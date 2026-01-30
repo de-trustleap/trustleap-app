@@ -30,42 +30,92 @@ class PageBuilderButtonView extends StatelessWidget {
             properties.width?.getValueForBreakpoint(breakpoint);
         final height =
             properties.height?.getValueForBreakpoint(breakpoint);
+        final minWidthPercent =
+            properties.minWidthPercent?.getValueForBreakpoint(breakpoint);
 
-        final buttonContainer = Container(
-          width: width,
-          height: height,
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-          decoration: BoxDecoration(
-              color: properties.backgroundPaint?.isColor == true
-                  ? properties.backgroundPaint?.color
-                  : null,
-              gradient: properties.backgroundPaint?.isGradient == true
-                  ? properties.backgroundPaint?.gradient?.toFlutterGradient()
-                  : null,
-              borderRadius:
-                  BorderRadius.circular(properties.border?.radius ?? 0),
-              border: properties.border?.width != null &&
-                      properties.border?.color != null
-                  ? Border.all(
-                      width: properties.border!.width!,
-                      color: properties.border!.color!,
-                    )
-                  : null),
-          alignment: AlignmentMapper.getAlignmentFromTextAlignment(
-              properties.textProperties?.alignment?.getValue()),
-          child: PagebuilderHtmlRenderer(
-              textProperties: properties.textProperties,
-              useInlineDisplay: true),
+        final contentPadding = EdgeInsets.fromLTRB(
+          properties.contentPadding?.left
+                  ?.getValueForBreakpoint(breakpoint) ??
+              0,
+          properties.contentPadding?.top
+                  ?.getValueForBreakpoint(breakpoint) ??
+              0,
+          properties.contentPadding?.right
+                  ?.getValueForBreakpoint(breakpoint) ??
+              0,
+          properties.contentPadding?.bottom
+                  ?.getValueForBreakpoint(breakpoint) ??
+              0,
         );
 
-        if (width == null) {
-          return UnconstrainedBox(
-            alignment: Alignment.centerLeft,
-            child: buttonContainer,
+        final decoration = BoxDecoration(
+            color: properties.backgroundPaint?.isColor == true
+                ? properties.backgroundPaint?.color
+                : null,
+            gradient: properties.backgroundPaint?.isGradient == true
+                ? properties.backgroundPaint?.gradient?.toFlutterGradient()
+                : null,
+            borderRadius:
+                BorderRadius.circular(properties.border?.radius ?? 0),
+            border: properties.border?.width != null &&
+                    properties.border?.color != null
+                ? Border.all(
+                    width: properties.border!.width!,
+                    color: properties.border!.color!,
+                  )
+                : null);
+
+        final child = PagebuilderHtmlRenderer(
+            textProperties: properties.textProperties,
+            useInlineDisplay: true);
+
+        final alignment = AlignmentMapper.getAlignmentFromTextAlignment(
+            properties.textProperties?.alignment?.getValue());
+
+        // Fixed width mode
+        if (width != null) {
+          return Container(
+            width: width,
+            height: height,
+            padding: contentPadding,
+            decoration: decoration,
+            alignment: alignment,
+            child: child,
           );
         }
 
-        return buttonContainer;
+        // Min width mode
+        if (minWidthPercent != null) {
+          return LayoutBuilder(
+            builder: (context, constraints) {
+              return UnconstrainedBox(
+                alignment: Alignment.centerLeft,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minWidth: constraints.maxWidth * minWidthPercent,
+                  ),
+                  child: Container(
+                    padding: contentPadding,
+                    decoration: decoration,
+                    alignment: alignment,
+                    child: child,
+                  ),
+                ),
+              );
+            },
+          );
+        }
+
+        // Auto width mode
+        return UnconstrainedBox(
+          alignment: Alignment.centerLeft,
+          child: Container(
+            padding: contentPadding,
+            decoration: decoration,
+            alignment: alignment,
+            child: child,
+          ),
+        );
       },
     );
   }

@@ -4,6 +4,8 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.d
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_color_picker/pagebuilder_color_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_hover_config_tabbar.dart';
@@ -12,6 +14,7 @@ import 'package:finanzbegleiter/presentation/page_builder/top_level_components/p
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_number_stepper_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_responsive_config_helper.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_size_control.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_spacing_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_text_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,6 +68,12 @@ class PagebuilderConfigMenuButtonConfig extends StatelessWidget {
     }
   }
 
+  PagebuilderButtonSizeMode _getSizeMode(PageBuilderButtonProperties? props) {
+    if (props?.width != null) return PagebuilderButtonSizeMode.fixed;
+    if (props?.minWidthPercent != null) return PagebuilderButtonSizeMode.minWidth;
+    return PagebuilderButtonSizeMode.auto;
+  }
+
   Widget _buildConfigUI(
       PageBuilderButtonProperties? props,
       bool disabled,
@@ -76,57 +85,93 @@ class PagebuilderConfigMenuButtonConfig extends StatelessWidget {
       bloc: Modular.get<PagebuilderResponsiveBreakpointCubit>(),
       builder: (context, currentBreakpoint) {
         final helper = PagebuilderResponsiveConfigHelper(currentBreakpoint);
-
-        final isAutoWidth = props?.width == null;
+        final sizeMode = _getSizeMode(props);
 
         return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Row(
-            children: [
-              Checkbox(
-                value: isAutoWidth,
-                onChanged: (value) {
-                  if (value == true) {
-                    onChangedLocal(props?.copyWith(removeWidth: true));
-                  } else {
-                    final zeroWidth = helper.setValue(null, 0.0);
-                    onChangedLocal(props?.copyWith(width: zeroWidth));
-                  }
-                },
-              ),
-              Text(
-                localization.pagebuilder_button_config_auto_width,
-                style: const TextStyle(fontSize: 14),
-              ),
-            ],
+          // Size mode radio buttons
+          RadioGroup<PagebuilderButtonSizeMode>(
+            groupValue: sizeMode,
+            onChanged: (value) {
+              if (value == null) return;
+              switch (value) {
+                case PagebuilderButtonSizeMode.auto:
+                  onChangedLocal(props?.copyWith(
+                    removeWidth: true,
+                    removeMinWidthPercent: true,
+                    removeHeight: true,
+                  ));
+                case PagebuilderButtonSizeMode.minWidth:
+                  final defaultMinWidth = helper.setValue(null, 0.5);
+                  onChangedLocal(props?.copyWith(
+                    removeWidth: true,
+                    removeHeight: true,
+                    minWidthPercent: defaultMinWidth,
+                  ));
+                case PagebuilderButtonSizeMode.fixed:
+                  final defaultWidth = helper.setValue(null, 200.0);
+                  final defaultHeight = helper.setValue(null, 50.0);
+                  onChangedLocal(props?.copyWith(
+                    width: defaultWidth,
+                    height: defaultHeight,
+                    removeMinWidthPercent: true,
+                  ));
+              }
+            },
+            child: Column(
+              children: [
+                RadioListTile<PagebuilderButtonSizeMode>(
+                  title: Text(localization.pagebuilder_button_config_auto_width),
+                  value: PagebuilderButtonSizeMode.auto,
+                  contentPadding: EdgeInsets.zero,
+                  dense: true,
+                ),
+                RadioListTile<PagebuilderButtonSizeMode>(
+                  title: Text(localization.pagebuilder_button_config_min_width),
+                  value: PagebuilderButtonSizeMode.minWidth,
+                  contentPadding: EdgeInsets.zero,
+                  dense: true,
+                ),
+                RadioListTile<PagebuilderButtonSizeMode>(
+                  title: Text(localization.pagebuilder_button_config_fixed_width),
+                  value: PagebuilderButtonSizeMode.fixed,
+                  contentPadding: EdgeInsets.zero,
+                  dense: true,
+                ),
+              ],
+            ),
           ),
-          if (isAutoWidth) ...[
-            const SizedBox(height: 10),
+          const SizedBox(height: 10),
+
+          // Mode-specific controls
+          if (sizeMode == PagebuilderButtonSizeMode.minWidth) ...[
             Row(
               children: [
-                Text(localization.pagebuilder_layout_menu_size_control_height,
+                Text(localization.pagebuilder_button_config_min_width,
                     style: themeData.textTheme.bodySmall),
                 const SizedBox(width: 8),
                 PagebuilderBreakpointSelector(
                   currentBreakpoint: currentBreakpoint,
                 ),
-                const SizedBox(width: 8),
                 const Spacer(),
                 PagebuilderNumberStepper(
-                  initialValue: (helper.getValue(props?.height) ?? 0).toInt(),
+                  initialValue:
+                      ((helper.getValue(props?.minWidthPercent) ?? 0.5) * 100)
+                          .toInt(),
                   minValue: 0,
-                  maxValue: 3000,
-                  placeholder:
-                      localization.pagebuilder_layout_menu_size_control_height,
-                  onSelected: (height) {
-                    final updatedHeight =
-                        helper.setValue(props?.height, height.toDouble());
-                    onChangedLocal(props?.copyWith(height: updatedHeight));
+                  maxValue: 100,
+                  placeholder: '%',
+                  onSelected: (percent) {
+                    final updatedMinWidth = helper.setValue(
+                        props?.minWidthPercent, percent / 100.0);
+                    onChangedLocal(
+                        props?.copyWith(minWidthPercent: updatedMinWidth));
                   },
                 ),
               ],
             ),
-          ] else ...[
             const SizedBox(height: 10),
+          ],
+          if (sizeMode == PagebuilderButtonSizeMode.fixed) ...[
             PagebuilderSizeControl(
                 width: helper.getValue(props?.width) ?? 0,
                 height: helper.getValue(props?.height) ?? 0,
@@ -139,8 +184,15 @@ class PagebuilderConfigMenuButtonConfig extends StatelessWidget {
                   onChangedLocal(props?.copyWith(
                       width: updatedWidth, height: updatedHeight));
                 }),
+            const SizedBox(height: 10),
           ],
+
+          // Content Padding
+          _buildContentPaddingControl(
+              props, helper, themeData, localization, onChangedLocal,
+              currentBreakpoint),
           const SizedBox(height: 20),
+
           PagebuilderColorControl(
               title: localization
                   .pagebuilder_button_config_button_background_color,
@@ -215,6 +267,106 @@ class PagebuilderConfigMenuButtonConfig extends StatelessWidget {
               }),
         ]);
       },
+    );
+  }
+
+  Widget _buildContentPaddingControl(
+      PageBuilderButtonProperties? props,
+      PagebuilderResponsiveConfigHelper helper,
+      ThemeData themeData,
+      AppLocalizations localization,
+      Function(PageBuilderButtonProperties?) onChangedLocal,
+      PagebuilderResponsiveBreakpoint currentBreakpoint) {
+    void updatePadding(PageBuilderSpacingDirection direction, double value) {
+      final spacing = props?.contentPadding ??
+          const PageBuilderSpacing(
+              top: PagebuilderResponsiveOrConstant.constant(0.0),
+              bottom: PagebuilderResponsiveOrConstant.constant(0.0),
+              left: PagebuilderResponsiveOrConstant.constant(0.0),
+              right: PagebuilderResponsiveOrConstant.constant(0.0));
+      final updatedSpacing = spacing.copyWith(
+        top: direction == PageBuilderSpacingDirection.top
+            ? helper.setValue(spacing.top, value)
+            : spacing.top,
+        left: direction == PageBuilderSpacingDirection.left
+            ? helper.setValue(spacing.left, value)
+            : spacing.left,
+        bottom: direction == PageBuilderSpacingDirection.bottom
+            ? helper.setValue(spacing.bottom, value)
+            : spacing.bottom,
+        right: direction == PageBuilderSpacingDirection.right
+            ? helper.setValue(spacing.right, value)
+            : spacing.right,
+      );
+      onChangedLocal(props?.copyWith(contentPadding: updatedSpacing));
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text(localization.pagebuilder_button_config_content_padding,
+                style: themeData.textTheme.bodySmall),
+            const SizedBox(width: 8),
+            PagebuilderBreakpointSelector(
+              currentBreakpoint: currentBreakpoint,
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        Row(
+          children: [
+            PagebuilderNumberStepper(
+              initialValue:
+                  (helper.getValue(props?.contentPadding?.top) ?? 0).toInt(),
+              minValue: 0,
+              maxValue: 1000,
+              placeholder:
+                  localization.landingpage_pagebuilder_layout_spacing_top,
+              onSelected: (value) =>
+                  updatePadding(PageBuilderSpacingDirection.top, value.toDouble()),
+            ),
+            const SizedBox(width: 40),
+            PagebuilderNumberStepper(
+              initialValue:
+                  (helper.getValue(props?.contentPadding?.left) ?? 0).toInt(),
+              minValue: 0,
+              maxValue: 1000,
+              placeholder:
+                  localization.landingpage_pagebuilder_layout_spacing_left,
+              onSelected: (value) =>
+                  updatePadding(PageBuilderSpacingDirection.left, value.toDouble()),
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        Row(
+          children: [
+            PagebuilderNumberStepper(
+              initialValue:
+                  (helper.getValue(props?.contentPadding?.bottom) ?? 0).toInt(),
+              minValue: 0,
+              maxValue: 1000,
+              placeholder:
+                  localization.landingpage_pagebuilder_layout_spacing_bottom,
+              onSelected: (value) => updatePadding(
+                  PageBuilderSpacingDirection.bottom, value.toDouble()),
+            ),
+            const SizedBox(width: 40),
+            PagebuilderNumberStepper(
+              initialValue:
+                  (helper.getValue(props?.contentPadding?.right) ?? 0).toInt(),
+              minValue: 0,
+              maxValue: 1000,
+              placeholder:
+                  localization.landingpage_pagebuilder_layout_spacing_right,
+              onSelected: (value) => updatePadding(
+                  PageBuilderSpacingDirection.right, value.toDouble()),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

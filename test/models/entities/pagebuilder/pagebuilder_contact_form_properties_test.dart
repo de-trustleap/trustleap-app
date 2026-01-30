@@ -119,6 +119,8 @@ void main() {
           buttonProperties: PageBuilderButtonProperties(
               width: const PagebuilderResponsiveOrConstant.constant(200),
               height: const PagebuilderResponsiveOrConstant.constant(100),
+              minWidthPercent: null,
+              contentPadding: null,
               border: const PagebuilderBorder(radius: 12.0, width: null, color: null),
               backgroundPaint: null,
               textProperties: null));
@@ -227,6 +229,8 @@ void main() {
           buttonProperties: PageBuilderButtonProperties(
               width: const PagebuilderResponsiveOrConstant.constant(200),
               height: const PagebuilderResponsiveOrConstant.constant(100),
+              minWidthPercent: null,
+              contentPadding: null,
               border: const PagebuilderBorder(radius: 16, width: null, color: null),
               backgroundPaint: null,
               textProperties: null));
@@ -260,6 +264,8 @@ void main() {
           buttonProperties: PageBuilderButtonProperties(
               width: const PagebuilderResponsiveOrConstant.constant(200),
               height: const PagebuilderResponsiveOrConstant.constant(100),
+              minWidthPercent: null,
+              contentPadding: null,
               border: const PagebuilderBorder(radius: 16, width: null, color: null),
               backgroundPaint: null,
               textProperties: null));
@@ -376,6 +382,8 @@ void main() {
           buttonProperties: PageBuilderButtonProperties(
               width: const PagebuilderResponsiveOrConstant.constant(200),
               height: const PagebuilderResponsiveOrConstant.constant(100),
+              minWidthPercent: null,
+              contentPadding: null,
               border: const PagebuilderBorder(radius: 12.0, width: null, color: null),
               backgroundPaint: null,
               textProperties: null));
@@ -484,6 +492,8 @@ void main() {
           buttonProperties: PageBuilderButtonProperties(
               width: const PagebuilderResponsiveOrConstant.constant(200),
               height: const PagebuilderResponsiveOrConstant.constant(100),
+              minWidthPercent: null,
+              contentPadding: null,
               border: const PagebuilderBorder(radius: 12.0, width: null, color: null),
               backgroundPaint: null,
               textProperties: null));

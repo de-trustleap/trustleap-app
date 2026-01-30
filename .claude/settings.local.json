@@ -13,7 +13,8 @@
       "WebFetch(domain:stackoverflow.com)",
       "WebFetch(domain:api.flutter.dev)",
       "Read(//Users/marcelspindler/Documents/Dev/Finanzbegleiter/**)",
-      "Bash(sed:*)"
+      "Bash(sed:*)",
+      "WebSearch"
     ],
     "deny": []
   }

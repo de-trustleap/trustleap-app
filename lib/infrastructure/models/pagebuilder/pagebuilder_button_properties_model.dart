@@ -5,12 +5,15 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.d
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_border_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_paint_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_spacing_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_text_properties_model.dart';
 
 class PageBuilderButtonPropertiesModel extends Equatable
     implements PageBuilderProperties {
   final PagebuilderResponsiveOrConstantModel<double>? width;
   final PagebuilderResponsiveOrConstantModel<double>? height;
+  final PagebuilderResponsiveOrConstantModel<double>? minWidthPercent;
+  final Map<String, dynamic>? contentPadding;
   final Map<String, dynamic>? border;
   final Map<String, dynamic>? backgroundPaint;
   final Map<String, dynamic>? textProperties;
@@ -18,6 +21,8 @@ class PageBuilderButtonPropertiesModel extends Equatable
   const PageBuilderButtonPropertiesModel({
     required this.width,
     required this.height,
+    required this.minWidthPercent,
+    required this.contentPadding,
     required this.border,
     required this.backgroundPaint,
     required this.textProperties,
@@ -27,6 +32,10 @@ class PageBuilderButtonPropertiesModel extends Equatable
     Map<String, dynamic> map = {};
     if (width != null) map['width'] = width!.toMapValue();
     if (height != null) map['height'] = height!.toMapValue();
+    if (minWidthPercent != null) {
+      map['minWidthPercent'] = minWidthPercent!.toMapValue();
+    }
+    if (contentPadding != null) map['contentPadding'] = contentPadding;
     if (border != null) map['border'] = border;
     if (backgroundPaint != null) map['backgroundPaint'] = backgroundPaint;
     if (textProperties != null) map['textProperties'] = textProperties;
@@ -39,6 +48,11 @@ class PageBuilderButtonPropertiesModel extends Equatable
             map['width'], (v) => v as double),
         height: PagebuilderResponsiveOrConstantModel.fromMapValue(
             map['height'], (v) => v as double),
+        minWidthPercent: PagebuilderResponsiveOrConstantModel.fromMapValue(
+            map['minWidthPercent'], (v) => v as double),
+        contentPadding: map['contentPadding'] != null
+            ? map['contentPadding'] as Map<String, dynamic>
+            : null,
         border: map['border'] != null
             ? map['border'] as Map<String, dynamic>
             : null,
@@ -53,6 +67,8 @@ class PageBuilderButtonPropertiesModel extends Equatable
   PageBuilderButtonPropertiesModel copyWith({
     PagebuilderResponsiveOrConstantModel<double>? width,
     PagebuilderResponsiveOrConstantModel<double>? height,
+    PagebuilderResponsiveOrConstantModel<double>? minWidthPercent,
+    Map<String, dynamic>? contentPadding,
     Map<String, dynamic>? border,
     Map<String, dynamic>? backgroundPaint,
     Map<String, dynamic>? textProperties,
@@ -60,6 +76,8 @@ class PageBuilderButtonPropertiesModel extends Equatable
     return PageBuilderButtonPropertiesModel(
       width: width ?? this.width,
       height: height ?? this.height,
+      minWidthPercent: minWidthPercent ?? this.minWidthPercent,
+      contentPadding: contentPadding ?? this.contentPadding,
       border: border ?? this.border,
       backgroundPaint: backgroundPaint ?? this.backgroundPaint,
       textProperties: textProperties ?? this.textProperties,
@@ -70,6 +88,10 @@ class PageBuilderButtonPropertiesModel extends Equatable
     return PageBuilderButtonProperties(
         width: width?.toDomain(),
         height: height?.toDomain(),
+        minWidthPercent: minWidthPercent?.toDomain(),
+        contentPadding: contentPadding != null
+            ? PageBuilderSpacingModel.fromMap(contentPadding).toDomain()
+            : null,
         border: border != null
             ? PagebuilderBorderModel.fromMap(border!).toDomain(globalStyles)
             : null,
@@ -88,6 +110,12 @@ class PageBuilderButtonPropertiesModel extends Equatable
             properties.width),
         height: PagebuilderResponsiveOrConstantModel.fromDomain(
             properties.height),
+        minWidthPercent: PagebuilderResponsiveOrConstantModel.fromDomain(
+            properties.minWidthPercent),
+        contentPadding: properties.contentPadding != null
+            ? PageBuilderSpacingModel.fromDomain(properties.contentPadding)
+                .toMap()
+            : null,
         border: properties.border != null
             ? PagebuilderBorderModel.fromDomain(properties.border!).toMap()
             : null,
@@ -104,5 +132,5 @@ class PageBuilderButtonPropertiesModel extends Equatable
 
   @override
   List<Object?> get props =>
-      [width, height, border, backgroundPaint, textProperties];
+      [width, height, minWidthPercent, contentPadding, border, backgroundPaint, textProperties];
 }
