@@ -304,6 +304,8 @@ class PagebuilderWidgetFactory {
         buttonProperties: PageBuilderButtonProperties(
             width: const PagebuilderResponsiveOrConstant.constant(200),
             height: const PagebuilderResponsiveOrConstant.constant(70),
+            minWidthPercent: null,
+            contentPadding: null,
             border:
                 const PagebuilderBorder(width: null, radius: 4, color: null),
             backgroundPaint: PagebuilderPaint(
@@ -342,6 +344,8 @@ class PagebuilderWidgetFactory {
         buttonProperties: PageBuilderButtonProperties(
           width: PagebuilderResponsiveOrConstant.constant(200.0),
           height: PagebuilderResponsiveOrConstant.constant(50.0),
+          minWidthPercent: null,
+          contentPadding: null,
           border: PagebuilderBorder(width: null, radius: 8, color: null),
           backgroundPaint: null,
           textProperties: PageBuilderTextProperties(

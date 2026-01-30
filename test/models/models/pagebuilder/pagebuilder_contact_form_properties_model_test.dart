@@ -812,6 +812,8 @@ void main() {
           buttonProperties: PageBuilderButtonProperties(
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(70.0),
+              minWidthPercent: null,
+              contentPadding: null,
               border: const PagebuilderBorder(radius: 4, width: null, color: null),
               backgroundPaint: const PagebuilderPaint.color(Color(0xFF333A56)),
               textProperties: PageBuilderTextProperties(
@@ -940,6 +942,8 @@ void main() {
           buttonProperties: PageBuilderButtonProperties(
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(70.0),
+              minWidthPercent: null,
+              contentPadding: null,
               border: const PagebuilderBorder(radius: 4, width: null, color: null),
               backgroundPaint: const PagebuilderPaint.color(Color(0xFF333A56)),
               textProperties: PageBuilderTextProperties(

@@ -16,6 +16,8 @@ void main() {
       final model = PageBuilderButtonProperties(
           width: const PagebuilderResponsiveOrConstant.constant(200.0),
           height: const PagebuilderResponsiveOrConstant.constant(50.0),
+          minWidthPercent: null,
+          contentPadding: null,
           border: const PagebuilderBorder(radius: 10.0, width: null, color: null),
           backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
@@ -30,6 +32,8 @@ void main() {
       final expectedResult = PageBuilderButtonProperties(
           width: const PagebuilderResponsiveOrConstant.constant(400.0),
           height: const PagebuilderResponsiveOrConstant.constant(50.0),
+          minWidthPercent: null,
+          contentPadding: null,
           border: const PagebuilderBorder(radius: 12.0, width: null, color: null),
           backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
@@ -72,6 +76,8 @@ void main() {
       const original = PageBuilderButtonProperties(
         width: const PagebuilderResponsiveOrConstant.constant(200.0),
         height: const PagebuilderResponsiveOrConstant.constant(50.0),
+        minWidthPercent: null,
+        contentPadding: null,
         border: const PagebuilderBorder(radius: 8.0, width: null, color: null),
         backgroundPaint: const PagebuilderPaint.color(Color(0xFF2196F3)),
         textProperties: textProperties,
@@ -96,6 +102,8 @@ void main() {
       final properties1 = PageBuilderButtonProperties(
           width: const PagebuilderResponsiveOrConstant.constant(200.0),
           height: const PagebuilderResponsiveOrConstant.constant(50.0),
+          minWidthPercent: null,
+          contentPadding: null,
           border: const PagebuilderBorder(radius: 10.0, width: null, color: null),
           backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
@@ -110,6 +118,8 @@ void main() {
       final properties2 = PageBuilderButtonProperties(
           width: const PagebuilderResponsiveOrConstant.constant(200.0),
           height: const PagebuilderResponsiveOrConstant.constant(50.0),
+          minWidthPercent: null,
+          contentPadding: null,
           border: const PagebuilderBorder(radius: 10.0, width: null, color: null),
           backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
