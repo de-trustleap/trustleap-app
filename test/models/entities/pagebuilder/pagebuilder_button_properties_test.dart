@@ -14,6 +14,7 @@ void main() {
         () {
       // Given
       final model = PageBuilderButtonProperties(
+          sizeMode: null,
           width: const PagebuilderResponsiveOrConstant.constant(200.0),
           height: const PagebuilderResponsiveOrConstant.constant(50.0),
           minWidthPercent: null,
@@ -30,6 +31,7 @@ void main() {
               color: null,
               alignment: null));
       final expectedResult = PageBuilderButtonProperties(
+          sizeMode: null,
           width: const PagebuilderResponsiveOrConstant.constant(400.0),
           height: const PagebuilderResponsiveOrConstant.constant(50.0),
           minWidthPercent: null,
@@ -74,6 +76,7 @@ void main() {
       );
 
       const original = PageBuilderButtonProperties(
+        sizeMode: null,
         width: const PagebuilderResponsiveOrConstant.constant(200.0),
         height: const PagebuilderResponsiveOrConstant.constant(50.0),
         minWidthPercent: null,
@@ -100,6 +103,7 @@ void main() {
     test("check if value equality works", () {
       // Given
       final properties1 = PageBuilderButtonProperties(
+          sizeMode: null,
           width: const PagebuilderResponsiveOrConstant.constant(200.0),
           height: const PagebuilderResponsiveOrConstant.constant(50.0),
           minWidthPercent: null,
@@ -116,6 +120,7 @@ void main() {
               color: null,
               alignment: null));
       final properties2 = PageBuilderButtonProperties(
+          sizeMode: null,
           width: const PagebuilderResponsiveOrConstant.constant(200.0),
           height: const PagebuilderResponsiveOrConstant.constant(50.0),
           minWidthPercent: null,

@@ -26,22 +26,25 @@ class PageBuilderButtonView extends StatelessWidget {
         PagebuilderResponsiveBreakpoint>(
       bloc: Modular.get<PagebuilderResponsiveBreakpointCubit>(),
       builder: (context, breakpoint) {
-        final width =
-            properties.width?.getValueForBreakpoint(breakpoint);
-        final height =
-            properties.height?.getValueForBreakpoint(breakpoint);
+        final sizeMode = properties.sizeMode?.getValueForBreakpoint(breakpoint);
+        final width = properties.width?.getValueForBreakpoint(breakpoint);
+        final height = properties.height?.getValueForBreakpoint(breakpoint);
         final minWidthPercent =
             properties.minWidthPercent?.getValueForBreakpoint(breakpoint);
 
+        final effectiveSizeMode = sizeMode ??
+            (width != null
+                ? PagebuilderButtonSizeMode.fixed
+                : minWidthPercent != null
+                    ? PagebuilderButtonSizeMode.minWidth
+                    : PagebuilderButtonSizeMode.auto);
+
         final contentPadding = EdgeInsets.fromLTRB(
-          properties.contentPadding?.left
-                  ?.getValueForBreakpoint(breakpoint) ??
+          properties.contentPadding?.left?.getValueForBreakpoint(breakpoint) ??
               0,
-          properties.contentPadding?.top
-                  ?.getValueForBreakpoint(breakpoint) ??
+          properties.contentPadding?.top?.getValueForBreakpoint(breakpoint) ??
               0,
-          properties.contentPadding?.right
-                  ?.getValueForBreakpoint(breakpoint) ??
+          properties.contentPadding?.right?.getValueForBreakpoint(breakpoint) ??
               0,
           properties.contentPadding?.bottom
                   ?.getValueForBreakpoint(breakpoint) ??
@@ -55,8 +58,7 @@ class PageBuilderButtonView extends StatelessWidget {
             gradient: properties.backgroundPaint?.isGradient == true
                 ? properties.backgroundPaint?.gradient?.toFlutterGradient()
                 : null,
-            borderRadius:
-                BorderRadius.circular(properties.border?.radius ?? 0),
+            borderRadius: BorderRadius.circular(properties.border?.radius ?? 0),
             border: properties.border?.width != null &&
                     properties.border?.color != null
                 ? Border.all(
@@ -66,56 +68,51 @@ class PageBuilderButtonView extends StatelessWidget {
                 : null);
 
         final child = PagebuilderHtmlRenderer(
-            textProperties: properties.textProperties,
-            useInlineDisplay: true);
+            textProperties: properties.textProperties, useInlineDisplay: true);
 
         final alignment = AlignmentMapper.getAlignmentFromTextAlignment(
             properties.textProperties?.alignment?.getValue());
 
-        // Fixed width mode
-        if (width != null) {
-          return Container(
-            width: width,
-            height: height,
-            padding: contentPadding,
-            decoration: decoration,
-            alignment: alignment,
-            child: child,
-          );
-        }
-
-        // Min width mode
-        if (minWidthPercent != null) {
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              return UnconstrainedBox(
-                alignment: Alignment.centerLeft,
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minWidth: constraints.maxWidth * minWidthPercent,
+        switch (effectiveSizeMode) {
+          case PagebuilderButtonSizeMode.fixed:
+            return Container(
+              width: width,
+              height: height,
+              padding: contentPadding,
+              decoration: decoration,
+              alignment: alignment,
+              child: child,
+            );
+          case PagebuilderButtonSizeMode.minWidth:
+            return LayoutBuilder(
+              builder: (context, constraints) {
+                return UnconstrainedBox(
+                  alignment: Alignment.centerLeft,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minWidth: constraints.maxWidth * (minWidthPercent ?? 0.5),
+                    ),
+                    child: Container(
+                      padding: contentPadding,
+                      decoration: decoration,
+                      alignment: alignment,
+                      child: child,
+                    ),
                   ),
-                  child: Container(
-                    padding: contentPadding,
-                    decoration: decoration,
-                    alignment: alignment,
-                    child: child,
-                  ),
-                ),
-              );
-            },
-          );
+                );
+              },
+            );
+          case PagebuilderButtonSizeMode.auto:
+            return UnconstrainedBox(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                padding: contentPadding,
+                decoration: decoration,
+                alignment: alignment,
+                child: child,
+              ),
+            );
         }
-
-        // Auto width mode
-        return UnconstrainedBox(
-          alignment: Alignment.centerLeft,
-          child: Container(
-            padding: contentPadding,
-            decoration: decoration,
-            alignment: alignment,
-            child: child,
-          ),
-        );
       },
     );
   }

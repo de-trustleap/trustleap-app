@@ -810,6 +810,7 @@ void main() {
                   color: null,
                   alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left))),
           buttonProperties: PageBuilderButtonProperties(
+              sizeMode: null,
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(70.0),
               minWidthPercent: null,
@@ -940,6 +941,7 @@ void main() {
                   color: null,
                   alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left))),
           buttonProperties: PageBuilderButtonProperties(
+              sizeMode: null,
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(70.0),
               minWidthPercent: null,
