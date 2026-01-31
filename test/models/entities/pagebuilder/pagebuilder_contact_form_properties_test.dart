@@ -117,6 +117,7 @@ void main() {
                   color: null,
                   alignment: null)),
           buttonProperties: PageBuilderButtonProperties(
+              sizeMode: null,
               width: const PagebuilderResponsiveOrConstant.constant(200),
               height: const PagebuilderResponsiveOrConstant.constant(100),
               minWidthPercent: null,
@@ -227,6 +228,7 @@ void main() {
                   color: null,
                   alignment: null)),
           buttonProperties: PageBuilderButtonProperties(
+              sizeMode: null,
               width: const PagebuilderResponsiveOrConstant.constant(200),
               height: const PagebuilderResponsiveOrConstant.constant(100),
               minWidthPercent: null,
@@ -262,6 +264,7 @@ void main() {
                   color: null,
                   alignment: null)),
           buttonProperties: PageBuilderButtonProperties(
+              sizeMode: null,
               width: const PagebuilderResponsiveOrConstant.constant(200),
               height: const PagebuilderResponsiveOrConstant.constant(100),
               minWidthPercent: null,
@@ -380,6 +383,7 @@ void main() {
                   color: null,
                   alignment: null)),
           buttonProperties: PageBuilderButtonProperties(
+              sizeMode: null,
               width: const PagebuilderResponsiveOrConstant.constant(200),
               height: const PagebuilderResponsiveOrConstant.constant(100),
               minWidthPercent: null,
@@ -490,6 +494,7 @@ void main() {
                   color: null,
                   alignment: null)),
           buttonProperties: PageBuilderButtonProperties(
+              sizeMode: null,
               width: const PagebuilderResponsiveOrConstant.constant(200),
               height: const PagebuilderResponsiveOrConstant.constant(100),
               minWidthPercent: null,

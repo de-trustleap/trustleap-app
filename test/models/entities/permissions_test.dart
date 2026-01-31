@@ -27,7 +27,7 @@ void main() {
     test("should return false for missing permissions", () {
       // Given
       final permissions = Permissions(permissions: {
-        "editCompany": false, // Explizit false
+        "editCompany": false,
       });
 
       // Then

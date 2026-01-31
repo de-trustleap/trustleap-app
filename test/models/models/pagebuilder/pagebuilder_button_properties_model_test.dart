@@ -15,6 +15,7 @@ void main() {
     test("set height with copyWith should set height for resulting object", () {
       // Given
       final model = PageBuilderButtonPropertiesModel(
+          sizeMode: null,
           width: const PagebuilderResponsiveOrConstantModel.constant(200.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(60.0),
           minWidthPercent: null, contentPadding: null,
@@ -22,6 +23,7 @@ void main() {
           backgroundPaint: null,
           textProperties: {"text": "Test", "fontSize": 16.0});
       final expectedResult = PageBuilderButtonPropertiesModel(
+          sizeMode: null,
           width: const PagebuilderResponsiveOrConstantModel.constant(200.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(80.0),
           minWidthPercent: null, contentPadding: null,
@@ -39,6 +41,7 @@ void main() {
     test("check if model is successfully converted to a map", () {
       // Given
       final model = PageBuilderButtonPropertiesModel(
+          sizeMode: null,
           width: const PagebuilderResponsiveOrConstantModel.constant(200.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(60.0),
           minWidthPercent: null, contentPadding: null,
@@ -70,6 +73,7 @@ void main() {
         "textProperties": {"text": "Test", "fontSize": 16.0}
       };
       final expectedResult = PageBuilderButtonPropertiesModel(
+          sizeMode: null,
           width: const PagebuilderResponsiveOrConstantModel.constant(200.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(60.0),
           minWidthPercent: null, contentPadding: null,
@@ -89,6 +93,7 @@ void main() {
         () {
       // Given
       final model = PageBuilderButtonPropertiesModel(
+          sizeMode: null,
           width: const PagebuilderResponsiveOrConstantModel.constant(200.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(60.0),
           minWidthPercent: null, contentPadding: null,
@@ -96,6 +101,7 @@ void main() {
           backgroundPaint: {"color": "FFFFFFFF"},
           textProperties: {"text": "Test", "fontSize": 16.0});
       final expectedResult = PageBuilderButtonProperties(
+          sizeMode: null,
           width: const PagebuilderResponsiveOrConstant.constant(200.0),
           height: const PagebuilderResponsiveOrConstant.constant(60.0),
           minWidthPercent: null,
@@ -124,6 +130,7 @@ void main() {
         () {
       // Given
       final model = PageBuilderButtonProperties(
+          sizeMode: null,
           width: const PagebuilderResponsiveOrConstant.constant(200.0),
           height: const PagebuilderResponsiveOrConstant.constant(60.0),
           minWidthPercent: null,
@@ -140,6 +147,7 @@ void main() {
               color: null,
               alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)));
       final expectedResult = PageBuilderButtonPropertiesModel(
+          sizeMode: null,
           width: const PagebuilderResponsiveOrConstantModel.constant(200.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(60.0),
           minWidthPercent: null, contentPadding: null,
@@ -161,6 +169,7 @@ void main() {
     test("check if background color token is resolved with globalStyles in toDomain", () {
       // Given
       final model = PageBuilderButtonPropertiesModel(
+          sizeMode: null,
           width: const PagebuilderResponsiveOrConstantModel.constant(200.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(60.0),
           minWidthPercent: null, contentPadding: null,
@@ -187,6 +196,7 @@ void main() {
     test("check if border color token is resolved with globalStyles in toDomain", () {
       // Given
       final model = PageBuilderButtonPropertiesModel(
+          sizeMode: null,
           width: const PagebuilderResponsiveOrConstantModel.constant(200.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(60.0),
           minWidthPercent: null, contentPadding: null,
@@ -213,6 +223,7 @@ void main() {
     test("check if text color token is resolved with globalStyles in toDomain", () {
       // Given
       final model = PageBuilderButtonPropertiesModel(
+          sizeMode: null,
           width: const PagebuilderResponsiveOrConstantModel.constant(200.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(60.0),
           minWidthPercent: null, contentPadding: null,
@@ -239,6 +250,7 @@ void main() {
     test("check if multiple color tokens are resolved with globalStyles in toDomain", () {
       // Given
       final model = PageBuilderButtonPropertiesModel(
+          sizeMode: null,
           width: const PagebuilderResponsiveOrConstantModel.constant(200.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(60.0),
           minWidthPercent: null, contentPadding: null,
@@ -269,6 +281,7 @@ void main() {
     test("check if conversion from domain with tokens preserves tokens in fromDomain", () {
       // Given
       final domainProperties = PageBuilderButtonProperties(
+          sizeMode: null,
           width: const PagebuilderResponsiveOrConstant.constant(200.0),
           height: const PagebuilderResponsiveOrConstant.constant(60.0),
           minWidthPercent: null,
@@ -306,6 +319,7 @@ void main() {
     test("check if value equality works", () {
       // Given
       final properties1 = PageBuilderButtonPropertiesModel(
+          sizeMode: null,
           width: const PagebuilderResponsiveOrConstantModel.constant(200.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(60.0),
           minWidthPercent: null, contentPadding: null,
@@ -317,6 +331,7 @@ void main() {
             "alignment": "left"
           });
       final properties2 = PageBuilderButtonPropertiesModel(
+          sizeMode: null,
           width: const PagebuilderResponsiveOrConstantModel.constant(200.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(60.0),
           minWidthPercent: null, contentPadding: null,

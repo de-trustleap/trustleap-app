@@ -108,6 +108,7 @@ void main() {
       final expectedResult = PagebuilderAnchorButtonProperties(
           sectionName: "1",
           buttonProperties: PageBuilderButtonProperties(
+              sizeMode: null,
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(200.0),
               minWidthPercent: null,
@@ -138,6 +139,7 @@ void main() {
       final model = PagebuilderAnchorButtonProperties(
           sectionName: "1",
           buttonProperties: PageBuilderButtonProperties(
+              sizeMode: null,
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(200.0),
               minWidthPercent: null,

@@ -302,6 +302,7 @@ class PagebuilderWidgetFactory {
                     PagebuilderResponsiveOrConstant.constant(TextAlign.left),
                 textShadow: null)),
         buttonProperties: PageBuilderButtonProperties(
+            sizeMode: null,
             width: const PagebuilderResponsiveOrConstant.constant(200),
             height: const PagebuilderResponsiveOrConstant.constant(70),
             minWidthPercent: null,
@@ -342,6 +343,7 @@ class PagebuilderWidgetFactory {
       properties: const PagebuilderAnchorButtonProperties(
         sectionName: null,
         buttonProperties: PageBuilderButtonProperties(
+          sizeMode: null,
           width: PagebuilderResponsiveOrConstant.constant(200.0),
           height: PagebuilderResponsiveOrConstant.constant(50.0),
           minWidthPercent: null,

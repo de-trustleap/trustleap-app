@@ -68,7 +68,12 @@ class PagebuilderConfigMenuButtonConfig extends StatelessWidget {
     }
   }
 
-  PagebuilderButtonSizeMode _getSizeMode(PageBuilderButtonProperties? props) {
+  PagebuilderButtonSizeMode _getSizeMode(
+      PageBuilderButtonProperties? props,
+      PagebuilderResponsiveConfigHelper helper) {
+    final mode = helper.getValue(props?.sizeMode);
+    if (mode != null) return mode;
+    // Fallback for old data without sizeMode
     if (props?.width != null) return PagebuilderButtonSizeMode.fixed;
     if (props?.minWidthPercent != null) return PagebuilderButtonSizeMode.minWidth;
     return PagebuilderButtonSizeMode.auto;
@@ -85,37 +90,44 @@ class PagebuilderConfigMenuButtonConfig extends StatelessWidget {
       bloc: Modular.get<PagebuilderResponsiveBreakpointCubit>(),
       builder: (context, currentBreakpoint) {
         final helper = PagebuilderResponsiveConfigHelper(currentBreakpoint);
-        final sizeMode = _getSizeMode(props);
+        final sizeMode = _getSizeMode(props, helper);
 
         return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           // Size mode radio buttons
+          Row(
+            children: [
+              Text(localization.pagebuilder_button_config_auto_width,
+                  style: themeData.textTheme.bodySmall),
+              const SizedBox(width: 8),
+              PagebuilderBreakpointSelector(
+                currentBreakpoint: currentBreakpoint,
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
           RadioGroup<PagebuilderButtonSizeMode>(
             groupValue: sizeMode,
             onChanged: (value) {
               if (value == null) return;
-              switch (value) {
-                case PagebuilderButtonSizeMode.auto:
-                  onChangedLocal(props?.copyWith(
-                    removeWidth: true,
-                    removeMinWidthPercent: true,
-                    removeHeight: true,
-                  ));
-                case PagebuilderButtonSizeMode.minWidth:
-                  final defaultMinWidth = helper.setValue(null, 0.5);
-                  onChangedLocal(props?.copyWith(
-                    removeWidth: true,
-                    removeHeight: true,
-                    minWidthPercent: defaultMinWidth,
-                  ));
-                case PagebuilderButtonSizeMode.fixed:
-                  final defaultWidth = helper.setValue(null, 200.0);
-                  final defaultHeight = helper.setValue(null, 50.0);
-                  onChangedLocal(props?.copyWith(
-                    width: defaultWidth,
-                    height: defaultHeight,
-                    removeMinWidthPercent: true,
-                  ));
+              final updatedSizeMode = helper.setValue(props?.sizeMode, value);
+              var updated = props?.copyWith(sizeMode: updatedSizeMode);
+              // Set defaults if fields don't have values yet
+              if (value == PagebuilderButtonSizeMode.minWidth &&
+                  helper.getValue(props?.minWidthPercent) == null) {
+                updated = updated?.copyWith(
+                    minWidthPercent: helper.setValue(null, 0.5));
               }
+              if (value == PagebuilderButtonSizeMode.fixed) {
+                if (helper.getValue(props?.width) == null) {
+                  updated = updated?.copyWith(
+                      width: helper.setValue(null, 200.0));
+                }
+                if (helper.getValue(props?.height) == null) {
+                  updated = updated?.copyWith(
+                      height: helper.setValue(null, 50.0));
+                }
+              }
+              onChangedLocal(updated);
             },
             child: Column(
               children: [

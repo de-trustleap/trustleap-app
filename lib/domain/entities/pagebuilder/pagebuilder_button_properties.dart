@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
@@ -9,6 +10,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuild
 
 class PageBuilderButtonProperties extends Equatable
     implements PageBuilderProperties {
+  final PagebuilderResponsiveOrConstant<PagebuilderButtonSizeMode>? sizeMode;
   final PagebuilderResponsiveOrConstant<double>? width;
   final PagebuilderResponsiveOrConstant<double>? height;
   final PagebuilderResponsiveOrConstant<double>? minWidthPercent;
@@ -18,6 +20,7 @@ class PageBuilderButtonProperties extends Equatable
   final PageBuilderTextProperties? textProperties;
 
   const PageBuilderButtonProperties({
+    required this.sizeMode,
     required this.width,
     required this.height,
     required this.minWidthPercent,
@@ -28,6 +31,7 @@ class PageBuilderButtonProperties extends Equatable
   });
 
   PageBuilderButtonProperties copyWith({
+    PagebuilderResponsiveOrConstant<PagebuilderButtonSizeMode>? sizeMode,
     PagebuilderResponsiveOrConstant<double>? width,
     PagebuilderResponsiveOrConstant<double>? height,
     PagebuilderResponsiveOrConstant<double>? minWidthPercent,
@@ -35,16 +39,12 @@ class PageBuilderButtonProperties extends Equatable
     PagebuilderBorder? border,
     PagebuilderPaint? backgroundPaint,
     PageBuilderTextProperties? textProperties,
-    bool removeWidth = false,
-    bool removeHeight = false,
-    bool removeMinWidthPercent = false,
   }) {
     return PageBuilderButtonProperties(
-      width: removeWidth ? null : (width ?? this.width),
-      height: removeHeight ? null : (height ?? this.height),
-      minWidthPercent: removeMinWidthPercent
-          ? null
-          : (minWidthPercent ?? this.minWidthPercent),
+      sizeMode: sizeMode ?? this.sizeMode,
+      width: width ?? this.width,
+      height: height ?? this.height,
+      minWidthPercent: minWidthPercent ?? this.minWidthPercent,
       contentPadding: contentPadding ?? this.contentPadding,
       border: border ?? this.border,
       backgroundPaint: backgroundPaint ?? this.backgroundPaint,
@@ -54,6 +54,7 @@ class PageBuilderButtonProperties extends Equatable
 
   PageBuilderButtonProperties deepCopy() {
     return PageBuilderButtonProperties(
+      sizeMode: sizeMode?.deepCopy(),
       width: width?.deepCopy(),
       height: height?.deepCopy(),
       minWidthPercent: minWidthPercent?.deepCopy(),
@@ -66,6 +67,7 @@ class PageBuilderButtonProperties extends Equatable
 
   @override
   List<Object?> get props => [
+        sizeMode,
         width,
         height,
         minWidthPercent,

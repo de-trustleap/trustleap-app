@@ -17,6 +17,7 @@ void main() {
       final model = PagebuilderAnchorButtonProperties(
           sectionName: "1",
           buttonProperties: PageBuilderButtonProperties(
+              sizeMode: null,
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(50.0),
               minWidthPercent: null,
@@ -35,6 +36,7 @@ void main() {
       final expectedResult = PagebuilderAnchorButtonProperties(
           sectionName: "2",
           buttonProperties: PageBuilderButtonProperties(
+              sizeMode: null,
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(50.0),
               minWidthPercent: null,
@@ -79,6 +81,7 @@ void main() {
       );
 
       final originalButtonProperties = PageBuilderButtonProperties(
+        sizeMode: null,
         width: const PagebuilderResponsiveOrConstant.constant(100.0),
         height: const PagebuilderResponsiveOrConstant.constant(40.0),
         minWidthPercent: null,
@@ -115,6 +118,7 @@ void main() {
       );
 
       final mutatedButtonProperties = PageBuilderButtonProperties(
+        sizeMode: null,
         width: const PagebuilderResponsiveOrConstant.constant(300.0),
         height: const PagebuilderResponsiveOrConstant.constant(80.0),
         minWidthPercent: null,
@@ -158,6 +162,7 @@ void main() {
       final model = PagebuilderAnchorButtonProperties(
           sectionName: "1",
           buttonProperties: PageBuilderButtonProperties(
+              sizeMode: null,
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(50.0),
               minWidthPercent: null,
@@ -176,6 +181,7 @@ void main() {
       final model2 = PagebuilderAnchorButtonProperties(
           sectionName: "1",
           buttonProperties: PageBuilderButtonProperties(
+              sizeMode: null,
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(50.0),
               minWidthPercent: null,
