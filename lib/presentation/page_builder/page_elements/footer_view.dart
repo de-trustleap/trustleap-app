@@ -98,10 +98,10 @@ class PagebuilderFooterView extends StatelessWidget {
     return LandingPageBuilderWidgetContainer(
         model: widgetModel,
         index: index,
-        child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+        child: Wrap(
+            alignment: WrapAlignment.center,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            runSpacing: 8,
             children: children));
   }
 }
