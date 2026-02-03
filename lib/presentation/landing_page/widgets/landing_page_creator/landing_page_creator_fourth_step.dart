@@ -74,16 +74,18 @@ class _LandingPageCreatorFourthStepState
         }
       },
       builder: (context, state) {
-        return Column(
-          children: [
-            SizedBox(height: responsiveValue.isMobile ? 40 : 80),
-            CenteredConstrainedWrapper(
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: responsiveValue.isMobile ? 40 : 80),
+              CenteredConstrainedWrapper(
               child: CardContainer(
                   maxWidth: 800,
                   child: LayoutBuilder(builder: (context, constraints) {
                     final maxWidth = constraints.maxWidth;
                     return Column(children: [
-                      SelectableText("Wähle ein Template aus",
+                      SelectableText(
+                          localization.landingpage_creator_select_template_title,
                           style: themeData.textTheme.headlineLarge!
                               .copyWith(fontWeight: FontWeight.bold)),
                       const SizedBox(height: 24),
@@ -192,6 +194,7 @@ class _LandingPageCreatorFourthStepState
                   })),
             ),
           ],
+        ),
         );
       },
     );

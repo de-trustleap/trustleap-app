@@ -2249,6 +2249,10 @@
     "@landingpage_creator_ai_generator_tile_description": {
         "description": "Description for the AI Generator tile in the landing page creator"
     },
+    "landingpage_creator_select_template_title": "Select a template",
+    "@landingpage_creator_select_template_title": {
+        "description": "Title for the template selection in the fourth step of the landing page creator"
+    },
     "landingpage_overview_no_default_page_title": "Setup Landingpage",
     "@landingpage_overview_no_default_page_title": {
         "description": "Title for the page that is displayed if you have not yet created a default landing page."

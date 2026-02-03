@@ -1965,6 +1965,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Beschreibe dein Unternehmen und erhalte eine maßgeschneiderte Seite in kürzester Zeit.';
 
   @override
+  String get landingpage_creator_select_template_title =>
+      'Wähle ein Template aus';
+
+  @override
   String get landingpage_overview_no_default_page_title =>
       'Landingpage einrichten';
 

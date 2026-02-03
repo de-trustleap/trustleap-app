@@ -57,8 +57,6 @@ class _LandingPageCreatorThirdStepGridTileState
             duration: const Duration(milliseconds: 200),
             curve: Curves.easeInOut,
             child: Container(
-              width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
-              height: 200,
               decoration: BoxDecoration(
                   color: themeData.colorScheme.surface,
                   border: Border.all(
@@ -71,7 +69,7 @@ class _LandingPageCreatorThirdStepGridTileState
                 padding: const EdgeInsets.all(4),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CachedNetworkImage(
                       width: responsiveValue.largerThan(MOBILE) ? 130 : 140,

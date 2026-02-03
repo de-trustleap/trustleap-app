@@ -36,7 +36,6 @@ class PromotersOverviewGridTile extends StatelessWidget {
         .permissions;
 
     return Container(
-      width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
       decoration: BoxDecoration(
           color: themeData.colorScheme.surface,
           border: Border.all(color: Colors.transparent),
@@ -79,7 +78,7 @@ class PromotersOverviewGridTile extends StatelessWidget {
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
-                                            Icon(Icons.delete,
+                                            Icon(Icons.edit,
                                                 color: themeData
                                                     .colorScheme.secondary,
                                                 size: 24),
@@ -102,7 +101,7 @@ class PromotersOverviewGridTile extends StatelessWidget {
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
-                                            Icon(Icons.copy,
+                                            Icon(Icons.delete,
                                                 color: themeData
                                                     .colorScheme.secondary,
                                                 size: 24),

@@ -3386,6 +3386,12 @@ abstract class AppLocalizations {
   /// **'Describe your business and get a customized page in no time.'**
   String get landingpage_creator_ai_generator_tile_description;
 
+  /// Title for the template selection in the fourth step of the landing page creator
+  ///
+  /// In en, this message translates to:
+  /// **'Select a template'**
+  String get landingpage_creator_select_template_title;
+
   /// Title for the page that is displayed if you have not yet created a default landing page.
   ///
   /// In en, this message translates to:

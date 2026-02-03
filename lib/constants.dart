@@ -164,4 +164,3 @@ enum ConsentMethod {
   rejectAll,
   custom,
 }
-// TODO: UNSPLASH EMAIL UMSETZEN
