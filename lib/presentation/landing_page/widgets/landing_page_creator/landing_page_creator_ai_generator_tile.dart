@@ -1,6 +1,5 @@
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageCreatorAIGeneratorTile extends StatefulWidget {
   final bool isSelected;
@@ -27,7 +26,6 @@ class _LandingPageCreatorAIGeneratorTileState
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
 
     return Opacity(
       opacity: widget.disabled ? 0.5 : 1.0,
@@ -54,8 +52,6 @@ class _LandingPageCreatorAIGeneratorTileState
             duration: const Duration(milliseconds: 200),
             curve: Curves.easeInOut,
             child: Container(
-              width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
-              height: 200,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,

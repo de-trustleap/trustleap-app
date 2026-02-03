@@ -36,7 +36,6 @@ class PromotersOverviewGridTile extends StatelessWidget {
         .permissions;
 
     return Container(
-      width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
       decoration: BoxDecoration(
           color: themeData.colorScheme.surface,
           border: Border.all(color: Colors.transparent),

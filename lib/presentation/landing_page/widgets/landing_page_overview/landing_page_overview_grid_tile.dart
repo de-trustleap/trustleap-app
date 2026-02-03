@@ -116,7 +116,6 @@ class LandingPageOverviewGridTile extends StatelessWidget {
             ? localizations.landingpage_overview_pending_tooltip
             : "",
         child: Container(
-          width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
           decoration: BoxDecoration(
               color: _getBackgroundColor(themeData),
               gradient: _getBackgroundGradient(themeData),
@@ -126,7 +125,6 @@ class LandingPageOverviewGridTile extends StatelessWidget {
               padding: const EdgeInsets.all(4),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   LandingPageOverviewGridTileTopActionRow(
                     landingPage: landingPage,
@@ -137,67 +135,74 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                     isActivePressed: isActivePressed,
                     permissions: permissions,
                   ),
-                  CachedNetworkImage(
-                    width: responsiveValue.largerThan(MOBILE) ? 120 : 140,
-                    height: responsiveValue.largerThan(MOBILE) ? 120 : 140,
-                    imageUrl: landingPage.thumbnailDownloadURL ?? "",
-                    imageBuilder: (context, imageProvider) {
-                      return Container(
-                          decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            image: imageProvider, fit: BoxFit.cover),
-                      ));
-                    },
-                    placeholder: (context, url) {
-                      return Stack(children: [
-                        placeHolderImage(responsiveValue),
-                        const LoadingIndicator()
-                      ]);
-                    },
-                    errorWidget: (context, url, error) {
-                      return placeHolderImage(responsiveValue);
-                    },
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CachedNetworkImage(
+                          width: responsiveValue.largerThan(MOBILE) ? 120 : 140,
+                          height:
+                              responsiveValue.largerThan(MOBILE) ? 120 : 140,
+                          imageUrl: landingPage.thumbnailDownloadURL ?? "",
+                          imageBuilder: (context, imageProvider) {
+                            return Container(
+                                decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                  image: imageProvider, fit: BoxFit.cover),
+                            ));
+                          },
+                          placeholder: (context, url) {
+                            return Stack(children: [
+                              placeHolderImage(responsiveValue),
+                              const LoadingIndicator()
+                            ]);
+                          },
+                          errorWidget: (context, url, error) {
+                            return placeHolderImage(responsiveValue);
+                          },
+                        ),
+                        const SizedBox(height: 8),
+                        SelectableText(landingPage.name ?? "",
+                            style: themeData.textTheme.bodySmall!
+                                .copyWith(overflow: TextOverflow.ellipsis),
+                            textAlign: TextAlign.center,
+                            maxLines: 2),
+                        if (landingPage.createdAt != null &&
+                            landingPage.lastUpdatedAt == null) ...[
+                          const SizedBox(height: 16),
+                          SelectableText(
+                              "${localizations.landingpage_overview_created_at} ${DateTimeFormatter().getStringFromDate(context, landingPage.createdAt!)}",
+                              style: themeData.textTheme.bodySmall!.copyWith(
+                                  fontSize: responsiveValue.isMobile ? 10 : 12,
+                                  color: themeData.colorScheme.surfaceTint
+                                      .withValues(alpha: 0.6),
+                                  overflow: TextOverflow.ellipsis),
+                              maxLines: 1),
+                        ] else if (landingPage.lastUpdatedAt != null) ...[
+                          const SizedBox(height: 8),
+                          SelectableText(
+                              "${localizations.landingpage_overview_updated_at} ${DateTimeFormatter().getStringFromDate(context, landingPage.lastUpdatedAt!)}",
+                              style: themeData.textTheme.bodySmall!.copyWith(
+                                  fontSize: responsiveValue.isMobile ? 10 : 12,
+                                  color: themeData.colorScheme.surfaceTint
+                                      .withValues(alpha: 0.6),
+                                  overflow: TextOverflow.ellipsis),
+                              maxLines: 1)
+                        ],
+                        if (!(landingPage.isActive ?? false) &&
+                            !(landingPage.isDefaultPage ?? false)) ...[
+                          SelectableText(
+                              localizations.landingpage_overview_deactivated,
+                              style: themeData.textTheme.bodySmall!.copyWith(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color.fromARGB(255, 255, 0, 0)),
+                              maxLines: 1),
+                        ],
+                      ],
+                    ),
                   ),
-                  const SizedBox(height: 8),
-                  SelectableText(landingPage.name ?? "",
-                      style: themeData.textTheme.bodySmall!
-                          .copyWith(overflow: TextOverflow.ellipsis),
-                      textAlign: TextAlign.center,
-                      maxLines: 2),
-                  if (landingPage.createdAt != null &&
-                      landingPage.lastUpdatedAt == null) ...[
-                    const SizedBox(height: 16),
-                    SelectableText(
-                        "${localizations.landingpage_overview_created_at} ${DateTimeFormatter().getStringFromDate(context, landingPage.createdAt!)}",
-                        style: themeData.textTheme.bodySmall!.copyWith(
-                            fontSize: responsiveValue.isMobile ? 10 : 12,
-                            color: themeData.colorScheme.surfaceTint
-                                .withValues(alpha: 0.6),
-                            overflow: TextOverflow.ellipsis),
-                        maxLines: 1),
-                  ] else if (landingPage.lastUpdatedAt != null) ...[
-                    const SizedBox(height: 8),
-                    SelectableText(
-                        "${localizations.landingpage_overview_updated_at} ${DateTimeFormatter().getStringFromDate(context, landingPage.lastUpdatedAt!)}",
-                        style: themeData.textTheme.bodySmall!.copyWith(
-                            fontSize: responsiveValue.isMobile ? 10 : 12,
-                            color: themeData.colorScheme.surfaceTint
-                                .withValues(alpha: 0.6),
-                            overflow: TextOverflow.ellipsis),
-                        maxLines: 1)
-                  ],
-                  if (!(landingPage.isActive ?? false) &&
-                      !(landingPage.isDefaultPage ?? false)) ...[
-                    SelectableText(
-                        localizations.landingpage_overview_deactivated,
-                        style: themeData.textTheme.bodySmall!.copyWith(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: const Color.fromARGB(255, 255, 0, 0)),
-                        maxLines: 1),
-                  ],
-                  const Spacer()
                 ],
               )),
         ),

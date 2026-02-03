@@ -59,3 +59,5 @@ dart run build_runner build --delete-conflicting-outputs
 - **Widgets:** Responsive für Mobile/Tablet/Desktop (responsive_framework)
 - **Sprache:** Lokalisierung (DE/EN) in `lib/l10n/`
 - **Tests:** Bei neuen Tests an bestehenden vergleichbaren Tests im `test/`-Verzeichnis orientieren und deren Patterns übernehmen
+- **Navigation:** CustomNavigator statt Navigator verwenden
+- **Snackbars:** CustomSnackbar für alle Snackbar-Anzeigen nutzen

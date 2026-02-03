@@ -1,80 +1,33 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/animated_tile_grid.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoters_overview_grid_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class PromoterOverviewGrid extends StatelessWidget {
   final ScrollController controller;
   final List<Promoter> promoters;
   final Function(String, bool) deletePressed;
 
-  const PromoterOverviewGrid(
-      {super.key,
-      required this.controller,
-      required this.promoters,
-      required this.deletePressed});
+  const PromoterOverviewGrid({
+    super.key,
+    required this.controller,
+    required this.promoters,
+    required this.deletePressed,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final responsiveValue = ResponsiveHelper.of(context);
-
-    return LayoutBuilder(builder: (context, constraints) {
-      final double horizontalSpacing =
-          responsiveValue.largerThan(MOBILE) ? 24 : 12;
-      final double verticalSpacing =
-          responsiveValue.largerThan(MOBILE) ? 24 : 12;
-
-      double tileWidth;
-      int columnsCount;
-
-      if (responsiveValue.isMobile) {
-        columnsCount = 2;
-        final double availableWidth = constraints.maxWidth;
-        final double totalSpacing = horizontalSpacing * (columnsCount - 1);
-        tileWidth = (availableWidth - totalSpacing) / columnsCount;
-      } else {
-        tileWidth = 200;
-        columnsCount = (constraints.maxWidth / (tileWidth + horizontalSpacing))
-            .floor()
-            .clamp(1, double.infinity)
-            .toInt();
-      }
-
-      return AnimationLimiter(
-        key: ValueKey(
-            'promoter-grid-${responsiveValue.isMobile}-$columnsCount-${tileWidth.toInt()}'),
-        child: SingleChildScrollView(
-          controller: controller,
-          child: Wrap(
-            spacing: horizontalSpacing,
-            runSpacing: verticalSpacing,
-            children: promoters.asMap().entries.map((entry) {
-              int index = entry.key;
-              Promoter promoter = entry.value;
-
-              return AnimationConfiguration.staggeredGrid(
-                position: index,
-                duration: const Duration(milliseconds: 150),
-                columnCount: columnsCount,
-                child: ScaleAnimation(
-                  child: IntrinsicHeight(
-                    child: SizedBox(
-                      key: ValueKey(
-                          'tile-${promoter.id.value}-${responsiveValue.isMobile}'),
-                      width: tileWidth,
-                      child: PromotersOverviewGridTile(
-                          promoter: promoter, deletePressed: deletePressed),
-                    ),
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-        ),
-      );
-    });
+    return AnimatedTileGrid(
+      itemCount: promoters.length,
+      gridName: 'promoter-grid',
+      scrollController: controller,
+      itemBuilder: (index, tileWidth, tileHeight) {
+        return PromotersOverviewGridTile(
+          promoter: promoters[index],
+          deletePressed: deletePressed,
+        );
+      },
+    );
   }
 }
