@@ -78,7 +78,7 @@ class PromotersOverviewGridTile extends StatelessWidget {
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
-                                            Icon(Icons.delete,
+                                            Icon(Icons.edit,
                                                 color: themeData
                                                     .colorScheme.secondary,
                                                 size: 24),
@@ -101,7 +101,7 @@ class PromotersOverviewGridTile extends StatelessWidget {
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
-                                            Icon(Icons.copy,
+                                            Icon(Icons.delete,
                                                 color: themeData
                                                     .colorScheme.secondary,
                                                 size: 24),

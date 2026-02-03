@@ -1935,6 +1935,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Describe your business and get a customized page in no time.';
 
   @override
+  String get landingpage_creator_select_template_title => 'Select a template';
+
+  @override
   String get landingpage_overview_no_default_page_title => 'Setup Landingpage';
 
   @override

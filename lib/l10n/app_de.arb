@@ -2249,6 +2249,10 @@
     "@landingpage_creator_ai_generator_tile_description": {
         "description": "Beschreibung für die KI Generator Kachel im Landingpage Creator"
     },
+    "landingpage_creator_select_template_title": "Wähle ein Template aus",
+    "@landingpage_creator_select_template_title": {
+        "description": "Titel für die Template-Auswahl im vierten Schritt des Landingpage Creators"
+    },
     "landingpage_overview_no_default_page_title": "Landingpage einrichten",
     "@landingpage_overview_no_default_page_title": {
         "description": "Titel für die Seite die angezeigt wird wenn man noch keine Default Landingpage erstellt hat."

@@ -84,7 +84,8 @@ class _LandingPageCreatorFourthStepState
                   child: LayoutBuilder(builder: (context, constraints) {
                     final maxWidth = constraints.maxWidth;
                     return Column(children: [
-                      SelectableText("Wähle ein Template aus",
+                      SelectableText(
+                          localization.landingpage_creator_select_template_title,
                           style: themeData.textTheme.headlineLarge!
                               .copyWith(fontWeight: FontWeight.bold)),
                       const SizedBox(height: 24),
