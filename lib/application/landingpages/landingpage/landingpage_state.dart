@@ -211,3 +211,29 @@ class CheckCompanyValidState extends LandingPageState with EquatableMixin {
   @override
   List<Object> get props => [];
 }
+
+class GetArchivedLegalsLoadingState extends LandingPageState
+    with EquatableMixin {
+  @override
+  List<Object> get props => [];
+}
+
+class GetArchivedLegalsFailureState extends LandingPageState
+    with EquatableMixin {
+  final DatabaseFailure failure;
+  GetArchivedLegalsFailureState({
+    required this.failure,
+  });
+  @override
+  List<Object> get props => [failure];
+}
+
+class GetArchivedLegalsSuccessState extends LandingPageState
+    with EquatableMixin {
+  final ArchivedLandingPageLegals archivedLegals;
+  GetArchivedLegalsSuccessState({
+    required this.archivedLegals,
+  });
+  @override
+  List<Object> get props => [archivedLegals];
+}

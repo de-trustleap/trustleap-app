@@ -5852,6 +5852,204 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Privacy Policy'**
   String get cookie_consent_privacy_policy;
+
+  /// Status badge on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'ACTIVE'**
+  String get landing_page_detail_status_active;
+
+  /// Status badge on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'INACTIVE'**
+  String get landing_page_detail_status_inactive;
+
+  /// Creation date label on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Created on'**
+  String get landing_page_detail_created_on;
+
+  /// Modification date label on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Last modified'**
+  String get landing_page_detail_last_modified;
+
+  /// Last updated label for legal texts on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Last updated'**
+  String get landing_page_detail_last_updated;
+
+  /// Preview button on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get landing_page_detail_preview;
+
+  /// Open Pagebuilder button on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Open Pagebuilder'**
+  String get landing_page_detail_open_builder;
+
+  /// Total visits statistic on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Total Visits'**
+  String get landing_page_detail_total_visits;
+
+  /// Conversion rate statistic on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Conversion Rate'**
+  String get landing_page_detail_conversion_rate;
+
+  /// Traffic chart title on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Traffic Overview'**
+  String get landing_page_detail_traffic_overview;
+
+  /// Configuration section title on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Page Configuration'**
+  String get landing_page_detail_page_configuration;
+
+  /// Edit configuration button on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get landing_page_detail_edit_configuration;
+
+  /// Description label on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get landing_page_detail_description;
+
+  /// Promoter template text label on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Promoter Template Text'**
+  String get landing_page_detail_promoter_template_text;
+
+  /// Page type label on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Page Type'**
+  String get landing_page_detail_page_type;
+
+  /// B2C page type on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'B2C'**
+  String get landing_page_detail_type_b2c;
+
+  /// B2C page type description on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Consumer focused landing page'**
+  String get landing_page_detail_type_b2c_description;
+
+  /// B2B page type on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'B2B'**
+  String get landing_page_detail_type_b2b;
+
+  /// B2B page type description on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Business focused landing page'**
+  String get landing_page_detail_type_b2b_description;
+
+  /// Contact options label on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Options'**
+  String get landing_page_detail_contact_options;
+
+  /// Calendly contact option on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Calendly'**
+  String get landing_page_detail_contact_calendly;
+
+  /// Calendly contact option description on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Book appointments via Calendly'**
+  String get landing_page_detail_contact_calendly_description;
+
+  /// Contact form option on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Form'**
+  String get landing_page_detail_contact_form;
+
+  /// Contact form option description on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Contact form on the page'**
+  String get landing_page_detail_contact_form_description;
+
+  /// Both contact options on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Both Options'**
+  String get landing_page_detail_contact_both;
+
+  /// Both contact options description on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Contact form + Calendly integration'**
+  String get landing_page_detail_contact_both_description;
+
+  /// Legal information section on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Legal Information'**
+  String get landing_page_detail_legal_information;
+
+  /// Privacy policy tile on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get landing_page_detail_privacy_policy;
+
+  /// Imprint tile on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Imprint'**
+  String get landing_page_detail_imprint;
+
+  /// Terms and conditions tile on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Terms & Conditions'**
+  String get landing_page_detail_terms_and_conditions;
+
+  /// Initial information tile on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Initial Information'**
+  String get landing_page_detail_initial_information;
+
+  /// Error message on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading landing page'**
+  String get landing_page_detail_error_loading;
+
+  /// Not found message on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Landing page not found'**
+  String get landing_page_detail_not_found;
 }
 
 class _AppLocalizationsDelegate

@@ -27,6 +27,7 @@ class LandingPage extends Equatable {
   final BusinessModel? businessModel;
   final ContactOption? contactOption;
   final Map<String, dynamic>? companyData;
+  final int? visitsTotal;
 
   const LandingPage(
       {required this.id,
@@ -51,7 +52,8 @@ class LandingPage extends Equatable {
       this.calendlyEventURL,
       this.businessModel,
       this.contactOption,
-      this.companyData});
+      this.companyData,
+      this.visitsTotal});
 
   LandingPage copyWith(
       {UniqueID? id,
@@ -76,7 +78,8 @@ class LandingPage extends Equatable {
       String? calendlyEventURL,
       BusinessModel? businessModel,
       ContactOption? contactOption,
-      Map<String, dynamic>? companyData}) {
+      Map<String, dynamic>? companyData,
+      int? visitsTotal}) {
     return LandingPage(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -100,7 +103,8 @@ class LandingPage extends Equatable {
         calendlyEventURL: calendlyEventURL ?? this.calendlyEventURL,
         businessModel: businessModel ?? this.businessModel,
         contactOption: contactOption ?? this.contactOption,
-        companyData: companyData ?? this.companyData);
+        companyData: companyData ?? this.companyData,
+        visitsTotal: visitsTotal ?? this.visitsTotal);
   }
 
   @override
@@ -124,6 +128,7 @@ class LandingPage extends Equatable {
         calendlyEventURL,
         businessModel,
         contactOption,
-        companyData
+        companyData,
+        visitsTotal
       ];
 }

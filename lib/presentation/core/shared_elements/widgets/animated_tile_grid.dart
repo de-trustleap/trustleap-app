@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -29,7 +30,7 @@ class AnimatedTileGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
 
     return LayoutBuilder(builder: (context, constraints) {
       final double horizontalSpacing =

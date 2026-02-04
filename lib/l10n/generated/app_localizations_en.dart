@@ -3364,4 +3364,109 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cookie_consent_privacy_policy => 'Privacy Policy';
+
+  @override
+  String get landing_page_detail_status_active => 'ACTIVE';
+
+  @override
+  String get landing_page_detail_status_inactive => 'INACTIVE';
+
+  @override
+  String get landing_page_detail_created_on => 'Created on';
+
+  @override
+  String get landing_page_detail_last_modified => 'Last modified';
+
+  @override
+  String get landing_page_detail_last_updated => 'Last updated';
+
+  @override
+  String get landing_page_detail_preview => 'Preview';
+
+  @override
+  String get landing_page_detail_open_builder => 'Open Pagebuilder';
+
+  @override
+  String get landing_page_detail_total_visits => 'Total Visits';
+
+  @override
+  String get landing_page_detail_conversion_rate => 'Conversion Rate';
+
+  @override
+  String get landing_page_detail_traffic_overview => 'Traffic Overview';
+
+  @override
+  String get landing_page_detail_page_configuration => 'Page Configuration';
+
+  @override
+  String get landing_page_detail_edit_configuration => 'Edit';
+
+  @override
+  String get landing_page_detail_description => 'Description';
+
+  @override
+  String get landing_page_detail_promoter_template_text =>
+      'Promoter Template Text';
+
+  @override
+  String get landing_page_detail_page_type => 'Page Type';
+
+  @override
+  String get landing_page_detail_type_b2c => 'B2C';
+
+  @override
+  String get landing_page_detail_type_b2c_description =>
+      'Consumer focused landing page';
+
+  @override
+  String get landing_page_detail_type_b2b => 'B2B';
+
+  @override
+  String get landing_page_detail_type_b2b_description =>
+      'Business focused landing page';
+
+  @override
+  String get landing_page_detail_contact_options => 'Contact Options';
+
+  @override
+  String get landing_page_detail_contact_calendly => 'Calendly';
+
+  @override
+  String get landing_page_detail_contact_calendly_description =>
+      'Book appointments via Calendly';
+
+  @override
+  String get landing_page_detail_contact_form => 'Contact Form';
+
+  @override
+  String get landing_page_detail_contact_form_description =>
+      'Contact form on the page';
+
+  @override
+  String get landing_page_detail_contact_both => 'Both Options';
+
+  @override
+  String get landing_page_detail_contact_both_description =>
+      'Contact form + Calendly integration';
+
+  @override
+  String get landing_page_detail_legal_information => 'Legal Information';
+
+  @override
+  String get landing_page_detail_privacy_policy => 'Privacy Policy';
+
+  @override
+  String get landing_page_detail_imprint => 'Imprint';
+
+  @override
+  String get landing_page_detail_terms_and_conditions => 'Terms & Conditions';
+
+  @override
+  String get landing_page_detail_initial_information => 'Initial Information';
+
+  @override
+  String get landing_page_detail_error_loading => 'Error loading landing page';
+
+  @override
+  String get landing_page_detail_not_found => 'Landing page not found';
 }

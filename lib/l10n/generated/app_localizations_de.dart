@@ -3424,4 +3424,111 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get cookie_consent_privacy_policy => 'Datenschutzerklärung';
+
+  @override
+  String get landing_page_detail_status_active => 'AKTIV';
+
+  @override
+  String get landing_page_detail_status_inactive => 'INAKTIV';
+
+  @override
+  String get landing_page_detail_created_on => 'Erstellt am';
+
+  @override
+  String get landing_page_detail_last_modified => 'Zuletzt bearbeitet';
+
+  @override
+  String get landing_page_detail_last_updated => 'Zuletzt aktualisiert';
+
+  @override
+  String get landing_page_detail_preview => 'Vorschau';
+
+  @override
+  String get landing_page_detail_open_builder => 'Pagebuilder öffnen';
+
+  @override
+  String get landing_page_detail_total_visits => 'Aufrufe gesamt';
+
+  @override
+  String get landing_page_detail_conversion_rate => 'Conversion Rate';
+
+  @override
+  String get landing_page_detail_traffic_overview => 'Traffic Übersicht';
+
+  @override
+  String get landing_page_detail_page_configuration => 'Seiten Konfiguration';
+
+  @override
+  String get landing_page_detail_edit_configuration => 'Bearbeiten';
+
+  @override
+  String get landing_page_detail_description => 'Beschreibung';
+
+  @override
+  String get landing_page_detail_promoter_template_text =>
+      'Promoter Template Text';
+
+  @override
+  String get landing_page_detail_page_type => 'Seitentyp';
+
+  @override
+  String get landing_page_detail_type_b2c => 'B2C';
+
+  @override
+  String get landing_page_detail_type_b2c_description =>
+      'Endkunden-fokussierte Landingpage';
+
+  @override
+  String get landing_page_detail_type_b2b => 'B2B';
+
+  @override
+  String get landing_page_detail_type_b2b_description =>
+      'Geschäftskunden-fokussierte Landingpage';
+
+  @override
+  String get landing_page_detail_contact_options => 'Kontaktoptionen';
+
+  @override
+  String get landing_page_detail_contact_calendly => 'Calendly';
+
+  @override
+  String get landing_page_detail_contact_calendly_description =>
+      'Terminbuchung über Calendly';
+
+  @override
+  String get landing_page_detail_contact_form => 'Kontaktformular';
+
+  @override
+  String get landing_page_detail_contact_form_description =>
+      'Kontaktformular auf der Seite';
+
+  @override
+  String get landing_page_detail_contact_both => 'Beide Optionen';
+
+  @override
+  String get landing_page_detail_contact_both_description =>
+      'Kontaktformular + Calendly Integration';
+
+  @override
+  String get landing_page_detail_legal_information =>
+      'Rechtliche Informationen';
+
+  @override
+  String get landing_page_detail_privacy_policy => 'Datenschutzerklärung';
+
+  @override
+  String get landing_page_detail_imprint => 'Impressum';
+
+  @override
+  String get landing_page_detail_terms_and_conditions => 'AGB';
+
+  @override
+  String get landing_page_detail_initial_information => 'Erstinformation';
+
+  @override
+  String get landing_page_detail_error_loading =>
+      'Fehler beim Laden der Landingpage';
+
+  @override
+  String get landing_page_detail_not_found => 'Landingpage nicht gefunden';
 }

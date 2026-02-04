@@ -10,6 +10,7 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/placeholder_image.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_overview/landing_page_overview_grid_tile_top_action_row.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_status_badge.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -90,11 +91,10 @@ class LandingPageOverviewGridTile extends StatelessWidget {
     if ((landingPage.ownerID == user.id ||
             (permissions.hasEditLandingPagePermission())) &&
         !_isDefaultPage() &&
-        !_isPending() &&
-        responsiveValue.isDesktop) {
+        !_isPending()) {
       return InkWell(
-          onTap: () => navigator.openInNewTab(
-              "${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${landingPage.id.value}"),
+          onTap: () => navigator.navigate(
+              "${RoutePaths.homePath}${RoutePaths.landingPageDetailPath}/${landingPage.id.value}"),
           child: buildTile(themeData, responsiveValue, localizations, context));
     } else {
       return buildTile(themeData, responsiveValue, localizations, context);
@@ -190,15 +190,11 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis),
                               maxLines: 1)
                         ],
-                        if (!(landingPage.isActive ?? false) &&
-                            !(landingPage.isDefaultPage ?? false)) ...[
-                          SelectableText(
-                              localizations.landingpage_overview_deactivated,
-                              style: themeData.textTheme.bodySmall!.copyWith(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: const Color.fromARGB(255, 255, 0, 0)),
-                              maxLines: 1),
+                        if (!(landingPage.isDefaultPage ?? false)) ...[
+                          const SizedBox(height: 8),
+                          LandingPageStatusBadge(
+                            isActive: landingPage.isActive ?? false,
+                          ),
                         ],
                       ],
                     ),

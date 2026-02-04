@@ -3954,5 +3954,137 @@
     "cookie_consent_privacy_policy": "Datenschutzerklärung",
     "@cookie_consent_privacy_policy": {
         "description": "Link-Text zur Datenschutzerklärung"
+    },
+    "landing_page_detail_status_active": "AKTIV",
+    "@landing_page_detail_status_active": {
+        "description": "Status Badge für aktive Landingpage auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_status_inactive": "INAKTIV",
+    "@landing_page_detail_status_inactive": {
+        "description": "Status Badge für inaktive Landingpage auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_created_on": "Erstellt am",
+    "@landing_page_detail_created_on": {
+        "description": "Label für Erstellungsdatum auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_last_modified": "Zuletzt bearbeitet",
+    "@landing_page_detail_last_modified": {
+        "description": "Label für letztes Änderungsdatum auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_last_updated": "Zuletzt aktualisiert",
+    "@landing_page_detail_last_updated": {
+        "description": "Label für letztes Aktualisierungsdatum der Rechtstexte auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_preview": "Vorschau",
+    "@landing_page_detail_preview": {
+        "description": "Titel des Vorschau Buttons auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_open_builder": "Pagebuilder öffnen",
+    "@landing_page_detail_open_builder": {
+        "description": "Titel des Pagebuilder Buttons auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_total_visits": "Aufrufe gesamt",
+    "@landing_page_detail_total_visits": {
+        "description": "Label für Gesamtaufrufe auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_conversion_rate": "Conversion Rate",
+    "@landing_page_detail_conversion_rate": {
+        "description": "Label für Conversion Rate auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_traffic_overview": "Traffic Übersicht",
+    "@landing_page_detail_traffic_overview": {
+        "description": "Titel des Traffic Charts auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_page_configuration": "Seiten Konfiguration",
+    "@landing_page_detail_page_configuration": {
+        "description": "Titel des Konfigurationsbereichs auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_edit_configuration": "Bearbeiten",
+    "@landing_page_detail_edit_configuration": {
+        "description": "Titel des Bearbeiten Buttons auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_description": "Beschreibung",
+    "@landing_page_detail_description": {
+        "description": "Label für Beschreibung auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_promoter_template_text": "Promoter Template Text",
+    "@landing_page_detail_promoter_template_text": {
+        "description": "Label für Promoter Template Text auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_page_type": "Seitentyp",
+    "@landing_page_detail_page_type": {
+        "description": "Label für Seitentyp auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_type_b2c": "B2C",
+    "@landing_page_detail_type_b2c": {
+        "description": "B2C Seitentyp Label auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_type_b2c_description": "Endkunden-fokussierte Landingpage",
+    "@landing_page_detail_type_b2c_description": {
+        "description": "B2C Seitentyp Beschreibung auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_type_b2b": "B2B",
+    "@landing_page_detail_type_b2b": {
+        "description": "B2B Seitentyp Label auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_type_b2b_description": "Geschäftskunden-fokussierte Landingpage",
+    "@landing_page_detail_type_b2b_description": {
+        "description": "B2B Seitentyp Beschreibung auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_contact_options": "Kontaktoptionen",
+    "@landing_page_detail_contact_options": {
+        "description": "Label für Kontaktoptionen auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_contact_calendly": "Calendly",
+    "@landing_page_detail_contact_calendly": {
+        "description": "Calendly Kontaktoption Label auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_contact_calendly_description": "Terminbuchung über Calendly",
+    "@landing_page_detail_contact_calendly_description": {
+        "description": "Calendly Kontaktoption Beschreibung auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_contact_form": "Kontaktformular",
+    "@landing_page_detail_contact_form": {
+        "description": "Kontaktformular Label auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_contact_form_description": "Kontaktformular auf der Seite",
+    "@landing_page_detail_contact_form_description": {
+        "description": "Kontaktformular Beschreibung auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_contact_both": "Beide Optionen",
+    "@landing_page_detail_contact_both": {
+        "description": "Beide Kontaktoptionen Label auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_contact_both_description": "Kontaktformular + Calendly Integration",
+    "@landing_page_detail_contact_both_description": {
+        "description": "Beide Kontaktoptionen Beschreibung auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_legal_information": "Rechtliche Informationen",
+    "@landing_page_detail_legal_information": {
+        "description": "Label für rechtliche Informationen auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_privacy_policy": "Datenschutzerklärung",
+    "@landing_page_detail_privacy_policy": {
+        "description": "Label für Datenschutzerklärung auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_imprint": "Impressum",
+    "@landing_page_detail_imprint": {
+        "description": "Label für Impressum auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_terms_and_conditions": "AGB",
+    "@landing_page_detail_terms_and_conditions": {
+        "description": "Label für AGB auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_initial_information": "Erstinformation",
+    "@landing_page_detail_initial_information": {
+        "description": "Label für Erstinformation auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_error_loading": "Fehler beim Laden der Landingpage",
+    "@landing_page_detail_error_loading": {
+        "description": "Fehlermeldung auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_not_found": "Landingpage nicht gefunden",
+    "@landing_page_detail_not_found": {
+        "description": "Fehlermeldung auf der Landingpage Detail Seite"
     }
 }
