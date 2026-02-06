@@ -15,23 +15,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-class LandingPageDetailTrafficChart extends StatefulWidget {
+class LandingPageDetailRecommendationChart extends StatefulWidget {
   final String landingPageId;
   final CustomUser user;
 
-  const LandingPageDetailTrafficChart({
+  const LandingPageDetailRecommendationChart({
     super.key,
     required this.landingPageId,
     required this.user,
   });
 
   @override
-  State<LandingPageDetailTrafficChart> createState() =>
+  State<LandingPageDetailRecommendationChart> createState() =>
       _LandingPageDetailTrafficChartState();
 }
 
 class _LandingPageDetailTrafficChartState
-    extends State<LandingPageDetailTrafficChart> {
+    extends State<LandingPageDetailRecommendationChart> {
   TimePeriod _selectedTimePeriod = TimePeriod.week;
   int? _selectedStatusLevel = 1;
   String? _selectedPromoterId;
@@ -147,7 +147,7 @@ class _LandingPageDetailTrafficChartState
               Row(
                 children: [
                   SelectableText(
-                    localization.landing_page_detail_traffic_overview,
+                    localization.landing_page_detail_recommendation_overview,
                     style: themeData.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -158,7 +158,8 @@ class _LandingPageDetailTrafficChartState
                     height: 48,
                     child: IconButton(
                       onPressed: _onFilterPressed,
-                      tooltip: localization.dashboard_recommendations_filter_tooltip,
+                      tooltip:
+                          localization.dashboard_recommendations_filter_tooltip,
                       icon: Icon(
                         Icons.filter_list,
                         color: themeData.colorScheme.secondary,

@@ -84,8 +84,6 @@ class HomeModule extends Module {
                   )),
           ChildRoute(RoutePaths.landingPageCreatorPath, child: (_) {
             final args = r.args.data as Map<String, dynamic>?;
-            print('DEBUG HomeModule - Creator args: $args');
-            print('DEBUG HomeModule - landingPage: ${args?["landingPage"]}');
             return LandingPageCreator(
                 landingPage: args?["landingPage"],
                 createDefaultPage: args?["createDefaultPage"] ?? false);

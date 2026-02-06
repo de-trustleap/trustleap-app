@@ -11,8 +11,8 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loadin
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_detail/landing_page_detail_config_card.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_detail/landing_page_detail_header.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_detail/landing_page_detail_promoters_section.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_detail/landing_page_detail_recommendation_chart.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_detail/landing_page_detail_statistics.dart';
-import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_detail/landing_page_detail_traffic_chart.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -129,7 +129,7 @@ class _LandingPageDetailPageState extends State<LandingPageDetailPage> {
                       user: lpState.user,
                     ),
                     const SizedBox(height: 24),
-                    LandingPageDetailTrafficChart(
+                    LandingPageDetailRecommendationChart(
                       landingPageId: widget.landingPageId,
                       user: lpState.user,
                     ),
@@ -152,9 +152,7 @@ class _LandingPageDetailPageState extends State<LandingPageDetailPage> {
     );
   }
 }
-
-// TODO: LANDINGPAGE CREATOR ANPASSEN UND B2C/B2B UND CONTACT DURCH KARTEN TAUSCHEN DIE SICH WIE BUTTONS VERHALTEN    
-// TODO: TEXTE PRÜFEN                                                                                                                                                                             
+                                                                                                                                                                        
 // TODO: PROMOTER OVERVIEW ANPASSEN UND KACHELN AUCH STATT BILD PLATZHALTER INITIALEN DES NAMENS ANZEIGEN                                                   
 // TODO: TESTS ERWEITERN. VOR ALLEM FÜR CUBIT UND REPO
 // TODO: MOCKDATEN ERSTELLEN FÜR DETAIL PAGE UND TESTEN                                                                                                   

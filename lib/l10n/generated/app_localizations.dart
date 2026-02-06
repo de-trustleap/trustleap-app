@@ -788,7 +788,7 @@ abstract class AppLocalizations {
   /// Tooltip text for the business model InfoButton
   ///
   /// In en, this message translates to:
-  /// **'Choose whether your customers are B2B (business customers) or B2C (end consumers). This is important to embed a disclaimer on the landing page in case of B2B customers.\\nIf you address both business customers and end consumers, choose B2C.'**
+  /// **'Choose whether your customers are B2B (business customers) or B2C (end consumers). This is important to embed a disclaimer on the landing page in case of B2B customers.\nIf you address both business customers and end consumers, choose B2C.'**
   String get landingpage_creator_business_model_info_tooltip;
 
   /// Error message when no image has been uploaded.
@@ -5907,11 +5907,11 @@ abstract class AppLocalizations {
   /// **'Conversion Rate'**
   String get landing_page_detail_conversion_rate;
 
-  /// Traffic chart title on the Landing Page Detail Page
+  /// Recommendation chart title on the Landing Page Detail Page
   ///
   /// In en, this message translates to:
-  /// **'Traffic Overview'**
-  String get landing_page_detail_traffic_overview;
+  /// **'Recommendations'**
+  String get landing_page_detail_recommendation_overview;
 
   /// Configuration section title on the Landing Page Detail Page
   ///

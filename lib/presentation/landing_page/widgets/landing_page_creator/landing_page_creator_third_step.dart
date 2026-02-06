@@ -9,6 +9,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_c
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/radio_option_tile.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/secondary_button.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/tooltip_buttons/info_button.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/calendly_connection_widget.dart';
@@ -102,8 +103,8 @@ class _LandingPageCreatorThirdStepState
       );
       if (updatedLandingPage != null) {
         if (widget.isEditMode) {
-          Modular.get<LandingPageCubit>()
-              .editLandingPage(updatedLandingPage, widget.image, widget.imageHasChanged);
+          Modular.get<LandingPageCubit>().editLandingPage(
+              updatedLandingPage, widget.image, widget.imageHasChanged);
         } else {
           widget.onContinue(
               updatedLandingPage, widget.image, widget.imageHasChanged);
@@ -130,7 +131,9 @@ class _LandingPageCreatorThirdStepState
     }
 
     if (_needsCalendly()) {
-      if (!isCalendlyConnected || selectedEventTypeUrl == null || selectedEventTypeUrl!.isEmpty) {
+      if (!isCalendlyConnected ||
+          selectedEventTypeUrl == null ||
+          selectedEventTypeUrl!.isEmpty) {
         return false;
       }
     }
@@ -160,7 +163,9 @@ class _LandingPageCreatorThirdStepState
                   Align(
                     alignment: Alignment.centerLeft,
                     child: SelectableText(
-                      widget.isEditMode ? localization.landingpage_creation_edit_button_text : localization.landingpage_create_txt,
+                      widget.isEditMode
+                          ? localization.landingpage_creation_edit_button_text
+                          : localization.landingpage_create_txt,
                       style: themeData.textTheme.headlineLarge!
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
@@ -191,15 +196,38 @@ class _LandingPageCreatorThirdStepState
                     },
                     child: Column(
                       children: [
-                        RadioListTile<BusinessModel>(
-                          title: Text(localization
-                              .landingpage_creator_business_model_b2b_label),
+                        RadioOptionTile<BusinessModel>(
+                          icon: Icons.business_outlined,
+                          label: localization
+                              .landingpage_creator_business_model_b2b_label,
+                          description: localization
+                              .landing_page_detail_type_b2b_description,
                           value: BusinessModel.b2b,
+                          isSelected:
+                              selectedBusinessModel == BusinessModel.b2b,
+                          onTap: () {
+                            setState(() {
+                              selectedBusinessModel = BusinessModel.b2b;
+                              showCalendlyValidationError = false;
+                            });
+                          },
                         ),
-                        RadioListTile<BusinessModel>(
-                          title: Text(localization
-                              .landingpage_creator_business_model_b2c_label),
+                        const SizedBox(height: 12),
+                        RadioOptionTile<BusinessModel>(
+                          icon: Icons.person_outline,
+                          label: localization
+                              .landingpage_creator_business_model_b2c_label,
+                          description: localization
+                              .landing_page_detail_type_b2c_description,
                           value: BusinessModel.b2c,
+                          isSelected:
+                              selectedBusinessModel == BusinessModel.b2c,
+                          onTap: () {
+                            setState(() {
+                              selectedBusinessModel = BusinessModel.b2c;
+                              showCalendlyValidationError = false;
+                            });
+                          },
                         ),
                       ],
                     ),
@@ -230,20 +258,55 @@ class _LandingPageCreatorThirdStepState
                     },
                     child: Column(
                       children: [
-                        RadioListTile<ContactOption>(
-                          title: Text(localization
-                              .landingpage_creator_contact_option_calendly),
+                        RadioOptionTile<ContactOption>(
+                          icon: Icons.calendar_month_outlined,
+                          label: localization
+                              .landingpage_creator_contact_option_calendly,
+                          description: localization
+                              .landing_page_detail_contact_calendly_description,
                           value: ContactOption.calendly,
+                          isSelected:
+                              selectedContactOption == ContactOption.calendly,
+                          onTap: () {
+                            setState(() {
+                              selectedContactOption = ContactOption.calendly;
+                              showCalendlyValidationError = false;
+                            });
+                          },
                         ),
-                        RadioListTile<ContactOption>(
-                          title: Text(localization
-                              .landingpage_creator_contact_option_form),
+                        const SizedBox(height: 12),
+                        RadioOptionTile<ContactOption>(
+                          icon: Icons.email_outlined,
+                          label: localization
+                              .landingpage_creator_contact_option_form,
+                          description: localization
+                              .landing_page_detail_contact_form_description,
                           value: ContactOption.contactForm,
+                          isSelected: selectedContactOption ==
+                              ContactOption.contactForm,
+                          onTap: () {
+                            setState(() {
+                              selectedContactOption = ContactOption.contactForm;
+                              showCalendlyValidationError = false;
+                            });
+                          },
                         ),
-                        RadioListTile<ContactOption>(
-                          title: Text(localization
-                              .landingpage_creator_contact_option_both),
+                        const SizedBox(height: 12),
+                        RadioOptionTile<ContactOption>(
+                          icon: Icons.dashboard_customize_outlined,
+                          label: localization
+                              .landingpage_creator_contact_option_both,
+                          description: localization
+                              .landing_page_detail_contact_both_description,
                           value: ContactOption.both,
+                          isSelected:
+                              selectedContactOption == ContactOption.both,
+                          onTap: () {
+                            setState(() {
+                              selectedContactOption = ContactOption.both;
+                              showCalendlyValidationError = false;
+                            });
+                          },
                         ),
                       ],
                     ),
@@ -311,7 +374,8 @@ class _LandingPageCreatorThirdStepState
                             widget.onBack(widget.landingPage!.copyWith(
                               businessModel: selectedBusinessModel,
                               contactOption: selectedContactOption,
-                              contactEmailAddress: contactEmailController.text.trim(),
+                              contactEmailAddress:
+                                  contactEmailController.text.trim(),
                               calendlyEventURL: selectedEventTypeUrl,
                             ));
                           },
@@ -322,7 +386,8 @@ class _LandingPageCreatorThirdStepState
                       ResponsiveRowColumnItem(
                         child: PrimaryButton(
                           title: widget.isEditMode
-                              ? localization.landingpage_creation_edit_button_text
+                              ? localization
+                                  .landingpage_creation_edit_button_text
                               : localization.landingpage_creation_continue,
                           disabled: !_isButtonEnabled(),
                           isLoading: widget.isLoading,

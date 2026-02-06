@@ -407,7 +407,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landingpage_creator_business_model_info_tooltip =>
-      'Wähle ob deine Kunden B2B (Geschäftskunden) oder B2C (Endverbraucher) sind. Das ist wichtig um im Falle von B2B Kunden einen Disclaimer auf der Landingpage einzubetten.\\nWenn du Geschäftskunden und Endverbraucher ansprichst dann wähle B2C aus.';
+      'Wähle ob deine Kunden B2B (Geschäftskunden) oder B2C (Endverbraucher) sind. Das ist wichtig um im Falle von B2B Kunden einen Disclaimer auf der Landingpage einzubetten.\nWenn du Geschäftskunden und Endverbraucher ansprichst dann wähle B2C aus.';
 
   @override
   String get error_msg_pleace_upload_picture => 'Bitte ein Bild hochladen';
@@ -3453,7 +3453,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landing_page_detail_conversion_rate => 'Conversion Rate';
 
   @override
-  String get landing_page_detail_traffic_overview => 'Traffic Übersicht';
+  String get landing_page_detail_recommendation_overview => 'Empfehlungen';
 
   @override
   String get landing_page_detail_page_configuration => 'Seiten Konfiguration';

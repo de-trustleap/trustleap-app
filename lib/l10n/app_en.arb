@@ -466,7 +466,7 @@
     "@landingpage_creator_business_model_b2c_label": {
         "description": "Label for B2C business model"
     },
-    "landingpage_creator_business_model_info_tooltip": "Choose whether your customers are B2B (business customers) or B2C (end consumers). This is important to embed a disclaimer on the landing page in case of B2B customers.\\nIf you address both business customers and end consumers, choose B2C.",
+    "landingpage_creator_business_model_info_tooltip": "Choose whether your customers are B2B (business customers) or B2C (end consumers). This is important to embed a disclaimer on the landing page in case of B2B customers.\nIf you address both business customers and end consumers, choose B2C.",
     "@landingpage_creator_business_model_info_tooltip": {
         "description": "Tooltip text for the business model InfoButton"
     },
@@ -3991,9 +3991,9 @@
     "@landing_page_detail_conversion_rate": {
         "description": "Conversion rate statistic on the Landing Page Detail Page"
     },
-    "landing_page_detail_traffic_overview": "Traffic Overview",
-    "@landing_page_detail_traffic_overview": {
-        "description": "Traffic chart title on the Landing Page Detail Page"
+    "landing_page_detail_recommendation_overview": "Recommendations",
+    "@landing_page_detail_recommendation_overview": {
+        "description": "Recommendation chart title on the Landing Page Detail Page"
     },
     "landing_page_detail_page_configuration": "Page Configuration",
     "@landing_page_detail_page_configuration": {

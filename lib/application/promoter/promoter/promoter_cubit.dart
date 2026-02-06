@@ -55,7 +55,7 @@ class PromoterCubit extends Cubit<PromoterState> {
   }
 
   void getPromotingLandingPages(List<String> landingPageIDs) async {
-    emit(PromoterLoadingState());
+    emit(const PromoterLoadingState());
     if (landingPageIDs.isEmpty) {
       emit(PromoterNoLandingPagesState());
     } else {
@@ -71,7 +71,7 @@ class PromoterCubit extends Cubit<PromoterState> {
   }
 
   void deletePromoter(String id, bool isRegistered) async {
-    emit(PromoterLoadingState());
+    emit(const PromoterLoadingState());
     final failureOrSuccess =
         await promoterRepo.deletePromoter(id: id, isRegistered: isRegistered);
     failureOrSuccess.fold(
@@ -94,7 +94,7 @@ class PromoterCubit extends Cubit<PromoterState> {
   }
 
   void getPromoter(String id, CustomUser? user, Permissions permission) async {
-    emit(PromoterLoadingState());
+    emit(const PromoterLoadingState());
     if (user == null || !permission.hasEditPromoterPermission()) {
       emit(PromoterGetFailureState(failure: PermissionDeniedFailure()));
       return;
