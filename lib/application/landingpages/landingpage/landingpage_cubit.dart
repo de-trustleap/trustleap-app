@@ -10,6 +10,7 @@ import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_ai_generation.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
+import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 
 part 'landingpage_state.dart';
@@ -168,6 +169,66 @@ class LandingPageCubit extends Cubit<LandingPageState> {
         });
       });
     }
+  }
+
+  void getAssignedPromoters(List<String>? associatedUsersIDs) async {
+    emit(GetPromotersLoadingState());
+    List<Promoter> promoters = [];
+    if (associatedUsersIDs == null || associatedUsersIDs.isEmpty) {
+      emit(GetPromotersSuccessState(promoters: promoters));
+    } else {
+      final failureOrSuccess =
+          await landingPageRepo.getUnregisteredPromoters(associatedUsersIDs);
+      failureOrSuccess.fold((failure) {
+        emit(GetPromotersFailureState(failure: failure));
+      }, (unregisteredPromoters) async {
+        promoters.addAll(unregisteredPromoters);
+        final failureOrSuccessRegistered =
+            await landingPageRepo.getRegisteredPromoters(associatedUsersIDs);
+        failureOrSuccessRegistered.fold((failure) {
+          emit(GetPromotersFailureState(failure: failure));
+        }, (registeredPromoters) async {
+          promoters.addAll(registeredPromoters);
+          emit(GetPromotersSuccessState(promoters: promoters));
+        });
+      });
+    }
+  }
+
+  void getAllPromotersForUser(CustomUser user) async {
+    emit(GetAllPromotersLoadingState());
+    List<Promoter> promoters = [];
+    final registeredIds = user.registeredPromoterIDs ?? [];
+    final unregisteredIds = user.unregisteredPromoterIDs ?? [];
+
+    if (registeredIds.isEmpty && unregisteredIds.isEmpty) {
+      emit(GetAllPromotersSuccessState(promoters: promoters));
+      return;
+    }
+
+    if (unregisteredIds.isNotEmpty) {
+      final failureOrSuccess =
+          await landingPageRepo.getUnregisteredPromoters(unregisteredIds);
+      if (failureOrSuccess.isLeft()) {
+        emit(GetAllPromotersFailureState(
+            failure: failureOrSuccess.fold((f) => f, (_) => throw Error())));
+        return;
+      }
+      promoters.addAll(failureOrSuccess.getOrElse(() => []));
+    }
+
+    if (registeredIds.isNotEmpty) {
+      final failureOrSuccess =
+          await landingPageRepo.getRegisteredPromoters(registeredIds);
+      if (failureOrSuccess.isLeft()) {
+        emit(GetAllPromotersFailureState(
+            failure: failureOrSuccess.fold((f) => f, (_) => throw Error())));
+        return;
+      }
+      promoters.addAll(failureOrSuccess.getOrElse(() => []));
+    }
+
+    emit(GetAllPromotersSuccessState(promoters: promoters));
   }
 
   List<Promoter> assignLandingPagesToPromoters(

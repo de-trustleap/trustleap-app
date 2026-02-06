@@ -3531,4 +3531,66 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landing_page_detail_not_found => 'Landingpage nicht gefunden';
+
+  @override
+  String get landing_page_detail_assigned_promoters => 'Zugewiesene Promoter';
+
+  @override
+  String get landing_page_detail_assigned_promoters_subtitle =>
+      'Verwalte Promoter-Zuweisungen für diese Landingpage';
+
+  @override
+  String get landing_page_detail_assign_promoter => 'Promoter zuweisen';
+
+  @override
+  String get landing_page_detail_assign_promoter_title => 'Promoter zuweisen';
+
+  @override
+  String get landing_page_detail_total_promoters => 'Promoter gesamt';
+
+  @override
+  String get landing_page_detail_registered_promoters => 'Registriert';
+
+  @override
+  String get landing_page_detail_unregistered_promoters => 'Unregistriert';
+
+  @override
+  String get landing_page_detail_no_promoters => 'Keine Promoter zugewiesen';
+
+  @override
+  String get landing_page_detail_no_promoters_available =>
+      'Keine Promoter verfügbar';
+
+  @override
+  String get landing_page_detail_promoters_error_title =>
+      'Fehler beim Laden der Promoter';
+
+  @override
+  String get landing_page_detail_view_promoter => 'Promoter anzeigen';
+
+  @override
+  String get landing_page_detail_remove_promoter => 'Promoter entfernen';
+
+  @override
+  String get landing_page_detail_remove_promoter_title => 'Promoter entfernen';
+
+  @override
+  String landing_page_detail_remove_promoter_message(String promoterName) {
+    return 'Möchtest du $promoterName wirklich von dieser Landingpage entfernen?';
+  }
+
+  @override
+  String get landing_page_detail_remove_promoter_button => 'Entfernen';
+
+  @override
+  String get landing_page_detail_promoter_removed_success =>
+      'Promoter erfolgreich entfernt';
+
+  @override
+  String get landing_page_detail_promoters_updated_success =>
+      'Promoter-Zuweisungen aktualisiert';
+
+  @override
+  String get landing_page_detail_promoters_updated_partial =>
+      'Einige Zuweisungen konnten nicht aktualisiert werden';
 }

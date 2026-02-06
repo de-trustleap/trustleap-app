@@ -157,6 +157,15 @@ class _LandingPageCreatorThirdStepState
               return Form(
                 key: formKey,
                 child: Column(children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: SelectableText(
+                      widget.isEditMode ? localization.landingpage_creation_edit_button_text : localization.landingpage_create_txt,
+                      style: themeData.textTheme.headlineLarge!
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
                   Row(
                     children: [
                       SelectableText(

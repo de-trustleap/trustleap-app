@@ -117,6 +117,7 @@ class LandingPage extends Equatable {
         contentID,
         description,
         promotionTemplate,
+        associatedUsersIDs,
         isDefaultPage,
         isActive,
         impressum,

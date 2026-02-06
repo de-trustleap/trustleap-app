@@ -3469,4 +3469,66 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landing_page_detail_not_found => 'Landing page not found';
+
+  @override
+  String get landing_page_detail_assigned_promoters => 'Assigned Promoters';
+
+  @override
+  String get landing_page_detail_assigned_promoters_subtitle =>
+      'Manage promoter assignments for this landing page';
+
+  @override
+  String get landing_page_detail_assign_promoter => 'Assign Promoter';
+
+  @override
+  String get landing_page_detail_assign_promoter_title => 'Assign Promoter';
+
+  @override
+  String get landing_page_detail_total_promoters => 'Total Promoters';
+
+  @override
+  String get landing_page_detail_registered_promoters => 'Registered';
+
+  @override
+  String get landing_page_detail_unregistered_promoters => 'Unregistered';
+
+  @override
+  String get landing_page_detail_no_promoters => 'No promoters assigned';
+
+  @override
+  String get landing_page_detail_no_promoters_available =>
+      'No promoters available';
+
+  @override
+  String get landing_page_detail_promoters_error_title =>
+      'Error loading promoters';
+
+  @override
+  String get landing_page_detail_view_promoter => 'View promoter';
+
+  @override
+  String get landing_page_detail_remove_promoter => 'Remove promoter';
+
+  @override
+  String get landing_page_detail_remove_promoter_title => 'Remove Promoter';
+
+  @override
+  String landing_page_detail_remove_promoter_message(String promoterName) {
+    return 'Do you really want to remove $promoterName from this landing page?';
+  }
+
+  @override
+  String get landing_page_detail_remove_promoter_button => 'Remove';
+
+  @override
+  String get landing_page_detail_promoter_removed_success =>
+      'Promoter removed successfully';
+
+  @override
+  String get landing_page_detail_promoters_updated_success =>
+      'Promoter assignments updated';
+
+  @override
+  String get landing_page_detail_promoters_updated_partial =>
+      'Some assignments could not be updated';
 }

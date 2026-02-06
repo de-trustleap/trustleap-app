@@ -6050,6 +6050,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Landing page not found'**
   String get landing_page_detail_not_found;
+
+  /// Title of the promoters section on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Assigned Promoters'**
+  String get landing_page_detail_assigned_promoters;
+
+  /// Subtitle of the promoters section on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Manage promoter assignments for this landing page'**
+  String get landing_page_detail_assigned_promoters_subtitle;
+
+  /// Button to assign promoters
+  ///
+  /// In en, this message translates to:
+  /// **'Assign Promoter'**
+  String get landing_page_detail_assign_promoter;
+
+  /// Title of the dialog to assign promoters
+  ///
+  /// In en, this message translates to:
+  /// **'Assign Promoter'**
+  String get landing_page_detail_assign_promoter_title;
+
+  /// Label for the total number of promoters
+  ///
+  /// In en, this message translates to:
+  /// **'Total Promoters'**
+  String get landing_page_detail_total_promoters;
+
+  /// Label for registered promoters
+  ///
+  /// In en, this message translates to:
+  /// **'Registered'**
+  String get landing_page_detail_registered_promoters;
+
+  /// Label for unregistered promoters
+  ///
+  /// In en, this message translates to:
+  /// **'Unregistered'**
+  String get landing_page_detail_unregistered_promoters;
+
+  /// Text when no promoters are assigned
+  ///
+  /// In en, this message translates to:
+  /// **'No promoters assigned'**
+  String get landing_page_detail_no_promoters;
+
+  /// Text when no promoters are available to assign
+  ///
+  /// In en, this message translates to:
+  /// **'No promoters available'**
+  String get landing_page_detail_no_promoters_available;
+
+  /// Error title when loading promoters
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading promoters'**
+  String get landing_page_detail_promoters_error_title;
+
+  /// Tooltip for view promoter button
+  ///
+  /// In en, this message translates to:
+  /// **'View promoter'**
+  String get landing_page_detail_view_promoter;
+
+  /// Tooltip for remove promoter button
+  ///
+  /// In en, this message translates to:
+  /// **'Remove promoter'**
+  String get landing_page_detail_remove_promoter;
+
+  /// Title of the dialog to remove a promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Promoter'**
+  String get landing_page_detail_remove_promoter_title;
+
+  /// Message in the dialog to remove a promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Do you really want to remove {promoterName} from this landing page?'**
+  String landing_page_detail_remove_promoter_message(String promoterName);
+
+  /// Button to remove a promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get landing_page_detail_remove_promoter_button;
+
+  /// Success message after removing a promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Promoter removed successfully'**
+  String get landing_page_detail_promoter_removed_success;
+
+  /// Success message after updating promoter assignments
+  ///
+  /// In en, this message translates to:
+  /// **'Promoter assignments updated'**
+  String get landing_page_detail_promoters_updated_success;
+
+  /// Partial success message after updating promoter assignments
+  ///
+  /// In en, this message translates to:
+  /// **'Some assignments could not be updated'**
+  String get landing_page_detail_promoters_updated_partial;
 }
 
 class _AppLocalizationsDelegate

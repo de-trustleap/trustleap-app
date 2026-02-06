@@ -1,8 +1,8 @@
 import 'package:finanzbegleiter/core/helpers/date_time_formatter.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/status_badge.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/subtle_button.dart';
-import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_status_badge.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -63,7 +63,12 @@ class LandingPageDetailHeader extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 12),
-            LandingPageStatusBadge(isActive: landingPage.isActive ?? false),
+            StatusBadge(
+              isPositive: landingPage.isActive ?? false,
+              label: landingPage.isActive ?? false
+                  ? localization.landing_page_detail_status_active
+                  : localization.landing_page_detail_status_inactive,
+            ),
           ],
         ),
         const SizedBox(height: 4),

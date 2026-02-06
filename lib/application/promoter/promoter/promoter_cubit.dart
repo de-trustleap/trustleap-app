@@ -82,7 +82,7 @@ class PromoterCubit extends Cubit<PromoterState> {
 
   void editPromoter(
       bool isRegistered, List<String> landingPageIDs, String promoterID) async {
-    emit(PromoterLoadingState());
+    emit(PromoterLoadingState(promoterId: promoterID));
     final failureOrSuccess = await promoterRepo.editPromoter(
         isRegistered: isRegistered,
         landingPageIDs: landingPageIDs,

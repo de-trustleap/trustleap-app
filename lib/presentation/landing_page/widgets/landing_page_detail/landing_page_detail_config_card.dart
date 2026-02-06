@@ -32,12 +32,6 @@ class LandingPageDetailConfigCard extends StatelessWidget {
           // Header Row
           Row(
             children: [
-              Icon(
-                Icons.settings_outlined,
-                color: themeData.colorScheme.secondary,
-                size: 24,
-              ),
-              const SizedBox(width: 8),
               SelectableText(
                 localization.landing_page_detail_page_configuration,
                 style: themeData.textTheme.titleMedium?.copyWith(

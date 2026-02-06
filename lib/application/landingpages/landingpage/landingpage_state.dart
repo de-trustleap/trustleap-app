@@ -237,3 +237,26 @@ class GetArchivedLegalsSuccessState extends LandingPageState
   @override
   List<Object> get props => [archivedLegals];
 }
+
+class GetAllPromotersLoadingState extends LandingPageState with EquatableMixin {
+  @override
+  List<Object> get props => [];
+}
+
+class GetAllPromotersFailureState extends LandingPageState with EquatableMixin {
+  final DatabaseFailure failure;
+  GetAllPromotersFailureState({
+    required this.failure,
+  });
+  @override
+  List<Object> get props => [failure];
+}
+
+class GetAllPromotersSuccessState extends LandingPageState with EquatableMixin {
+  final List<Promoter> promoters;
+  GetAllPromotersSuccessState({
+    required this.promoters,
+  });
+  @override
+  List<Object> get props => [promoters];
+}
