@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_observer_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
@@ -7,8 +6,7 @@ import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/modular_watch_extension.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/placeholder_image.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/promoter_avatar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/tooltip_buttons/tooltip_icon.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/status_badge.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/promoter_helper.dart';
@@ -127,34 +125,13 @@ class PromotersOverviewGridTile extends StatelessWidget {
                           })
                     ]
                   ]),
-              if (promoter.registered != null &&
-                  promoter.registered! &&
-                  promoter.thumbnailDownloadURL != null) ...[
-                CachedNetworkImage(
-                  width: responsiveValue.largerThan(MOBILE) ? 120 : 140,
-                  height: responsiveValue.largerThan(MOBILE) ? 120 : 140,
-                  imageUrl: promoter.thumbnailDownloadURL ?? "",
-                  imageBuilder: (context, imageProvider) {
-                    return Container(
-                        decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          image: imageProvider, fit: BoxFit.cover),
-                    ));
-                  },
-                  placeholder: (context, url) {
-                    return Stack(children: [
-                      placeHolderImage(responsiveValue),
-                      const LoadingIndicator()
-                    ]);
-                  },
-                  errorWidget: (context, url, error) {
-                    return placeHolderImage(responsiveValue);
-                  },
-                ),
-              ] else ...[
-                placeHolderImage(responsiveValue)
-              ],
+              PromoterAvatar(
+                thumbnailDownloadURL:
+                    (promoter.registered == true) ? promoter.thumbnailDownloadURL : null,
+                firstName: promoter.firstName,
+                lastName: promoter.lastName,
+                size: responsiveValue.largerThan(MOBILE) ? 120 : 140,
+              ),
               const SizedBox(height: 4),
               SelectableText(
                   "${promoter.firstName ?? ""} ${promoter.lastName ?? ""}",
@@ -198,10 +175,4 @@ class PromotersOverviewGridTile extends StatelessWidget {
     );
   }
 
-  Widget placeHolderImage(ResponsiveBreakpointsData responsiveValue) {
-    return PlaceholderImage(
-        imageSize: Size(responsiveValue.largerThan(MOBILE) ? 120 : 140,
-            responsiveValue.largerThan(MOBILE) ? 120 : 140),
-        hovered: false);
-  }
 }

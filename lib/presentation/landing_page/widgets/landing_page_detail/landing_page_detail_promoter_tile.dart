@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dar
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/promoter_avatar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/status_badge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +36,12 @@ class LandingPageDetailPromoterTile extends StatelessWidget {
       ),
       child: Row(
         children: [
-          _buildAvatar(themeData),
+          PromoterAvatar(
+            thumbnailDownloadURL: promoter.thumbnailDownloadURL,
+            firstName: promoter.firstName,
+            lastName: promoter.lastName,
+            size: 40,
+          ),
           const SizedBox(width: 12),
           _buildNameAndEmail(themeData),
           const SizedBox(width: 12),
@@ -43,31 +49,13 @@ class LandingPageDetailPromoterTile extends StatelessWidget {
             isPositive: promoter.registered == true,
             label: promoter.registered == true
                 ? localization.promoter_overview_registration_badge_registered
-                : localization.promoter_overview_registration_badge_unregistered,
+                : localization
+                    .promoter_overview_registration_badge_unregistered,
           ),
           const SizedBox(width: 12),
           _buildActions(themeData, localization),
         ],
       ),
-    );
-  }
-
-  Widget _buildAvatar(ThemeData themeData) {
-    return CircleAvatar(
-      radius: 20,
-      backgroundColor: themeData.colorScheme.primary.withValues(alpha: 0.1),
-      backgroundImage: promoter.thumbnailDownloadURL != null
-          ? NetworkImage(promoter.thumbnailDownloadURL!)
-          : null,
-      child: promoter.thumbnailDownloadURL == null
-          ? Text(
-              _getInitials(),
-              style: themeData.textTheme.bodyMedium?.copyWith(
-                color: themeData.colorScheme.primary,
-                fontWeight: FontWeight.bold,
-              ),
-            )
-          : null,
     );
   }
 
@@ -118,13 +106,5 @@ class LandingPageDetailPromoterTile extends StatelessWidget {
         );
       },
     );
-  }
-
-  String _getInitials() {
-    final firstName = promoter.firstName ?? '';
-    final lastName = promoter.lastName ?? '';
-    final firstInitial = firstName.isNotEmpty ? firstName[0].toUpperCase() : '';
-    final lastInitial = lastName.isNotEmpty ? lastName[0].toUpperCase() : '';
-    return '$firstInitial$lastInitial';
   }
 }
