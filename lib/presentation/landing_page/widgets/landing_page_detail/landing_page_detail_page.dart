@@ -153,7 +153,5 @@ class _LandingPageDetailPageState extends State<LandingPageDetailPage> {
   }
 }
                                                                                                                                                                         
-// TODO: PROMOTER OVERVIEW ANPASSEN UND KACHELN AUCH STATT BILD PLATZHALTER INITIALEN DES NAMENS ANZEIGEN                                                   
-// TODO: TESTS ERWEITERN. VOR ALLEM FÜR CUBIT UND REPO
 // TODO: MOCKDATEN ERSTELLEN FÜR DETAIL PAGE UND TESTEN                                                                                                   
 // TODO: VISITSTOTAL IN BACKEND BEFÜLLEN  
