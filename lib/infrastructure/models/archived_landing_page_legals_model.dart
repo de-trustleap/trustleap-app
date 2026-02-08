@@ -33,6 +33,7 @@ class ArchivedLandingPageLegalsModel extends Equatable {
 
     return versions
         .whereType<Map<String, dynamic>>()
+        .where((v) => v['archivedAt'] is Timestamp)
         .map((v) => LegalVersion(
               content: v['content'] as String? ?? '',
               archivedAt: (v['archivedAt'] as Timestamp).toDate(),
