@@ -312,22 +312,28 @@ void main() {
     });
 
     test(
-        "should keep order for promoters with equal conversions",
+        "should sort by conversion rate when conversions are equal",
         () {
       // Given
+      // p1: 1 conversion out of 3 shares (33%)
+      // p2: 1 conversion out of 1 share (100%)
       final promoterRecommendations = [
         PromoterRecommendations(
           promoter: CustomUser(id: UniqueID.fromUniqueString("p1")),
           recommendations: [
             createRecommendation(
                 id: "r1", statusLevel: StatusLevel.successful),
+            createRecommendation(
+                id: "r2", statusLevel: StatusLevel.recommendationSend),
+            createRecommendation(
+                id: "r3", statusLevel: StatusLevel.linkClicked),
           ],
         ),
         PromoterRecommendations(
           promoter: CustomUser(id: UniqueID.fromUniqueString("p2")),
           recommendations: [
             createRecommendation(
-                id: "r2", statusLevel: StatusLevel.successful),
+                id: "r4", statusLevel: StatusLevel.successful),
           ],
         ),
       ];
@@ -342,8 +348,9 @@ void main() {
       // When
       final result = statistics.sortByConversions(promoters);
 
-      // Then
-      expect(result.length, 2);
+      // Then – p2 (100%) should come before p1 (33%)
+      expect(result[0].id.value, "p2");
+      expect(result[1].id.value, "p1");
     });
   });
 

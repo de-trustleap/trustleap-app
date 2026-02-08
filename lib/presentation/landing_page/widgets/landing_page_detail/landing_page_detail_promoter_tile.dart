@@ -82,6 +82,13 @@ class LandingPageDetailPromoterTile extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(width: 12),
+              StatusBadge(
+                isPositive: promoter.registered == true,
+                label: promoter.registered == true
+                    ? localization.promoter_overview_registration_badge_registered
+                    : localization.promoter_overview_registration_badge_unregistered,
+              ),
             ],
           ),
         ),
@@ -127,13 +134,6 @@ class LandingPageDetailPromoterTile extends StatelessWidget {
         ),
         const SizedBox(width: 12),
         _buildConversionRate(themeData, localization),
-        const SizedBox(width: 12),
-        StatusBadge(
-          isPositive: promoter.registered == true,
-          label: promoter.registered == true
-              ? localization.promoter_overview_registration_badge_registered
-              : localization.promoter_overview_registration_badge_unregistered,
-        ),
         const SizedBox(width: 12),
         _buildActions(themeData, localization),
       ],

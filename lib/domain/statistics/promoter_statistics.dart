@@ -32,7 +32,9 @@ class PromoterStatistics {
     sorted.sort((a, b) {
       final statsA = getStatsForPromoter(a.id.value);
       final statsB = getStatsForPromoter(b.id.value);
-      return statsB.conversions.compareTo(statsA.conversions);
+      final cmp = statsB.conversions.compareTo(statsA.conversions);
+      if (cmp != 0) return cmp;
+      return statsB.performance.compareTo(statsA.performance);
     });
     return sorted;
   }
