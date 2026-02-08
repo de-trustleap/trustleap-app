@@ -6158,6 +6158,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Some assignments could not be updated'**
   String get landing_page_detail_promoters_updated_partial;
+
+  /// Label for shared recommendations per promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended'**
+  String get landing_page_detail_promoter_shares;
+
+  /// Label for conversions per promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Conversions'**
+  String get landing_page_detail_promoter_conversions;
+
+  /// Label for conversion rate per promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Conversion Rate'**
+  String get landing_page_detail_promoter_conversion_rate;
 }
 
 class _AppLocalizationsDelegate

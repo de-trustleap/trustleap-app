@@ -152,6 +152,6 @@ class _LandingPageDetailPageState extends State<LandingPageDetailPage> {
     );
   }
 }
-                                                                                                                                                                        
+
 // TODO: MOCKDATEN ERSTELLEN FÜR DETAIL PAGE UND TESTEN                                                                                                   
 // TODO: VISITSTOTAL IN BACKEND BEFÜLLEN  

@@ -1,5 +1,5 @@
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/domain/entities/dashboard_trend.dart';
+import 'package:finanzbegleiter/domain/entities/chart_trend.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_line_chart.dart';
@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 class DashboardPromotersChart extends StatelessWidget {
   final List<CustomUser> promoters;
   final TimePeriod timePeriod;
-  final DashboardTrend? trend;
+  final ChartTrend? trend;
 
   const DashboardPromotersChart({
     super.key,
@@ -45,7 +45,7 @@ class DashboardPromotersChart extends StatelessWidget {
           Positioned(
             top: 8,
             right: 8,
-            child: DashboardTrendArrow(trend: trend!),
+            child: ChartTrendArrow(trend: trend!),
           ),
       ],
     );

@@ -1,10 +1,13 @@
-import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
+import 'package:finanzbegleiter/application/landingpages/landing_page_detail/landing_page_detail_cubit.dart';
 import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart';
 import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
+import 'package:finanzbegleiter/domain/entities/promoter_recommendations.dart';
+import 'package:finanzbegleiter/domain/entities/promoter_stats.dart';
+import 'package:finanzbegleiter/domain/statistics/promoter_statistics.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
@@ -36,6 +39,8 @@ class LandingPageDetailPromotersSection extends StatefulWidget {
 class _LandingPageDetailPromotersSectionState
     extends State<LandingPageDetailPromotersSection> {
   List<Promoter> _assignedPromoters = [];
+  List<PromoterRecommendations>? _promoterRecommendations;
+  PromoterStatistics? _statistics;
   bool _isLoading = true;
   String? _errorMessage;
   List<String>? _lastAssociatedUsersIDs;
@@ -49,8 +54,18 @@ class _LandingPageDetailPromotersSectionState
     });
   }
 
+  void _updateStatistics() {
+    if (_promoterRecommendations != null) {
+      _statistics = PromoterStatistics(
+        promoterRecommendations: _promoterRecommendations!,
+        landingPageName: widget.landingPage.name,
+      );
+      _assignedPromoters = _statistics!.sortByConversions(_assignedPromoters);
+    }
+  }
+
   void _loadPromoters() {
-    Modular.get<LandingPageCubit>().getAssignedPromoters(
+    Modular.get<LandingPageDetailCubit>().getAssignedPromoters(
       widget.landingPage.associatedUsersIDs,
     );
   }
@@ -59,7 +74,7 @@ class _LandingPageDetailPromotersSectionState
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
-    final landingPageCubit = Modular.get<LandingPageCubit>();
+    final detailCubit = Modular.get<LandingPageDetailCubit>();
     final promoterCubit = Modular.get<PromoterCubit>();
     final landingPageObserverCubit = Modular.get<LandingPageObserverCubit>();
 
@@ -76,28 +91,34 @@ class _LandingPageDetailPromotersSectionState
               final newIds = currentLandingPage.associatedUsersIDs;
               if (newIds.toString() != _lastAssociatedUsersIDs.toString()) {
                 _lastAssociatedUsersIDs = newIds;
-                Modular.get<LandingPageCubit>().getAssignedPromoters(newIds);
+                Modular.get<LandingPageDetailCubit>().getAssignedPromoters(newIds);
               }
             }
           },
         ),
-        BlocListener<LandingPageCubit, LandingPageState>(
-          bloc: landingPageCubit,
+        BlocListener<LandingPageDetailCubit, LandingPageDetailState>(
+          bloc: detailCubit,
           listener: (context, state) {
-            if (state is GetPromotersSuccessState) {
+            if (state is LandingPageDetailPromotersSuccess) {
               setState(() {
                 _assignedPromoters = state.promoters;
                 _isLoading = false;
                 _errorMessage = null;
+                _updateStatistics();
               });
-            } else if (state is GetPromotersFailureState) {
+            } else if (state is LandingPageDetailPromotersFailure) {
               setState(() {
                 _isLoading = false;
                 _errorMessage = DatabaseFailureMapper.mapFailureMessage(
                     state.failure, localization);
               });
-            } else if (state is GetPromotersLoadingState) {
+            } else if (state is LandingPageDetailPromotersLoading) {
               setState(() => _isLoading = true);
+            } else if (state is LandingPageDetailRecommendationsSuccess) {
+              setState(() {
+                _promoterRecommendations = state.promoterRecommendations;
+                _updateStatistics();
+              });
             }
           },
         ),
@@ -231,6 +252,8 @@ class _LandingPageDetailPromotersSectionState
       children: _assignedPromoters
           .map((p) => LandingPageDetailPromoterTile(
                 promoter: p,
+                stats: _statistics?.getStatsForPromoter(p.id.value) ??
+                    const PromoterStats(shares: 0, conversions: 0),
                 onRemove: () => _showRemoveDialog(p),
               ))
           .toList(),

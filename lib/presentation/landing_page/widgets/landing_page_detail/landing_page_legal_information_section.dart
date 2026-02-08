@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
+import 'package:finanzbegleiter/application/landingpages/landing_page_detail/landing_page_detail_cubit.dart';
 import 'package:finanzbegleiter/domain/entities/archived_landing_page_legals.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -7,22 +7,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class LandingPageLegalInformationSection extends StatefulWidget {
+class LandingPageDetailLegalInformationSection extends StatefulWidget {
   final LandingPage landingPage;
 
-  const LandingPageLegalInformationSection({
+  const LandingPageDetailLegalInformationSection({
     super.key,
     required this.landingPage,
   });
 
   @override
-  State<LandingPageLegalInformationSection> createState() =>
-      _LandingPageLegalInformationSectionState();
+  State<LandingPageDetailLegalInformationSection> createState() =>
+      _LandingPageDetailLegalInformationSectionState();
 }
 
-class _LandingPageLegalInformationSectionState
-    extends State<LandingPageLegalInformationSection> {
-  final LandingPageCubit _cubit = Modular.get<LandingPageCubit>();
+class _LandingPageDetailLegalInformationSectionState
+    extends State<LandingPageDetailLegalInformationSection> {
+  final LandingPageDetailCubit _cubit = Modular.get<LandingPageDetailCubit>();
 
   @override
   void initState() {
@@ -50,11 +50,11 @@ class _LandingPageLegalInformationSectionState
       return const SizedBox.shrink();
     }
 
-    return BlocBuilder<LandingPageCubit, LandingPageState>(
+    return BlocBuilder<LandingPageDetailCubit, LandingPageDetailState>(
       bloc: _cubit,
       builder: (context, state) {
         ArchivedLandingPageLegals? archivedLegals;
-        if (state is GetArchivedLegalsSuccessState) {
+        if (state is LandingPageDetailArchivedLegalsSuccess) {
           archivedLegals = state.archivedLegals;
         }
 

@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
+import 'package:finanzbegleiter/application/landingpages/landing_page_detail/landing_page_detail_cubit.dart';
 import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart';
 import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
@@ -52,7 +52,7 @@ class _AssignPromoterDialogState extends State<AssignPromoterDialog> {
   void _loadAllPromoters() {
     final userState = Modular.get<UserObserverCubit>().state;
     if (userState is UserObserverSuccess) {
-      Modular.get<LandingPageCubit>().getAllPromotersForUser(userState.user);
+      Modular.get<LandingPageDetailCubit>().getAllPromotersForUser(userState.user);
     }
   }
 
@@ -62,23 +62,23 @@ class _AssignPromoterDialogState extends State<AssignPromoterDialog> {
     final localization = AppLocalizations.of(context);
     final navigator = CustomNavigator.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
-    final landingPageCubit = Modular.get<LandingPageCubit>();
+    final detailCubit = Modular.get<LandingPageDetailCubit>();
 
-    return BlocListener<LandingPageCubit, LandingPageState>(
-      bloc: landingPageCubit,
+    return BlocListener<LandingPageDetailCubit, LandingPageDetailState>(
+      bloc: detailCubit,
       listener: (context, state) {
-        if (state is GetAllPromotersSuccessState) {
+        if (state is LandingPageDetailAllPromotersSuccess) {
           setState(() {
             _allPromoters = state.promoters;
             _isLoading = false;
             _errorMessage = null;
           });
-        } else if (state is GetAllPromotersFailureState) {
+        } else if (state is LandingPageDetailAllPromotersFailure) {
           setState(() {
             _isLoading = false;
             _errorMessage = localization.landing_page_detail_promoters_error_title;
           });
-        } else if (state is GetAllPromotersLoadingState) {
+        } else if (state is LandingPageDetailAllPromotersLoading) {
           setState(() {
             _isLoading = true;
           });

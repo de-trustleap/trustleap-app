@@ -4163,5 +4163,17 @@
     "landing_page_detail_promoters_updated_partial": "Einige Zuweisungen konnten nicht aktualisiert werden",
     "@landing_page_detail_promoters_updated_partial": {
         "description": "Teilweise Erfolgsmeldung nach Aktualisierung der Promoter-Zuweisungen"
+    },
+    "landing_page_detail_promoter_shares": "Empfohlen",
+    "@landing_page_detail_promoter_shares": {
+        "description": "Label für geteilte Empfehlungen pro Promoter"
+    },
+    "landing_page_detail_promoter_conversions": "Conversions",
+    "@landing_page_detail_promoter_conversions": {
+        "description": "Label für Conversions pro Promoter"
+    },
+    "landing_page_detail_promoter_conversion_rate": "Conversion Rate",
+    "@landing_page_detail_promoter_conversion_rate": {
+        "description": "Label für die Conversion Rate pro Promoter"
     }
 }

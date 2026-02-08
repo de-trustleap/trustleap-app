@@ -124,7 +124,7 @@ class LandingPageDetailConfigCard extends StatelessWidget {
         const SizedBox(height: 20),
 
         // Legal Information
-        LandingPageLegalInformationSection(landingPage: landingPage),
+        LandingPageDetailLegalInformationSection(landingPage: landingPage),
       ],
     );
   }

@@ -4163,5 +4163,17 @@
     "landing_page_detail_promoters_updated_partial": "Some assignments could not be updated",
     "@landing_page_detail_promoters_updated_partial": {
         "description": "Partial success message after updating promoter assignments"
+    },
+    "landing_page_detail_promoter_shares": "Recommended",
+    "@landing_page_detail_promoter_shares": {
+        "description": "Label for shared recommendations per promoter"
+    },
+    "landing_page_detail_promoter_conversions": "Conversions",
+    "@landing_page_detail_promoter_conversions": {
+        "description": "Label for conversions per promoter"
+    },
+    "landing_page_detail_promoter_conversion_rate": "Conversion Rate",
+    "@landing_page_detail_promoter_conversion_rate": {
+        "description": "Label for conversion rate per promoter"
     }
 }

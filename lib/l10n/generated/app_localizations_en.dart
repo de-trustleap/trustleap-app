@@ -3531,4 +3531,13 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get landing_page_detail_promoters_updated_partial =>
       'Some assignments could not be updated';
+
+  @override
+  String get landing_page_detail_promoter_shares => 'Recommended';
+
+  @override
+  String get landing_page_detail_promoter_conversions => 'Conversions';
+
+  @override
+  String get landing_page_detail_promoter_conversion_rate => 'Conversion Rate';
 }

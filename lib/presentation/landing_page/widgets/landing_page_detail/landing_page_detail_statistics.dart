@@ -1,10 +1,10 @@
-import 'package:finanzbegleiter/application/dashboard/recommendation/dashboard_recommendations_cubit.dart';
+import 'package:finanzbegleiter/application/landingpages/landing_page_detail/landing_page_detail_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/domain/statistics/recommendations_statistics.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
-import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations/dashboard_recommendations_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -23,13 +23,15 @@ class LandingPageDetailStatistics extends StatelessWidget {
   });
 
   int _getCompletedRecommendationsCount(
-      DashboardRecommendationsGetRecosSuccessState state) {
+      LandingPageDetailRecommendationsSuccess state) {
     final recommendations =
-        DashboardRecommendationsHelper.getFilteredRecommendations(
-      state: state,
+        RecommendationsStatistics.getFilteredRecommendations(
+      recommendations: state.recommendations,
       selectedPromoterId: null,
       userRole: user.role ?? Role.none,
+      promoterRecommendations: state.promoterRecommendations,
       selectedLandingPageId: landingPageId,
+      allLandingPages: state.allLandingPages,
     );
 
     return recommendations
@@ -47,14 +49,13 @@ class LandingPageDetailStatistics extends StatelessWidget {
   Widget build(BuildContext context) {
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
-    final recommendationsCubit = Modular.get<DashboardRecommendationsCubit>();
+    final detailCubit = Modular.get<LandingPageDetailCubit>();
 
-    return BlocBuilder<DashboardRecommendationsCubit,
-        DashboardRecommendationsState>(
-      bloc: recommendationsCubit,
+    return BlocBuilder<LandingPageDetailCubit, LandingPageDetailState>(
+      bloc: detailCubit,
       builder: (context, state) {
         final completedRecommendations =
-            state is DashboardRecommendationsGetRecosSuccessState
+            state is LandingPageDetailRecommendationsSuccess
                 ? _getCompletedRecommendationsCount(state)
                 : 0;
         final conversionRate = _getConversionRate(completedRecommendations);
