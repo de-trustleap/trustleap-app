@@ -152,6 +152,3 @@ class _LandingPageDetailPageState extends State<LandingPageDetailPage> {
     );
   }
 }
-
-// TODO: CLAUDE REVIEW FEHLER ANMERKUNGEN ANPASSEN
-// TODO: VISITSTOTAL IN BACKEND BEFÜLLEN
