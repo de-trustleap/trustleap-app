@@ -3,26 +3,20 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoters_overview_page.dart';
 import 'package:flutter/material.dart';
 
-class PromoterOverviewViewStateButton extends StatefulWidget {
+class PromoterOverviewViewStateButton extends StatelessWidget {
+  final PromotersOverviewViewState currentViewState;
   final Function(PromotersOverviewViewState) onSelected;
 
   const PromoterOverviewViewStateButton({
     super.key,
+    required this.currentViewState,
     required this.onSelected,
   });
 
   @override
-  State<PromoterOverviewViewStateButton> createState() =>
-      _PromoterOverviewViewStateButtonState();
-}
-
-class _PromoterOverviewViewStateButtonState
-    extends State<PromoterOverviewViewStateButton> {
-  Set<PromotersOverviewViewState> selected = {PromotersOverviewViewState.grid};
-  @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
-    
+
     return SegmentedButton<PromotersOverviewViewState>(
         segments: [
           ButtonSegment<PromotersOverviewViewState>(
@@ -35,12 +29,9 @@ class _PromoterOverviewViewStateButtonState
               icon: const Icon(Icons.format_list_bulleted))
         ],
         showSelectedIcon: false,
-        selected: selected,
+        selected: {currentViewState},
         onSelectionChanged: (Set<PromotersOverviewViewState> newSelectedValue) {
-          setState(() {
-            selected = newSelectedValue;
-            widget.onSelected(selected.first);
-          });
+          onSelected(newSelectedValue.first);
         });
   }
 }
