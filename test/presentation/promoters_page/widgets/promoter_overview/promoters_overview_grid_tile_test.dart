@@ -8,7 +8,7 @@ import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/repositories/permission_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_registration_badge.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/status_badge.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoters_overview_grid_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -211,7 +211,7 @@ void main() {
       await tester.pump();
 
       // Then
-      expect(find.byType(PromoterRegistrationBadge), findsOneWidget);
+      expect(find.byType(StatusBadge), findsOneWidget);
     });
 
     testWidgets('should display registration badge for unregistered promoter',
@@ -230,7 +230,7 @@ void main() {
       await tester.pump();
 
       // Then
-      expect(find.byType(PromoterRegistrationBadge), findsOneWidget);
+      expect(find.byType(StatusBadge), findsOneWidget);
     });
 
     testWidgets('should show popup menu when permissions allow',

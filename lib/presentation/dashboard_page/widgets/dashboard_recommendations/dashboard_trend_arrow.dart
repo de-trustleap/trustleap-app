@@ -1,10 +1,10 @@
-import 'package:finanzbegleiter/domain/entities/dashboard_trend.dart';
+import 'package:finanzbegleiter/domain/entities/chart_trend.dart';
 import 'package:flutter/material.dart';
 
-class DashboardTrendArrow extends StatelessWidget {
-  final DashboardTrend trend;
+class ChartTrendArrow extends StatelessWidget {
+  final ChartTrend trend;
 
-  const DashboardTrendArrow({super.key, required this.trend});
+  const ChartTrendArrow({super.key, required this.trend});
 
   @override
   Widget build(BuildContext context) {

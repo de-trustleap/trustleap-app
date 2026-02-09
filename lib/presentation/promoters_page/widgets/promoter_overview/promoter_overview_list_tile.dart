@@ -1,10 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/status_badge.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/promoter_helper.dart';
-import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_registration_badge.dart';
 import 'package:flutter/material.dart';
 
 class PromoterOverviewListTile extends StatelessWidget {
@@ -62,12 +61,16 @@ class PromoterOverviewListTile extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         if (promoter.registered == true) ...[
-                          const PromoterRegistrationBadge(
-                              state: PromoterRegistrationState.registered),
+                          StatusBadge(
+                            isPositive: true,
+                            label: localization.promoter_overview_registration_badge_registered,
+                          ),
                           Spacer(flex: responsiveValue.isMobile ? 1 : 3)
                         ] else ...[
-                          const PromoterRegistrationBadge(
-                              state: PromoterRegistrationState.unregistered),
+                          StatusBadge(
+                            isPositive: false,
+                            label: localization.promoter_overview_registration_badge_unregistered,
+                          ),
                           Spacer(flex: responsiveValue.isMobile ? 1 : 10)
                         ],
                         Expanded(

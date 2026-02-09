@@ -466,7 +466,7 @@
     "@landingpage_creator_business_model_b2c_label": {
         "description": "Das Label für B2C Geschäftsmodell"
     },
-    "landingpage_creator_business_model_info_tooltip": "Wähle ob deine Kunden B2B (Geschäftskunden) oder B2C (Endverbraucher) sind. Das ist wichtig um im Falle von B2B Kunden einen Disclaimer auf der Landingpage einzubetten.\\nWenn du Geschäftskunden und Endverbraucher ansprichst dann wähle B2C aus.",
+    "landingpage_creator_business_model_info_tooltip": "Wähle ob deine Kunden B2B (Geschäftskunden) oder B2C (Endverbraucher) sind. Das ist wichtig um im Falle von B2B Kunden einen Disclaimer auf der Landingpage einzubetten.\nWenn du Geschäftskunden und Endverbraucher ansprichst dann wähle B2C aus.",
     "@landingpage_creator_business_model_info_tooltip": {
         "description": "Der Tooltip Text für das Geschäftsmodell InfoButton"
     },
@@ -3954,5 +3954,226 @@
     "cookie_consent_privacy_policy": "Datenschutzerklärung",
     "@cookie_consent_privacy_policy": {
         "description": "Link-Text zur Datenschutzerklärung"
+    },
+    "landing_page_detail_status_active": "AKTIV",
+    "@landing_page_detail_status_active": {
+        "description": "Status Badge für aktive Landingpage auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_status_inactive": "INAKTIV",
+    "@landing_page_detail_status_inactive": {
+        "description": "Status Badge für inaktive Landingpage auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_created_on": "Erstellt am",
+    "@landing_page_detail_created_on": {
+        "description": "Label für Erstellungsdatum auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_last_modified": "Zuletzt bearbeitet",
+    "@landing_page_detail_last_modified": {
+        "description": "Label für letztes Änderungsdatum auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_last_updated": "Zuletzt aktualisiert",
+    "@landing_page_detail_last_updated": {
+        "description": "Label für letztes Aktualisierungsdatum der Rechtstexte auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_preview": "Vorschau",
+    "@landing_page_detail_preview": {
+        "description": "Titel des Vorschau Buttons auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_open_builder": "Pagebuilder öffnen",
+    "@landing_page_detail_open_builder": {
+        "description": "Titel des Pagebuilder Buttons auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_total_visits": "Aufrufe gesamt",
+    "@landing_page_detail_total_visits": {
+        "description": "Label für Gesamtaufrufe auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_conversion_rate": "Conversion Rate",
+    "@landing_page_detail_conversion_rate": {
+        "description": "Label für Conversion Rate auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_recommendation_overview": "Empfehlungen",
+    "@landing_page_detail_recommendation_overview": {
+        "description": "Titel des Empfehlungen Charts auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_page_configuration": "Seiten Konfiguration",
+    "@landing_page_detail_page_configuration": {
+        "description": "Titel des Konfigurationsbereichs auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_edit_configuration": "Bearbeiten",
+    "@landing_page_detail_edit_configuration": {
+        "description": "Titel des Bearbeiten Buttons auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_description": "Beschreibung",
+    "@landing_page_detail_description": {
+        "description": "Label für Beschreibung auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_promoter_template_text": "Promoter Template Text",
+    "@landing_page_detail_promoter_template_text": {
+        "description": "Label für Promoter Template Text auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_page_type": "Seitentyp",
+    "@landing_page_detail_page_type": {
+        "description": "Label für Seitentyp auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_type_b2c": "B2C",
+    "@landing_page_detail_type_b2c": {
+        "description": "B2C Seitentyp Label auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_type_b2c_description": "Endkunden-fokussierte Landingpage",
+    "@landing_page_detail_type_b2c_description": {
+        "description": "B2C Seitentyp Beschreibung auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_type_b2b": "B2B",
+    "@landing_page_detail_type_b2b": {
+        "description": "B2B Seitentyp Label auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_type_b2b_description": "Geschäftskunden-fokussierte Landingpage",
+    "@landing_page_detail_type_b2b_description": {
+        "description": "B2B Seitentyp Beschreibung auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_contact_options": "Kontaktoptionen",
+    "@landing_page_detail_contact_options": {
+        "description": "Label für Kontaktoptionen auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_contact_calendly": "Calendly",
+    "@landing_page_detail_contact_calendly": {
+        "description": "Calendly Kontaktoption Label auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_contact_calendly_description": "Terminbuchung über Calendly",
+    "@landing_page_detail_contact_calendly_description": {
+        "description": "Calendly Kontaktoption Beschreibung auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_contact_form": "Kontaktformular",
+    "@landing_page_detail_contact_form": {
+        "description": "Kontaktformular Label auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_contact_form_description": "Kontaktformular auf der Seite",
+    "@landing_page_detail_contact_form_description": {
+        "description": "Kontaktformular Beschreibung auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_contact_both": "Beide Optionen",
+    "@landing_page_detail_contact_both": {
+        "description": "Beide Kontaktoptionen Label auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_contact_both_description": "Kontaktformular + Calendly Integration",
+    "@landing_page_detail_contact_both_description": {
+        "description": "Beide Kontaktoptionen Beschreibung auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_legal_information": "Rechtliche Informationen",
+    "@landing_page_detail_legal_information": {
+        "description": "Label für rechtliche Informationen auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_privacy_policy": "Datenschutzerklärung",
+    "@landing_page_detail_privacy_policy": {
+        "description": "Label für Datenschutzerklärung auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_imprint": "Impressum",
+    "@landing_page_detail_imprint": {
+        "description": "Label für Impressum auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_terms_and_conditions": "AGB",
+    "@landing_page_detail_terms_and_conditions": {
+        "description": "Label für AGB auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_initial_information": "Erstinformation",
+    "@landing_page_detail_initial_information": {
+        "description": "Label für Erstinformation auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_error_loading": "Fehler beim Laden der Landingpage",
+    "@landing_page_detail_error_loading": {
+        "description": "Fehlermeldung auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_not_found": "Landingpage nicht gefunden",
+    "@landing_page_detail_not_found": {
+        "description": "Fehlermeldung auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_assigned_promoters": "Zugewiesene Promoter",
+    "@landing_page_detail_assigned_promoters": {
+        "description": "Titel der Promoter-Sektion auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_assigned_promoters_subtitle": "Verwalte Promoter-Zuweisungen für diese Landingpage",
+    "@landing_page_detail_assigned_promoters_subtitle": {
+        "description": "Untertitel der Promoter-Sektion auf der Landingpage Detail Seite"
+    },
+    "landing_page_detail_assign_promoter": "Promoter zuweisen",
+    "@landing_page_detail_assign_promoter": {
+        "description": "Button zum Zuweisen von Promotern"
+    },
+    "landing_page_detail_assign_promoter_title": "Promoter zuweisen",
+    "@landing_page_detail_assign_promoter_title": {
+        "description": "Titel des Dialogs zum Zuweisen von Promotern"
+    },
+    "landing_page_detail_total_promoters": "Promoter gesamt",
+    "@landing_page_detail_total_promoters": {
+        "description": "Label für die Gesamtanzahl der Promoter"
+    },
+    "landing_page_detail_registered_promoters": "Registriert",
+    "@landing_page_detail_registered_promoters": {
+        "description": "Label für registrierte Promoter"
+    },
+    "landing_page_detail_unregistered_promoters": "Unregistriert",
+    "@landing_page_detail_unregistered_promoters": {
+        "description": "Label für unregistrierte Promoter"
+    },
+    "landing_page_detail_no_promoters": "Keine Promoter zugewiesen",
+    "@landing_page_detail_no_promoters": {
+        "description": "Text wenn keine Promoter zugewiesen sind"
+    },
+    "landing_page_detail_no_promoters_available": "Keine Promoter verfügbar",
+    "@landing_page_detail_no_promoters_available": {
+        "description": "Text wenn keine Promoter zum Zuweisen verfügbar sind"
+    },
+    "landing_page_detail_promoters_error_title": "Fehler beim Laden der Promoter",
+    "@landing_page_detail_promoters_error_title": {
+        "description": "Fehlertitel beim Laden der Promoter"
+    },
+    "landing_page_detail_view_promoter": "Promoter anzeigen",
+    "@landing_page_detail_view_promoter": {
+        "description": "Tooltip für Promoter anzeigen Button"
+    },
+    "landing_page_detail_remove_promoter": "Promoter entfernen",
+    "@landing_page_detail_remove_promoter": {
+        "description": "Tooltip für Promoter entfernen Button"
+    },
+    "landing_page_detail_remove_promoter_title": "Promoter entfernen",
+    "@landing_page_detail_remove_promoter_title": {
+        "description": "Titel des Dialogs zum Entfernen eines Promoters"
+    },
+    "landing_page_detail_remove_promoter_message": "Möchtest du {promoterName} wirklich von dieser Landingpage entfernen?",
+    "@landing_page_detail_remove_promoter_message": {
+        "description": "Nachricht im Dialog zum Entfernen eines Promoters",
+        "placeholders": {
+            "promoterName": {
+                "type": "String"
+            }
+        }
+    },
+    "landing_page_detail_remove_promoter_button": "Entfernen",
+    "@landing_page_detail_remove_promoter_button": {
+        "description": "Button zum Entfernen eines Promoters"
+    },
+    "landing_page_detail_promoter_removed_success": "Promoter erfolgreich entfernt",
+    "@landing_page_detail_promoter_removed_success": {
+        "description": "Erfolgsmeldung nach Entfernen eines Promoters"
+    },
+    "landing_page_detail_promoters_updated_success": "Promoter-Zuweisungen aktualisiert",
+    "@landing_page_detail_promoters_updated_success": {
+        "description": "Erfolgsmeldung nach Aktualisierung der Promoter-Zuweisungen"
+    },
+    "landing_page_detail_promoters_updated_partial": "Einige Zuweisungen konnten nicht aktualisiert werden",
+    "@landing_page_detail_promoters_updated_partial": {
+        "description": "Teilweise Erfolgsmeldung nach Aktualisierung der Promoter-Zuweisungen"
+    },
+    "landing_page_detail_promoter_shares": "Empfohlen",
+    "@landing_page_detail_promoter_shares": {
+        "description": "Label für geteilte Empfehlungen pro Promoter"
+    },
+    "landing_page_detail_promoter_conversions": "Conversions",
+    "@landing_page_detail_promoter_conversions": {
+        "description": "Label für Conversions pro Promoter"
+    },
+    "landing_page_detail_promoter_conversion_rate": "Conversion Rate",
+    "@landing_page_detail_promoter_conversion_rate": {
+        "description": "Label für die Conversion Rate pro Promoter"
     }
 }

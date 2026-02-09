@@ -38,7 +38,6 @@ class LandingPageObserverCubit extends Cubit<LandingPageObserverState> {
     if (_currentUserId == user.id.value &&
         _landingPagesStreamSub != null &&
         currentSorted.toString() == newSorted.toString()) {
-      // Same user and same IDs - stream is already observing correctly
       return;
     }
 
@@ -63,7 +62,9 @@ class LandingPageObserverCubit extends Cubit<LandingPageObserverState> {
       Either<DatabaseFailure, List<LandingPage>> failureOrLandingPages,
       CustomUser user) {
     failureOrLandingPages.fold(
-      (failure) => emit(LandingPageObserverFailure(failure: failure)),
+      (failure) {
+        emit(LandingPageObserverFailure(failure: failure));
+      },
       (landingPages) {
         PaintingBinding.instance.imageCache.clear();
         emit(

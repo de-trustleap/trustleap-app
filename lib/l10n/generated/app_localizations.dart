@@ -788,7 +788,7 @@ abstract class AppLocalizations {
   /// Tooltip text for the business model InfoButton
   ///
   /// In en, this message translates to:
-  /// **'Choose whether your customers are B2B (business customers) or B2C (end consumers). This is important to embed a disclaimer on the landing page in case of B2B customers.\\nIf you address both business customers and end consumers, choose B2C.'**
+  /// **'Choose whether your customers are B2B (business customers) or B2C (end consumers). This is important to embed a disclaimer on the landing page in case of B2B customers.\nIf you address both business customers and end consumers, choose B2C.'**
   String get landingpage_creator_business_model_info_tooltip;
 
   /// Error message when no image has been uploaded.
@@ -5852,6 +5852,330 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Privacy Policy'**
   String get cookie_consent_privacy_policy;
+
+  /// Status badge on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'ACTIVE'**
+  String get landing_page_detail_status_active;
+
+  /// Status badge on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'INACTIVE'**
+  String get landing_page_detail_status_inactive;
+
+  /// Creation date label on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Created on'**
+  String get landing_page_detail_created_on;
+
+  /// Modification date label on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Last modified'**
+  String get landing_page_detail_last_modified;
+
+  /// Last updated label for legal texts on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Last updated'**
+  String get landing_page_detail_last_updated;
+
+  /// Preview button on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get landing_page_detail_preview;
+
+  /// Open Pagebuilder button on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Open Pagebuilder'**
+  String get landing_page_detail_open_builder;
+
+  /// Total visits statistic on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Total Visits'**
+  String get landing_page_detail_total_visits;
+
+  /// Conversion rate statistic on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Conversion Rate'**
+  String get landing_page_detail_conversion_rate;
+
+  /// Recommendation chart title on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendations'**
+  String get landing_page_detail_recommendation_overview;
+
+  /// Configuration section title on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Page Configuration'**
+  String get landing_page_detail_page_configuration;
+
+  /// Edit configuration button on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get landing_page_detail_edit_configuration;
+
+  /// Description label on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get landing_page_detail_description;
+
+  /// Promoter template text label on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Promoter Template Text'**
+  String get landing_page_detail_promoter_template_text;
+
+  /// Page type label on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Page Type'**
+  String get landing_page_detail_page_type;
+
+  /// B2C page type on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'B2C'**
+  String get landing_page_detail_type_b2c;
+
+  /// B2C page type description on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Consumer focused landing page'**
+  String get landing_page_detail_type_b2c_description;
+
+  /// B2B page type on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'B2B'**
+  String get landing_page_detail_type_b2b;
+
+  /// B2B page type description on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Business focused landing page'**
+  String get landing_page_detail_type_b2b_description;
+
+  /// Contact options label on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Options'**
+  String get landing_page_detail_contact_options;
+
+  /// Calendly contact option on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Calendly'**
+  String get landing_page_detail_contact_calendly;
+
+  /// Calendly contact option description on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Book appointments via Calendly'**
+  String get landing_page_detail_contact_calendly_description;
+
+  /// Contact form option on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Form'**
+  String get landing_page_detail_contact_form;
+
+  /// Contact form option description on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Contact form on the page'**
+  String get landing_page_detail_contact_form_description;
+
+  /// Both contact options on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Both Options'**
+  String get landing_page_detail_contact_both;
+
+  /// Both contact options description on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Contact form + Calendly integration'**
+  String get landing_page_detail_contact_both_description;
+
+  /// Legal information section on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Legal Information'**
+  String get landing_page_detail_legal_information;
+
+  /// Privacy policy tile on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get landing_page_detail_privacy_policy;
+
+  /// Imprint tile on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Imprint'**
+  String get landing_page_detail_imprint;
+
+  /// Terms and conditions tile on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Terms & Conditions'**
+  String get landing_page_detail_terms_and_conditions;
+
+  /// Initial information tile on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Initial Information'**
+  String get landing_page_detail_initial_information;
+
+  /// Error message on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading landing page'**
+  String get landing_page_detail_error_loading;
+
+  /// Not found message on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Landing page not found'**
+  String get landing_page_detail_not_found;
+
+  /// Title of the promoters section on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Assigned Promoters'**
+  String get landing_page_detail_assigned_promoters;
+
+  /// Subtitle of the promoters section on the Landing Page Detail Page
+  ///
+  /// In en, this message translates to:
+  /// **'Manage promoter assignments for this landing page'**
+  String get landing_page_detail_assigned_promoters_subtitle;
+
+  /// Button to assign promoters
+  ///
+  /// In en, this message translates to:
+  /// **'Assign Promoter'**
+  String get landing_page_detail_assign_promoter;
+
+  /// Title of the dialog to assign promoters
+  ///
+  /// In en, this message translates to:
+  /// **'Assign Promoter'**
+  String get landing_page_detail_assign_promoter_title;
+
+  /// Label for the total number of promoters
+  ///
+  /// In en, this message translates to:
+  /// **'Total Promoters'**
+  String get landing_page_detail_total_promoters;
+
+  /// Label for registered promoters
+  ///
+  /// In en, this message translates to:
+  /// **'Registered'**
+  String get landing_page_detail_registered_promoters;
+
+  /// Label for unregistered promoters
+  ///
+  /// In en, this message translates to:
+  /// **'Unregistered'**
+  String get landing_page_detail_unregistered_promoters;
+
+  /// Text when no promoters are assigned
+  ///
+  /// In en, this message translates to:
+  /// **'No promoters assigned'**
+  String get landing_page_detail_no_promoters;
+
+  /// Text when no promoters are available to assign
+  ///
+  /// In en, this message translates to:
+  /// **'No promoters available'**
+  String get landing_page_detail_no_promoters_available;
+
+  /// Error title when loading promoters
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading promoters'**
+  String get landing_page_detail_promoters_error_title;
+
+  /// Tooltip for view promoter button
+  ///
+  /// In en, this message translates to:
+  /// **'View promoter'**
+  String get landing_page_detail_view_promoter;
+
+  /// Tooltip for remove promoter button
+  ///
+  /// In en, this message translates to:
+  /// **'Remove promoter'**
+  String get landing_page_detail_remove_promoter;
+
+  /// Title of the dialog to remove a promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Promoter'**
+  String get landing_page_detail_remove_promoter_title;
+
+  /// Message in the dialog to remove a promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Do you really want to remove {promoterName} from this landing page?'**
+  String landing_page_detail_remove_promoter_message(String promoterName);
+
+  /// Button to remove a promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get landing_page_detail_remove_promoter_button;
+
+  /// Success message after removing a promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Promoter removed successfully'**
+  String get landing_page_detail_promoter_removed_success;
+
+  /// Success message after updating promoter assignments
+  ///
+  /// In en, this message translates to:
+  /// **'Promoter assignments updated'**
+  String get landing_page_detail_promoters_updated_success;
+
+  /// Partial success message after updating promoter assignments
+  ///
+  /// In en, this message translates to:
+  /// **'Some assignments could not be updated'**
+  String get landing_page_detail_promoters_updated_partial;
+
+  /// Label for shared recommendations per promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended'**
+  String get landing_page_detail_promoter_shares;
+
+  /// Label for conversions per promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Conversions'**
+  String get landing_page_detail_promoter_conversions;
+
+  /// Label for conversion rate per promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Conversion Rate'**
+  String get landing_page_detail_promoter_conversion_rate;
 }
 
 class _AppLocalizationsDelegate

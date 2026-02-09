@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 
-class DashboardTrend extends Equatable {
+class ChartTrend extends Equatable {
   final int currentPeriodCount;
   final int previousPeriodCount;
   final double percentageChange;
   final bool isIncreasing;
   final bool isDecreasing;
 
-  const DashboardTrend({
+  const ChartTrend({
     required this.currentPeriodCount,
     required this.previousPeriodCount,
     required this.percentageChange,

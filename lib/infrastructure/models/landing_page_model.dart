@@ -29,6 +29,7 @@ class LandingPageModel extends Equatable {
   final String? contactOption;
   final String? calendlyEventURL;
   final Map<String, dynamic>? companyData;
+  final int? visitsTotal;
 
   const LandingPageModel(
       {required this.id,
@@ -53,7 +54,8 @@ class LandingPageModel extends Equatable {
       this.businessModel,
       this.contactOption,
       this.calendlyEventURL,
-      this.companyData});
+      this.companyData,
+      this.visitsTotal});
 
   LandingPageModel copyWith(
       {String? id,
@@ -78,7 +80,8 @@ class LandingPageModel extends Equatable {
       String? businessModel,
       String? contactOption,
       String? calendlyEventURL,
-      Map<String, dynamic>? companyData}) {
+      Map<String, dynamic>? companyData,
+      int? visitsTotal}) {
     return LandingPageModel(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -102,7 +105,8 @@ class LandingPageModel extends Equatable {
         businessModel: businessModel ?? this.businessModel,
         contactOption: contactOption ?? this.contactOption,
         calendlyEventURL: calendlyEventURL ?? this.calendlyEventURL,
-        companyData: companyData ?? this.companyData);
+        companyData: companyData ?? this.companyData,
+        visitsTotal: visitsTotal ?? this.visitsTotal);
   }
 
   Map<String, dynamic> toMap() {
@@ -129,7 +133,8 @@ class LandingPageModel extends Equatable {
       'businessModel': businessModel,
       'contactOption': contactOption,
       'calendlyEventURL': calendlyEventURL,
-      'companyData': companyData
+      'companyData': companyData,
+      'visitsTotal': visitsTotal
     };
   }
 
@@ -186,7 +191,8 @@ class LandingPageModel extends Equatable {
             : null,
         companyData: map['companyData'] != null
             ? map['companyData'] as Map<String, dynamic>
-            : null);
+            : null,
+        visitsTotal: map['visitsTotal'] != null ? map['visitsTotal'] as int : null);
   }
 
   factory LandingPageModel.fromFirestore(Map<String, dynamic> doc, String id) {
@@ -221,7 +227,8 @@ class LandingPageModel extends Equatable {
         businessModel: convertedBusinessModel,
         contactOption: convertedContactOption,
         calendlyEventURL: calendlyEventURL,
-        companyData: companyData);
+        companyData: companyData,
+        visitsTotal: visitsTotal);
   }
 
   factory LandingPageModel.fromDomain(LandingPage landingPage) {
@@ -248,7 +255,8 @@ class LandingPageModel extends Equatable {
         businessModel: landingPage.businessModel?.name,
         contactOption: landingPage.contactOption?.name,
         calendlyEventURL: landingPage.calendlyEventURL,
-        companyData: landingPage.companyData);
+        companyData: landingPage.companyData,
+        visitsTotal: landingPage.visitsTotal);
   }
 
   BusinessModel? _getBusinessModelFromString(String? businessModel) {
@@ -302,6 +310,7 @@ class LandingPageModel extends Equatable {
         businessModel,
         contactOption,
         calendlyEventURL,
-        companyData
+        companyData,
+        visitsTotal
       ];
 }

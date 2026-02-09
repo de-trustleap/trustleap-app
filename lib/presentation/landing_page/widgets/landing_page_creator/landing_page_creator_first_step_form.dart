@@ -26,6 +26,7 @@ class LandingPageCreatorFirstStepForm extends StatefulWidget {
   final LandingPage? landingPage;
   final Company? company;
   final bool createDefaultPage;
+  final bool isEditMode;
   final Function(LandingPage) onContinueTap;
   const LandingPageCreatorFirstStepForm(
       {super.key,
@@ -33,6 +34,7 @@ class LandingPageCreatorFirstStepForm extends StatefulWidget {
       this.landingPage,
       this.company,
       required this.createDefaultPage,
+      required this.isEditMode,
       required this.onContinueTap});
 
   @override
@@ -161,7 +163,7 @@ class _LandingPageCreatorFormState
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SelectableText(localization.landingpage_create_txt,
+                        SelectableText(widget.isEditMode ? localization.landingpage_creation_edit_button_text : localization.landingpage_create_txt,
                             style: themeData.textTheme.headlineLarge!
                                 .copyWith(fontWeight: FontWeight.bold)),
                         const SizedBox(height: 16),
