@@ -45,6 +45,7 @@ void main() {
           onSearchQueryChanged: onSearchQueryChanged ?? (query) {},
           clearSearch: clearSearch ?? () {},
           onFilterChanged: onFilterChanged ?? (filterStates) {},
+          currentViewState: PromotersOverviewViewState.grid,
           onViewStateButtonPressed:
               onViewStateButtonPressed ?? (viewState) {},
           onSearchOptionChanged: onSearchOptionChanged ?? (option) {},

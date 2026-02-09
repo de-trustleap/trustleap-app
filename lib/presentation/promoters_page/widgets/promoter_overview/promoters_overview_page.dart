@@ -39,7 +39,9 @@ class PromotersOverviewPage extends StatefulWidget {
 }
 
 class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
-  PromotersOverviewViewState _viewState = PromotersOverviewViewState.grid;
+  static PromotersOverviewViewState _persistedViewState =
+      PromotersOverviewViewState.grid;
+  PromotersOverviewViewState _viewState = _persistedViewState;
   PromoterOverviewFilter filter = PromoterOverviewFilter();
   final ScrollController _controller = ScrollController();
   final TextEditingController _searchController = TextEditingController();
@@ -57,14 +59,17 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
   @override
   void initState() {
     super.initState();
-    final userObserverCubit = Modular.get<UserObserverCubit>();
-    final currentUserState = userObserverCubit.state;
-    if (currentUserState is UserObserverSuccess) {
-      Modular.get<PromoterObserverCubit>()
-          .observePromotersForUser(currentUserState.user);
-    }
     _controller.addListener(_onScroll);
     _filterStates = PromoterOverviewFilterStates();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final currentUserState = Modular.get<UserObserverCubit>().state;
+      if (currentUserState is UserObserverSuccess) {
+        Modular.get<PromoterObserverCubit>()
+            .observePromotersForUser(currentUserState.user);
+      }
+    });
   }
 
   @override
@@ -292,9 +297,11 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
         onSearchQueryChanged: onSearchQueryChanged,
         clearSearch: clearSearch,
         onFilterChanged: onFilterChanged,
+        currentViewState: _viewState,
         onViewStateButtonPressed: (viewState) {
           setState(() {
             _viewState = viewState;
+            _persistedViewState = viewState;
           });
         },
         onSearchOptionChanged: onSearchOptionChanged);

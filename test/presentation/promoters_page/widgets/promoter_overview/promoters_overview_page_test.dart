@@ -90,7 +90,6 @@ void main() {
 
   tearDown(() {
     ResponsiveHelper.disableTestMode();
-    Modular.destroy();
     promoterCubit.close();
     promoterObserverCubit.close();
     userObserverCubit.close();
@@ -413,7 +412,7 @@ void main() {
         permissions: createTestPermissions(),
         permissionInitiallyLoaded: true,
       ));
-      userObserverCubit.emit(UserObserverSuccess(user: createTestUser()));
+      userObserverCubit.emit(UserObserverSuccess(user: createTestUserWithPromoters()));
       promoterObserverCubit
           .emit(PromotersObserverGetElementsSuccess(promoters: [testPromoter]));
 
@@ -439,7 +438,7 @@ void main() {
         permissions: createTestPermissions(),
         permissionInitiallyLoaded: true,
       ));
-      userObserverCubit.emit(UserObserverSuccess(user: createTestUser()));
+      userObserverCubit.emit(UserObserverSuccess(user: createTestUserWithPromoters()));
       promoterObserverCubit
           .emit(PromotersObserverGetElementsSuccess(promoters: [testPromoter]));
 

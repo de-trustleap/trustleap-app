@@ -21,6 +21,7 @@ class PromotersPage extends StatefulWidget {
 
 class _PromotersPageState extends State<PromotersPage> {
   bool initialSnackbarAlreadyShown = false;
+  final _overviewKey = GlobalKey();
 
   @override
   void initState() {
@@ -75,7 +76,7 @@ class _PromotersPageState extends State<PromotersPage> {
           title: localization.my_promoters_tab_title,
           icon: Icons.people,
           route: "${RoutePaths.homePath}${RoutePaths.promotersPath}${RoutePaths.promotersOverviewPath}",
-          content: const PromotersOverviewWrapper()),
+          content: PromotersOverviewWrapper(key: _overviewKey)),
       if (_canAccessPromoterRegistration(permissions)) ...[
         CustomTabItem(
             title: localization.promoter_register_tab_title,
