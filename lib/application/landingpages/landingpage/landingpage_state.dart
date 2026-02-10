@@ -211,3 +211,4 @@ class CheckCompanyValidState extends LandingPageState with EquatableMixin {
   @override
   List<Object> get props => [];
 }
+

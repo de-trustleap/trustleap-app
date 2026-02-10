@@ -102,7 +102,7 @@ void main() {
         () async {
       // Given
       final expectedResult = [
-        PromoterLoadingState(),
+        PromoterLoadingState(promoterId: promoterID),
         PromoterEditSuccessState()
       ];
       when(mockPromoterRepo.editPromoter(
@@ -120,7 +120,7 @@ void main() {
         () async {
       // Given
       final expectedResult = [
-        PromoterLoadingState(),
+        PromoterLoadingState(promoterId: promoterID),
         PromoterEditFailureState(failure: BackendFailure())
       ];
       when(mockPromoterRepo.editPromoter(

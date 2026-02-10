@@ -400,7 +400,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_creator_business_model_info_tooltip =>
-      'Choose whether your customers are B2B (business customers) or B2C (end consumers). This is important to embed a disclaimer on the landing page in case of B2B customers.\\nIf you address both business customers and end consumers, choose B2C.';
+      'Choose whether your customers are B2B (business customers) or B2C (end consumers). This is important to embed a disclaimer on the landing page in case of B2B customers.\nIf you address both business customers and end consumers, choose B2C.';
 
   @override
   String get error_msg_pleace_upload_picture => 'Please upload an image';
@@ -3364,4 +3364,180 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cookie_consent_privacy_policy => 'Privacy Policy';
+
+  @override
+  String get landing_page_detail_status_active => 'ACTIVE';
+
+  @override
+  String get landing_page_detail_status_inactive => 'INACTIVE';
+
+  @override
+  String get landing_page_detail_created_on => 'Created on';
+
+  @override
+  String get landing_page_detail_last_modified => 'Last modified';
+
+  @override
+  String get landing_page_detail_last_updated => 'Last updated';
+
+  @override
+  String get landing_page_detail_preview => 'Preview';
+
+  @override
+  String get landing_page_detail_open_builder => 'Open Pagebuilder';
+
+  @override
+  String get landing_page_detail_total_visits => 'Total Visits';
+
+  @override
+  String get landing_page_detail_conversion_rate => 'Conversion Rate';
+
+  @override
+  String get landing_page_detail_recommendation_overview => 'Recommendations';
+
+  @override
+  String get landing_page_detail_page_configuration => 'Page Configuration';
+
+  @override
+  String get landing_page_detail_edit_configuration => 'Edit';
+
+  @override
+  String get landing_page_detail_description => 'Description';
+
+  @override
+  String get landing_page_detail_promoter_template_text =>
+      'Promoter Template Text';
+
+  @override
+  String get landing_page_detail_page_type => 'Page Type';
+
+  @override
+  String get landing_page_detail_type_b2c => 'B2C';
+
+  @override
+  String get landing_page_detail_type_b2c_description =>
+      'Consumer focused landing page';
+
+  @override
+  String get landing_page_detail_type_b2b => 'B2B';
+
+  @override
+  String get landing_page_detail_type_b2b_description =>
+      'Business focused landing page';
+
+  @override
+  String get landing_page_detail_contact_options => 'Contact Options';
+
+  @override
+  String get landing_page_detail_contact_calendly => 'Calendly';
+
+  @override
+  String get landing_page_detail_contact_calendly_description =>
+      'Book appointments via Calendly';
+
+  @override
+  String get landing_page_detail_contact_form => 'Contact Form';
+
+  @override
+  String get landing_page_detail_contact_form_description =>
+      'Contact form on the page';
+
+  @override
+  String get landing_page_detail_contact_both => 'Both Options';
+
+  @override
+  String get landing_page_detail_contact_both_description =>
+      'Contact form + Calendly integration';
+
+  @override
+  String get landing_page_detail_legal_information => 'Legal Information';
+
+  @override
+  String get landing_page_detail_privacy_policy => 'Privacy Policy';
+
+  @override
+  String get landing_page_detail_imprint => 'Imprint';
+
+  @override
+  String get landing_page_detail_terms_and_conditions => 'Terms & Conditions';
+
+  @override
+  String get landing_page_detail_initial_information => 'Initial Information';
+
+  @override
+  String get landing_page_detail_error_loading => 'Error loading landing page';
+
+  @override
+  String get landing_page_detail_not_found => 'Landing page not found';
+
+  @override
+  String get landing_page_detail_assigned_promoters => 'Assigned Promoters';
+
+  @override
+  String get landing_page_detail_assigned_promoters_subtitle =>
+      'Manage promoter assignments for this landing page';
+
+  @override
+  String get landing_page_detail_assign_promoter => 'Assign Promoter';
+
+  @override
+  String get landing_page_detail_assign_promoter_title => 'Assign Promoter';
+
+  @override
+  String get landing_page_detail_total_promoters => 'Total Promoters';
+
+  @override
+  String get landing_page_detail_registered_promoters => 'Registered';
+
+  @override
+  String get landing_page_detail_unregistered_promoters => 'Unregistered';
+
+  @override
+  String get landing_page_detail_no_promoters => 'No promoters assigned';
+
+  @override
+  String get landing_page_detail_no_promoters_available =>
+      'No promoters available';
+
+  @override
+  String get landing_page_detail_promoters_error_title =>
+      'Error loading promoters';
+
+  @override
+  String get landing_page_detail_view_promoter => 'View promoter';
+
+  @override
+  String get landing_page_detail_remove_promoter => 'Remove promoter';
+
+  @override
+  String get landing_page_detail_remove_promoter_title => 'Remove Promoter';
+
+  @override
+  String landing_page_detail_remove_promoter_message(String promoterName) {
+    return 'Do you really want to remove $promoterName from this landing page?';
+  }
+
+  @override
+  String get landing_page_detail_remove_promoter_button => 'Remove';
+
+  @override
+  String get landing_page_detail_promoter_removed_success =>
+      'Promoter removed successfully';
+
+  @override
+  String get landing_page_detail_promoters_updated_success =>
+      'Promoter assignments updated';
+
+  @override
+  String get landing_page_detail_promoters_updated_partial =>
+      'Some assignments could not be updated';
+
+  @override
+  String get landing_page_detail_promoter_shares => 'Recommended';
+
+  @override
+  String get landing_page_detail_promoter_conversions => 'Conversions';
+
+  @override
+  String get landing_page_detail_promoter_conversion_rate => 'Conversion Rate';
 }

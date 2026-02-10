@@ -116,6 +116,7 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
             landingPage: widget.landingPage,
             company: widget.company,
             createDefaultPage: widget.createDefaultPage,
+            isEditMode: widget.isEditMode,
             onContinueTap: (landingPage) {
               _onContinue(landingPage);
             },

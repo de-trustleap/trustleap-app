@@ -19,6 +19,7 @@ import 'package:finanzbegleiter/application/images/company/company_image_bloc.da
 import 'package:finanzbegleiter/application/images/landing_page/landing_page_image_bloc.dart';
 import 'package:finanzbegleiter/application/images/profile/profile_image_bloc.dart';
 import 'package:finanzbegleiter/application/landingpages/landing_page_creator/landing_page_creator_cubit.dart';
+import 'package:finanzbegleiter/application/landingpages/landing_page_detail/landing_page_detail_cubit.dart';
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart';
 import 'package:finanzbegleiter/application/legals/admin_legals/admin_legals_cubit.dart';
@@ -154,6 +155,7 @@ class AppModule extends Module {
       ..addLazySingleton(PromoterCubit.new)
       ..addLazySingleton(PromoterObserverCubit.new)
       ..addLazySingleton(LandingPageCubit.new)
+      ..addLazySingleton(LandingPageDetailCubit.new)
       ..addLazySingleton(LandingPageObserverCubit.new)
       ..addLazySingleton(LandingPageCreatorCubit.new)
       ..addLazySingleton(AdminRegistrationCodeCubit.new)

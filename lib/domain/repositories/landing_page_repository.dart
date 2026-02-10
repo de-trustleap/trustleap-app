@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/domain/entities/archived_landing_page_legals.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_ai_generation.dart';
@@ -45,4 +46,7 @@ abstract class LandingPageRepository {
 
   Future<Either<DatabaseFailure, List<LandingPage>>>
       getLandingPagesForPromoters(List<Promoter> promoters);
+
+  Future<Either<DatabaseFailure, ArchivedLandingPageLegals>>
+      getArchivedLandingPageLegals(String landingPageId);
 }

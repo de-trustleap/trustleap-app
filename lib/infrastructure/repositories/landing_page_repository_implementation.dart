@@ -8,11 +8,13 @@ import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
+import 'package:finanzbegleiter/domain/entities/archived_landing_page_legals.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_ai_generation.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
+import 'package:finanzbegleiter/infrastructure/models/archived_landing_page_legals_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/landing_page_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/landing_page_template_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_ai_generation_model.dart';
@@ -404,6 +406,26 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       }
 
       return right(landingPages);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, ArchivedLandingPageLegals>>
+      getArchivedLandingPageLegals(String landingPageId) async {
+    final archivedLegalsCollection =
+        firestore.collection("archivedLandingPageLegals");
+    try {
+      final document = await archivedLegalsCollection.doc(landingPageId).get();
+
+      if (!document.exists || document.data() == null) {
+        return right(ArchivedLandingPageLegals(id: landingPageId));
+      }
+
+      final data = document.data()!;
+      data['id'] = landingPageId;
+      return right(ArchivedLandingPageLegalsModel.fromMap(data).toDomain());
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }

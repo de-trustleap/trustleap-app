@@ -7,7 +7,7 @@ import 'dart:async' as _i12;
 import 'dart:io' as _i31;
 import 'dart:typed_data' as _i29;
 
-import 'package:bloc/bloc.dart' as _i67;
+import 'package:bloc/bloc.dart' as _i68;
 import 'package:cloud_firestore/cloud_firestore.dart' as _i11;
 import 'package:cloud_firestore_platform_interface/cloud_firestore_platform_interface.dart'
     as _i10;
@@ -16,60 +16,62 @@ import 'package:cloud_functions_platform_interface/cloud_functions_platform_inte
     as _i14;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart'
-    as _i64;
+    as _i65;
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart'
-    as _i68;
-import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart'
     as _i69;
+import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart'
+    as _i70;
 import 'package:finanzbegleiter/constants.dart' as _i30;
 import 'package:finanzbegleiter/core/failures/auth_failures.dart' as _i21;
 import 'package:finanzbegleiter/core/failures/database_failures.dart' as _i22;
 import 'package:finanzbegleiter/core/failures/failure.dart' as _i19;
 import 'package:finanzbegleiter/core/failures/storage_failures.dart' as _i28;
+import 'package:finanzbegleiter/domain/entities/archived_landing_page_legals.dart'
+    as _i37;
 import 'package:finanzbegleiter/domain/entities/archived_recommendation_item.dart'
-    as _i46;
+    as _i47;
 import 'package:finanzbegleiter/domain/entities/company.dart' as _i25;
 import 'package:finanzbegleiter/domain/entities/company_request.dart' as _i26;
 import 'package:finanzbegleiter/domain/entities/consent_preference.dart' as _i3;
 import 'package:finanzbegleiter/domain/entities/dashboard_ranked_landingpage.dart'
-    as _i53;
+    as _i54;
 import 'package:finanzbegleiter/domain/entities/dashboard_ranked_promoter.dart'
-    as _i52;
-import 'package:finanzbegleiter/domain/entities/feedback_item.dart' as _i43;
+    as _i53;
+import 'package:finanzbegleiter/domain/entities/feedback_item.dart' as _i44;
 import 'package:finanzbegleiter/domain/entities/landing_page.dart' as _i33;
 import 'package:finanzbegleiter/domain/entities/landing_page_template.dart'
     as _i35;
-import 'package:finanzbegleiter/domain/entities/last_viewed.dart' as _i47;
-import 'package:finanzbegleiter/domain/entities/legals.dart' as _i50;
+import 'package:finanzbegleiter/domain/entities/last_viewed.dart' as _i48;
+import 'package:finanzbegleiter/domain/entities/legals.dart' as _i51;
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_ai_generation.dart'
     as _i34;
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart'
-    as _i63;
+    as _i64;
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart'
-    as _i66;
+    as _i67;
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section_template.dart'
-    as _i57;
+    as _i58;
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section_template_meta.dart'
-    as _i56;
+    as _i57;
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart'
-    as _i65;
+    as _i66;
 import 'package:finanzbegleiter/domain/entities/pagebuilder_section_template_edit.dart'
-    as _i60;
+    as _i61;
 import 'package:finanzbegleiter/domain/entities/pagebuilder_section_template_upload.dart'
-    as _i59;
-import 'package:finanzbegleiter/domain/entities/permissions.dart' as _i40;
+    as _i60;
+import 'package:finanzbegleiter/domain/entities/permissions.dart' as _i41;
 import 'package:finanzbegleiter/domain/entities/promoter.dart' as _i36;
 import 'package:finanzbegleiter/domain/entities/promoter_recommendations.dart'
-    as _i48;
+    as _i49;
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart'
-    as _i44;
+    as _i45;
 import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart'
-    as _i38;
+    as _i39;
 import 'package:finanzbegleiter/domain/entities/user.dart' as _i20;
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart'
-    as _i45;
+    as _i46;
 import 'package:finanzbegleiter/domain/repositories/admin_registration_code_repository.dart'
-    as _i41;
+    as _i42;
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart'
     as _i18;
 import 'package:finanzbegleiter/domain/repositories/calendly_repository.dart'
@@ -77,31 +79,31 @@ import 'package:finanzbegleiter/domain/repositories/calendly_repository.dart'
 import 'package:finanzbegleiter/domain/repositories/company_repository.dart'
     as _i24;
 import 'package:finanzbegleiter/domain/repositories/consent_repository.dart'
-    as _i61;
+    as _i62;
 import 'package:finanzbegleiter/domain/repositories/dashboard_repository.dart'
-    as _i51;
+    as _i52;
 import 'package:finanzbegleiter/domain/repositories/feedback_repository.dart'
-    as _i42;
+    as _i43;
 import 'package:finanzbegleiter/domain/repositories/image_repository.dart'
     as _i27;
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart'
     as _i32;
 import 'package:finanzbegleiter/domain/repositories/legals_repository.dart'
-    as _i49;
+    as _i50;
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart'
-    as _i62;
+    as _i63;
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_section_template_repository.dart'
-    as _i55;
+    as _i56;
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_section_template_upload_repository.dart'
-    as _i58;
+    as _i59;
 import 'package:finanzbegleiter/domain/repositories/permission_repository.dart'
-    as _i39;
+    as _i40;
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart'
-    as _i37;
+    as _i38;
 import 'package:finanzbegleiter/domain/repositories/recommendation_repository.dart'
     as _i5;
 import 'package:finanzbegleiter/domain/repositories/tutorial_repository.dart'
-    as _i54;
+    as _i55;
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart'
     as _i6;
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart' as _i16;
@@ -4667,6 +4669,42 @@ class MockAppLocalizations extends _i1.Mock implements _i16.AppLocalizations {
       ) as String);
 
   @override
+  String get pagebuilder_button_config_auto_width => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_button_config_auto_width),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_button_config_auto_width),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_button_config_min_width => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_button_config_min_width),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_button_config_min_width),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_button_config_fixed_width => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_button_config_fixed_width),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_button_config_fixed_width),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_button_config_content_padding => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_button_config_content_padding),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_button_config_content_padding),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_pagebuilder_container_config_container_shadow =>
       (super.noSuchMethod(
         Invocation.getter(
@@ -5690,6 +5728,34 @@ class MockAppLocalizations extends _i1.Mock implements _i16.AppLocalizations {
         returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#landingpage_creator_ai_form_example),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_ai_generator_tile_title => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_ai_generator_tile_title),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_ai_generator_tile_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_ai_generator_tile_description =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_ai_generator_tile_description),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_ai_generator_tile_description),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_select_template_title => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_select_template_title),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_select_template_title),
         ),
       ) as String);
 
@@ -8896,6 +8962,25 @@ class MockAppLocalizations extends _i1.Mock implements _i16.AppLocalizations {
       ) as String);
 
   @override
+  String get admin_area_template_manager_type_contact_form =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_type_contact_form),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_type_contact_form),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_type_calendly => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_type_calendly),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_type_calendly),
+        ),
+      ) as String);
+
+  @override
   String get admin_area_template_manager_environment_label =>
       (super.noSuchMethod(
         Invocation.getter(#admin_area_template_manager_environment_label),
@@ -9049,6 +9134,45 @@ class MockAppLocalizations extends _i1.Mock implements _i16.AppLocalizations {
       ) as String);
 
   @override
+  String get admin_area_template_manager_json_format_tooltip =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_json_format_tooltip),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_json_format_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_json_upload_tooltip =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_json_upload_tooltip),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_json_upload_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_json_invalid => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_json_invalid),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_json_invalid),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_new_assets_label =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_new_assets_label),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_new_assets_label),
+        ),
+      ) as String);
+
+  @override
   String get menuitems_templates => (super.noSuchMethod(
         Invocation.getter(#menuitems_templates),
         returnValue: _i17.dummyValue<String>(
@@ -9140,6 +9264,24 @@ class MockAppLocalizations extends _i1.Mock implements _i16.AppLocalizations {
         returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#pagebuilder_section_type_footer),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_type_contact_form => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_type_contact_form),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_type_contact_form),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_type_calendly => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_type_calendly),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_type_calendly),
         ),
       ) as String);
 
@@ -9354,6 +9496,463 @@ class MockAppLocalizations extends _i1.Mock implements _i16.AppLocalizations {
         returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#cookie_consent_privacy_policy),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_status_active => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_status_active),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_status_active),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_status_inactive => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_status_inactive),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_status_inactive),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_created_on => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_created_on),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_created_on),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_last_modified => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_last_modified),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_last_modified),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_last_updated => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_last_updated),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_last_updated),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_preview => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_preview),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_preview),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_open_builder => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_open_builder),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_open_builder),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_total_visits => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_total_visits),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_total_visits),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_conversion_rate => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_conversion_rate),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_conversion_rate),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_recommendation_overview => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_recommendation_overview),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_recommendation_overview),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_page_configuration => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_page_configuration),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_page_configuration),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_edit_configuration => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_edit_configuration),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_edit_configuration),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_description => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_description),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_description),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_promoter_template_text => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_promoter_template_text),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_promoter_template_text),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_page_type => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_page_type),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_page_type),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_type_b2c => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_type_b2c),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_type_b2c),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_type_b2c_description => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_type_b2c_description),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_type_b2c_description),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_type_b2b => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_type_b2b),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_type_b2b),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_type_b2b_description => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_type_b2b_description),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_type_b2b_description),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_contact_options => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_contact_options),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_contact_options),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_contact_calendly => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_contact_calendly),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_contact_calendly),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_contact_calendly_description =>
+      (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_contact_calendly_description),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_contact_calendly_description),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_contact_form => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_contact_form),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_contact_form),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_contact_form_description =>
+      (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_contact_form_description),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_contact_form_description),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_contact_both => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_contact_both),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_contact_both),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_contact_both_description =>
+      (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_contact_both_description),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_contact_both_description),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_legal_information => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_legal_information),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_legal_information),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_privacy_policy => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_privacy_policy),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_privacy_policy),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_imprint => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_imprint),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_imprint),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_terms_and_conditions => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_terms_and_conditions),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_terms_and_conditions),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_initial_information => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_initial_information),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_initial_information),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_error_loading => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_error_loading),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_error_loading),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_not_found => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_not_found),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_not_found),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_assigned_promoters => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_assigned_promoters),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_assigned_promoters),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_assigned_promoters_subtitle =>
+      (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_assigned_promoters_subtitle),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_assigned_promoters_subtitle),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_assign_promoter => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_assign_promoter),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_assign_promoter),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_assign_promoter_title => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_assign_promoter_title),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_assign_promoter_title),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_total_promoters => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_total_promoters),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_total_promoters),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_registered_promoters => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_registered_promoters),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_registered_promoters),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_unregistered_promoters => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_unregistered_promoters),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_unregistered_promoters),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_no_promoters => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_no_promoters),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_no_promoters),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_no_promoters_available => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_no_promoters_available),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_no_promoters_available),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_promoters_error_title => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_promoters_error_title),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_promoters_error_title),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_view_promoter => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_view_promoter),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_view_promoter),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_remove_promoter => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_remove_promoter),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_remove_promoter),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_remove_promoter_title => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_remove_promoter_title),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_remove_promoter_title),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_remove_promoter_button => (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_remove_promoter_button),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_remove_promoter_button),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_promoter_removed_success =>
+      (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_promoter_removed_success),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_promoter_removed_success),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_promoters_updated_success =>
+      (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_promoters_updated_success),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_promoters_updated_success),
+        ),
+      ) as String);
+
+  @override
+  String get landing_page_detail_promoters_updated_partial =>
+      (super.noSuchMethod(
+        Invocation.getter(#landing_page_detail_promoters_updated_partial),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landing_page_detail_promoters_updated_partial),
         ),
       ) as String);
 
@@ -9711,6 +10310,22 @@ class MockAppLocalizations extends _i1.Mock implements _i16.AppLocalizations {
           Invocation.method(
             #pagebuilder_template_library_no_templates_available,
             [type],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String landing_page_detail_remove_promoter_message(String? promoterName) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #landing_page_detail_remove_promoter_message,
+          [promoterName],
+        ),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.method(
+            #landing_page_detail_remove_promoter_message,
+            [promoterName],
           ),
         ),
       ) as String);
@@ -10623,20 +11238,42 @@ class MockLandingPageRepository extends _i1.Mock
             )),
           ) as _i12.Future<
               _i2.Either<_i22.DatabaseFailure, List<_i33.LandingPage>>>);
+
+  @override
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i37.ArchivedLandingPageLegals>>
+      getArchivedLandingPageLegals(String? landingPageId) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #getArchivedLandingPageLegals,
+              [landingPageId],
+            ),
+            returnValue: _i12.Future<
+                _i2.Either<_i22.DatabaseFailure,
+                    _i37.ArchivedLandingPageLegals>>.value(_FakeEither_0<
+                _i22.DatabaseFailure, _i37.ArchivedLandingPageLegals>(
+              this,
+              Invocation.method(
+                #getArchivedLandingPageLegals,
+                [landingPageId],
+              ),
+            )),
+          ) as _i12.Future<
+              _i2
+              .Either<_i22.DatabaseFailure, _i37.ArchivedLandingPageLegals>>);
 }
 
 /// A class which mocks [PromoterRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPromoterRepository extends _i1.Mock
-    implements _i37.PromoterRepository {
+    implements _i38.PromoterRepository {
   MockPromoterRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
   _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>> registerPromoter(
-          {required _i38.UnregisteredPromoter? promoter}) =>
+          {required _i39.UnregisteredPromoter? promoter}) =>
       (super.noSuchMethod(
         Invocation.method(
           #registerPromoter,
@@ -10717,7 +11354,7 @@ class MockPromoterRepository extends _i1.Mock
               .Future<_i2.Either<_i22.DatabaseFailure, List<_i20.CustomUser>>>);
 
   @override
-  _i12.Future<_i2.Either<_i22.DatabaseFailure, List<_i38.UnregisteredPromoter>>>
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, List<_i39.UnregisteredPromoter>>>
       getUnregisteredPromoters(List<String>? ids) => (super.noSuchMethod(
             Invocation.method(
               #getUnregisteredPromoters,
@@ -10725,8 +11362,8 @@ class MockPromoterRepository extends _i1.Mock
             ),
             returnValue: _i12.Future<
                 _i2.Either<_i22.DatabaseFailure,
-                    List<_i38.UnregisteredPromoter>>>.value(_FakeEither_0<
-                _i22.DatabaseFailure, List<_i38.UnregisteredPromoter>>(
+                    List<_i39.UnregisteredPromoter>>>.value(_FakeEither_0<
+                _i22.DatabaseFailure, List<_i39.UnregisteredPromoter>>(
               this,
               Invocation.method(
                 #getUnregisteredPromoters,
@@ -10735,7 +11372,7 @@ class MockPromoterRepository extends _i1.Mock
             )),
           ) as _i12.Future<
               _i2
-              .Either<_i22.DatabaseFailure, List<_i38.UnregisteredPromoter>>>);
+              .Either<_i22.DatabaseFailure, List<_i39.UnregisteredPromoter>>>);
 
   @override
   _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>> deletePromoter({
@@ -10994,28 +11631,28 @@ class MockUserRepository extends _i1.Mock implements _i6.UserRepository {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPermissionRepository extends _i1.Mock
-    implements _i39.PermissionRepository {
+    implements _i40.PermissionRepository {
   MockPermissionRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i12.Stream<_i2.Either<_i22.DatabaseFailure, _i40.Permissions>>
+  _i12.Stream<_i2.Either<_i22.DatabaseFailure, _i41.Permissions>>
       observeAllPermissions() => (super.noSuchMethod(
             Invocation.method(
               #observeAllPermissions,
               [],
             ),
             returnValue: _i12.Stream<
-                _i2.Either<_i22.DatabaseFailure, _i40.Permissions>>.empty(),
-          ) as _i12.Stream<_i2.Either<_i22.DatabaseFailure, _i40.Permissions>>);
+                _i2.Either<_i22.DatabaseFailure, _i41.Permissions>>.empty(),
+          ) as _i12.Stream<_i2.Either<_i22.DatabaseFailure, _i41.Permissions>>);
 }
 
 /// A class which mocks [AdminRegistrationCodeRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAdminRegistrationCodeRepository extends _i1.Mock
-    implements _i41.AdminRegistrationCodeRepository {
+    implements _i42.AdminRegistrationCodeRepository {
   MockAdminRegistrationCodeRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -11058,14 +11695,14 @@ class MockAdminRegistrationCodeRepository extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockFeedbackRepository extends _i1.Mock
-    implements _i42.FeedbackRepository {
+    implements _i43.FeedbackRepository {
   MockFeedbackRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
   _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>> sendFeedback(
-    _i43.FeedbackItem? feedback,
+    _i44.FeedbackItem? feedback,
     List<_i29.Uint8List>? images,
   ) =>
       (super.noSuchMethod(
@@ -11091,7 +11728,7 @@ class MockFeedbackRepository extends _i1.Mock
       ) as _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>);
 
   @override
-  _i12.Future<_i2.Either<_i22.DatabaseFailure, List<_i43.FeedbackItem>>>
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, List<_i44.FeedbackItem>>>
       getFeedbackItems() => (super.noSuchMethod(
             Invocation.method(
               #getFeedbackItems,
@@ -11099,8 +11736,8 @@ class MockFeedbackRepository extends _i1.Mock
             ),
             returnValue: _i12.Future<
                     _i2.Either<_i22.DatabaseFailure,
-                        List<_i43.FeedbackItem>>>.value(
-                _FakeEither_0<_i22.DatabaseFailure, List<_i43.FeedbackItem>>(
+                        List<_i44.FeedbackItem>>>.value(
+                _FakeEither_0<_i22.DatabaseFailure, List<_i44.FeedbackItem>>(
               this,
               Invocation.method(
                 #getFeedbackItems,
@@ -11108,7 +11745,7 @@ class MockFeedbackRepository extends _i1.Mock
               ),
             )),
           ) as _i12.Future<
-              _i2.Either<_i22.DatabaseFailure, List<_i43.FeedbackItem>>>);
+              _i2.Either<_i22.DatabaseFailure, List<_i44.FeedbackItem>>>);
 
   @override
   _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>> deleteFeedback(
@@ -11141,7 +11778,7 @@ class MockRecommendationRepository extends _i1.Mock
 
   @override
   _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>> saveRecommendation(
-    _i44.RecommendationItem? recommendation,
+    _i45.RecommendationItem? recommendation,
     String? userID,
   ) =>
       (super.noSuchMethod(
@@ -11167,7 +11804,7 @@ class MockRecommendationRepository extends _i1.Mock
       ) as _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>);
 
   @override
-  _i12.Future<_i2.Either<_i22.DatabaseFailure, List<_i45.UserRecommendation>>>
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, List<_i46.UserRecommendation>>>
       getRecommendations(String? userID) => (super.noSuchMethod(
             Invocation.method(
               #getRecommendations,
@@ -11175,8 +11812,8 @@ class MockRecommendationRepository extends _i1.Mock
             ),
             returnValue: _i12.Future<
                 _i2.Either<_i22.DatabaseFailure,
-                    List<_i45.UserRecommendation>>>.value(_FakeEither_0<
-                _i22.DatabaseFailure, List<_i45.UserRecommendation>>(
+                    List<_i46.UserRecommendation>>>.value(_FakeEither_0<
+                _i22.DatabaseFailure, List<_i46.UserRecommendation>>(
               this,
               Invocation.method(
                 #getRecommendations,
@@ -11184,7 +11821,7 @@ class MockRecommendationRepository extends _i1.Mock
               ),
             )),
           ) as _i12.Future<
-              _i2.Either<_i22.DatabaseFailure, List<_i45.UserRecommendation>>>);
+              _i2.Either<_i22.DatabaseFailure, List<_i46.UserRecommendation>>>);
 
   @override
   _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>> deleteRecommendation(
@@ -11217,8 +11854,8 @@ class MockRecommendationRepository extends _i1.Mock
       ) as _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>);
 
   @override
-  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i45.UserRecommendation>>
-      setAppointmentState(_i45.UserRecommendation? recommendation) =>
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i46.UserRecommendation>>
+      setAppointmentState(_i46.UserRecommendation? recommendation) =>
           (super.noSuchMethod(
             Invocation.method(
               #setAppointmentState,
@@ -11226,8 +11863,8 @@ class MockRecommendationRepository extends _i1.Mock
             ),
             returnValue: _i12.Future<
                     _i2.Either<_i22.DatabaseFailure,
-                        _i45.UserRecommendation>>.value(
-                _FakeEither_0<_i22.DatabaseFailure, _i45.UserRecommendation>(
+                        _i46.UserRecommendation>>.value(
+                _FakeEither_0<_i22.DatabaseFailure, _i46.UserRecommendation>(
               this,
               Invocation.method(
                 #setAppointmentState,
@@ -11235,12 +11872,12 @@ class MockRecommendationRepository extends _i1.Mock
               ),
             )),
           ) as _i12.Future<
-              _i2.Either<_i22.DatabaseFailure, _i45.UserRecommendation>>);
+              _i2.Either<_i22.DatabaseFailure, _i46.UserRecommendation>>);
 
   @override
-  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i45.UserRecommendation>>
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i46.UserRecommendation>>
       finishRecommendation(
-    _i45.UserRecommendation? recommendation,
+    _i46.UserRecommendation? recommendation,
     bool? completed,
   ) =>
           (super.noSuchMethod(
@@ -11253,8 +11890,8 @@ class MockRecommendationRepository extends _i1.Mock
             ),
             returnValue: _i12.Future<
                     _i2.Either<_i22.DatabaseFailure,
-                        _i45.UserRecommendation>>.value(
-                _FakeEither_0<_i22.DatabaseFailure, _i45.UserRecommendation>(
+                        _i46.UserRecommendation>>.value(
+                _FakeEither_0<_i22.DatabaseFailure, _i46.UserRecommendation>(
               this,
               Invocation.method(
                 #finishRecommendation,
@@ -11265,12 +11902,12 @@ class MockRecommendationRepository extends _i1.Mock
               ),
             )),
           ) as _i12.Future<
-              _i2.Either<_i22.DatabaseFailure, _i45.UserRecommendation>>);
+              _i2.Either<_i22.DatabaseFailure, _i46.UserRecommendation>>);
 
   @override
   _i12.Future<
           _i2
-          .Either<_i22.DatabaseFailure, List<_i46.ArchivedRecommendationItem>>>
+          .Either<_i22.DatabaseFailure, List<_i47.ArchivedRecommendationItem>>>
       getArchivedRecommendations(String? userID) => (super.noSuchMethod(
             Invocation.method(
               #getArchivedRecommendations,
@@ -11278,8 +11915,8 @@ class MockRecommendationRepository extends _i1.Mock
             ),
             returnValue: _i12.Future<
                 _i2.Either<_i22.DatabaseFailure,
-                    List<_i46.ArchivedRecommendationItem>>>.value(_FakeEither_0<
-                _i22.DatabaseFailure, List<_i46.ArchivedRecommendationItem>>(
+                    List<_i47.ArchivedRecommendationItem>>>.value(_FakeEither_0<
+                _i22.DatabaseFailure, List<_i47.ArchivedRecommendationItem>>(
               this,
               Invocation.method(
                 #getArchivedRecommendations,
@@ -11288,12 +11925,12 @@ class MockRecommendationRepository extends _i1.Mock
             )),
           ) as _i12.Future<
               _i2.Either<_i22.DatabaseFailure,
-                  List<_i46.ArchivedRecommendationItem>>>);
+                  List<_i47.ArchivedRecommendationItem>>>);
 
   @override
   _i12.Future<
-      _i2.Either<_i22.DatabaseFailure, _i45.UserRecommendation>> setFavorite(
-    _i45.UserRecommendation? recommendation,
+      _i2.Either<_i22.DatabaseFailure, _i46.UserRecommendation>> setFavorite(
+    _i46.UserRecommendation? recommendation,
     String? userID,
   ) =>
       (super.noSuchMethod(
@@ -11306,8 +11943,8 @@ class MockRecommendationRepository extends _i1.Mock
         ),
         returnValue: _i12.Future<
                 _i2
-                .Either<_i22.DatabaseFailure, _i45.UserRecommendation>>.value(
-            _FakeEither_0<_i22.DatabaseFailure, _i45.UserRecommendation>(
+                .Either<_i22.DatabaseFailure, _i46.UserRecommendation>>.value(
+            _FakeEither_0<_i22.DatabaseFailure, _i46.UserRecommendation>(
           this,
           Invocation.method(
             #setFavorite,
@@ -11318,12 +11955,12 @@ class MockRecommendationRepository extends _i1.Mock
           ),
         )),
       ) as _i12
-          .Future<_i2.Either<_i22.DatabaseFailure, _i45.UserRecommendation>>);
+          .Future<_i2.Either<_i22.DatabaseFailure, _i46.UserRecommendation>>);
 
   @override
   _i12.Future<
-      _i2.Either<_i22.DatabaseFailure, _i45.UserRecommendation>> setPriority(
-    _i45.UserRecommendation? recommendation,
+      _i2.Either<_i22.DatabaseFailure, _i46.UserRecommendation>> setPriority(
+    _i46.UserRecommendation? recommendation,
     String? currentUserID,
   ) =>
       (super.noSuchMethod(
@@ -11336,8 +11973,8 @@ class MockRecommendationRepository extends _i1.Mock
         ),
         returnValue: _i12.Future<
                 _i2
-                .Either<_i22.DatabaseFailure, _i45.UserRecommendation>>.value(
-            _FakeEither_0<_i22.DatabaseFailure, _i45.UserRecommendation>(
+                .Either<_i22.DatabaseFailure, _i46.UserRecommendation>>.value(
+            _FakeEither_0<_i22.DatabaseFailure, _i46.UserRecommendation>(
           this,
           Invocation.method(
             #setPriority,
@@ -11348,12 +11985,12 @@ class MockRecommendationRepository extends _i1.Mock
           ),
         )),
       ) as _i12
-          .Future<_i2.Either<_i22.DatabaseFailure, _i45.UserRecommendation>>);
+          .Future<_i2.Either<_i22.DatabaseFailure, _i46.UserRecommendation>>);
 
   @override
   _i12.Future<
-      _i2.Either<_i22.DatabaseFailure, _i45.UserRecommendation>> setNotes(
-    _i45.UserRecommendation? recommendation,
+      _i2.Either<_i22.DatabaseFailure, _i46.UserRecommendation>> setNotes(
+    _i46.UserRecommendation? recommendation,
     String? currentUserID,
   ) =>
       (super.noSuchMethod(
@@ -11366,8 +12003,8 @@ class MockRecommendationRepository extends _i1.Mock
         ),
         returnValue: _i12.Future<
                 _i2
-                .Either<_i22.DatabaseFailure, _i45.UserRecommendation>>.value(
-            _FakeEither_0<_i22.DatabaseFailure, _i45.UserRecommendation>(
+                .Either<_i22.DatabaseFailure, _i46.UserRecommendation>>.value(
+            _FakeEither_0<_i22.DatabaseFailure, _i46.UserRecommendation>(
           this,
           Invocation.method(
             #setNotes,
@@ -11378,12 +12015,12 @@ class MockRecommendationRepository extends _i1.Mock
           ),
         )),
       ) as _i12
-          .Future<_i2.Either<_i22.DatabaseFailure, _i45.UserRecommendation>>);
+          .Future<_i2.Either<_i22.DatabaseFailure, _i46.UserRecommendation>>);
 
   @override
   void markAsViewed(
     String? recommendationID,
-    _i47.LastViewed? lastViewed,
+    _i48.LastViewed? lastViewed,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -11398,7 +12035,7 @@ class MockRecommendationRepository extends _i1.Mock
 
   @override
   _i12.Future<
-          _i2.Either<_i22.DatabaseFailure, List<_i48.PromoterRecommendations>>>
+          _i2.Either<_i22.DatabaseFailure, List<_i49.PromoterRecommendations>>>
       getRecommendationsCompany(String? userID) => (super.noSuchMethod(
             Invocation.method(
               #getRecommendationsCompany,
@@ -11406,8 +12043,8 @@ class MockRecommendationRepository extends _i1.Mock
             ),
             returnValue: _i12.Future<
                 _i2.Either<_i22.DatabaseFailure,
-                    List<_i48.PromoterRecommendations>>>.value(_FakeEither_0<
-                _i22.DatabaseFailure, List<_i48.PromoterRecommendations>>(
+                    List<_i49.PromoterRecommendations>>>.value(_FakeEither_0<
+                _i22.DatabaseFailure, List<_i49.PromoterRecommendations>>(
               this,
               Invocation.method(
                 #getRecommendationsCompany,
@@ -11416,11 +12053,11 @@ class MockRecommendationRepository extends _i1.Mock
             )),
           ) as _i12.Future<
               _i2.Either<_i22.DatabaseFailure,
-                  List<_i48.PromoterRecommendations>>>);
+                  List<_i49.PromoterRecommendations>>>);
 
   @override
   _i12.Future<
-          _i2.Either<_i22.DatabaseFailure, List<_i48.PromoterRecommendations>>>
+          _i2.Either<_i22.DatabaseFailure, List<_i49.PromoterRecommendations>>>
       getRecommendationsCompanyWithArchived(String? userID) =>
           (super.noSuchMethod(
             Invocation.method(
@@ -11429,8 +12066,8 @@ class MockRecommendationRepository extends _i1.Mock
             ),
             returnValue: _i12.Future<
                 _i2.Either<_i22.DatabaseFailure,
-                    List<_i48.PromoterRecommendations>>>.value(_FakeEither_0<
-                _i22.DatabaseFailure, List<_i48.PromoterRecommendations>>(
+                    List<_i49.PromoterRecommendations>>>.value(_FakeEither_0<
+                _i22.DatabaseFailure, List<_i49.PromoterRecommendations>>(
               this,
               Invocation.method(
                 #getRecommendationsCompanyWithArchived,
@@ -11439,10 +12076,10 @@ class MockRecommendationRepository extends _i1.Mock
             )),
           ) as _i12.Future<
               _i2.Either<_i22.DatabaseFailure,
-                  List<_i48.PromoterRecommendations>>>);
+                  List<_i49.PromoterRecommendations>>>);
 
   @override
-  _i12.Future<_i2.Either<_i22.DatabaseFailure, List<_i45.UserRecommendation>>>
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, List<_i46.UserRecommendation>>>
       getRecommendationsWithArchived(String? userID) => (super.noSuchMethod(
             Invocation.method(
               #getRecommendationsWithArchived,
@@ -11450,8 +12087,8 @@ class MockRecommendationRepository extends _i1.Mock
             ),
             returnValue: _i12.Future<
                 _i2.Either<_i22.DatabaseFailure,
-                    List<_i45.UserRecommendation>>>.value(_FakeEither_0<
-                _i22.DatabaseFailure, List<_i45.UserRecommendation>>(
+                    List<_i46.UserRecommendation>>>.value(_FakeEither_0<
+                _i22.DatabaseFailure, List<_i46.UserRecommendation>>(
               this,
               Invocation.method(
                 #getRecommendationsWithArchived,
@@ -11459,13 +12096,13 @@ class MockRecommendationRepository extends _i1.Mock
               ),
             )),
           ) as _i12.Future<
-              _i2.Either<_i22.DatabaseFailure, List<_i45.UserRecommendation>>>);
+              _i2.Either<_i22.DatabaseFailure, List<_i46.UserRecommendation>>>);
 }
 
 /// A class which mocks [LegalsRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLegalsRepository extends _i1.Mock implements _i49.LegalsRepository {
+class MockLegalsRepository extends _i1.Mock implements _i50.LegalsRepository {
   MockLegalsRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -11490,26 +12127,26 @@ class MockLegalsRepository extends _i1.Mock implements _i49.LegalsRepository {
       ) as _i12.Future<_i2.Either<_i22.DatabaseFailure, String?>>);
 
   @override
-  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i50.Legals>> getAllLegals() =>
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i51.Legals>> getAllLegals() =>
       (super.noSuchMethod(
         Invocation.method(
           #getAllLegals,
           [],
         ),
         returnValue:
-            _i12.Future<_i2.Either<_i22.DatabaseFailure, _i50.Legals>>.value(
-                _FakeEither_0<_i22.DatabaseFailure, _i50.Legals>(
+            _i12.Future<_i2.Either<_i22.DatabaseFailure, _i51.Legals>>.value(
+                _FakeEither_0<_i22.DatabaseFailure, _i51.Legals>(
           this,
           Invocation.method(
             #getAllLegals,
             [],
           ),
         )),
-      ) as _i12.Future<_i2.Either<_i22.DatabaseFailure, _i50.Legals>>);
+      ) as _i12.Future<_i2.Either<_i22.DatabaseFailure, _i51.Legals>>);
 
   @override
   _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>> saveLegals(
-          _i50.Legals? legals) =>
+          _i51.Legals? legals) =>
       (super.noSuchMethod(
         Invocation.method(
           #saveLegals,
@@ -11531,14 +12168,14 @@ class MockLegalsRepository extends _i1.Mock implements _i49.LegalsRepository {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockDashboardRepository extends _i1.Mock
-    implements _i51.DashboardRepository {
+    implements _i52.DashboardRepository {
   MockDashboardRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
   _i12.Future<
-          _i2.Either<_i22.DatabaseFailure, List<_i52.DashboardRankedPromoter>>>
+          _i2.Either<_i22.DatabaseFailure, List<_i53.DashboardRankedPromoter>>>
       getTop3Promoters(
     List<String>? registeredPromoterIDs, {
     _i30.TimePeriod? timePeriod,
@@ -11551,8 +12188,8 @@ class MockDashboardRepository extends _i1.Mock
             ),
             returnValue: _i12.Future<
                 _i2.Either<_i22.DatabaseFailure,
-                    List<_i52.DashboardRankedPromoter>>>.value(_FakeEither_0<
-                _i22.DatabaseFailure, List<_i52.DashboardRankedPromoter>>(
+                    List<_i53.DashboardRankedPromoter>>>.value(_FakeEither_0<
+                _i22.DatabaseFailure, List<_i53.DashboardRankedPromoter>>(
               this,
               Invocation.method(
                 #getTop3Promoters,
@@ -11562,12 +12199,12 @@ class MockDashboardRepository extends _i1.Mock
             )),
           ) as _i12.Future<
               _i2.Either<_i22.DatabaseFailure,
-                  List<_i52.DashboardRankedPromoter>>>);
+                  List<_i53.DashboardRankedPromoter>>>);
 
   @override
   _i12.Future<
           _i2
-          .Either<_i22.DatabaseFailure, List<_i53.DashboardRankedLandingpage>>>
+          .Either<_i22.DatabaseFailure, List<_i54.DashboardRankedLandingpage>>>
       getTop3LandingPages(
     List<String>? landingPageIDs, {
     _i30.TimePeriod? timePeriod,
@@ -11580,8 +12217,8 @@ class MockDashboardRepository extends _i1.Mock
             ),
             returnValue: _i12.Future<
                 _i2.Either<_i22.DatabaseFailure,
-                    List<_i53.DashboardRankedLandingpage>>>.value(_FakeEither_0<
-                _i22.DatabaseFailure, List<_i53.DashboardRankedLandingpage>>(
+                    List<_i54.DashboardRankedLandingpage>>>.value(_FakeEither_0<
+                _i22.DatabaseFailure, List<_i54.DashboardRankedLandingpage>>(
               this,
               Invocation.method(
                 #getTop3LandingPages,
@@ -11591,14 +12228,14 @@ class MockDashboardRepository extends _i1.Mock
             )),
           ) as _i12.Future<
               _i2.Either<_i22.DatabaseFailure,
-                  List<_i53.DashboardRankedLandingpage>>>);
+                  List<_i54.DashboardRankedLandingpage>>>);
 }
 
 /// A class which mocks [TutorialRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTutorialRepository extends _i1.Mock
-    implements _i54.TutorialRepository {
+    implements _i55.TutorialRepository {
   MockTutorialRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -11643,7 +12280,7 @@ class MockTutorialRepository extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPagebuilderSectionTemplateRepository extends _i1.Mock
-    implements _i55.PagebuilderSectionTemplateRepository {
+    implements _i56.PagebuilderSectionTemplateRepository {
   MockPagebuilderSectionTemplateRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -11651,7 +12288,7 @@ class MockPagebuilderSectionTemplateRepository extends _i1.Mock
   @override
   _i12.Future<
       _i2.Either<_i22.DatabaseFailure,
-          List<_i56.PagebuilderSectionTemplateMeta>>> getAllTemplateMetas() =>
+          List<_i57.PagebuilderSectionTemplateMeta>>> getAllTemplateMetas() =>
       (super.noSuchMethod(
         Invocation.method(
           #getAllTemplateMetas,
@@ -11659,8 +12296,8 @@ class MockPagebuilderSectionTemplateRepository extends _i1.Mock
         ),
         returnValue: _i12.Future<
             _i2.Either<_i22.DatabaseFailure,
-                List<_i56.PagebuilderSectionTemplateMeta>>>.value(_FakeEither_0<
-            _i22.DatabaseFailure, List<_i56.PagebuilderSectionTemplateMeta>>(
+                List<_i57.PagebuilderSectionTemplateMeta>>>.value(_FakeEither_0<
+            _i22.DatabaseFailure, List<_i57.PagebuilderSectionTemplateMeta>>(
           this,
           Invocation.method(
             #getAllTemplateMetas,
@@ -11669,10 +12306,10 @@ class MockPagebuilderSectionTemplateRepository extends _i1.Mock
         )),
       ) as _i12.Future<
           _i2.Either<_i22.DatabaseFailure,
-              List<_i56.PagebuilderSectionTemplateMeta>>>);
+              List<_i57.PagebuilderSectionTemplateMeta>>>);
 
   @override
-  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i57.PagebuilderSectionTemplate>>
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i58.PagebuilderSectionTemplate>>
       getTemplateById(String? id) => (super.noSuchMethod(
             Invocation.method(
               #getTemplateById,
@@ -11680,8 +12317,8 @@ class MockPagebuilderSectionTemplateRepository extends _i1.Mock
             ),
             returnValue: _i12.Future<
                 _i2.Either<_i22.DatabaseFailure,
-                    _i57.PagebuilderSectionTemplate>>.value(_FakeEither_0<
-                _i22.DatabaseFailure, _i57.PagebuilderSectionTemplate>(
+                    _i58.PagebuilderSectionTemplate>>.value(_FakeEither_0<
+                _i22.DatabaseFailure, _i58.PagebuilderSectionTemplate>(
               this,
               Invocation.method(
                 #getTemplateById,
@@ -11690,21 +12327,21 @@ class MockPagebuilderSectionTemplateRepository extends _i1.Mock
             )),
           ) as _i12.Future<
               _i2
-              .Either<_i22.DatabaseFailure, _i57.PagebuilderSectionTemplate>>);
+              .Either<_i22.DatabaseFailure, _i58.PagebuilderSectionTemplate>>);
 }
 
 /// A class which mocks [PagebuilderSectionTemplateUploadRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPagebuilderSectionTemplateUploadRepository extends _i1.Mock
-    implements _i58.PagebuilderSectionTemplateUploadRepository {
+    implements _i59.PagebuilderSectionTemplateUploadRepository {
   MockPagebuilderSectionTemplateUploadRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
   _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>> uploadTemplate(
-          _i59.PagebuilderSectionTemplateUpload? template) =>
+          _i60.PagebuilderSectionTemplateUpload? template) =>
       (super.noSuchMethod(
         Invocation.method(
           #uploadTemplate,
@@ -11723,7 +12360,7 @@ class MockPagebuilderSectionTemplateUploadRepository extends _i1.Mock
 
   @override
   _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>> editTemplate(
-          _i60.PagebuilderSectionTemplateEdit? template) =>
+          _i61.PagebuilderSectionTemplateEdit? template) =>
       (super.noSuchMethod(
         Invocation.method(
           #editTemplate,
@@ -11744,7 +12381,7 @@ class MockPagebuilderSectionTemplateUploadRepository extends _i1.Mock
 /// A class which mocks [ConsentRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockConsentRepository extends _i1.Mock implements _i61.ConsentRepository {
+class MockConsentRepository extends _i1.Mock implements _i62.ConsentRepository {
   MockConsentRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -12195,13 +12832,13 @@ class MockUser extends _i1.Mock implements _i4.User {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPagebuilderRepository extends _i1.Mock
-    implements _i62.PagebuilderRepository {
+    implements _i63.PagebuilderRepository {
   MockPagebuilderRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i63.PageBuilderPage>>
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i64.PageBuilderPage>>
       getLandingPageContent(String? id) => (super.noSuchMethod(
             Invocation.method(
               #getLandingPageContent,
@@ -12209,8 +12846,8 @@ class MockPagebuilderRepository extends _i1.Mock
             ),
             returnValue: _i12.Future<
                     _i2
-                    .Either<_i22.DatabaseFailure, _i63.PageBuilderPage>>.value(
-                _FakeEither_0<_i22.DatabaseFailure, _i63.PageBuilderPage>(
+                    .Either<_i22.DatabaseFailure, _i64.PageBuilderPage>>.value(
+                _FakeEither_0<_i22.DatabaseFailure, _i64.PageBuilderPage>(
               this,
               Invocation.method(
                 #getLandingPageContent,
@@ -12218,11 +12855,11 @@ class MockPagebuilderRepository extends _i1.Mock
               ),
             )),
           ) as _i12
-              .Future<_i2.Either<_i22.DatabaseFailure, _i63.PageBuilderPage>>);
+              .Future<_i2.Either<_i22.DatabaseFailure, _i64.PageBuilderPage>>);
 
   @override
   _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>
-      saveLandingPageContent(_i63.PageBuilderPage? page) => (super.noSuchMethod(
+      saveLandingPageContent(_i64.PageBuilderPage? page) => (super.noSuchMethod(
             Invocation.method(
               #saveLandingPageContent,
               [page],
@@ -12243,26 +12880,26 @@ class MockPagebuilderRepository extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPagebuilderConfigMenuCubit extends _i1.Mock
-    implements _i64.PagebuilderConfigMenuCubit {
+    implements _i65.PagebuilderConfigMenuCubit {
   MockPagebuilderConfigMenuCubit() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i64.PagebuilderConfigMenuState get state => (super.noSuchMethod(
+  _i65.PagebuilderConfigMenuState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i17.dummyValue<_i64.PagebuilderConfigMenuState>(
+        returnValue: _i17.dummyValue<_i65.PagebuilderConfigMenuState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i64.PagebuilderConfigMenuState);
+      ) as _i65.PagebuilderConfigMenuState);
 
   @override
-  _i12.Stream<_i64.PagebuilderConfigMenuState> get stream =>
+  _i12.Stream<_i65.PagebuilderConfigMenuState> get stream =>
       (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i12.Stream<_i64.PagebuilderConfigMenuState>.empty(),
-      ) as _i12.Stream<_i64.PagebuilderConfigMenuState>);
+        returnValue: _i12.Stream<_i65.PagebuilderConfigMenuState>.empty(),
+      ) as _i12.Stream<_i65.PagebuilderConfigMenuState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -12271,7 +12908,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
       ) as bool);
 
   @override
-  void openConfigMenu(_i65.PageBuilderWidget? model) => super.noSuchMethod(
+  void openConfigMenu(_i66.PageBuilderWidget? model) => super.noSuchMethod(
         Invocation.method(
           #openConfigMenu,
           [model],
@@ -12280,7 +12917,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
       );
 
   @override
-  void openSectionConfigMenu(_i66.PageBuilderSection? model) =>
+  void openSectionConfigMenu(_i67.PageBuilderSection? model) =>
       super.noSuchMethod(
         Invocation.method(
           #openSectionConfigMenu,
@@ -12308,7 +12945,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
       );
 
   @override
-  void emit(_i64.PagebuilderConfigMenuState? state) => super.noSuchMethod(
+  void emit(_i65.PagebuilderConfigMenuState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -12317,7 +12954,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i67.Change<_i64.PagebuilderConfigMenuState>? change) =>
+  void onChange(_i68.Change<_i65.PagebuilderConfigMenuState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -12373,7 +13010,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPagebuilderSelectionCubit extends _i1.Mock
-    implements _i68.PagebuilderSelectionCubit {
+    implements _i69.PagebuilderSelectionCubit {
   MockPagebuilderSelectionCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -12409,7 +13046,7 @@ class MockPagebuilderSelectionCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i67.Change<String?>? change) => super.noSuchMethod(
+  void onChange(_i68.Change<String?>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -12464,7 +13101,7 @@ class MockPagebuilderSelectionCubit extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockRecommendationManagerTileCubit extends _i1.Mock
-    implements _i69.RecommendationManagerTileCubit {
+    implements _i70.RecommendationManagerTileCubit {
   MockRecommendationManagerTileCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -12494,20 +13131,20 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
       ) as List<String>);
 
   @override
-  _i69.RecommendationManagerTileState get state => (super.noSuchMethod(
+  _i70.RecommendationManagerTileState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i17.dummyValue<_i69.RecommendationManagerTileState>(
+        returnValue: _i17.dummyValue<_i70.RecommendationManagerTileState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i69.RecommendationManagerTileState);
+      ) as _i70.RecommendationManagerTileState);
 
   @override
-  _i12.Stream<_i69.RecommendationManagerTileState> get stream =>
+  _i12.Stream<_i70.RecommendationManagerTileState> get stream =>
       (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i12.Stream<_i69.RecommendationManagerTileState>.empty(),
-      ) as _i12.Stream<_i69.RecommendationManagerTileState>);
+        returnValue: _i12.Stream<_i70.RecommendationManagerTileState>.empty(),
+      ) as _i12.Stream<_i70.RecommendationManagerTileState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -12535,7 +13172,7 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
       );
 
   @override
-  void setAppointmentState(_i45.UserRecommendation? recommendation) =>
+  void setAppointmentState(_i46.UserRecommendation? recommendation) =>
       super.noSuchMethod(
         Invocation.method(
           #setAppointmentState,
@@ -12546,7 +13183,7 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
 
   @override
   void setFinished(
-    _i45.UserRecommendation? recommendation,
+    _i46.UserRecommendation? recommendation,
     bool? success,
   ) =>
       super.noSuchMethod(
@@ -12562,7 +13199,7 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
 
   @override
   void setFavorite(
-    _i45.UserRecommendation? recommendation,
+    _i46.UserRecommendation? recommendation,
     String? currentUserID,
   ) =>
       super.noSuchMethod(
@@ -12577,7 +13214,7 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
       );
 
   @override
-  void setPriority(_i45.UserRecommendation? recommendation) =>
+  void setPriority(_i46.UserRecommendation? recommendation) =>
       super.noSuchMethod(
         Invocation.method(
           #setPriority,
@@ -12587,7 +13224,7 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
       );
 
   @override
-  void setNotes(_i45.UserRecommendation? recommendation) => super.noSuchMethod(
+  void setNotes(_i46.UserRecommendation? recommendation) => super.noSuchMethod(
         Invocation.method(
           #setNotes,
           [recommendation],
@@ -12620,7 +13257,7 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
       ) as _i12.Future<String>);
 
   @override
-  void emit(_i69.RecommendationManagerTileState? state) => super.noSuchMethod(
+  void emit(_i70.RecommendationManagerTileState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -12629,7 +13266,7 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i67.Change<_i69.RecommendationManagerTileState>? change) =>
+  void onChange(_i68.Change<_i70.RecommendationManagerTileState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,

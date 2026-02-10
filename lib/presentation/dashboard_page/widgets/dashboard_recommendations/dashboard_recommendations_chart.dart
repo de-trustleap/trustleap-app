@@ -1,5 +1,5 @@
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/domain/entities/dashboard_trend.dart';
+import 'package:finanzbegleiter/domain/entities/chart_trend.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_line_chart.dart';
@@ -11,7 +11,7 @@ class DashboardRecommendationsChart extends StatelessWidget {
   final List<UserRecommendation> recommendations;
   final TimePeriod timePeriod;
   final int? statusLevel;
-  final DashboardTrend? trend;
+  final ChartTrend? trend;
 
   const DashboardRecommendationsChart({
     super.key,
@@ -49,7 +49,7 @@ class DashboardRecommendationsChart extends StatelessWidget {
           Positioned(
             top: 8,
             right: 8,
-            child: DashboardTrendArrow(trend: trend!),
+            child: ChartTrendArrow(trend: trend!),
           ),
       ],
     );

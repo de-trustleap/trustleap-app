@@ -1,9 +1,9 @@
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/domain/entities/dashboard_trend.dart';
+import 'package:finanzbegleiter/domain/entities/chart_trend.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 
 class DashboardPromotersHelper {
-  static DashboardTrend calculateTrend({
+  static ChartTrend calculateTrend({
     required List<CustomUser> promoters,
     required TimePeriod timePeriod,
     DateTime? now,
@@ -44,7 +44,7 @@ class DashboardPromotersHelper {
       }
     }
 
-    return DashboardTrend(
+    return ChartTrend(
       currentPeriodCount: currentPeriodCount,
       previousPeriodCount: previousPeriodCount,
       percentageChange: percentageChange,

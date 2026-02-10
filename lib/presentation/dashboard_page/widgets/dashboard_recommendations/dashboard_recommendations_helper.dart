@@ -1,9 +1,9 @@
 import 'package:finanzbegleiter/application/dashboard/recommendation/dashboard_recommendations_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/domain/entities/dashboard_trend.dart';
+import 'package:finanzbegleiter/domain/entities/chart_trend.dart';
 import 'package:finanzbegleiter/domain/entities/promoter_recommendations.dart';
-import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
+import 'package:finanzbegleiter/domain/statistics/recommendations_statistics.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -82,45 +82,14 @@ class DashboardRecommendationsHelper {
     required Role userRole,
     String? selectedLandingPageId,
   }) {
-    List<UserRecommendation> recommendations;
-
-    // First filter by promoter
-    if (selectedPromoterId == null || userRole != Role.company) {
-      recommendations = state.recommendation;
-    } else {
-      // Filter by selected promoter
-      if (state.promoterRecommendations != null) {
-        try {
-          final selectedPromoterRec = state.promoterRecommendations!.firstWhere(
-            (promoterRec) =>
-                promoterRec.promoter.id.value == selectedPromoterId,
-          );
-          recommendations = selectedPromoterRec.recommendations;
-        } catch (e) {
-          return [];
-        }
-      } else {
-        recommendations = state.recommendation;
-      }
-    }
-
-    // Then filter by landing page if selected
-    if (selectedLandingPageId != null && state.allLandingPages != null) {
-      // Find the landing page name for the selected ID
-      final selectedLandingPage = state.allLandingPages!
-          .where((lp) => lp.id.value == selectedLandingPageId)
-          .firstOrNull;
-
-      if (selectedLandingPage != null && selectedLandingPage.name != null) {
-        // Filter recommendations where reason matches landing page name
-        recommendations = recommendations
-            .where(
-                (rec) => rec.recommendation?.reason == selectedLandingPage.name)
-            .toList();
-      }
-    }
-
-    return recommendations;
+    return RecommendationsStatistics.getFilteredRecommendations(
+      recommendations: state.recommendation,
+      selectedPromoterId: selectedPromoterId,
+      userRole: userRole,
+      promoterRecommendations: state.promoterRecommendations,
+      selectedLandingPageId: selectedLandingPageId,
+      allLandingPages: state.allLandingPages,
+    );
   }
 
   static String getTimePeriodSummaryText({
@@ -137,48 +106,23 @@ class DashboardRecommendationsHelper {
       userRole: userRole,
       selectedLandingPageId: selectedLandingPageId,
     );
-    final now = DateTime.now();
-    DateTime startDate;
 
-    switch (timePeriod) {
-      case TimePeriod.day:
-        startDate = now.subtract(const Duration(hours: 24));
-        break;
-      case TimePeriod.week:
-        startDate = now.subtract(const Duration(days: 7));
-        break;
-      case TimePeriod.month:
-      case TimePeriod.quarter:
-      case TimePeriod.year:
-        startDate = DateTime(now.year, now.month - 1, now.day);
-        break;
-    }
-
-    final count = recommendations.where((rec) {
-      final createdAt = rec.recommendation?.createdAt;
-      return createdAt != null && createdAt.isAfter(startDate);
-    }).length;
-
-    switch (timePeriod) {
-      case TimePeriod.day:
-        return localization.dashboard_recommendations_last_24_hours(count);
-      case TimePeriod.week:
-        return localization.dashboard_recommendations_last_7_days(count);
-      case TimePeriod.month:
-      case TimePeriod.quarter:
-      case TimePeriod.year:
-        return localization.dashboard_recommendations_last_month(count);
-    }
+    return RecommendationsStatistics.getTimePeriodSummaryText(
+      recommendations: recommendations,
+      timePeriod: timePeriod,
+      localization: localization,
+    );
   }
 
-  static DashboardTrend calculateTrend(
-      {required DashboardRecommendationsGetRecosSuccessState state,
-      required String? selectedPromoterId,
-      required Role userRole,
-      required TimePeriod timePeriod,
-      String? selectedLandingPageId,
-      int? statusLevel,
-      DateTime? now}) {
+  static ChartTrend calculateTrend({
+    required DashboardRecommendationsGetRecosSuccessState state,
+    required String? selectedPromoterId,
+    required Role userRole,
+    required TimePeriod timePeriod,
+    String? selectedLandingPageId,
+    int? statusLevel,
+    DateTime? now,
+  }) {
     final recommendations = getFilteredRecommendations(
       state: state,
       selectedPromoterId: selectedPromoterId,
@@ -186,92 +130,11 @@ class DashboardRecommendationsHelper {
       selectedLandingPageId: selectedLandingPageId,
     );
 
-    final currentTime = now ?? DateTime.now();
-    DateTime currentPeriodStart;
-    DateTime previousPeriodStart;
-    DateTime previousPeriodEnd;
-
-    switch (timePeriod) {
-      case TimePeriod.day:
-        currentPeriodStart = currentTime.subtract(const Duration(hours: 24));
-        previousPeriodStart = currentTime.subtract(const Duration(hours: 48));
-        previousPeriodEnd = currentTime.subtract(const Duration(hours: 24));
-        break;
-      case TimePeriod.week:
-        currentPeriodStart = currentTime.subtract(const Duration(days: 7));
-        previousPeriodStart = currentTime.subtract(const Duration(days: 14));
-        previousPeriodEnd = currentTime.subtract(const Duration(days: 7));
-        break;
-      case TimePeriod.month:
-      case TimePeriod.quarter:
-      case TimePeriod.year:
-        currentPeriodStart = DateTime(currentTime.year, currentTime.month, 1);
-        final previousMonth =
-            DateTime(currentTime.year, currentTime.month - 1, 1);
-        previousPeriodStart = previousMonth;
-        previousPeriodEnd = DateTime(currentTime.year, currentTime.month, 1);
-        break;
-    }
-
-    int currentCount = 0;
-    int previousCount = 0;
-
-    for (final rec in recommendations) {
-      final createdAt = rec.recommendation?.createdAt;
-      if (createdAt != null) {
-        // Check if recommendation matches the status level filter
-        bool matchesStatusLevel = true;
-        if (statusLevel != null) {
-          final recStatusLevel = rec.recommendation?.statusLevel;
-          if (recStatusLevel != null) {
-            // For archived recommendations (successful/failed), they count for all status levels
-            // because they have gone through all the previous stages
-            if (recStatusLevel == StatusLevel.successful ||
-                recStatusLevel == StatusLevel.failed) {
-              // Archived recommendations count for all status levels since they completed the process
-              matchesStatusLevel = true;
-            } else {
-              // Active recommendations: check if status level is at or below the selected level
-              matchesStatusLevel = recStatusLevel.index + 1 <= statusLevel;
-            }
-          }
-        }
-
-        if (matchesStatusLevel) {
-          if (createdAt.isAfter(currentPeriodStart)) {
-            currentCount++;
-          } else if (createdAt.isAfter(previousPeriodStart) &&
-              createdAt.isBefore(previousPeriodEnd)) {
-            previousCount++;
-          }
-        }
-      }
-    }
-
-    double percentageChange = 0.0;
-    bool isIncreasing = false;
-    bool isDecreasing = false;
-
-    if (previousCount > 0) {
-      percentageChange = ((currentCount - previousCount) / previousCount * 100);
-
-      // Do not show changes under 1%
-      const threshold = 1.0;
-      if (percentageChange.abs() > threshold) {
-        isIncreasing = percentageChange > 0;
-        isDecreasing = percentageChange < 0;
-      }
-    } else if (currentCount > 0) {
-      percentageChange = currentCount * 100.0;
-      isIncreasing = true;
-    }
-
-    return DashboardTrend(
-      currentPeriodCount: currentCount,
-      previousPeriodCount: previousCount,
-      percentageChange: percentageChange,
-      isIncreasing: isIncreasing,
-      isDecreasing: isDecreasing,
+    return RecommendationsStatistics.calculateTrend(
+      recommendations: recommendations,
+      timePeriod: timePeriod,
+      statusLevel: statusLevel,
+      now: now,
     );
   }
 }

@@ -59,14 +59,6 @@ enum Role {
   const Role(this.value);
 }
 
-enum PromoterRegistrationState {
-  registered("Registriert"),
-  unregistered("Nicht registriert");
-
-  final String value;
-  const PromoterRegistrationState(this.value);
-}
-
 enum ImageUploader { user, company, landingPage }
 
 enum ThemeStatus { light, dark }

@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/presentation/core/page_wrapper/home_page.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/dashboard_page.dart';
 import 'package:finanzbegleiter/presentation/landing_page/landing_page.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_detail/landing_page_detail_page.dart';
 import 'package:finanzbegleiter/presentation/legals_page/legals_page.dart';
 import 'package:finanzbegleiter/presentation/page_builder/landing_page_builder_view.dart';
 import 'package:finanzbegleiter/presentation/profile_page/profile_page.dart';
@@ -76,6 +77,10 @@ class HomeModule extends Module {
               child: (_) => LandingPageView(
                     createdNewPage: r.args.queryParams["createdNewPage"],
                     editedPage: r.args.queryParams["editedPage"],
+                  )),
+          ChildRoute("${RoutePaths.landingPageDetailPath}/:id",
+              child: (_) => LandingPageDetailPage(
+                    landingPageId: r.args.params["id"] ?? "",
                   )),
           ChildRoute(RoutePaths.landingPageCreatorPath, child: (_) {
             final args = r.args.data as Map<String, dynamic>?;
