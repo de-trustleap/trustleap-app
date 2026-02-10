@@ -73,9 +73,9 @@ class PromoterDetailLandingPagesSection extends StatelessWidget {
             if (!isCompact) _buildTableHeader(themeData, localization),
             ...landingPages.map((lp) {
               final statistics =
-                  PromoterStatistics(promoterRecommendations: []);
-              final stats = statistics.getStatsForLandingPage(
-                  recommendations, lp.name);
+                  const PromoterStatistics(promoterRecommendations: []);
+              final stats =
+                  statistics.getStatsForLandingPage(recommendations, lp.name);
               return PromoterDetailLandingPageTile(
                 landingPage: lp,
                 stats: stats,
