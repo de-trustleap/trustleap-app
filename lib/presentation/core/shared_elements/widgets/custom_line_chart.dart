@@ -1,8 +1,9 @@
 import 'package:fl_chart/fl_chart.dart';
+import 'package:finanzbegleiter/domain/entities/line_series_data.dart';
 import 'package:flutter/material.dart';
 
-class DashboardLineChart extends StatelessWidget {
-  final List<FlSpot> spots;
+class CustomLineChart extends StatelessWidget {
+  final List<LineSeriesData> series;
   final double maxX;
   final double maxY;
   final double xAxisInterval;
@@ -11,9 +12,9 @@ class DashboardLineChart extends StatelessWidget {
   final String emptyStateMessage;
   final bool isEmpty;
 
-  const DashboardLineChart({
+  const CustomLineChart({
     super.key,
-    required this.spots,
+    required this.series,
     required this.maxX,
     required this.maxY,
     required this.xAxisInterval,
@@ -63,7 +64,8 @@ class DashboardLineChart extends StatelessWidget {
                 horizontalInterval: 1,
                 getDrawingHorizontalLine: (value) {
                   return FlLine(
-                    color: themeData.colorScheme.outline.withValues(alpha: 0.1),
+                    color:
+                        themeData.colorScheme.outline.withValues(alpha: 0.1),
                     strokeWidth: 1,
                   );
                 },
@@ -102,47 +104,15 @@ class DashboardLineChart extends StatelessWidget {
                     },
                   ),
                 ),
-                rightTitles:
-                    const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                topTitles:
-                    const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                rightTitles: const AxisTitles(
+                    sideTitles: SideTitles(showTitles: false)),
+                topTitles: const AxisTitles(
+                    sideTitles: SideTitles(showTitles: false)),
               ),
               borderData: FlBorderData(show: false),
-              lineBarsData: [
-                LineChartBarData(
-                  spots: spots,
-                  isCurved: true,
-                  curveSmoothness: 0.3,
-                  color: themeData.colorScheme.primary,
-                  barWidth: 3,
-                  isStrokeCapRound: true,
-                  dotData: FlDotData(
-                    show: true,
-                    checkToShowDot: (spot, barData) {
-                      return spot.y > 0;
-                    },
-                    getDotPainter: (spot, percent, barData, index) {
-                      return FlDotCirclePainter(
-                        radius: 4,
-                        color: themeData.colorScheme.primary,
-                        strokeWidth: 2,
-                        strokeColor: themeData.colorScheme.surface,
-                      );
-                    },
-                  ),
-                  belowBarData: BarAreaData(
-                    show: true,
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        themeData.colorScheme.primary.withValues(alpha: 0.2),
-                        themeData.colorScheme.primary.withValues(alpha: 0.0),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+              lineBarsData: series
+                  .map((s) => _buildLineBarData(s, themeData))
+                  .toList(),
               minX: 0,
               maxX: maxX,
               minY: 0,
@@ -151,6 +121,43 @@ class DashboardLineChart extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  LineChartBarData _buildLineBarData(
+      LineSeriesData seriesData, ThemeData themeData) {
+    return LineChartBarData(
+      spots: seriesData.spots,
+      isCurved: true,
+      curveSmoothness: 0.3,
+      color: seriesData.color,
+      barWidth: 3,
+      isStrokeCapRound: true,
+      dotData: FlDotData(
+        show: true,
+        checkToShowDot: (spot, barData) {
+          return spot.y > 0;
+        },
+        getDotPainter: (spot, percent, barData, index) {
+          return FlDotCirclePainter(
+            radius: 4,
+            color: seriesData.color,
+            strokeWidth: 2,
+            strokeColor: themeData.colorScheme.surface,
+          );
+        },
+      ),
+      belowBarData: BarAreaData(
+        show: true,
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            seriesData.color.withValues(alpha: 0.2),
+            seriesData.color.withValues(alpha: 0.0),
+          ],
+        ),
+      ),
     );
   }
 }

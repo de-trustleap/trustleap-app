@@ -32,7 +32,11 @@ class PromotersOverviewGridTile extends StatelessWidget {
             as PermissionSuccessState)
         .permissions;
 
-    return Container(
+    return InkWell(
+      onTap: () => navigator.navigate(
+          "${RoutePaths.homePath}${RoutePaths.promoterDetailPath}/${promoter.id.value}"),
+      borderRadius: const BorderRadius.all(Radius.circular(20)),
+      child: Container(
       decoration: BoxDecoration(
           color: themeData.colorScheme.surface,
           border: Border.all(color: Colors.transparent),
@@ -172,6 +176,7 @@ class PromotersOverviewGridTile extends StatelessWidget {
               ]
             ]),
       ),
+    ),
     );
   }
 

@@ -4175,5 +4175,119 @@
     "landing_page_detail_promoter_conversion_rate": "Conversion Rate",
     "@landing_page_detail_promoter_conversion_rate": {
         "description": "Label für die Conversion Rate pro Promoter"
+    },
+    "promoter_detail_birthday": "Geburtsdatum",
+    "@promoter_detail_birthday": {
+        "description": "Label für Geburtsdatum auf der Promoter Detail Seite"
+    },
+    "promoter_detail_member_since": "Mitglied seit",
+    "@promoter_detail_member_since": {
+        "description": "Label für Mitgliedschaftsdatum auf der Promoter Detail Seite"
+    },
+    "promoter_detail_created_at": "Erstellt am",
+    "@promoter_detail_created_at": {
+        "description": "Label für Erstellungsdatum auf der Promoter Detail Seite"
+    },
+    "promoter_detail_expires_at": "Läuft ab am",
+    "@promoter_detail_expires_at": {
+        "description": "Label für Ablaufdatum auf der Promoter Detail Seite"
+    },
+    "promoter_detail_performance_overview": "Performance Übersicht",
+    "@promoter_detail_performance_overview": {
+        "description": "Titel der Performance Karte auf der Promoter Detail Seite"
+    },
+    "promoter_detail_shared_pages": "Geteilte Seiten",
+    "@promoter_detail_shared_pages": {
+        "description": "Label für geteilte Seiten Statistik"
+    },
+    "promoter_detail_conversions": "Conversions",
+    "@promoter_detail_conversions": {
+        "description": "Label für Conversions Statistik"
+    },
+    "promoter_detail_conversion_rate": "Conversion Rate",
+    "@promoter_detail_conversion_rate": {
+        "description": "Label für Conversion Rate"
+    },
+    "promoter_detail_contact_actions": "Kontakt & Aktionen",
+    "@promoter_detail_contact_actions": {
+        "description": "Titel der Aktionen Karte auf der Promoter Detail Seite"
+    },
+    "promoter_detail_send_email": "E-Mail senden",
+    "@promoter_detail_send_email": {
+        "description": "Button-Text zum E-Mail senden"
+    },
+    "promoter_detail_delete_promoter": "Promoter löschen",
+    "@promoter_detail_delete_promoter": {
+        "description": "Button-Text zum Promoter löschen"
+    },
+    "promoter_detail_chart_title": "Empfehlungen & Conversions",
+    "@promoter_detail_chart_title": {
+        "description": "Titel des Charts auf der Promoter Detail Seite"
+    },
+    "promoter_detail_chart_subtitle": "Performance der letzten {days} Tage",
+    "@promoter_detail_chart_subtitle": {
+        "description": "Untertitel des Charts",
+        "placeholders": {
+            "days": {
+                "type": "String"
+            }
+        }
+    },
+    "promoter_detail_chart_recommendations": "Empfehlungen",
+    "@promoter_detail_chart_recommendations": {
+        "description": "Legende für Empfehlungen im Chart"
+    },
+    "promoter_detail_chart_last_days": "Letzte {days} Tage",
+    "@promoter_detail_chart_last_days": {
+        "description": "Dropdown-Text für Zeitraum",
+        "placeholders": {
+            "days": {
+                "type": "String"
+            }
+        }
+    },
+    "promoter_detail_landing_pages_title": "Promotete Landingpages",
+    "@promoter_detail_landing_pages_title": {
+        "description": "Titel der Landingpages Sektion"
+    },
+    "promoter_detail_landing_pages_subtitle": "Übersicht aller zugewiesenen Kampagnen",
+    "@promoter_detail_landing_pages_subtitle": {
+        "description": "Untertitel der Landingpages Sektion"
+    },
+    "promoter_detail_assign_page": "Landingpage zuweisen",
+    "@promoter_detail_assign_page": {
+        "description": "Button-Text zum Zuweisen einer Landingpage"
+    },
+    "promoter_detail_assign_dialog_subtitle": "Wähle die Seiten aus, die diesem Promoter zugewiesen werden sollen.",
+    "@promoter_detail_assign_dialog_subtitle": {
+        "description": "Untertitel im Landingpage-Zuweisungsdialog"
+    },
+    "promoter_detail_assign_success": "Landingpages erfolgreich aktualisiert",
+    "@promoter_detail_assign_success": {
+        "description": "Snackbar nach erfolgreicher Landingpage-Zuweisung"
+    },
+    "promoter_detail_landing_page_name": "Landingpage Name",
+    "@promoter_detail_landing_page_name": {
+        "description": "Tabellen-Header für Landingpage Name"
+    },
+    "promoter_detail_status": "Status",
+    "@promoter_detail_status": {
+        "description": "Tabellen-Header für Status"
+    },
+    "promoter_detail_visits": "Aufrufe",
+    "@promoter_detail_visits": {
+        "description": "Tabellen-Header für Aufrufe"
+    },
+    "promoter_detail_no_landing_pages": "Keine Landingpages zugewiesen",
+    "@promoter_detail_no_landing_pages": {
+        "description": "Leer-Zustand Text wenn keine Landingpages zugewiesen"
+    },
+    "promoter_detail_error_loading": "Fehler beim Laden der Promoter-Details",
+    "@promoter_detail_error_loading": {
+        "description": "Fehlermeldung beim Laden der Promoter-Details"
+    },
+    "promoter_detail_not_found": "Promoter nicht gefunden",
+    "@promoter_detail_not_found": {
+        "description": "Fehlermeldung wenn Promoter nicht gefunden"
     }
 }

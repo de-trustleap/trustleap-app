@@ -2,7 +2,8 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/chart_trend.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_line_chart.dart';
+import 'package:finanzbegleiter/domain/entities/line_series_data.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_line_chart.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations/dashboard_recommendations_chart_data_processor.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations/dashboard_trend_arrow.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class DashboardRecommendationsChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final dataProcessor = DashboardRecommendationsChartDataProcessor(
       recommendations: recommendations,
@@ -34,8 +36,8 @@ class DashboardRecommendationsChart extends StatelessWidget {
 
     return Stack(
       children: [
-        DashboardLineChart(
-          spots: spots,
+        CustomLineChart(
+          series: [LineSeriesData(spots: spots, color: themeData.colorScheme.primary)],
           maxX: (dataProcessor.getPeriodLength() - 1).toDouble(),
           maxY: dataProcessor.getMaxY(),
           xAxisInterval: dataProcessor.getXAxisInterval(),

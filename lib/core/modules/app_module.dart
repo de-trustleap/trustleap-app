@@ -40,6 +40,7 @@ import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart';
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
 import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart';
+import 'package:finanzbegleiter/application/promoter/promoter_detail/promoter_detail_cubit.dart';
 import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_observer_cubit.dart';
 import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager/recommendation_manager_cubit.dart';
 import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_archive/recommendation_manager_archive_cubit.dart';
@@ -153,6 +154,7 @@ class AppModule extends Module {
       ..addLazySingleton(PagebuilderSectionTemplateUploadCubit.new)
       ..addLazySingleton(PermissionCubit.new)
       ..addLazySingleton(PromoterCubit.new)
+      ..addLazySingleton(PromoterDetailCubit.new)
       ..addLazySingleton(PromoterObserverCubit.new)
       ..addLazySingleton(LandingPageCubit.new)
       ..addLazySingleton(LandingPageDetailCubit.new)

@@ -4175,5 +4175,119 @@
     "landing_page_detail_promoter_conversion_rate": "Conversion Rate",
     "@landing_page_detail_promoter_conversion_rate": {
         "description": "Label for conversion rate per promoter"
+    },
+    "promoter_detail_birthday": "Date of birth",
+    "@promoter_detail_birthday": {
+        "description": "Label for date of birth on promoter detail page"
+    },
+    "promoter_detail_member_since": "Member since",
+    "@promoter_detail_member_since": {
+        "description": "Label for membership date on promoter detail page"
+    },
+    "promoter_detail_created_at": "Created on",
+    "@promoter_detail_created_at": {
+        "description": "Label for creation date on promoter detail page"
+    },
+    "promoter_detail_expires_at": "Expires on",
+    "@promoter_detail_expires_at": {
+        "description": "Label for expiration date on promoter detail page"
+    },
+    "promoter_detail_performance_overview": "Performance Overview",
+    "@promoter_detail_performance_overview": {
+        "description": "Title of performance card on promoter detail page"
+    },
+    "promoter_detail_shared_pages": "Shared Pages",
+    "@promoter_detail_shared_pages": {
+        "description": "Label for shared pages statistic"
+    },
+    "promoter_detail_conversions": "Conversions",
+    "@promoter_detail_conversions": {
+        "description": "Label for conversions statistic"
+    },
+    "promoter_detail_conversion_rate": "Conversion Rate",
+    "@promoter_detail_conversion_rate": {
+        "description": "Label for conversion rate"
+    },
+    "promoter_detail_contact_actions": "Contact & Actions",
+    "@promoter_detail_contact_actions": {
+        "description": "Title of actions card on promoter detail page"
+    },
+    "promoter_detail_send_email": "Send E-Mail",
+    "@promoter_detail_send_email": {
+        "description": "Button text to send email"
+    },
+    "promoter_detail_delete_promoter": "Delete Promoter",
+    "@promoter_detail_delete_promoter": {
+        "description": "Button text to delete promoter"
+    },
+    "promoter_detail_chart_title": "Recommendations & Conversions",
+    "@promoter_detail_chart_title": {
+        "description": "Title of chart on promoter detail page"
+    },
+    "promoter_detail_chart_subtitle": "Performance of the last {days} days",
+    "@promoter_detail_chart_subtitle": {
+        "description": "Subtitle of chart",
+        "placeholders": {
+            "days": {
+                "type": "String"
+            }
+        }
+    },
+    "promoter_detail_chart_recommendations": "Recommendations",
+    "@promoter_detail_chart_recommendations": {
+        "description": "Legend label for recommendations in chart"
+    },
+    "promoter_detail_chart_last_days": "Last {days} days",
+    "@promoter_detail_chart_last_days": {
+        "description": "Dropdown text for time period",
+        "placeholders": {
+            "days": {
+                "type": "String"
+            }
+        }
+    },
+    "promoter_detail_landing_pages_title": "Promoted Landing Pages",
+    "@promoter_detail_landing_pages_title": {
+        "description": "Title of landing pages section"
+    },
+    "promoter_detail_landing_pages_subtitle": "Overview of all assigned campaigns",
+    "@promoter_detail_landing_pages_subtitle": {
+        "description": "Subtitle of landing pages section"
+    },
+    "promoter_detail_assign_page": "Assign Landing Page",
+    "@promoter_detail_assign_page": {
+        "description": "Button text to assign a landing page"
+    },
+    "promoter_detail_assign_dialog_subtitle": "Select the pages to assign to this promoter.",
+    "@promoter_detail_assign_dialog_subtitle": {
+        "description": "Subtitle in landing page assignment dialog"
+    },
+    "promoter_detail_assign_success": "Landing pages updated successfully",
+    "@promoter_detail_assign_success": {
+        "description": "Snackbar after successful landing page assignment"
+    },
+    "promoter_detail_landing_page_name": "Landing Page Name",
+    "@promoter_detail_landing_page_name": {
+        "description": "Table header for landing page name"
+    },
+    "promoter_detail_status": "Status",
+    "@promoter_detail_status": {
+        "description": "Table header for status"
+    },
+    "promoter_detail_visits": "Visits",
+    "@promoter_detail_visits": {
+        "description": "Table header for visits"
+    },
+    "promoter_detail_no_landing_pages": "No landing pages assigned",
+    "@promoter_detail_no_landing_pages": {
+        "description": "Empty state text when no landing pages assigned"
+    },
+    "promoter_detail_error_loading": "Error loading promoter details",
+    "@promoter_detail_error_loading": {
+        "description": "Error message when loading promoter details"
+    },
+    "promoter_detail_not_found": "Promoter not found",
+    "@promoter_detail_not_found": {
+        "description": "Error message when promoter not found"
     }
 }

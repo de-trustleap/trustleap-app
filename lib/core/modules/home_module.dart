@@ -9,6 +9,7 @@ import 'package:finanzbegleiter/presentation/page_builder/landing_page_builder_v
 import 'package:finanzbegleiter/presentation/profile_page/profile_page.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/company_registration/company_registration_page.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/promoters_page.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_detail/promoter_detail_page.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_edit/promoter_edit_page.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_page.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendations_page.dart';
@@ -73,6 +74,10 @@ class HomeModule extends Module {
           ChildRoute("${RoutePaths.editPromoterPath}/:id",
               child: (_) =>
                   PromoterEditPage(promoterID: r.args.params["id"] ?? "")),
+          ChildRoute("${RoutePaths.promoterDetailPath}/:id",
+              child: (_) => PromoterDetailPage(
+                    promoterId: r.args.params["id"] ?? "",
+                  )),
           ChildRoute(RoutePaths.landingPagePath,
               child: (_) => LandingPageView(
                     createdNewPage: r.args.queryParams["createdNewPage"],

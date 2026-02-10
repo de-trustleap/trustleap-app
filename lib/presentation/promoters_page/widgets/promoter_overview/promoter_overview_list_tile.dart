@@ -1,9 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/promoter_avatar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/status_badge.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/promoter_helper.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 
 class PromoterOverviewListTile extends StatelessWidget {
@@ -18,8 +20,13 @@ class PromoterOverviewListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
+    final navigator = CustomNavigator.of(context);
 
-    return Container(
+    return InkWell(
+      onTap: () => navigator.navigate(
+          "${RoutePaths.homePath}${RoutePaths.promoterDetailPath}/${promoter.id.value}"),
+      borderRadius: BorderRadius.circular(8),
+      child: Container(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -92,6 +99,7 @@ class PromoterOverviewListTile extends StatelessWidget {
           ),
         ],
       ),
+    ),
     );
   }
 }
