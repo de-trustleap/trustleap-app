@@ -16,6 +16,7 @@ class PromoterOverviewHeader extends StatefulWidget {
   final Function(String?) onSearchQueryChanged;
   final Function clearSearch;
   final Function(PromoterOverviewFilterStates filterStates) onFilterChanged;
+  final PromotersOverviewViewState currentViewState;
   final Function(PromotersOverviewViewState) onViewStateButtonPressed;
   final Function(PromoterSearchOption) onSearchOptionChanged;
   const PromoterOverviewHeader(
@@ -24,6 +25,7 @@ class PromoterOverviewHeader extends StatefulWidget {
       required this.onSearchQueryChanged,
       required this.clearSearch,
       required this.onFilterChanged,
+      required this.currentViewState,
       required this.onViewStateButtonPressed,
       required this.onSearchOptionChanged});
 
@@ -71,9 +73,12 @@ class _PromoterOverviewHeaderState extends State<PromoterOverviewHeader> {
           SelectableText(localization.promoter_overview_title,
               style: themeData.textTheme.headlineLarge!
                   .copyWith(fontWeight: FontWeight.bold)),
-          PromoterOverviewViewStateButton(onSelected: (selectedValue) {
-            widget.onViewStateButtonPressed(selectedValue);
-          }),
+          PromoterOverviewViewStateButton(
+            currentViewState: widget.currentViewState,
+            onSelected: (selectedValue) {
+              widget.onViewStateButtonPressed(selectedValue);
+            },
+          ),
         ]),
         const SizedBox(height: 16),
         ResponsiveRowColumn(

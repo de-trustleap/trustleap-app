@@ -133,7 +133,7 @@ class _LandingPageCreatorSecondStepState
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SelectableText(localization.landingpage_create_txt,
+                            SelectableText(widget.isEditMode ? localization.landingpage_creation_edit_button_text : localization.landingpage_create_txt,
                                 style: themeData.textTheme.headlineLarge!
                                     .copyWith(fontWeight: FontWeight.bold)),
                             const SizedBox(height: 16),

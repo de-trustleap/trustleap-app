@@ -58,8 +58,12 @@ final class PromoterRegisteredSuccessState extends PromoterState
 }
 
 final class PromoterLoadingState extends PromoterState with EquatableMixin {
+  final String? promoterId;
+
+  const PromoterLoadingState({this.promoterId});
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [promoterId];
 }
 
 

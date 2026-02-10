@@ -69,7 +69,8 @@ void main() {
         "businessModel": null,
         "contactOption": null,
         "calendlyEventURL": null,
-        "companyData": null
+        "companyData": null,
+        "visitsTotal": null
       };
       // When
       final result = model.toMap();

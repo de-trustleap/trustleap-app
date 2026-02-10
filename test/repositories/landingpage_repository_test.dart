@@ -2,8 +2,10 @@ import 'dart:typed_data';
 
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/domain/entities/archived_landing_page_legals.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
+import 'package:finanzbegleiter/domain/entities/legal_version.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -373,6 +375,86 @@ void main() {
           await mockLandingPageRepo.getLandingPagesForPromoters(promoters);
       // Then
       verify(mockLandingPageRepo.getLandingPagesForPromoters(promoters));
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+  });
+
+  group(
+      "LandingPageRepositoryImplementation_getArchivedLandingPageLegals", () {
+    const landingPageId = "1";
+    final testArchivedLegals = ArchivedLandingPageLegals(
+      id: landingPageId,
+      privacyPolicyVersions: [
+        LegalVersion(
+          content: "Privacy v1",
+          archivedAt: DateTime(2024, 1, 1),
+          version: 1,
+        ),
+      ],
+      initialInformationVersions: [
+        LegalVersion(
+          content: "Initial Info v1",
+          archivedAt: DateTime(2024, 1, 1),
+          version: 1,
+        ),
+      ],
+      termsAndConditionsVersions: [
+        LegalVersion(
+          content: "Terms v1",
+          archivedAt: DateTime(2024, 1, 1),
+          version: 1,
+        ),
+      ],
+    );
+
+    test(
+        "should return archived legals when the call was successful",
+        () async {
+      // Given
+      final expectedResult = right(testArchivedLegals);
+      when(mockLandingPageRepo.getArchivedLandingPageLegals(landingPageId))
+          .thenAnswer((_) async => right(testArchivedLegals));
+      // When
+      final result = await mockLandingPageRepo
+          .getArchivedLandingPageLegals(landingPageId);
+      // Then
+      verify(
+          mockLandingPageRepo.getArchivedLandingPageLegals(landingPageId));
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+
+    test("should return failure when the call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockLandingPageRepo.getArchivedLandingPageLegals(landingPageId))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockLandingPageRepo
+          .getArchivedLandingPageLegals(landingPageId);
+      // Then
+      verify(
+          mockLandingPageRepo.getArchivedLandingPageLegals(landingPageId));
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+
+    test(
+        "should return empty archived legals when no document exists",
+        () async {
+      // Given
+      final emptyLegals =
+          ArchivedLandingPageLegals(id: landingPageId);
+      final expectedResult = right(emptyLegals);
+      when(mockLandingPageRepo.getArchivedLandingPageLegals(landingPageId))
+          .thenAnswer((_) async => right(emptyLegals));
+      // When
+      final result = await mockLandingPageRepo
+          .getArchivedLandingPageLegals(landingPageId);
+      // Then
+      verify(
+          mockLandingPageRepo.getArchivedLandingPageLegals(landingPageId));
       expect(result, expectedResult);
       verifyNoMoreInteractions(mockLandingPageRepo);
     });

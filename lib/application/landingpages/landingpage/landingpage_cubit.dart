@@ -201,4 +201,5 @@ class LandingPageCubit extends Cubit<LandingPageState> {
       return hasNoLandingPages || hasNoActiveLandingPages;
     }).toList();
   }
+
 }

@@ -1,134 +1,102 @@
 @TestOn('chrome')
 library;
 
-import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_registration_badge.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/status_badge.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  Widget createWidgetUnderTest(PromoterRegistrationState state) {
+  Widget createWidgetUnderTest({required bool isPositive, required String label}) {
     return MaterialApp(
-      locale: const Locale('de'),
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: AppLocalizations.supportedLocales,
       home: Scaffold(
-        body: PromoterRegistrationBadge(state: state),
+        body: StatusBadge(isPositive: isPositive, label: label),
       ),
     );
   }
 
-  group('PromoterRegistrationBadge Widget Tests', () {
-    testWidgets('should create PromoterRegistrationBadge widget',
-        (tester) async {
+  group('StatusBadge Widget Tests', () {
+    testWidgets('should create StatusBadge widget', (tester) async {
       // When
       await tester.pumpWidget(
-          createWidgetUnderTest(PromoterRegistrationState.registered));
+          createWidgetUnderTest(isPositive: true, label: 'Registriert'));
       await tester.pump();
 
       // Then
-      expect(find.byType(PromoterRegistrationBadge), findsOneWidget);
+      expect(find.byType(StatusBadge), findsOneWidget);
     });
 
-    testWidgets('should display registered text when state is registered',
-        (tester) async {
+    testWidgets('should display label text uppercased', (tester) async {
       // When
       await tester.pumpWidget(
-          createWidgetUnderTest(PromoterRegistrationState.registered));
+          createWidgetUnderTest(isPositive: true, label: 'Registriert'));
       await tester.pump();
 
       // Then
-      expect(find.text('Registriert'), findsOneWidget);
+      expect(find.text('REGISTRIERT'), findsOneWidget);
     });
 
-    testWidgets('should display unregistered text when state is unregistered',
-        (tester) async {
+    testWidgets('should display unregistered label uppercased', (tester) async {
       // When
       await tester.pumpWidget(
-          createWidgetUnderTest(PromoterRegistrationState.unregistered));
+          createWidgetUnderTest(isPositive: false, label: 'Nicht registriert'));
       await tester.pump();
 
       // Then
-      expect(find.text('Nicht registriert'), findsOneWidget);
+      expect(find.text('NICHT REGISTRIERT'), findsOneWidget);
     });
 
-    testWidgets('should have primary color for registered state',
-        (tester) async {
+    testWidgets('should have primary color for positive state', (tester) async {
       // When
       await tester.pumpWidget(
-          createWidgetUnderTest(PromoterRegistrationState.registered));
+          createWidgetUnderTest(isPositive: true, label: 'Registriert'));
       await tester.pump();
 
       // Then
       final container = tester.widget<Container>(find.byType(Container).first);
       final decoration = container.decoration as BoxDecoration;
-      final colorScheme = Theme.of(tester.element(find.byType(Container).first))
-          .colorScheme;
+      final colorScheme =
+          Theme.of(tester.element(find.byType(Container).first)).colorScheme;
 
-      expect(decoration.border, isA<Border>());
-      final border = decoration.border as Border;
-      expect(border.top.color, equals(colorScheme.primary));
+      expect(decoration.color, equals(colorScheme.primary.withValues(alpha: 0.1)));
     });
 
-    testWidgets('should have error color for unregistered state',
-        (tester) async {
+    testWidgets('should have error color for negative state', (tester) async {
       // When
       await tester.pumpWidget(
-          createWidgetUnderTest(PromoterRegistrationState.unregistered));
+          createWidgetUnderTest(isPositive: false, label: 'Nicht registriert'));
       await tester.pump();
 
       // Then
       final container = tester.widget<Container>(find.byType(Container).first);
       final decoration = container.decoration as BoxDecoration;
-      final colorScheme = Theme.of(tester.element(find.byType(Container).first))
-          .colorScheme;
+      final colorScheme =
+          Theme.of(tester.element(find.byType(Container).first)).colorScheme;
 
-      expect(decoration.border, isA<Border>());
-      final border = decoration.border as Border;
-      expect(border.top.color, equals(colorScheme.error));
+      expect(decoration.color, equals(colorScheme.error.withValues(alpha: 0.1)));
     });
 
     testWidgets('should have rounded corners', (tester) async {
       // When
       await tester.pumpWidget(
-          createWidgetUnderTest(PromoterRegistrationState.registered));
+          createWidgetUnderTest(isPositive: true, label: 'Registriert'));
       await tester.pump();
 
       // Then
       final container = tester.widget<Container>(find.byType(Container).first);
       final decoration = container.decoration as BoxDecoration;
 
-      expect(decoration.borderRadius, equals(BorderRadius.circular(8)));
+      expect(decoration.borderRadius, equals(BorderRadius.circular(16)));
     });
 
-    testWidgets('should display text with correct font weight',
-        (tester) async {
+    testWidgets('should display text with bold font weight', (tester) async {
       // When
       await tester.pumpWidget(
-          createWidgetUnderTest(PromoterRegistrationState.registered));
+          createWidgetUnderTest(isPositive: true, label: 'Registriert'));
       await tester.pump();
 
       // Then
-      final text = tester.widget<Text>(find.text('Registriert'));
+      final text = tester.widget<Text>(find.text('REGISTRIERT'));
       expect(text.style?.fontWeight, equals(FontWeight.bold));
-    });
-
-    testWidgets('should display text with font size 14', (tester) async {
-      // When
-      await tester.pumpWidget(
-          createWidgetUnderTest(PromoterRegistrationState.registered));
-      await tester.pump();
-
-      // Then
-      final text = tester.widget<Text>(find.text('Registriert'));
-      expect(text.style?.fontSize, equals(14));
     });
   });
 }

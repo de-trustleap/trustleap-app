@@ -9,8 +9,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  Widget createWidgetUnderTest(
-      {required Function(PromotersOverviewViewState) onSelected}) {
+  Widget createWidgetUnderTest({
+    required Function(PromotersOverviewViewState) onSelected,
+    PromotersOverviewViewState currentViewState =
+        PromotersOverviewViewState.grid,
+  }) {
     return MaterialApp(
       localizationsDelegates: const [
         AppLocalizations.delegate,
@@ -20,7 +23,10 @@ void main() {
       ],
       supportedLocales: AppLocalizations.supportedLocales,
       home: Scaffold(
-        body: PromoterOverviewViewStateButton(onSelected: onSelected),
+        body: PromoterOverviewViewStateButton(
+          currentViewState: currentViewState,
+          onSelected: onSelected,
+        ),
       ),
     );
   }
@@ -81,16 +87,15 @@ void main() {
         (tester) async {
       // Given
       PromotersOverviewViewState? selectedState;
-      await tester.pumpWidget(createWidgetUnderTest(onSelected: (state) {
-        selectedState = state;
-      }));
+      await tester.pumpWidget(createWidgetUnderTest(
+        onSelected: (state) {
+          selectedState = state;
+        },
+        currentViewState: PromotersOverviewViewState.list,
+      ));
       await tester.pump();
 
-      // Switch to list first
-      await tester.tap(find.byIcon(Icons.format_list_bulleted));
-      await tester.pump();
-
-      // When - switch back to grid
+      // When - switch to grid
       await tester.tap(find.byIcon(Icons.grid_on));
       await tester.pump();
 
@@ -115,43 +120,30 @@ void main() {
       expect(selectedState, equals(PromotersOverviewViewState.list));
     });
 
-    testWidgets('should update selection when list button is tapped',
+    testWidgets('should show list as selected when currentViewState is list',
         (tester) async {
-      // Given
-      await tester.pumpWidget(createWidgetUnderTest(onSelected: (_) {}));
-      await tester.pump();
-
-      // Verify grid is selected initially
-      var segmentedButton = tester.widget<
-              SegmentedButton<PromotersOverviewViewState>>(
-          find.byType(SegmentedButton<PromotersOverviewViewState>));
-      expect(segmentedButton.selected,
-          equals({PromotersOverviewViewState.grid}));
-
       // When
-      await tester.tap(find.byIcon(Icons.format_list_bulleted));
+      await tester.pumpWidget(createWidgetUnderTest(
+        onSelected: (_) {},
+        currentViewState: PromotersOverviewViewState.list,
+      ));
       await tester.pump();
 
       // Then
-      segmentedButton = tester.widget<
+      final segmentedButton = tester.widget<
               SegmentedButton<PromotersOverviewViewState>>(
           find.byType(SegmentedButton<PromotersOverviewViewState>));
       expect(segmentedButton.selected,
           equals({PromotersOverviewViewState.list}));
     });
 
-    testWidgets('should update selection when grid button is tapped again',
+    testWidgets('should show grid as selected when currentViewState is grid',
         (tester) async {
-      // Given
-      await tester.pumpWidget(createWidgetUnderTest(onSelected: (_) {}));
-      await tester.pump();
-
-      // Switch to list view first
-      await tester.tap(find.byIcon(Icons.format_list_bulleted));
-      await tester.pump();
-
-      // When - switch back to grid
-      await tester.tap(find.byIcon(Icons.grid_on));
+      // When
+      await tester.pumpWidget(createWidgetUnderTest(
+        onSelected: (_) {},
+        currentViewState: PromotersOverviewViewState.grid,
+      ));
       await tester.pump();
 
       // Then

@@ -27,11 +27,7 @@ class PromoterOverviewList extends StatelessWidget {
               position: index,
               duration: const Duration(milliseconds: 150),
               child: ScaleAnimation(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: PromoterOverviewListTile(promoter: promoters[index]),
-                ),
+                child: PromoterOverviewListTile(promoter: promoters[index]),
               ),
             );
           }),
