@@ -354,6 +354,137 @@ void main() {
     });
   });
 
+  group("PromoterStatistics_GetStatsForLandingPage", () {
+    test("should return correct shares and conversions for a landing page", () {
+      // Given
+      final statistics = PromoterStatistics(promoterRecommendations: []);
+      final recommendations = [
+        createRecommendation(
+            id: "r1",
+            reason: "Investment Page",
+            statusLevel: StatusLevel.successful),
+        createRecommendation(
+            id: "r2",
+            reason: "Investment Page",
+            statusLevel: StatusLevel.recommendationSend),
+        createRecommendation(
+            id: "r3",
+            reason: "Savings Page",
+            statusLevel: StatusLevel.successful),
+      ];
+
+      // When
+      final result = statistics.getStatsForLandingPage(
+          recommendations, "Investment Page");
+
+      // Then
+      expect(result, const PromoterStats(shares: 2, conversions: 1));
+    });
+
+    test("should return zero stats when no recommendations match", () {
+      // Given
+      final statistics = PromoterStatistics(promoterRecommendations: []);
+      final recommendations = [
+        createRecommendation(id: "r1", reason: "Other Page"),
+      ];
+
+      // When
+      final result = statistics.getStatsForLandingPage(
+          recommendations, "Investment Page");
+
+      // Then
+      expect(result, const PromoterStats(shares: 0, conversions: 0));
+    });
+
+    test("should return zero stats for empty recommendations list", () {
+      // Given
+      final statistics = PromoterStatistics(promoterRecommendations: []);
+
+      // When
+      final result = statistics.getStatsForLandingPage([], "Investment Page");
+
+      // Then
+      expect(result, const PromoterStats(shares: 0, conversions: 0));
+    });
+
+    test("should return zero conversions when no successful recommendations",
+        () {
+      // Given
+      final statistics = PromoterStatistics(promoterRecommendations: []);
+      final recommendations = [
+        createRecommendation(
+            id: "r1",
+            reason: "Investment Page",
+            statusLevel: StatusLevel.recommendationSend),
+        createRecommendation(
+            id: "r2",
+            reason: "Investment Page",
+            statusLevel: StatusLevel.linkClicked),
+      ];
+
+      // When
+      final result = statistics.getStatsForLandingPage(
+          recommendations, "Investment Page");
+
+      // Then
+      expect(result, const PromoterStats(shares: 2, conversions: 0));
+    });
+
+    test("should count all status levels as shares", () {
+      // Given
+      final statistics = PromoterStatistics(promoterRecommendations: []);
+      final recommendations = [
+        createRecommendation(
+            id: "r1",
+            reason: "Page A",
+            statusLevel: StatusLevel.recommendationSend),
+        createRecommendation(
+            id: "r2",
+            reason: "Page A",
+            statusLevel: StatusLevel.linkClicked),
+        createRecommendation(
+            id: "r3",
+            reason: "Page A",
+            statusLevel: StatusLevel.contactFormSent),
+        createRecommendation(
+            id: "r4",
+            reason: "Page A",
+            statusLevel: StatusLevel.appointment),
+        createRecommendation(
+            id: "r5",
+            reason: "Page A",
+            statusLevel: StatusLevel.successful),
+        createRecommendation(
+            id: "r6",
+            reason: "Page A",
+            statusLevel: StatusLevel.failed),
+      ];
+
+      // When
+      final result =
+          statistics.getStatsForLandingPage(recommendations, "Page A");
+
+      // Then
+      expect(result, const PromoterStats(shares: 6, conversions: 1));
+    });
+
+    test("should handle null landing page name", () {
+      // Given
+      final statistics = PromoterStatistics(promoterRecommendations: []);
+      final recommendations = [
+        createRecommendation(id: "r1", reason: "Page A"),
+        createRecommendation(id: "r2", reason: "Page B"),
+      ];
+
+      // When
+      final result =
+          statistics.getStatsForLandingPage(recommendations, null);
+
+      // Then
+      expect(result, const PromoterStats(shares: 0, conversions: 0));
+    });
+  });
+
   group("PromoterStats_Performance", () {
     test("should calculate performance as conversions / shares", () {
       // Given
@@ -377,6 +508,40 @@ void main() {
 
       // Then
       expect(stats.performance, 1.0);
+    });
+  });
+
+  group("PromoterStats_FormattedConversionRate", () {
+    test("should format whole number without decimals", () {
+      // Given
+      const stats = PromoterStats(shares: 2, conversions: 1);
+
+      // Then
+      expect(stats.formattedConversionRate, "50%");
+    });
+
+    test("should format decimal with one decimal place", () {
+      // Given
+      const stats = PromoterStats(shares: 3, conversions: 1);
+
+      // Then
+      expect(stats.formattedConversionRate, "33.3%");
+    });
+
+    test("should return 0% when no shares", () {
+      // Given
+      const stats = PromoterStats(shares: 0, conversions: 0);
+
+      // Then
+      expect(stats.formattedConversionRate, "0%");
+    });
+
+    test("should return 100% when all shares are conversions", () {
+      // Given
+      const stats = PromoterStats(shares: 5, conversions: 5);
+
+      // Then
+      expect(stats.formattedConversionRate, "100%");
     });
   });
 }

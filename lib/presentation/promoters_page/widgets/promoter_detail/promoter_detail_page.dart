@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.da
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
+import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -32,6 +33,7 @@ class PromoterDetailPage extends StatefulWidget {
 class _PromoterDetailPageState extends State<PromoterDetailPage> {
   Promoter? _promoter;
   List<LandingPage> _landingPages = [];
+  List<UserRecommendation> _recommendations = [];
 
   @override
   void initState() {
@@ -59,6 +61,19 @@ class _PromoterDetailPageState extends State<PromoterDetailPage> {
     }
   }
 
+  void _onRecommendationsLoaded(PromoterDetailRecommendationsSuccess state) {
+    setState(() {
+      if (state.promoterRecommendations != null && _promoter != null) {
+        final promoterRec = state.promoterRecommendations!
+            .where((pr) => pr.promoter.id.value == _promoter!.id.value)
+            .firstOrNull;
+        _recommendations = promoterRec?.recommendations ?? [];
+      } else {
+        _recommendations = state.recommendations;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -72,6 +87,8 @@ class _PromoterDetailPageState extends State<PromoterDetailPage> {
       listener: (context, state) {
         if (state is PromoterDetailSuccess) {
           _onPromoterLoaded(state);
+        } else if (state is PromoterDetailRecommendationsSuccess) {
+          _onRecommendationsLoaded(state);
         }
       },
       child: BlocBuilder<PromoterDetailCubit, PromoterDetailState>(
@@ -154,6 +171,7 @@ class _PromoterDetailPageState extends State<PromoterDetailPage> {
                               PromoterDetailLandingPagesSection(
                                 promoter: promoter,
                                 landingPages: landingPages,
+                                recommendations: _recommendations,
                                 onChanged: () => promoterDetailCubit
                                     .loadPromoterWithLandingPages(
                                         widget.promoterId),

@@ -27,6 +27,16 @@ class PromoterStatistics {
     );
   }
 
+  PromoterStats getStatsForLandingPage(
+    List<UserRecommendation> recommendations,
+    String? landingPageName,
+  ) {
+    final filtered = recommendations
+        .where((rec) => rec.recommendation?.reason == landingPageName)
+        .toList();
+    return _calculateStats(filtered);
+  }
+
   List<Promoter> sortByConversions(List<Promoter> promoters) {
     final sorted = List<Promoter>.from(promoters);
     sorted.sort((a, b) {

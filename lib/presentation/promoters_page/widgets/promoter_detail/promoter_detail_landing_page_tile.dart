@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/core/helpers/date_time_formatter.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
+import 'package:finanzbegleiter/domain/entities/promoter_stats.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/status_badge.dart';
 import 'package:flutter/material.dart';
@@ -7,11 +8,13 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 class PromoterDetailLandingPageTile extends StatelessWidget {
   final LandingPage landingPage;
+  final PromoterStats stats;
   final VoidCallback onTap;
 
   const PromoterDetailLandingPageTile({
     super.key,
     required this.landingPage,
+    required this.stats,
     required this.onTap,
   });
 
@@ -94,6 +97,24 @@ class PromoterDetailLandingPageTile extends StatelessWidget {
           ),
         ),
         SizedBox(
+          width: 100,
+          child: Text(
+            stats.conversions.toString(),
+            style: themeData.textTheme.bodyMedium
+                ?.copyWith(fontWeight: FontWeight.w600),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        SizedBox(
+          width: 100,
+          child: Text(
+            stats.formattedConversionRate,
+            style: themeData.textTheme.bodyMedium
+                ?.copyWith(fontWeight: FontWeight.w600),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        SizedBox(
           width: 40,
           child: Icon(
             Icons.chevron_right,
@@ -106,55 +127,100 @@ class PromoterDetailLandingPageTile extends StatelessWidget {
 
   Widget _buildMobileLayout(ThemeData themeData, AppLocalizations localization,
       BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Row(
-          children: [
-            _buildThumbnail(themeData),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
                 children: [
-                  Text(
-                    landingPage.name ?? '',
-                    style: themeData.textTheme.bodyMedium
-                        ?.copyWith(fontWeight: FontWeight.w600),
-                  ),
-                  if (landingPage.createdAt != null)
-                    Text(
-                      '${localization.promoter_detail_created_at} ${DateTimeFormatter().getStringFromDate(context, landingPage.createdAt!)}',
-                      style: themeData.textTheme.bodySmall?.copyWith(
-                        color: themeData.colorScheme.onSurfaceVariant,
-                      ),
+                  _buildThumbnail(themeData),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          landingPage.name ?? '',
+                          style: themeData.textTheme.bodyMedium
+                              ?.copyWith(fontWeight: FontWeight.w600),
+                        ),
+                        if (landingPage.createdAt != null)
+                          Text(
+                            '${localization.promoter_detail_created_at} ${DateTimeFormatter().getStringFromDate(context, landingPage.createdAt!)}',
+                            style: themeData.textTheme.bodySmall?.copyWith(
+                              color: themeData.colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                      ],
                     ),
+                  ),
+                  StatusBadge(
+                    isPositive: landingPage.isActive == true,
+                    label: landingPage.isActive == true
+                        ? localization.landing_page_detail_status_active
+                        : localization.landing_page_detail_status_inactive,
+                  ),
                 ],
               ),
-            ),
-            Icon(
-              Icons.chevron_right,
-              color: themeData.colorScheme.onSurfaceVariant,
-            ),
-          ],
-        ),
-        const SizedBox(height: 12),
-        Row(
-          children: [
-            StatusBadge(
-              isPositive: landingPage.isActive == true,
-              label: landingPage.isActive == true
-                  ? localization.landing_page_detail_status_active
-                  : localization.landing_page_detail_status_inactive,
-            ),
-            const SizedBox(width: 16),
-            Text(
-              '${localization.promoter_detail_visits}: ${landingPage.visitsTotal ?? 0}',
-              style: themeData.textTheme.bodySmall?.copyWith(
-                color: themeData.colorScheme.onSurfaceVariant,
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Expanded(
+                    child: _buildStatColumn(
+                      themeData,
+                      localization.promoter_detail_visits,
+                      (landingPage.visitsTotal ?? 0).toString(),
+                    ),
+                  ),
+                  Expanded(
+                    child: _buildStatColumn(
+                      themeData,
+                      localization.promoter_detail_conversions,
+                      stats.conversions.toString(),
+                    ),
+                  ),
+                  Expanded(
+                    child: _buildStatColumn(
+                      themeData,
+                      localization.promoter_detail_conversion_rate,
+                      stats.formattedConversionRate,
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
+            ],
+          ),
+        ),
+        Icon(
+          Icons.chevron_right,
+          color: themeData.colorScheme.onSurfaceVariant,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildStatColumn(
+    ThemeData themeData,
+    String label,
+    String value,
+  ) {
+    return Column(
+      children: [
+        Text(
+          label,
+          style: themeData.textTheme.labelSmall?.copyWith(
+            color: themeData.colorScheme.onSurfaceVariant,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          value,
+          style: themeData.textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ],
     );
@@ -192,9 +258,9 @@ class PromoterDetailLandingPageTile extends StatelessWidget {
     );
   }
 }
-
-// TODO: CONVERSIONS AND CONVERSIONRATE ANZEIGEN
 // TODO: MOCKDATEN ERSTELLEN
-// TODO: TESTS SCHREIBEN
+// TODO: TESTS SCHREIBEN FÜR CUBIT UND HELPER KLASSEN
 // TODO: SENTRY MCP EINBINDEN
+// TODO: SENTRY PROBLEM BEHEBEN
 // TODO: FIREBASE MCP EINBINDEN (IM BACKEND NICHT VERFÜGBAR)
+// TODO: UNSPLASH NEUE ANFRAGE

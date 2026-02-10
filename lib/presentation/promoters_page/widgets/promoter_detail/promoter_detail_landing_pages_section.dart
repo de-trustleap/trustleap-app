@@ -1,6 +1,8 @@
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
+import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
+import 'package:finanzbegleiter/domain/statistics/promoter_statistics.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/subtle_button.dart';
@@ -13,12 +15,14 @@ import 'package:responsive_framework/responsive_framework.dart';
 class PromoterDetailLandingPagesSection extends StatelessWidget {
   final Promoter promoter;
   final List<LandingPage> landingPages;
+  final List<UserRecommendation> recommendations;
   final VoidCallback onChanged;
 
   const PromoterDetailLandingPagesSection({
     super.key,
     required this.promoter,
     required this.landingPages,
+    required this.recommendations,
     required this.onChanged,
   });
 
@@ -67,11 +71,18 @@ class PromoterDetailLandingPagesSection extends StatelessWidget {
             _buildEmptyState(themeData, localization)
           else ...[
             if (!isCompact) _buildTableHeader(themeData, localization),
-            ...landingPages.map((lp) => PromoterDetailLandingPageTile(
-                  landingPage: lp,
-                  onTap: () => navigator.navigate(
-                      "${RoutePaths.homePath}${RoutePaths.landingPageDetailPath}/${lp.id.value}"),
-                )),
+            ...landingPages.map((lp) {
+              final statistics =
+                  PromoterStatistics(promoterRecommendations: []);
+              final stats = statistics.getStatsForLandingPage(
+                  recommendations, lp.name);
+              return PromoterDetailLandingPageTile(
+                landingPage: lp,
+                stats: stats,
+                onTap: () => navigator.navigate(
+                    "${RoutePaths.homePath}${RoutePaths.landingPageDetailPath}/${lp.id.value}"),
+              );
+            }),
           ],
         ],
       ),
@@ -105,6 +116,26 @@ class PromoterDetailLandingPagesSection extends StatelessWidget {
             width: 80,
             child: Text(
               localization.promoter_detail_visits.toUpperCase(),
+              style: themeData.textTheme.labelSmall?.copyWith(
+                color: themeData.colorScheme.onSurfaceVariant,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          SizedBox(
+            width: 100,
+            child: Text(
+              localization.promoter_detail_conversions.toUpperCase(),
+              style: themeData.textTheme.labelSmall?.copyWith(
+                color: themeData.colorScheme.onSurfaceVariant,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          SizedBox(
+            width: 100,
+            child: Text(
+              localization.promoter_detail_conversion_rate.toUpperCase(),
               style: themeData.textTheme.labelSmall?.copyWith(
                 color: themeData.colorScheme.onSurfaceVariant,
               ),
