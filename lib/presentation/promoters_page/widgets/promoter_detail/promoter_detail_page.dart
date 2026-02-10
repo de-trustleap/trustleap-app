@@ -1,9 +1,6 @@
 import 'package:finanzbegleiter/application/promoter/promoter_detail/promoter_detail_cubit.dart';
 import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/domain/entities/landing_page.dart';
-import 'package:finanzbegleiter/domain/entities/promoter.dart';
-import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -31,10 +28,6 @@ class PromoterDetailPage extends StatefulWidget {
 }
 
 class _PromoterDetailPageState extends State<PromoterDetailPage> {
-  Promoter? _promoter;
-  List<LandingPage> _landingPages = [];
-  List<UserRecommendation> _recommendations = [];
-
   @override
   void initState() {
     super.initState();
@@ -42,36 +35,20 @@ class _PromoterDetailPageState extends State<PromoterDetailPage> {
         .loadPromoterWithLandingPages(widget.promoterId);
   }
 
-  void _onPromoterLoaded(PromoterDetailSuccess state) {
-    setState(() {
-      _promoter = state.promoter;
-      _landingPages = state.landingPages;
-    });
+  void _loadRecommendationsIfNeeded(PromoterDetailLoaded state) {
+    if (state.promoter.registered != true) return;
+    if (state.recommendations != null) return;
+    if (state.isRecommendationsLoading) return;
+    if (state.recommendationsFailure != null) return;
 
-    if (state.promoter.registered == true) {
-      final userState = Modular.get<UserObserverCubit>().state;
-      if (userState is UserObserverSuccess) {
-        final user = userState.user;
-        Modular.get<PromoterDetailCubit>().loadRecommendations(
-          userId: user.id.value,
-          role: user.role ?? Role.promoter,
-          landingPageIds: state.promoter.landingPageIDs,
-        );
-      }
+    final userState = Modular.get<UserObserverCubit>().state;
+    if (userState is UserObserverSuccess) {
+      final user = userState.user;
+      Modular.get<PromoterDetailCubit>().loadRecommendations(
+        userId: user.id.value,
+        role: user.role ?? Role.promoter,
+      );
     }
-  }
-
-  void _onRecommendationsLoaded(PromoterDetailRecommendationsSuccess state) {
-    setState(() {
-      if (state.promoterRecommendations != null && _promoter != null) {
-        final promoterRec = state.promoterRecommendations!
-            .where((pr) => pr.promoter.id.value == _promoter!.id.value)
-            .firstOrNull;
-        _recommendations = promoterRec?.recommendations ?? [];
-      } else {
-        _recommendations = state.recommendations;
-      }
-    });
   }
 
   @override
@@ -82,40 +59,36 @@ class _PromoterDetailPageState extends State<PromoterDetailPage> {
     final responsiveValue = ResponsiveHelper.of(context);
     final promoterDetailCubit = Modular.get<PromoterDetailCubit>();
 
-    return BlocListener<PromoterDetailCubit, PromoterDetailState>(
+    return BlocConsumer<PromoterDetailCubit, PromoterDetailState>(
       bloc: promoterDetailCubit,
       listener: (context, state) {
-        if (state is PromoterDetailSuccess) {
-          _onPromoterLoaded(state);
-        } else if (state is PromoterDetailRecommendationsSuccess) {
-          _onRecommendationsLoaded(state);
+        if (state is PromoterDetailLoaded) {
+          _loadRecommendationsIfNeeded(state);
         }
       },
-      child: BlocBuilder<PromoterDetailCubit, PromoterDetailState>(
-        bloc: promoterDetailCubit,
-        builder: (context, state) {
-          if (_promoter == null) {
-            if (state is PromoterDetailFailure) {
-              return CenteredConstrainedWrapper(
-                child: Center(
-                  child: ErrorView(
-                    title: localization.promoter_detail_error_loading,
-                    message: '',
-                    callback: () => navigator.navigate(
-                        "${RoutePaths.homePath}${RoutePaths.promotersPath}"),
-                  ),
-                ),
-              );
-            }
+      builder: (context, state) {
+        if (state is PromoterDetailFailure) {
+          return CenteredConstrainedWrapper(
+            child: Center(
+              child: ErrorView(
+                title: localization.promoter_detail_error_loading,
+                message: '',
+                callback: () => navigator.navigate(
+                    "${RoutePaths.homePath}${RoutePaths.promotersPath}"),
+              ),
+            ),
+          );
+        }
 
-            return const CenteredConstrainedWrapper(
-              child: Center(child: LoadingIndicator()),
-            );
-          }
+        if (state is! PromoterDetailLoaded) {
+          return const CenteredConstrainedWrapper(
+            child: Center(child: LoadingIndicator()),
+          );
+        }
 
-          final promoter = _promoter!;
-          final landingPages = _landingPages;
-          final isRegistered = promoter.registered == true;
+        final promoter = state.promoter;
+        final landingPages = state.landingPages;
+        final isRegistered = promoter.registered == true;
 
         return Container(
           width: double.infinity,
@@ -171,7 +144,7 @@ class _PromoterDetailPageState extends State<PromoterDetailPage> {
                               PromoterDetailLandingPagesSection(
                                 promoter: promoter,
                                 landingPages: landingPages,
-                                recommendations: _recommendations,
+                                recommendations: state.recommendations ?? [],
                                 onChanged: () => promoterDetailCubit
                                     .loadPromoterWithLandingPages(
                                         widget.promoterId),
@@ -188,8 +161,7 @@ class _PromoterDetailPageState extends State<PromoterDetailPage> {
             ],
           ),
         );
-        },
-      ),
+      },
     );
   }
 }

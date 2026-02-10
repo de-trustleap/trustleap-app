@@ -24,7 +24,7 @@ class PromoterDetailPerformanceCard extends StatelessWidget {
       builder: (context, state) {
         PromoterStats stats = const PromoterStats(shares: 0, conversions: 0);
 
-        if (state is PromoterDetailRecommendationsSuccess &&
+        if (state is PromoterDetailLoaded &&
             state.promoterRecommendations != null) {
           final statistics = PromoterStatistics(
             promoterRecommendations: state.promoterRecommendations!,

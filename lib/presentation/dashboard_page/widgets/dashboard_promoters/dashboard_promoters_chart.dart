@@ -24,9 +24,11 @@ class DashboardPromotersChart extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
+    final locale = Localizations.localeOf(context).languageCode;
     final dataProcessor = DashboardPromotersChartDataProcessor(
       promoters: promoters,
       timePeriod: timePeriod,
+      locale: locale,
     );
 
     final spots = dataProcessor.generateSpots();

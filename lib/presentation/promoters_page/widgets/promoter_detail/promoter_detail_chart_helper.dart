@@ -6,10 +6,12 @@ import 'package:intl/intl.dart';
 class PromoterDetailChartHelper {
   final List<UserRecommendation> recommendations;
   final int selectedDays;
+  final String locale;
 
   const PromoterDetailChartHelper({
     required this.recommendations,
     required this.selectedDays,
+    this.locale = 'de',
   });
 
   List<UserRecommendation> get nonSuccessful => recommendations
@@ -75,7 +77,7 @@ class PromoterDetailChartHelper {
     final now = DateTime.now();
     final day = now.subtract(Duration(days: selectedDays - 1 - index));
     if (selectedDays <= 7) {
-      return DateFormat('E', 'de_DE').format(day);
+      return DateFormat('E', locale).format(day);
     }
     return DateFormat('dd.MM').format(day);
   }

@@ -34,6 +34,10 @@ class _PromoterDetailChartState extends State<PromoterDetailChart> {
       child: BlocBuilder<PromoterDetailCubit, PromoterDetailState>(
         bloc: promoterDetailCubit,
         builder: (context, state) {
+          if (state is! PromoterDetailLoaded) {
+            return const LoadingIndicator();
+          }
+
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -85,9 +89,9 @@ class _PromoterDetailChartState extends State<PromoterDetailChart> {
               const SizedBox(height: 12),
               _buildLegend(state, themeData, localization),
               const SizedBox(height: 16),
-              if (state is PromoterDetailRecommendationsSuccess)
+              if (state.recommendations != null)
                 _buildChart(state, themeData, localization)
-              else if (state is PromoterDetailRecommendationsFailure)
+              else if (state.recommendationsFailure != null)
                 Center(
                   child: Text(
                     localization.promoter_detail_error_loading,
@@ -104,14 +108,16 @@ class _PromoterDetailChartState extends State<PromoterDetailChart> {
   }
 
   Widget _buildLegend(
-    PromoterDetailState state,
+    PromoterDetailLoaded state,
     ThemeData themeData,
     AppLocalizations localization,
   ) {
-    final hasConversions = state is PromoterDetailRecommendationsSuccess &&
+    final locale = Localizations.localeOf(context).languageCode;
+    final hasConversions = state.recommendations != null &&
         PromoterDetailChartHelper(
-          recommendations: state.recommendations,
+          recommendations: state.recommendations!,
           selectedDays: _selectedDays,
+          locale: locale,
         ).hasConversionsInTimeframe;
 
     return Row(
@@ -157,13 +163,15 @@ class _PromoterDetailChartState extends State<PromoterDetailChart> {
   }
 
   Widget _buildChart(
-    PromoterDetailRecommendationsSuccess state,
+    PromoterDetailLoaded state,
     ThemeData themeData,
     AppLocalizations localization,
   ) {
+    final locale = Localizations.localeOf(context).languageCode;
     final helper = PromoterDetailChartHelper(
-      recommendations: state.recommendations,
+      recommendations: state.recommendations!,
       selectedDays: _selectedDays,
+      locale: locale,
     );
 
     final recommendationSpots = helper.generateSpots(helper.nonSuccessful);
@@ -191,7 +199,7 @@ class _PromoterDetailChartState extends State<PromoterDetailChart> {
       getXAxisLabel: helper.getXAxisLabel,
       emptyStateMessage:
           localization.dashboard_recommendations_chart_no_recommendations,
-      isEmpty: state.recommendations.isEmpty,
+      isEmpty: state.recommendations!.isEmpty,
     );
   }
 }

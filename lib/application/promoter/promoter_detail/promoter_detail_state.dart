@@ -14,18 +14,33 @@ final class PromoterDetailLoading extends PromoterDetailState
   List<Object> get props => [];
 }
 
-final class PromoterDetailSuccess extends PromoterDetailState
+final class PromoterDetailLoaded extends PromoterDetailState
     with EquatableMixin {
   final Promoter promoter;
   final List<LandingPage> landingPages;
+  final List<UserRecommendation>? recommendations;
+  final List<PromoterRecommendations>? promoterRecommendations;
+  final bool isRecommendationsLoading;
+  final DatabaseFailure? recommendationsFailure;
 
-  PromoterDetailSuccess({
+  PromoterDetailLoaded({
     required this.promoter,
     required this.landingPages,
+    this.recommendations,
+    this.promoterRecommendations,
+    this.isRecommendationsLoading = false,
+    this.recommendationsFailure,
   });
 
   @override
-  List<Object> get props => [promoter, landingPages];
+  List<Object?> get props => [
+        promoter,
+        landingPages,
+        recommendations,
+        promoterRecommendations,
+        isRecommendationsLoading,
+        recommendationsFailure,
+      ];
 }
 
 final class PromoterDetailFailure extends PromoterDetailState
@@ -37,37 +52,3 @@ final class PromoterDetailFailure extends PromoterDetailState
   @override
   List<Object> get props => [failure];
 }
-
-final class PromoterDetailRecommendationsLoading extends PromoterDetailState
-    with EquatableMixin {
-  @override
-  List<Object> get props => [];
-}
-
-final class PromoterDetailRecommendationsSuccess extends PromoterDetailState
-    with EquatableMixin {
-  final List<UserRecommendation> recommendations;
-  final List<PromoterRecommendations>? promoterRecommendations;
-  final List<LandingPage>? allLandingPages;
-
-  PromoterDetailRecommendationsSuccess({
-    required this.recommendations,
-    this.promoterRecommendations,
-    this.allLandingPages,
-  });
-
-  @override
-  List<Object?> get props =>
-      [recommendations, promoterRecommendations, allLandingPages];
-}
-
-final class PromoterDetailRecommendationsFailure extends PromoterDetailState
-    with EquatableMixin {
-  final DatabaseFailure failure;
-
-  PromoterDetailRecommendationsFailure({required this.failure});
-
-  @override
-  List<Object> get props => [failure];
-}
-

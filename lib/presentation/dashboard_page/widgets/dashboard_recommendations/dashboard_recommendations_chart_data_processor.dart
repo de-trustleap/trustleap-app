@@ -7,11 +7,13 @@ class DashboardRecommendationsChartDataProcessor {
   final List<UserRecommendation> recommendations;
   final TimePeriod timePeriod;
   final int? statusLevel;
+  final String locale;
 
   DashboardRecommendationsChartDataProcessor({
     required this.recommendations,
     required this.timePeriod,
     this.statusLevel,
+    this.locale = 'de',
   });
 
   List<FlSpot> generateSpots() {
@@ -102,7 +104,7 @@ class DashboardRecommendationsChartDataProcessor {
         return '${index.toString().padLeft(2, '0')}:00';
       case TimePeriod.week:
         final day = now.subtract(Duration(days: 6 - index));
-        return DateFormat('E', 'de_DE').format(day);
+        return DateFormat('E', locale).format(day);
       case TimePeriod.month:
       case TimePeriod.quarter:
       case TimePeriod.year:

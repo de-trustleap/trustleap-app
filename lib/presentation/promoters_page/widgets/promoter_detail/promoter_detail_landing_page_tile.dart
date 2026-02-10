@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finanzbegleiter/core/helpers/date_time_formatter.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/promoter_stats.dart';
@@ -230,12 +231,13 @@ class PromoterDetailLandingPageTile extends StatelessWidget {
     if (landingPage.thumbnailDownloadURL != null) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(6),
-        child: Image.network(
-          landingPage.thumbnailDownloadURL!,
+        child: CachedNetworkImage(
+          imageUrl: landingPage.thumbnailDownloadURL!,
           width: 40,
           height: 40,
           fit: BoxFit.cover,
-          errorBuilder: (_, __, ___) => _buildPlaceholderThumbnail(themeData),
+          placeholder: (_, __) => _buildPlaceholderThumbnail(themeData),
+          errorWidget: (_, __, ___) => _buildPlaceholderThumbnail(themeData),
         ),
       );
     }

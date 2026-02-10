@@ -6,7 +6,6 @@ import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/entities/promoter_recommendations.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
-import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/recommendation_repository.dart';
 
@@ -15,10 +14,8 @@ part 'promoter_detail_state.dart';
 class PromoterDetailCubit extends Cubit<PromoterDetailState> {
   final PromoterRepository promoterRepo;
   final RecommendationRepository recommendationRepo;
-  final LandingPageRepository landingPageRepo;
 
-  PromoterDetailCubit(
-      this.promoterRepo, this.recommendationRepo, this.landingPageRepo)
+  PromoterDetailCubit(this.promoterRepo, this.recommendationRepo)
       : super(PromoterDetailInitial());
 
   void loadPromoterWithLandingPages(String promoterId) async {
@@ -30,15 +27,15 @@ class PromoterDetailCubit extends Cubit<PromoterDetailState> {
       (promoter) async {
         final landingPageIDs = promoter.landingPageIDs;
         if (landingPageIDs == null || landingPageIDs.isEmpty) {
-          emit(PromoterDetailSuccess(promoter: promoter, landingPages: []));
+          emit(PromoterDetailLoaded(promoter: promoter, landingPages: []));
           return;
         }
 
         final lpResult = await promoterRepo.getLandingPages(landingPageIDs);
         lpResult.fold(
           (failure) =>
-              emit(PromoterDetailSuccess(promoter: promoter, landingPages: [])),
-          (landingPages) => emit(PromoterDetailSuccess(
+              emit(PromoterDetailLoaded(promoter: promoter, landingPages: [])),
+          (landingPages) => emit(PromoterDetailLoaded(
               promoter: promoter, landingPages: landingPages)),
         );
       },
@@ -48,77 +45,80 @@ class PromoterDetailCubit extends Cubit<PromoterDetailState> {
   void loadRecommendations({
     required String userId,
     required Role role,
-    List<String>? landingPageIds,
   }) {
+    if (state is! PromoterDetailLoaded) return;
+
     if (role == Role.company) {
       _loadRecommendationsCompany(userId);
     } else {
-      _loadRecommendationsPromoter(userId, landingPageIds);
+      _loadRecommendationsPromoter(userId);
     }
   }
 
   void _loadRecommendationsCompany(String userId) async {
-    emit(PromoterDetailRecommendationsLoading());
+    final currentState = state;
+    if (currentState is! PromoterDetailLoaded) return;
+
+    emit(PromoterDetailLoaded(
+      promoter: currentState.promoter,
+      landingPages: currentState.landingPages,
+      isRecommendationsLoading: true,
+    ));
 
     final failureOrSuccess =
         await recommendationRepo.getRecommendationsCompanyWithArchived(userId);
+    final loadedState = state;
+    if (loadedState is! PromoterDetailLoaded) return;
+
     failureOrSuccess.fold(
-      (failure) =>
-          emit(PromoterDetailRecommendationsFailure(failure: failure)),
-      (promoterRecommendations) async {
-        final allRecommendations = <UserRecommendation>[];
-        for (final promoterRec in promoterRecommendations) {
-          allRecommendations.addAll(promoterRec.recommendations);
-        }
+      (failure) => emit(PromoterDetailLoaded(
+        promoter: loadedState.promoter,
+        landingPages: loadedState.landingPages,
+        recommendationsFailure: failure,
+      )),
+      (promoterRecommendations) {
+        final promoterRec = promoterRecommendations
+            .where(
+                (pr) => pr.promoter.id.value == loadedState.promoter.id.value)
+            .firstOrNull;
+        final filteredRecommendations = promoterRec?.recommendations ?? [];
 
-        final allLandingPageIds = <String>{};
-        for (final promoterRec in promoterRecommendations) {
-          if (promoterRec.promoter.landingPageIDs != null) {
-            allLandingPageIds.addAll(promoterRec.promoter.landingPageIDs!);
-          }
-        }
-
-        final allLandingPages =
-            await _loadLandingPages(allLandingPageIds.toList());
-
-        emit(PromoterDetailRecommendationsSuccess(
-          recommendations: allRecommendations,
+        emit(PromoterDetailLoaded(
+          promoter: loadedState.promoter,
+          landingPages: loadedState.landingPages,
+          recommendations: filteredRecommendations,
           promoterRecommendations: promoterRecommendations,
-          allLandingPages: allLandingPages,
         ));
       },
     );
   }
 
-  void _loadRecommendationsPromoter(
-      String userId, List<String>? landingPageIds) async {
-    emit(PromoterDetailRecommendationsLoading());
+  void _loadRecommendationsPromoter(String userId) async {
+    final currentState = state;
+    if (currentState is! PromoterDetailLoaded) return;
+
+    emit(PromoterDetailLoaded(
+      promoter: currentState.promoter,
+      landingPages: currentState.landingPages,
+      isRecommendationsLoading: true,
+    ));
 
     final failureOrSuccess =
         await recommendationRepo.getRecommendationsWithArchived(userId);
+    final loadedState = state;
+    if (loadedState is! PromoterDetailLoaded) return;
+
     failureOrSuccess.fold(
-      (failure) =>
-          emit(PromoterDetailRecommendationsFailure(failure: failure)),
-      (recommendations) async {
-        final allLandingPages =
-            await _loadLandingPages(landingPageIds ?? []);
-
-        emit(PromoterDetailRecommendationsSuccess(
-          recommendations: recommendations,
-          allLandingPages: allLandingPages,
-        ));
-      },
-    );
-  }
-
-  Future<List<LandingPage>?> _loadLandingPages(
-      List<String> landingPageIds) async {
-    if (landingPageIds.isEmpty) return null;
-
-    final result = await landingPageRepo.getAllLandingPages(landingPageIds);
-    return result.fold(
-      (failure) => null,
-      (landingPages) => landingPages,
+      (failure) => emit(PromoterDetailLoaded(
+        promoter: loadedState.promoter,
+        landingPages: loadedState.landingPages,
+        recommendationsFailure: failure,
+      )),
+      (recommendations) => emit(PromoterDetailLoaded(
+        promoter: loadedState.promoter,
+        landingPages: loadedState.landingPages,
+        recommendations: recommendations,
+      )),
     );
   }
 }

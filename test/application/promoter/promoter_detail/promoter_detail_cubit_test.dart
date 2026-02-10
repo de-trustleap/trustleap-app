@@ -18,16 +18,13 @@ void main() {
   late PromoterDetailCubit cubit;
   late MockPromoterRepository mockPromoterRepo;
   late MockRecommendationRepository mockRecommendationRepo;
-  late MockLandingPageRepository mockLandingPageRepo;
 
   setUp(() {
     mockPromoterRepo = MockPromoterRepository();
     mockRecommendationRepo = MockRecommendationRepository();
-    mockLandingPageRepo = MockLandingPageRepository();
     cubit = PromoterDetailCubit(
       mockPromoterRepo,
       mockRecommendationRepo,
-      mockLandingPageRepo,
     );
   });
 
@@ -102,6 +99,30 @@ void main() {
     );
   }
 
+  /// Helper: loads a promoter into the cubit so it reaches PromoterDetailLoaded
+  Future<void> loadPromoterIntoState({
+    Promoter? promoter,
+    List<LandingPage>? landingPages,
+  }) async {
+    final p = promoter ?? testPromoter;
+    final lps = landingPages ?? testLandingPages;
+    when(mockPromoterRepo.getPromoter(p.id.value))
+        .thenAnswer((_) async => right(p));
+    if (p.landingPageIDs != null && p.landingPageIDs!.isNotEmpty) {
+      when(mockPromoterRepo.getLandingPages(p.landingPageIDs!))
+          .thenAnswer((_) async => right(lps));
+    }
+    final future = expectLater(
+      cubit.stream,
+      emitsInOrder([
+        PromoterDetailLoading(),
+        PromoterDetailLoaded(promoter: p, landingPages: lps),
+      ]),
+    );
+    cubit.loadPromoterWithLandingPages(p.id.value);
+    await future;
+  }
+
   test("initial state should be PromoterDetailInitial", () {
     expect(cubit.state, isA<PromoterDetailInitial>());
   });
@@ -123,12 +144,12 @@ void main() {
     });
 
     test(
-        "should emit [Loading, Success] with landing pages when promoter has landingPageIDs",
+        "should emit [Loading, Loaded] with landing pages when promoter has landingPageIDs",
         () {
       // Given
       final expectedResult = [
         PromoterDetailLoading(),
-        PromoterDetailSuccess(
+        PromoterDetailLoaded(
           promoter: testPromoter,
           landingPages: testLandingPages,
         ),
@@ -144,12 +165,12 @@ void main() {
     });
 
     test(
-        "should emit [Loading, Success] with empty list when promoter has no landingPageIDs",
+        "should emit [Loading, Loaded] with empty list when promoter has no landingPageIDs",
         () {
       // Given
       final expectedResult = [
         PromoterDetailLoading(),
-        PromoterDetailSuccess(
+        PromoterDetailLoaded(
           promoter: testPromoterNoLandingPages,
           landingPages: [],
         ),
@@ -163,12 +184,12 @@ void main() {
     });
 
     test(
-        "should emit [Loading, Success] with empty list when promoter has null landingPageIDs",
+        "should emit [Loading, Loaded] with empty list when promoter has null landingPageIDs",
         () {
       // Given
       final expectedResult = [
         PromoterDetailLoading(),
-        PromoterDetailSuccess(
+        PromoterDetailLoaded(
           promoter: testPromoterNullLandingPages,
           landingPages: [],
         ),
@@ -196,12 +217,12 @@ void main() {
     });
 
     test(
-        "should emit [Loading, Success] with empty landing pages when getLandingPages fails",
+        "should emit [Loading, Loaded] with empty landing pages when getLandingPages fails",
         () {
       // Given
       final expectedResult = [
         PromoterDetailLoading(),
-        PromoterDetailSuccess(
+        PromoterDetailLoaded(
           promoter: testPromoter,
           landingPages: [],
         ),
@@ -232,6 +253,19 @@ void main() {
   });
 
   group("loadRecommendations", () {
+    test("should do nothing when state is not PromoterDetailLoaded", () {
+      // Given - initial state
+      when(mockRecommendationRepo.getRecommendationsWithArchived(any))
+          .thenAnswer((_) async => right([]));
+
+      // When
+      cubit.loadRecommendations(userId: "user-1", role: Role.promoter);
+
+      // Then
+      verifyNever(
+          mockRecommendationRepo.getRecommendationsWithArchived(any));
+    });
+
     group("promoter role", () {
       final testRecommendations = [
         createRecommendation(
@@ -243,17 +277,12 @@ void main() {
       test("should call recommendationRepo.getRecommendationsWithArchived",
           () async {
         // Given
+        await loadPromoterIntoState();
         when(mockRecommendationRepo.getRecommendationsWithArchived("user-1"))
             .thenAnswer((_) async => right(testRecommendations));
-        when(mockLandingPageRepo.getAllLandingPages(["lp-1"]))
-            .thenAnswer((_) async => right(testLandingPages));
 
         // When
-        cubit.loadRecommendations(
-          userId: "user-1",
-          role: Role.promoter,
-          landingPageIds: ["lp-1"],
-        );
+        cubit.loadRecommendations(userId: "user-1", role: Role.promoter);
         await untilCalled(
             mockRecommendationRepo.getRecommendationsWithArchived("user-1"));
 
@@ -263,129 +292,67 @@ void main() {
       });
 
       test(
-          "should emit [RecommendationsLoading, RecommendationsSuccess] with landing pages",
-          () {
+          "should emit [Loaded(loading), Loaded(recommendations)] on success",
+          () async {
         // Given
-        final expectedResult = [
-          PromoterDetailRecommendationsLoading(),
-          PromoterDetailRecommendationsSuccess(
-            recommendations: testRecommendations,
-            allLandingPages: testLandingPages,
-          ),
-        ];
-        when(mockRecommendationRepo.getRecommendationsWithArchived("user-1"))
-            .thenAnswer((_) async => right(testRecommendations));
-        when(mockLandingPageRepo.getAllLandingPages(["lp-1"]))
-            .thenAnswer((_) async => right(testLandingPages));
-
-        // Then
-        expectLater(cubit.stream, emitsInOrder(expectedResult));
-        cubit.loadRecommendations(
-          userId: "user-1",
-          role: Role.promoter,
-          landingPageIds: ["lp-1"],
-        );
-      });
-
-      test(
-          "should emit [RecommendationsLoading, RecommendationsSuccess] with null landing pages when no IDs",
-          () {
-        // Given
-        final expectedResult = [
-          PromoterDetailRecommendationsLoading(),
-          PromoterDetailRecommendationsSuccess(
-            recommendations: testRecommendations,
-            allLandingPages: null,
-          ),
-        ];
+        await loadPromoterIntoState();
         when(mockRecommendationRepo.getRecommendationsWithArchived("user-1"))
             .thenAnswer((_) async => right(testRecommendations));
 
         // Then
-        expectLater(cubit.stream, emitsInOrder(expectedResult));
-        cubit.loadRecommendations(
-          userId: "user-1",
-          role: Role.promoter,
-          landingPageIds: [],
+        expectLater(
+          cubit.stream,
+          emitsInOrder([
+            PromoterDetailLoaded(
+              promoter: testPromoter,
+              landingPages: testLandingPages,
+              isRecommendationsLoading: true,
+            ),
+            PromoterDetailLoaded(
+              promoter: testPromoter,
+              landingPages: testLandingPages,
+              recommendations: testRecommendations,
+            ),
+          ]),
         );
+        cubit.loadRecommendations(userId: "user-1", role: Role.promoter);
       });
 
       test(
-          "should emit [RecommendationsLoading, RecommendationsSuccess] with null landing pages when IDs are null",
-          () {
+          "should emit [Loaded(loading), Loaded(failure)] when getRecommendationsWithArchived fails",
+          () async {
         // Given
-        final expectedResult = [
-          PromoterDetailRecommendationsLoading(),
-          PromoterDetailRecommendationsSuccess(
-            recommendations: testRecommendations,
-            allLandingPages: null,
-          ),
-        ];
-        when(mockRecommendationRepo.getRecommendationsWithArchived("user-1"))
-            .thenAnswer((_) async => right(testRecommendations));
-
-        // Then
-        expectLater(cubit.stream, emitsInOrder(expectedResult));
-        cubit.loadRecommendations(
-          userId: "user-1",
-          role: Role.promoter,
-          landingPageIds: null,
-        );
-      });
-
-      test(
-          "should emit [RecommendationsLoading, RecommendationsSuccess] with null landing pages when loading fails",
-          () {
-        // Given
-        final expectedResult = [
-          PromoterDetailRecommendationsLoading(),
-          PromoterDetailRecommendationsSuccess(
-            recommendations: testRecommendations,
-            allLandingPages: null,
-          ),
-        ];
-        when(mockRecommendationRepo.getRecommendationsWithArchived("user-1"))
-            .thenAnswer((_) async => right(testRecommendations));
-        when(mockLandingPageRepo.getAllLandingPages(["lp-1"]))
-            .thenAnswer((_) async => left(BackendFailure()));
-
-        // Then
-        expectLater(cubit.stream, emitsInOrder(expectedResult));
-        cubit.loadRecommendations(
-          userId: "user-1",
-          role: Role.promoter,
-          landingPageIds: ["lp-1"],
-        );
-      });
-
-      test(
-          "should emit [RecommendationsLoading, RecommendationsFailure] when getRecommendationsWithArchived fails",
-          () {
-        // Given
-        final expectedResult = [
-          PromoterDetailRecommendationsLoading(),
-          PromoterDetailRecommendationsFailure(failure: BackendFailure()),
-        ];
+        await loadPromoterIntoState();
         when(mockRecommendationRepo.getRecommendationsWithArchived("user-1"))
             .thenAnswer((_) async => left(BackendFailure()));
 
         // Then
-        expectLater(cubit.stream, emitsInOrder(expectedResult));
-        cubit.loadRecommendations(
-          userId: "user-1",
-          role: Role.promoter,
-          landingPageIds: ["lp-1"],
+        expectLater(
+          cubit.stream,
+          emitsInOrder([
+            PromoterDetailLoaded(
+              promoter: testPromoter,
+              landingPages: testLandingPages,
+              isRecommendationsLoading: true,
+            ),
+            PromoterDetailLoaded(
+              promoter: testPromoter,
+              landingPages: testLandingPages,
+              recommendationsFailure: BackendFailure(),
+            ),
+          ]),
         );
+        cubit.loadRecommendations(userId: "user-1", role: Role.promoter);
       });
     });
 
     group("company role", () {
-      final testUser = CustomUser(
-        id: UniqueID.fromUniqueString("user-1"),
+      final testPromoterAsUser = CustomUser(
+        id: UniqueID.fromUniqueString("promoter-1"),
         firstName: "Max",
         lastName: "Mustermann",
         email: "max@example.com",
-        landingPageIDs: ["lp-1"],
+        landingPageIDs: ["lp-1", "lp-2"],
       );
 
       final testRecommendations = [
@@ -397,7 +364,7 @@ void main() {
 
       final testPromoterRecommendations = [
         PromoterRecommendations(
-          promoter: testUser,
+          promoter: testPromoterAsUser,
           recommendations: testRecommendations,
         ),
       ];
@@ -406,17 +373,13 @@ void main() {
           "should call recommendationRepo.getRecommendationsCompanyWithArchived",
           () async {
         // Given
+        await loadPromoterIntoState();
         when(mockRecommendationRepo
                 .getRecommendationsCompanyWithArchived("user-1"))
             .thenAnswer((_) async => right(testPromoterRecommendations));
-        when(mockLandingPageRepo.getAllLandingPages(["lp-1"]))
-            .thenAnswer((_) async => right(testLandingPages));
 
         // When
-        cubit.loadRecommendations(
-          userId: "user-1",
-          role: Role.company,
-        );
+        cubit.loadRecommendations(userId: "user-1", role: Role.company);
         await untilCalled(mockRecommendationRepo
             .getRecommendationsCompanyWithArchived("user-1"));
 
@@ -427,131 +390,148 @@ void main() {
       });
 
       test(
-          "should emit [RecommendationsLoading, RecommendationsSuccess] with promoterRecommendations",
-          () {
+          "should emit [Loaded(loading), Loaded(filtered recommendations)] on success",
+          () async {
         // Given
-        final expectedResult = [
-          PromoterDetailRecommendationsLoading(),
-          PromoterDetailRecommendationsSuccess(
-            recommendations: testRecommendations,
-            promoterRecommendations: testPromoterRecommendations,
-            allLandingPages: testLandingPages,
-          ),
-        ];
+        await loadPromoterIntoState();
         when(mockRecommendationRepo
                 .getRecommendationsCompanyWithArchived("user-1"))
             .thenAnswer((_) async => right(testPromoterRecommendations));
-        when(mockLandingPageRepo.getAllLandingPages(["lp-1"]))
-            .thenAnswer((_) async => right(testLandingPages));
 
         // Then
-        expectLater(cubit.stream, emitsInOrder(expectedResult));
-        cubit.loadRecommendations(
-          userId: "user-1",
-          role: Role.company,
+        expectLater(
+          cubit.stream,
+          emitsInOrder([
+            PromoterDetailLoaded(
+              promoter: testPromoter,
+              landingPages: testLandingPages,
+              isRecommendationsLoading: true,
+            ),
+            PromoterDetailLoaded(
+              promoter: testPromoter,
+              landingPages: testLandingPages,
+              recommendations: testRecommendations,
+              promoterRecommendations: testPromoterRecommendations,
+            ),
+          ]),
         );
+        cubit.loadRecommendations(userId: "user-1", role: Role.company);
       });
 
       test(
-          "should collect all recommendations from multiple promoters", () {
+          "should filter recommendations to matching promoter only", () async {
         // Given
-        final testUser2 = CustomUser(
-          id: UniqueID.fromUniqueString("user-2"),
+        await loadPromoterIntoState();
+        final otherUser = CustomUser(
+          id: UniqueID.fromUniqueString("other-promoter"),
           firstName: "Anna",
           lastName: "Schmidt",
           email: "anna@example.com",
           landingPageIDs: ["lp-2"],
         );
-        final rec3 = createRecommendation(
+        final otherRec = createRecommendation(
             id: "rec-3", statusLevel: StatusLevel.linkClicked);
         final multiPromoterRecs = [
           PromoterRecommendations(
-            promoter: testUser,
+            promoter: testPromoterAsUser,
             recommendations: testRecommendations,
           ),
           PromoterRecommendations(
-            promoter: testUser2,
-            recommendations: [rec3],
-          ),
-        ];
-        final allRecs = [...testRecommendations, rec3];
-        final expectedResult = [
-          PromoterDetailRecommendationsLoading(),
-          PromoterDetailRecommendationsSuccess(
-            recommendations: allRecs,
-            promoterRecommendations: multiPromoterRecs,
-            allLandingPages: testLandingPages,
+            promoter: otherUser,
+            recommendations: [otherRec],
           ),
         ];
         when(mockRecommendationRepo
                 .getRecommendationsCompanyWithArchived("user-1"))
             .thenAnswer((_) async => right(multiPromoterRecs));
-        when(mockLandingPageRepo.getAllLandingPages(any))
-            .thenAnswer((_) async => right(testLandingPages));
 
-        // Then
-        expectLater(cubit.stream, emitsInOrder(expectedResult));
-        cubit.loadRecommendations(
-          userId: "user-1",
-          role: Role.company,
+        // Then — recommendations should only contain testPromoter's recs
+        expectLater(
+          cubit.stream,
+          emitsInOrder([
+            PromoterDetailLoaded(
+              promoter: testPromoter,
+              landingPages: testLandingPages,
+              isRecommendationsLoading: true,
+            ),
+            PromoterDetailLoaded(
+              promoter: testPromoter,
+              landingPages: testLandingPages,
+              recommendations: testRecommendations,
+              promoterRecommendations: multiPromoterRecs,
+            ),
+          ]),
         );
+        cubit.loadRecommendations(userId: "user-1", role: Role.company);
       });
 
       test(
-          "should emit [RecommendationsLoading, RecommendationsFailure] when getRecommendationsCompanyWithArchived fails",
-          () {
+          "should emit empty recommendations when no matching promoter found",
+          () async {
         // Given
-        final expectedResult = [
-          PromoterDetailRecommendationsLoading(),
-          PromoterDetailRecommendationsFailure(failure: BackendFailure()),
+        await loadPromoterIntoState();
+        final otherUser = CustomUser(
+          id: UniqueID.fromUniqueString("other-promoter"),
+          firstName: "Anna",
+          lastName: "Schmidt",
+          email: "anna@example.com",
+        );
+        final nonMatchingRecs = [
+          PromoterRecommendations(
+            promoter: otherUser,
+            recommendations: testRecommendations,
+          ),
         ];
+        when(mockRecommendationRepo
+                .getRecommendationsCompanyWithArchived("user-1"))
+            .thenAnswer((_) async => right(nonMatchingRecs));
+
+        // Then
+        expectLater(
+          cubit.stream,
+          emitsInOrder([
+            PromoterDetailLoaded(
+              promoter: testPromoter,
+              landingPages: testLandingPages,
+              isRecommendationsLoading: true,
+            ),
+            PromoterDetailLoaded(
+              promoter: testPromoter,
+              landingPages: testLandingPages,
+              recommendations: [],
+              promoterRecommendations: nonMatchingRecs,
+            ),
+          ]),
+        );
+        cubit.loadRecommendations(userId: "user-1", role: Role.company);
+      });
+
+      test(
+          "should emit [Loaded(loading), Loaded(failure)] when getRecommendationsCompanyWithArchived fails",
+          () async {
+        // Given
+        await loadPromoterIntoState();
         when(mockRecommendationRepo
                 .getRecommendationsCompanyWithArchived("user-1"))
             .thenAnswer((_) async => left(BackendFailure()));
 
         // Then
-        expectLater(cubit.stream, emitsInOrder(expectedResult));
-        cubit.loadRecommendations(
-          userId: "user-1",
-          role: Role.company,
+        expectLater(
+          cubit.stream,
+          emitsInOrder([
+            PromoterDetailLoaded(
+              promoter: testPromoter,
+              landingPages: testLandingPages,
+              isRecommendationsLoading: true,
+            ),
+            PromoterDetailLoaded(
+              promoter: testPromoter,
+              landingPages: testLandingPages,
+              recommendationsFailure: BackendFailure(),
+            ),
+          ]),
         );
-      });
-
-      test(
-          "should emit success with null landing pages when no promoter has landingPageIDs",
-          () {
-        // Given
-        final userNoLPs = CustomUser(
-          id: UniqueID.fromUniqueString("user-no-lp"),
-          firstName: "No",
-          lastName: "LPs",
-          email: "nolp@example.com",
-          landingPageIDs: null,
-        );
-        final promoRecsNoLPs = [
-          PromoterRecommendations(
-            promoter: userNoLPs,
-            recommendations: testRecommendations,
-          ),
-        ];
-        final expectedResult = [
-          PromoterDetailRecommendationsLoading(),
-          PromoterDetailRecommendationsSuccess(
-            recommendations: testRecommendations,
-            promoterRecommendations: promoRecsNoLPs,
-            allLandingPages: null,
-          ),
-        ];
-        when(mockRecommendationRepo
-                .getRecommendationsCompanyWithArchived("user-1"))
-            .thenAnswer((_) async => right(promoRecsNoLPs));
-
-        // Then
-        expectLater(cubit.stream, emitsInOrder(expectedResult));
-        cubit.loadRecommendations(
-          userId: "user-1",
-          role: Role.company,
-        );
+        cubit.loadRecommendations(userId: "user-1", role: Role.company);
       });
     });
   });
