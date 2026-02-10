@@ -88,9 +88,9 @@ class PromoterDetailLandingPageTile extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: 80,
+          width: 100,
           child: Text(
-            landingPage.visitsTotal?.toString() ?? '0',
+            stats.shares.toString(),
             style: themeData.textTheme.bodyMedium
                 ?.copyWith(fontWeight: FontWeight.w600),
             textAlign: TextAlign.center,
@@ -171,8 +171,8 @@ class PromoterDetailLandingPageTile extends StatelessWidget {
                   Expanded(
                     child: _buildStatColumn(
                       themeData,
-                      localization.promoter_detail_visits,
-                      (landingPage.visitsTotal ?? 0).toString(),
+                      localization.promoter_detail_chart_recommendations,
+                      stats.shares.toString(),
                     ),
                   ),
                   Expanded(
@@ -258,7 +258,6 @@ class PromoterDetailLandingPageTile extends StatelessWidget {
     );
   }
 }
-// TODO: MOCKDATEN ERSTELLEN
 // TODO: TESTS SCHREIBEN FÜR CUBIT UND HELPER KLASSEN
 // TODO: SENTRY MCP EINBINDEN
 // TODO: SENTRY PROBLEM BEHEBEN

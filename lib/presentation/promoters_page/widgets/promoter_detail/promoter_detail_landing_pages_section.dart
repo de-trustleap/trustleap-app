@@ -113,9 +113,9 @@ class PromoterDetailLandingPagesSection extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: 80,
+            width: 100,
             child: Text(
-              localization.promoter_detail_visits.toUpperCase(),
+              localization.promoter_detail_chart_recommendations.toUpperCase(),
               style: themeData.textTheme.labelSmall?.copyWith(
                 color: themeData.colorScheme.onSurfaceVariant,
               ),
