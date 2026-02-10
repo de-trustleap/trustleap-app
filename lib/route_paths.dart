@@ -27,6 +27,7 @@ class RoutePaths {
   static const String promotersOverviewPath = "/overview";
   static const String promotersRegisterPath = "/register";
   static const String editPromoterPath = "/edit-promoter";
+  static const String promoterDetailPath = "/promoter-detail";
   static const String landingPagePath = "/landingpage";
   static const String landingPageDetailPath = "/landingpage-detail";
   static const String landingPageCreatorPath = "/landingpage-creator";

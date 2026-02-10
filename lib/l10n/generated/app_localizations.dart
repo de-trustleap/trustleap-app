@@ -6176,6 +6176,162 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Conversion Rate'**
   String get landing_page_detail_promoter_conversion_rate;
+
+  /// Label for date of birth on promoter detail page
+  ///
+  /// In en, this message translates to:
+  /// **'Date of birth'**
+  String get promoter_detail_birthday;
+
+  /// Label for membership date on promoter detail page
+  ///
+  /// In en, this message translates to:
+  /// **'Member since'**
+  String get promoter_detail_member_since;
+
+  /// Label for creation date on promoter detail page
+  ///
+  /// In en, this message translates to:
+  /// **'Created on'**
+  String get promoter_detail_created_at;
+
+  /// Label for expiration date on promoter detail page
+  ///
+  /// In en, this message translates to:
+  /// **'Expires on'**
+  String get promoter_detail_expires_at;
+
+  /// Title of performance card on promoter detail page
+  ///
+  /// In en, this message translates to:
+  /// **'Performance Overview'**
+  String get promoter_detail_performance_overview;
+
+  /// Label for shared pages statistic
+  ///
+  /// In en, this message translates to:
+  /// **'Shared Pages'**
+  String get promoter_detail_shared_pages;
+
+  /// Label for conversions statistic
+  ///
+  /// In en, this message translates to:
+  /// **'Conversions'**
+  String get promoter_detail_conversions;
+
+  /// Label for conversion rate
+  ///
+  /// In en, this message translates to:
+  /// **'Conversion Rate'**
+  String get promoter_detail_conversion_rate;
+
+  /// Title of actions card on promoter detail page
+  ///
+  /// In en, this message translates to:
+  /// **'Contact & Actions'**
+  String get promoter_detail_contact_actions;
+
+  /// Button text to send email
+  ///
+  /// In en, this message translates to:
+  /// **'Send E-Mail'**
+  String get promoter_detail_send_email;
+
+  /// Button text to delete promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Promoter'**
+  String get promoter_detail_delete_promoter;
+
+  /// Title of chart on promoter detail page
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendations & Conversions'**
+  String get promoter_detail_chart_title;
+
+  /// Subtitle of chart
+  ///
+  /// In en, this message translates to:
+  /// **'Performance of the last {days} days'**
+  String promoter_detail_chart_subtitle(String days);
+
+  /// Legend label for recommendations in chart
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendations'**
+  String get promoter_detail_chart_recommendations;
+
+  /// Dropdown text for time period
+  ///
+  /// In en, this message translates to:
+  /// **'Last {days} days'**
+  String promoter_detail_chart_last_days(String days);
+
+  /// Title of landing pages section
+  ///
+  /// In en, this message translates to:
+  /// **'Promoted Landing Pages'**
+  String get promoter_detail_landing_pages_title;
+
+  /// Subtitle of landing pages section
+  ///
+  /// In en, this message translates to:
+  /// **'Overview of all assigned campaigns'**
+  String get promoter_detail_landing_pages_subtitle;
+
+  /// Button text to assign a landing page
+  ///
+  /// In en, this message translates to:
+  /// **'Assign Landing Page'**
+  String get promoter_detail_assign_page;
+
+  /// Subtitle in landing page assignment dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Select the pages to assign to this promoter.'**
+  String get promoter_detail_assign_dialog_subtitle;
+
+  /// Snackbar after successful landing page assignment
+  ///
+  /// In en, this message translates to:
+  /// **'Landing pages updated successfully'**
+  String get promoter_detail_assign_success;
+
+  /// Table header for landing page name
+  ///
+  /// In en, this message translates to:
+  /// **'Landing Page Name'**
+  String get promoter_detail_landing_page_name;
+
+  /// Table header for status
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get promoter_detail_status;
+
+  /// Table header for visits
+  ///
+  /// In en, this message translates to:
+  /// **'Visits'**
+  String get promoter_detail_visits;
+
+  /// Empty state text when no landing pages assigned
+  ///
+  /// In en, this message translates to:
+  /// **'No landing pages assigned'**
+  String get promoter_detail_no_landing_pages;
+
+  /// Error message when loading promoter details
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading promoter details'**
+  String get promoter_detail_error_loading;
+
+  /// Error message when promoter not found
+  ///
+  /// In en, this message translates to:
+  /// **'Promoter not found'**
+  String get promoter_detail_not_found;
 }
 
 class _AppLocalizationsDelegate

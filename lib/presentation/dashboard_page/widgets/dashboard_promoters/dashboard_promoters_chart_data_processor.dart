@@ -6,10 +6,12 @@ import 'package:intl/intl.dart';
 class DashboardPromotersChartDataProcessor {
   final List<CustomUser> promoters;
   final TimePeriod timePeriod;
+  final String locale;
 
   DashboardPromotersChartDataProcessor({
     required this.promoters,
     required this.timePeriod,
+    this.locale = 'de',
   });
 
   List<FlSpot> generateSpots() {
@@ -89,14 +91,14 @@ class DashboardPromotersChartDataProcessor {
       case TimePeriod.day:
       case TimePeriod.week:
         final day = now.subtract(Duration(days: 6 - index));
-        return DateFormat('E', 'de_DE').format(day);
+        return DateFormat('E', locale).format(day);
       case TimePeriod.month:
       case TimePeriod.quarter:
         final day = now.subtract(Duration(days: 29 - index));
         return DateFormat('dd.MM').format(day);
       case TimePeriod.year:
         final month = DateTime(now.year, now.month - (11 - index), 1);
-        return DateFormat('MMM', 'de_DE').format(month);
+        return DateFormat('MMM', locale).format(month);
     }
   }
 

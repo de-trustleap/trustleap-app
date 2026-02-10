@@ -3540,4 +3540,89 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landing_page_detail_promoter_conversion_rate => 'Conversion Rate';
+
+  @override
+  String get promoter_detail_birthday => 'Date of birth';
+
+  @override
+  String get promoter_detail_member_since => 'Member since';
+
+  @override
+  String get promoter_detail_created_at => 'Created on';
+
+  @override
+  String get promoter_detail_expires_at => 'Expires on';
+
+  @override
+  String get promoter_detail_performance_overview => 'Performance Overview';
+
+  @override
+  String get promoter_detail_shared_pages => 'Shared Pages';
+
+  @override
+  String get promoter_detail_conversions => 'Conversions';
+
+  @override
+  String get promoter_detail_conversion_rate => 'Conversion Rate';
+
+  @override
+  String get promoter_detail_contact_actions => 'Contact & Actions';
+
+  @override
+  String get promoter_detail_send_email => 'Send E-Mail';
+
+  @override
+  String get promoter_detail_delete_promoter => 'Delete Promoter';
+
+  @override
+  String get promoter_detail_chart_title => 'Recommendations & Conversions';
+
+  @override
+  String promoter_detail_chart_subtitle(String days) {
+    return 'Performance of the last $days days';
+  }
+
+  @override
+  String get promoter_detail_chart_recommendations => 'Recommendations';
+
+  @override
+  String promoter_detail_chart_last_days(String days) {
+    return 'Last $days days';
+  }
+
+  @override
+  String get promoter_detail_landing_pages_title => 'Promoted Landing Pages';
+
+  @override
+  String get promoter_detail_landing_pages_subtitle =>
+      'Overview of all assigned campaigns';
+
+  @override
+  String get promoter_detail_assign_page => 'Assign Landing Page';
+
+  @override
+  String get promoter_detail_assign_dialog_subtitle =>
+      'Select the pages to assign to this promoter.';
+
+  @override
+  String get promoter_detail_assign_success =>
+      'Landing pages updated successfully';
+
+  @override
+  String get promoter_detail_landing_page_name => 'Landing Page Name';
+
+  @override
+  String get promoter_detail_status => 'Status';
+
+  @override
+  String get promoter_detail_visits => 'Visits';
+
+  @override
+  String get promoter_detail_no_landing_pages => 'No landing pages assigned';
+
+  @override
+  String get promoter_detail_error_loading => 'Error loading promoter details';
+
+  @override
+  String get promoter_detail_not_found => 'Promoter not found';
 }

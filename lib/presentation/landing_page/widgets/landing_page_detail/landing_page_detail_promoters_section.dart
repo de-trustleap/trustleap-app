@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/application/landingpages/landingpage_observer/la
 import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/entities/promoter_recommendations.dart';
@@ -248,6 +249,7 @@ class _LandingPageDetailPromotersSectionState
     if (_assignedPromoters.isEmpty) {
       return _buildEmptyState(themeData, localization);
     }
+    final navigator = CustomNavigator.of(context);
     return Column(
       children: _assignedPromoters
           .map((p) => LandingPageDetailPromoterTile(
@@ -255,6 +257,8 @@ class _LandingPageDetailPromotersSectionState
                 stats: _statistics?.getStatsForPromoter(p.id.value) ??
                     const PromoterStats(shares: 0, conversions: 0),
                 onRemove: () => _showRemoveDialog(p),
+                onTap: () => navigator.navigate(
+                    "${RoutePaths.homePath}${RoutePaths.promoterDetailPath}/${p.id.value}"),
               ))
           .toList(),
     );
