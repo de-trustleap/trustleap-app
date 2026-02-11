@@ -29,6 +29,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:finanzbegleiter/core/sentry_initialization.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:web/web.dart' as web;
@@ -38,14 +39,7 @@ Future<void> main() async {
 
   if (hasStatisticsConsent) {
     // Initialize with Sentry if consent is given
-    await SentryFlutter.init(
-      (options) {
-        options.dsn =
-            'https://618cb82100c49afd9b092cd092c96202@o4509530459209728.ingest.de.sentry.io/4509530460586064';
-        options.sendDefaultPii = false;
-        options.tracesSampleRate = 0.1;
-        options.profilesSampleRate = 0.1;
-      },
+    await SentryInitialization.init(
       appRunner: () => _runApp(hasStatisticsConsent),
     );
   } else {
