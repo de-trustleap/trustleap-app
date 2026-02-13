@@ -1,6 +1,6 @@
-import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/landing_page.dart';
-import 'package:finanzbegleiter/infrastructure/repositories/landing_page_repository_sorting_helper.dart';
+import 'package:finanzbegleiter/core/id.dart';
+import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
+import 'package:finanzbegleiter/features/landing_pages/infrastructure/landing_page_repository_sorting_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

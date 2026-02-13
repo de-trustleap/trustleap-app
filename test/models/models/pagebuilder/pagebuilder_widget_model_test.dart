@@ -1,16 +1,16 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/core/id.dart';
 import 'package:flutter/material.dart';
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_widget_model.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_background.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
-import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
+import 'package:finanzbegleiter/features/page_builder/infrastructure/models/pagebuilder_widget_model.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_spacing.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_container_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_text_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_background.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/responsive/pagebuilder_responsive_or_constant.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_paint.dart';
+import 'package:finanzbegleiter/features/page_builder/infrastructure/models/pagebuilder_responsive_or_constant_model.dart';
 
 void main() {
   group("PagebuilderWidgetModel_CopyWith", () {

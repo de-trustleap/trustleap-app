@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/domain/entities/last_viewed.dart';
+import 'package:finanzbegleiter/features/landing_pages/domain/last_viewed.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

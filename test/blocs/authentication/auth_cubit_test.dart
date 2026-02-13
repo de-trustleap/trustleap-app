@@ -1,6 +1,6 @@
 // ignore_for_file: type=lint
 import 'package:dartz/dartz.dart';
-import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
+import 'package:finanzbegleiter/features/auth/application/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:flutter_test/flutter_test.dart';

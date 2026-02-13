@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart';
+import 'package:finanzbegleiter/features/profile/application/company_observer/company_observer_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
-import 'package:finanzbegleiter/domain/entities/company.dart';
-import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/features/profile/domain/company.dart';
+import 'package:finanzbegleiter/core/id.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import '../mocks.mocks.dart';

@@ -1,19 +1,19 @@
 @TestOn('chrome')
 library;
 
-import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
+import 'package:finanzbegleiter/features/profile/application/company/company_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
-import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/core/id.dart';
+import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/company_registration/company_registration_form.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/form_error_view.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/form_textfield.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/primary_button.dart';
+import 'package:finanzbegleiter/features/profile/presentation/widgets/company_registration/company_registration_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

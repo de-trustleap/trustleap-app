@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
-import "package:finanzbegleiter/presentation/page_builder/page_elements/textstyle_parser.dart";
-import "package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart";
+import "package:finanzbegleiter/features/page_builder/presentation/page_elements/textstyle_parser.dart";
+import "package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_text_properties.dart";
 import "package:flutter/material.dart";
-import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/responsive/pagebuilder_responsive_or_constant.dart';
+import 'package:finanzbegleiter/features/page_builder/application/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:finanzbegleiter/constants.dart';
 

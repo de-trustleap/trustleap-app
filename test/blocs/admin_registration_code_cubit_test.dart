@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:finanzbegleiter/application/admin_registration_code/admin_registration_code_cubit.dart';
+import 'package:finanzbegleiter/features/admin/application/admin_registration_code_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

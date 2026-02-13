@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
+import 'package:finanzbegleiter/features/auth/application/signIn/sign_in_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
-import 'package:finanzbegleiter/domain/entities/user.dart';
-import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/features/auth/domain/user.dart';
+import 'package:finanzbegleiter/core/id.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import '../../repositories/mock_user_credential.dart';

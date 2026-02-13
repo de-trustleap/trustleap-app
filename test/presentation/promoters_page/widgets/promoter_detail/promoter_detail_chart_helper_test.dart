@@ -1,8 +1,8 @@
 import "package:fl_chart/fl_chart.dart";
-import "package:finanzbegleiter/domain/entities/id.dart";
-import "package:finanzbegleiter/domain/entities/recommendation_item.dart";
-import "package:finanzbegleiter/domain/entities/user_recommendation.dart";
-import "package:finanzbegleiter/presentation/promoters_page/widgets/promoter_detail/promoter_detail_chart_helper.dart";
+import "package:finanzbegleiter/core/id.dart";
+import "package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart";
+import "package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart";
+import "package:finanzbegleiter/features/promoter/presentation/widgets/promoter_detail/promoter_detail_chart_helper.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:intl/date_symbol_data_local.dart";
 

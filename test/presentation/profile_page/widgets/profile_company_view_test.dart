@@ -1,23 +1,23 @@
 @TestOn('chrome')
 library;
 
-import 'package:finanzbegleiter/application/images/company/company_image_bloc.dart';
-import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
-import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
-import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart';
+import 'package:finanzbegleiter/features/images/application/company/company_image_bloc.dart';
+import 'package:finanzbegleiter/features/permissions/application/permission_cubit.dart';
+import 'package:finanzbegleiter/features/profile/application/company/company_cubit.dart';
+import 'package:finanzbegleiter/features/profile/application/company_observer/company_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
-import 'package:finanzbegleiter/domain/entities/company.dart';
-import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/permissions.dart';
-import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/features/profile/domain/company.dart';
+import 'package:finanzbegleiter/core/id.dart';
+import 'package:finanzbegleiter/features/permissions/domain/permissions.dart';
+import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/cached_image_view.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/company/company_contact_section.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/company/company_image_section.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/company/profile_company_view.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/error_view.dart';
+import 'package:finanzbegleiter/features/profile/presentation/widgets/cached_image_view.dart';
+import 'package:finanzbegleiter/features/profile/presentation/widgets/company/company_contact_section.dart';
+import 'package:finanzbegleiter/features/profile/presentation/widgets/company/company_image_section.dart';
+import 'package:finanzbegleiter/features/profile/presentation/widgets/company/profile_company_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

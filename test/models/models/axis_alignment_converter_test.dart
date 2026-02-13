@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:finanzbegleiter/infrastructure/models/model_helper/axis_alignment_converter.dart';
+import 'package:finanzbegleiter/features/page_builder/infrastructure/model_helper/axis_alignment_converter.dart';
 
 void main() {
   group("AxisAlignmentConverter Tests", () {

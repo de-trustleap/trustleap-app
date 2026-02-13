@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/domain/entities/avv.dart';
+import 'package:finanzbegleiter/features/legals/domain/avv.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

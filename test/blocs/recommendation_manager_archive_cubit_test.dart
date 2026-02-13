@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_archive/recommendation_manager_archive_cubit.dart';
-import 'package:finanzbegleiter/domain/entities/archived_recommendation_item.dart';
-import 'package:finanzbegleiter/domain/entities/user.dart';
-import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager_archive/recommendation_manager_archive_cubit.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/archived_recommendation_item.dart';
+import 'package:finanzbegleiter/features/auth/domain/user.dart';
+import 'package:finanzbegleiter/core/id.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

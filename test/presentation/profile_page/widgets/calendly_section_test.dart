@@ -1,8 +1,8 @@
-import 'package:finanzbegleiter/application/calendly/calendly_cubit.dart';
+import 'package:finanzbegleiter/features/calendly/application/calendly_cubit.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/calendly_connection_widget.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/calendly_section.dart';
+import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_creator/calendly_connection_widget.dart';
+import 'package:finanzbegleiter/features/profile/presentation/widgets/calendly_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

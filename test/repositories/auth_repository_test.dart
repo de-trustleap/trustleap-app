@@ -2,8 +2,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
-import 'package:finanzbegleiter/domain/entities/user.dart';
-import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/features/auth/domain/user.dart';
+import 'package:finanzbegleiter/core/id.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'mock_user_credential.dart';

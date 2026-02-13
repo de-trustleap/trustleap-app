@@ -2,12 +2,12 @@ import 'dart:typed_data';
 
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
-import 'package:finanzbegleiter/domain/entities/archived_landing_page_legals.dart';
-import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/landing_page.dart';
-import 'package:finanzbegleiter/domain/entities/legal_version.dart';
-import 'package:finanzbegleiter/domain/entities/promoter.dart';
-import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
+import 'package:finanzbegleiter/features/legals/domain/archived_landing_page_legals.dart';
+import 'package:finanzbegleiter/core/id.dart';
+import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
+import 'package:finanzbegleiter/features/legals/domain/legal_version.dart';
+import 'package:finanzbegleiter/features/promoter/domain/promoter.dart';
+import 'package:finanzbegleiter/features/landing_pages/domain/landing_page_template.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import '../mocks.mocks.dart';

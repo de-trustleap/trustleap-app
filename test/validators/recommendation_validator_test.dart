@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_validator.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_validator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 

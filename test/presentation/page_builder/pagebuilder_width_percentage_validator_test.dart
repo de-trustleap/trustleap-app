@@ -1,13 +1,13 @@
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
+import 'package:finanzbegleiter/features/page_builder/application/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_value.dart';
-import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_width_percentage_validator.dart';
+import 'package:finanzbegleiter/core/id.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_content.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_page.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_section.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/responsive/pagebuilder_responsive_or_constant.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/responsive/pagebuilder_responsive_value.dart';
+import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_width_percentage_validator.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 

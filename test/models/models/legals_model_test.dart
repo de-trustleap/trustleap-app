@@ -1,5 +1,5 @@
-import 'package:finanzbegleiter/domain/entities/legals.dart';
-import 'package:finanzbegleiter/infrastructure/models/legals_model.dart';
+import 'package:finanzbegleiter/features/legals/domain/legals.dart';
+import 'package:finanzbegleiter/features/legals/infrastructure/legals_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

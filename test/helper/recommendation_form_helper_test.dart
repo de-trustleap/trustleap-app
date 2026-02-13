@@ -1,9 +1,9 @@
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
-import 'package:finanzbegleiter/domain/entities/recommendation_reason.dart';
-import 'package:finanzbegleiter/domain/entities/user.dart';
-import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_form_helper.dart';
+import 'package:finanzbegleiter/core/id.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_reason.dart';
+import 'package:finanzbegleiter/features/auth/domain/user.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_form_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

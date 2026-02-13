@@ -1,5 +1,5 @@
-import 'package:finanzbegleiter/domain/entities/last_edit.dart';
-import 'package:finanzbegleiter/infrastructure/models/last_edit_model.dart';
+import 'package:finanzbegleiter/features/landing_pages/domain/last_edit.dart';
+import 'package:finanzbegleiter/features/landing_pages/infrastructure/last_edit_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

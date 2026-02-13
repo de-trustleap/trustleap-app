@@ -1,9 +1,9 @@
 // ignore_for_file: type=lint
 import 'package:dartz/dartz.dart';
-import 'package:finanzbegleiter/application/consent/consent_cubit.dart';
+import 'package:finanzbegleiter/features/consent/application/consent_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
-import 'package:finanzbegleiter/domain/entities/consent_preference.dart';
+import 'package:finanzbegleiter/features/consent/domain/consent_preference.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import '../mocks.mocks.dart';

@@ -3,10 +3,10 @@ import 'package:finanzbegleiter/core/modules/admin_module.dart';
 import 'package:finanzbegleiter/core/modules/auth_guard.dart';
 import 'package:finanzbegleiter/core/modules/home_module.dart';
 import 'package:finanzbegleiter/core/modules/legals_guard.dart';
-import 'package:finanzbegleiter/presentation/authentication/login_page.dart';
-import 'package:finanzbegleiter/presentation/authentication/password_forgotten_page.dart';
-import 'package:finanzbegleiter/presentation/authentication/register_page.dart';
-import 'package:finanzbegleiter/presentation/legals_page/legals_page.dart';
+import 'package:finanzbegleiter/features/auth/presentation/login_page.dart';
+import 'package:finanzbegleiter/features/auth/presentation/password_forgotten_page.dart';
+import 'package:finanzbegleiter/features/auth/presentation/register_page.dart';
+import 'package:finanzbegleiter/features/legals/presentation/legals_page.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 

@@ -1,9 +1,9 @@
-import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
-import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
-import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
-import 'package:finanzbegleiter/presentation/authentication/login_page.dart';
-import 'package:finanzbegleiter/presentation/authentication/widgets/login_form.dart';
-import 'package:finanzbegleiter/presentation/core/page_wrapper/auth_page_template.dart';
+import 'package:finanzbegleiter/features/auth/application/signIn/sign_in_cubit.dart';
+import 'package:finanzbegleiter/features/permissions/application/permission_cubit.dart';
+import 'package:finanzbegleiter/features/auth/application/auth/auth_cubit.dart';
+import 'package:finanzbegleiter/features/auth/presentation/login_page.dart';
+import 'package:finanzbegleiter/features/auth/presentation/widgets/login_form.dart';
+import 'package:finanzbegleiter/core/widgets/page_wrapper/auth_page_template.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

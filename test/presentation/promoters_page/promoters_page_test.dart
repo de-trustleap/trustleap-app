@@ -1,20 +1,20 @@
 @TestOn('chrome')
 library;
 
-import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
-import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
-import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart';
-import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_observer_cubit.dart';
-import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
+import 'package:finanzbegleiter/features/auth/application/auth/auth_cubit.dart';
+import 'package:finanzbegleiter/features/permissions/application/permission_cubit.dart';
+import 'package:finanzbegleiter/features/promoter/application/promoter/promoter_cubit.dart';
+import 'package:finanzbegleiter/features/promoter/application/promoter_observer/promoter_observer_cubit.dart';
+import 'package:finanzbegleiter/features/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
-import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/permissions.dart';
-import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/core/id.dart';
+import 'package:finanzbegleiter/features/permissions/domain/permissions.dart';
+import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tabbar.dart';
-import 'package:finanzbegleiter/presentation/promoters_page/promoters_page.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/tab_bar/custom_tabbar.dart';
+import 'package:finanzbegleiter/features/promoter/presentation/promoters_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

@@ -1,14 +1,14 @@
 @TestOn('chrome')
 library;
 
-import 'package:finanzbegleiter/application/recommendations/recommendations_alert/recommendations_alert_cubit.dart';
+import 'package:finanzbegleiter/features/recommendations/application/recommendations_alert/recommendations_alert_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
-import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
+import 'package:finanzbegleiter/core/id.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_preview.dart';
-import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_textfield.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_preview.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

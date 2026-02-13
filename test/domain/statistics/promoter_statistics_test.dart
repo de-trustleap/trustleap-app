@@ -1,12 +1,12 @@
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/promoter.dart';
-import 'package:finanzbegleiter/domain/entities/promoter_recommendations.dart';
-import 'package:finanzbegleiter/domain/entities/promoter_stats.dart';
-import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
-import 'package:finanzbegleiter/domain/entities/user.dart';
-import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
-import 'package:finanzbegleiter/domain/statistics/promoter_statistics.dart';
+import 'package:finanzbegleiter/core/id.dart';
+import 'package:finanzbegleiter/features/promoter/domain/promoter.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart';
+import 'package:finanzbegleiter/features/promoter/domain/promoter_stats.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
+import 'package:finanzbegleiter/features/auth/domain/user.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
+import 'package:finanzbegleiter/features/promoter/helpers/promoter_statistics.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

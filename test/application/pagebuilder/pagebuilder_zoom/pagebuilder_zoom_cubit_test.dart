@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_zoom/pagebuilder_zoom_cubit.dart';
+import 'package:finanzbegleiter/features/page_builder/application/pagebuilder_zoom/pagebuilder_zoom_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

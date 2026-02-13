@@ -1,7 +1,7 @@
-import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/last_edit.dart';
-import 'package:finanzbegleiter/domain/entities/last_viewed.dart';
-import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
+import 'package:finanzbegleiter/core/id.dart';
+import 'package:finanzbegleiter/features/landing_pages/domain/last_edit.dart';
+import 'package:finanzbegleiter/features/landing_pages/domain/last_viewed.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:flutter_test/flutter_test.dart';
 

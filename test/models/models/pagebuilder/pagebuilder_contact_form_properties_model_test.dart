@@ -1,15 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_contact_form_properties_model.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_contact_form_properties.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_textfield_properties.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
-import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
+import 'package:finanzbegleiter/features/page_builder/infrastructure/models/pagebuilder_contact_form_properties_model.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_contact_form_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_textfield_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_text_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_button_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_border.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/responsive/pagebuilder_responsive_or_constant.dart';
+import 'package:finanzbegleiter/features/page_builder/infrastructure/models/pagebuilder_responsive_or_constant_model.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_paint.dart';
 
 void main() {
   group("PagebuilderContactFormPropertiesModel_CopyWith", () {

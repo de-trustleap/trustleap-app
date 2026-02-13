@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_drag/pagebuilder_drag_cubit.dart';
+import 'package:finanzbegleiter/features/page_builder/application/pagebuilder_drag/pagebuilder_drag_cubit.dart';
 
 void main() {
   group("PagebuilderDragCubit", () {

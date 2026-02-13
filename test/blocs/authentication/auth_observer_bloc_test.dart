@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/authentication/auth_observer/auth_observer_bloc.dart';
+import 'package:finanzbegleiter/features/auth/application/auth_observer/auth_observer_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

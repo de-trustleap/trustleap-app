@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_image_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_border.dart';
 import 'package:flutter/material.dart';
 import "dart:typed_data";
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_paint.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/responsive/pagebuilder_responsive_or_constant.dart';
 
 void main() {
   group("PagebuilderImageProperties_CopyWith", () {

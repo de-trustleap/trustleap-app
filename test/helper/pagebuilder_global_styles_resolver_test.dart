@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:finanzbegleiter/domain/helpers/pagebuilder_global_styles_resolver.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_fonts.dart';
+import 'package:finanzbegleiter/features/page_builder/helpers/pagebuilder_global_styles_resolver.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_global_styles.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_global_colors.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_global_fonts.dart';
 import 'package:flutter/material.dart';
 
 void main() {

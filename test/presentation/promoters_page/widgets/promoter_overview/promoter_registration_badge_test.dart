@@ -1,7 +1,7 @@
 @TestOn('chrome')
 library;
 
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/status_badge.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/status_badge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_global_colors_model.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
+import 'package:finanzbegleiter/features/page_builder/infrastructure/models/pagebuilder_global_colors_model.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_global_colors.dart';
 import 'package:flutter/material.dart';
 
 void main() {

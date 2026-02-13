@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:finanzbegleiter/application/feedback/admin_feedback/admin_feedback_cubit.dart';
+import 'package:finanzbegleiter/features/feedback/application/admin_feedback/admin_feedback_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
-import 'package:finanzbegleiter/domain/entities/feedback_item.dart';
-import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/features/feedback/domain/feedback_item.dart';
+import 'package:finanzbegleiter/core/id.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 

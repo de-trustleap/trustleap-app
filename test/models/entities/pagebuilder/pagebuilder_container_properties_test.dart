@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_container_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_border.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_shadow.dart';
 import 'package:flutter/material.dart';
 
 void main() {

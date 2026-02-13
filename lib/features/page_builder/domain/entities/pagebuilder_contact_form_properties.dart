@@ -1,0 +1,54 @@
+import 'package:equatable/equatable.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_button_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_textfield_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_widget.dart';
+
+class PageBuilderContactFormProperties extends Equatable
+    implements PageBuilderProperties {
+  final String? email;
+  final PageBuilderTextFieldProperties? nameTextFieldProperties;
+  final PageBuilderTextFieldProperties? emailTextFieldProperties;
+  final PageBuilderTextFieldProperties? phoneTextFieldProperties;
+  final PageBuilderTextFieldProperties? messageTextFieldProperties;
+  final PageBuilderButtonProperties? buttonProperties;
+
+  const PageBuilderContactFormProperties({
+    required this.email,
+    required this.nameTextFieldProperties,
+    required this.emailTextFieldProperties,
+    required this.phoneTextFieldProperties,
+    required this.messageTextFieldProperties,
+    required this.buttonProperties,
+  });
+
+  PageBuilderContactFormProperties copyWith(
+      {String? email,
+      PageBuilderTextFieldProperties? nameTextFieldProperties,
+      PageBuilderTextFieldProperties? emailTextFieldProperties,
+      PageBuilderTextFieldProperties? phoneTextFieldProperties,
+      PageBuilderTextFieldProperties? messageTextFieldProperties,
+      PageBuilderButtonProperties? buttonProperties}) {
+    return PageBuilderContactFormProperties(
+      email: email ?? this.email,
+      nameTextFieldProperties:
+          nameTextFieldProperties ?? this.nameTextFieldProperties,
+      emailTextFieldProperties:
+          emailTextFieldProperties ?? this.emailTextFieldProperties,
+      phoneTextFieldProperties:
+          phoneTextFieldProperties ?? this.phoneTextFieldProperties,
+      messageTextFieldProperties:
+          messageTextFieldProperties ?? this.messageTextFieldProperties,
+      buttonProperties: buttonProperties ?? this.buttonProperties,
+    );
+  }
+
+  @override
+  List<Object?> get props => [
+        email,
+        nameTextFieldProperties,
+        emailTextFieldProperties,
+        phoneTextFieldProperties,
+        messageTextFieldProperties,
+        buttonProperties
+      ];
+}

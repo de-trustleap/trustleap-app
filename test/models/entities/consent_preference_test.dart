@@ -1,5 +1,5 @@
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/domain/entities/consent_preference.dart';
+import 'package:finanzbegleiter/features/consent/domain/consent_preference.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

@@ -2,8 +2,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
-import 'package:finanzbegleiter/domain/entities/dashboard_ranked_landingpage.dart';
-import 'package:finanzbegleiter/domain/entities/dashboard_ranked_promoter.dart';
+import 'package:finanzbegleiter/features/dashboard/domain/dashboard_ranked_landingpage.dart';
+import 'package:finanzbegleiter/features/dashboard/domain/dashboard_ranked_promoter.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import '../mocks.mocks.dart';

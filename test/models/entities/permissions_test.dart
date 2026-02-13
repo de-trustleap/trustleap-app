@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:finanzbegleiter/domain/entities/permissions.dart';
+import 'package:finanzbegleiter/features/permissions/domain/permissions.dart';
 
 void main() {
   group("Permissions", () {

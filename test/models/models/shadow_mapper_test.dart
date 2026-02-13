@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
-import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_shadow_model.dart';
-import 'package:finanzbegleiter/infrastructure/models/model_helper/shadow_mapper.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_shadow.dart';
+import 'package:finanzbegleiter/features/page_builder/infrastructure/models/pagebuilder_shadow_model.dart';
+import 'package:finanzbegleiter/features/page_builder/infrastructure/model_helper/shadow_mapper.dart';
 
 
 void main() {

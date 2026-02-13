@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_ai_generation.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_ai_generation.dart';
 
 void main() {
   group("PagebuilderAIGeneration_CopyWith", () {

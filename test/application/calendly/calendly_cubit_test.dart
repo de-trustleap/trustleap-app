@@ -1,6 +1,6 @@
 // ignore_for_file: type=lint
 import 'package:dartz/dartz.dart';
-import 'package:finanzbegleiter/application/calendly/calendly_cubit.dart';
+import 'package:finanzbegleiter/features/calendly/application/calendly_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

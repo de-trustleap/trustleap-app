@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_gradient.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_gradient.dart';
 import 'package:flutter/material.dart';
 
 void main() {

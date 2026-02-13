@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
+import 'package:finanzbegleiter/features/menu/application/menu_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';

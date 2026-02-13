@@ -14,7 +14,8 @@
       "WebFetch(domain:api.flutter.dev)",
       "Read(//Users/marcelspindler/Documents/Dev/Finanzbegleiter/**)",
       "Bash(sed:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(cat:*)"
     ],
     "deny": []
   }

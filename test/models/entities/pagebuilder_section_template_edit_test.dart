@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:finanzbegleiter/domain/entities/pagebuilder_section_template_asset_replacement.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder_section_template_edit.dart';
+import 'package:finanzbegleiter/features/admin/domain/pagebuilder_section_template_asset_replacement.dart';
+import 'package:finanzbegleiter/features/admin/domain/pagebuilder_section_template_edit.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import '../mocks.mocks.dart';
 import 'package:dartz/dartz.dart';
-import 'package:finanzbegleiter/application/legals/legals_cubit.dart';
+import 'package:finanzbegleiter/features/legals/application/legals_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/constants.dart';
 

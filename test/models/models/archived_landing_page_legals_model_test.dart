@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:finanzbegleiter/domain/entities/archived_landing_page_legals.dart';
-import 'package:finanzbegleiter/domain/entities/legal_version.dart';
-import 'package:finanzbegleiter/infrastructure/models/archived_landing_page_legals_model.dart';
+import 'package:finanzbegleiter/features/legals/domain/archived_landing_page_legals.dart';
+import 'package:finanzbegleiter/features/legals/domain/legal_version.dart';
+import 'package:finanzbegleiter/features/legals/infrastructure/archived_landing_page_legals_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

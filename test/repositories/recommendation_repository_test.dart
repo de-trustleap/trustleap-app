@@ -1,10 +1,10 @@
-import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
-import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/archived_recommendation_item.dart';
-import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
-import 'package:finanzbegleiter/domain/entities/promoter_recommendations.dart';
-import 'package:finanzbegleiter/domain/entities/user.dart';
-import 'package:finanzbegleiter/domain/entities/last_viewed.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
+import 'package:finanzbegleiter/core/id.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/archived_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart';
+import 'package:finanzbegleiter/features/auth/domain/user.dart';
+import 'package:finanzbegleiter/features/landing_pages/domain/last_viewed.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:dartz/dartz.dart';

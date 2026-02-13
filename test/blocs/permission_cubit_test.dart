@@ -3,8 +3,8 @@ import 'package:mockito/mockito.dart';
 import '../mocks.mocks.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
-import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
-import 'package:finanzbegleiter/domain/entities/permissions.dart';
+import 'package:finanzbegleiter/features/permissions/application/permission_cubit.dart';
+import 'package:finanzbegleiter/features/permissions/domain/permissions.dart';
 
 void main() {
   late PermissionCubit permissionCubit;

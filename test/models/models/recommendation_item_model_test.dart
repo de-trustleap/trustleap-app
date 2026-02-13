@@ -1,6 +1,6 @@
-import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:finanzbegleiter/infrastructure/models/recommendation_item_model.dart';
+import 'package:finanzbegleiter/features/recommendations/infrastructure/recommendation_item_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

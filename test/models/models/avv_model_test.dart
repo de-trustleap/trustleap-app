@@ -1,5 +1,5 @@
-import 'package:finanzbegleiter/domain/entities/avv.dart';
-import 'package:finanzbegleiter/infrastructure/models/avv_model.dart';
+import 'package:finanzbegleiter/features/legals/domain/avv.dart';
+import 'package:finanzbegleiter/features/legals/infrastructure/avv_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

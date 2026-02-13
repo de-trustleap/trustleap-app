@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/presentation/profile_page/widgets/company/company_validator.dart';
+import 'package:finanzbegleiter/features/profile/presentation/widgets/company/company_validator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 

@@ -1,8 +1,8 @@
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/promoter.dart';
-import 'package:finanzbegleiter/presentation/promoters_page/promoter_overview_filter.dart';
-import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_header_expandable_filter.dart';
+import 'package:finanzbegleiter/core/id.dart';
+import 'package:finanzbegleiter/features/promoter/domain/promoter.dart';
+import 'package:finanzbegleiter/features/promoter/presentation/promoter_overview_filter.dart';
+import 'package:finanzbegleiter/features/promoter/presentation/widgets/promoter_overview/promoter_overview_header_expandable_filter.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

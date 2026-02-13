@@ -1,7 +1,7 @@
-import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
-import 'package:finanzbegleiter/presentation/authentication/password_forgotten_page.dart';
-import 'package:finanzbegleiter/presentation/authentication/widgets/password_forgotten_form.dart';
-import 'package:finanzbegleiter/presentation/core/page_wrapper/auth_page_template.dart';
+import 'package:finanzbegleiter/features/auth/application/auth/auth_cubit.dart';
+import 'package:finanzbegleiter/features/auth/presentation/password_forgotten_page.dart';
+import 'package:finanzbegleiter/features/auth/presentation/widgets/password_forgotten_form.dart';
+import 'package:finanzbegleiter/core/widgets/page_wrapper/auth_page_template.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_modular/flutter_modular.dart';

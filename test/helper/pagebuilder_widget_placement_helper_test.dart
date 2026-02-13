@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
-import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_column_properties.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_properties.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
-import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_widget_placement_helper.dart';
+import 'package:finanzbegleiter/features/page_builder/application/pagebuilder_bloc.dart';
+import 'package:finanzbegleiter/core/id.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_column_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_row_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/responsive/pagebuilder_responsive_or_constant.dart';
+import 'package:finanzbegleiter/features/page_builder/presentation/pagebuilder_widget_placement_helper.dart';
 import 'package:finanzbegleiter/constants.dart';
 
 void main() {

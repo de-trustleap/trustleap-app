@@ -1,10 +1,10 @@
 // ignore_for_file: type=lint
 import 'package:dartz/dartz.dart';
-import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
+import 'package:finanzbegleiter/features/profile/application/profile/profile_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
-import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/core/id.dart';
+import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import '../repositories/mock_user_credential.dart';

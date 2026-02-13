@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
-import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_drag_position_detector.dart';
+import 'package:finanzbegleiter/features/page_builder/application/pagebuilder_bloc.dart';
+import 'package:finanzbegleiter/features/page_builder/presentation/pagebuilder_drag_position_detector.dart';
 
 void main() {
   group("PagebuilderDragPositionDetector.detectPosition", () {

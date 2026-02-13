@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:finanzbegleiter/domain/entities/company.dart';
-import 'package:finanzbegleiter/domain/entities/company_request.dart';
-import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/infrastructure/models/company_request_model.dart';
+import 'package:finanzbegleiter/features/profile/domain/company.dart';
+import 'package:finanzbegleiter/features/admin/domain/company_request.dart';
+import 'package:finanzbegleiter/core/id.dart';
+import 'package:finanzbegleiter/features/admin/infrastructure/company_request_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

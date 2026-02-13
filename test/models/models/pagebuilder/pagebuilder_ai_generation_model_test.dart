@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_ai_generation_model.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_ai_generation.dart';
+import 'package:finanzbegleiter/features/page_builder/infrastructure/models/pagebuilder_ai_generation_model.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_ai_generation.dart';
 
 void main() {
   group("PagebuilderAIGenerationsModel_CopyWith", () {

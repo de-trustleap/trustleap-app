@@ -3,9 +3,9 @@ import "dart:typed_data";
 
 import "package:dartz/dartz.dart";
 import "package:finanzbegleiter/core/failures/database_failures.dart";
-import "package:finanzbegleiter/domain/entities/pagebuilder_section_template_asset_replacement.dart";
-import "package:finanzbegleiter/domain/entities/pagebuilder_section_template_edit.dart";
-import "package:finanzbegleiter/domain/entities/pagebuilder_section_template_upload.dart";
+import "package:finanzbegleiter/features/admin/domain/pagebuilder_section_template_asset_replacement.dart";
+import "package:finanzbegleiter/features/admin/domain/pagebuilder_section_template_edit.dart";
+import "package:finanzbegleiter/features/admin/domain/pagebuilder_section_template_upload.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:mockito/mockito.dart";
 
