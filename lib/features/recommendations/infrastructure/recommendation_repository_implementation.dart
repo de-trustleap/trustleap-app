@@ -715,8 +715,6 @@ class RecommendationRepositoryImplementation
       userID: archived.userID,
       promoterImageDownloadURL: null,
       createdAt: archived.createdAt ?? DateTime.now(),
-      expiresAt:
-          archived.expiresAt ?? DateTime.now().add(const Duration(days: 14)),
     );
   }
 

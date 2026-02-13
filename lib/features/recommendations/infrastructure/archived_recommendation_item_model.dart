@@ -14,7 +14,6 @@ class ArchivedRecommendationItemModel extends Equatable {
   final String? userID;
   final DateTime? createdAt;
   final DateTime finishedTimeStamp;
-  final DateTime? expiresAt;
 
   const ArchivedRecommendationItemModel({
     required this.id,
@@ -26,7 +25,6 @@ class ArchivedRecommendationItemModel extends Equatable {
     required this.userID,
     required this.createdAt,
     required this.finishedTimeStamp,
-    required this.expiresAt,
   });
 
   ArchivedRecommendationItemModel copyWith({
@@ -39,7 +37,6 @@ class ArchivedRecommendationItemModel extends Equatable {
     String? userID,
     DateTime? createdAt,
     DateTime? finishedTimeStamp,
-    DateTime? expiresAt,
   }) {
     return ArchivedRecommendationItemModel(
       id: id ?? this.id,
@@ -51,7 +48,6 @@ class ArchivedRecommendationItemModel extends Equatable {
       userID: userID ?? this.userID,
       createdAt: createdAt ?? this.createdAt,
       finishedTimeStamp: finishedTimeStamp ?? this.finishedTimeStamp,
-      expiresAt: expiresAt ?? this.expiresAt,
     );
   }
 
@@ -64,7 +60,6 @@ class ArchivedRecommendationItemModel extends Equatable {
       'serviceProviderName': serviceProviderName,
       'success': success,
       'userID': userID,
-      'expiresAt': expiresAt != null ? Timestamp.fromDate(expiresAt!) : null,
       'createdAt': createdAt != null ? Timestamp.fromDate(createdAt!) : null,
       'finishedTimeStamp': Timestamp.fromDate(finishedTimeStamp)
     };
@@ -84,8 +79,9 @@ class ArchivedRecommendationItemModel extends Equatable {
             : null,
         success: map['success'] != null ? map['success'] as bool : null,
         userID: map['userID'] != null ? map['userID'] as String : null,
-        expiresAt: (map['expiresAt'] as Timestamp).toDate(),
-        createdAt: (map['createdAt'] as Timestamp).toDate(),
+        createdAt: map['createdAt'] != null
+            ? (map['createdAt'] as Timestamp).toDate()
+            : null,
         finishedTimeStamp: (map['finishedTimeStamp'] as Timestamp).toDate());
   }
 
@@ -104,8 +100,7 @@ class ArchivedRecommendationItemModel extends Equatable {
         success: success,
         userID: userID,
         createdAt: createdAt,
-        finishedTimeStamp: finishedTimeStamp,
-        expiresAt: expiresAt);
+        finishedTimeStamp: finishedTimeStamp);
   }
 
   factory ArchivedRecommendationItemModel.fromDomain(
@@ -119,8 +114,7 @@ class ArchivedRecommendationItemModel extends Equatable {
         success: recommendation.success,
         userID: recommendation.userID,
         createdAt: recommendation.createdAt,
-        finishedTimeStamp: recommendation.finishedTimeStamp,
-        expiresAt: recommendation.expiresAt);
+        finishedTimeStamp: recommendation.finishedTimeStamp);
   }
 
   @override

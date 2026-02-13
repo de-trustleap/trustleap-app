@@ -12,7 +12,6 @@ class ArchivedRecommendationItem extends Equatable {
   final String? userID;
   final DateTime? createdAt;
   final DateTime finishedTimeStamp;
-  final DateTime? expiresAt;
 
   const ArchivedRecommendationItem({
     required this.id,
@@ -24,7 +23,6 @@ class ArchivedRecommendationItem extends Equatable {
     required this.userID,
     required this.createdAt,
     required this.finishedTimeStamp,
-    required this.expiresAt,
   });
 
   ArchivedRecommendationItem copyWith({
@@ -37,7 +35,6 @@ class ArchivedRecommendationItem extends Equatable {
     String? userID,
     DateTime? createdAt,
     DateTime? finishedTimeStamp,
-    DateTime? expiresAt,
   }) {
     return ArchivedRecommendationItem(
       id: id ?? this.id,
@@ -49,7 +46,6 @@ class ArchivedRecommendationItem extends Equatable {
       userID: userID ?? this.userID,
       createdAt: createdAt ?? this.createdAt,
       finishedTimeStamp: finishedTimeStamp ?? this.finishedTimeStamp,
-      expiresAt: expiresAt ?? this.expiresAt,
     );
   }
 
