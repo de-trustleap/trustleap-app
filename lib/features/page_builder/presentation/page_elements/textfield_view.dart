@@ -1,0 +1,60 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/features/page_builder/application/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_textfield_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/responsive/pagebuilder_responsive_or_constant_extensions.dart';
+import 'package:finanzbegleiter/features/page_builder/presentation/page_elements/textstyle_parser.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
+class PageBuilderTextFieldView extends StatelessWidget {
+  final PageBuilderTextFieldProperties properties;
+  final PageBuilderWidget widgetModel;
+  final TextStyleParser parser = TextStyleParser();
+
+  PageBuilderTextFieldView({
+    super.key,
+    required this.properties,
+    required this.widgetModel,
+  });
+
+  double _calculateContainerMinHeight() {
+    if (properties.minLines == null || properties.minLines == 1) {
+      return 0;
+    }
+    return (properties.textProperties?.fontSize?.getValue() ?? 16) *
+        (properties.textProperties?.lineHeight?.getValue() ?? 1) *
+        (properties.minLines ?? 1) *
+        2;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<PagebuilderResponsiveBreakpointCubit,
+        PagebuilderResponsiveBreakpoint>(
+      bloc: Modular.get<PagebuilderResponsiveBreakpointCubit>(),
+      builder: (context, breakpoint) {
+        final width = properties.width?.getValueForBreakpoint(breakpoint);
+
+        return Container(
+            width: width,
+            constraints: BoxConstraints(
+              minHeight: _calculateContainerMinHeight(),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            decoration: BoxDecoration(
+                border:
+                    Border.all(color: properties.borderColor ?? Colors.black),
+                borderRadius: BorderRadius.circular(4),
+                color: properties.backgroundColor),
+            child: Text(properties.placeHolderTextProperties?.text ?? "",
+                style: parser.getTextStyleFromProperties(
+                    properties.placeHolderTextProperties),
+                textAlign: properties.textProperties?.alignment?.getValue() ??
+                    TextAlign.start));
+      },
+    );
+  }
+}

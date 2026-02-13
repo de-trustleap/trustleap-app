@@ -1,0 +1,195 @@
+import 'package:finanzbegleiter/features/calendly/application/calendly_cubit.dart';
+import 'package:finanzbegleiter/features/page_builder/application/pagebuilder_bloc.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_calendly_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
+import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_switch_control.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
+class PagebuilderConfigMenuCalendlyContent extends StatefulWidget {
+  final PageBuilderWidget model;
+  const PagebuilderConfigMenuCalendlyContent({super.key, required this.model});
+
+  @override
+  State<PagebuilderConfigMenuCalendlyContent> createState() =>
+      _PagebuilderConfigMenuCalendlyContentState();
+}
+
+class _PagebuilderConfigMenuCalendlyContentState
+    extends State<PagebuilderConfigMenuCalendlyContent> {
+  late CalendlyCubit calendlyCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    calendlyCubit = Modular.get<CalendlyCubit>();
+    calendlyCubit.startObservingAuthStatus();
+  }
+
+  @override
+  void dispose() {
+    calendlyCubit.stopObservingAuthStatus();
+    super.dispose();
+  }
+
+  void updateCalendlyProperties(PagebuilderCalendlyProperties properties,
+      PagebuilderBloc pagebuilderCubit) {
+    final updatedWidget = widget.model.copyWith(properties: properties);
+    pagebuilderCubit.add(UpdateWidgetEvent(updatedWidget));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final pagebuilderCubit = Modular.get<PagebuilderBloc>();
+    final properties = widget.model.properties as PagebuilderCalendlyProperties;
+    final localization = AppLocalizations.of(context);
+
+    return CollapsibleTile(
+      title: localization.pagebuilder_calendly_content_title,
+      children: [
+        BlocBuilder<CalendlyCubit, CalendlyState>(
+          bloc: calendlyCubit,
+          builder: (context, calendlyState) {
+            if (calendlyState is CalendlyConnectedState) {
+              return _buildEventTypeDropdown(
+                calendlyState.eventTypes,
+                properties,
+                pagebuilderCubit,
+              );
+            } else if (calendlyState is CalendlyAuthenticatedState) {
+              return Column(
+                children: [
+                  const CircularProgressIndicator(),
+                  const SizedBox(height: 8),
+                  Text(localization
+                      .pagebuilder_calendly_content_loading_event_types),
+                ],
+              );
+            } else if (calendlyState is CalendlyNotAuthenticatedState) {
+              return _buildLoginButton(calendlyCubit, localization);
+            } else if (calendlyState is CalendlyConnectingState) {
+              return Column(
+                children: [
+                  const CircularProgressIndicator(),
+                  const SizedBox(height: 8),
+                  Text(localization.pagebuilder_calendly_content_connecting),
+                ],
+              );
+            } else if (calendlyState is CalendlyConnectionFailureState) {
+              return Column(
+                children: [
+                  const Icon(Icons.error, color: Colors.red),
+                  const SizedBox(height: 8),
+                  Text(
+                      "${localization.pagebuilder_calendly_content_error_prefix} ${calendlyState.failure.toString()}"),
+                  const SizedBox(height: 8),
+                  _buildLoginButton(calendlyCubit, localization),
+                ],
+              );
+            } else {
+              return _buildLoginButton(calendlyCubit, localization);
+            }
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildEventTypeDropdown(
+    List<Map<String, dynamic>> eventTypes,
+    PagebuilderCalendlyProperties properties,
+    PagebuilderBloc pagebuilderCubit,
+  ) {
+    final localization = AppLocalizations.of(context);
+
+    final validValue = eventTypes.any((eventType) =>
+            eventType['scheduling_url'] == properties.calendlyEventURL)
+        ? properties.calendlyEventURL
+        : null;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(localization.pagebuilder_calendly_content_select_event_type,
+            style: const TextStyle(fontWeight: FontWeight.bold)),
+        const SizedBox(height: 8),
+        DropdownButtonFormField<String>(
+          initialValue: validValue,
+          hint:
+              Text(localization.pagebuilder_calendly_content_choose_event_type),
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          ),
+          items: eventTypes.map<DropdownMenuItem<String>>((eventType) {
+            final name = eventType['name'] as String? ?? 'Unnamed Event';
+            final url = eventType['scheduling_url'] as String? ?? '';
+            return DropdownMenuItem<String>(
+              value: url,
+              child: Text(name),
+            );
+          }).toList(),
+          onChanged: (selectedUrl) {
+            if (selectedUrl != null) {
+              final selectedEventType = eventTypes.firstWhere(
+                (eventType) => eventType['scheduling_url'] == selectedUrl,
+              );
+              final eventTypeName = selectedEventType['name'] as String? ?? '';
+
+              updateCalendlyProperties(
+                properties.copyWith(
+                  calendlyEventURL: selectedUrl,
+                  eventTypeName: eventTypeName,
+                ),
+                pagebuilderCubit,
+              );
+            }
+          },
+        ),
+        const SizedBox(height: 16),
+        PagebuilderSwitchControl(
+          title: localization.pagebuilder_calendly_content_hide_event_details,
+          isActive: properties.hideEventTypeDetails ?? false,
+          onSelected: (value) {
+            updateCalendlyProperties(
+              properties.copyWith(hideEventTypeDetails: value),
+              pagebuilderCubit,
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildLoginButton(
+      CalendlyCubit calendlyCubit, AppLocalizations localization) {
+    return Column(
+      children: [
+        const Icon(Icons.calendar_today, size: 48, color: Colors.grey),
+        const SizedBox(height: 16),
+        Text(
+          localization.pagebuilder_calendly_content_connection_required,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          localization.pagebuilder_calendly_content_connection_description,
+          textAlign: TextAlign.center,
+          style: const TextStyle(color: Colors.grey),
+        ),
+        const SizedBox(height: 16),
+        ElevatedButton.icon(
+          onPressed: () => calendlyCubit.connectToCalendly(),
+          icon: const Icon(Icons.link),
+          label: Text(localization.pagebuilder_calendly_content_connect_button),
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          ),
+        ),
+      ],
+    );
+  }
+}

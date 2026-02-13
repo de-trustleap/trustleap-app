@@ -1,0 +1,92 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/features/profile/application/company_observer/company_observer_cubit.dart';
+import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
+import 'package:finanzbegleiter/features/auth/domain/user.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/core/widgets/page_wrapper/centered_constrained_wrapper.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/custom_snackbar.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/error_view.dart';
+import 'package:finanzbegleiter/features/profile/presentation/widgets/company/company_contact_section.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
+class ProfileCompanyView extends StatefulWidget {
+  final CustomUser user;
+  final String companyID;
+
+  const ProfileCompanyView(
+      {super.key, required this.user, required this.companyID});
+
+  @override
+  State<ProfileCompanyView> createState() => _ProfileCompanyViewState();
+}
+
+class _ProfileCompanyViewState extends State<ProfileCompanyView>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<CompanyObserverCubit>(context)
+        .observeCompany(widget.companyID);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+
+    final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
+    final companyObserverCubit = Modular.get<CompanyObserverCubit>();
+
+    return BlocBuilder<CompanyObserverCubit, CompanyObserverState>(
+      builder: (context, state) {
+        if (state is CompanyObserverSuccess) {
+          return Container(
+              width: double.infinity,
+              decoration: BoxDecoration(color: themeData.colorScheme.surface),
+              child: ListView(children: [
+                SizedBox(height: responsiveValue.isMobile ? 40 : 80),
+                CenteredConstrainedWrapper(
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CompanyContactSection(
+                        user: widget.user,
+                        company: state.company,
+                        changesSaved: () {
+                          CustomSnackBar.of(context).showCustomSnackBar(localization
+                              .profile_company_contact_section_success_snackbar_message);
+                        },
+                        imageUploadSuccessful: () {
+                          CustomSnackBar.of(context).showCustomSnackBar(
+                              localization
+                                  .profile_page_snackbar_image_changed_message);
+                        }),
+                    SizedBox(height: responsiveValue.isMobile ? 50 : 100)
+                  ],
+                ))
+              ]));
+        } else if (state is CompanyObserverFailure) {
+          return CenteredConstrainedWrapper(
+              child: ErrorView(
+                  title: localization.profile_page_request_failure_message,
+                  message: DatabaseFailureMapper.mapFailureMessage(
+                      state.failure, localization),
+                  callback: () =>
+                      {companyObserverCubit.observeCompany(widget.companyID)}));
+        } else {
+          return CenteredConstrainedWrapper(
+              child: CircularProgressIndicator(
+                  color: themeData.colorScheme.secondary));
+        }
+      },
+    );
+  }
+}

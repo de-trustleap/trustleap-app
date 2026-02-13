@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:finanzbegleiter/application/web_logging/web_logging_cubit.dart';
+import 'package:finanzbegleiter/features/web_logging/application/web_logging_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
