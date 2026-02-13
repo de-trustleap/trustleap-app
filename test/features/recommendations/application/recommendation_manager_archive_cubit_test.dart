@@ -36,8 +36,7 @@ void main() {
           success: true,
           userID: userID,
           createdAt: null,
-          finishedTimeStamp: date,
-          expiresAt: null)
+          finishedTimeStamp: date),
     ];
 
     test("should call reco repo when function is called", () async {

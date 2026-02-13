@@ -265,8 +265,7 @@ void main() {
           success: true,
           userID: userID,
           createdAt: null,
-          finishedTimeStamp: date,
-          expiresAt: null)
+          finishedTimeStamp: date),
     ];
 
     test("should return items when call was successful", () async {

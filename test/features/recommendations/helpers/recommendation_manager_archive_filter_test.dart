@@ -16,8 +16,7 @@ void main() {
           success: true,
           userID: "1",
           createdAt: null,
-          finishedTimeStamp: DateTime(2024, 1, 10),
-          expiresAt: null),
+          finishedTimeStamp: DateTime(2024, 1, 10)),
       ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("2"),
           reason: "Test 2",
@@ -27,8 +26,7 @@ void main() {
           success: false,
           userID: "1",
           createdAt: null,
-          finishedTimeStamp: DateTime(2024, 2, 5),
-          expiresAt: null),
+          finishedTimeStamp: DateTime(2024, 2, 5)),
       ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("3"),
           reason: "Test 3",
@@ -38,8 +36,7 @@ void main() {
           success: true,
           userID: "1",
           createdAt: null,
-          finishedTimeStamp: DateTime(2024, 1, 20),
-          expiresAt: null),
+          finishedTimeStamp: DateTime(2024, 1, 20)),
     ];
 
     test('filters by success status = successful', () {

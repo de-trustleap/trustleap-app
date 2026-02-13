@@ -20,8 +20,7 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date,
-          expiresAt: date);
+          finishedTimeStamp: date);
       final expectedResult = ArchivedRecommendationItemModel(
           id: "1",
           reason: "Test",
@@ -31,8 +30,7 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date,
-          expiresAt: date);
+          finishedTimeStamp: date);
       // When
       final result = model.copyWith(promoterName: "Test new");
       // Then
@@ -53,8 +51,7 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date,
-          expiresAt: date);
+          finishedTimeStamp: date);
       final expectedResult = {
         "id": "1",
         "reason": "Test",
@@ -65,7 +62,6 @@ void main() {
         "userID": "2",
         "createdAt": Timestamp.fromDate(date),
         "finishedTimeStamp": Timestamp.fromDate(date),
-        "expiresAt": Timestamp.fromDate(date)
       };
       // When
       final result = model.toMap();
@@ -88,7 +84,6 @@ void main() {
         "userID": "2",
         "createdAt": Timestamp.fromDate(date),
         "finishedTimeStamp": Timestamp.fromDate(date),
-        "expiresAt": Timestamp.fromDate(date)
       };
       final expectedResult = ArchivedRecommendationItemModel(
           id: "",
@@ -99,8 +94,7 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date,
-          expiresAt: date);
+          finishedTimeStamp: date);
       // When
       final result = ArchivedRecommendationItemModel.fromMap(map);
       // Then
@@ -122,7 +116,6 @@ void main() {
         "userID": "2",
         "createdAt": Timestamp.fromDate(date),
         "finishedTimeStamp": Timestamp.fromDate(date),
-        "expiresAt": Timestamp.fromDate(date)
       };
       final expectedResult = ArchivedRecommendationItemModel(
           id: "1",
@@ -133,8 +126,7 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date,
-          expiresAt: date);
+          finishedTimeStamp: date);
       // When
       final result = ArchivedRecommendationItemModel.fromFirestore(map, "1");
       // Then
@@ -157,8 +149,7 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date,
-          expiresAt: date);
+          finishedTimeStamp: date);
       final expectedResult = ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("1"),
           reason: "Test",
@@ -168,8 +159,7 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date,
-          expiresAt: date);
+          finishedTimeStamp: date);
       // When
       final result = model.toDomain();
       // Then
@@ -192,8 +182,7 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date,
-          expiresAt: date);
+          finishedTimeStamp: date);
       final expectedResult = ArchivedRecommendationItemModel(
           id: "1",
           reason: "Test",
@@ -203,8 +192,7 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date,
-          expiresAt: date);
+          finishedTimeStamp: date);
       // When
       final result = ArchivedRecommendationItemModel.fromDomain(model);
       // Then
@@ -225,8 +213,7 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date,
-          expiresAt: date);
+          finishedTimeStamp: date);
       final model2 = ArchivedRecommendationItemModel(
           id: "1",
           reason: "Test",
@@ -236,8 +223,7 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date,
-          expiresAt: date);
+          finishedTimeStamp: date);
       // Then
       expect(model, model2);
     });

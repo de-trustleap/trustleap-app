@@ -16,7 +16,6 @@ void main() {
           userID: "2",
           createdAt: date,
           finishedTimeStamp: date,
-          expiresAt: date,
           landingPageID: "test-landing-page");
       final expectedResult = ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("1"),
@@ -27,7 +26,6 @@ void main() {
           userID: "2",
           createdAt: date,
           finishedTimeStamp: date,
-          expiresAt: date,
           landingPageID: "test-landing-page");
       // When
       final result = model.copyWith(reason: "Test new");
@@ -49,7 +47,6 @@ void main() {
           userID: "2",
           createdAt: date,
           finishedTimeStamp: date,
-          expiresAt: date,
           landingPageID: "test-landing-page");
       final model2 = ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("1"),
@@ -60,7 +57,6 @@ void main() {
           userID: "2",
           createdAt: date,
           finishedTimeStamp: date,
-          expiresAt: date,
           landingPageID: "test-landing-page");
       // Then
       expect(model, model2);
