@@ -1,0 +1,143 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_button_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_border.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_text_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_shadow.dart';
+import 'package:flutter/material.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_paint.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/responsive/pagebuilder_responsive_or_constant.dart';
+
+void main() {
+  group("PagebuilderButtonProperties_CopyWith", () {
+    test(
+        "set width and border with copyWith should set width and border for resulting object",
+        () {
+      // Given
+      final model = PageBuilderButtonProperties(
+          sizeMode: null,
+          width: const PagebuilderResponsiveOrConstant.constant(200.0),
+          height: const PagebuilderResponsiveOrConstant.constant(50.0),
+          minWidthPercent: null,
+          contentPadding: null,
+          border: const PagebuilderBorder(radius: 10.0, width: null, color: null),
+          backgroundPaint: const PagebuilderPaint.color(Colors.white),
+          textProperties: PageBuilderTextProperties(
+              text: "Test",
+              fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
+              fontFamily: "Poppins",
+              lineHeight: null,
+              letterSpacing: null,
+              textShadow: null,
+              color: null,
+              alignment: null));
+      final expectedResult = PageBuilderButtonProperties(
+          sizeMode: null,
+          width: const PagebuilderResponsiveOrConstant.constant(400.0),
+          height: const PagebuilderResponsiveOrConstant.constant(50.0),
+          minWidthPercent: null,
+          contentPadding: null,
+          border: const PagebuilderBorder(radius: 12.0, width: null, color: null),
+          backgroundPaint: const PagebuilderPaint.color(Colors.white),
+          textProperties: PageBuilderTextProperties(
+              text: "Test",
+              fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
+              fontFamily: "Poppins",
+              lineHeight: null,
+              letterSpacing: null,
+              textShadow: null,
+              color: null,
+              alignment: null));
+      // When
+      final result = model.copyWith(
+          width: const PagebuilderResponsiveOrConstant.constant(400.0),
+          border: const PagebuilderBorder(radius: 12.0, width: null, color: null));
+      // Then
+      expect(result, expectedResult);
+    });
+  });
+
+  group("PageBuilderButtonProperties DeepCopy", () {
+    test("should create independent copy with all properties", () {
+      // Given
+      const textProperties = PageBuilderTextProperties(
+        text: "Test Button",
+        fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
+        fontFamily: "Arial",
+        lineHeight: const PagebuilderResponsiveOrConstant.constant(1.2),
+        letterSpacing: const PagebuilderResponsiveOrConstant.constant(0.5),
+        color: Colors.white,
+        alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
+        textShadow: PageBuilderShadow(
+          color: Colors.black26,
+          spreadRadius: 0.0,
+          blurRadius: 2.0,
+          offset: Offset(1.0, 1.0),
+        ),
+      );
+
+      const original = PageBuilderButtonProperties(
+        sizeMode: null,
+        width: const PagebuilderResponsiveOrConstant.constant(200.0),
+        height: const PagebuilderResponsiveOrConstant.constant(50.0),
+        minWidthPercent: null,
+        contentPadding: null,
+        border: const PagebuilderBorder(radius: 8.0, width: null, color: null),
+        backgroundPaint: const PagebuilderPaint.color(Color(0xFF2196F3)),
+        textProperties: textProperties,
+      );
+
+      // When
+      final copy = original.deepCopy();
+
+      // Then
+      expect(copy, isNot(same(original)));
+      expect(copy.width, equals(original.width));
+      expect(copy.height, equals(original.height));
+      expect(copy.border?.radius, equals(original.border?.radius));
+      expect(copy.backgroundPaint?.color, equals(original.backgroundPaint?.color));
+      expect(copy.textProperties, equals(original.textProperties));
+    });
+  });
+
+  group("PagebuilderButtonProperties_Props", () {
+    test("check if value equality works", () {
+      // Given
+      final properties1 = PageBuilderButtonProperties(
+          sizeMode: null,
+          width: const PagebuilderResponsiveOrConstant.constant(200.0),
+          height: const PagebuilderResponsiveOrConstant.constant(50.0),
+          minWidthPercent: null,
+          contentPadding: null,
+          border: const PagebuilderBorder(radius: 10.0, width: null, color: null),
+          backgroundPaint: const PagebuilderPaint.color(Colors.white),
+          textProperties: PageBuilderTextProperties(
+              text: "Test",
+              fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
+              fontFamily: "Poppins",
+              lineHeight: null,
+              letterSpacing: null,
+              textShadow: null,
+              color: null,
+              alignment: null));
+      final properties2 = PageBuilderButtonProperties(
+          sizeMode: null,
+          width: const PagebuilderResponsiveOrConstant.constant(200.0),
+          height: const PagebuilderResponsiveOrConstant.constant(50.0),
+          minWidthPercent: null,
+          contentPadding: null,
+          border: const PagebuilderBorder(radius: 10.0, width: null, color: null),
+          backgroundPaint: const PagebuilderPaint.color(Colors.white),
+          textProperties: PageBuilderTextProperties(
+              text: "Test",
+              fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
+              fontFamily: "Poppins",
+              lineHeight: null,
+              letterSpacing: null,
+              textShadow: null,
+              color: null,
+              alignment: null));
+      // Then
+      expect(properties1, properties2);
+    });
+  });
+}

@@ -15,96 +15,96 @@ import 'package:cloud_functions/cloud_functions.dart' as _i15;
 import 'package:cloud_functions_platform_interface/cloud_functions_platform_interface.dart'
     as _i14;
 import 'package:dartz/dartz.dart' as _i2;
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart'
+import 'package:finanzbegleiter/features/page_builder/application/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart'
     as _i65;
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart'
+import 'package:finanzbegleiter/features/page_builder/application/pagebuilder_selection/pagebuilder_selection_cubit.dart'
     as _i69;
-import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart'
+import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart'
     as _i70;
 import 'package:finanzbegleiter/constants.dart' as _i30;
 import 'package:finanzbegleiter/core/failures/auth_failures.dart' as _i21;
 import 'package:finanzbegleiter/core/failures/database_failures.dart' as _i22;
 import 'package:finanzbegleiter/core/failures/failure.dart' as _i19;
 import 'package:finanzbegleiter/core/failures/storage_failures.dart' as _i28;
-import 'package:finanzbegleiter/domain/entities/archived_landing_page_legals.dart'
+import 'package:finanzbegleiter/features/legals/domain/archived_landing_page_legals.dart'
     as _i37;
-import 'package:finanzbegleiter/domain/entities/archived_recommendation_item.dart'
+import 'package:finanzbegleiter/features/recommendations/domain/archived_recommendation_item.dart'
     as _i47;
-import 'package:finanzbegleiter/domain/entities/company.dart' as _i25;
-import 'package:finanzbegleiter/domain/entities/company_request.dart' as _i26;
-import 'package:finanzbegleiter/domain/entities/consent_preference.dart' as _i3;
-import 'package:finanzbegleiter/domain/entities/dashboard_ranked_landingpage.dart'
+import 'package:finanzbegleiter/features/profile/domain/company.dart' as _i25;
+import 'package:finanzbegleiter/features/admin/domain/company_request.dart' as _i26;
+import 'package:finanzbegleiter/features/consent/domain/consent_preference.dart' as _i3;
+import 'package:finanzbegleiter/features/dashboard/domain/dashboard_ranked_landingpage.dart'
     as _i54;
-import 'package:finanzbegleiter/domain/entities/dashboard_ranked_promoter.dart'
+import 'package:finanzbegleiter/features/dashboard/domain/dashboard_ranked_promoter.dart'
     as _i53;
-import 'package:finanzbegleiter/domain/entities/feedback_item.dart' as _i44;
-import 'package:finanzbegleiter/domain/entities/landing_page.dart' as _i33;
-import 'package:finanzbegleiter/domain/entities/landing_page_template.dart'
+import 'package:finanzbegleiter/features/feedback/domain/feedback_item.dart' as _i44;
+import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart' as _i33;
+import 'package:finanzbegleiter/features/landing_pages/domain/landing_page_template.dart'
     as _i35;
-import 'package:finanzbegleiter/domain/entities/last_viewed.dart' as _i48;
-import 'package:finanzbegleiter/domain/entities/legals.dart' as _i51;
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_ai_generation.dart'
+import 'package:finanzbegleiter/features/landing_pages/domain/last_viewed.dart' as _i48;
+import 'package:finanzbegleiter/features/legals/domain/legals.dart' as _i51;
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_ai_generation.dart'
     as _i34;
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart'
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_page.dart'
     as _i64;
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart'
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_section.dart'
     as _i67;
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section_template.dart'
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_section_template.dart'
     as _i58;
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section_template_meta.dart'
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_section_template_meta.dart'
     as _i57;
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart'
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_widget.dart'
     as _i66;
-import 'package:finanzbegleiter/domain/entities/pagebuilder_section_template_edit.dart'
+import 'package:finanzbegleiter/features/admin/domain/pagebuilder_section_template_edit.dart'
     as _i61;
-import 'package:finanzbegleiter/domain/entities/pagebuilder_section_template_upload.dart'
+import 'package:finanzbegleiter/features/admin/domain/pagebuilder_section_template_upload.dart'
     as _i60;
-import 'package:finanzbegleiter/domain/entities/permissions.dart' as _i41;
-import 'package:finanzbegleiter/domain/entities/promoter.dart' as _i36;
-import 'package:finanzbegleiter/domain/entities/promoter_recommendations.dart'
+import 'package:finanzbegleiter/features/permissions/domain/permissions.dart' as _i41;
+import 'package:finanzbegleiter/features/promoter/domain/promoter.dart' as _i36;
+import 'package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart'
     as _i49;
-import 'package:finanzbegleiter/domain/entities/recommendation_item.dart'
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart'
     as _i45;
-import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart'
+import 'package:finanzbegleiter/features/promoter/domain/unregistered_promoter.dart'
     as _i39;
-import 'package:finanzbegleiter/domain/entities/user.dart' as _i20;
-import 'package:finanzbegleiter/domain/entities/user_recommendation.dart'
+import 'package:finanzbegleiter/features/auth/domain/user.dart' as _i20;
+import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart'
     as _i46;
-import 'package:finanzbegleiter/domain/repositories/admin_registration_code_repository.dart'
+import 'package:finanzbegleiter/features/admin/domain/admin_registration_code_repository.dart'
     as _i42;
-import 'package:finanzbegleiter/domain/repositories/auth_repository.dart'
+import 'package:finanzbegleiter/features/auth/domain/auth_repository.dart'
     as _i18;
-import 'package:finanzbegleiter/domain/repositories/calendly_repository.dart'
+import 'package:finanzbegleiter/features/calendly/domain/calendly_repository.dart'
     as _i23;
-import 'package:finanzbegleiter/domain/repositories/company_repository.dart'
+import 'package:finanzbegleiter/features/profile/domain/company_repository.dart'
     as _i24;
-import 'package:finanzbegleiter/domain/repositories/consent_repository.dart'
+import 'package:finanzbegleiter/features/consent/domain/consent_repository.dart'
     as _i62;
-import 'package:finanzbegleiter/domain/repositories/dashboard_repository.dart'
+import 'package:finanzbegleiter/features/dashboard/domain/dashboard_repository.dart'
     as _i52;
-import 'package:finanzbegleiter/domain/repositories/feedback_repository.dart'
+import 'package:finanzbegleiter/features/feedback/domain/feedback_repository.dart'
     as _i43;
-import 'package:finanzbegleiter/domain/repositories/image_repository.dart'
+import 'package:finanzbegleiter/features/images/domain/image_repository.dart'
     as _i27;
-import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart'
+import 'package:finanzbegleiter/features/landing_pages/domain/landing_page_repository.dart'
     as _i32;
-import 'package:finanzbegleiter/domain/repositories/legals_repository.dart'
+import 'package:finanzbegleiter/features/legals/domain/legals_repository.dart'
     as _i50;
-import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart'
+import 'package:finanzbegleiter/features/page_builder/domain/pagebuilder_repository.dart'
     as _i63;
-import 'package:finanzbegleiter/domain/repositories/pagebuilder_section_template_repository.dart'
+import 'package:finanzbegleiter/features/page_builder/domain/pagebuilder_section_template_repository.dart'
     as _i56;
-import 'package:finanzbegleiter/domain/repositories/pagebuilder_section_template_upload_repository.dart'
+import 'package:finanzbegleiter/features/admin/domain/pagebuilder_section_template_upload_repository.dart'
     as _i59;
-import 'package:finanzbegleiter/domain/repositories/permission_repository.dart'
+import 'package:finanzbegleiter/features/permissions/domain/permission_repository.dart'
     as _i40;
-import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart'
+import 'package:finanzbegleiter/features/promoter/domain/promoter_repository.dart'
     as _i38;
-import 'package:finanzbegleiter/domain/repositories/recommendation_repository.dart'
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_repository.dart'
     as _i5;
-import 'package:finanzbegleiter/domain/repositories/tutorial_repository.dart'
+import 'package:finanzbegleiter/features/dashboard/domain/tutorial_repository.dart'
     as _i55;
-import 'package:finanzbegleiter/domain/repositories/user_repository.dart'
+import 'package:finanzbegleiter/features/profile/domain/user_repository.dart'
     as _i6;
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart' as _i16;
 import 'package:firebase_auth/firebase_auth.dart' as _i4;

@@ -1,0 +1,99 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/archived_recommendation_item.dart';
+import 'package:finanzbegleiter/core/id.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_manager_expandable_filter.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_archive/recommendation_archive_filter.dart';
+
+void main() {
+  group('RecommendationArchiveFilter', () {
+    final testData = <ArchivedRecommendationItem>[
+      ArchivedRecommendationItem(
+          id: UniqueID.fromUniqueString("1"),
+          reason: "Test 1",
+          landingPageID: "test-landing-page",
+          promoterName: "Promoter X",
+          serviceProviderName: "Test",
+          success: true,
+          userID: "1",
+          createdAt: null,
+          finishedTimeStamp: DateTime(2024, 1, 10)),
+      ArchivedRecommendationItem(
+          id: UniqueID.fromUniqueString("2"),
+          reason: "Test 2",
+          landingPageID: "test-landing-page",
+          promoterName: "Promoter A",
+          serviceProviderName: "Test",
+          success: false,
+          userID: "1",
+          createdAt: null,
+          finishedTimeStamp: DateTime(2024, 2, 5)),
+      ArchivedRecommendationItem(
+          id: UniqueID.fromUniqueString("3"),
+          reason: "Test 3",
+          landingPageID: "test-landing-page",
+          promoterName: "Promoter B",
+          serviceProviderName: "Test",
+          success: true,
+          userID: "1",
+          createdAt: null,
+          finishedTimeStamp: DateTime(2024, 1, 20)),
+    ];
+
+    test('filters by success status = successful', () {
+      final filter = RecommendationOverviewFilterStates(isArchive: true)
+        ..statusFilterState = RecommendationStatusFilterState.successful;
+
+      final result = RecommendationArchiveFilter.applyFilters(
+        items: testData,
+        filterStates: filter,
+      );
+
+      expect(result.length, 2);
+      expect(result.every((e) => e.success == true), true);
+    });
+
+    test('filters by success status = failed', () {
+      final filter = RecommendationOverviewFilterStates(isArchive: true)
+        ..statusFilterState = RecommendationStatusFilterState.failed;
+
+      final result = RecommendationArchiveFilter.applyFilters(
+        items: testData,
+        filterStates: filter,
+      );
+
+      expect(result.length, 1);
+      expect(result.first.success, false);
+    });
+
+    test('sorts by promoter name ascending', () {
+      final filter = RecommendationOverviewFilterStates(isArchive: true)
+        ..sortByFilterState = RecommendationSortByFilterState.promoter
+        ..sortOrderFilterState = RecommendationSortOrderFilterState.asc;
+
+      final result = RecommendationArchiveFilter.applyFilters(
+        items: testData,
+        filterStates: filter,
+      );
+
+      expect(result.map((e) => e.promoterName),
+          ['Promoter A', 'Promoter B', 'Promoter X']);
+    });
+
+    test('sorts by finishedAt date ascending', () {
+      final filter = RecommendationOverviewFilterStates(isArchive: true)
+        ..sortByFilterState = RecommendationSortByFilterState.finishedAt
+        ..sortOrderFilterState = RecommendationSortOrderFilterState.asc;
+
+      final result = RecommendationArchiveFilter.applyFilters(
+        items: testData,
+        filterStates: filter,
+      );
+
+      expect(result.map((e) => e.finishedTimeStamp), [
+        DateTime(2024, 1, 10),
+        DateTime(2024, 1, 20),
+        DateTime(2024, 2, 5),
+      ]);
+    });
+  });
+}
