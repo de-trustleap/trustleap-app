@@ -1454,6 +1454,81 @@
     "@recommendations_no_active_landingpage_warning": {
         "description": "Warnung wenn keine aktive Landingpage zugewiesen ist"
     },
+    "recommendation_section_type_title": "Art der Empfehlung",
+    "@recommendation_section_type_title": {
+        "description": "Titel für Sektion 1 - Art der Empfehlung"
+    },
+    "recommendation_type_personalized": "Personalisiert",
+    "@recommendation_type_personalized": {
+        "description": "Label für personalisierte Empfehlung"
+    },
+    "recommendation_type_personalized_desc": "Für spezifische Kunden mit individuellem Namen und Tracking.",
+    "@recommendation_type_personalized_desc": {
+        "description": "Beschreibung der personalisierten Empfehlung"
+    },
+    "recommendation_type_general": "Allgemein",
+    "@recommendation_type_general": {
+        "description": "Label für allgemeine Empfehlung"
+    },
+    "recommendation_type_general_desc": "Ein universeller Link für Newsletter oder Social Media.",
+    "@recommendation_type_general_desc": {
+        "description": "Beschreibung der allgemeinen Empfehlung"
+    },
+    "recommendation_section_create_title": "Empfehlung erstellen",
+    "@recommendation_section_create_title": {
+        "description": "Titel für Sektion 2 - Empfehlung erstellen"
+    },
+    "recommendation_section_created_title": "Erstellte Empfehlungen",
+    "@recommendation_section_created_title": {
+        "description": "Titel für Sektion 3 - Erstellte Empfehlungen"
+    },
+    "recommendation_add_button": "Empfehlung hinzufügen",
+    "@recommendation_add_button": {
+        "description": "Button-Text zum Hinzufügen einer Empfehlung"
+    },
+    "recommendation_customer_name_placeholder": "Name des Kunden eingeben...",
+    "@recommendation_customer_name_placeholder": {
+        "description": "Placeholder für das Kunden-Name Feld"
+    },
+    "recommendation_promoter_name_placeholder": "Name des Promoters eingeben...",
+    "@recommendation_promoter_name_placeholder": {
+        "description": "Placeholder für das Promoter-Name Feld"
+    },
+    "recommendation_choose_reason_label": "Wähle einen Grund (Landingpage)",
+    "@recommendation_choose_reason_label": {
+        "description": "Label für den Grund-Dropdown"
+    },
+    "recommendation_message_template": "Nachrichtenvorlage für {name}",
+    "@recommendation_message_template": {
+        "description": "Placeholder für die Nachrichtenvorlage",
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "recommendation_customer_subtitle": "Kunde",
+    "@recommendation_customer_subtitle": {
+        "description": "Subtitle unter dem Kundennamen"
+    },
+    "recommendation_count": "({count} Empfehlungen)",
+    "@recommendation_count": {
+        "description": "Anzahl der erstellten Empfehlungen",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "description": "Anzahl der Empfehlungen"
+            }
+        }
+    },
+    "recommendation_promoter_label": "Promoter",
+    "@recommendation_promoter_label": {
+        "description": "Label für das Promoter-Info Feld"
+    },
+    "recommendation_landingpage_label": "Landingpage",
+    "@recommendation_landingpage_label": {
+        "description": "Label für das Landingpage-Info Feld"
+    },
     "landingpage_pagebuilder_container_request_error": "Beim Abruf der Daten ist ein Fehler aufgetreten",
     "@landingpage_pagebuilder_container_request_error": {
         "description": "Fehlermeldung auf der Pagebuilder Seite wenn Request fehlschlägt"

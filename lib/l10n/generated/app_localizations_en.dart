@@ -1248,6 +1248,63 @@ class AppLocalizationsEn extends AppLocalizations {
       'No recommendations possible - You have no active landing page assigned';
 
   @override
+  String get recommendation_section_type_title => 'Type of recommendation';
+
+  @override
+  String get recommendation_type_personalized => 'Personalized';
+
+  @override
+  String get recommendation_type_personalized_desc =>
+      'For specific customers with individual names and tracking.';
+
+  @override
+  String get recommendation_type_general => 'General';
+
+  @override
+  String get recommendation_type_general_desc =>
+      'A universal link for newsletters or social media.';
+
+  @override
+  String get recommendation_section_create_title => 'Create recommendation';
+
+  @override
+  String get recommendation_section_created_title => 'Created recommendations';
+
+  @override
+  String get recommendation_add_button => 'Add recommendation';
+
+  @override
+  String get recommendation_customer_name_placeholder =>
+      'Enter customer name...';
+
+  @override
+  String get recommendation_promoter_name_placeholder =>
+      'Enter promoter name...';
+
+  @override
+  String get recommendation_choose_reason_label =>
+      'Choose a reason (Landing page)';
+
+  @override
+  String recommendation_message_template(String name) {
+    return 'Message template for $name';
+  }
+
+  @override
+  String get recommendation_customer_subtitle => 'Customer';
+
+  @override
+  String recommendation_count(int count) {
+    return '($count recommendations)';
+  }
+
+  @override
+  String get recommendation_promoter_label => 'Promoter';
+
+  @override
+  String get recommendation_landingpage_label => 'Landing page';
+
+  @override
   String get landingpage_pagebuilder_container_request_error =>
       'An error occurred while retrieving the data';
 

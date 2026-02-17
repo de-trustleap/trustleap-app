@@ -202,10 +202,10 @@ void main() {
       // Then
       final localization =
           await AppLocalizations.delegate.load(const Locale('en'));
-      expect(find.text(localization.recommendations_title), findsOneWidget);
+      expect(find.text(localization.recommendation_section_create_title), findsOneWidget);
     });
 
-    testWidgets('should display three form textfields', (tester) async {
+    testWidgets('should display two form textfields', (tester) async {
       // Given
       await tester.binding.setSurfaceSize(const Size(1200, 800));
 
@@ -231,7 +231,7 @@ void main() {
       await tester.pump();
 
       // Then
-      expect(find.byType(FormTextfield), findsNWidgets(3));
+      expect(find.byType(FormTextfield), findsNWidgets(2));
     });
 
     testWidgets('should display add button', (tester) async {
@@ -260,7 +260,7 @@ void main() {
       await tester.pump();
 
       // Then
-      expect(find.byIcon(Icons.add_circle), findsOneWidget);
+      expect(find.byIcon(Icons.add), findsOneWidget);
     });
 
     testWidgets('should display reason picker when reasons are available',
@@ -327,7 +327,7 @@ void main() {
       expect(promoterField, findsOneWidget);
     });
 
-    testWidgets('should prefill service provider name for company role',
+    testWidgets('should display two form textfields for company role',
         (tester) async {
       // Given
       await tester.binding.setSurfaceSize(const Size(1200, 800));
@@ -355,10 +355,8 @@ void main() {
       ));
       await tester.pumpAndSettle();
 
-      // Then
-      final serviceProviderField = find.byWidgetPredicate((widget) =>
-          widget is FormTextfield && widget.controller.text == 'Jane Smith');
-      expect(serviceProviderField, findsOneWidget);
+      // Then - promoter name and customer name fields are displayed
+      expect(find.byType(FormTextfield), findsNWidgets(2));
     });
 
     testWidgets('should display field placeholders', (tester) async {
@@ -389,15 +387,10 @@ void main() {
       // Then
       final localization =
           await AppLocalizations.delegate.load(const Locale('en'));
-      expect(find.text(localization.recommendations_form_promoter_placeholder),
+      expect(find.text(localization.recommendation_promoter_name_placeholder),
           findsOneWidget);
       expect(
-          find.text(
-              localization.recommendations_form_service_provider_placeholder),
-          findsOneWidget);
-      expect(
-          find.text(localization
-              .recommendations_form_recommendation_name_placeholder),
+          find.text(localization.recommendation_customer_name_placeholder),
           findsOneWidget);
     });
 

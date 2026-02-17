@@ -9,6 +9,7 @@ import 'package:finanzbegleiter/features/recommendations/domain/recommendation_i
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_preview.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_textfield.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/tab_bar/custom_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -150,14 +151,14 @@ void main() {
 
       // Then
       expect(find.byType(TabBar), findsOneWidget);
-      expect(find.byType(TabBarView), findsOneWidget);
-      expect(find.byType(Tab), findsNWidgets(3));
-      expect(find.text('Person 1'), findsOneWidget);
+      expect(find.byType(CustomTab), findsNWidgets(3));
+      // Person 1 is selected by default, so it appears in the tab and the detail card
+      expect(find.text('Person 1'), findsNWidgets(2));
       expect(find.text('Person 2'), findsOneWidget);
       expect(find.text('Person 3'), findsOneWidget);
     });
 
-    testWidgets('should create RecommendationTextFields in TabBarView for multiple leads',
+    testWidgets('should create RecommendationTextField for selected lead with multiple leads',
         (tester) async {
       // Given
       await tester.binding.setSurfaceSize(const Size(1200, 800));
@@ -171,10 +172,8 @@ void main() {
       await tester.pumpAndSettle();
 
       // Then
-      // TabBarView renders all children but only one is visible at a time
-      // Verify that we have a TabBarView which contains the TextFields
-      expect(find.byType(TabBarView), findsOneWidget);
-      expect(find.byType(RecommendationTextField), findsWidgets);
+      // AnimatedSwitcher shows only the selected lead's content at a time
+      expect(find.byType(RecommendationTextField), findsOneWidget);
     });
 
     testWidgets('should show empty widget when no leads are provided',
@@ -259,29 +258,8 @@ void main() {
 
       // Then - verify tab is selected (TabBar should still be visible)
       expect(find.byType(TabBar), findsOneWidget);
-      expect(find.text('Person 2'), findsOneWidget);
-    });
-
-    testWidgets('should have TabBarView height of 250 for multiple recommendations',
-        (tester) async {
-      // Given
-      await tester.binding.setSurfaceSize(const Size(1200, 800));
-      final leads = [
-        createTestRecommendation(id: '1', name: 'Person 1'),
-        createTestRecommendation(id: '2', name: 'Person 2'),
-      ];
-
-      // When
-      await tester.pumpWidget(createWidgetUnderTest(leads: leads));
-      await tester.pumpAndSettle();
-
-      // Then
-      final sizedBoxFinder = find.ancestor(
-        of: find.byType(TabBarView),
-        matching: find.byType(SizedBox),
-      );
-      final sizedBox = tester.widget<SizedBox>(sizedBoxFinder.first);
-      expect(sizedBox.height, equals(250));
+      // Person 2 is now selected, so it appears in both the tab and the detail card
+      expect(find.text('Person 2'), findsNWidgets(2));
     });
 
     testWidgets('should initialize text controller with template containing [LINK]',
@@ -410,28 +388,19 @@ void main() {
       await tester.pumpAndSettle();
 
       // Then
-      // Find all RecommendationTextFields (note: in TabBarView, all are built but only one visible)
-      final textFields = tester
-          .widgetList<RecommendationTextField>(find.byType(RecommendationTextField))
-          .toList();
-      expect(textFields.length, greaterThanOrEqualTo(1));
-
-      // Check the first visible TextField has the correct template
-      expect(textFields.first.controller.text, contains('Template for Person 1'));
+      // AnimatedSwitcher only shows the selected lead's RecommendationTextField
+      final firstTextField = tester.widget<RecommendationTextField>(
+          find.byType(RecommendationTextField));
+      expect(firstTextField.controller.text, contains('Template for Person 1'));
 
       // Tap on second tab to switch to second lead
       await tester.tap(find.text('Person 2'));
       await tester.pumpAndSettle();
 
       // Now check the second TextField is visible with correct template
-      final textFieldsAfterSwitch = tester
-          .widgetList<RecommendationTextField>(find.byType(RecommendationTextField))
-          .toList();
-      // The visible one should now be for Person 2
-      final visibleTextField = textFieldsAfterSwitch.firstWhere(
-        (tf) => tf.controller.text.contains('Different template for Person 2'),
-      );
-      expect(visibleTextField, isNotNull);
+      final secondTextField = tester.widget<RecommendationTextField>(
+          find.byType(RecommendationTextField));
+      expect(secondTextField.controller.text, contains('Different template for Person 2'));
     });
 
     testWidgets('should display email send button', (tester) async {

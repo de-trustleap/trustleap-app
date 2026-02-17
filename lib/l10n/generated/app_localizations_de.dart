@@ -1271,6 +1271,63 @@ class AppLocalizationsDe extends AppLocalizations {
       'Keine Empfehlungen möglich - Ihnen ist keine aktive Landingpage zugewiesen';
 
   @override
+  String get recommendation_section_type_title => 'Art der Empfehlung';
+
+  @override
+  String get recommendation_type_personalized => 'Personalisiert';
+
+  @override
+  String get recommendation_type_personalized_desc =>
+      'Für spezifische Kunden mit individuellem Namen und Tracking.';
+
+  @override
+  String get recommendation_type_general => 'Allgemein';
+
+  @override
+  String get recommendation_type_general_desc =>
+      'Ein universeller Link für Newsletter oder Social Media.';
+
+  @override
+  String get recommendation_section_create_title => 'Empfehlung erstellen';
+
+  @override
+  String get recommendation_section_created_title => 'Erstellte Empfehlungen';
+
+  @override
+  String get recommendation_add_button => 'Empfehlung hinzufügen';
+
+  @override
+  String get recommendation_customer_name_placeholder =>
+      'Name des Kunden eingeben...';
+
+  @override
+  String get recommendation_promoter_name_placeholder =>
+      'Name des Promoters eingeben...';
+
+  @override
+  String get recommendation_choose_reason_label =>
+      'Wähle einen Grund (Landingpage)';
+
+  @override
+  String recommendation_message_template(String name) {
+    return 'Nachrichtenvorlage für $name';
+  }
+
+  @override
+  String get recommendation_customer_subtitle => 'Kunde';
+
+  @override
+  String recommendation_count(int count) {
+    return '($count Empfehlungen)';
+  }
+
+  @override
+  String get recommendation_promoter_label => 'Promoter';
+
+  @override
+  String get recommendation_landingpage_label => 'Landingpage';
+
+  @override
   String get landingpage_pagebuilder_container_request_error =>
       'Beim Abruf der Daten ist ein Fehler aufgetreten';
 

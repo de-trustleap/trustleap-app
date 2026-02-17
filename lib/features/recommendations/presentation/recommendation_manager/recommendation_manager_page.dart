@@ -16,16 +16,16 @@ class RecommendationManagerPage extends StatefulWidget {
 
 class _RecommendationManagerTabBarPageState
     extends State<RecommendationManagerPage> {
-
   @override
   void initState() {
     super.initState();
-    
+
     // Redirect /recommendation-manager to /recommendation-manager/active
     final currentRoute = Modular.to.path;
     if (currentRoute == RoutePaths.recommendationManagerPath) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        Modular.to.navigate("${RoutePaths.homePath}${RoutePaths.recommendationManagerPath}${RoutePaths.recommendationManagerActivePath}");
+        Modular.to.navigate(
+            "${RoutePaths.homePath}${RoutePaths.recommendationManagerPath}${RoutePaths.recommendationManagerActivePath}");
       });
     }
   }
@@ -44,13 +44,17 @@ class _RecommendationManagerTabBarPageState
       CustomTabItem(
           title: localization.recommendation_manager_active_recommendations_tab,
           icon: Icons.thumb_up,
-          route: "${RoutePaths.homePath}${RoutePaths.recommendationManagerPath}${RoutePaths.recommendationManagerActivePath}",
+          route:
+              "${RoutePaths.homePath}${RoutePaths.recommendationManagerPath}${RoutePaths.recommendationManagerActivePath}",
           content: const RecommendationManagerOverviewWrapper()),
       CustomTabItem(
           title: localization.recommendation_manager_achive_tab,
           icon: Icons.archive,
-          route: "${RoutePaths.homePath}${RoutePaths.recommendationManagerPath}${RoutePaths.recommendationManagerArchivePath}",
+          route:
+              "${RoutePaths.homePath}${RoutePaths.recommendationManagerPath}${RoutePaths.recommendationManagerArchivePath}",
           content: const RecommendationManagerArchiveOverviewWrapper())
     ];
   }
 }
+
+// TODO: RECOMMENDATION ALLGEMEIN IMPLEMENTIEREN

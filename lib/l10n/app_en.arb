@@ -1454,6 +1454,81 @@
     "@recommendations_no_active_landingpage_warning": {
         "description": "Warning when no active landing page is assigned"
     },
+    "recommendation_section_type_title": "Type of recommendation",
+    "@recommendation_section_type_title": {
+        "description": "Title for section 1 - type of recommendation"
+    },
+    "recommendation_type_personalized": "Personalized",
+    "@recommendation_type_personalized": {
+        "description": "Label for personalized recommendation"
+    },
+    "recommendation_type_personalized_desc": "For specific customers with individual names and tracking.",
+    "@recommendation_type_personalized_desc": {
+        "description": "Description of personalized recommendation"
+    },
+    "recommendation_type_general": "General",
+    "@recommendation_type_general": {
+        "description": "Label for general recommendation"
+    },
+    "recommendation_type_general_desc": "A universal link for newsletters or social media.",
+    "@recommendation_type_general_desc": {
+        "description": "Description of general recommendation"
+    },
+    "recommendation_section_create_title": "Create recommendation",
+    "@recommendation_section_create_title": {
+        "description": "Title for section 2 - create recommendation"
+    },
+    "recommendation_section_created_title": "Created recommendations",
+    "@recommendation_section_created_title": {
+        "description": "Title for section 3 - created recommendations"
+    },
+    "recommendation_add_button": "Add recommendation",
+    "@recommendation_add_button": {
+        "description": "Button text for adding a recommendation"
+    },
+    "recommendation_customer_name_placeholder": "Enter customer name...",
+    "@recommendation_customer_name_placeholder": {
+        "description": "Placeholder for the customer name field"
+    },
+    "recommendation_promoter_name_placeholder": "Enter promoter name...",
+    "@recommendation_promoter_name_placeholder": {
+        "description": "Placeholder for the promoter name field"
+    },
+    "recommendation_choose_reason_label": "Choose a reason (Landing page)",
+    "@recommendation_choose_reason_label": {
+        "description": "Label for the reason dropdown"
+    },
+    "recommendation_message_template": "Message template for {name}",
+    "@recommendation_message_template": {
+        "description": "Placeholder for the message template",
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "recommendation_customer_subtitle": "Customer",
+    "@recommendation_customer_subtitle": {
+        "description": "Subtitle under the customer name"
+    },
+    "recommendation_count": "({count} recommendations)",
+    "@recommendation_count": {
+        "description": "Count of created recommendations",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "description": "Number of recommendations"
+            }
+        }
+    },
+    "recommendation_promoter_label": "Promoter",
+    "@recommendation_promoter_label": {
+        "description": "Label for the promoter info field"
+    },
+    "recommendation_landingpage_label": "Landing page",
+    "@recommendation_landingpage_label": {
+        "description": "Label for the landing page info field"
+    },
     "landingpage_pagebuilder_container_request_error": "An error occurred while retrieving the data",
     "@landingpage_pagebuilder_container_request_error": {
         "description": "Error title on the page builder page if request fails"

@@ -2213,6 +2213,102 @@ abstract class AppLocalizations {
   /// **'No recommendations possible - You have no active landing page assigned'**
   String get recommendations_no_active_landingpage_warning;
 
+  /// Title for section 1 - type of recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Type of recommendation'**
+  String get recommendation_section_type_title;
+
+  /// Label for personalized recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Personalized'**
+  String get recommendation_type_personalized;
+
+  /// Description of personalized recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'For specific customers with individual names and tracking.'**
+  String get recommendation_type_personalized_desc;
+
+  /// Label for general recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get recommendation_type_general;
+
+  /// Description of general recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'A universal link for newsletters or social media.'**
+  String get recommendation_type_general_desc;
+
+  /// Title for section 2 - create recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Create recommendation'**
+  String get recommendation_section_create_title;
+
+  /// Title for section 3 - created recommendations
+  ///
+  /// In en, this message translates to:
+  /// **'Created recommendations'**
+  String get recommendation_section_created_title;
+
+  /// Button text for adding a recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Add recommendation'**
+  String get recommendation_add_button;
+
+  /// Placeholder for the customer name field
+  ///
+  /// In en, this message translates to:
+  /// **'Enter customer name...'**
+  String get recommendation_customer_name_placeholder;
+
+  /// Placeholder for the promoter name field
+  ///
+  /// In en, this message translates to:
+  /// **'Enter promoter name...'**
+  String get recommendation_promoter_name_placeholder;
+
+  /// Label for the reason dropdown
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a reason (Landing page)'**
+  String get recommendation_choose_reason_label;
+
+  /// Placeholder for the message template
+  ///
+  /// In en, this message translates to:
+  /// **'Message template for {name}'**
+  String recommendation_message_template(String name);
+
+  /// Subtitle under the customer name
+  ///
+  /// In en, this message translates to:
+  /// **'Customer'**
+  String get recommendation_customer_subtitle;
+
+  /// Count of created recommendations
+  ///
+  /// In en, this message translates to:
+  /// **'({count} recommendations)'**
+  String recommendation_count(int count);
+
+  /// Label for the promoter info field
+  ///
+  /// In en, this message translates to:
+  /// **'Promoter'**
+  String get recommendation_promoter_label;
+
+  /// Label for the landing page info field
+  ///
+  /// In en, this message translates to:
+  /// **'Landing page'**
+  String get recommendation_landingpage_label;
+
   /// Error title on the page builder page if request fails
   ///
   /// In en, this message translates to:
