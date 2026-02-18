@@ -6,8 +6,8 @@ import 'package:finanzbegleiter/features/recommendations/domain/recommendation_i
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/loading_overlay.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/tab_bar/custom_tab.dart';
-import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_creator/landing_page_template_placeholder.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_confirmation_dialog.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_form_helper.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_confirmation_dialog_error.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_sender.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_textfield.dart';
@@ -46,6 +46,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
   bool showMissingLinkError = false;
   bool isAlertVisible = false;
   final RecommendationSender _sender = RecommendationSender();
+  final RecommendationFormHelper _helper = RecommendationFormHelper();
   int _selectedIndex = 0;
 
   @override
@@ -53,7 +54,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
     super.initState();
 
     for (final lead in widget.leads) {
-      final text = parseTemplate(lead, lead.promotionTemplate ?? "");
+      final text = _helper.parseTemplate(lead, lead.promotionTemplate ?? "");
       _textControllers[lead.id] = TextEditingController(text: text);
     }
 
@@ -91,7 +92,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
 
     for (final lead in widget.leads) {
       if (!_textControllers.containsKey(lead.id)) {
-        final text = parseTemplate(lead, lead.promotionTemplate ?? "");
+        final text = _helper.parseTemplate(lead, lead.promotionTemplate ?? "");
         _textControllers[lead.id] = TextEditingController(text: text);
       }
     }
@@ -136,31 +137,6 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
     super.dispose();
   }
 
-  String parseTemplate(RecommendationItem lead, String template) {
-    final serviceProviderLastName =
-        (lead.serviceProviderName?.split(" "))?.skip(1).join(" ");
-    final promoterLastName = (lead.promoterName?.split(" "))?.skip(1).join(" ");
-    final replacements = {
-      LandingPageTemplatePlaceholder.receiverName: lead.displayName,
-      LandingPageTemplatePlaceholder.providerFirstName:
-          lead.serviceProviderName?.split(" ").first,
-      LandingPageTemplatePlaceholder.providerLastName: serviceProviderLastName,
-      LandingPageTemplatePlaceholder.providerName:
-          "${lead.serviceProviderName?.split(" ").first} $serviceProviderLastName",
-      LandingPageTemplatePlaceholder.promoterFirstName:
-          lead.promoterName?.split(" ").first,
-      LandingPageTemplatePlaceholder.promoterLastName: promoterLastName,
-      LandingPageTemplatePlaceholder.promoterName:
-          "${lead.promoterName?.split(" ").first} $promoterLastName"
-    };
-
-    var result = template;
-    replacements.forEach((key, value) {
-      result = result.replaceAll(key, value ?? "");
-    });
-    result += "\n[LINK]";
-    return result;
-  }
 
   Future<void> _sendMessage(
       RecommendationItem recommendation, String message) async {

@@ -1541,6 +1541,22 @@
     "@recommendation_copied_to_clipboard": {
         "description": "Snackbar-Nachricht nach dem Kopieren in die Zwischenablage"
     },
+    "recommendation_campaign_shared_alert_title": "Link bereits geteilt?",
+    "@recommendation_campaign_shared_alert_title": {
+        "description": "Titel des Alerts nach dem Kopieren des Kampagnenlinks"
+    },
+    "recommendation_campaign_shared_alert_description": "Hast du den kopierten Link bereits geteilt? Dann wird das Tracking im Empfehlungsmanager eingerichtet.",
+    "@recommendation_campaign_shared_alert_description": {
+        "description": "Beschreibung des Alerts nach dem Kopieren des Kampagnenlinks"
+    },
+    "recommendation_campaign_shared_alert_yes_button": "Ja, bereits geteilt",
+    "@recommendation_campaign_shared_alert_yes_button": {
+        "description": "Bestätigungsbutton des Kampagnen-Shared-Alerts"
+    },
+    "recommendation_campaign_shared_alert_no_button": "Noch nicht",
+    "@recommendation_campaign_shared_alert_no_button": {
+        "description": "Abbrechen-Button des Kampagnen-Shared-Alerts"
+    },
     "recommendation_copy_template_button": "Vorlage kopieren",
     "@recommendation_copy_template_button": {
         "description": "Button-Text zum Kopieren der Nachrichtenvorlage mit Link"

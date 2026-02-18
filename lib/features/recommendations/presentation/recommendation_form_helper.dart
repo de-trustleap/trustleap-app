@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_creator/landing_page_template_placeholder.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/campaign_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
@@ -78,6 +79,33 @@ class RecommendationFormHelper {
               promotionTemplate: null),
         );
     return reason.reason as String;
+  }
+
+  String parseTemplate(RecommendationItem item, String template) {
+    final serviceProviderLastName =
+        (item.serviceProviderName?.split(" "))?.skip(1).join(" ");
+    final promoterLastName =
+        (item.promoterName?.split(" "))?.skip(1).join(" ");
+    final replacements = {
+      LandingPageTemplatePlaceholder.receiverName: item.displayName,
+      LandingPageTemplatePlaceholder.providerFirstName:
+          item.serviceProviderName?.split(" ").first,
+      LandingPageTemplatePlaceholder.providerLastName: serviceProviderLastName,
+      LandingPageTemplatePlaceholder.providerName:
+          "${item.serviceProviderName?.split(" ").first} $serviceProviderLastName",
+      LandingPageTemplatePlaceholder.promoterFirstName:
+          item.promoterName?.split(" ").first,
+      LandingPageTemplatePlaceholder.promoterLastName: promoterLastName,
+      LandingPageTemplatePlaceholder.promoterName:
+          "${item.promoterName?.split(" ").first} $promoterLastName"
+    };
+
+    var result = template;
+    replacements.forEach((key, value) {
+      result = result.replaceAll(key, value ?? "");
+    });
+    result += "\n[LINK]";
+    return result;
   }
 
   PersonalizedRecommendationItem createRecommendationItem({

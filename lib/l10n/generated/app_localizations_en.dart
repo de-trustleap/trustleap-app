@@ -1314,6 +1314,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendation_copied_to_clipboard => 'Copied to clipboard';
 
   @override
+  String get recommendation_campaign_shared_alert_title =>
+      'Link already shared?';
+
+  @override
+  String get recommendation_campaign_shared_alert_description =>
+      'Have you already shared the copied link? Then tracking will be set up in the recommendation manager.';
+
+  @override
+  String get recommendation_campaign_shared_alert_yes_button =>
+      'Yes, already shared';
+
+  @override
+  String get recommendation_campaign_shared_alert_no_button => 'Not yet';
+
+  @override
   String get recommendation_copy_template_button => 'Copy template';
 
   @override

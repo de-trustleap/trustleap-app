@@ -2327,6 +2327,30 @@ abstract class AppLocalizations {
   /// **'Copied to clipboard'**
   String get recommendation_copied_to_clipboard;
 
+  /// Title of the alert after copying the campaign link
+  ///
+  /// In en, this message translates to:
+  /// **'Link already shared?'**
+  String get recommendation_campaign_shared_alert_title;
+
+  /// Description of the alert after copying the campaign link
+  ///
+  /// In en, this message translates to:
+  /// **'Have you already shared the copied link? Then tracking will be set up in the recommendation manager.'**
+  String get recommendation_campaign_shared_alert_description;
+
+  /// Confirm button of the campaign shared alert
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, already shared'**
+  String get recommendation_campaign_shared_alert_yes_button;
+
+  /// Cancel button of the campaign shared alert
+  ///
+  /// In en, this message translates to:
+  /// **'Not yet'**
+  String get recommendation_campaign_shared_alert_no_button;
+
   /// Button text for copying the message template with link
   ///
   /// In en, this message translates to:
