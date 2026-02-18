@@ -1466,13 +1466,13 @@
     "@recommendation_type_personalized_desc": {
         "description": "Description of personalized recommendation"
     },
-    "recommendation_type_general": "General",
-    "@recommendation_type_general": {
-        "description": "Label for general recommendation"
+    "recommendation_type_campaign": "Campaign",
+    "@recommendation_type_campaign": {
+        "description": "Label for campaign recommendation"
     },
-    "recommendation_type_general_desc": "A universal link for newsletters or social media.",
-    "@recommendation_type_general_desc": {
-        "description": "Description of general recommendation"
+    "recommendation_type_campaign_desc": "A universal link for newsletters or social media.",
+    "@recommendation_type_campaign_desc": {
+        "description": "Description of campaign recommendation"
     },
     "recommendation_section_create_title": "Create recommendation",
     "@recommendation_section_create_title": {
@@ -1528,6 +1528,38 @@
     "recommendation_landingpage_label": "Landing page",
     "@recommendation_landingpage_label": {
         "description": "Label for the landing page info field"
+    },
+    "recommendation_generate_link_button": "Generate link",
+    "@recommendation_generate_link_button": {
+        "description": "Button text for generating a general link"
+    },
+    "recommendation_campaign_link_title": "Generated link",
+    "@recommendation_campaign_link_title": {
+        "description": "Title of the section for the generated campaign link"
+    },
+    "recommendation_copied_to_clipboard": "Copied to clipboard",
+    "@recommendation_copied_to_clipboard": {
+        "description": "Snackbar message after copying to clipboard"
+    },
+    "recommendation_copy_template_button": "Copy template",
+    "@recommendation_copy_template_button": {
+        "description": "Button text for copying the message template with link"
+    },
+    "recommendation_campaign_name_placeholder": "Campaign name",
+    "@recommendation_campaign_name_placeholder": {
+        "description": "Placeholder for the campaign name field"
+    },
+    "recommendation_campaign_duration_placeholder": "Duration in days",
+    "@recommendation_campaign_duration_placeholder": {
+        "description": "Placeholder for the campaign duration field"
+    },
+    "recommendations_validation_missing_campaign_name": "Please enter a campaign name",
+    "@recommendations_validation_missing_campaign_name": {
+        "description": "Validation message when campaign name is missing"
+    },
+    "recommendations_validation_invalid_campaign_duration": "Please enter a duration between 1 and 30 days",
+    "@recommendations_validation_invalid_campaign_duration": {
+        "description": "Validation message when campaign duration is invalid"
     },
     "landingpage_pagebuilder_container_request_error": "An error occurred while retrieving the data",
     "@landingpage_pagebuilder_container_request_error": {

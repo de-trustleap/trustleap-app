@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/last_viewed.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:finanzbegleiter/environment.dart';
@@ -152,6 +153,8 @@ class _RecommendationManagerListTileState
         }
       },
       builder: (context, state) {
+        final reco = _recommendation.recommendation;
+        final personalizedReco = reco is PersonalizedRecommendationItem ? reco : null;
         return Container(
           color: themeData.colorScheme.surface,
           child: CollapsibleTile(
@@ -221,14 +224,14 @@ class _RecommendationManagerListTileState
                 ),
                 const SizedBox(height: 16),
                 RecommendationManagerStatusProgressIndicator(
-                    level: _recommendation.recommendation?.statusLevel ??
+                    level: personalizedReco?.statusLevel ??
                         StatusLevel.recommendationSend,
                     statusTimestamps:
-                        _recommendation.recommendation?.statusTimestamps ?? {}),
+                        personalizedReco?.statusTimestamps ?? {}),
                 const SizedBox(height: 16),
                 RecommendationManagerListTileIconRow(
                     key: ValueKey(
-                        "${_recommendation.id}-${_recommendation.recommendation?.statusLevel}"),
+                        "${_recommendation.id}-${personalizedReco?.statusLevel}"),
                     recommendation: _recommendation,
                     onAppointmentPressed: widget.onAppointmentPressed,
                     onFinishedPressed: widget.onFinishedPressed,

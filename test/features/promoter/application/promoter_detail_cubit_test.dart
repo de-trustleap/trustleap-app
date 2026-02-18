@@ -6,6 +6,7 @@ import "package:finanzbegleiter/core/id.dart";
 import "package:finanzbegleiter/features/landing_pages/domain/landing_page.dart";
 import "package:finanzbegleiter/features/promoter/domain/promoter.dart";
 import "package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart";
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import "package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart";
 import "package:finanzbegleiter/features/auth/domain/user.dart";
 import "package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart";
@@ -82,7 +83,7 @@ void main() {
       userID: "user-1",
       priority: RecommendationPriority.medium,
       notes: null,
-      recommendation: RecommendationItem(
+      recommendation: PersonalizedRecommendationItem(
         id: id,
         name: "Rec $id",
         reason: "Test",

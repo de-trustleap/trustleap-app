@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_helper.dart';
@@ -33,6 +34,8 @@ class RecommendationManagerListTileTitle extends StatelessWidget {
   }
 
   Widget _buildDesktopTitleWidget(RecommendationManagerHelper helper, ThemeData themeData) {
+    final reco = recommendation.recommendation;
+    final personalizedReco = reco is PersonalizedRecommendationItem ? reco : null;
     return Row(children: [
       Flexible(
           flex: 1,
@@ -41,15 +44,13 @@ class RecommendationManagerListTileTitle extends StatelessWidget {
           flex: 3,
           child: _buildCell(
               isPromoter
-                  ? recommendation.recommendation?.name ?? ""
-                  : recommendation.recommendation?.promoterName ?? "",
+                  ? reco?.displayName ?? ""
+                  : reco?.promoterName ?? "",
               themeData)),
       Flexible(
           flex: 3,
           child: _buildCell(
-              helper.getStringFromStatusLevel(
-                      recommendation.recommendation?.statusLevel) ??
-                  "",
+              helper.getStringFromStatusLevel(personalizedReco?.statusLevel) ?? "",
               themeData)),
       Flexible(
           flex: 2,
@@ -69,6 +70,8 @@ class RecommendationManagerListTileTitle extends StatelessWidget {
   }
 
   Widget _buildMobileTitleWidget(RecommendationManagerHelper helper, ThemeData themeData, AppLocalizations localization) {
+    final reco = recommendation.recommendation;
+    final personalizedReco = reco is PersonalizedRecommendationItem ? reco : null;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -79,8 +82,8 @@ class RecommendationManagerListTileTitle extends StatelessWidget {
             Expanded(
               child: Text(
                 isPromoter
-                    ? recommendation.recommendation?.name ?? ""
-                    : recommendation.recommendation?.promoterName ?? "",
+                    ? reco?.displayName ?? ""
+                    : reco?.promoterName ?? "",
                 style: themeData.textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
@@ -100,9 +103,7 @@ class RecommendationManagerListTileTitle extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              helper.getStringFromStatusLevel(
-                recommendation.recommendation?.statusLevel
-              ) ?? "",
+              helper.getStringFromStatusLevel(personalizedReco?.statusLevel) ?? "",
               style: themeData.textTheme.bodyMedium,
             ),
             const SizedBox(height: 4),

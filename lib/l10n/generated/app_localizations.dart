@@ -2231,17 +2231,17 @@ abstract class AppLocalizations {
   /// **'For specific customers with individual names and tracking.'**
   String get recommendation_type_personalized_desc;
 
-  /// Label for general recommendation
+  /// Label for campaign recommendation
   ///
   /// In en, this message translates to:
-  /// **'General'**
-  String get recommendation_type_general;
+  /// **'Campaign'**
+  String get recommendation_type_campaign;
 
-  /// Description of general recommendation
+  /// Description of campaign recommendation
   ///
   /// In en, this message translates to:
   /// **'A universal link for newsletters or social media.'**
-  String get recommendation_type_general_desc;
+  String get recommendation_type_campaign_desc;
 
   /// Title for section 2 - create recommendation
   ///
@@ -2308,6 +2308,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Landing page'**
   String get recommendation_landingpage_label;
+
+  /// Button text for generating a general link
+  ///
+  /// In en, this message translates to:
+  /// **'Generate link'**
+  String get recommendation_generate_link_button;
+
+  /// Title of the section for the generated campaign link
+  ///
+  /// In en, this message translates to:
+  /// **'Generated link'**
+  String get recommendation_campaign_link_title;
+
+  /// Snackbar message after copying to clipboard
+  ///
+  /// In en, this message translates to:
+  /// **'Copied to clipboard'**
+  String get recommendation_copied_to_clipboard;
+
+  /// Button text for copying the message template with link
+  ///
+  /// In en, this message translates to:
+  /// **'Copy template'**
+  String get recommendation_copy_template_button;
+
+  /// Placeholder for the campaign name field
+  ///
+  /// In en, this message translates to:
+  /// **'Campaign name'**
+  String get recommendation_campaign_name_placeholder;
+
+  /// Placeholder for the campaign duration field
+  ///
+  /// In en, this message translates to:
+  /// **'Duration in days'**
+  String get recommendation_campaign_duration_placeholder;
+
+  /// Validation message when campaign name is missing
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a campaign name'**
+  String get recommendations_validation_missing_campaign_name;
+
+  /// Validation message when campaign duration is invalid
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a duration between 1 and 30 days'**
+  String get recommendations_validation_invalid_campaign_duration;
 
   /// Error title on the page builder page if request fails
   ///

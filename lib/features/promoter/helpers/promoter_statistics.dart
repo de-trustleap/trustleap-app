@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/features/promoter/domain/promoter.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart';
 import 'package:finanzbegleiter/features/promoter/domain/promoter_stats.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 
@@ -62,7 +63,10 @@ class PromoterStatistics {
     final shares = recommendations.length;
     final conversions = recommendations
         .where(
-            (rec) => rec.recommendation?.statusLevel == StatusLevel.successful)
+            (rec) {
+              final reco = rec.recommendation;
+              return reco is PersonalizedRecommendationItem && reco.statusLevel == StatusLevel.successful;
+            })
         .length;
 
     return PromoterStats(shares: shares, conversions: conversions);

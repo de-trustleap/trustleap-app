@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/id.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_reason.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';

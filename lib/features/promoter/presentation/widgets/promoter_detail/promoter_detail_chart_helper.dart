@@ -1,4 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:intl/intl.dart';
@@ -15,13 +16,17 @@ class PromoterDetailChartHelper {
   });
 
   List<UserRecommendation> get nonSuccessful => recommendations
-      .where(
-          (rec) => rec.recommendation?.statusLevel != StatusLevel.successful)
+      .where((rec) {
+        final reco = rec.recommendation;
+        return reco is! PersonalizedRecommendationItem || reco.statusLevel != StatusLevel.successful;
+      })
       .toList();
 
   List<UserRecommendation> get conversions => recommendations
-      .where(
-          (rec) => rec.recommendation?.statusLevel == StatusLevel.successful)
+      .where((rec) {
+        final reco = rec.recommendation;
+        return reco is PersonalizedRecommendationItem && reco.statusLevel == StatusLevel.successful;
+      })
       .toList();
 
   bool get hasConversionsInTimeframe =>
@@ -37,7 +42,8 @@ class PromoterDetailChartHelper {
 
       int count = 0;
       for (final rec in recs) {
-        final timestamp = rec.recommendation?.statusTimestamps?[0];
+        final reco = rec.recommendation;
+        final timestamp = reco is PersonalizedRecommendationItem ? (reco.statusTimestamps?[0]) : null;
         if (timestamp != null) {
           final recDay =
               DateTime(timestamp.year, timestamp.month, timestamp.day);

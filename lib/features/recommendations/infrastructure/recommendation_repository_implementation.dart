@@ -8,6 +8,7 @@ import 'package:finanzbegleiter/features/recommendations/domain/archived_recomme
 import 'package:finanzbegleiter/features/landing_pages/domain/last_edit.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/last_viewed.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
@@ -150,19 +151,24 @@ class RecommendationRepositoryImplementation
   Future<Either<DatabaseFailure, UserRecommendation>> setAppointmentState(
       UserRecommendation recommendation) async {
     final recoCollection = firestore.collection("recommendations");
-    final newStatusTimeStamps = recommendation.recommendation?.statusTimestamps;
+    if (recommendation.recommendation is! PersonalizedRecommendationItem) {
+      return left(BackendFailure());
+    }
+    final personalized =
+        recommendation.recommendation! as PersonalizedRecommendationItem;
+    final newStatusTimeStamps = personalized.statusTimestamps;
     final actualDate = DateTime.now();
     newStatusTimeStamps?[3] = actualDate;
-    final newRecommendation = recommendation.recommendation
-        ?.copyWith(statusTimestamps: newStatusTimeStamps);
-    final timeStamps = newRecommendation?.statusTimestamps?.map(
+    final newRecommendation =
+        personalized.copyWith(statusTimestamps: newStatusTimeStamps);
+    final timeStamps = newRecommendation.statusTimestamps?.map(
         (key, value) => MapEntry(key.toString(), value?.toIso8601String()));
     try {
-      await recoCollection.doc(newRecommendation?.id).set(
+      await recoCollection.doc(newRecommendation.id).set(
           {"statusLevel": 3, "statusTimestamps": timeStamps},
           SetOptions(merge: true));
       return right(recommendation.copyWith(
-          recommendation: newRecommendation?.copyWith(
+          recommendation: newRecommendation.copyWith(
               statusLevel: StatusLevel.appointment,
               statusTimestamps: newStatusTimeStamps)));
     } on FirebaseException catch (e) {
@@ -685,7 +691,7 @@ class RecommendationRepositoryImplementation
     }
   }
 
-  RecommendationItem _convertArchivedToRecommendationItem(
+  PersonalizedRecommendationItem _convertArchivedToRecommendationItem(
       ArchivedRecommendationItem archived) {
     StatusLevel statusLevel;
     if (archived.success == true) {
@@ -701,7 +707,7 @@ class RecommendationRepositoryImplementation
       5: archived.finishedTimeStamp,
     };
 
-    return RecommendationItem(
+    return PersonalizedRecommendationItem(
       id: archived.id.value,
       name: null,
       reason: archived.reason,

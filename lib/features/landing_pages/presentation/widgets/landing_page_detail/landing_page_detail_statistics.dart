@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/features/landing_pages/application/landing_page_detail/landing_page_detail_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/features/recommendations/helpers/recommendations_statistics.dart';
@@ -36,7 +37,10 @@ class LandingPageDetailStatistics extends StatelessWidget {
 
     return recommendations
         .where(
-            (rec) => rec.recommendation?.statusLevel == StatusLevel.successful)
+            (rec) {
+              final reco = rec.recommendation;
+              return reco is PersonalizedRecommendationItem && reco.statusLevel == StatusLevel.successful;
+            })
         .length;
   }
 

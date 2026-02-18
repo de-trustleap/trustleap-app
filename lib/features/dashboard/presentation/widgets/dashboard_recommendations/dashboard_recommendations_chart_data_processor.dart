@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
@@ -66,14 +67,18 @@ class DashboardRecommendationsChartDataProcessor {
 
     final filteredRecommendations = statusLevel != null
         ? recommendations
-            .where((rec) =>
-                rec.recommendation?.statusLevel?.index == (statusLevel! - 1))
+            .where((rec) {
+                final reco = rec.recommendation;
+                return reco is PersonalizedRecommendationItem &&
+                    reco.statusLevel?.index == (statusLevel! - 1);
+              })
             .toList()
         : recommendations;
 
     for (final recommendation in filteredRecommendations) {
+      final reco = recommendation.recommendation;
       final statusTimestamp =
-          recommendation.recommendation?.statusTimestamps?[0];
+          reco is PersonalizedRecommendationItem ? (reco.statusTimestamps?[0]) : null;
       if (statusTimestamp != null) {
         final dateKey = _getDateKeyForTimestamp(statusTimestamp);
         groupedData[dateKey] = (groupedData[dateKey] ?? 0) + 1;

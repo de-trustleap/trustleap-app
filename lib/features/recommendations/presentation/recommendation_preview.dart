@@ -141,7 +141,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
         (lead.serviceProviderName?.split(" "))?.skip(1).join(" ");
     final promoterLastName = (lead.promoterName?.split(" "))?.skip(1).join(" ");
     final replacements = {
-      LandingPageTemplatePlaceholder.receiverName: lead.name,
+      LandingPageTemplatePlaceholder.receiverName: lead.displayName,
       LandingPageTemplatePlaceholder.providerFirstName:
           lead.serviceProviderName?.split(" ").first,
       LandingPageTemplatePlaceholder.providerLastName: serviceProviderLastName,
@@ -211,7 +211,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
             context: context,
             builder: (_) {
               return RecommendationConfirmationDialog(
-                  recommendationReceiverName: recommendation.name,
+                  recommendationReceiverName: recommendation.displayName,
                   cancelAction: () {
                     isAlertVisible = false;
                     CustomNavigator.of(context).pop();
@@ -268,7 +268,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
                 builder: (_) {
                   return RecommendationConfirmationDialogError(
                       failure: state.failure,
-                      recommendationReceiverName: state.recommendation.name,
+                      recommendationReceiverName: state.recommendation.displayName,
                       cancelAction: () {
                         isAlertVisible = false;
                         navigator.pop();
@@ -304,7 +304,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
             controller: tabController,
             tabs: widget.leads
                 .map((lead) => CustomTab(
-                      title: lead.name ?? "",
+                      title: lead.displayName ?? "",
                       icon: Icons.person,
                       responsiveValue: responsiveValue,
                       totalTabs: widget.leads.length,
@@ -349,7 +349,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
                   backgroundColor: themeData.colorScheme.primary
                       .withValues(alpha: 0.15),
                   child: Text(
-                    _getInitials(lead.name),
+                    _getInitials(lead.displayName),
                     style: themeData.textTheme.bodySmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: themeData.colorScheme.primary,
@@ -362,7 +362,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        lead.name ?? "",
+                        lead.displayName ?? "",
                         style: themeData.textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -435,7 +435,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
             const SizedBox(height: 16),
             RecommendationTextField(
               controller: controller,
-              leadName: lead.name ?? "",
+              leadName: lead.displayName ?? "",
               showError: showMissingLinkError,
               disabled: widget.disabled,
               onSendPressed: () {

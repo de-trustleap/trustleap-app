@@ -64,7 +64,7 @@ class _RecommendationManagerOverviewState
     final query = _searchController.text.toLowerCase();
     setState(() {
       _searchFilteredRecommendations = widget.recommendations.where((item) {
-        final name = item.recommendation?.name?.toLowerCase() ?? "";
+        final name = item.recommendation?.displayName?.toLowerCase() ?? "";
         final promoter =
             item.recommendation?.promoterName?.toLowerCase() ?? "";
         final reason = item.recommendation?.reason?.toLowerCase() ?? "";

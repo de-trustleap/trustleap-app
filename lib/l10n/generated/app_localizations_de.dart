@@ -1281,10 +1281,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Für spezifische Kunden mit individuellem Namen und Tracking.';
 
   @override
-  String get recommendation_type_general => 'Allgemein';
+  String get recommendation_type_campaign => 'Kampagne';
 
   @override
-  String get recommendation_type_general_desc =>
+  String get recommendation_type_campaign_desc =>
       'Ein universeller Link für Newsletter oder Social Media.';
 
   @override
@@ -1326,6 +1326,32 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get recommendation_landingpage_label => 'Landingpage';
+
+  @override
+  String get recommendation_generate_link_button => 'Link generieren';
+
+  @override
+  String get recommendation_campaign_link_title => 'Generierter Link';
+
+  @override
+  String get recommendation_copied_to_clipboard => 'In Zwischenablage kopiert';
+
+  @override
+  String get recommendation_copy_template_button => 'Vorlage kopieren';
+
+  @override
+  String get recommendation_campaign_name_placeholder => 'Kampagnenname';
+
+  @override
+  String get recommendation_campaign_duration_placeholder => 'Dauer in Tagen';
+
+  @override
+  String get recommendations_validation_missing_campaign_name =>
+      'Bitte gib einen Kampagnennamen ein';
+
+  @override
+  String get recommendations_validation_invalid_campaign_duration =>
+      'Bitte gib eine Dauer zwischen 1 und 30 Tagen ein';
 
   @override
   String get landingpage_pagebuilder_container_request_error =>

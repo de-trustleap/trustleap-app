@@ -56,5 +56,3 @@ class _RecommendationManagerTabBarPageState
     ];
   }
 }
-
-// TODO: RECOMMENDATION ALLGEMEIN IMPLEMENTIEREN

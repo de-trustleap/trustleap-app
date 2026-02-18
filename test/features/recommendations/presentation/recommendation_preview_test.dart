@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/features/recommendations/application/recommendat
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/core/id.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_preview.dart';
@@ -63,7 +64,7 @@ void main() {
     String? landingPageID,
     String? defaultLandingPageID,
   }) {
-    return RecommendationItem(
+    return PersonalizedRecommendationItem(
       id: id ?? 'test-id-1',
       name: name ?? 'Max Mustermann',
       promoterName: promoterName ?? 'Hans Schmidt',

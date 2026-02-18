@@ -8,6 +8,7 @@ import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart'
 import 'package:finanzbegleiter/features/legals/domain/legal_version.dart';
 import 'package:finanzbegleiter/features/promoter/domain/promoter.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
@@ -43,7 +44,7 @@ void main() {
       userID: userId,
       priority: RecommendationPriority.medium,
       notes: null,
-      recommendation: RecommendationItem(
+      recommendation: PersonalizedRecommendationItem(
         id: "item-1",
         name: "Test",
         reason: "Test Landing Page",
@@ -177,7 +178,7 @@ void main() {
         userID: userId,
         priority: RecommendationPriority.medium,
         notes: null,
-        recommendation: RecommendationItem(
+        recommendation: PersonalizedRecommendationItem(
           id: "item-1",
           name: "Test",
           reason: "Test Landing Page",

@@ -1,5 +1,6 @@
 import "package:fl_chart/fl_chart.dart";
 import "package:finanzbegleiter/core/id.dart";
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import "package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart";
 import "package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart";
 import "package:finanzbegleiter/features/promoter/presentation/widgets/promoter_detail/promoter_detail_chart_helper.dart";
@@ -22,7 +23,7 @@ void main() {
         userID: "user-1",
         priority: RecommendationPriority.medium,
         notes: null,
-        recommendation: RecommendationItem(
+        recommendation: PersonalizedRecommendationItem(
           id: id,
           name: "Rec $id",
           reason: "Test",
@@ -64,8 +65,11 @@ void main() {
 
         expect(helper.nonSuccessful.length, equals(2));
         expect(
-            helper.nonSuccessful.every((r) =>
-                r.recommendation?.statusLevel != StatusLevel.successful),
+            helper.nonSuccessful.every((r) {
+              final reco = r.recommendation;
+              return reco is PersonalizedRecommendationItem &&
+                  reco.statusLevel != StatusLevel.successful;
+            }),
             isTrue);
       });
 
@@ -134,8 +138,11 @@ void main() {
 
         expect(helper.conversions.length, equals(2));
         expect(
-            helper.conversions.every((r) =>
-                r.recommendation?.statusLevel == StatusLevel.successful),
+            helper.conversions.every((r) {
+              final reco = r.recommendation;
+              return reco is PersonalizedRecommendationItem &&
+                  reco.statusLevel == StatusLevel.successful;
+            }),
             isTrue);
       });
 
@@ -274,7 +281,7 @@ void main() {
           userID: "user-1",
           priority: RecommendationPriority.medium,
           notes: null,
-          recommendation: RecommendationItem(
+          recommendation: PersonalizedRecommendationItem(
             id: "null-ts",
             name: "Rec",
             reason: "Test",

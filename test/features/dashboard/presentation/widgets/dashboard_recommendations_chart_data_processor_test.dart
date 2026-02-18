@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/id.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:finanzbegleiter/features/dashboard/presentation/widgets/dashboard_recommendations/dashboard_recommendations_chart_data_processor.dart';
@@ -19,7 +20,7 @@ void main() {
 
     setUp(() {
       final now = DateTime.now();
-      final recommendation1 = RecommendationItem(
+      final recommendation1 = PersonalizedRecommendationItem(
         id: "1",
         name: "Test Recommendation 1",
         reason: "Test",
@@ -34,7 +35,7 @@ void main() {
         promoterImageDownloadURL: null,
       );
 
-      final recommendation2 = RecommendationItem(
+      final recommendation2 = PersonalizedRecommendationItem(
         id: "2",
         name: "Test Recommendation 2",
         reason: "Test",

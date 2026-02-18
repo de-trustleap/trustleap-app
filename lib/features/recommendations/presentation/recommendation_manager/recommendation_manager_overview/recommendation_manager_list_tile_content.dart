@@ -33,7 +33,7 @@ class RecommendationManagerListTileContent extends StatelessWidget {
                   localization.recommendation_manager_list_tile_receiver,
                   style: themeData.textTheme.bodyMedium),
               const SizedBox(height: 4),
-              Text(recommendation.recommendation?.name ?? "",
+              Text(recommendation.recommendation?.displayName ?? "",
                   style: themeData.textTheme.bodyMedium!
                       .copyWith(fontWeight: FontWeight.bold))
             ]),
@@ -64,7 +64,7 @@ class RecommendationManagerListTileContent extends StatelessWidget {
                     localization.recommendation_manager_list_tile_receiver,
                     style: themeData.textTheme.bodyMedium),
                 const SizedBox(height: 4),
-                Text(recommendation.recommendation?.name ?? "",
+                Text(recommendation.recommendation?.displayName ?? "",
                     style: themeData.textTheme.bodyMedium!
                         .copyWith(fontWeight: FontWeight.bold))
               ]),

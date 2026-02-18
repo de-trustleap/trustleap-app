@@ -1,5 +1,8 @@
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/campaign_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_status_counts.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_reason.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/core/id.dart';
@@ -77,7 +80,7 @@ class RecommendationFormHelper {
     return reason.reason as String;
   }
 
-  RecommendationItem createRecommendationItem({
+  PersonalizedRecommendationItem createRecommendationItem({
     required String leadName,
     required String promoterName,
     required String serviceProviderName,
@@ -86,7 +89,7 @@ class RecommendationFormHelper {
     required CustomUser? currentUser,
     required CustomUser? parentUser,
   }) {
-    return RecommendationItem(
+    return PersonalizedRecommendationItem(
         id: UniqueID().value,
         name: leadName.trim(),
         reason: selectedReason.reason!,
@@ -103,5 +106,35 @@ class RecommendationFormHelper {
         promotionTemplate: reasons.firstWhere((e) {
           return e.reason == selectedReason.reason;
         }).promotionTemplate!);
+  }
+
+  CampaignRecommendationItem createCampaignRecommendationItem({
+    required String campaignName,
+    required int campaignDurationDays,
+    required String promoterName,
+    required String serviceProviderName,
+    required RecommendationReason selectedReason,
+    required List<RecommendationReason> reasons,
+    required CustomUser? currentUser,
+    required CustomUser? parentUser,
+  }) {
+    return CampaignRecommendationItem(
+        id: UniqueID().value,
+        campaignName: campaignName.trim(),
+        campaignDurationDays: campaignDurationDays,
+        reason: selectedReason.reason!,
+        landingPageID: selectedReason.id!.value,
+        promoterName: promoterName.trim(),
+        serviceProviderName: serviceProviderName.trim(),
+        defaultLandingPageID: currentUser != null
+            ? currentUser.defaultLandingPageID
+            : parentUser?.defaultLandingPageID,
+        userID: currentUser?.id.value ?? parentUser?.id.value,
+        promoterImageDownloadURL: null,
+        statusCounts: const RecommendationStatusCounts(),
+        promotionTemplate: reasons.firstWhere((e) {
+          return e.reason == selectedReason.reason;
+        }).promotionTemplate!,
+        expiresAt: DateTime.now().add(Duration(days: campaignDurationDays)));
   }
 }

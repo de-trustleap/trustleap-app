@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/last_viewed.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
@@ -39,10 +40,10 @@ class RecommendationManagerTileCubit
 
   void setAppointmentState(UserRecommendation recommendation) async {
     emit(RecommendationSetStatusLoadingState(recommendation: recommendation));
-    if (recommendation.recommendation == null ||
-        recommendation.recommendation?.statusLevel !=
-            StatusLevel.contactFormSent ||
-        recommendation.recommendation?.statusTimestamps == null) {
+    final reco = recommendation.recommendation;
+    if (reco is! PersonalizedRecommendationItem ||
+        reco.statusLevel != StatusLevel.contactFormSent ||
+        reco.statusTimestamps == null) {
       return;
     }
     final failureOrSuccess =
@@ -56,9 +57,10 @@ class RecommendationManagerTileCubit
 
   void setFinished(UserRecommendation recommendation, bool success) async {
     emit(RecommendationSetStatusLoadingState(recommendation: recommendation));
-    if (recommendation.recommendation == null ||
-        recommendation.recommendation?.statusLevel != StatusLevel.appointment ||
-        recommendation.recommendation?.statusTimestamps == null) {
+    final reco = recommendation.recommendation;
+    if (reco is! PersonalizedRecommendationItem ||
+        reco.statusLevel != StatusLevel.appointment ||
+        reco.statusTimestamps == null) {
       return;
     }
     final failureOrSuccess =

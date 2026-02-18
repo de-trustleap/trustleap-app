@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/core/id.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/archived_recommendation_item.dart';
@@ -21,7 +22,7 @@ void main() {
 
   group("RecommendationRepositoryImplementation_SaveRecommendation", () {
     final userID = "1";
-    final recommendation = RecommendationItem(
+    final recommendation = PersonalizedRecommendationItem(
         id: "1",
         name: "Test",
         reason: "Page1",
@@ -67,7 +68,7 @@ void main() {
 
   group("RecommendationRepositoryImplementation_GetRecommendations", () {
     final userID = "1";
-    final recommendation = RecommendationItem(
+    final recommendation = PersonalizedRecommendationItem(
         id: "1",
         name: "Test",
         reason: "Test",
@@ -151,7 +152,7 @@ void main() {
 
   group("RecommendationRepositoryImplementation_SetAppointmentState", () {
     final date = DateTime.now();
-    final recommendation = RecommendationItem(
+    final recommendation = PersonalizedRecommendationItem(
         id: "1",
         name: "Test",
         reason: "Test",
@@ -201,7 +202,7 @@ void main() {
 
   group("RecommendationRepositoryImplementation_finishRecommendation", () {
     final date = DateTime.now();
-    final recommendation = RecommendationItem(
+    final recommendation = PersonalizedRecommendationItem(
         id: "1",
         name: "Test",
         reason: "Test",
@@ -297,7 +298,7 @@ void main() {
 
   group("RecommendationRepositoryImplementation_setFavorite", () {
     final date = DateTime.now();
-    final recommendation = RecommendationItem(
+    final recommendation = PersonalizedRecommendationItem(
         id: "1",
         name: "Test",
         reason: "Test",
@@ -346,7 +347,7 @@ void main() {
 
   group("RecommendationRepositoryImplementation_setPriority", () {
     final date = DateTime.now();
-    final recommendation = RecommendationItem(
+    final recommendation = PersonalizedRecommendationItem(
         id: "1",
         name: "Test",
         reason: "Test",
@@ -394,7 +395,7 @@ void main() {
 
   group("RecommendationRepositoryImplementation_setNotes", () {
     final date = DateTime.now();
-    final recommendation = RecommendationItem(
+    final recommendation = PersonalizedRecommendationItem(
         id: "1",
         name: "Test",
         reason: "Test",
@@ -444,7 +445,7 @@ void main() {
   group("RecommendationRepositoryImplementation_getRecommendationsCompany", () {
     final userID = "1";
     final date = DateTime.now();
-    final recommendation = RecommendationItem(
+    final recommendation = PersonalizedRecommendationItem(
         id: "1",
         name: "Test",
         reason: "Test",
@@ -581,7 +582,7 @@ void main() {
     final date = DateTime.now();
     
     // Active recommendation
-    final activeRecommendation = RecommendationItem(
+    final activeRecommendation = PersonalizedRecommendationItem(
         id: "1",
         name: "Active Test",
         reason: "Test",
@@ -604,7 +605,7 @@ void main() {
         recommendation: activeRecommendation);
     
     // Archived recommendation (converted to UserRecommendation)
-    final archivedRecommendation = RecommendationItem(
+    final archivedRecommendation = PersonalizedRecommendationItem(
         id: "2",
         name: "Archived Test",
         reason: "Test",

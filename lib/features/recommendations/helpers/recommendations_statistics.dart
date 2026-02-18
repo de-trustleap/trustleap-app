@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/features/dashboard/domain/chart_trend.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -131,7 +132,8 @@ class RecommendationsStatistics {
       if (createdAt != null) {
         bool matchesStatusLevel = true;
         if (statusLevel != null) {
-          final recStatusLevel = rec.recommendation?.statusLevel;
+          final reco = rec.recommendation;
+          final recStatusLevel = reco is PersonalizedRecommendationItem ? reco.statusLevel : null;
           if (recStatusLevel != null) {
             if (recStatusLevel == StatusLevel.successful ||
                 recStatusLevel == StatusLevel.failed) {

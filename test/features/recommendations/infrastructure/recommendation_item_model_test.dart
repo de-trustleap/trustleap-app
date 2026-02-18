@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finanzbegleiter/features/recommendations/infrastructure/recommendation_item_model.dart';
@@ -22,6 +23,10 @@ void main() {
           statusLevel: "recommendationSend",
           statusTimestamps: null,
           promoterImageDownloadURL: null,
+          recommendationType: null,
+          statusCounts: null,
+          campaignName: null,
+          campaignDurationDays: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);
@@ -37,6 +42,10 @@ void main() {
           statusTimestamps: null,
           reason: "",
           promoterImageDownloadURL: null,
+          recommendationType: null,
+          statusCounts: null,
+          campaignName: null,
+          campaignDurationDays: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);
@@ -63,6 +72,10 @@ void main() {
           statusLevel: "recommendationSend",
           statusTimestamps: null,
           promoterImageDownloadURL: null,
+          recommendationType: null,
+          statusCounts: null,
+          campaignName: null,
+          campaignDurationDays: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);
@@ -78,6 +91,10 @@ void main() {
         "statusLevel": "recommendationSend",
         "statusTimestamps": null,
         "promoterImageDownloadURL": null,
+        "recommendationType": null,
+        "statusCounts": null,
+        "campaignName": null,
+        "campaignDurationDays": null,
         "expiresAt": date.toIso8601String(),
         "createdAt": date.toIso8601String(),
         "lastUpdated": null
@@ -119,6 +136,10 @@ void main() {
           statusLevel: "recommendationSend",
           statusTimestamps: null,
           promoterImageDownloadURL: null,
+          recommendationType: null,
+          statusCounts: null,
+          campaignName: null,
+          campaignDurationDays: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);
@@ -160,6 +181,10 @@ void main() {
           statusLevel: "recommendationSend",
           statusTimestamps: null,
           promoterImageDownloadURL: null,
+          recommendationType: null,
+          statusCounts: null,
+          campaignName: null,
+          campaignDurationDays: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);
@@ -187,10 +212,14 @@ void main() {
           statusLevel: "recommendationSend",
           statusTimestamps: null,
           promoterImageDownloadURL: null,
+          recommendationType: null,
+          statusCounts: null,
+          campaignName: null,
+          campaignDurationDays: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);
-      final expectedResult = RecommendationItem(
+      final expectedResult = PersonalizedRecommendationItem(
           id: "1",
           name: "Test",
           reason: "",
@@ -219,7 +248,7 @@ void main() {
         "check if conversion from RecommendationItem to RecommendationItemModel works",
         () {
       // Given
-      final model = RecommendationItem(
+      final model = PersonalizedRecommendationItem(
           id: "1",
           name: "Test",
           reason: null,
@@ -247,6 +276,10 @@ void main() {
           statusLevel: "recommendationSend",
           statusTimestamps: null,
           promoterImageDownloadURL: null,
+          recommendationType: "personalized",
+          statusCounts: null,
+          campaignName: null,
+          campaignDurationDays: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);
@@ -273,6 +306,10 @@ void main() {
           statusLevel: "recommendationSend",
           statusTimestamps: null,
           promoterImageDownloadURL: null,
+          recommendationType: null,
+          statusCounts: null,
+          campaignName: null,
+          campaignDurationDays: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);
@@ -288,6 +325,10 @@ void main() {
           statusLevel: "recommendationSend",
           statusTimestamps: null,
           promoterImageDownloadURL: null,
+          recommendationType: null,
+          statusCounts: null,
+          campaignName: null,
+          campaignDurationDays: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);

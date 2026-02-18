@@ -1,7 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/campaign_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/infrastructure/recommendation_status_counts_model.dart';
 
 class RecommendationItemModel extends Equatable {
   final String id;
@@ -15,6 +18,10 @@ class RecommendationItemModel extends Equatable {
   final Map<int, DateTime?>? statusTimestamps;
   final String? userID;
   final String? promoterImageDownloadURL;
+  final String? recommendationType;
+  final Map<String, int>? statusCounts;
+  final String? campaignName;
+  final int? campaignDurationDays;
   final DateTime createdAt;
   final DateTime expiresAt;
   final DateTime? lastUpdated;
@@ -31,6 +38,10 @@ class RecommendationItemModel extends Equatable {
       required this.statusTimestamps,
       required this.userID,
       required this.promoterImageDownloadURL,
+      required this.recommendationType,
+      required this.statusCounts,
+      required this.campaignName,
+      required this.campaignDurationDays,
       required this.expiresAt,
       required this.createdAt,
       required this.lastUpdated});
@@ -47,6 +58,10 @@ class RecommendationItemModel extends Equatable {
       Map<int, DateTime?>? statusTimestamps,
       String? userID,
       String? promoterImageDownloadURL,
+      String? recommendationType,
+      Map<String, int>? statusCounts,
+      String? campaignName,
+      int? campaignDurationDays,
       DateTime? expiresAt,
       DateTime? createdAt,
       DateTime? lastUpdated}) {
@@ -63,6 +78,10 @@ class RecommendationItemModel extends Equatable {
         userID: userID ?? this.userID,
         promoterImageDownloadURL:
             promoterImageDownloadURL ?? this.promoterImageDownloadURL,
+        recommendationType: recommendationType ?? this.recommendationType,
+        statusCounts: statusCounts ?? this.statusCounts,
+        campaignName: campaignName ?? this.campaignName,
+        campaignDurationDays: campaignDurationDays ?? this.campaignDurationDays,
         expiresAt: expiresAt ?? this.expiresAt,
         createdAt: createdAt ?? this.createdAt,
         lastUpdated: lastUpdated ?? this.lastUpdated);
@@ -86,6 +105,10 @@ class RecommendationItemModel extends Equatable {
             ),
       'userID': userID,
       'promoterImageDownloadURL': promoterImageDownloadURL,
+      'recommendationType': recommendationType,
+      'statusCounts': statusCounts,
+      'campaignName': campaignName,
+      'campaignDurationDays': campaignDurationDays,
       'expiresAt': expiresAt.toIso8601String(),
       'createdAt': createdAt.toIso8601String(),
       'lastUpdated': lastUpdated?.toIso8601String(),
@@ -118,6 +141,18 @@ class RecommendationItemModel extends Equatable {
         promoterImageDownloadURL: map['promoterImageDownloadURL'] != null
             ? map['promoterImageDownloadURL'] as String
             : null,
+        recommendationType: map['recommendationType'] != null
+            ? map['recommendationType'] as String
+            : null,
+        statusCounts: map['statusCounts'] != null
+            ? Map<String, int>.from(map['statusCounts'] as Map)
+            : null,
+        campaignName: map['campaignName'] != null
+            ? map['campaignName'] as String
+            : null,
+        campaignDurationDays: map['campaignDurationDays'] != null
+            ? map['campaignDurationDays'] as int
+            : null,
         expiresAt: (map['expiresAt'] as Timestamp).toDate(),
         createdAt: (map['createdAt'] as Timestamp).toDate(),
         lastUpdated: map['lastUpdated'] != null
@@ -131,7 +166,29 @@ class RecommendationItemModel extends Equatable {
   }
 
   RecommendationItem toDomain() {
-    return RecommendationItem(
+    final type = _getRecommendationTypeFromString(recommendationType);
+    if (type == RecommendationType.campaign) {
+      return CampaignRecommendationItem(
+          id: id,
+          campaignName: campaignName,
+          campaignDurationDays: campaignDurationDays,
+          reason: reason,
+          landingPageID: landingPageID,
+          promotionTemplate: null,
+          promoterName: promoterName,
+          serviceProviderName: serviceProviderName,
+          defaultLandingPageID: defaultLandingPageID,
+          userID: userID,
+          promoterImageDownloadURL: promoterImageDownloadURL,
+          statusCounts: statusCounts != null
+              ? RecommendationStatusCountsModel.fromMap(statusCounts!)
+                  .toDomain()
+              : null,
+          expiresAt: expiresAt,
+          createdAt: createdAt,
+          lastUpdated: lastUpdated);
+    }
+    return PersonalizedRecommendationItem(
         id: id,
         name: name,
         reason: reason,
@@ -151,21 +208,64 @@ class RecommendationItemModel extends Equatable {
 
   factory RecommendationItemModel.fromDomain(
       RecommendationItem recommendation) {
+    if (recommendation is CampaignRecommendationItem) {
+      return RecommendationItemModel(
+          id: recommendation.id,
+          name: null,
+          landingPageID: recommendation.landingPageID,
+          promoterName: recommendation.promoterName,
+          serviceProviderName: recommendation.serviceProviderName,
+          reason: recommendation.reason,
+          defaultLandingPageID: recommendation.defaultLandingPageID,
+          statusLevel: null,
+          statusTimestamps: null,
+          userID: recommendation.userID,
+          promoterImageDownloadURL: recommendation.promoterImageDownloadURL,
+          recommendationType: recommendation.recommendationType?.name,
+          statusCounts: recommendation.statusCounts != null
+              ? RecommendationStatusCountsModel.fromDomain(
+                      recommendation.statusCounts!)
+                  .toMap()
+              : null,
+          campaignName: recommendation.campaignName,
+          campaignDurationDays: recommendation.campaignDurationDays,
+          expiresAt: recommendation.expiresAt,
+          createdAt: recommendation.createdAt,
+          lastUpdated: recommendation.lastUpdated);
+    }
+    final personalized = recommendation as PersonalizedRecommendationItem;
     return RecommendationItemModel(
-        id: recommendation.id,
-        name: recommendation.name,
-        landingPageID: recommendation.landingPageID,
-        promoterName: recommendation.promoterName,
-        serviceProviderName: recommendation.serviceProviderName,
-        reason: recommendation.reason,
-        defaultLandingPageID: recommendation.defaultLandingPageID,
-        statusLevel: recommendation.statusLevel?.name,
-        statusTimestamps: recommendation.statusTimestamps,
-        userID: recommendation.userID,
-        promoterImageDownloadURL: recommendation.promoterImageDownloadURL,
-        expiresAt: recommendation.expiresAt,
-        createdAt: recommendation.createdAt,
-        lastUpdated: recommendation.lastUpdated);
+        id: personalized.id,
+        name: personalized.name,
+        landingPageID: personalized.landingPageID,
+        promoterName: personalized.promoterName,
+        serviceProviderName: personalized.serviceProviderName,
+        reason: personalized.reason,
+        defaultLandingPageID: personalized.defaultLandingPageID,
+        statusLevel: personalized.statusLevel?.name,
+        statusTimestamps: personalized.statusTimestamps,
+        userID: personalized.userID,
+        promoterImageDownloadURL: personalized.promoterImageDownloadURL,
+        recommendationType: personalized.recommendationType?.name,
+        statusCounts: null,
+        campaignName: null,
+        campaignDurationDays: null,
+        expiresAt: personalized.expiresAt,
+        createdAt: personalized.createdAt,
+        lastUpdated: personalized.lastUpdated);
+  }
+
+  RecommendationType? _getRecommendationTypeFromString(String? type) {
+    if (type == null) return null;
+    switch (type) {
+      case "personalized":
+        return RecommendationType.personalized;
+      case "general":
+      case "campaign":
+        return RecommendationType.campaign;
+      default:
+        return null;
+    }
   }
 
   StatusLevel? _getStatusLevelFromString(String? statusLevel) {
@@ -201,6 +301,10 @@ class RecommendationItemModel extends Equatable {
         expiresAt,
         defaultLandingPageID,
         userID,
-        promoterImageDownloadURL
+        promoterImageDownloadURL,
+        recommendationType,
+        statusCounts,
+        campaignName,
+        campaignDurationDays,
       ];
 }

@@ -1466,13 +1466,13 @@
     "@recommendation_type_personalized_desc": {
         "description": "Beschreibung der personalisierten Empfehlung"
     },
-    "recommendation_type_general": "Allgemein",
-    "@recommendation_type_general": {
-        "description": "Label für allgemeine Empfehlung"
+    "recommendation_type_campaign": "Kampagne",
+    "@recommendation_type_campaign": {
+        "description": "Label für Kampagnen-Empfehlung"
     },
-    "recommendation_type_general_desc": "Ein universeller Link für Newsletter oder Social Media.",
-    "@recommendation_type_general_desc": {
-        "description": "Beschreibung der allgemeinen Empfehlung"
+    "recommendation_type_campaign_desc": "Ein universeller Link für Newsletter oder Social Media.",
+    "@recommendation_type_campaign_desc": {
+        "description": "Beschreibung der Kampagnen-Empfehlung"
     },
     "recommendation_section_create_title": "Empfehlung erstellen",
     "@recommendation_section_create_title": {
@@ -1528,6 +1528,38 @@
     "recommendation_landingpage_label": "Landingpage",
     "@recommendation_landingpage_label": {
         "description": "Label für das Landingpage-Info Feld"
+    },
+    "recommendation_generate_link_button": "Link generieren",
+    "@recommendation_generate_link_button": {
+        "description": "Button-Text für das Generieren eines allgemeinen Links"
+    },
+    "recommendation_campaign_link_title": "Generierter Link",
+    "@recommendation_campaign_link_title": {
+        "description": "Titel der Sektion für den generierten Kampagnen-Link"
+    },
+    "recommendation_copied_to_clipboard": "In Zwischenablage kopiert",
+    "@recommendation_copied_to_clipboard": {
+        "description": "Snackbar-Nachricht nach dem Kopieren in die Zwischenablage"
+    },
+    "recommendation_copy_template_button": "Vorlage kopieren",
+    "@recommendation_copy_template_button": {
+        "description": "Button-Text zum Kopieren der Nachrichtenvorlage mit Link"
+    },
+    "recommendation_campaign_name_placeholder": "Kampagnenname",
+    "@recommendation_campaign_name_placeholder": {
+        "description": "Platzhalter für das Kampagnennamen-Feld"
+    },
+    "recommendation_campaign_duration_placeholder": "Dauer in Tagen",
+    "@recommendation_campaign_duration_placeholder": {
+        "description": "Platzhalter für das Kampagnendauer-Feld"
+    },
+    "recommendations_validation_missing_campaign_name": "Bitte gib einen Kampagnennamen ein",
+    "@recommendations_validation_missing_campaign_name": {
+        "description": "Validierungsmeldung wenn Kampagnenname fehlt"
+    },
+    "recommendations_validation_invalid_campaign_duration": "Bitte gib eine Dauer zwischen 1 und 30 Tagen ein",
+    "@recommendations_validation_invalid_campaign_duration": {
+        "description": "Validierungsmeldung wenn Kampagnendauer ungültig ist"
     },
     "landingpage_pagebuilder_container_request_error": "Beim Abruf der Daten ist ein Fehler aufgetreten",
     "@landingpage_pagebuilder_container_request_error": {
