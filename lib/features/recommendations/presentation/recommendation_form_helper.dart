@@ -81,23 +81,32 @@ class RecommendationFormHelper {
     return reason.reason as String;
   }
 
+  String? _getFirstName(String? fullName) {
+    if (fullName == null) return null;
+    return fullName.trim().split(" ").first;
+  }
+
+  String? _getLastName(String? fullName) {
+    if (fullName == null) return null;
+    final parts = fullName.trim().split(" ");
+    return parts.length > 1 ? parts.skip(1).join(" ") : "";
+  }
+
   String parseTemplate(RecommendationItem item, String template) {
-    final serviceProviderLastName =
-        (item.serviceProviderName?.split(" "))?.skip(1).join(" ");
-    final promoterLastName =
-        (item.promoterName?.split(" "))?.skip(1).join(" ");
+    final providerFirst = _getFirstName(item.serviceProviderName);
+    final providerLast = _getLastName(item.serviceProviderName);
+    final promoterFirst = _getFirstName(item.promoterName);
+    final promoterLast = _getLastName(item.promoterName);
+
     final replacements = {
       LandingPageTemplatePlaceholder.receiverName: item.displayName,
-      LandingPageTemplatePlaceholder.providerFirstName:
-          item.serviceProviderName?.split(" ").first,
-      LandingPageTemplatePlaceholder.providerLastName: serviceProviderLastName,
+      LandingPageTemplatePlaceholder.providerFirstName: providerFirst,
+      LandingPageTemplatePlaceholder.providerLastName: providerLast,
       LandingPageTemplatePlaceholder.providerName:
-          "${item.serviceProviderName?.split(" ").first} $serviceProviderLastName",
-      LandingPageTemplatePlaceholder.promoterFirstName:
-          item.promoterName?.split(" ").first,
-      LandingPageTemplatePlaceholder.promoterLastName: promoterLastName,
-      LandingPageTemplatePlaceholder.promoterName:
-          "${item.promoterName?.split(" ").first} $promoterLastName"
+          item.serviceProviderName,
+      LandingPageTemplatePlaceholder.promoterFirstName: promoterFirst,
+      LandingPageTemplatePlaceholder.promoterLastName: promoterLast,
+      LandingPageTemplatePlaceholder.promoterName: item.promoterName,
     };
 
     var result = template;

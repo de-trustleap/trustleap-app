@@ -298,13 +298,17 @@ class RecommendationItemModel extends Equatable {
         promoterName,
         serviceProviderName,
         reason,
-        expiresAt,
         defaultLandingPageID,
+        statusLevel,
+        statusTimestamps,
         userID,
         promoterImageDownloadURL,
         recommendationType,
         statusCounts,
         campaignName,
         campaignDurationDays,
+        expiresAt,
+        createdAt,
+        lastUpdated,
       ];
 }

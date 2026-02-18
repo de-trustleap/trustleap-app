@@ -81,21 +81,6 @@ class _CampaignRecommendationSectionState
     }
   }
 
-  Widget _buildPromoterNameField(
-    RecommendationsFormScope scope,
-    AppLocalizations localization,
-    RecommendationValidator validator,
-  ) {
-    return FormTextfield(
-      controller: scope.promoterTextController,
-      disabled: scope.promoterTextFieldDisabled,
-      placeholder: localization.recommendation_promoter_name_placeholder,
-      prefixIcon: Icons.person,
-      onChanged: scope.onResetError,
-      validator: validator.validatePromotersName,
-    );
-  }
-
   Widget _buildCampaignNameField(
     AppLocalizations localization,
     RecommendationValidator validator,
@@ -218,7 +203,7 @@ class _CampaignRecommendationSectionState
                   title: localization.recommendation_section_create_title,
                 ),
                 const SizedBox(height: 16),
-                _buildPromoterNameField(scope, localization, validator),
+                const PromoterNameField(),
                 const SizedBox(height: 16),
                 if (responsiveValue.isMobile)
                   Column(

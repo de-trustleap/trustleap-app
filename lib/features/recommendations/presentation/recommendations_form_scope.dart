@@ -1,6 +1,9 @@
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_reason.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_form_helper.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_validator.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class RecommendationsFormScope extends InheritedWidget {
@@ -64,6 +67,25 @@ class RecommendationsFormScope extends InheritedWidget {
         validationHasError != oldWidget.validationHasError ||
         reasonValid != oldWidget.reasonValid ||
         promoterTextFieldDisabled != oldWidget.promoterTextFieldDisabled;
+  }
+}
+
+class PromoterNameField extends StatelessWidget {
+  const PromoterNameField({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final scope = RecommendationsFormScope.of(context);
+    final localization = AppLocalizations.of(context);
+    final validator = RecommendationValidator(localization: localization);
+    return FormTextfield(
+      controller: scope.promoterTextController,
+      disabled: scope.promoterTextFieldDisabled,
+      placeholder: localization.recommendation_promoter_name_placeholder,
+      prefixIcon: Icons.person,
+      onChanged: scope.onResetError,
+      validator: validator.validatePromotersName,
+    );
   }
 }
 
