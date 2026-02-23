@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/archived_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/core/id.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_manager_expandable_filter.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_archive/recommendation_archive_filter.dart';
@@ -16,7 +17,11 @@ void main() {
           success: true,
           userID: "1",
           createdAt: null,
-          finishedTimeStamp: DateTime(2024, 1, 10)),
+          finishedTimeStamp: DateTime(2024, 1, 10),
+          recommendationType: RecommendationType.personalized,
+          campaignName: null,
+          campaignDurationDays: null,
+          statusCounts: null),
       ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("2"),
           reason: "Test 2",
@@ -26,7 +31,11 @@ void main() {
           success: false,
           userID: "1",
           createdAt: null,
-          finishedTimeStamp: DateTime(2024, 2, 5)),
+          finishedTimeStamp: DateTime(2024, 2, 5),
+          recommendationType: RecommendationType.personalized,
+          campaignName: null,
+          campaignDurationDays: null,
+          statusCounts: null),
       ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("3"),
           reason: "Test 3",
@@ -36,7 +45,11 @@ void main() {
           success: true,
           userID: "1",
           createdAt: null,
-          finishedTimeStamp: DateTime(2024, 1, 20)),
+          finishedTimeStamp: DateTime(2024, 1, 20),
+          recommendationType: RecommendationType.personalized,
+          campaignName: null,
+          campaignDurationDays: null,
+          statusCounts: null),
     ];
 
     test('filters by success status = successful', () {

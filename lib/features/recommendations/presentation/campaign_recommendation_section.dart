@@ -5,9 +5,11 @@ import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/card_contai
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/custom_alert_dialog.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/form_textfield.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/loading_overlay.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/features/recommendations/application/recommendations_alert/recommendations_alert_cubit.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_confirmation_dialog_error.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_reason_picker.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_sender.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_validator.dart';
@@ -15,6 +17,7 @@ import 'package:finanzbegleiter/features/recommendations/presentation/recommenda
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class CampaignRecommendationSection extends StatefulWidget {
@@ -33,6 +36,7 @@ class _CampaignRecommendationSectionState
 
   RecommendationItem? _campaignItem;
   bool _showLinkPreview = false;
+  bool _isAlertVisible = false;
 
   @override
   void dispose() {
@@ -139,14 +143,14 @@ class _CampaignRecommendationSectionState
           const SizedBox(height: 20),
           Center(
             child: PrimaryButton(
-              title: localization.recommendation_copy_template_button,
-              icon: Icons.copy,
+              title: localization.campaign_start_button,
               width: responsiveValue.isMobile ? maxWidth : maxWidth / 2,
               onTap: () {
               Clipboard.setData(
                   ClipboardData(text: _campaignLinkController.text));
               CustomSnackBar.of(context).showCustomSnackBar(
                   localization.recommendation_copied_to_clipboard);
+              _isAlertVisible = true;
               showDialog(
                 context: context,
                 builder: (_) => CustomAlertDialog(
@@ -159,7 +163,6 @@ class _CampaignRecommendationSectionState
                   cancelButtonTitle: localization
                       .recommendation_campaign_shared_alert_no_button,
                   actionButtonAction: () {
-                    CustomNavigator.of(context).pop();
                     if (_campaignItem != null) {
                       final userID = scope.currentUser?.id.value ??
                           scope.parentUser?.id.value ??
@@ -169,6 +172,7 @@ class _CampaignRecommendationSectionState
                     }
                   },
                   cancelButtonAction: () {
+                    _isAlertVisible = false;
                     CustomNavigator.of(context).pop();
                   },
                 ),
@@ -189,7 +193,67 @@ class _CampaignRecommendationSectionState
     final validator = RecommendationValidator(localization: localization);
     final responsiveValue = ResponsiveHelper.of(context);
 
-    return LayoutBuilder(builder: (context, constraints) {
+    final navigator = CustomNavigator.of(context);
+    final alertCubit = Modular.get<RecommendationsAlertCubit>();
+
+    return BlocListener<RecommendationsAlertCubit, RecommendationsAlertState>(
+      bloc: alertCubit,
+      listener: (context, state) {
+        if (state is RecommendationSaveLoadingState) {
+          if (_isAlertVisible) {
+            navigator.pop();
+            showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (dialogContext) {
+                  final loc = AppLocalizations.of(dialogContext);
+                  return LoadingOverlay(
+                    title: loc.save_campaign_loading_title,
+                    subtitle: loc.save_campaign_loading_subtitle,
+                  );
+                });
+          }
+        } else if (state is RecommendationSaveFailureState) {
+          if (_isAlertVisible) {
+            navigator.pop();
+            showDialog(
+                context: context,
+                builder: (_) {
+                  return RecommendationConfirmationDialogError(
+                      failure: state.failure,
+                      recommendationReceiverName:
+                          state.recommendation.displayName,
+                      cancelAction: () {
+                        _isAlertVisible = false;
+                        navigator.pop();
+                      },
+                      action: () {
+                        Modular.get<RecommendationsAlertCubit>()
+                            .saveRecommendation(
+                                state.recommendation,
+                                scope.currentUser?.id.value ??
+                                    scope.parentUser?.id.value ??
+                                    "");
+                      });
+                });
+          }
+        } else if (state is RecommendationSaveSuccessState) {
+          if (_isAlertVisible) {
+            _isAlertVisible = false;
+            navigator.pop();
+            CustomSnackBar.of(context).showCustomSnackBar(
+                localization.campaign_created_success);
+            setState(() {
+              _campaignItem = null;
+              _showLinkPreview = false;
+              _campaignNameController.clear();
+              _campaignDurationController.clear();
+              _campaignLinkController.clear();
+            });
+          }
+        }
+      },
+      child: LayoutBuilder(builder: (context, constraints) {
       final maxWidth = constraints.maxWidth;
       return Column(
         children: [
@@ -269,6 +333,7 @@ class _CampaignRecommendationSectionState
           ],
         ],
       );
-    });
+    }),
+    );
   }
 }

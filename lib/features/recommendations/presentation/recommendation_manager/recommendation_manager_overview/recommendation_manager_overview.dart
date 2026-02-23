@@ -1,12 +1,14 @@
 import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/expanded_section.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_list_header.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_filter.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_manager_expandable_filter.dart';
-import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_manager_list.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/personalized_recommendation_list.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/campaign_recommendation_overview/campaign_recommendation_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -14,11 +16,11 @@ import 'package:flutter_modular/flutter_modular.dart';
 class RecommendationManagerOverview extends StatefulWidget {
   final List<UserRecommendation> recommendations;
   final bool isPromoter;
-  final List<String>? favoriteRecommendationIDs;
   final Function(UserRecommendation) onAppointmentPressed;
   final Function(UserRecommendation) onFinishedPressed;
   final Function(UserRecommendation) onFailedPressed;
   final Function(String, String, String) onDeletePressed;
+  final Function(String, String, String) onCampaignDeletePressed;
   final Function(UserRecommendation) onFavoritePressed;
   final Function(UserRecommendation) onPriorityChanged;
   final Function(UserRecommendation, bool, bool, bool, bool) onUpdate;
@@ -26,11 +28,11 @@ class RecommendationManagerOverview extends StatefulWidget {
       {super.key,
       required this.recommendations,
       required this.isPromoter,
-      required this.favoriteRecommendationIDs,
       required this.onAppointmentPressed,
       required this.onFinishedPressed,
       required this.onFailedPressed,
       required this.onDeletePressed,
+      required this.onCampaignDeletePressed,
       required this.onFavoritePressed,
       required this.onPriorityChanged,
       required this.onUpdate});
@@ -49,6 +51,7 @@ class _RecommendationManagerOverviewState
       RecommendationOverviewFilterStates(isArchive: false);
   bool _filterIsExpanded = false;
   RecommendationSearchOption _selectedSearchOption = RecommendationSearchOption.promoterName;
+  RecommendationType _selectedType = RecommendationType.personalized;
 
   @override
   void initState() {
@@ -60,11 +63,23 @@ class _RecommendationManagerOverviewState
     });
   }
 
+  List<UserRecommendation> _getTypeFilteredRecommendations() {
+    return widget.recommendations
+        .where((r) => r.recommendation?.recommendationType == _selectedType)
+        .toList();
+  }
+
   void _performSearch() {
     final query = _searchController.text.toLowerCase();
+    final typeFiltered = _getTypeFilteredRecommendations();
     setState(() {
-      _searchFilteredRecommendations = widget.recommendations.where((item) {
+      _searchFilteredRecommendations = typeFiltered.where((item) {
         final name = item.recommendation?.displayName?.toLowerCase() ?? "";
+
+        if (_selectedType == RecommendationType.campaign) {
+          return name.contains(query);
+        }
+
         final promoter =
             item.recommendation?.promoterName?.toLowerCase() ?? "";
         final reason = item.recommendation?.reason?.toLowerCase() ?? "";
@@ -105,7 +120,7 @@ class _RecommendationManagerOverviewState
   }
 
   void _setInitialFilterData() {
-    _searchFilteredRecommendations = widget.recommendations;
+    _searchFilteredRecommendations = _getTypeFilteredRecommendations();
     _filteredRecommendations = RecommendationFilter.applyFilters(
       items: _searchFilteredRecommendations,
       filterStates: _currentFilterStates,
@@ -159,7 +174,15 @@ class _RecommendationManagerOverviewState
             RecommendationManagerListHeader(
                 searchController: _searchController,
                 onFilterPressed: onFilterPressed,
-                onSearchOptionChanged: onSearchOptionChanged),
+                onSearchOptionChanged: onSearchOptionChanged,
+                selectedType: _selectedType,
+                onTypeChanged: (type) {
+                  setState(() {
+                    _selectedType = type;
+                    _setInitialFilterData();
+                    _performSearch();
+                  });
+                }),
             ExpandedSection(
                 expand: _filterIsExpanded,
                 child: Column(
@@ -170,18 +193,27 @@ class _RecommendationManagerOverviewState
                           onFilterChanged: onFilterChanged, isArchive: false)
                     ])),
             const SizedBox(height: 20),
-            RecommendationManagerList(
-              recommendations: _filteredRecommendations,
-              isPromoter: widget.isPromoter,
-              favoriteRecommendationIDs: widget.favoriteRecommendationIDs,
-              onAppointmentPressed: widget.onAppointmentPressed,
-              onFinishedPressed: widget.onFinishedPressed,
-              onFailedPressed: widget.onFailedPressed,
-              onDeletePressed: widget.onDeletePressed,
-              onFavoritePressed: widget.onFavoritePressed,
-              onPriorityChanged: widget.onPriorityChanged,
-              onUpdate: widget.onUpdate,
-            ),
+            if (_selectedType == RecommendationType.campaign)
+              CampaignRecommendationList(
+                recommendations: _filteredRecommendations,
+                searchQuery: _searchController.text,
+                onDeletePressed: widget.onCampaignDeletePressed,
+                onFavoritePressed: widget.onFavoritePressed,
+                onUpdate: widget.onUpdate,
+              )
+            else
+              PersonalizedRecommendationList(
+                recommendations: _filteredRecommendations,
+                searchQuery: _searchController.text,
+                isPromoter: widget.isPromoter,
+                onAppointmentPressed: widget.onAppointmentPressed,
+                onFinishedPressed: widget.onFinishedPressed,
+                onFailedPressed: widget.onFailedPressed,
+                onDeletePressed: widget.onDeletePressed,
+                onFavoritePressed: widget.onFavoritePressed,
+                onPriorityChanged: widget.onPriorityChanged,
+                onUpdate: widget.onUpdate,
+              ),
           ],
         ),
       ),

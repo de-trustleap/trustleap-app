@@ -1442,6 +1442,10 @@
             }
         }
     },
+    "campaign_created_success": "The campaign was created successfully!",
+    "@campaign_created_success": {
+        "description": "Success message after creating a campaign"
+    },
     "recommendations_limit_reached_tooltip": "Recommendation limit reached",
     "@recommendations_limit_reached_tooltip": {
         "description": "Tooltip when the recommendation limit is reached"
@@ -1541,11 +1545,11 @@
     "@recommendation_copied_to_clipboard": {
         "description": "Snackbar message after copying to clipboard"
     },
-    "recommendation_campaign_shared_alert_title": "Link already shared?",
+    "recommendation_campaign_shared_alert_title": "Start campaign?",
     "@recommendation_campaign_shared_alert_title": {
         "description": "Title of the alert after copying the campaign link"
     },
-    "recommendation_campaign_shared_alert_description": "Have you already shared the copied link? Then tracking will be set up in the recommendation manager.",
+    "recommendation_campaign_shared_alert_description": "Have you already copied and shared the link? Then tracking will be set up in the recommendation manager.",
     "@recommendation_campaign_shared_alert_description": {
         "description": "Description of the alert after copying the campaign link"
     },
@@ -1560,6 +1564,10 @@
     "recommendation_copy_template_button": "Copy template",
     "@recommendation_copy_template_button": {
         "description": "Button text for copying the message template with link"
+    },
+    "campaign_start_button": "Start campaign",
+    "@campaign_start_button": {
+        "description": "Button text for starting a campaign"
     },
     "recommendation_campaign_name_placeholder": "Campaign name",
     "@recommendation_campaign_name_placeholder": {
@@ -2419,6 +2427,14 @@
     "save_recommendation_loading_subtitle": "The recommendation is being saved",
     "@save_recommendation_loading_subtitle": {
         "description": "Subtitle of the loading dialog when saving a recommendation"
+    },
+    "save_campaign_loading_title": "Creating campaign",
+    "@save_campaign_loading_title": {
+        "description": "Title of the loading dialog when saving a campaign"
+    },
+    "save_campaign_loading_subtitle": "The campaign is being saved",
+    "@save_campaign_loading_subtitle": {
+        "description": "Subtitle of the loading dialog when saving a campaign"
     },
     "send_recommendation_alert_description": "Did you successfully send the recommendation to {receiver}? The link in the recommendation will only become valid once you confirm it here.",
     "@send_recommendation_alert_description": {
@@ -4412,5 +4428,57 @@
     "promoter_detail_not_found": "Promoter not found",
     "@promoter_detail_not_found": {
         "description": "Error message when promoter not found"
+    },
+    "campaign_manager_list_header_campaign_name": "Campaign Name",
+    "@campaign_manager_list_header_campaign_name": {
+        "description": "Header for campaign name column in campaign list"
+    },
+    "campaign_manager_list_header_conversion_rate": "Conversion Rate",
+    "@campaign_manager_list_header_conversion_rate": {
+        "description": "Header for conversion rate column in campaign list"
+    },
+    "campaign_manager_funnel_title": "Campaign Performance",
+    "@campaign_manager_funnel_title": {
+        "description": "Title of the campaign funnel section"
+    },
+    "campaign_manager_funnel_link_clicked": "Link Clicked",
+    "@campaign_manager_funnel_link_clicked": {
+        "description": "Label for link clicked stage in funnel"
+    },
+    "campaign_manager_funnel_contact_form": "Contact Form Sent",
+    "@campaign_manager_funnel_contact_form": {
+        "description": "Label for contact form stage in funnel"
+    },
+    "campaign_manager_funnel_appointment": "Appointment Scheduled",
+    "@campaign_manager_funnel_appointment": {
+        "description": "Label for appointment stage in funnel"
+    },
+    "campaign_manager_funnel_successful": "Completed",
+    "@campaign_manager_funnel_successful": {
+        "description": "Label for successful stage in funnel"
+    },
+    "campaign_manager_funnel_failed": "Not Completed",
+    "@campaign_manager_funnel_failed": {
+        "description": "Label for failed stage in funnel"
+    },
+    "campaign_manager_copy_link_tooltip": "Copy link",
+    "@campaign_manager_copy_link_tooltip": {
+        "description": "Tooltip for the copy link button in the campaign tile"
+    },
+    "campaign_manager_delete_tooltip": "Delete campaign",
+    "@campaign_manager_delete_tooltip": {
+        "description": "Tooltip for the delete campaign button"
+    },
+    "campaign_manager_delete_alert_title": "Delete campaign",
+    "@campaign_manager_delete_alert_title": {
+        "description": "Title of the delete campaign alert"
+    },
+    "campaign_manager_delete_alert_description": "Do you really want to delete this campaign? This action cannot be undone.",
+    "@campaign_manager_delete_alert_description": {
+        "description": "Description of the delete campaign alert"
+    },
+    "campaign_manager_delete_alert_delete_button": "Delete campaign",
+    "@campaign_manager_delete_alert_delete_button": {
+        "description": "Delete button in the delete campaign alert"
     }
 }

@@ -266,7 +266,11 @@ void main() {
           success: true,
           userID: userID,
           createdAt: null,
-          finishedTimeStamp: date),
+          finishedTimeStamp: date,
+          recommendationType: RecommendationType.personalized,
+          campaignName: null,
+          campaignDurationDays: null,
+          statusCounts: null),
     ];
 
     test("should return items when call was successful", () async {

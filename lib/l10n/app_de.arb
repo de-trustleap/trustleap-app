@@ -1442,6 +1442,10 @@
             }
         }
     },
+    "campaign_created_success": "Die Kampagne wurde erfolgreich erstellt!",
+    "@campaign_created_success": {
+        "description": "Erfolgsmeldung nach dem Erstellen einer Kampagne"
+    },
     "recommendations_limit_reached_tooltip": "Empfehlungslimit erreicht",
     "@recommendations_limit_reached_tooltip": {
         "description": "Tooltip wenn das Empfehlungslimit erreicht ist"
@@ -1541,11 +1545,11 @@
     "@recommendation_copied_to_clipboard": {
         "description": "Snackbar-Nachricht nach dem Kopieren in die Zwischenablage"
     },
-    "recommendation_campaign_shared_alert_title": "Link bereits geteilt?",
+    "recommendation_campaign_shared_alert_title": "Kampagne starten?",
     "@recommendation_campaign_shared_alert_title": {
         "description": "Titel des Alerts nach dem Kopieren des Kampagnenlinks"
     },
-    "recommendation_campaign_shared_alert_description": "Hast du den kopierten Link bereits geteilt? Dann wird das Tracking im Empfehlungsmanager eingerichtet.",
+    "recommendation_campaign_shared_alert_description": "Hast du den Link bereits kopiert und geteilt? Dann wird das Tracking im Empfehlungsmanager eingerichtet.",
     "@recommendation_campaign_shared_alert_description": {
         "description": "Beschreibung des Alerts nach dem Kopieren des Kampagnenlinks"
     },
@@ -1560,6 +1564,10 @@
     "recommendation_copy_template_button": "Vorlage kopieren",
     "@recommendation_copy_template_button": {
         "description": "Button-Text zum Kopieren der Nachrichtenvorlage mit Link"
+    },
+    "campaign_start_button": "Kampagne starten",
+    "@campaign_start_button": {
+        "description": "Button-Text zum Starten einer Kampagne"
     },
     "recommendation_campaign_name_placeholder": "Kampagnenname",
     "@recommendation_campaign_name_placeholder": {
@@ -2419,6 +2427,14 @@
     "save_recommendation_loading_subtitle": "Die Empfehlung wird gespeichert",
     "@save_recommendation_loading_subtitle": {
         "description": "Untertitel des Loading-Dialogs beim Speichern einer Empfehlung"
+    },
+    "save_campaign_loading_title": "Kampagne wird erstellt",
+    "@save_campaign_loading_title": {
+        "description": "Titel des Loading-Dialogs beim Speichern einer Kampagne"
+    },
+    "save_campaign_loading_subtitle": "Die Kampagne wird gespeichert",
+    "@save_campaign_loading_subtitle": {
+        "description": "Untertitel des Loading-Dialogs beim Speichern einer Kampagne"
     },
     "send_recommendation_alert_description": "Hast du die Empfehlung erfolgreich an {receiver} verschickt? Der Link in der Empfehlung wird erst gültig wenn du hier bestätigst.",
     "@send_recommendation_alert_description": {
@@ -4412,5 +4428,57 @@
     "promoter_detail_not_found": "Promoter nicht gefunden",
     "@promoter_detail_not_found": {
         "description": "Fehlermeldung wenn Promoter nicht gefunden"
+    },
+    "campaign_manager_list_header_campaign_name": "Kampagnenname",
+    "@campaign_manager_list_header_campaign_name": {
+        "description": "Header für Kampagnenname-Spalte in der Kampagnenliste"
+    },
+    "campaign_manager_list_header_conversion_rate": "Conversionrate",
+    "@campaign_manager_list_header_conversion_rate": {
+        "description": "Header für Conversionrate-Spalte in der Kampagnenliste"
+    },
+    "campaign_manager_funnel_title": "Kampagnen-Performance",
+    "@campaign_manager_funnel_title": {
+        "description": "Titel des Kampagnen-Funnel-Bereichs"
+    },
+    "campaign_manager_funnel_link_clicked": "Link geklickt",
+    "@campaign_manager_funnel_link_clicked": {
+        "description": "Label für Link-Clicked-Stufe im Funnel"
+    },
+    "campaign_manager_funnel_contact_form": "Kontaktformular gesendet",
+    "@campaign_manager_funnel_contact_form": {
+        "description": "Label für Kontaktformular-Stufe im Funnel"
+    },
+    "campaign_manager_funnel_appointment": "Terminiert",
+    "@campaign_manager_funnel_appointment": {
+        "description": "Label für Termin-Stufe im Funnel"
+    },
+    "campaign_manager_funnel_successful": "Abgeschlossen",
+    "@campaign_manager_funnel_successful": {
+        "description": "Label für Erfolgreich-Stufe im Funnel"
+    },
+    "campaign_manager_funnel_failed": "Nicht abgeschlossen",
+    "@campaign_manager_funnel_failed": {
+        "description": "Label für Nicht-abgeschlossen-Stufe im Funnel"
+    },
+    "campaign_manager_copy_link_tooltip": "Link kopieren",
+    "@campaign_manager_copy_link_tooltip": {
+        "description": "Tooltip für den Link-Kopieren-Button in der Kampagnen-Tile"
+    },
+    "campaign_manager_delete_tooltip": "Kampagne löschen",
+    "@campaign_manager_delete_tooltip": {
+        "description": "Tooltip für den Kampagne-Löschen-Button"
+    },
+    "campaign_manager_delete_alert_title": "Kampagne löschen",
+    "@campaign_manager_delete_alert_title": {
+        "description": "Titel des Kampagne-Löschen-Alerts"
+    },
+    "campaign_manager_delete_alert_description": "Möchtest du die Kampagne wirklich löschen? Der Vorgang kann nicht rückgängig gemacht werden.",
+    "@campaign_manager_delete_alert_description": {
+        "description": "Beschreibung des Kampagne-Löschen-Alerts"
+    },
+    "campaign_manager_delete_alert_delete_button": "Kampagne löschen",
+    "@campaign_manager_delete_alert_delete_button": {
+        "description": "Löschen-Button im Kampagne-Löschen-Alert"
     }
 }

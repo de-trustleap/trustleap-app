@@ -182,9 +182,8 @@ class _PersonalizedRecommendationSectionState
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: _buildPromoterNameField(
-                            scope, localization, validator),
+                      const Expanded(
+                        child: PromoterNameField(),
                       ),
                       const SizedBox(width: 16),
                       Expanded(

@@ -7,13 +7,13 @@ import 'package:finanzbegleiter/features/recommendations/presentation/recommenda
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_manager_favorite_button.dart';
 import 'package:flutter/material.dart';
 
-class RecommendationManagerListTileTitle extends StatelessWidget {
+class PersonalizedRecommendationListTileTitle extends StatelessWidget {
   final UserRecommendation recommendation;
   final bool isPromoter;
   final Function(UserRecommendation) onFavoritePressed;
   final RecommendationManagerTileCubit cubit;
 
-  const RecommendationManagerListTileTitle({
+  const PersonalizedRecommendationListTileTitle({
     super.key,
     required this.recommendation,
     required this.isPromoter,
@@ -28,14 +28,16 @@ class RecommendationManagerListTileTitle extends StatelessWidget {
     final responsiveValue = ResponsiveHelper.of(context);
     final helper = RecommendationManagerHelper(localization: localization);
 
-    return responsiveValue.isMobile 
+    return responsiveValue.isMobile
         ? _buildMobileTitleWidget(helper, themeData, localization)
         : _buildDesktopTitleWidget(helper, themeData);
   }
 
-  Widget _buildDesktopTitleWidget(RecommendationManagerHelper helper, ThemeData themeData) {
+  Widget _buildDesktopTitleWidget(
+      RecommendationManagerHelper helper, ThemeData themeData) {
     final reco = recommendation.recommendation;
-    final personalizedReco = reco is PersonalizedRecommendationItem ? reco : null;
+    final personalizedReco =
+        reco is PersonalizedRecommendationItem ? reco : null;
     return Row(children: [
       Flexible(
           flex: 1,
@@ -50,14 +52,15 @@ class RecommendationManagerListTileTitle extends StatelessWidget {
       Flexible(
           flex: 3,
           child: _buildCell(
-              helper.getStringFromStatusLevel(personalizedReco?.statusLevel) ?? "",
+              helper.getStringFromStatusLevel(
+                      personalizedReco?.statusLevel) ??
+                  "",
               themeData)),
       Flexible(
           flex: 2,
           child: _buildCell(
               helper.getExpiresInDaysCount(
-                  recommendation.recommendation?.expiresAt ??
-                      DateTime.now()),
+                  recommendation.recommendation?.expiresAt ?? DateTime.now()),
               themeData)),
       Flexible(
           flex: 1,
@@ -69,9 +72,11 @@ class RecommendationManagerListTileTitle extends StatelessWidget {
     ]);
   }
 
-  Widget _buildMobileTitleWidget(RecommendationManagerHelper helper, ThemeData themeData, AppLocalizations localization) {
+  Widget _buildMobileTitleWidget(RecommendationManagerHelper helper,
+      ThemeData themeData, AppLocalizations localization) {
     final reco = recommendation.recommendation;
-    final personalizedReco = reco is PersonalizedRecommendationItem ? reco : null;
+    final personalizedReco =
+        reco is PersonalizedRecommendationItem ? reco : null;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -103,7 +108,9 @@ class RecommendationManagerListTileTitle extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              helper.getStringFromStatusLevel(personalizedReco?.statusLevel) ?? "",
+              helper.getStringFromStatusLevel(
+                      personalizedReco?.statusLevel) ??
+                  "",
               style: themeData.textTheme.bodyMedium,
             ),
             const SizedBox(height: 4),
@@ -133,14 +140,16 @@ class RecommendationManagerListTileTitle extends StatelessWidget {
     );
   }
 
-  Widget _buildPriorityCell(RecommendationPriority? priority, ThemeData themeData) {
+  Widget _buildPriorityCell(
+      RecommendationPriority? priority, ThemeData themeData) {
     return Container(
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.all(8.0),
         child: _getPriorityIcon(priority, themeData));
   }
 
-  Widget _getPriorityIcon(RecommendationPriority? priority, ThemeData themeData) {
+  Widget _getPriorityIcon(
+      RecommendationPriority? priority, ThemeData themeData) {
     switch (priority) {
       case RecommendationPriority.low:
         return Icon(Icons.arrow_downward,

@@ -226,7 +226,6 @@ class RecommendationRepositoryImplementation
 
       await Future.forEach(chunks, (element) async {
         final document = await archivedRecoCollection
-            .orderBy("name", descending: true)
             .where(FieldPath.documentId, whereIn: element)
             .get();
         querySnapshots.add(document);
@@ -309,7 +308,6 @@ class RecommendationRepositoryImplementation
 
       await Future.forEach(recoChunks, (chunk) async {
         final snapshot = await recoCollection
-            .orderBy("name", descending: true)
             .where(FieldPath.documentId, whereIn: chunk)
             .get();
         for (var doc in snapshot.docs) {

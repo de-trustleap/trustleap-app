@@ -1236,6 +1236,10 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get campaign_created_success =>
+      'The campaign was created successfully!';
+
+  @override
   String get recommendations_limit_reached_tooltip =>
       'Recommendation limit reached';
 
@@ -1314,12 +1318,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendation_copied_to_clipboard => 'Copied to clipboard';
 
   @override
-  String get recommendation_campaign_shared_alert_title =>
-      'Link already shared?';
+  String get recommendation_campaign_shared_alert_title => 'Start campaign?';
 
   @override
   String get recommendation_campaign_shared_alert_description =>
-      'Have you already shared the copied link? Then tracking will be set up in the recommendation manager.';
+      'Have you already copied and shared the link? Then tracking will be set up in the recommendation manager.';
 
   @override
   String get recommendation_campaign_shared_alert_yes_button =>
@@ -1330,6 +1333,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recommendation_copy_template_button => 'Copy template';
+
+  @override
+  String get campaign_start_button => 'Start campaign';
 
   @override
   String get recommendation_campaign_name_placeholder => 'Campaign name';
@@ -2071,6 +2077,12 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get save_recommendation_loading_subtitle =>
       'The recommendation is being saved';
+
+  @override
+  String get save_campaign_loading_title => 'Creating campaign';
+
+  @override
+  String get save_campaign_loading_subtitle => 'The campaign is being saved';
 
   @override
   String send_recommendation_alert_description(String receiver) {
@@ -3723,4 +3735,44 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get promoter_detail_not_found => 'Promoter not found';
+
+  @override
+  String get campaign_manager_list_header_campaign_name => 'Campaign Name';
+
+  @override
+  String get campaign_manager_list_header_conversion_rate => 'Conversion Rate';
+
+  @override
+  String get campaign_manager_funnel_title => 'Campaign Performance';
+
+  @override
+  String get campaign_manager_funnel_link_clicked => 'Link Clicked';
+
+  @override
+  String get campaign_manager_funnel_contact_form => 'Contact Form Sent';
+
+  @override
+  String get campaign_manager_funnel_appointment => 'Appointment Scheduled';
+
+  @override
+  String get campaign_manager_funnel_successful => 'Completed';
+
+  @override
+  String get campaign_manager_funnel_failed => 'Not Completed';
+
+  @override
+  String get campaign_manager_copy_link_tooltip => 'Copy link';
+
+  @override
+  String get campaign_manager_delete_tooltip => 'Delete campaign';
+
+  @override
+  String get campaign_manager_delete_alert_title => 'Delete campaign';
+
+  @override
+  String get campaign_manager_delete_alert_description =>
+      'Do you really want to delete this campaign? This action cannot be undone.';
+
+  @override
+  String get campaign_manager_delete_alert_delete_button => 'Delete campaign';
 }

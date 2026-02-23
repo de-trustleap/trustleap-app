@@ -2195,6 +2195,12 @@ abstract class AppLocalizations {
   /// **'The recommendation to {name} has been sent successfully!'**
   String recommendations_sent_success(String name);
 
+  /// Success message after creating a campaign
+  ///
+  /// In en, this message translates to:
+  /// **'The campaign was created successfully!'**
+  String get campaign_created_success;
+
   /// Tooltip when the recommendation limit is reached
   ///
   /// In en, this message translates to:
@@ -2330,13 +2336,13 @@ abstract class AppLocalizations {
   /// Title of the alert after copying the campaign link
   ///
   /// In en, this message translates to:
-  /// **'Link already shared?'**
+  /// **'Start campaign?'**
   String get recommendation_campaign_shared_alert_title;
 
   /// Description of the alert after copying the campaign link
   ///
   /// In en, this message translates to:
-  /// **'Have you already shared the copied link? Then tracking will be set up in the recommendation manager.'**
+  /// **'Have you already copied and shared the link? Then tracking will be set up in the recommendation manager.'**
   String get recommendation_campaign_shared_alert_description;
 
   /// Confirm button of the campaign shared alert
@@ -2356,6 +2362,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Copy template'**
   String get recommendation_copy_template_button;
+
+  /// Button text for starting a campaign
+  ///
+  /// In en, this message translates to:
+  /// **'Start campaign'**
+  String get campaign_start_button;
 
   /// Placeholder for the campaign name field
   ///
@@ -3625,6 +3637,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The recommendation is being saved'**
   String get save_recommendation_loading_subtitle;
+
+  /// Title of the loading dialog when saving a campaign
+  ///
+  /// In en, this message translates to:
+  /// **'Creating campaign'**
+  String get save_campaign_loading_title;
+
+  /// Subtitle of the loading dialog when saving a campaign
+  ///
+  /// In en, this message translates to:
+  /// **'The campaign is being saved'**
+  String get save_campaign_loading_subtitle;
 
   /// Description of the alert to confirm whether you have sent a recommendation.
   ///
@@ -6500,6 +6524,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Promoter not found'**
   String get promoter_detail_not_found;
+
+  /// Header for campaign name column in campaign list
+  ///
+  /// In en, this message translates to:
+  /// **'Campaign Name'**
+  String get campaign_manager_list_header_campaign_name;
+
+  /// Header for conversion rate column in campaign list
+  ///
+  /// In en, this message translates to:
+  /// **'Conversion Rate'**
+  String get campaign_manager_list_header_conversion_rate;
+
+  /// Title of the campaign funnel section
+  ///
+  /// In en, this message translates to:
+  /// **'Campaign Performance'**
+  String get campaign_manager_funnel_title;
+
+  /// Label for link clicked stage in funnel
+  ///
+  /// In en, this message translates to:
+  /// **'Link Clicked'**
+  String get campaign_manager_funnel_link_clicked;
+
+  /// Label for contact form stage in funnel
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Form Sent'**
+  String get campaign_manager_funnel_contact_form;
+
+  /// Label for appointment stage in funnel
+  ///
+  /// In en, this message translates to:
+  /// **'Appointment Scheduled'**
+  String get campaign_manager_funnel_appointment;
+
+  /// Label for successful stage in funnel
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get campaign_manager_funnel_successful;
+
+  /// Label for failed stage in funnel
+  ///
+  /// In en, this message translates to:
+  /// **'Not Completed'**
+  String get campaign_manager_funnel_failed;
+
+  /// Tooltip for the copy link button in the campaign tile
+  ///
+  /// In en, this message translates to:
+  /// **'Copy link'**
+  String get campaign_manager_copy_link_tooltip;
+
+  /// Tooltip for the delete campaign button
+  ///
+  /// In en, this message translates to:
+  /// **'Delete campaign'**
+  String get campaign_manager_delete_tooltip;
+
+  /// Title of the delete campaign alert
+  ///
+  /// In en, this message translates to:
+  /// **'Delete campaign'**
+  String get campaign_manager_delete_alert_title;
+
+  /// Description of the delete campaign alert
+  ///
+  /// In en, this message translates to:
+  /// **'Do you really want to delete this campaign? This action cannot be undone.'**
+  String get campaign_manager_delete_alert_description;
+
+  /// Delete button in the delete campaign alert
+  ///
+  /// In en, this message translates to:
+  /// **'Delete campaign'**
+  String get campaign_manager_delete_alert_delete_button;
 }
 
 class _AppLocalizationsDelegate
