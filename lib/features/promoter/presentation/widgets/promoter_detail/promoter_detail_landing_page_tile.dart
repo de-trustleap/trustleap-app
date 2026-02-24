@@ -260,4 +260,3 @@ class PromoterDetailLandingPageTile extends StatelessWidget {
     );
   }
 }
-// TODO: DOMAIN DRIVEN DESIGN STRUKTUR IMPLEMENTIEREN

@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_manager_expandable_filter.dart';
@@ -12,8 +13,9 @@ class RecommendationFilter {
     List<UserRecommendation> filtered = items.where((item) {
       if (filterStates.statusFilterState !=
           RecommendationStatusFilterState.all) {
-        final statusLevel =
-            item.recommendation?.statusLevel ?? StatusLevel.recommendationSend;
+        final reco = item.recommendation;
+        final personalizedReco = reco is PersonalizedRecommendationItem ? reco : null;
+        final statusLevel = personalizedReco?.statusLevel ?? StatusLevel.recommendationSend;
         return _statusFilterMatches(
             filterStates.statusFilterState, statusLevel);
       }
@@ -59,8 +61,8 @@ class RecommendationFilter {
         break;
       case RecommendationSortByFilterState.recommendationReceiver:
         filtered.sort((a, b) {
-          final aValue = a.recommendation?.name ?? '';
-          final bValue = b.recommendation?.name ?? '';
+          final aValue = a.recommendation?.displayName ?? '';
+          final bValue = b.recommendation?.displayName ?? '';
           return _sortStrings(
               aValue, bValue, filterStates.sortOrderFilterState);
         });

@@ -2,6 +2,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/archived_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_status_counts.dart';
+import 'package:finanzbegleiter/features/recommendations/infrastructure/recommendation_status_counts_model.dart';
 import 'package:finanzbegleiter/core/id.dart';
 
 class ArchivedRecommendationItemModel extends Equatable {
@@ -14,6 +17,10 @@ class ArchivedRecommendationItemModel extends Equatable {
   final String? userID;
   final DateTime? createdAt;
   final DateTime finishedTimeStamp;
+  final String? recommendationType;
+  final String? campaignName;
+  final int? campaignDurationDays;
+  final RecommendationStatusCounts? statusCounts;
 
   const ArchivedRecommendationItemModel({
     required this.id,
@@ -25,6 +32,10 @@ class ArchivedRecommendationItemModel extends Equatable {
     required this.userID,
     required this.createdAt,
     required this.finishedTimeStamp,
+    required this.recommendationType,
+    required this.campaignName,
+    required this.campaignDurationDays,
+    required this.statusCounts,
   });
 
   ArchivedRecommendationItemModel copyWith({
@@ -37,6 +48,10 @@ class ArchivedRecommendationItemModel extends Equatable {
     String? userID,
     DateTime? createdAt,
     DateTime? finishedTimeStamp,
+    String? recommendationType,
+    String? campaignName,
+    int? campaignDurationDays,
+    RecommendationStatusCounts? statusCounts,
   }) {
     return ArchivedRecommendationItemModel(
       id: id ?? this.id,
@@ -48,6 +63,10 @@ class ArchivedRecommendationItemModel extends Equatable {
       userID: userID ?? this.userID,
       createdAt: createdAt ?? this.createdAt,
       finishedTimeStamp: finishedTimeStamp ?? this.finishedTimeStamp,
+      recommendationType: recommendationType ?? this.recommendationType,
+      campaignName: campaignName ?? this.campaignName,
+      campaignDurationDays: campaignDurationDays ?? this.campaignDurationDays,
+      statusCounts: statusCounts ?? this.statusCounts,
     );
   }
 
@@ -61,7 +80,13 @@ class ArchivedRecommendationItemModel extends Equatable {
       'success': success,
       'userID': userID,
       'createdAt': createdAt != null ? Timestamp.fromDate(createdAt!) : null,
-      'finishedTimeStamp': Timestamp.fromDate(finishedTimeStamp)
+      'finishedTimeStamp': Timestamp.fromDate(finishedTimeStamp),
+      'recommendationType': recommendationType,
+      'campaignName': campaignName,
+      'campaignDurationDays': campaignDurationDays,
+      'statusCounts': statusCounts != null
+          ? RecommendationStatusCountsModel.fromDomain(statusCounts!).toMap()
+          : null,
     };
   }
 
@@ -82,7 +107,21 @@ class ArchivedRecommendationItemModel extends Equatable {
         createdAt: map['createdAt'] != null
             ? (map['createdAt'] as Timestamp).toDate()
             : null,
-        finishedTimeStamp: (map['finishedTimeStamp'] as Timestamp).toDate());
+        finishedTimeStamp: (map['finishedTimeStamp'] as Timestamp).toDate(),
+        recommendationType: map['recommendationType'] != null
+            ? map['recommendationType'] as String
+            : null,
+        campaignName: map['campaignName'] != null
+            ? map['campaignName'] as String
+            : null,
+        campaignDurationDays: map['campaignDurationDays'] != null
+            ? map['campaignDurationDays'] as int
+            : null,
+        statusCounts: map['statusCounts'] != null
+            ? RecommendationStatusCountsModel.fromMap(
+                    map['statusCounts'] as Map<String, dynamic>)
+                .toDomain()
+            : null);
   }
 
   factory ArchivedRecommendationItemModel.fromFirestore(
@@ -100,7 +139,11 @@ class ArchivedRecommendationItemModel extends Equatable {
         success: success,
         userID: userID,
         createdAt: createdAt,
-        finishedTimeStamp: finishedTimeStamp);
+        finishedTimeStamp: finishedTimeStamp,
+        recommendationType: _getRecommendationTypeFromString(recommendationType),
+        campaignName: campaignName,
+        campaignDurationDays: campaignDurationDays,
+        statusCounts: statusCounts);
   }
 
   factory ArchivedRecommendationItemModel.fromDomain(
@@ -114,7 +157,23 @@ class ArchivedRecommendationItemModel extends Equatable {
         success: recommendation.success,
         userID: recommendation.userID,
         createdAt: recommendation.createdAt,
-        finishedTimeStamp: recommendation.finishedTimeStamp);
+        finishedTimeStamp: recommendation.finishedTimeStamp,
+        recommendationType: recommendation.recommendationType.name,
+        campaignName: recommendation.campaignName,
+        campaignDurationDays: recommendation.campaignDurationDays,
+        statusCounts: recommendation.statusCounts);
+  }
+
+  RecommendationType _getRecommendationTypeFromString(String? type) {
+    switch (type) {
+      case "personalized":
+        return RecommendationType.personalized;
+      case "general":
+      case "campaign":
+        return RecommendationType.campaign;
+      default:
+        return RecommendationType.personalized;
+    }
   }
 
   @override
@@ -125,6 +184,10 @@ class ArchivedRecommendationItemModel extends Equatable {
         promoterName,
         serviceProviderName,
         success,
-        userID
+        userID,
+        recommendationType,
+        campaignName,
+        campaignDurationDays,
+        statusCounts,
       ];
 }

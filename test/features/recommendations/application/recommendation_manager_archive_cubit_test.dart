@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager_archive/recommendation_manager_archive_cubit.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/archived_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/core/id.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
@@ -36,7 +37,11 @@ void main() {
           success: true,
           userID: userID,
           createdAt: null,
-          finishedTimeStamp: date),
+          finishedTimeStamp: date,
+          recommendationType: RecommendationType.personalized,
+          campaignName: null,
+          campaignDurationDays: null,
+          statusCounts: null),
     ];
 
     test("should call reco repo when function is called", () async {

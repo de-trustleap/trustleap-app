@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -28,6 +29,11 @@ class RecommendationManagerListTileIconRow extends StatefulWidget {
 class _RecommendationManagerListTileIconRowState
     extends State<RecommendationManagerListTileIconRow> {
   bool buttonsDisabled = false;
+
+  StatusLevel? _getStatusLevel() {
+    final reco = widget.recommendation.recommendation;
+    return reco is PersonalizedRecommendationItem ? reco.statusLevel : null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +66,7 @@ class _RecommendationManagerListTileIconRowState
                   message: localization
                       .recommendation_manager_tile_progress_appointment_button_tooltip,
                   child: ElevatedButton(
-                      onPressed: widget.recommendation.recommendation
-                                      ?.statusLevel ==
+                      onPressed: _getStatusLevel() ==
                                   StatusLevel.contactFormSent &&
                               !buttonsDisabled
                           ? () =>
@@ -82,8 +87,7 @@ class _RecommendationManagerListTileIconRowState
                   message: localization
                       .recommendation_manager_tile_progress_finish_button_tooltip,
                   child: ElevatedButton(
-                      onPressed: widget.recommendation.recommendation
-                                      ?.statusLevel ==
+                      onPressed: _getStatusLevel() ==
                                   StatusLevel.appointment &&
                               !buttonsDisabled
                           ? () =>
@@ -103,8 +107,7 @@ class _RecommendationManagerListTileIconRowState
                   message: localization
                       .recommendation_manager_tile_progress_failed_button_tooltip,
                   child: ElevatedButton(
-                      onPressed: widget.recommendation.recommendation
-                                      ?.statusLevel ==
+                      onPressed: _getStatusLevel() ==
                                   StatusLevel.appointment &&
                               !buttonsDisabled
                           ? () => widget.onFailedPressed(widget.recommendation)

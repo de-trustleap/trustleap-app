@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class SubtleButton extends StatelessWidget {
   final String title;
   final double? width;
+  final bool disabled;
   final Function? onTap;
   final IconData? icon;
   final Color? backgroundColor;
@@ -13,6 +14,7 @@ class SubtleButton extends StatelessWidget {
     required this.title,
     this.onTap,
     this.width,
+    this.disabled = false,
     this.icon,
     this.backgroundColor,
     this.textColor,
@@ -21,13 +23,17 @@ class SubtleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
-    final bgColor = backgroundColor ?? themeData.colorScheme.primary;
+    final bgColor = disabled
+        ? Colors.grey[400]!
+        : (backgroundColor ?? themeData.colorScheme.primary);
     final fgColor = textColor ?? Colors.white;
 
-    return InkWell(
-      onTap: () => onTap?.call(),
-      borderRadius: BorderRadius.circular(8),
-      child: Container(
+    return IgnorePointer(
+      ignoring: disabled,
+      child: InkWell(
+        onTap: () => onTap?.call(),
+        borderRadius: BorderRadius.circular(8),
+        child: Container(
         height: 40,
         width: width,
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -64,6 +70,7 @@ class SubtleButton extends StatelessWidget {
                   ),
                 ),
         ),
+      ),
       ),
     );
   }

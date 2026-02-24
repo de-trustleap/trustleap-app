@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/features/recommendations/domain/archived_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finanzbegleiter/features/recommendations/infrastructure/archived_recommendation_item_model.dart';
 import 'package:finanzbegleiter/core/id.dart';
@@ -20,7 +21,11 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date);
+          finishedTimeStamp: date,
+          recommendationType: "personalized",
+          campaignName: null,
+          campaignDurationDays: null,
+          statusCounts: null);
       final expectedResult = ArchivedRecommendationItemModel(
           id: "1",
           reason: "Test",
@@ -30,7 +35,11 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date);
+          finishedTimeStamp: date,
+          recommendationType: "personalized",
+          campaignName: null,
+          campaignDurationDays: null,
+          statusCounts: null);
       // When
       final result = model.copyWith(promoterName: "Test new");
       // Then
@@ -51,7 +60,11 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date);
+          finishedTimeStamp: date,
+          recommendationType: "personalized",
+          campaignName: null,
+          campaignDurationDays: null,
+          statusCounts: null);
       final expectedResult = {
         "id": "1",
         "reason": "Test",
@@ -62,6 +75,10 @@ void main() {
         "userID": "2",
         "createdAt": Timestamp.fromDate(date),
         "finishedTimeStamp": Timestamp.fromDate(date),
+        "recommendationType": "personalized",
+        "campaignName": null,
+        "campaignDurationDays": null,
+        "statusCounts": null,
       };
       // When
       final result = model.toMap();
@@ -84,6 +101,7 @@ void main() {
         "userID": "2",
         "createdAt": Timestamp.fromDate(date),
         "finishedTimeStamp": Timestamp.fromDate(date),
+        "recommendationType": "personalized",
       };
       final expectedResult = ArchivedRecommendationItemModel(
           id: "",
@@ -94,7 +112,11 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date);
+          finishedTimeStamp: date,
+          recommendationType: "personalized",
+          campaignName: null,
+          campaignDurationDays: null,
+          statusCounts: null);
       // When
       final result = ArchivedRecommendationItemModel.fromMap(map);
       // Then
@@ -116,6 +138,7 @@ void main() {
         "userID": "2",
         "createdAt": Timestamp.fromDate(date),
         "finishedTimeStamp": Timestamp.fromDate(date),
+        "recommendationType": "personalized",
       };
       final expectedResult = ArchivedRecommendationItemModel(
           id: "1",
@@ -126,7 +149,11 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date);
+          finishedTimeStamp: date,
+          recommendationType: "personalized",
+          campaignName: null,
+          campaignDurationDays: null,
+          statusCounts: null);
       // When
       final result = ArchivedRecommendationItemModel.fromFirestore(map, "1");
       // Then
@@ -149,7 +176,11 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date);
+          finishedTimeStamp: date,
+          recommendationType: "personalized",
+          campaignName: null,
+          campaignDurationDays: null,
+          statusCounts: null);
       final expectedResult = ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("1"),
           reason: "Test",
@@ -159,7 +190,11 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date);
+          finishedTimeStamp: date,
+          recommendationType: RecommendationType.personalized,
+          campaignName: null,
+          campaignDurationDays: null,
+          statusCounts: null);
       // When
       final result = model.toDomain();
       // Then
@@ -182,7 +217,11 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date);
+          finishedTimeStamp: date,
+          recommendationType: RecommendationType.personalized,
+          campaignName: null,
+          campaignDurationDays: null,
+          statusCounts: null);
       final expectedResult = ArchivedRecommendationItemModel(
           id: "1",
           reason: "Test",
@@ -192,7 +231,11 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date);
+          finishedTimeStamp: date,
+          recommendationType: "personalized",
+          campaignName: null,
+          campaignDurationDays: null,
+          statusCounts: null);
       // When
       final result = ArchivedRecommendationItemModel.fromDomain(model);
       // Then
@@ -213,7 +256,11 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date);
+          finishedTimeStamp: date,
+          recommendationType: "personalized",
+          campaignName: null,
+          campaignDurationDays: null,
+          statusCounts: null);
       final model2 = ArchivedRecommendationItemModel(
           id: "1",
           reason: "Test",
@@ -223,7 +270,11 @@ void main() {
           success: true,
           userID: "2",
           createdAt: date,
-          finishedTimeStamp: date);
+          finishedTimeStamp: date,
+          recommendationType: "personalized",
+          campaignName: null,
+          campaignDurationDays: null,
+          statusCounts: null);
       // Then
       expect(model, model2);
     });

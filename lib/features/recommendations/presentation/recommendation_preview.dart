@@ -5,28 +5,34 @@ import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/loading_overlay.dart';
-import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_creator/landing_page_template_placeholder.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/tab_bar/custom_tab.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_confirmation_dialog.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_form_helper.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_confirmation_dialog_error.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_sender.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:web/web.dart' as web;
 
 class RecommendationPreview extends StatefulWidget {
   final String userID;
   final List<RecommendationItem> leads;
   final Function(RecommendationItem) onSaveSuccess;
+  final Function(RecommendationItem)? onDelete;
   final bool disabled;
 
-  const RecommendationPreview(
-      {super.key,
-      required this.userID,
-      required this.leads,
-      required this.onSaveSuccess,
-      this.disabled = false});
+  const RecommendationPreview({
+    super.key,
+    required this.userID,
+    required this.leads,
+    required this.onSaveSuccess,
+    this.onDelete,
+    this.disabled = false,
+  });
 
   @override
   State<RecommendationPreview> createState() => _RecommendationPreviewState();
@@ -40,22 +46,39 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
   bool showMissingLinkError = false;
   bool isAlertVisible = false;
   final RecommendationSender _sender = RecommendationSender();
+  final RecommendationFormHelper _helper = RecommendationFormHelper();
+  int _selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
 
     for (final lead in widget.leads) {
-      final text = parseTemplate(lead, lead.promotionTemplate ?? "");
+      final text = _helper.parseTemplate(lead, lead.promotionTemplate ?? "");
       _textControllers[lead.id] = TextEditingController(text: text);
     }
 
+    _initTabController();
+  }
+
+  void _initTabController() {
     if (widget.leads.length > 1) {
       tabController = TabController(
         length: widget.leads.length,
         vsync: this,
       );
+      _addTabListener();
     }
+  }
+
+  void _addTabListener() {
+    tabController!.addListener(() {
+      if (!tabController!.indexIsChanging) {
+        setState(() {
+          _selectedIndex = tabController!.index;
+        });
+      }
+    });
   }
 
   @override
@@ -73,7 +96,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
 
     for (final lead in widget.leads) {
       if (!_textControllers.containsKey(lead.id)) {
-        final text = parseTemplate(lead, lead.promotionTemplate ?? "");
+        final text = _helper.parseTemplate(lead, lead.promotionTemplate ?? "");
         _textControllers[lead.id] = TextEditingController(text: text);
       }
     }
@@ -86,10 +109,19 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
           length: widget.leads.length,
           vsync: this,
         );
+        _addTabListener();
       }
     } else {
       tabController?.dispose();
       tabController = null;
+      _selectedIndex = 0;
+    }
+
+    if (_selectedIndex >= widget.leads.length) {
+      _selectedIndex = widget.leads.isEmpty ? 0 : widget.leads.length - 1;
+      if (tabController != null && widget.leads.isNotEmpty) {
+        tabController!.index = _selectedIndex;
+      }
     }
   }
 
@@ -103,31 +135,6 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
     super.dispose();
   }
 
-  String parseTemplate(RecommendationItem lead, String template) {
-    final serviceProviderLastName =
-        (lead.serviceProviderName?.split(" "))?.skip(1).join(" ");
-    final promoterLastName = (lead.promoterName?.split(" "))?.skip(1).join(" ");
-    final replacements = {
-      LandingPageTemplatePlaceholder.receiverName: lead.name,
-      LandingPageTemplatePlaceholder.providerFirstName:
-          lead.serviceProviderName?.split(" ").first,
-      LandingPageTemplatePlaceholder.providerLastName: serviceProviderLastName,
-      LandingPageTemplatePlaceholder.providerName:
-          "${lead.serviceProviderName?.split(" ").first} $serviceProviderLastName",
-      LandingPageTemplatePlaceholder.promoterFirstName:
-          lead.promoterName?.split(" ").first,
-      LandingPageTemplatePlaceholder.promoterLastName: promoterLastName,
-      LandingPageTemplatePlaceholder.promoterName:
-          "${lead.promoterName?.split(" ").first} $promoterLastName"
-    };
-
-    var result = template;
-    replacements.forEach((key, value) {
-      result = result.replaceAll(key, value ?? "");
-    });
-    result += "\n[LINK]";
-    return result;
-  }
 
   Future<void> _sendMessage(
       RecommendationItem recommendation, String message) async {
@@ -178,7 +185,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
             context: context,
             builder: (_) {
               return RecommendationConfirmationDialog(
-                  recommendationReceiverName: recommendation.name,
+                  recommendationReceiverName: recommendation.displayName,
                   cancelAction: () {
                     isAlertVisible = false;
                     CustomNavigator.of(context).pop();
@@ -195,10 +202,21 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
         .saveRecommendation(recommendation, widget.userID);
   }
 
+  String _getInitials(String? name) {
+    if (name == null || name.isEmpty) return "?";
+    final parts = name.trim().split(" ");
+    if (parts.length >= 2) {
+      return "${parts.first[0]}${parts.last[0]}".toUpperCase();
+    }
+    return parts.first[0].toUpperCase();
+  }
+
   @override
   Widget build(BuildContext context) {
     final navigator = CustomNavigator.of(context);
     final recoCubit = Modular.get<RecommendationsAlertCubit>();
+    final responsiveValue = ResponsiveHelper.of(context);
+
     return BlocListener<RecommendationsAlertCubit, RecommendationsAlertState>(
       bloc: recoCubit,
       listener: (context, state) {
@@ -224,7 +242,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
                 builder: (_) {
                   return RecommendationConfirmationDialogError(
                       failure: state.failure,
-                      recommendationReceiverName: state.recommendation.name,
+                      recommendationReceiverName: state.recommendation.displayName,
                       cancelAction: () {
                         isAlertVisible = false;
                         navigator.pop();
@@ -241,67 +259,169 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
           }
         }
       },
-      child: widget.leads.length <= 1
-          ? _buildSingleRecommendationWidget()
-          : _buildMultipleRecommendationsWidget(),
+      child: _buildContent(responsiveValue),
     );
   }
 
-  Widget _buildSingleRecommendationWidget() {
-    final lead = widget.leads.isNotEmpty ? widget.leads.first : null;
-    if (lead == null) {
-      return const SizedBox();
-    }
-    final controller = _textControllers[lead.id]!;
-    return RecommendationTextField(
-      controller: controller,
-      leadName: lead.name ?? "",
-      showError: showMissingLinkError,
-      disabled: widget.disabled,
-      onSendPressed: () {
-        _sendMessage(widget.leads.first, controller.text);
-      },
-      onEmailSendPressed: () {
-        _sendEmail(widget.leads.first, controller.text);
-      },
-    );
-  }
+  Widget _buildContent(ResponsiveBreakpointsData responsiveValue) {
+    if (widget.leads.isEmpty) return const SizedBox();
 
-  Widget _buildMultipleRecommendationsWidget() {
+    final lead = widget.leads.length == 1
+        ? widget.leads.first
+        : widget.leads[_selectedIndex];
+
     return Column(
-      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TabBar(
-          controller: tabController,
-          tabs: widget.leads.map((lead) => Tab(text: lead.name)).toList(),
-          dividerColor: Colors.transparent,
-        ),
-        const SizedBox(height: 30),
-        SizedBox(
-          height: 250,
-          child: TabBarView(
+        if (widget.leads.length > 1) ...[
+          TabBar(
             controller: tabController,
-            children: widget.leads.map((lead) {
-              final controller = _textControllers[lead.id]!;
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: RecommendationTextField(
-                  controller: controller,
-                  leadName: lead.name ?? "",
-                  showError: showMissingLinkError,
-                  disabled: widget.disabled,
-                  onSendPressed: () {
-                    _sendMessage(lead, controller.text);
-                  },
-                  onEmailSendPressed: () {
-                    _sendEmail(lead, controller.text);
-                  },
-                ),
-              );
-            }).toList(),
+            tabs: widget.leads
+                .map((lead) => CustomTab(
+                      title: lead.displayName ?? "",
+                      icon: Icons.person,
+                      responsiveValue: responsiveValue,
+                      totalTabs: widget.leads.length,
+                    ))
+                .toList(),
+            dividerColor: Colors.transparent,
+            dividerHeight: 0,
+            tabAlignment: TabAlignment.start,
+            isScrollable: true,
+            indicatorPadding: const EdgeInsets.only(bottom: 4),
           ),
-        ),
+          const SizedBox(height: 16),
+        ],
+        _buildLeadDetailCard(lead),
       ],
+    );
+  }
+
+  Widget _buildLeadDetailCard(RecommendationItem lead) {
+    final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
+    final controller = _textControllers[lead.id];
+    if (controller == null) return const SizedBox();
+
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 250),
+      child: Container(
+        key: ValueKey(lead.id),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: themeData.colorScheme.surfaceContainerHighest
+              .withValues(alpha: 0.3),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 20,
+                  backgroundColor: themeData.colorScheme.primary
+                      .withValues(alpha: 0.15),
+                  child: Text(
+                    _getInitials(lead.displayName),
+                    style: themeData.textTheme.bodySmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: themeData.colorScheme.primary,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        lead.displayName ?? "",
+                        style: themeData.textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        localization.recommendation_customer_subtitle,
+                        style: themeData.textTheme.bodySmall?.copyWith(
+                          color: themeData.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                if (widget.onDelete != null)
+                  IconButton(
+                    onPressed: () => widget.onDelete!(lead),
+                    tooltip: localization.recommendation_manager_delete_alert_title,
+                    icon: Icon(
+                      Icons.delete_outline,
+                      color: themeData.colorScheme.secondary,
+                    ),
+                  ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        localization.recommendation_promoter_label,
+                        style: themeData.textTheme.bodySmall?.copyWith(
+                          color: themeData.colorScheme.onSurfaceVariant,
+                          fontSize: 12,
+                        ),
+                      ),
+                      Text(
+                        lead.promoterName ?? "",
+                        style: themeData.textTheme.bodySmall?.copyWith(
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        localization.recommendation_landingpage_label,
+                        style: themeData.textTheme.bodySmall?.copyWith(
+                          color: themeData.colorScheme.onSurfaceVariant,
+                          fontSize: 12,
+                        ),
+                      ),
+                      Text(
+                        lead.reason ?? "",
+                        style: themeData.textTheme.bodySmall?.copyWith(
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            RecommendationTextField(
+              controller: controller,
+              leadName: lead.displayName ?? "",
+              showError: showMissingLinkError,
+              disabled: widget.disabled,
+              onSendPressed: () {
+                _sendMessage(lead, controller.text);
+              },
+              onEmailSendPressed: () {
+                _sendEmail(lead, controller.text);
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

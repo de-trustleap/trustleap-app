@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager/recommendation_manager_cubit.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/core/id.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
@@ -23,7 +24,7 @@ void main() {
 
   group("RecommendationManagerCubit_getRecommendations", () {
     final userID = "1";
-    final recommendation = RecommendationItem(
+    final recommendation = PersonalizedRecommendationItem(
         id: "1",
         name: "Test",
         reason: "Test",

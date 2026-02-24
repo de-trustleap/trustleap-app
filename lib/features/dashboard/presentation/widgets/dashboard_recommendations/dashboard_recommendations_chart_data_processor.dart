@@ -1,4 +1,7 @@
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/campaign_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
@@ -66,21 +69,55 @@ class DashboardRecommendationsChartDataProcessor {
 
     final filteredRecommendations = statusLevel != null
         ? recommendations
-            .where((rec) =>
-                rec.recommendation?.statusLevel?.index == (statusLevel! - 1))
+            .where((rec) {
+                final reco = rec.recommendation;
+                if (reco is PersonalizedRecommendationItem) {
+                  return reco.statusLevel?.index == (statusLevel! - 1);
+                }
+                if (reco is CampaignRecommendationItem) {
+                  return _campaignMatchesStatusLevel(reco, statusLevel! - 1);
+                }
+                return false;
+              })
             .toList()
         : recommendations;
 
     for (final recommendation in filteredRecommendations) {
-      final statusTimestamp =
-          recommendation.recommendation?.statusTimestamps?[0];
-      if (statusTimestamp != null) {
-        final dateKey = _getDateKeyForTimestamp(statusTimestamp);
+      final reco = recommendation.recommendation;
+      DateTime? timestamp;
+      if (reco is PersonalizedRecommendationItem) {
+        final timestampKey = statusLevel != null ? (statusLevel! - 1) : 0;
+        timestamp = reco.statusTimestamps?[timestampKey];
+      } else if (reco is CampaignRecommendationItem) {
+        timestamp = reco.createdAt;
+      }
+      if (timestamp != null) {
+        final dateKey = _getDateKeyForTimestamp(timestamp);
         groupedData[dateKey] = (groupedData[dateKey] ?? 0) + 1;
       }
     }
 
     return groupedData;
+  }
+
+  bool _campaignMatchesStatusLevel(CampaignRecommendationItem reco, int statusIndex) {
+    final counts = reco.statusCounts;
+    if (counts == null) return false;
+    if (statusIndex < 0 || statusIndex >= StatusLevel.values.length) return false;
+    switch (StatusLevel.values[statusIndex]) {
+      case StatusLevel.recommendationSend:
+        return true;
+      case StatusLevel.linkClicked:
+        return counts.linkClicked > 0;
+      case StatusLevel.contactFormSent:
+        return counts.contactFormSent > 0;
+      case StatusLevel.appointment:
+        return counts.appointment > 0;
+      case StatusLevel.successful:
+        return counts.successful > 0;
+      case StatusLevel.failed:
+        return counts.failed > 0;
+    }
   }
 
   DateTime _getDateKeyForTimestamp(DateTime timestamp) {

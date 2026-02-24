@@ -1,28 +1,28 @@
-import 'package:finanzbegleiter/features/recommendations/application/recommendations_cubit.dart';
-import 'package:finanzbegleiter/features/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
-import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
-import 'package:finanzbegleiter/features/recommendations/domain/recommendation_reason.dart';
-import 'package:finanzbegleiter/features/auth/domain/user.dart';
-import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/core/widgets/page_wrapper/centered_constrained_wrapper.dart';
-import 'package:finanzbegleiter/core/widgets/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/empty_page.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/error_view.dart';
-import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/form_textfield.dart';
-import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/loading_indicator.dart';
-import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_preview.dart';
-import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_reason_picker.dart';
-import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_validator.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/radio_option_tile.dart';
+import 'package:finanzbegleiter/features/auth/domain/user.dart';
+import 'package:finanzbegleiter/features/recommendations/application/recommendations_cubit.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_reason.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/campaign_recommendation_section.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/personalized_recommendation_section.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_form_helper.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/recommendations_form_scope.dart';
+import 'package:finanzbegleiter/features/user_observer/user_observer_cubit.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class RecommendationsForm extends StatefulWidget {
   const RecommendationsForm({super.key});
@@ -32,34 +32,33 @@ class RecommendationsForm extends StatefulWidget {
 }
 
 class _RecommendationsFormState extends State<RecommendationsForm> {
-  final promoterTextController = TextEditingController();
-  final leadTextController = TextEditingController();
-  final serviceProviderTextController = TextEditingController();
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final _promoterTextController = TextEditingController();
+  final _serviceProviderTextController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _helper = RecommendationFormHelper();
 
-  bool showRecommendation = false;
-  RecommendationReason? selectedReason;
-  FocusNode? focusNode;
-  CustomUser? currentUser;
-  CustomUser? parentUser;
-
-  List<RecommendationItem> leads = [];
-
-  bool showError = false;
-  String errorMessage = "";
-  bool validationHasError = false;
-  String? reasonValid;
-  bool promoterTextFieldDisabled = false;
-  List<RecommendationReason> reasons = [];
-  final helper = RecommendationFormHelper();
+  RecommendationReason? _selectedReason;
+  CustomUser? _currentUser;
+  CustomUser? _parentUser;
+  bool _validationHasError = false;
+  String? _reasonValid;
+  bool _promoterTextFieldDisabled = false;
+  List<RecommendationReason> _reasons = [];
+  RecommendationType _selectedType = RecommendationType.personalized;
 
   @override
   void initState() {
-    focusNode = FocusNode();
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _initializeUserData();
     });
+  }
+
+  @override
+  void dispose() {
+    _promoterTextController.dispose();
+    _serviceProviderTextController.dispose();
+    super.dispose();
   }
 
   void _initializeUserData() {
@@ -70,7 +69,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   }
 
   void _loadRecommendationData(CustomUser user) {
-    setUser(user);
+    _setUser(user);
     Modular.get<RecommendationsCubit>()
         .getRecommendationReasons(user.landingPageIDs ?? []);
     if (user.role == Role.promoter && user.parentUserID != null) {
@@ -78,89 +77,44 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
     }
   }
 
-  @override
-  void dispose() {
-    promoterTextController.dispose();
-    leadTextController.dispose();
-    serviceProviderTextController.dispose();
-    focusNode!.dispose();
-    super.dispose();
-  }
-
-  void resetError() {
-    setState(() {
-      showError = false;
-      errorMessage = "";
-    });
-  }
-
-  void addLead(RecommendationValidator validator) {
-    final localization = AppLocalizations.of(context);
-    if (leads.length < 6) {
-      if (formKey.currentState!.validate() &&
-          validator.validateReason(selectedReason?.reason) == null &&
-          selectedReason?.id != null) {
-        setState(() {
-          validationHasError = false;
-          reasonValid = null;
-          leads.add(helper.createRecommendationItem(
-            leadName: leadTextController.text,
-            promoterName: promoterTextController.text,
-            serviceProviderName: serviceProviderTextController.text,
-            selectedReason: selectedReason!,
-            reasons: reasons,
-            currentUser: currentUser,
-            parentUser: parentUser,
-          ));
-          leadTextController.clear();
-          generateRecommendation();
-        });
-      } else {
-        setState(() {
-          validationHasError = true;
-          reasonValid = validator.validateReason(selectedReason?.reason);
-        });
-      }
-    } else {
-      CustomSnackBar.of(context).showCustomSnackBar(
-          localization.recommendation_page_max_item_Message);
-    }
-  }
-
-  void setUser(CustomUser user) {
+  void _setUser(CustomUser user) {
     if (user.firstName != null && user.lastName != null) {
       if (user.role == Role.promoter) {
         setState(() {
-          currentUser = user;
-          promoterTextFieldDisabled = true;
-          promoterTextController.text =
-              "${currentUser!.firstName} ${currentUser!.lastName}";
+          _currentUser = user;
+          _promoterTextFieldDisabled = true;
+          _promoterTextController.text =
+              "${_currentUser!.firstName} ${_currentUser!.lastName}";
         });
       } else {
         setState(() {
-          parentUser = user;
-          serviceProviderTextController.text =
-              "${parentUser!.firstName} ${parentUser!.lastName}";
+          _parentUser = user;
+          _serviceProviderTextController.text =
+              "${_parentUser!.firstName} ${_parentUser!.lastName}";
         });
       }
     }
   }
 
-  void setParentUser(CustomUser user) {
-    parentUser = user;
-    if (parentUser != null &&
-        parentUser!.firstName != null &&
-        parentUser!.lastName != null) {
+  void _setParentUser(CustomUser user) {
+    _parentUser = user;
+    if (_parentUser != null &&
+        _parentUser!.firstName != null &&
+        _parentUser!.lastName != null) {
       setState(() {
-        serviceProviderTextController.text =
-            "${parentUser!.firstName} ${parentUser!.lastName}";
+        _serviceProviderTextController.text =
+            "${_parentUser!.firstName} ${_parentUser!.lastName}";
       });
     }
   }
 
-  String getReasonValues() {
-    selectedReason = selectedReason ??
-        reasons.firstWhere(
+  void _resetError() {
+    setState(() {});
+  }
+
+  String _getReasonValues() {
+    _selectedReason = _selectedReason ??
+        _reasons.firstWhere(
           (e) => e.isActive == true,
           orElse: () => const RecommendationReason(
             id: null,
@@ -169,26 +123,85 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
             promotionTemplate: null,
           ),
         );
-    return helper.getReasonValues(reasons, selectedReason);
+    return _helper.getReasonValues(_reasons, _selectedReason);
   }
 
-  void generateRecommendation() {
-    setState(() {
-      showRecommendation = true;
-    });
-  }
-
-  bool isRecommendationLimitReached() {
-    return helper.isRecommendationLimitReached(currentUser);
-  }
-
-  bool hasActiveReasons() {
-    return helper.hasActiveReasons(reasons);
-  }
-
-  String? getRecommendationLimitResetText() {
-    return helper.getRecommendationLimitResetText(
-        context, currentUser, parentUser);
+  Widget _buildTypeSection(ThemeData themeData, AppLocalizations localization) {
+    final isMobile = ResponsiveHelper.of(context).isMobile;
+    return CardContainer(
+      maxWidth: 1200,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SectionHeader(
+            number: 1,
+            title: localization.recommendation_section_type_title,
+          ),
+          const SizedBox(height: 16),
+          RadioGroup<RecommendationType>(
+            groupValue: _selectedType,
+            onChanged: (RecommendationType? value) {
+              if (value != null && value != _selectedType) {
+                setState(() {
+                  _selectedType = value;
+                  _validationHasError = false;
+                  _reasonValid = null;
+                });
+              }
+            },
+            child: ResponsiveRowColumn(
+              layout: isMobile
+                  ? ResponsiveRowColumnType.COLUMN
+                  : ResponsiveRowColumnType.ROW,
+              rowSpacing: 12,
+              columnSpacing: 12,
+              children: [
+                ResponsiveRowColumnItem(
+                  rowFlex: 1,
+                  child: RadioOptionTile<RecommendationType>(
+                    icon: Icons.people,
+                    label: localization.recommendation_type_personalized,
+                    description:
+                        localization.recommendation_type_personalized_desc,
+                    value: RecommendationType.personalized,
+                    isSelected:
+                        _selectedType == RecommendationType.personalized,
+                    onTap: () {
+                      if (_selectedType != RecommendationType.personalized) {
+                        setState(() {
+                          _selectedType = RecommendationType.personalized;
+                          _validationHasError = false;
+                          _reasonValid = null;
+                        });
+                      }
+                    },
+                  ),
+                ),
+                ResponsiveRowColumnItem(
+                  rowFlex: 1,
+                  child: RadioOptionTile<RecommendationType>(
+                    icon: Icons.campaign,
+                    label: localization.recommendation_type_campaign,
+                    description: localization.recommendation_type_campaign_desc,
+                    value: RecommendationType.campaign,
+                    isSelected: _selectedType == RecommendationType.campaign,
+                    onTap: () {
+                      if (_selectedType != RecommendationType.campaign) {
+                        setState(() {
+                          _selectedType = RecommendationType.campaign;
+                          _validationHasError = false;
+                          _reasonValid = null;
+                        });
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -197,281 +210,119 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
     final localization = AppLocalizations.of(context);
     final navigator = CustomNavigator.of(context);
     final recoCubit = Modular.get<RecommendationsCubit>();
-    final validator = RecommendationValidator(localization: localization);
-    const double textFieldSpacing = 20;
-    const double tabFieldSpacing = 20;
 
-    return CardContainer(child: LayoutBuilder(builder: (context, constraints) {
-      final maxWidth = constraints.maxWidth;
-      return BlocListener<UserObserverCubit, UserObserverState>(
-        listener: (context, state) {
-          if (state is UserObserverSuccess) {
-            _loadRecommendationData(state.user);
+    return BlocListener<UserObserverCubit, UserObserverState>(
+      listener: (context, state) {
+        if (state is UserObserverSuccess) {
+          _loadRecommendationData(state.user);
+        }
+      },
+      child: BlocBuilder<UserObserverCubit, UserObserverState>(
+        builder: (context, userState) {
+          if (userState is UserObserverLoading ||
+              userState is UserObserverInitial) {
+            return const LoadingIndicator();
           }
+          return BlocConsumer<RecommendationsCubit, RecommendationsState>(
+            bloc: recoCubit,
+            listener: (context, state) {
+              if (state is RecommendationGetParentUserSuccessState) {
+                _setParentUser(state.user);
+              } else if (state is RecommendationGetReasonsSuccessState) {
+                setState(() {
+                  _reasons = state.reasons;
+                });
+              }
+            },
+            builder: (context, state) {
+              if (state is RecommendationsInitial ||
+                  state is RecommendationLoadingState) {
+                return const LoadingIndicator();
+              }
+              if (state is RecommendationNoReasonsState) {
+                return EmptyPage(
+                    icon: Icons.person_add,
+                    title:
+                        localization.recommendation_missing_landingpage_title,
+                    subTitle:
+                        localization.recommendation_missing_landingpage_text,
+                    buttonTitle: localization
+                        .recommendation_missing_landingpage_button,
+                    onTap: () {
+                      navigator.navigate(
+                          RoutePaths.homePath + RoutePaths.landingPagePath);
+                    });
+              }
+              if (_currentUser != null || _parentUser != null) {
+                return RecommendationsFormScope(
+                  promoterTextController: _promoterTextController,
+                  serviceProviderTextController:
+                      _serviceProviderTextController,
+                  reasons: _reasons,
+                  selectedReason: _selectedReason,
+                  currentUser: _currentUser,
+                  parentUser: _parentUser,
+                  helper: _helper,
+                  formKey: _formKey,
+                  validationHasError: _validationHasError,
+                  reasonValid: _reasonValid,
+                  promoterTextFieldDisabled: _promoterTextFieldDisabled,
+                  onReasonChanged: (reason) {
+                    setState(() {
+                      _selectedReason = reason;
+                    });
+                  },
+                  onResetError: _resetError,
+                  onReasonValidChanged: (value) {
+                    setState(() {
+                      _reasonValid = value;
+                    });
+                  },
+                  onValidationHasErrorChanged: (value) {
+                    setState(() {
+                      _validationHasError = value;
+                    });
+                  },
+                  getReasonValues: _getReasonValues,
+                  isRecommendationLimitReached: () =>
+                      _helper.isRecommendationLimitReached(_currentUser),
+                  hasActiveReasons: () =>
+                      _helper.hasActiveReasons(_reasons),
+                  getRecommendationLimitResetText: () =>
+                      _helper.getRecommendationLimitResetText(
+                          context, _currentUser, _parentUser),
+                  child: Form(
+                    key: _formKey,
+                    autovalidateMode: _validationHasError
+                        ? AutovalidateMode.always
+                        : AutovalidateMode.disabled,
+                    child: Column(
+                      children: [
+                        _buildTypeSection(themeData, localization),
+                        const SizedBox(height: 24),
+                        if (_selectedType ==
+                            RecommendationType.personalized)
+                          const PersonalizedRecommendationSection()
+                        else
+                          const CampaignRecommendationSection(),
+                      ],
+                    ),
+                  ),
+                );
+              } else if (state is RecommendationGetUserFailureState) {
+                return CenteredConstrainedWrapper(
+                    child: ErrorView(
+                        title: localization.recommendations_error_view_title,
+                        message: DatabaseFailureMapper.mapFailureMessage(
+                            state.failure, localization),
+                        callback: _initializeUserData));
+              } else {
+                return const LoadingIndicator();
+              }
+            },
+          );
         },
-        child: BlocBuilder<UserObserverCubit, UserObserverState>(
-          builder: (context, userState) {
-            if (userState is UserObserverLoading ||
-                userState is UserObserverInitial) {
-              return const LoadingIndicator();
-            }
-            return BlocConsumer<RecommendationsCubit, RecommendationsState>(
-              bloc: recoCubit,
-              listener: (context, state) {
-                if (state is RecommendationGetParentUserSuccessState) {
-                  setParentUser(state.user);
-                } else if (state is RecommendationGetReasonsSuccessState) {
-                  setState(() {
-                    reasons = state.reasons;
-                  });
-                }
-              },
-              builder: (context, state) {
-                if (state is RecommendationsInitial ||
-                    state is RecommendationLoadingState) {
-                  return const LoadingIndicator();
-                }
-                if (state is RecommendationNoReasonsState) {
-                  return EmptyPage(
-                      icon: Icons.person_add,
-                      title:
-                          localization.recommendation_missing_landingpage_title,
-                      subTitle:
-                          localization.recommendation_missing_landingpage_text,
-                      buttonTitle: localization
-                          .recommendation_missing_landingpage_button,
-                      onTap: () {
-                        navigator.navigate(
-                            RoutePaths.homePath + RoutePaths.landingPagePath);
-                      });
-                }
-                if (currentUser != null || parentUser != null) {
-                  return Form(
-                      key: formKey,
-                      autovalidateMode: validationHasError
-                          ? AutovalidateMode.always
-                          : AutovalidateMode.disabled,
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SelectableText(localization.recommendations_title,
-                                style: themeData.textTheme.headlineLarge!
-                                    .copyWith(fontWeight: FontWeight.bold)),
-                            const SizedBox(height: 16),
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  FormTextfield(
-                                      maxWidth: maxWidth,
-                                      controller: promoterTextController,
-                                      disabled: promoterTextFieldDisabled,
-                                      placeholder: localization
-                                          .recommendations_form_promoter_placeholder,
-                                      onChanged: resetError,
-                                      validator:
-                                          validator.validatePromotersName)
-                                ]),
-                            const SizedBox(height: textFieldSpacing),
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  FormTextfield(
-                                      maxWidth: maxWidth,
-                                      controller: serviceProviderTextController,
-                                      disabled: true,
-                                      placeholder: localization
-                                          .recommendations_form_service_provider_placeholder,
-                                      onChanged: resetError,
-                                      validator: validator.validateLeadsName)
-                                ]),
-                            const SizedBox(height: textFieldSpacing),
-                            Row(children: [
-                              Expanded(
-                                child: FormTextfield(
-                                    maxWidth: double.infinity,
-                                    controller: leadTextController,
-                                    disabled: false,
-                                    placeholder: localization
-                                        .recommendations_form_recommendation_name_placeholder,
-                                    onChanged: resetError,
-                                    onFieldSubmitted: () {
-                                      addLead(validator);
-                                      focusNode!.requestFocus();
-                                    },
-                                    focusNode: focusNode,
-                                    validator: validator.validateLeadsName),
-                              ),
-                              const SizedBox(width: 8),
-                              IconButton(
-                                  onPressed: (isRecommendationLimitReached() ||
-                                          !hasActiveReasons())
-                                      ? null
-                                      : () => addLead(validator),
-                                  tooltip: isRecommendationLimitReached()
-                                      ? localization
-                                          .recommendations_limit_reached_tooltip
-                                      : !hasActiveReasons()
-                                          ? localization
-                                              .recommendations_no_active_landingpage_tooltip
-                                          : localization
-                                              .recommendations_form_add_button_tooltip,
-                                  icon: const Icon(Icons.add_circle),
-                                  iconSize: 48,
-                                  color: (isRecommendationLimitReached() ||
-                                          !hasActiveReasons())
-                                      ? Colors.grey[400]
-                                      : themeData.colorScheme.secondary)
-                            ]),
-                            const SizedBox(height: textFieldSpacing),
-                            Wrap(spacing: 8, runSpacing: 8, children: [
-                              for (var lead in leads)
-                                Chip(
-                                  label: Text("${lead.name}\n${lead.reason}",
-                                      maxLines: 2),
-                                  deleteIcon: const Icon(Icons.close, size: 16),
-                                  onDeleted: () {
-                                    setState(() {
-                                      leads.remove(lead);
-                                    });
-                                  },
-                                )
-                            ]),
-                            const SizedBox(height: textFieldSpacing),
-                            if (!hasActiveReasons()) ...[
-                              FormErrorView(
-                                message: localization
-                                    .recommendations_no_active_landingpage_warning,
-                              ),
-                              const SizedBox(height: textFieldSpacing),
-                            ],
-                            if (reasons.isNotEmpty) ...[
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    RecommendationReasonPicker(
-                                        width: maxWidth,
-                                        validate: reasonValid,
-                                        reasons: reasons,
-                                        initialValue: getReasonValues(),
-                                        onSelected: (reason) {
-                                          setState(() {
-                                            reasonValid = validator
-                                                .validateReason(reason?.reason);
-                                            selectedReason = reason;
-                                          });
-                                          resetError();
-                                        })
-                                  ]),
-                              if (currentUser?.role == Role.promoter) ...[
-                                const SizedBox(height: 8),
-                                Container(
-                                  width: maxWidth,
-                                  padding: const EdgeInsets.all(12),
-                                  decoration: BoxDecoration(
-                                    color: themeData
-                                        .colorScheme.surfaceContainerHighest,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        localization
-                                            .recommendations_limit_title,
-                                        style: themeData.textTheme.bodyMedium
-                                            ?.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          color: themeData
-                                              .colorScheme.onSurfaceVariant,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        localization
-                                            .recommendations_limit_description,
-                                        style: themeData.textTheme.bodySmall
-                                            ?.copyWith(
-                                          color: themeData
-                                              .colorScheme.onSurfaceVariant,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        localization
-                                            .recommendations_limit_status(
-                                          (currentUser ?? parentUser)
-                                                  ?.recommendationCountLast30Days ??
-                                              0,
-                                          6,
-                                        ),
-                                        style: themeData.textTheme.bodySmall
-                                            ?.copyWith(
-                                          color: ((currentUser ?? parentUser)
-                                                          ?.recommendationCountLast30Days ??
-                                                      0) >=
-                                                  6
-                                              ? themeData.colorScheme.error
-                                              : themeData.colorScheme.primary,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                      if (getRecommendationLimitResetText() !=
-                                          null) ...[
-                                        const SizedBox(height: 4),
-                                        Text(
-                                          getRecommendationLimitResetText()!,
-                                          style: themeData.textTheme.bodySmall
-                                              ?.copyWith(
-                                            color: themeData
-                                                .colorScheme.onSurfaceVariant,
-                                            fontStyle: FontStyle.italic,
-                                          ),
-                                        ),
-                                      ],
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ],
-                            if (showRecommendation && leads.isNotEmpty) ...[
-                              const SizedBox(height: tabFieldSpacing),
-                              RecommendationPreview(
-                                  leads: leads,
-                                  userID: currentUser != null
-                                      ? currentUser?.id.value ?? ""
-                                      : parentUser?.id.value ?? "",
-                                  disabled: isRecommendationLimitReached(),
-                                  onSaveSuccess: (recommendation) {
-                                    setState(() {
-                                      leads.removeWhere((lead) =>
-                                          lead.id == recommendation.id);
-                                      if (leads.isEmpty) {
-                                        showRecommendation = false;
-                                      }
-                                    });
-                                    CustomSnackBar.of(context)
-                                        .showCustomSnackBar(localization
-                                            .recommendations_sent_success(
-                                                recommendation.name ?? ""));
-                                  }),
-                            ],
-                          ]));
-                } else if (state is RecommendationGetUserFailureState) {
-                  return CenteredConstrainedWrapper(
-                      child: ErrorView(
-                          title: localization.recommendations_error_view_title,
-                          message: DatabaseFailureMapper.mapFailureMessage(
-                              state.failure, localization),
-                          callback: _initializeUserData));
-                } else {
-                  return const LoadingIndicator();
-                }
-              },
-            );
-          },
-        ),
-      );
-    }));
+      ),
+    );
   }
 }

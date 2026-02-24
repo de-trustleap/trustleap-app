@@ -124,7 +124,7 @@ class _LandingPageDetailPageState extends State<LandingPageDetailPage> {
                     ),
                     const SizedBox(height: 24),
                     LandingPageDetailStatistics(
-                      visitsTotal: landingPage.visitsTotal ?? 0,
+                      totalVisits: landingPage.totalVisits ?? 0,
                       landingPageId: widget.landingPageId,
                       user: lpState.user,
                     ),
