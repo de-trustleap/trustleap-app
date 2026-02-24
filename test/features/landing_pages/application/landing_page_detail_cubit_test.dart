@@ -8,6 +8,7 @@ import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart'
 import 'package:finanzbegleiter/features/legals/domain/legal_version.dart';
 import 'package:finanzbegleiter/features/promoter/domain/promoter.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
@@ -43,7 +44,7 @@ void main() {
       userID: userId,
       priority: RecommendationPriority.medium,
       notes: null,
-      recommendation: RecommendationItem(
+      recommendation: PersonalizedRecommendationItem(
         id: "item-1",
         name: "Test",
         reason: "Test Landing Page",
@@ -78,7 +79,10 @@ void main() {
       // Given
       when(mockRecommendationRepo
               .getRecommendationsCompanyWithArchived(userId))
-          .thenAnswer((_) async => right(promoterRecommendations));
+          .thenAnswer((_) async => right((
+                promoterRecommendations: promoterRecommendations,
+                allRecommendations: [recommendation1],
+              )));
       when(mockLandingPageRepo.getAllLandingPages(["lp1"]))
           .thenAnswer((_) async => right(landingPages));
       final expectedResult = [
@@ -150,7 +154,10 @@ void main() {
       ];
       when(mockRecommendationRepo
               .getRecommendationsCompanyWithArchived(userId))
-          .thenAnswer((_) async => right(emptyPromoterRecs));
+          .thenAnswer((_) async => right((
+                promoterRecommendations: emptyPromoterRecs,
+                allRecommendations: <UserRecommendation>[],
+              )));
       final expectedResult = [
         LandingPageDetailRecommendationsLoading(),
         LandingPageDetailRecommendationsSuccess(
@@ -177,7 +184,7 @@ void main() {
         userID: userId,
         priority: RecommendationPriority.medium,
         notes: null,
-        recommendation: RecommendationItem(
+        recommendation: PersonalizedRecommendationItem(
           id: "item-1",
           name: "Test",
           reason: "Test Landing Page",

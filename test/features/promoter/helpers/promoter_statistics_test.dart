@@ -1,9 +1,12 @@
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/id.dart';
 import 'package:finanzbegleiter/features/promoter/domain/promoter.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/campaign_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart';
 import 'package:finanzbegleiter/features/promoter/domain/promoter_stats.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_status_counts.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:finanzbegleiter/features/promoter/helpers/promoter_statistics.dart';
@@ -21,7 +24,7 @@ void main() {
       userID: "user-1",
       priority: RecommendationPriority.medium,
       notes: null,
-      recommendation: RecommendationItem(
+      recommendation: PersonalizedRecommendationItem(
         id: id,
         name: "Test",
         reason: reason,
@@ -542,6 +545,113 @@ void main() {
 
       // Then
       expect(stats.formattedConversionRate, "100%");
+    });
+  });
+
+  group("PromoterStatistics_CampaignRecommendations", () {
+    UserRecommendation createCampaignRecommendation({
+      required String id,
+      String reason = "Test Page",
+      int successful = 0,
+      int linkClicked = 0,
+    }) {
+      return UserRecommendation(
+        id: UniqueID.fromUniqueString(id),
+        recoID: id,
+        userID: "user-1",
+        priority: RecommendationPriority.medium,
+        notes: null,
+        recommendation: CampaignRecommendationItem(
+          id: id,
+          campaignName: "Campaign $id",
+          campaignDurationDays: 30,
+          reason: reason,
+          landingPageID: "lp1",
+          promotionTemplate: null,
+          promoterName: null,
+          serviceProviderName: null,
+          defaultLandingPageID: null,
+          userID: "user-1",
+          promoterImageDownloadURL: null,
+          statusCounts: RecommendationStatusCounts(
+            linkClicked: linkClicked,
+            successful: successful,
+          ),
+        ),
+      );
+    }
+
+    test("should count campaign with successful > 0 as conversion", () {
+      // Given
+      final promoterRecommendations = [
+        PromoterRecommendations(
+          promoter: CustomUser(id: UniqueID.fromUniqueString("p1")),
+          recommendations: [
+            createCampaignRecommendation(id: "c1", successful: 3),
+            createCampaignRecommendation(id: "c2", successful: 0),
+          ],
+        ),
+      ];
+      final statistics = PromoterStatistics(
+        promoterRecommendations: promoterRecommendations,
+      );
+
+      // When
+      final result = statistics.getStatsForPromoter("p1");
+
+      // Then
+      expect(result, const PromoterStats(shares: 2, conversions: 1));
+    });
+
+    test("should count mixed personalized and campaign conversions", () {
+      // Given
+      final promoterRecommendations = [
+        PromoterRecommendations(
+          promoter: CustomUser(id: UniqueID.fromUniqueString("p1")),
+          recommendations: [
+            createRecommendation(
+                id: "r1", statusLevel: StatusLevel.successful),
+            createCampaignRecommendation(id: "c1", successful: 5),
+            createRecommendation(
+                id: "r2", statusLevel: StatusLevel.recommendationSend),
+            createCampaignRecommendation(id: "c2", successful: 0),
+          ],
+        ),
+      ];
+      final statistics = PromoterStatistics(
+        promoterRecommendations: promoterRecommendations,
+      );
+
+      // When
+      final result = statistics.getStatsForPromoter("p1");
+
+      // Then
+      expect(result, const PromoterStats(shares: 4, conversions: 2));
+    });
+
+    test("should return zero conversions when all campaigns have zero successful",
+        () {
+      // Given
+      final promoterRecommendations = [
+        PromoterRecommendations(
+          promoter: CustomUser(id: UniqueID.fromUniqueString("p1")),
+          recommendations: [
+            createCampaignRecommendation(
+                id: "c1", successful: 0, linkClicked: 10),
+            createCampaignRecommendation(
+                id: "c2", successful: 0, linkClicked: 5),
+          ],
+        ),
+      ];
+      final statistics = PromoterStatistics(
+        promoterRecommendations: promoterRecommendations,
+      );
+
+      // When
+      final result = statistics.getStatsForPromoter("p1");
+
+      // Then
+      expect(result, const PromoterStats(shares: 2, conversions: 0));
     });
   });
 }

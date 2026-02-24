@@ -2195,6 +2195,12 @@ abstract class AppLocalizations {
   /// **'The recommendation to {name} has been sent successfully!'**
   String recommendations_sent_success(String name);
 
+  /// Success message after creating a campaign
+  ///
+  /// In en, this message translates to:
+  /// **'The campaign was created successfully!'**
+  String get campaign_created_success;
+
   /// Tooltip when the recommendation limit is reached
   ///
   /// In en, this message translates to:
@@ -2212,6 +2218,180 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No recommendations possible - You have no active landing page assigned'**
   String get recommendations_no_active_landingpage_warning;
+
+  /// Title for section 1 - type of recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Type of recommendation'**
+  String get recommendation_section_type_title;
+
+  /// Label for personalized recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Personalized'**
+  String get recommendation_type_personalized;
+
+  /// Description of personalized recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'For specific customers with individual names and tracking.'**
+  String get recommendation_type_personalized_desc;
+
+  /// Label for campaign recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Campaign'**
+  String get recommendation_type_campaign;
+
+  /// Description of campaign recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'A universal link for newsletters or social media.'**
+  String get recommendation_type_campaign_desc;
+
+  /// Title for section 2 - create recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Create recommendation'**
+  String get recommendation_section_create_title;
+
+  /// Title for section 3 - created recommendations
+  ///
+  /// In en, this message translates to:
+  /// **'Created recommendations'**
+  String get recommendation_section_created_title;
+
+  /// Button text for adding a recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Add recommendation'**
+  String get recommendation_add_button;
+
+  /// Placeholder for the customer name field
+  ///
+  /// In en, this message translates to:
+  /// **'Enter customer name...'**
+  String get recommendation_customer_name_placeholder;
+
+  /// Placeholder for the promoter name field
+  ///
+  /// In en, this message translates to:
+  /// **'Enter promoter name...'**
+  String get recommendation_promoter_name_placeholder;
+
+  /// Label for the reason dropdown
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a reason (Landing page)'**
+  String get recommendation_choose_reason_label;
+
+  /// Placeholder for the message template
+  ///
+  /// In en, this message translates to:
+  /// **'Message template for {name}'**
+  String recommendation_message_template(String name);
+
+  /// Subtitle under the customer name
+  ///
+  /// In en, this message translates to:
+  /// **'Customer'**
+  String get recommendation_customer_subtitle;
+
+  /// Count of created recommendations
+  ///
+  /// In en, this message translates to:
+  /// **'({count} recommendations)'**
+  String recommendation_count(int count);
+
+  /// Label for the promoter info field
+  ///
+  /// In en, this message translates to:
+  /// **'Promoter'**
+  String get recommendation_promoter_label;
+
+  /// Label for the landing page info field
+  ///
+  /// In en, this message translates to:
+  /// **'Landing page'**
+  String get recommendation_landingpage_label;
+
+  /// Button text for generating a general link
+  ///
+  /// In en, this message translates to:
+  /// **'Generate link'**
+  String get recommendation_generate_link_button;
+
+  /// Title of the section for the generated campaign link
+  ///
+  /// In en, this message translates to:
+  /// **'Generated link'**
+  String get recommendation_campaign_link_title;
+
+  /// Snackbar message after copying to clipboard
+  ///
+  /// In en, this message translates to:
+  /// **'Copied to clipboard'**
+  String get recommendation_copied_to_clipboard;
+
+  /// Title of the alert after copying the campaign link
+  ///
+  /// In en, this message translates to:
+  /// **'Start campaign?'**
+  String get recommendation_campaign_shared_alert_title;
+
+  /// Description of the alert after copying the campaign link
+  ///
+  /// In en, this message translates to:
+  /// **'Have you already copied and shared the link? Then tracking will be set up in the recommendation manager.'**
+  String get recommendation_campaign_shared_alert_description;
+
+  /// Confirm button of the campaign shared alert
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, already shared'**
+  String get recommendation_campaign_shared_alert_yes_button;
+
+  /// Cancel button of the campaign shared alert
+  ///
+  /// In en, this message translates to:
+  /// **'Not yet'**
+  String get recommendation_campaign_shared_alert_no_button;
+
+  /// Button text for copying the message template with link
+  ///
+  /// In en, this message translates to:
+  /// **'Copy template'**
+  String get recommendation_copy_template_button;
+
+  /// Button text for starting a campaign
+  ///
+  /// In en, this message translates to:
+  /// **'Start campaign'**
+  String get campaign_start_button;
+
+  /// Placeholder for the campaign name field
+  ///
+  /// In en, this message translates to:
+  /// **'Campaign name'**
+  String get recommendation_campaign_name_placeholder;
+
+  /// Placeholder for the campaign duration field
+  ///
+  /// In en, this message translates to:
+  /// **'Duration in days'**
+  String get recommendation_campaign_duration_placeholder;
+
+  /// Validation message when campaign name is missing
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a campaign name'**
+  String get recommendations_validation_missing_campaign_name;
+
+  /// Validation message when campaign duration is invalid
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a duration between 1 and 30 days'**
+  String get recommendations_validation_invalid_campaign_duration;
 
   /// Error title on the page builder page if request fails
   ///
@@ -3457,6 +3637,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The recommendation is being saved'**
   String get save_recommendation_loading_subtitle;
+
+  /// Title of the loading dialog when saving a campaign
+  ///
+  /// In en, this message translates to:
+  /// **'Creating campaign'**
+  String get save_campaign_loading_title;
+
+  /// Subtitle of the loading dialog when saving a campaign
+  ///
+  /// In en, this message translates to:
+  /// **'The campaign is being saved'**
+  String get save_campaign_loading_subtitle;
 
   /// Description of the alert to confirm whether you have sent a recommendation.
   ///
@@ -6332,6 +6524,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Promoter not found'**
   String get promoter_detail_not_found;
+
+  /// Header for campaign name column in campaign list
+  ///
+  /// In en, this message translates to:
+  /// **'Campaign Name'**
+  String get campaign_manager_list_header_campaign_name;
+
+  /// Header for conversion rate column in campaign list
+  ///
+  /// In en, this message translates to:
+  /// **'Conversion Rate'**
+  String get campaign_manager_list_header_conversion_rate;
+
+  /// Title of the campaign funnel section
+  ///
+  /// In en, this message translates to:
+  /// **'Campaign Performance'**
+  String get campaign_manager_funnel_title;
+
+  /// Label for link clicked stage in funnel
+  ///
+  /// In en, this message translates to:
+  /// **'Link Clicked'**
+  String get campaign_manager_funnel_link_clicked;
+
+  /// Label for contact form stage in funnel
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Form Sent'**
+  String get campaign_manager_funnel_contact_form;
+
+  /// Label for appointment stage in funnel
+  ///
+  /// In en, this message translates to:
+  /// **'Appointment Scheduled'**
+  String get campaign_manager_funnel_appointment;
+
+  /// Label for successful stage in funnel
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get campaign_manager_funnel_successful;
+
+  /// Label for failed stage in funnel
+  ///
+  /// In en, this message translates to:
+  /// **'Not Completed'**
+  String get campaign_manager_funnel_failed;
+
+  /// Tooltip for the copy link button in the campaign tile
+  ///
+  /// In en, this message translates to:
+  /// **'Copy link'**
+  String get campaign_manager_copy_link_tooltip;
+
+  /// Tooltip for the delete campaign button
+  ///
+  /// In en, this message translates to:
+  /// **'Delete campaign'**
+  String get campaign_manager_delete_tooltip;
+
+  /// Title of the delete campaign alert
+  ///
+  /// In en, this message translates to:
+  /// **'Delete campaign'**
+  String get campaign_manager_delete_alert_title;
+
+  /// Description of the delete campaign alert
+  ///
+  /// In en, this message translates to:
+  /// **'Do you really want to delete this campaign? This action cannot be undone.'**
+  String get campaign_manager_delete_alert_description;
+
+  /// Delete button in the delete campaign alert
+  ///
+  /// In en, this message translates to:
+  /// **'Delete campaign'**
+  String get campaign_manager_delete_alert_delete_button;
 }
 
 class _AppLocalizationsDelegate

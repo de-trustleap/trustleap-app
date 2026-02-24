@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/core/id.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/last_viewed.dart';
@@ -38,7 +39,7 @@ void main() {
 
   group("RecommendationManagerTileCubit_setAppointmentState", () {
     final date = DateTime.now();
-    final recommendation = RecommendationItem(
+    final recommendation = PersonalizedRecommendationItem(
         id: "1",
         name: "Test",
         reason: "Test",
@@ -102,7 +103,7 @@ void main() {
 
   group("RecommendationManagerTileCubit_setFinished", () {
     final date = DateTime.now();
-    final recommendation = RecommendationItem(
+    final recommendation = PersonalizedRecommendationItem(
         id: "1",
         name: "Test",
         reason: "Test",
@@ -167,7 +168,7 @@ void main() {
 
   group("RecommendationManagerTileCubit_setFavorite", () {
     final date = DateTime.now();
-    final recommendation = RecommendationItem(
+    final recommendation = PersonalizedRecommendationItem(
         id: "1",
         name: "Test",
         reason: "Test",
@@ -229,7 +230,7 @@ void main() {
 
   group("RecommendationManagerTileCubit_setPriority", () {
     final date = DateTime.now();
-    final recommendation = RecommendationItem(
+    final recommendation = PersonalizedRecommendationItem(
         id: "1",
         name: "Test",
         reason: "Test",
@@ -289,7 +290,7 @@ void main() {
 
   group("RecommendationManagerTileCubit_setNotes", () {
     final date = DateTime.now();
-    final recommendation = RecommendationItem(
+    final recommendation = PersonalizedRecommendationItem(
         id: "1",
         name: "Test",
         reason: "Test",

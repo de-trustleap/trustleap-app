@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/features/recommendations/domain/archived_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/core/id.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -16,7 +17,11 @@ void main() {
           userID: "2",
           createdAt: date,
           finishedTimeStamp: date,
-          landingPageID: "test-landing-page");
+          landingPageID: "test-landing-page",
+          recommendationType: RecommendationType.personalized,
+          campaignName: null,
+          campaignDurationDays: null,
+          statusCounts: null);
       final expectedResult = ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("1"),
           reason: "Test new",
@@ -26,7 +31,11 @@ void main() {
           userID: "2",
           createdAt: date,
           finishedTimeStamp: date,
-          landingPageID: "test-landing-page");
+          landingPageID: "test-landing-page",
+          recommendationType: RecommendationType.personalized,
+          campaignName: null,
+          campaignDurationDays: null,
+          statusCounts: null);
       // When
       final result = model.copyWith(reason: "Test new");
       // Then
@@ -47,7 +56,11 @@ void main() {
           userID: "2",
           createdAt: date,
           finishedTimeStamp: date,
-          landingPageID: "test-landing-page");
+          landingPageID: "test-landing-page",
+          recommendationType: RecommendationType.personalized,
+          campaignName: null,
+          campaignDurationDays: null,
+          statusCounts: null);
       final model2 = ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("1"),
           reason: "Test",
@@ -57,7 +70,11 @@ void main() {
           userID: "2",
           createdAt: date,
           finishedTimeStamp: date,
-          landingPageID: "test-landing-page");
+          landingPageID: "test-landing-page",
+          recommendationType: RecommendationType.personalized,
+          campaignName: null,
+          campaignDurationDays: null,
+          statusCounts: null);
       // Then
       expect(model, model2);
     });

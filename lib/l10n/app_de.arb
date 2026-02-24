@@ -1442,6 +1442,10 @@
             }
         }
     },
+    "campaign_created_success": "Die Kampagne wurde erfolgreich erstellt!",
+    "@campaign_created_success": {
+        "description": "Erfolgsmeldung nach dem Erstellen einer Kampagne"
+    },
     "recommendations_limit_reached_tooltip": "Empfehlungslimit erreicht",
     "@recommendations_limit_reached_tooltip": {
         "description": "Tooltip wenn das Empfehlungslimit erreicht ist"
@@ -1453,6 +1457,133 @@
     "recommendations_no_active_landingpage_warning": "Keine Empfehlungen möglich - Ihnen ist keine aktive Landingpage zugewiesen",
     "@recommendations_no_active_landingpage_warning": {
         "description": "Warnung wenn keine aktive Landingpage zugewiesen ist"
+    },
+    "recommendation_section_type_title": "Art der Empfehlung",
+    "@recommendation_section_type_title": {
+        "description": "Titel für Sektion 1 - Art der Empfehlung"
+    },
+    "recommendation_type_personalized": "Personalisiert",
+    "@recommendation_type_personalized": {
+        "description": "Label für personalisierte Empfehlung"
+    },
+    "recommendation_type_personalized_desc": "Für spezifische Kunden mit individuellem Namen und Tracking.",
+    "@recommendation_type_personalized_desc": {
+        "description": "Beschreibung der personalisierten Empfehlung"
+    },
+    "recommendation_type_campaign": "Kampagne",
+    "@recommendation_type_campaign": {
+        "description": "Label für Kampagnen-Empfehlung"
+    },
+    "recommendation_type_campaign_desc": "Ein universeller Link für Newsletter oder Social Media.",
+    "@recommendation_type_campaign_desc": {
+        "description": "Beschreibung der Kampagnen-Empfehlung"
+    },
+    "recommendation_section_create_title": "Empfehlung erstellen",
+    "@recommendation_section_create_title": {
+        "description": "Titel für Sektion 2 - Empfehlung erstellen"
+    },
+    "recommendation_section_created_title": "Erstellte Empfehlungen",
+    "@recommendation_section_created_title": {
+        "description": "Titel für Sektion 3 - Erstellte Empfehlungen"
+    },
+    "recommendation_add_button": "Empfehlung hinzufügen",
+    "@recommendation_add_button": {
+        "description": "Button-Text zum Hinzufügen einer Empfehlung"
+    },
+    "recommendation_customer_name_placeholder": "Name des Kunden eingeben...",
+    "@recommendation_customer_name_placeholder": {
+        "description": "Placeholder für das Kunden-Name Feld"
+    },
+    "recommendation_promoter_name_placeholder": "Name des Promoters eingeben...",
+    "@recommendation_promoter_name_placeholder": {
+        "description": "Placeholder für das Promoter-Name Feld"
+    },
+    "recommendation_choose_reason_label": "Wähle einen Grund (Landingpage)",
+    "@recommendation_choose_reason_label": {
+        "description": "Label für den Grund-Dropdown"
+    },
+    "recommendation_message_template": "Nachrichtenvorlage für {name}",
+    "@recommendation_message_template": {
+        "description": "Placeholder für die Nachrichtenvorlage",
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "recommendation_customer_subtitle": "Kunde",
+    "@recommendation_customer_subtitle": {
+        "description": "Subtitle unter dem Kundennamen"
+    },
+    "recommendation_count": "({count} Empfehlungen)",
+    "@recommendation_count": {
+        "description": "Anzahl der erstellten Empfehlungen",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "description": "Anzahl der Empfehlungen"
+            }
+        }
+    },
+    "recommendation_promoter_label": "Promoter",
+    "@recommendation_promoter_label": {
+        "description": "Label für das Promoter-Info Feld"
+    },
+    "recommendation_landingpage_label": "Landingpage",
+    "@recommendation_landingpage_label": {
+        "description": "Label für das Landingpage-Info Feld"
+    },
+    "recommendation_generate_link_button": "Link generieren",
+    "@recommendation_generate_link_button": {
+        "description": "Button-Text für das Generieren eines allgemeinen Links"
+    },
+    "recommendation_campaign_link_title": "Generierter Link",
+    "@recommendation_campaign_link_title": {
+        "description": "Titel der Sektion für den generierten Kampagnen-Link"
+    },
+    "recommendation_copied_to_clipboard": "In Zwischenablage kopiert",
+    "@recommendation_copied_to_clipboard": {
+        "description": "Snackbar-Nachricht nach dem Kopieren in die Zwischenablage"
+    },
+    "recommendation_campaign_shared_alert_title": "Kampagne starten?",
+    "@recommendation_campaign_shared_alert_title": {
+        "description": "Titel des Alerts nach dem Kopieren des Kampagnenlinks"
+    },
+    "recommendation_campaign_shared_alert_description": "Hast du den Link bereits kopiert und geteilt? Dann wird das Tracking im Empfehlungsmanager eingerichtet.",
+    "@recommendation_campaign_shared_alert_description": {
+        "description": "Beschreibung des Alerts nach dem Kopieren des Kampagnenlinks"
+    },
+    "recommendation_campaign_shared_alert_yes_button": "Ja, bereits geteilt",
+    "@recommendation_campaign_shared_alert_yes_button": {
+        "description": "Bestätigungsbutton des Kampagnen-Shared-Alerts"
+    },
+    "recommendation_campaign_shared_alert_no_button": "Noch nicht",
+    "@recommendation_campaign_shared_alert_no_button": {
+        "description": "Abbrechen-Button des Kampagnen-Shared-Alerts"
+    },
+    "recommendation_copy_template_button": "Vorlage kopieren",
+    "@recommendation_copy_template_button": {
+        "description": "Button-Text zum Kopieren der Nachrichtenvorlage mit Link"
+    },
+    "campaign_start_button": "Kampagne starten",
+    "@campaign_start_button": {
+        "description": "Button-Text zum Starten einer Kampagne"
+    },
+    "recommendation_campaign_name_placeholder": "Kampagnenname",
+    "@recommendation_campaign_name_placeholder": {
+        "description": "Platzhalter für das Kampagnennamen-Feld"
+    },
+    "recommendation_campaign_duration_placeholder": "Dauer in Tagen",
+    "@recommendation_campaign_duration_placeholder": {
+        "description": "Platzhalter für das Kampagnendauer-Feld"
+    },
+    "recommendations_validation_missing_campaign_name": "Bitte gib einen Kampagnennamen ein",
+    "@recommendations_validation_missing_campaign_name": {
+        "description": "Validierungsmeldung wenn Kampagnenname fehlt"
+    },
+    "recommendations_validation_invalid_campaign_duration": "Bitte gib eine Dauer zwischen 1 und 30 Tagen ein",
+    "@recommendations_validation_invalid_campaign_duration": {
+        "description": "Validierungsmeldung wenn Kampagnendauer ungültig ist"
     },
     "landingpage_pagebuilder_container_request_error": "Beim Abruf der Daten ist ein Fehler aufgetreten",
     "@landingpage_pagebuilder_container_request_error": {
@@ -2296,6 +2427,14 @@
     "save_recommendation_loading_subtitle": "Die Empfehlung wird gespeichert",
     "@save_recommendation_loading_subtitle": {
         "description": "Untertitel des Loading-Dialogs beim Speichern einer Empfehlung"
+    },
+    "save_campaign_loading_title": "Kampagne wird erstellt",
+    "@save_campaign_loading_title": {
+        "description": "Titel des Loading-Dialogs beim Speichern einer Kampagne"
+    },
+    "save_campaign_loading_subtitle": "Die Kampagne wird gespeichert",
+    "@save_campaign_loading_subtitle": {
+        "description": "Untertitel des Loading-Dialogs beim Speichern einer Kampagne"
     },
     "send_recommendation_alert_description": "Hast du die Empfehlung erfolgreich an {receiver} verschickt? Der Link in der Empfehlung wird erst gültig wenn du hier bestätigst.",
     "@send_recommendation_alert_description": {
@@ -4289,5 +4428,57 @@
     "promoter_detail_not_found": "Promoter nicht gefunden",
     "@promoter_detail_not_found": {
         "description": "Fehlermeldung wenn Promoter nicht gefunden"
+    },
+    "campaign_manager_list_header_campaign_name": "Kampagnenname",
+    "@campaign_manager_list_header_campaign_name": {
+        "description": "Header für Kampagnenname-Spalte in der Kampagnenliste"
+    },
+    "campaign_manager_list_header_conversion_rate": "Conversionrate",
+    "@campaign_manager_list_header_conversion_rate": {
+        "description": "Header für Conversionrate-Spalte in der Kampagnenliste"
+    },
+    "campaign_manager_funnel_title": "Kampagnen-Performance",
+    "@campaign_manager_funnel_title": {
+        "description": "Titel des Kampagnen-Funnel-Bereichs"
+    },
+    "campaign_manager_funnel_link_clicked": "Link geklickt",
+    "@campaign_manager_funnel_link_clicked": {
+        "description": "Label für Link-Clicked-Stufe im Funnel"
+    },
+    "campaign_manager_funnel_contact_form": "Kontaktformular gesendet",
+    "@campaign_manager_funnel_contact_form": {
+        "description": "Label für Kontaktformular-Stufe im Funnel"
+    },
+    "campaign_manager_funnel_appointment": "Terminiert",
+    "@campaign_manager_funnel_appointment": {
+        "description": "Label für Termin-Stufe im Funnel"
+    },
+    "campaign_manager_funnel_successful": "Abgeschlossen",
+    "@campaign_manager_funnel_successful": {
+        "description": "Label für Erfolgreich-Stufe im Funnel"
+    },
+    "campaign_manager_funnel_failed": "Nicht abgeschlossen",
+    "@campaign_manager_funnel_failed": {
+        "description": "Label für Nicht-abgeschlossen-Stufe im Funnel"
+    },
+    "campaign_manager_copy_link_tooltip": "Link kopieren",
+    "@campaign_manager_copy_link_tooltip": {
+        "description": "Tooltip für den Link-Kopieren-Button in der Kampagnen-Tile"
+    },
+    "campaign_manager_delete_tooltip": "Kampagne löschen",
+    "@campaign_manager_delete_tooltip": {
+        "description": "Tooltip für den Kampagne-Löschen-Button"
+    },
+    "campaign_manager_delete_alert_title": "Kampagne löschen",
+    "@campaign_manager_delete_alert_title": {
+        "description": "Titel des Kampagne-Löschen-Alerts"
+    },
+    "campaign_manager_delete_alert_description": "Möchtest du die Kampagne wirklich löschen? Der Vorgang kann nicht rückgängig gemacht werden.",
+    "@campaign_manager_delete_alert_description": {
+        "description": "Beschreibung des Kampagne-Löschen-Alerts"
+    },
+    "campaign_manager_delete_alert_delete_button": "Kampagne löschen",
+    "@campaign_manager_delete_alert_delete_button": {
+        "description": "Löschen-Button im Kampagne-Löschen-Alert"
     }
 }

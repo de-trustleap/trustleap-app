@@ -27,14 +27,9 @@ class DashboardRecommendationsCubit
             ? emit(DashboardRecommendationsGetRecosNotFoundFailureState())
             : emit(
                 DashboardRecommendationsGetRecosFailureState(failure: failure)),
-        (promoterRecommendations) async {
-      final allRecommendations = <UserRecommendation>[];
-      for (final promoterRec in promoterRecommendations) {
-        allRecommendations.addAll(promoterRec.recommendations);
-      }
-
+        (result) async {
       final allLandingPageIds = <String>{};
-      for (final promoterRec in promoterRecommendations) {
+      for (final promoterRec in result.promoterRecommendations) {
         if (promoterRec.promoter.landingPageIDs != null) {
           allLandingPageIds.addAll(promoterRec.promoter.landingPageIDs!);
         }
@@ -44,8 +39,8 @@ class DashboardRecommendationsCubit
           await _loadLandingPages(allLandingPageIds.toList());
 
       emit(DashboardRecommendationsGetRecosSuccessState(
-        recommendation: allRecommendations,
-        promoterRecommendations: promoterRecommendations,
+        recommendation: result.allRecommendations,
+        promoterRecommendations: result.promoterRecommendations,
         allLandingPages: allLandingPages,
         filteredLandingPages: allLandingPages,
       ));

@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/archived_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/expanded_section.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_archive/recommendation_archive_filter.dart';
@@ -28,6 +29,7 @@ class _RecommendationManagerArchiveOverviewState
       RecommendationOverviewFilterStates(isArchive: true);
   bool _filterIsExpanded = false;
   RecommendationSearchOption _selectedSearchOption = RecommendationSearchOption.promoterName;
+  RecommendationType _selectedType = RecommendationType.personalized;
 
   @override
   void initState() {
@@ -39,10 +41,17 @@ class _RecommendationManagerArchiveOverviewState
     });
   }
 
+  List<ArchivedRecommendationItem> _getTypeFilteredRecommendations() {
+    return widget.recommendations
+        .where((r) => r.recommendationType == _selectedType)
+        .toList();
+  }
+
   void _performSearch() {
     final query = _searchController.text.toLowerCase();
+    final typeFiltered = _getTypeFilteredRecommendations();
     setState(() {
-      _searchFilteredRecommendations = widget.recommendations.where((item) {
+      _searchFilteredRecommendations = typeFiltered.where((item) {
         final promoter = item.promoterName?.toLowerCase() ?? "";
         final reason = item.reason?.toLowerCase() ?? "";
 
@@ -82,7 +91,7 @@ class _RecommendationManagerArchiveOverviewState
   }
 
   void _setInitialFilterData() {
-    _searchFilteredRecommendations = widget.recommendations;
+    _searchFilteredRecommendations = _getTypeFilteredRecommendations();
     _filteredRecommendations = RecommendationArchiveFilter.applyFilters(
       items: _searchFilteredRecommendations,
       filterStates: _currentFilterStates,
@@ -120,7 +129,15 @@ class _RecommendationManagerArchiveOverviewState
           RecommendationManagerListHeader(
               searchController: _searchController,
               onFilterPressed: onFilterPressed,
-              onSearchOptionChanged: onSearchOptionChanged),
+              onSearchOptionChanged: onSearchOptionChanged,
+              selectedType: _selectedType,
+              onTypeChanged: (type) {
+                setState(() {
+                  _selectedType = type;
+                  _setInitialFilterData();
+                  _performSearch();
+                });
+              }),
           ExpandedSection(
               expand: _filterIsExpanded,
               child: Column(
@@ -134,7 +151,8 @@ class _RecommendationManagerArchiveOverviewState
           RecommendationManagerArchiveList(
               key: ValueKey(_filteredRecommendations),
               recommendations: _filteredRecommendations,
-              isPromoter: widget.isPromoter)
+              isPromoter: widget.isPromoter,
+              selectedType: _selectedType)
         ],
       ),
     );

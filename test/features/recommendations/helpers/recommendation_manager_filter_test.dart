@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:finanzbegleiter/core/id.dart';
@@ -14,7 +15,7 @@ void main() {
         priority: RecommendationPriority.medium,
 
         notes: "Test",
-        recommendation: RecommendationItem(
+        recommendation: PersonalizedRecommendationItem(
           id: '1',
           name: 'Anna',
           reason: 'Finanzen',
@@ -38,7 +39,7 @@ void main() {
         priority: RecommendationPriority.medium,
 
         notes: "Test",
-        recommendation: RecommendationItem(
+        recommendation: PersonalizedRecommendationItem(
           id: '2',
           name: 'Ben',
           reason: 'Versicherung',
@@ -62,7 +63,7 @@ void main() {
         priority: RecommendationPriority.medium,
 
         notes: "Test",
-        recommendation: RecommendationItem(
+        recommendation: PersonalizedRecommendationItem(
           id: '3',
           name: 'Clara',
           reason: 'Altersvorsorge',
@@ -101,7 +102,7 @@ void main() {
     );
 
     expect(result.length, 1);
-    expect(result.first.recommendation?.name, 'Ben');
+    expect(result.first.recommendation?.displayName, 'Ben');
   });
 
   test('filters by statusLevel == successful (4)', () {
@@ -114,7 +115,7 @@ void main() {
     );
 
     expect(result.length, 1);
-    expect(result.first.recommendation?.name, 'Clara');
+    expect(result.first.recommendation?.displayName, 'Clara');
   });
 
   test('sorts by promoter ASC', () {
@@ -143,7 +144,7 @@ void main() {
       filterStates: filterStates,
     );
 
-    final receiverNames = result.map((e) => e.recommendation?.name).toList();
+    final receiverNames = result.map((e) => e.recommendation?.displayName).toList();
     expect(receiverNames, ['Clara', 'Ben', 'Anna']);
   });
 
@@ -177,7 +178,7 @@ void main() {
     );
 
     expect(result.length, 2);
-    expect(result.map((e) => e.recommendation?.name),
+    expect(result.map((e) => e.recommendation?.displayName),
         containsAll(['Anna', 'Clara']));
   });
 
@@ -192,7 +193,7 @@ void main() {
     );
 
     expect(result.length, 1);
-    expect(result.first.recommendation?.name, 'Ben');
+    expect(result.first.recommendation?.displayName, 'Ben');
   });
 
   test('filters only high priority items', () {

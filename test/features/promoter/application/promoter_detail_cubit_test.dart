@@ -6,6 +6,7 @@ import "package:finanzbegleiter/core/id.dart";
 import "package:finanzbegleiter/features/landing_pages/domain/landing_page.dart";
 import "package:finanzbegleiter/features/promoter/domain/promoter.dart";
 import "package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart";
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import "package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart";
 import "package:finanzbegleiter/features/auth/domain/user.dart";
 import "package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart";
@@ -82,7 +83,7 @@ void main() {
       userID: "user-1",
       priority: RecommendationPriority.medium,
       notes: null,
-      recommendation: RecommendationItem(
+      recommendation: PersonalizedRecommendationItem(
         id: id,
         name: "Rec $id",
         reason: "Test",
@@ -376,7 +377,10 @@ void main() {
         await loadPromoterIntoState();
         when(mockRecommendationRepo
                 .getRecommendationsCompanyWithArchived("user-1"))
-            .thenAnswer((_) async => right(testPromoterRecommendations));
+            .thenAnswer((_) async => right((
+                  promoterRecommendations: testPromoterRecommendations,
+                  allRecommendations: testRecommendations,
+                )));
 
         // When
         cubit.loadRecommendations(userId: "user-1", role: Role.company);
@@ -396,7 +400,10 @@ void main() {
         await loadPromoterIntoState();
         when(mockRecommendationRepo
                 .getRecommendationsCompanyWithArchived("user-1"))
-            .thenAnswer((_) async => right(testPromoterRecommendations));
+            .thenAnswer((_) async => right((
+                  promoterRecommendations: testPromoterRecommendations,
+                  allRecommendations: testRecommendations,
+                )));
 
         // Then
         expectLater(
@@ -443,7 +450,10 @@ void main() {
         ];
         when(mockRecommendationRepo
                 .getRecommendationsCompanyWithArchived("user-1"))
-            .thenAnswer((_) async => right(multiPromoterRecs));
+            .thenAnswer((_) async => right((
+                  promoterRecommendations: multiPromoterRecs,
+                  allRecommendations: [...testRecommendations, otherRec],
+                )));
 
         // Then — recommendations should only contain testPromoter's recs
         expectLater(
@@ -484,7 +494,10 @@ void main() {
         ];
         when(mockRecommendationRepo
                 .getRecommendationsCompanyWithArchived("user-1"))
-            .thenAnswer((_) async => right(nonMatchingRecs));
+            .thenAnswer((_) async => right((
+                  promoterRecommendations: nonMatchingRecs,
+                  allRecommendations: testRecommendations,
+                )));
 
         // Then
         expectLater(

@@ -1,51 +1,36 @@
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/archived_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/no_search_results_view.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_archive/campaign_archive_list_tile.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_archive/recommendation_manager_archive_list_tile.dart';
 import 'package:flutter/material.dart';
 
 class RecommendationManagerArchiveList extends StatelessWidget {
   final List<ArchivedRecommendationItem> recommendations;
   final bool isPromoter;
+  final RecommendationType selectedType;
   const RecommendationManagerArchiveList(
-      {super.key, required this.recommendations, required this.isPromoter});
+      {super.key,
+      required this.recommendations,
+      required this.isPromoter,
+      required this.selectedType});
 
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveHelper.of(context);
+    final isCampaign = selectedType == RecommendationType.campaign;
 
     return Column(children: [
       if (!responsiveValue.isMobile) ...[
         SizedBox(
             width: double.infinity,
-            child: Row(children: [
-              Flexible(
-                  flex: 3,
-                  child: _buildHeaderCell(
-                      isPromoter
-                          ? localization
-                              .recommendation_manager_list_header_receiver
-                          : localization
-                              .recommendation_manager_list_header_promoter,
-                      themeData)),
-              Flexible(
-                  flex: 3,
-                  child: _buildHeaderCell(
-                      localization.recommendation_manager_list_header_status,
-                      themeData)),
-              Flexible(
-                  flex: 2,
-                  child: _buildHeaderCell(
-                      localization.recommendation_manager_finished_at_list_header,
-                      themeData)),
-              const SizedBox(
-                width: 70,
-                child: Icon(Icons.expand_more, color: Colors.transparent),
-              ),
-            ])),
+            child: isCampaign
+                ? _buildCampaignHeader(themeData, localization)
+                : _buildPersonalizedHeader(themeData, localization)),
         const Divider(height: 1),
       ],
       if (recommendations.isEmpty) ...[
@@ -61,11 +46,66 @@ class RecommendationManagerArchiveList extends StatelessWidget {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              return RecommendationManagerArchiveListTile(
-                  recommendation: recommendations[index],
-                  isPromoter: isPromoter);
+              return isCampaign
+                  ? CampaignArchiveListTile(
+                      recommendation: recommendations[index])
+                  : RecommendationManagerArchiveListTile(
+                      recommendation: recommendations[index],
+                      isPromoter: isPromoter);
             })
       ]
+    ]);
+  }
+
+  Widget _buildPersonalizedHeader(
+      ThemeData themeData, AppLocalizations localization) {
+    return Row(children: [
+      Flexible(
+          flex: 3,
+          child: _buildHeaderCell(
+              isPromoter
+                  ? localization.recommendation_manager_list_header_receiver
+                  : localization.recommendation_manager_list_header_promoter,
+              themeData)),
+      Flexible(
+          flex: 3,
+          child: _buildHeaderCell(
+              localization.recommendation_manager_list_header_status,
+              themeData)),
+      Flexible(
+          flex: 2,
+          child: _buildHeaderCell(
+              localization.recommendation_manager_finished_at_list_header,
+              themeData)),
+      const SizedBox(
+        width: 70,
+        child: Icon(Icons.expand_more, color: Colors.transparent),
+      ),
+    ]);
+  }
+
+  Widget _buildCampaignHeader(
+      ThemeData themeData, AppLocalizations localization) {
+    return Row(children: [
+      Flexible(
+          flex: 3,
+          child: _buildHeaderCell(
+              localization.campaign_manager_list_header_campaign_name,
+              themeData)),
+      Flexible(
+          flex: 2,
+          child: _buildHeaderCell(
+              localization.campaign_manager_list_header_conversion_rate,
+              themeData)),
+      Flexible(
+          flex: 2,
+          child: _buildHeaderCell(
+              localization.recommendation_manager_finished_at_list_header,
+              themeData)),
+      const SizedBox(
+        width: 70,
+        child: Icon(Icons.expand_more, color: Colors.transparent),
+      ),
     ]);
   }
 
