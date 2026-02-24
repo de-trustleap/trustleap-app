@@ -11,11 +11,12 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class RecommendationFormHelper {
+  static const int maxRecommendationsPerMonth = 6;
+
   bool isRecommendationLimitReached(CustomUser? currentUser) {
     if (currentUser?.role != Role.promoter) {
       return false;
     }
-    const int maxRecommendationsPerMonth = 6;
     final int currentCount = currentUser?.recommendationCountLast30Days ?? 0;
     return currentCount >= maxRecommendationsPerMonth;
   }

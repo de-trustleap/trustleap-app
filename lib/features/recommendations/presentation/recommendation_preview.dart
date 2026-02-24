@@ -67,14 +67,18 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
         length: widget.leads.length,
         vsync: this,
       );
-      tabController!.addListener(() {
-        if (!tabController!.indexIsChanging) {
-          setState(() {
-            _selectedIndex = tabController!.index;
-          });
-        }
-      });
+      _addTabListener();
     }
+  }
+
+  void _addTabListener() {
+    tabController!.addListener(() {
+      if (!tabController!.indexIsChanging) {
+        setState(() {
+          _selectedIndex = tabController!.index;
+        });
+      }
+    });
   }
 
   @override
@@ -105,13 +109,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
           length: widget.leads.length,
           vsync: this,
         );
-        tabController!.addListener(() {
-          if (!tabController!.indexIsChanging) {
-            setState(() {
-              _selectedIndex = tabController!.index;
-            });
-          }
-        });
+        _addTabListener();
       }
     } else {
       tabController?.dispose();

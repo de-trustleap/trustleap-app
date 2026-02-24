@@ -8,6 +8,7 @@ import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/primary_but
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_preview.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_reason_picker.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_form_helper.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_validator.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendations_form_scope.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -40,7 +41,7 @@ class _PersonalizedRecommendationSectionState
     final scope = RecommendationsFormScope.of(context);
     final localization = AppLocalizations.of(context);
 
-    if (_leads.length < 6) {
+    if (_leads.length < RecommendationFormHelper.maxRecommendationsPerMonth) {
       if (scope.formKey.currentState!.validate() &&
           validator.validateReason(scope.selectedReason?.reason) == null &&
           scope.selectedReason?.id != null) {
@@ -121,13 +122,13 @@ class _PersonalizedRecommendationSectionState
               (scope.currentUser ?? scope.parentUser)
                       ?.recommendationCountLast30Days ??
                   0,
-              6,
+              RecommendationFormHelper.maxRecommendationsPerMonth,
             ),
             style: themeData.textTheme.bodySmall?.copyWith(
               color: ((scope.currentUser ?? scope.parentUser)
                               ?.recommendationCountLast30Days ??
                           0) >=
-                      6
+                      RecommendationFormHelper.maxRecommendationsPerMonth
                   ? themeData.colorScheme.error
                   : themeData.colorScheme.primary,
               fontWeight: FontWeight.w500,

@@ -74,13 +74,11 @@ class CampaignRecommendationFunnelIndicator extends StatelessWidget {
         ...List.generate(steps.length, (index) {
           final step = steps[index];
           final isLast = index == steps.length - 1;
-          final isFailed = index == steps.length - 1;
 
           return _buildFunnelStep(
             themeData: themeData,
             step: step,
             isLast: isLast,
-            isFailed: isFailed,
           );
         }),
       ],
@@ -91,12 +89,9 @@ class CampaignRecommendationFunnelIndicator extends StatelessWidget {
     required ThemeData themeData,
     required RecommendationCampaignFunnelStep step,
     required bool isLast,
-    required bool isFailed,
   }) {
-    final circleColor =
-        isFailed ? themeData.colorScheme.error : themeData.colorScheme.primary;
-    final barColor =
-        isFailed ? themeData.colorScheme.error : themeData.colorScheme.primary;
+    final stepColor =
+        isLast ? themeData.colorScheme.error : themeData.colorScheme.primary;
 
     return Padding(
       padding: EdgeInsets.only(bottom: isLast ? 0 : 16),
@@ -109,7 +104,7 @@ class CampaignRecommendationFunnelIndicator extends StatelessWidget {
                 width: _circleSize,
                 height: _circleSize,
                 decoration: BoxDecoration(
-                  color: circleColor,
+                  color: stepColor,
                   shape: BoxShape.circle,
                 ),
                 child: Icon(step.icon, color: Colors.white, size: 20),
@@ -133,7 +128,7 @@ class CampaignRecommendationFunnelIndicator extends StatelessWidget {
                       "${step.count}",
                       style: themeData.textTheme.bodyLarge?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: isFailed ? themeData.colorScheme.error : null,
+                        color: isLast ? themeData.colorScheme.error : null,
                       ),
                     ),
                   ],
@@ -150,7 +145,7 @@ class CampaignRecommendationFunnelIndicator extends StatelessWidget {
                             minHeight: 8,
                             backgroundColor: Colors.grey[200],
                             valueColor:
-                                AlwaysStoppedAnimation<Color>(barColor),
+                                AlwaysStoppedAnimation<Color>(stepColor),
                           ),
                         ),
                       ),

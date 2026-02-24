@@ -116,7 +116,7 @@ class _RecommendationManagerBaseTileState
           widget.onUpdate(state.recommendation, true, false, false, false);
         } else if (state is RecommendationManagerTileFavoriteUpdatedState) {
           setState(() {
-            context.mounted;
+            _recommendation = state.recommendation;
           });
         } else if (state is RecommendationManagerTileViewedState) {
           final hadUnseenChanges = _recommendation
