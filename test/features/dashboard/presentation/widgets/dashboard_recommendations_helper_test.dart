@@ -3,6 +3,7 @@ import "package:finanzbegleiter/constants.dart";
 import "package:finanzbegleiter/core/id.dart";
 import "package:finanzbegleiter/features/landing_pages/domain/landing_page.dart";
 import "package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart";
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import "package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart";
 import "package:finanzbegleiter/features/auth/domain/user.dart";
 import "package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart";
@@ -308,7 +309,7 @@ void main() {
           userID: "user1",
           priority: RecommendationPriority.medium,
           notes: "Test",
-          recommendation: RecommendationItem(
+          recommendation: PersonalizedRecommendationItem(
             id: "item1",
             name: "Test",
             reason: "Investment Page", // matches landingPage1.name
@@ -330,7 +331,7 @@ void main() {
           userID: "user1",
           priority: RecommendationPriority.medium,
           notes: "Test",
-          recommendation: RecommendationItem(
+          recommendation: PersonalizedRecommendationItem(
             id: "item2",
             name: "Test",
             reason: "Savings Page", // matches landingPage2.name
@@ -376,7 +377,7 @@ void main() {
           userID: "user1",
           priority: RecommendationPriority.medium,
           notes: "Test",
-          recommendation: RecommendationItem(
+          recommendation: PersonalizedRecommendationItem(
             id: "item1",
             name: "Test",
             reason: "Investment Page",
@@ -422,7 +423,7 @@ void main() {
           userID: "user1",
           priority: RecommendationPriority.medium,
           notes: "Test",
-          recommendation: RecommendationItem(
+          recommendation: PersonalizedRecommendationItem(
             id: "item1",
             name: "Test",
             reason: "Different Reason", // doesn't match landingPage1.name
@@ -479,7 +480,7 @@ void main() {
           userID: "user1",
           priority: RecommendationPriority.medium,
           notes: "Test",
-          recommendation: RecommendationItem(
+          recommendation: PersonalizedRecommendationItem(
             id: "item1",
             name: "Test",
             reason: "Investment Page",
@@ -501,7 +502,7 @@ void main() {
           userID: "user1",
           priority: RecommendationPriority.medium,
           notes: "Test",
-          recommendation: RecommendationItem(
+          recommendation: PersonalizedRecommendationItem(
             id: "item2",
             name: "Test",
             reason: "Different Reason",
@@ -523,7 +524,7 @@ void main() {
           userID: "user1",
           priority: RecommendationPriority.medium,
           notes: "Test",
-          recommendation: RecommendationItem(
+          recommendation: PersonalizedRecommendationItem(
             id: "item3",
             name: "Test",
             reason: "Investment Page",
@@ -579,7 +580,7 @@ void main() {
             priority: RecommendationPriority.medium,
     
             notes: "Test",
-            recommendation: RecommendationItem(
+            recommendation: PersonalizedRecommendationItem(
               id: "item1",
               name: "Test",
               reason: "Test",
@@ -602,7 +603,7 @@ void main() {
             priority: RecommendationPriority.medium,
     
             notes: "Test",
-            recommendation: RecommendationItem(
+            recommendation: PersonalizedRecommendationItem(
               id: "item2",
               name: "Test",
               reason: "Test",
@@ -676,7 +677,7 @@ void main() {
           priority: RecommendationPriority.medium,
   
           notes: "Test",
-          recommendation: RecommendationItem(
+          recommendation: PersonalizedRecommendationItem(
             id: "item1",
             name: "Test",
             reason: "Test",
@@ -749,7 +750,7 @@ void main() {
           priority: RecommendationPriority.medium,
   
           notes: "Test",
-          recommendation: RecommendationItem(
+          recommendation: PersonalizedRecommendationItem(
             id: "item1",
             name: "Test",
             reason: "Test",
@@ -772,7 +773,7 @@ void main() {
           priority: RecommendationPriority.medium,
   
           notes: "Test",
-          recommendation: RecommendationItem(
+          recommendation: PersonalizedRecommendationItem(
             id: "item2",
             name: "Test",
             reason: "Test",
@@ -826,7 +827,7 @@ void main() {
             priority: RecommendationPriority.medium,
     
             notes: "Test",
-            recommendation: RecommendationItem(
+            recommendation: PersonalizedRecommendationItem(
               id: "item1",
               name: "Test",
               reason: "Test",
@@ -849,7 +850,7 @@ void main() {
             priority: RecommendationPriority.medium,
     
             notes: "Test",
-            recommendation: RecommendationItem(
+            recommendation: PersonalizedRecommendationItem(
               id: "item2",
               name: "Test",
               reason: "Test",
@@ -872,7 +873,7 @@ void main() {
             priority: RecommendationPriority.medium,
     
             notes: "Test",
-            recommendation: RecommendationItem(
+            recommendation: PersonalizedRecommendationItem(
               id: "item3",
               name: "Test",
               reason: "Test",
@@ -895,7 +896,7 @@ void main() {
             priority: RecommendationPriority.medium,
     
             notes: "Test",
-            recommendation: RecommendationItem(
+            recommendation: PersonalizedRecommendationItem(
               id: "item4",
               name: "Test",
               reason: "Test",
@@ -967,7 +968,7 @@ void main() {
           userID: "user1",
           priority: RecommendationPriority.medium,
           notes: "Test",
-          recommendation: RecommendationItem(
+          recommendation: PersonalizedRecommendationItem(
             id: "item1",
             name: "Test",
             reason: "Investment Page", // matches landingPage1.name
@@ -990,7 +991,7 @@ void main() {
           userID: "user1",
           priority: RecommendationPriority.medium,
           notes: "Test",
-          recommendation: RecommendationItem(
+          recommendation: PersonalizedRecommendationItem(
             id: "item2",
             name: "Test",
             reason: "Different Reason", // doesn't match landingPage1.name
@@ -1047,7 +1048,7 @@ void main() {
           userID: "user1",
           priority: RecommendationPriority.medium,
           notes: "Test",
-          recommendation: RecommendationItem(
+          recommendation: PersonalizedRecommendationItem(
             id: id,
             name: "Test",
             reason: "Test",
@@ -1454,7 +1455,7 @@ void main() {
               userID: "user1",
               priority: RecommendationPriority.medium,
               notes: "Test",
-              recommendation: RecommendationItem(
+              recommendation: PersonalizedRecommendationItem(
                 id: "rec1",
                 name: "Test",
                 reason: "Investment Page", // matches landingPage1.name
@@ -1476,7 +1477,7 @@ void main() {
               userID: "user1",
               priority: RecommendationPriority.medium,
               notes: "Test",
-              recommendation: RecommendationItem(
+              recommendation: PersonalizedRecommendationItem(
                 id: "rec2",
                 name: "Test",
                 reason: "Different Page", // doesn't match

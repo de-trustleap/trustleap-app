@@ -1,14 +1,17 @@
+import 'package:finanzbegleiter/core/custom_navigator.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/empty_page.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/no_search_results_view.dart';
-import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_manager_list_tile.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/personalized_recommendation_list_tile.dart';
 import 'package:flutter/material.dart';
 
-class RecommendationManagerList extends StatelessWidget {
+class PersonalizedRecommendationList extends StatelessWidget {
   final List<UserRecommendation> recommendations;
+  final String searchQuery;
   final bool isPromoter;
-  final List<String>? favoriteRecommendationIDs;
   final Function(UserRecommendation) onAppointmentPressed;
   final Function(UserRecommendation) onFinishedPressed;
   final Function(UserRecommendation) onFailedPressed;
@@ -16,11 +19,11 @@ class RecommendationManagerList extends StatelessWidget {
   final Function(UserRecommendation) onFavoritePressed;
   final Function(UserRecommendation) onPriorityChanged;
   final Function(UserRecommendation, bool, bool, bool, bool) onUpdate;
-  const RecommendationManagerList(
+  const PersonalizedRecommendationList(
       {super.key,
       required this.recommendations,
+      required this.searchQuery,
       required this.isPromoter,
-      required this.favoriteRecommendationIDs,
       required this.onAppointmentPressed,
       required this.onFinishedPressed,
       required this.onFailedPressed,
@@ -73,12 +76,25 @@ class RecommendationManagerList extends StatelessWidget {
         ),
         const Divider(height: 1),
       ],
-      if (recommendations.isEmpty) ...[
+      if (recommendations.isEmpty && searchQuery.isNotEmpty) ...[
         const SizedBox(height: 40),
         NoSearchResultsView(
             title: localization.recommendation_manager_no_search_result_title,
             description: localization
                 .recommendation_manager_no_search_result_description),
+        const SizedBox(height: 40)
+      ] else if (recommendations.isEmpty) ...[
+        const SizedBox(height: 40),
+        EmptyPage(
+            icon: Icons.person_add,
+            title: localization.recommendation_manager_no_data_title,
+            subTitle: localization.recommendation_manager_no_data_description,
+            buttonTitle:
+                localization.recommendation_manager_no_data_button_title,
+            onTap: () {
+              CustomNavigator.of(context).navigate(
+                  RoutePaths.homePath + RoutePaths.recommendationsPath);
+            }),
         const SizedBox(height: 40)
       ] else ...[
         ListView.builder(
@@ -86,11 +102,10 @@ class RecommendationManagerList extends StatelessWidget {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              return RecommendationManagerListTile(
+              return PersonalizedRecommendationListTile(
                 key: ValueKey(recommendations[index].id.value),
                 recommendation: recommendations[index],
                 isPromoter: isPromoter,
-                favoriteRecommendationIDs: favoriteRecommendationIDs,
                 onAppointmentPressed: onAppointmentPressed,
                 onFinishedPressed: onFinishedPressed,
                 onFailedPressed: onFailedPressed,

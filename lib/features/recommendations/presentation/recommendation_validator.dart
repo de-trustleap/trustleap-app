@@ -28,4 +28,23 @@ class RecommendationValidator {
       return null;
     }
   }
+
+  String? validateCampaignName(String? input) {
+    if (input == null || input.isEmpty) {
+      return localization.recommendations_validation_missing_campaign_name;
+    } else {
+      return null;
+    }
+  }
+
+  String? validateCampaignDuration(String? input) {
+    if (input == null || input.isEmpty) {
+      return localization.recommendations_validation_invalid_campaign_duration;
+    }
+    final value = int.tryParse(input);
+    if (value == null || value < 1 || value > 30) {
+      return localization.recommendations_validation_invalid_campaign_duration;
+    }
+    return null;
+  }
 }

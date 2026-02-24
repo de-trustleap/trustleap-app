@@ -8,7 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:web/web.dart' as web;
 
 class RecommendationSender {
-  String _createRecommendationLink(RecommendationItem recommendation) {
+  String createRecommendationLink(RecommendationItem recommendation) {
     final baseURL = Environment().getLandingpageBaseURL();
     return "$baseURL?p=${recommendation.promoterName}&id=${recommendation.id}";
   }
@@ -23,7 +23,7 @@ class RecommendationSender {
     required String message,
     Function()? onWebOpen,
   }) async {
-    final link = _createRecommendationLink(recommendation);
+    final link = createRecommendationLink(recommendation);
     final adaptedMessage = _prepareMessage(message, link);
     final localization = AppLocalizations.of(context);
 
@@ -55,7 +55,7 @@ class RecommendationSender {
     required String message,
     Function()? onWebOpen,
   }) async {
-    final link = _createRecommendationLink(recommendation);
+    final link = createRecommendationLink(recommendation);
     final adaptedMessage = _prepareMessage(message, link);
     final localization = AppLocalizations.of(context);
 

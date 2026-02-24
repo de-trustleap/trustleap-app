@@ -76,8 +76,8 @@ class PromoterDetailCubit extends Cubit<PromoterDetailState> {
         landingPages: loadedState.landingPages,
         recommendationsFailure: failure,
       )),
-      (promoterRecommendations) {
-        final promoterRec = promoterRecommendations
+      (result) {
+        final promoterRec = result.promoterRecommendations
             .where(
                 (pr) => pr.promoter.id.value == loadedState.promoter.id.value)
             .firstOrNull;
@@ -87,7 +87,7 @@ class PromoterDetailCubit extends Cubit<PromoterDetailState> {
           promoter: loadedState.promoter,
           landingPages: loadedState.landingPages,
           recommendations: filteredRecommendations,
-          promoterRecommendations: promoterRecommendations,
+          promoterRecommendations: result.promoterRecommendations,
         ));
       },
     );

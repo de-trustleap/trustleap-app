@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/features/recommendations/application/recommendations_alert/recommendations_alert_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -16,7 +17,7 @@ void main() {
   });
   group("RecommendationCubit_SaveRecommendation", () {
     final userID = "1";
-    final recommendation = RecommendationItem(
+    final recommendation = PersonalizedRecommendationItem(
         id: "1",
         name: "Test",
         reason: "Page1",

@@ -1,6 +1,9 @@
 import "package:fl_chart/fl_chart.dart";
 import "package:finanzbegleiter/core/id.dart";
+import 'package:finanzbegleiter/features/recommendations/domain/campaign_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import "package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart";
+import "package:finanzbegleiter/features/recommendations/domain/recommendation_status_counts.dart";
 import "package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart";
 import "package:finanzbegleiter/features/promoter/presentation/widgets/promoter_detail/promoter_detail_chart_helper.dart";
 import "package:flutter_test/flutter_test.dart";
@@ -22,7 +25,7 @@ void main() {
         userID: "user-1",
         priority: RecommendationPriority.medium,
         notes: null,
-        recommendation: RecommendationItem(
+        recommendation: PersonalizedRecommendationItem(
           id: id,
           name: "Rec $id",
           reason: "Test",
@@ -64,8 +67,11 @@ void main() {
 
         expect(helper.nonSuccessful.length, equals(2));
         expect(
-            helper.nonSuccessful.every((r) =>
-                r.recommendation?.statusLevel != StatusLevel.successful),
+            helper.nonSuccessful.every((r) {
+              final reco = r.recommendation;
+              return reco is PersonalizedRecommendationItem &&
+                  reco.statusLevel != StatusLevel.successful;
+            }),
             isTrue);
       });
 
@@ -134,8 +140,11 @@ void main() {
 
         expect(helper.conversions.length, equals(2));
         expect(
-            helper.conversions.every((r) =>
-                r.recommendation?.statusLevel == StatusLevel.successful),
+            helper.conversions.every((r) {
+              final reco = r.recommendation;
+              return reco is PersonalizedRecommendationItem &&
+                  reco.statusLevel == StatusLevel.successful;
+            }),
             isTrue);
       });
 
@@ -274,7 +283,7 @@ void main() {
           userID: "user-1",
           priority: RecommendationPriority.medium,
           notes: null,
-          recommendation: RecommendationItem(
+          recommendation: PersonalizedRecommendationItem(
             id: "null-ts",
             name: "Rec",
             reason: "Test",
@@ -544,6 +553,120 @@ void main() {
         final label = helper.getXAxisLabel(89); // today
         expect(label, contains("."));
         expect(label.length, equals(5));
+      });
+    });
+
+    group("campaign recommendations", () {
+      UserRecommendation createCampaignRecommendation({
+        required String id,
+        required DateTime createdAt,
+        int successful = 0,
+        int linkClicked = 0,
+      }) {
+        return UserRecommendation(
+          id: UniqueID.fromUniqueString(id),
+          recoID: id,
+          userID: "user-1",
+          priority: RecommendationPriority.medium,
+          notes: null,
+          recommendation: CampaignRecommendationItem(
+            id: id,
+            campaignName: "Campaign $id",
+            campaignDurationDays: 30,
+            reason: "Test",
+            landingPageID: "lp-1",
+            promotionTemplate: null,
+            promoterName: "Test User",
+            serviceProviderName: null,
+            defaultLandingPageID: null,
+            userID: "user-1",
+            promoterImageDownloadURL: null,
+            statusCounts: RecommendationStatusCounts(
+              linkClicked: linkClicked,
+              successful: successful,
+            ),
+            createdAt: createdAt,
+          ),
+        );
+      }
+
+      test("should count campaign with successful > 0 as conversion", () {
+        final recommendations = [
+          createCampaignRecommendation(
+              id: "c1", createdAt: DateTime.now(), successful: 3),
+          createCampaignRecommendation(
+              id: "c2", createdAt: DateTime.now(), successful: 0),
+          createRecommendation(
+              id: "p1",
+              statusLevel: StatusLevel.successful,
+              createdAt: DateTime.now()),
+        ];
+
+        final helper = PromoterDetailChartHelper(
+          recommendations: recommendations,
+          selectedDays: 7,
+        );
+
+        expect(helper.conversions.length, equals(2));
+      });
+
+      test("should count campaign with successful == 0 as nonSuccessful", () {
+        final recommendations = [
+          createCampaignRecommendation(
+              id: "c1", createdAt: DateTime.now(), successful: 0),
+          createCampaignRecommendation(
+              id: "c2", createdAt: DateTime.now(), successful: 2),
+        ];
+
+        final helper = PromoterDetailChartHelper(
+          recommendations: recommendations,
+          selectedDays: 7,
+        );
+
+        expect(helper.nonSuccessful.length, equals(1));
+      });
+
+      test("should use createdAt for campaign spots", () {
+        final now = DateTime.now();
+        final today = DateTime(now.year, now.month, now.day);
+
+        final recommendations = [
+          createCampaignRecommendation(
+              id: "c1", createdAt: today, successful: 1),
+        ];
+
+        final helper = PromoterDetailChartHelper(
+          recommendations: recommendations,
+          selectedDays: 7,
+        );
+
+        final spots = helper.generateSpots(recommendations);
+
+        // Last spot (index 6) = today
+        expect(spots.last.y, equals(1.0));
+      });
+
+      test("should count mixed personalized and campaign recommendations on correct days", () {
+        final now = DateTime.now();
+        final today = DateTime(now.year, now.month, now.day);
+
+        final recommendations = [
+          createRecommendation(
+              id: "p1",
+              statusLevel: StatusLevel.recommendationSend,
+              createdAt: today),
+          createCampaignRecommendation(
+              id: "c1", createdAt: today, successful: 1),
+        ];
+
+        final helper = PromoterDetailChartHelper(
+          recommendations: recommendations,
+          selectedDays: 7,
+        );
+
+        final spots = helper.generateSpots(recommendations);
+
+        expect(spots.last.y, equals(2.0));
       });
     });
   });

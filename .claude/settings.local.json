@@ -15,7 +15,8 @@
       "Read(//Users/marcelspindler/Documents/Dev/Finanzbegleiter/**)",
       "Bash(sed:*)",
       "WebSearch",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(wc:*)"
     ],
     "deny": []
   }

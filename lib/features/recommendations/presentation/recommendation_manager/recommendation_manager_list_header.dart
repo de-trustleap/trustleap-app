@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/underlined_dropdown.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +9,15 @@ class RecommendationManagerListHeader extends StatefulWidget {
   final TextEditingController searchController;
   final Function onFilterPressed;
   final Function(RecommendationSearchOption) onSearchOptionChanged;
+  final RecommendationType selectedType;
+  final ValueChanged<RecommendationType> onTypeChanged;
   const RecommendationManagerListHeader(
       {super.key,
       required this.searchController,
       required this.onFilterPressed,
-      required this.onSearchOptionChanged});
+      required this.onSearchOptionChanged,
+      required this.selectedType,
+      required this.onTypeChanged});
 
   @override
   State<RecommendationManagerListHeader> createState() => _RecommendationManagerListHeaderState();
@@ -35,6 +40,26 @@ class _RecommendationManagerListHeaderState extends State<RecommendationManagerL
               .copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16),
+        SegmentedButton<RecommendationType>(
+          segments: [
+            ButtonSegment<RecommendationType>(
+              value: RecommendationType.personalized,
+              label: Text(localization.recommendation_type_personalized),
+              icon: const Icon(Icons.people),
+            ),
+            ButtonSegment<RecommendationType>(
+              value: RecommendationType.campaign,
+              label: Text(localization.recommendation_type_campaign),
+              icon: const Icon(Icons.campaign),
+            ),
+          ],
+          selected: {widget.selectedType},
+          showSelectedIcon: false,
+          onSelectionChanged: (Set<RecommendationType> newSelection) {
+            widget.onTypeChanged(newSelection.first);
+          },
+        ),
+        const SizedBox(height: 16),
         ResponsiveRowColumn(
           layout: ResponsiveBreakpoints.of(context).isDesktop
               ? ResponsiveRowColumnType.ROW
@@ -42,30 +67,32 @@ class _RecommendationManagerListHeaderState extends State<RecommendationManagerL
           rowCrossAxisAlignment: CrossAxisAlignment.center,
           columnCrossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ResponsiveRowColumnItem(
-              child: UnderlinedDropdown<RecommendationSearchOption>(
-                value: _selectedSearchOption,
-                items: RecommendationSearchOption.values.map((option) {
-                  return DropdownMenuItem<RecommendationSearchOption>(
-                    value: option,
-                    child: Text(option.value),
-                  );
-                }).toList(),
-                onChanged: (RecommendationSearchOption? newValue) {
-                  if (newValue != null) {
-                    setState(() {
-                      _selectedSearchOption = newValue;
-                    });
-                    widget.onSearchOptionChanged(newValue);
-                  }
-                },
+            if (widget.selectedType == RecommendationType.personalized) ...[
+              ResponsiveRowColumnItem(
+                child: UnderlinedDropdown<RecommendationSearchOption>(
+                  value: _selectedSearchOption,
+                  items: RecommendationSearchOption.values.map((option) {
+                    return DropdownMenuItem<RecommendationSearchOption>(
+                      value: option,
+                      child: Text(option.value),
+                    );
+                  }).toList(),
+                  onChanged: (RecommendationSearchOption? newValue) {
+                    if (newValue != null) {
+                      setState(() {
+                        _selectedSearchOption = newValue;
+                      });
+                      widget.onSearchOptionChanged(newValue);
+                    }
+                  },
+                ),
               ),
-            ),
-            ResponsiveRowColumnItem(
-              child: ResponsiveBreakpoints.of(context).isDesktop
-                  ? const SizedBox(width: 16)
-                  : const SizedBox(height: 16),
-            ),
+              ResponsiveRowColumnItem(
+                child: ResponsiveBreakpoints.of(context).isDesktop
+                    ? const SizedBox(width: 16)
+                    : const SizedBox(height: 16),
+              ),
+            ],
             ResponsiveRowColumnItem(
               rowFlex: 1,
               child: Row(

@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/core/id.dart';
 import 'package:finanzbegleiter/constants.dart';
@@ -19,7 +20,7 @@ void main() {
         recommendationIDs: ["1"],
         createdAt: date);
 
-    final recommendation = RecommendationItem(
+    final recommendation = PersonalizedRecommendationItem(
         id: "1",
         name: "Test",
         reason: "Test",
@@ -120,7 +121,7 @@ void main() {
         recommendationIDs: ["1"],
         createdAt: date);
 
-    final recommendation = RecommendationItem(
+    final recommendation = PersonalizedRecommendationItem(
         id: "1",
         name: "Test",
         reason: "Test",

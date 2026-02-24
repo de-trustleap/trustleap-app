@@ -8,6 +8,8 @@ import 'package:finanzbegleiter/features/recommendations/domain/archived_recomme
 import 'package:finanzbegleiter/features/landing_pages/domain/last_edit.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/last_viewed.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/campaign_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
@@ -150,19 +152,24 @@ class RecommendationRepositoryImplementation
   Future<Either<DatabaseFailure, UserRecommendation>> setAppointmentState(
       UserRecommendation recommendation) async {
     final recoCollection = firestore.collection("recommendations");
-    final newStatusTimeStamps = recommendation.recommendation?.statusTimestamps;
+    if (recommendation.recommendation is! PersonalizedRecommendationItem) {
+      return left(BackendFailure());
+    }
+    final personalized =
+        recommendation.recommendation! as PersonalizedRecommendationItem;
+    final newStatusTimeStamps = personalized.statusTimestamps;
     final actualDate = DateTime.now();
     newStatusTimeStamps?[3] = actualDate;
-    final newRecommendation = recommendation.recommendation
-        ?.copyWith(statusTimestamps: newStatusTimeStamps);
-    final timeStamps = newRecommendation?.statusTimestamps?.map(
+    final newRecommendation =
+        personalized.copyWith(statusTimestamps: newStatusTimeStamps);
+    final timeStamps = newRecommendation.statusTimestamps?.map(
         (key, value) => MapEntry(key.toString(), value?.toIso8601String()));
     try {
-      await recoCollection.doc(newRecommendation?.id).set(
+      await recoCollection.doc(newRecommendation.id).set(
           {"statusLevel": 3, "statusTimestamps": timeStamps},
           SetOptions(merge: true));
       return right(recommendation.copyWith(
-          recommendation: newRecommendation?.copyWith(
+          recommendation: newRecommendation.copyWith(
               statusLevel: StatusLevel.appointment,
               statusTimestamps: newStatusTimeStamps)));
     } on FirebaseException catch (e) {
@@ -220,7 +227,6 @@ class RecommendationRepositoryImplementation
 
       await Future.forEach(chunks, (element) async {
         final document = await archivedRecoCollection
-            .orderBy("name", descending: true)
             .where(FieldPath.documentId, whereIn: element)
             .get();
         querySnapshots.add(document);
@@ -303,7 +309,6 @@ class RecommendationRepositoryImplementation
 
       await Future.forEach(recoChunks, (chunk) async {
         final snapshot = await recoCollection
-            .orderBy("name", descending: true)
             .where(FieldPath.documentId, whereIn: chunk)
             .get();
         for (var doc in snapshot.docs) {
@@ -607,14 +612,14 @@ class RecommendationRepositoryImplementation
   }
 
   @override
-  Future<Either<DatabaseFailure, List<PromoterRecommendations>>>
+  Future<Either<DatabaseFailure, ({List<PromoterRecommendations> promoterRecommendations, List<UserRecommendation> allRecommendations})>>
       getRecommendationsCompanyWithArchived(String userID) async {
     try {
       // 1. Get active recommendations
       final activeRecommendationsResult =
           await getRecommendationsCompany(userID);
       if (activeRecommendationsResult.isLeft()) {
-        return activeRecommendationsResult;
+        return left(activeRecommendationsResult.fold((f) => f, (_) => throw StateError('')));
       }
 
       final activeRecommendations =
@@ -628,7 +633,7 @@ class RecommendationRepositoryImplementation
         archivedRecos = archivedRecommendationsResult.getOrElse(() => []);
       }
 
-      // 3. Convert archived recommendations to RecommendationItems and create UserRecommendations
+      // 3. Convert archived recommendations to UserRecommendations
       final List<UserRecommendation> convertedArchivedRecommendations =
           archivedRecos.map((archived) {
         final recommendationItem =
@@ -645,16 +650,15 @@ class RecommendationRepositoryImplementation
         );
       }).toList();
 
-      // 4. Group archived recommendations by promoter and merge with active ones
+      // 4. Best-effort merge of archived into promoter groups (for promoter dropdown)
       final Map<String, List<UserRecommendation>> archivedByPromoter = {};
       for (final userReco in convertedArchivedRecommendations) {
         final promoterName = userReco.recommendation?.promoterName;
-        if (promoterName != null) {
-          archivedByPromoter.putIfAbsent(promoterName, () => []).add(userReco);
-        }
+        archivedByPromoter
+            .putIfAbsent(promoterName ?? '', () => [])
+            .add(userReco);
       }
 
-      // 5. Merge archived recommendations with existing active recommendations
       final List<PromoterRecommendations> mergedResults =
           activeRecommendations.map((promoterReco) {
         final promoterName = promoterReco.promoter.firstName != null &&
@@ -665,21 +669,40 @@ class RecommendationRepositoryImplementation
                 "";
 
         final archivedForPromoter = archivedByPromoter[promoterName] ?? [];
-        final allRecommendations = [
+
+        final recommendations = [
           ...promoterReco.recommendations,
           ...archivedForPromoter
         ];
 
-        // Sort by creation date (newest first)
-        allRecommendations.sort((a, b) {
+        recommendations.sort((a, b) {
           return (b.recommendation?.createdAt ?? DateTime.now())
               .compareTo(a.recommendation?.createdAt ?? DateTime.now());
         });
 
-        return promoterReco.copyWith(recommendations: allRecommendations);
+        return promoterReco.copyWith(recommendations: recommendations);
       }).toList();
 
-      return right(mergedResults);
+      // 5. Build flat list with ALL active + ALL archived recommendations
+      final List<UserRecommendation> allActiveRecommendations = [];
+      for (final promoterRec in activeRecommendations) {
+        allActiveRecommendations.addAll(promoterRec.recommendations);
+      }
+
+      final allRecommendations = [
+        ...allActiveRecommendations,
+        ...convertedArchivedRecommendations,
+      ];
+
+      allRecommendations.sort((a, b) {
+        return (b.recommendation?.createdAt ?? DateTime.now())
+            .compareTo(a.recommendation?.createdAt ?? DateTime.now());
+      });
+
+      return right((
+        promoterRecommendations: mergedResults,
+        allRecommendations: allRecommendations,
+      ));
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
@@ -687,6 +710,24 @@ class RecommendationRepositoryImplementation
 
   RecommendationItem _convertArchivedToRecommendationItem(
       ArchivedRecommendationItem archived) {
+    if (archived.recommendationType == RecommendationType.campaign) {
+      return CampaignRecommendationItem(
+        id: archived.id.value,
+        campaignName: archived.campaignName,
+        campaignDurationDays: archived.campaignDurationDays,
+        reason: archived.reason,
+        landingPageID: archived.landingPageID,
+        promotionTemplate: null,
+        promoterName: archived.promoterName,
+        serviceProviderName: archived.serviceProviderName,
+        defaultLandingPageID: null,
+        userID: archived.userID,
+        promoterImageDownloadURL: null,
+        statusCounts: archived.statusCounts,
+        createdAt: archived.createdAt ?? DateTime.now(),
+      );
+    }
+
     StatusLevel statusLevel;
     if (archived.success == true) {
       statusLevel = StatusLevel.successful;
@@ -698,10 +739,15 @@ class RecommendationRepositoryImplementation
 
     final Map<int, DateTime?> statusTimestamps = {
       0: archived.createdAt,
-      5: archived.finishedTimeStamp,
     };
+    if (statusLevel == StatusLevel.successful) {
+      statusTimestamps[StatusLevel.successful.index] =
+          archived.finishedTimeStamp;
+    } else if (statusLevel == StatusLevel.failed) {
+      statusTimestamps[StatusLevel.failed.index] = archived.finishedTimeStamp;
+    }
 
-    return RecommendationItem(
+    return PersonalizedRecommendationItem(
       id: archived.id.value,
       name: null,
       reason: archived.reason,

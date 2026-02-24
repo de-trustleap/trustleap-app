@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/features/dashboard/application/recommendation/da
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
@@ -44,7 +45,7 @@ void main() {
         landingPageIDs: ["lp1", "lp2"],
         createdAt: date);
 
-    final testRecommendation = RecommendationItem(
+    final testRecommendation = PersonalizedRecommendationItem(
         id: "1",
         name: "Test",
         reason: "Test",
@@ -87,7 +88,10 @@ void main() {
     test("should call repo if getRecommendationsCompany is called", () async {
       // Given
       when(mockRecommendationRepo.getRecommendationsCompanyWithArchived(userID))
-          .thenAnswer((_) async => right(testPromoterRecommendations));
+          .thenAnswer((_) async => right((
+                promoterRecommendations: testPromoterRecommendations,
+                allRecommendations: [testUserRecommendation],
+              )));
       when(mockLandingPageRepo.getAllLandingPages(["lp1", "lp2"]))
           .thenAnswer((_) async => right(testLandingPages));
 
@@ -114,7 +118,10 @@ void main() {
         )
       ];
       when(mockRecommendationRepo.getRecommendationsCompanyWithArchived(userID))
-          .thenAnswer((_) async => right(testPromoterRecommendations));
+          .thenAnswer((_) async => right((
+                promoterRecommendations: testPromoterRecommendations,
+                allRecommendations: [testUserRecommendation],
+              )));
       when(mockLandingPageRepo.getAllLandingPages(["lp1", "lp2"]))
           .thenAnswer((_) async => right(testLandingPages));
 
@@ -156,7 +163,7 @@ void main() {
     final userID = "1";
     final date = DateTime.now();
     
-    final testRecommendation = RecommendationItem(
+    final testRecommendation = PersonalizedRecommendationItem(
         id: "1",
         name: "Test",
         reason: "Test",

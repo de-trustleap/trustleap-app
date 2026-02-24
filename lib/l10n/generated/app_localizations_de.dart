@@ -1259,6 +1259,10 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get campaign_created_success =>
+      'Die Kampagne wurde erfolgreich erstellt!';
+
+  @override
   String get recommendations_limit_reached_tooltip =>
       'Empfehlungslimit erreicht';
 
@@ -1269,6 +1273,106 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get recommendations_no_active_landingpage_warning =>
       'Keine Empfehlungen möglich - Ihnen ist keine aktive Landingpage zugewiesen';
+
+  @override
+  String get recommendation_section_type_title => 'Art der Empfehlung';
+
+  @override
+  String get recommendation_type_personalized => 'Personalisiert';
+
+  @override
+  String get recommendation_type_personalized_desc =>
+      'Für spezifische Kunden mit individuellem Namen und Tracking.';
+
+  @override
+  String get recommendation_type_campaign => 'Kampagne';
+
+  @override
+  String get recommendation_type_campaign_desc =>
+      'Ein universeller Link für Newsletter oder Social Media.';
+
+  @override
+  String get recommendation_section_create_title => 'Empfehlung erstellen';
+
+  @override
+  String get recommendation_section_created_title => 'Erstellte Empfehlungen';
+
+  @override
+  String get recommendation_add_button => 'Empfehlung hinzufügen';
+
+  @override
+  String get recommendation_customer_name_placeholder =>
+      'Name des Kunden eingeben...';
+
+  @override
+  String get recommendation_promoter_name_placeholder =>
+      'Name des Promoters eingeben...';
+
+  @override
+  String get recommendation_choose_reason_label =>
+      'Wähle einen Grund (Landingpage)';
+
+  @override
+  String recommendation_message_template(String name) {
+    return 'Nachrichtenvorlage für $name';
+  }
+
+  @override
+  String get recommendation_customer_subtitle => 'Kunde';
+
+  @override
+  String recommendation_count(int count) {
+    return '($count Empfehlungen)';
+  }
+
+  @override
+  String get recommendation_promoter_label => 'Promoter';
+
+  @override
+  String get recommendation_landingpage_label => 'Landingpage';
+
+  @override
+  String get recommendation_generate_link_button => 'Link generieren';
+
+  @override
+  String get recommendation_campaign_link_title => 'Generierter Link';
+
+  @override
+  String get recommendation_copied_to_clipboard => 'In Zwischenablage kopiert';
+
+  @override
+  String get recommendation_campaign_shared_alert_title => 'Kampagne starten?';
+
+  @override
+  String get recommendation_campaign_shared_alert_description =>
+      'Hast du den Link bereits kopiert und geteilt? Dann wird das Tracking im Empfehlungsmanager eingerichtet.';
+
+  @override
+  String get recommendation_campaign_shared_alert_yes_button =>
+      'Ja, bereits geteilt';
+
+  @override
+  String get recommendation_campaign_shared_alert_no_button => 'Noch nicht';
+
+  @override
+  String get recommendation_copy_template_button => 'Vorlage kopieren';
+
+  @override
+  String get campaign_start_button => 'Kampagne starten';
+
+  @override
+  String get recommendation_campaign_name_placeholder => 'Kampagnenname';
+
+  @override
+  String get recommendation_campaign_duration_placeholder => 'Dauer in Tagen';
+
+  @override
+  String get recommendations_validation_missing_campaign_name =>
+      'Bitte gib einen Kampagnennamen ein';
+
+  @override
+  String get recommendations_validation_invalid_campaign_duration =>
+      'Bitte gib eine Dauer zwischen 1 und 30 Tagen ein';
 
   @override
   String get landingpage_pagebuilder_container_request_error =>
@@ -2005,6 +2109,12 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get save_recommendation_loading_subtitle =>
       'Die Empfehlung wird gespeichert';
+
+  @override
+  String get save_campaign_loading_title => 'Kampagne wird erstellt';
+
+  @override
+  String get save_campaign_loading_subtitle => 'Die Kampagne wird gespeichert';
 
   @override
   String send_recommendation_alert_description(String receiver) {
@@ -3689,4 +3799,44 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get promoter_detail_not_found => 'Promoter nicht gefunden';
+
+  @override
+  String get campaign_manager_list_header_campaign_name => 'Kampagnenname';
+
+  @override
+  String get campaign_manager_list_header_conversion_rate => 'Conversionrate';
+
+  @override
+  String get campaign_manager_funnel_title => 'Kampagnen-Performance';
+
+  @override
+  String get campaign_manager_funnel_link_clicked => 'Link geklickt';
+
+  @override
+  String get campaign_manager_funnel_contact_form => 'Kontaktformular gesendet';
+
+  @override
+  String get campaign_manager_funnel_appointment => 'Terminiert';
+
+  @override
+  String get campaign_manager_funnel_successful => 'Abgeschlossen';
+
+  @override
+  String get campaign_manager_funnel_failed => 'Nicht abgeschlossen';
+
+  @override
+  String get campaign_manager_copy_link_tooltip => 'Link kopieren';
+
+  @override
+  String get campaign_manager_delete_tooltip => 'Kampagne löschen';
+
+  @override
+  String get campaign_manager_delete_alert_title => 'Kampagne löschen';
+
+  @override
+  String get campaign_manager_delete_alert_description =>
+      'Möchtest du die Kampagne wirklich löschen? Der Vorgang kann nicht rückgängig gemacht werden.';
+
+  @override
+  String get campaign_manager_delete_alert_delete_button => 'Kampagne löschen';
 }

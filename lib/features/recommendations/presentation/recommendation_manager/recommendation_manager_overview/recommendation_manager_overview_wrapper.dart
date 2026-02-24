@@ -75,6 +75,29 @@ class _RecommendationManagerPageState
         });
   }
 
+  void showCampaignDeleteAlert(
+      AppLocalizations localizations,
+      CustomNavigatorBase navigator,
+      String recoID,
+      String userID,
+      String userRecoID) {
+    showDialog(
+        context: context,
+        builder: (_) {
+          return CustomAlertDialog(
+              title: localizations.campaign_manager_delete_alert_title,
+              message:
+                  localizations.campaign_manager_delete_alert_description,
+              actionButtonTitle: localizations
+                  .campaign_manager_delete_alert_delete_button,
+              cancelButtonTitle: localizations
+                  .recommendation_manager_delete_alert_cancel_button,
+              actionButtonAction: () =>
+                  _submitDeleteRecommendation(recoID, userID, userRecoID),
+              cancelButtonAction: () => navigator.pop());
+        });
+  }
+
   void showFinishAlert(AppLocalizations localizations,
       CustomNavigatorBase navigator, UserRecommendation recommendation) {
     showDialog(
@@ -220,7 +243,6 @@ class _RecommendationManagerPageState
           child: RecommendationManagerOverview(
               recommendations: state.recoItems,
               isPromoter: currentUser?.role == Role.promoter,
-              favoriteRecommendationIDs: currentUser?.favoriteRecommendationIDs,
               onAppointmentPressed: (recommendation) {
                 Modular.get<RecommendationManagerTileCubit>()
                     .setAppointmentState(recommendation);
@@ -233,6 +255,10 @@ class _RecommendationManagerPageState
               },
               onDeletePressed: (recoID, userID, userRecoID) {
                 showDeleteAlert(
+                    localization, navigator, recoID, userID, userRecoID);
+              },
+              onCampaignDeletePressed: (recoID, userID, userRecoID) {
+                showCampaignDeleteAlert(
                     localization, navigator, recoID, userID, userRecoID);
               },
               onFavoritePressed: (recommendation) {

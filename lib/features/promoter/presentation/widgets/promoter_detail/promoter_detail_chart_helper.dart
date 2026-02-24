@@ -1,4 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/campaign_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:intl/intl.dart';
@@ -15,13 +17,29 @@ class PromoterDetailChartHelper {
   });
 
   List<UserRecommendation> get nonSuccessful => recommendations
-      .where(
-          (rec) => rec.recommendation?.statusLevel != StatusLevel.successful)
+      .where((rec) {
+        final reco = rec.recommendation;
+        if (reco is PersonalizedRecommendationItem) {
+          return reco.statusLevel != StatusLevel.successful;
+        }
+        if (reco is CampaignRecommendationItem) {
+          return (reco.statusCounts?.successful ?? 0) == 0;
+        }
+        return true;
+      })
       .toList();
 
   List<UserRecommendation> get conversions => recommendations
-      .where(
-          (rec) => rec.recommendation?.statusLevel == StatusLevel.successful)
+      .where((rec) {
+        final reco = rec.recommendation;
+        if (reco is PersonalizedRecommendationItem) {
+          return reco.statusLevel == StatusLevel.successful;
+        }
+        if (reco is CampaignRecommendationItem) {
+          return (reco.statusCounts?.successful ?? 0) > 0;
+        }
+        return false;
+      })
       .toList();
 
   bool get hasConversionsInTimeframe =>
@@ -37,7 +55,13 @@ class PromoterDetailChartHelper {
 
       int count = 0;
       for (final rec in recs) {
-        final timestamp = rec.recommendation?.statusTimestamps?[0];
+        final reco = rec.recommendation;
+        DateTime? timestamp;
+        if (reco is PersonalizedRecommendationItem) {
+          timestamp = reco.statusTimestamps?[0];
+        } else if (reco is CampaignRecommendationItem) {
+          timestamp = reco.createdAt;
+        }
         if (timestamp != null) {
           final recDay =
               DateTime(timestamp.year, timestamp.month, timestamp.day);
