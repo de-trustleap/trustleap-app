@@ -151,7 +151,8 @@ class _RecommendationManagerArchiveOverviewState
           RecommendationManagerArchiveList(
               key: ValueKey(_filteredRecommendations),
               recommendations: _filteredRecommendations,
-              isPromoter: widget.isPromoter)
+              isPromoter: widget.isPromoter,
+              selectedType: _selectedType)
         ],
       ),
     );

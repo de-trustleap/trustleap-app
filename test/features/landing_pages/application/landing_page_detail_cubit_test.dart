@@ -79,7 +79,10 @@ void main() {
       // Given
       when(mockRecommendationRepo
               .getRecommendationsCompanyWithArchived(userId))
-          .thenAnswer((_) async => right(promoterRecommendations));
+          .thenAnswer((_) async => right((
+                promoterRecommendations: promoterRecommendations,
+                allRecommendations: [recommendation1],
+              )));
       when(mockLandingPageRepo.getAllLandingPages(["lp1"]))
           .thenAnswer((_) async => right(landingPages));
       final expectedResult = [
@@ -151,7 +154,10 @@ void main() {
       ];
       when(mockRecommendationRepo
               .getRecommendationsCompanyWithArchived(userId))
-          .thenAnswer((_) async => right(emptyPromoterRecs));
+          .thenAnswer((_) async => right((
+                promoterRecommendations: emptyPromoterRecs,
+                allRecommendations: <UserRecommendation>[],
+              )));
       final expectedResult = [
         LandingPageDetailRecommendationsLoading(),
         LandingPageDetailRecommendationsSuccess(

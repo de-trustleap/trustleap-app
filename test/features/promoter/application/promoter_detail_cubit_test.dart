@@ -377,7 +377,10 @@ void main() {
         await loadPromoterIntoState();
         when(mockRecommendationRepo
                 .getRecommendationsCompanyWithArchived("user-1"))
-            .thenAnswer((_) async => right(testPromoterRecommendations));
+            .thenAnswer((_) async => right((
+                  promoterRecommendations: testPromoterRecommendations,
+                  allRecommendations: testRecommendations,
+                )));
 
         // When
         cubit.loadRecommendations(userId: "user-1", role: Role.company);
@@ -397,7 +400,10 @@ void main() {
         await loadPromoterIntoState();
         when(mockRecommendationRepo
                 .getRecommendationsCompanyWithArchived("user-1"))
-            .thenAnswer((_) async => right(testPromoterRecommendations));
+            .thenAnswer((_) async => right((
+                  promoterRecommendations: testPromoterRecommendations,
+                  allRecommendations: testRecommendations,
+                )));
 
         // Then
         expectLater(
@@ -444,7 +450,10 @@ void main() {
         ];
         when(mockRecommendationRepo
                 .getRecommendationsCompanyWithArchived("user-1"))
-            .thenAnswer((_) async => right(multiPromoterRecs));
+            .thenAnswer((_) async => right((
+                  promoterRecommendations: multiPromoterRecs,
+                  allRecommendations: [...testRecommendations, otherRec],
+                )));
 
         // Then — recommendations should only contain testPromoter's recs
         expectLater(
@@ -485,7 +494,10 @@ void main() {
         ];
         when(mockRecommendationRepo
                 .getRecommendationsCompanyWithArchived("user-1"))
-            .thenAnswer((_) async => right(nonMatchingRecs));
+            .thenAnswer((_) async => right((
+                  promoterRecommendations: nonMatchingRecs,
+                  allRecommendations: testRecommendations,
+                )));
 
         // Then
         expectLater(

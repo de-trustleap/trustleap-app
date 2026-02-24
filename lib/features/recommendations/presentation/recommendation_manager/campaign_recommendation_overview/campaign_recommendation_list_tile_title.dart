@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/core/helpers/conversion_rate_formatter.dart';
 import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/campaign_recommendation_item.dart';
@@ -21,13 +22,13 @@ class CampaignRecommendationListTileTitle extends StatelessWidget {
 
   String _getConversionRate() {
     final reco = recommendation.recommendation;
-    if (reco is CampaignRecommendationItem) {
-      final counts = reco.statusCounts;
-      if (counts != null && counts.linkClicked > 0) {
-        return "${(counts.successful / counts.linkClicked * 100).toStringAsFixed(1)}%";
-      }
+    if (reco is CampaignRecommendationItem && reco.statusCounts != null) {
+      return ConversionRateFormatter.format(
+        total: reco.statusCounts!.linkClicked,
+        successful: reco.statusCounts!.successful,
+      );
     }
-    return "0.0%";
+    return ConversionRateFormatter.format(total: 0, successful: 0);
   }
 
   @override

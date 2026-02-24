@@ -1,7 +1,9 @@
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/id.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/campaign_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_status_counts.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:finanzbegleiter/features/dashboard/presentation/widgets/dashboard_recommendations/dashboard_recommendations_chart_data_processor.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -275,10 +277,150 @@ void main() {
 
         final spots = processor.generateSpots();
         expect(spots.length, 7);
-        
+
         // Should count all recommendations
         final totalCount = spots.map((spot) => spot.y).reduce((a, b) => a + b);
         expect(totalCount, 2); // Both recommendations should be counted
+      });
+    });
+
+    group('campaign recommendations', () {
+      late List<UserRecommendation> mixedRecommendations;
+
+      setUp(() {
+        final now = DateTime.now();
+
+        final campaignReco = CampaignRecommendationItem(
+          id: "c1",
+          campaignName: "Test Campaign",
+          campaignDurationDays: 30,
+          reason: "Test",
+          landingPageID: "1",
+          promotionTemplate: null,
+          promoterName: "Test Promoter",
+          serviceProviderName: "Test Service",
+          defaultLandingPageID: null,
+          userID: "user1",
+          promoterImageDownloadURL: null,
+          statusCounts: const RecommendationStatusCounts(
+            linkClicked: 10,
+            contactFormSent: 5,
+            appointment: 3,
+            successful: 2,
+            failed: 1,
+          ),
+          createdAt: now.subtract(const Duration(days: 1)),
+        );
+
+        final personalizedReco = PersonalizedRecommendationItem(
+          id: "p1",
+          name: "Test Personalized",
+          reason: "Test",
+          landingPageID: "1",
+          promotionTemplate: "",
+          promoterName: "Test Promoter",
+          serviceProviderName: "Test Service",
+          defaultLandingPageID: "2",
+          userID: "user1",
+          statusLevel: StatusLevel.successful,
+          statusTimestamps: {
+            0: now.subtract(const Duration(days: 3)),
+            StatusLevel.successful.index: now.subtract(const Duration(days: 2)),
+          },
+          promoterImageDownloadURL: null,
+        );
+
+        mixedRecommendations = [
+          UserRecommendation(
+            id: UniqueID.fromUniqueString("c1"),
+            recoID: "c1",
+            userID: "user1",
+            priority: RecommendationPriority.medium,
+            notes: null,
+            recommendation: campaignReco,
+          ),
+          UserRecommendation(
+            id: UniqueID.fromUniqueString("p1"),
+            recoID: "p1",
+            userID: "user1",
+            priority: RecommendationPriority.medium,
+            notes: null,
+            recommendation: personalizedReco,
+          ),
+        ];
+      });
+
+      test('should include campaign recommendations in spots without status filter', () {
+        processor = DashboardRecommendationsChartDataProcessor(
+          recommendations: mixedRecommendations,
+          timePeriod: TimePeriod.week,
+          statusLevel: null,
+        );
+
+        final spots = processor.generateSpots();
+        final totalCount = spots.map((spot) => spot.y).reduce((a, b) => a + b);
+        expect(totalCount, 2);
+      });
+
+      test('should include campaign when statusLevel filter matches successful', () {
+        // statusLevel 5 maps to index 4 = StatusLevel.successful
+        processor = DashboardRecommendationsChartDataProcessor(
+          recommendations: mixedRecommendations,
+          timePeriod: TimePeriod.week,
+          statusLevel: 5,
+        );
+
+        final spots = processor.generateSpots();
+        final totalCount = spots.map((spot) => spot.y).reduce((a, b) => a + b);
+        // Both should match: personalized has statusLevel.successful, campaign has successful > 0
+        expect(totalCount, 2);
+      });
+
+      test('should exclude campaign when statusCounts is zero for filtered level', () {
+        final now = DateTime.now();
+        final campaignNoAppointments = CampaignRecommendationItem(
+          id: "c2",
+          campaignName: "No Appointments",
+          campaignDurationDays: 30,
+          reason: "Test",
+          landingPageID: "1",
+          promotionTemplate: null,
+          promoterName: "Test Promoter",
+          serviceProviderName: "Test Service",
+          defaultLandingPageID: null,
+          userID: "user1",
+          promoterImageDownloadURL: null,
+          statusCounts: const RecommendationStatusCounts(
+            linkClicked: 10,
+            contactFormSent: 5,
+            appointment: 0,
+            successful: 0,
+            failed: 0,
+          ),
+          createdAt: now.subtract(const Duration(days: 1)),
+        );
+
+        final recommendations = [
+          UserRecommendation(
+            id: UniqueID.fromUniqueString("c2"),
+            recoID: "c2",
+            userID: "user1",
+            priority: RecommendationPriority.medium,
+            notes: null,
+            recommendation: campaignNoAppointments,
+          ),
+        ];
+
+        // statusLevel 5 = index 4 = successful
+        processor = DashboardRecommendationsChartDataProcessor(
+          recommendations: recommendations,
+          timePeriod: TimePeriod.week,
+          statusLevel: 5,
+        );
+
+        final spots = processor.generateSpots();
+        final totalCount = spots.map((spot) => spot.y).reduce((a, b) => a + b);
+        expect(totalCount, 0);
       });
     });
   });

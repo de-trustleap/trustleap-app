@@ -1,5 +1,7 @@
+import 'package:finanzbegleiter/core/helpers/conversion_rate_formatter.dart';
 import 'package:finanzbegleiter/features/landing_pages/application/landing_page_detail/landing_page_detail_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/campaign_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
@@ -12,13 +14,13 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageDetailStatistics extends StatelessWidget {
-  final int visitsTotal;
+  final int totalVisits;
   final String landingPageId;
   final CustomUser user;
 
   const LandingPageDetailStatistics({
     super.key,
-    required this.visitsTotal,
+    required this.totalVisits,
     required this.landingPageId,
     required this.user,
   });
@@ -39,14 +41,15 @@ class LandingPageDetailStatistics extends StatelessWidget {
         .where(
             (rec) {
               final reco = rec.recommendation;
-              return reco is PersonalizedRecommendationItem && reco.statusLevel == StatusLevel.successful;
+              if (reco is PersonalizedRecommendationItem) {
+                return reco.statusLevel == StatusLevel.successful;
+              }
+              if (reco is CampaignRecommendationItem) {
+                return (reco.statusCounts?.successful ?? 0) > 0;
+              }
+              return false;
             })
         .length;
-  }
-
-  double _getConversionRate(int completedRecommendations) {
-    if (visitsTotal == 0) return 0;
-    return (completedRecommendations / visitsTotal) * 100;
   }
 
   @override
@@ -62,7 +65,10 @@ class LandingPageDetailStatistics extends StatelessWidget {
             state is LandingPageDetailRecommendationsSuccess
                 ? _getCompletedRecommendationsCount(state)
                 : 0;
-        final conversionRate = _getConversionRate(completedRecommendations);
+        final conversionRate = ConversionRateFormatter.format(
+          total: totalVisits,
+          successful: completedRecommendations,
+        );
 
         if (responsiveValue.largerThan(MOBILE)) {
           return Row(
@@ -71,7 +77,7 @@ class LandingPageDetailStatistics extends StatelessWidget {
                 child: _StatisticCard(
                   icon: Icons.people_outline,
                   title: localization.landing_page_detail_total_visits,
-                  value: visitsTotal.toString(),
+                  value: totalVisits.toString(),
                 ),
               ),
               const SizedBox(width: 16),
@@ -79,7 +85,7 @@ class LandingPageDetailStatistics extends StatelessWidget {
                 child: _StatisticCard(
                   icon: Icons.trending_up,
                   title: localization.landing_page_detail_conversion_rate,
-                  value: "${conversionRate.toStringAsFixed(1)}%",
+                  value: conversionRate,
                 ),
               ),
             ],
@@ -90,13 +96,13 @@ class LandingPageDetailStatistics extends StatelessWidget {
               _StatisticCard(
                 icon: Icons.people_outline,
                 title: localization.landing_page_detail_total_visits,
-                value: visitsTotal.toString(),
+                value: totalVisits.toString(),
               ),
               const SizedBox(height: 16),
               _StatisticCard(
                 icon: Icons.trending_up,
                 title: localization.landing_page_detail_conversion_rate,
-                value: "${conversionRate.toStringAsFixed(1)}%",
+                value: conversionRate,
               ),
             ],
           );

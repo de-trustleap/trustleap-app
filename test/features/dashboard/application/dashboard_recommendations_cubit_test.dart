@@ -88,7 +88,10 @@ void main() {
     test("should call repo if getRecommendationsCompany is called", () async {
       // Given
       when(mockRecommendationRepo.getRecommendationsCompanyWithArchived(userID))
-          .thenAnswer((_) async => right(testPromoterRecommendations));
+          .thenAnswer((_) async => right((
+                promoterRecommendations: testPromoterRecommendations,
+                allRecommendations: [testUserRecommendation],
+              )));
       when(mockLandingPageRepo.getAllLandingPages(["lp1", "lp2"]))
           .thenAnswer((_) async => right(testLandingPages));
 
@@ -115,7 +118,10 @@ void main() {
         )
       ];
       when(mockRecommendationRepo.getRecommendationsCompanyWithArchived(userID))
-          .thenAnswer((_) async => right(testPromoterRecommendations));
+          .thenAnswer((_) async => right((
+                promoterRecommendations: testPromoterRecommendations,
+                allRecommendations: [testUserRecommendation],
+              )));
       when(mockLandingPageRepo.getAllLandingPages(["lp1", "lp2"]))
           .thenAnswer((_) async => right(testLandingPages));
 

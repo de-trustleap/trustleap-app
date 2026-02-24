@@ -3,8 +3,10 @@ import 'package:finanzbegleiter/features/dashboard/domain/chart_trend.dart';
 import 'package:finanzbegleiter/core/id.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/campaign_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_status_counts.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:finanzbegleiter/features/recommendations/helpers/recommendations_statistics.dart';
@@ -542,6 +544,90 @@ void main() {
       // Then
       // r1 (index 0+1=1 <= 2) matches, r2 (index 3+1=4 > 2) doesn't match, r3 (successful) always matches
       expect(result.currentPeriodCount, 2);
+    });
+
+    test("should include campaign recommendations in trend calculation", () {
+      // Given
+      final campaignReco = UserRecommendation(
+        id: UniqueID.fromUniqueString("c1"),
+        recoID: "c1",
+        userID: "user-1",
+        priority: RecommendationPriority.medium,
+        notes: null,
+        recommendation: CampaignRecommendationItem(
+          id: "c1",
+          campaignName: "Test Campaign",
+          campaignDurationDays: 30,
+          reason: "Test",
+          landingPageID: "lp1",
+          promotionTemplate: null,
+          promoterName: null,
+          serviceProviderName: null,
+          defaultLandingPageID: null,
+          userID: "user-1",
+          promoterImageDownloadURL: null,
+          statusCounts: const RecommendationStatusCounts(
+            linkClicked: 10,
+            successful: 3,
+          ),
+          createdAt: now.subtract(const Duration(days: 2)),
+        ),
+      );
+
+      final personalizedReco = createRecommendation(
+        id: "r1",
+        createdAt: now.subtract(const Duration(days: 3)),
+      );
+
+      // When
+      final result = RecommendationsStatistics.calculateTrend(
+        recommendations: [campaignReco, personalizedReco],
+        timePeriod: TimePeriod.week,
+        now: now,
+      );
+
+      // Then
+      expect(result.currentPeriodCount, 2);
+    });
+
+    test("should include campaign in trend with statusLevel filter", () {
+      // Given
+      final campaignReco = UserRecommendation(
+        id: UniqueID.fromUniqueString("c1"),
+        recoID: "c1",
+        userID: "user-1",
+        priority: RecommendationPriority.medium,
+        notes: null,
+        recommendation: CampaignRecommendationItem(
+          id: "c1",
+          campaignName: "Test Campaign",
+          campaignDurationDays: 30,
+          reason: "Test",
+          landingPageID: "lp1",
+          promotionTemplate: null,
+          promoterName: null,
+          serviceProviderName: null,
+          defaultLandingPageID: null,
+          userID: "user-1",
+          promoterImageDownloadURL: null,
+          statusCounts: const RecommendationStatusCounts(
+            linkClicked: 10,
+            successful: 3,
+          ),
+          createdAt: now.subtract(const Duration(days: 2)),
+        ),
+      );
+
+      // When - campaign should always match regardless of statusLevel filter
+      final result = RecommendationsStatistics.calculateTrend(
+        recommendations: [campaignReco],
+        timePeriod: TimePeriod.week,
+        statusLevel: 2,
+        now: now,
+      );
+
+      // Then
+      expect(result.currentPeriodCount, 1);
     });
   });
 }

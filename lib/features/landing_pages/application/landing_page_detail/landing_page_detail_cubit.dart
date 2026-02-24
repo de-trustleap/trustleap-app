@@ -41,14 +41,9 @@ class LandingPageDetailCubit extends Cubit<LandingPageDetailState> {
       (failure) => failure is NotFoundFailure
           ? emit(LandingPageDetailRecommendationsNotFound())
           : emit(LandingPageDetailRecommendationsFailure(failure: failure)),
-      (promoterRecommendations) async {
-        final allRecommendations = <UserRecommendation>[];
-        for (final promoterRec in promoterRecommendations) {
-          allRecommendations.addAll(promoterRec.recommendations);
-        }
-
+      (result) async {
         final allLandingPageIds = <String>{};
-        for (final promoterRec in promoterRecommendations) {
+        for (final promoterRec in result.promoterRecommendations) {
           if (promoterRec.promoter.landingPageIDs != null) {
             allLandingPageIds.addAll(promoterRec.promoter.landingPageIDs!);
           }
@@ -58,8 +53,8 @@ class LandingPageDetailCubit extends Cubit<LandingPageDetailState> {
             await _loadLandingPages(allLandingPageIds.toList());
 
         emit(LandingPageDetailRecommendationsSuccess(
-          recommendations: allRecommendations,
-          promoterRecommendations: promoterRecommendations,
+          recommendations: result.allRecommendations,
+          promoterRecommendations: result.promoterRecommendations,
           allLandingPages: allLandingPages,
         ));
       },
