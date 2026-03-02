@@ -2,7 +2,7 @@
 
 This project uses the following third-party libraries and their respective licenses.
 
-Last updated: 2026-02-03 22:09:48
+Last updated: 2026-02-24 22:18:55
 
 ---
 
@@ -36,7 +36,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### build_runner
 
-- **Version**: 2.10.5
+- **Version**: 2.11.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/build/tree/master/build_runner>
@@ -349,7 +349,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### sentry_flutter
 
-- **Version**: 9.11.0
+- **Version**: 9.14.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://docs.sentry.io/platforms/flutter/>
@@ -375,7 +375,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### uuid
 
-- **Version**: 4.5.2
+- **Version**: 4.5.3
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/Daegalus/dart-uuid>
@@ -397,7 +397,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### _fe_analyzer_shared
 
-- **Version**: 94.0.0
+- **Version**: 96.0.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/sdk/tree/main/pkg/_fe_analyzer_shared>
@@ -413,7 +413,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### analyzer
 
-- **Version**: 10.0.2
+- **Version**: 10.2.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/sdk/tree/main/pkg/analyzer>
@@ -421,7 +421,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### archive
 
-- **Version**: 4.0.7
+- **Version**: 4.0.9
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/brendan-duncan/archive>
@@ -507,7 +507,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### built_value
 
-- **Version**: 8.12.3
+- **Version**: 8.12.4
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/google/built_value.dart/tree/master/built_value>
@@ -648,7 +648,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### csv
 
-- **Version**: 6.0.0
+- **Version**: 7.1.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/close2/csv>
@@ -676,7 +676,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### dbus
 
-- **Version**: 0.7.11
+- **Version**: 0.7.12
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/canonical/dbus.dart>
@@ -729,7 +729,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### ffi
 
-- **Version**: 2.1.5
+- **Version**: 2.2.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/native/tree/main/pkgs/ffi>
@@ -944,7 +944,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### flutter_inappwebview_internal_annotations
 
-- **Version**: 1.2.0
+- **Version**: 1.3.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/pichillilorenzo/flutter_inappwebview>
@@ -1133,7 +1133,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### image_picker_android
 
-- **Version**: 0.8.13+13
+- **Version**: 0.8.13+14
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/image_picker/image_picker_android>
@@ -1221,6 +1221,15 @@ These packages are automatically included as dependencies of your direct depende
 - **Description**: A library to access JNI from Dart and Flutter that acts as a support library
   for package:jnigen.
 
+### json_annotation
+
+- **Version**: 4.11.0
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/google/json_serializable.dart/tree/master/json_annotation>
+- **Description**: Classes and helper functions that support JSON code generation via the
+  `json_serializable` package.
+
 ### json2yaml
 
 - **Version**: 3.0.1
@@ -1229,15 +1238,6 @@ These packages are automatically included as dependencies of your direct depende
 - **Website**: <https://github.com/alexei-sintotski/json2yaml>
 - **Description**: Dart package to render JSON data to YAML with built-in automatic beautifier and
   support for Dart pubspec.yaml and pubspec.lock conventions
-
-### json_annotation
-
-- **Version**: 4.10.0
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://github.com/google/json_serializable.dart/tree/master/json_annotation>
-- **Description**: Classes and helper functions that support JSON code generation via the
-  `json_serializable` package.
 
 ### leak_tracker
 
@@ -1480,7 +1480,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### petitparser
 
-- **Version**: 7.0.1
+- **Version**: 7.0.2
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://petitparser.github.io>
@@ -1547,7 +1547,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### posix
 
-- **Version**: 6.0.3
+- **Version**: 6.5.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/onepub-dev/dart_posix>
@@ -1580,7 +1580,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### pubspec_manager
 
-- **Version**: 3.2.0
+- **Version**: 3.2.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/onepub-dev/pubspec_manager>
@@ -1633,7 +1633,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### sentry
 
-- **Version**: 9.11.0
+- **Version**: 9.14.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://docs.sentry.io/platforms/dart/>
@@ -1732,7 +1732,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### source_span
 
-- **Version**: 1.10.1
+- **Version**: 1.10.2
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/tools/tree/main/pkgs/source_span>
@@ -1901,7 +1901,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### url_launcher_ios
 
-- **Version**: 6.3.6
+- **Version**: 6.4.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/url_launcher/url_launcher_ios>
@@ -2010,11 +2010,11 @@ These packages are automatically included as dependencies of your direct depende
 
 ### win32
 
-- **Version**: 5.15.0
+- **Version**: 6.0.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://win32.pub>
-- **Description**: Access common Win32 APIs directly from Dart using FFI — no C required!
+- **Description**: Call common Windows APIs directly from Dart using FFI.
 
 ### xdg_directories
 

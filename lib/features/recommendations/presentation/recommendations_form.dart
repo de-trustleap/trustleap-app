@@ -45,6 +45,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   bool _promoterTextFieldDisabled = false;
   List<RecommendationReason> _reasons = [];
   RecommendationType _selectedType = RecommendationType.personalized;
+  Set<String> _loadedLandingPageIDs = {};
 
   @override
   void initState() {
@@ -62,7 +63,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   }
 
   void _initializeUserData() {
-    final userState = BlocProvider.of<UserObserverCubit>(context).state;
+    final userState = Modular.get<UserObserverCubit>().state;
     if (userState is UserObserverSuccess) {
       _loadRecommendationData(userState.user);
     }
@@ -70,9 +71,17 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
 
   void _loadRecommendationData(CustomUser user) {
     _setUser(user);
-    Modular.get<RecommendationsCubit>()
-        .getRecommendationReasons(user.landingPageIDs ?? []);
-    if (user.role == Role.promoter && user.parentUserID != null) {
+    final landingPageIDs = (user.landingPageIDs ?? []).toSet();
+    if (_reasons.isEmpty ||
+        landingPageIDs.length != _loadedLandingPageIDs.length ||
+        !_loadedLandingPageIDs.containsAll(landingPageIDs)) {
+      _loadedLandingPageIDs = landingPageIDs;
+      Modular.get<RecommendationsCubit>()
+          .getRecommendationReasons(landingPageIDs.toList());
+    }
+    if (user.role == Role.promoter &&
+        user.parentUserID != null &&
+        _parentUser == null) {
       Modular.get<RecommendationsCubit>().getParentUser(user.parentUserID!);
     }
   }

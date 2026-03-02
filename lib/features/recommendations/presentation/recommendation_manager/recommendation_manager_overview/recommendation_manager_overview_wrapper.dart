@@ -40,7 +40,7 @@ class _RecommendationManagerPageState
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final userState = BlocProvider.of<UserObserverCubit>(context).state;
+      final userState = Modular.get<UserObserverCubit>().state;
       if (userState is UserObserverSuccess) {
         currentUser = userState.user;
         Modular.get<RecommendationManagerTileCubit>()
@@ -169,8 +169,22 @@ class _RecommendationManagerPageState
     final localization = AppLocalizations.of(context);
     final navigator = CustomNavigator.of(context);
     final recoManagerCubit = Modular.get<RecommendationManagerCubit>();
+    final userObserverCubit = Modular.get<UserObserverCubit>();
 
-    return BlocConsumer<RecommendationManagerCubit, RecommendationManagerState>(
+    return BlocListener<UserObserverCubit, UserObserverState>(
+        bloc: userObserverCubit,
+        listener: (context, state) {
+          if (state is UserObserverSuccess &&
+              state.user.id != currentUser?.id) {
+            currentUser = state.user;
+            Modular.get<RecommendationManagerTileCubit>()
+                .initializeFavorites(state.user.favoriteRecommendationIDs);
+            Modular.get<RecommendationManagerTileCubit>()
+                .setCurrentUser(state.user);
+            _requestRecommendations(state.user);
+          }
+        },
+        child: BlocConsumer<RecommendationManagerCubit, RecommendationManagerState>(
         bloc: recoManagerCubit,
         listener: (context, state) {
           if (state is RecommendationDeleteRecoSuccessState) {
@@ -212,7 +226,7 @@ class _RecommendationManagerPageState
                 child: _createContainerChildWidget(
                     state, responsiveValue, localization, navigator));
           }
-        });
+        }));
   }
 
   Widget _createContainerChildWidget(

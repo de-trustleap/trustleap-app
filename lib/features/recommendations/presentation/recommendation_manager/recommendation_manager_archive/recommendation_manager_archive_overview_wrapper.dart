@@ -33,7 +33,7 @@ class _RecommendationManagerArchiveOverviewState
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final userState = BlocProvider.of<UserObserverCubit>(context).state;
+      final userState = Modular.get<UserObserverCubit>().state;
       if (userState is UserObserverSuccess) {
         currentUser = userState.user;
         Modular.get<RecommendationManagerArchiveCubit>()
@@ -49,22 +49,34 @@ class _RecommendationManagerArchiveOverviewState
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
     final cubit = Modular.get<RecommendationManagerArchiveCubit>();
+    final userObserverCubit = Modular.get<UserObserverCubit>();
 
-    return BlocBuilder<RecommendationManagerArchiveCubit,
-        RecommendationManagerArchiveState>(
-      bloc: cubit,
-      builder: (context, state) {
-        if (state is RecommendationManagerArchiveLoadingState) {
-          return const LoadingIndicator();
-        } else {
-          return Container(
-              width: double.infinity,
-              decoration: BoxDecoration(color: themeData.colorScheme.surface),
-              child: _createContainerChildWidget(
-                  state, responsiveValue, localization));
-        }
-      },
-    );
+    return BlocListener<UserObserverCubit, UserObserverState>(
+        bloc: userObserverCubit,
+        listener: (context, state) {
+          if (state is UserObserverSuccess &&
+              state.user.id != currentUser?.id) {
+            currentUser = state.user;
+            Modular.get<RecommendationManagerArchiveCubit>()
+                .getArchivedRecommendations(state.user.id.value);
+          }
+        },
+        child: BlocBuilder<RecommendationManagerArchiveCubit,
+            RecommendationManagerArchiveState>(
+          bloc: cubit,
+          builder: (context, state) {
+            if (state is RecommendationManagerArchiveLoadingState) {
+              return const LoadingIndicator();
+            } else {
+              return Container(
+                  width: double.infinity,
+                  decoration:
+                      BoxDecoration(color: themeData.colorScheme.surface),
+                  child: _createContainerChildWidget(
+                      state, responsiveValue, localization));
+            }
+          },
+        ));
   }
 
   Widget _createContainerChildWidget(
