@@ -260,4 +260,3 @@ class PromoterDetailLandingPageTile extends StatelessWidget {
     );
   }
 }
-// TODO: EMPFEHLUNG LADE OVERLAY MANCHMAL UNENDLICH LANG
