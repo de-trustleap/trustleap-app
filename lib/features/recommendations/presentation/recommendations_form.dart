@@ -70,9 +70,13 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
 
   void _loadRecommendationData(CustomUser user) {
     _setUser(user);
-    Modular.get<RecommendationsCubit>()
-        .getRecommendationReasons(user.landingPageIDs ?? []);
-    if (user.role == Role.promoter && user.parentUserID != null) {
+    if (_reasons.isEmpty) {
+      Modular.get<RecommendationsCubit>()
+          .getRecommendationReasons(user.landingPageIDs ?? []);
+    }
+    if (user.role == Role.promoter &&
+        user.parentUserID != null &&
+        _parentUser == null) {
       Modular.get<RecommendationsCubit>().getParentUser(user.parentUserID!);
     }
   }

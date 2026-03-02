@@ -215,7 +215,7 @@ class LandingPageModel extends Equatable {
         promotionTemplate: promotionTemplate,
         associatedUsersIDs: associatedUsersIDs,
         lastUpdatedAt: lastUpdatedAt,
-        createdAt: (createdAt as Timestamp).toDate(),
+        createdAt: createdAt != null ? (createdAt as Timestamp).toDate() : null,
         isDefaultPage: isDefaultPage ?? false,
         isActive: isActive,
         impressum: impressum,
