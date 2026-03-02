@@ -171,23 +171,19 @@ class _RecommendationManagerPageState
     final recoManagerCubit = Modular.get<RecommendationManagerCubit>();
     final userObserverCubit = Modular.get<UserObserverCubit>();
 
-    return MultiBlocListener(
-        listeners: [
-          BlocListener<UserObserverCubit, UserObserverState>(
-            bloc: userObserverCubit,
-            listener: (context, state) {
-              if (state is UserObserverSuccess &&
-                  state.user.id != currentUser?.id) {
-                currentUser = state.user;
-                Modular.get<RecommendationManagerTileCubit>()
-                    .initializeFavorites(state.user.favoriteRecommendationIDs);
-                Modular.get<RecommendationManagerTileCubit>()
-                    .setCurrentUser(state.user);
-                _requestRecommendations(state.user);
-              }
-            },
-          ),
-        ],
+    return BlocListener<UserObserverCubit, UserObserverState>(
+        bloc: userObserverCubit,
+        listener: (context, state) {
+          if (state is UserObserverSuccess &&
+              state.user.id != currentUser?.id) {
+            currentUser = state.user;
+            Modular.get<RecommendationManagerTileCubit>()
+                .initializeFavorites(state.user.favoriteRecommendationIDs);
+            Modular.get<RecommendationManagerTileCubit>()
+                .setCurrentUser(state.user);
+            _requestRecommendations(state.user);
+          }
+        },
         child: BlocConsumer<RecommendationManagerCubit, RecommendationManagerState>(
         bloc: recoManagerCubit,
         listener: (context, state) {

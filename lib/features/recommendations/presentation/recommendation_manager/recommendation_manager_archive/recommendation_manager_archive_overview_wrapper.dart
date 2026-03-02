@@ -51,20 +51,16 @@ class _RecommendationManagerArchiveOverviewState
     final cubit = Modular.get<RecommendationManagerArchiveCubit>();
     final userObserverCubit = Modular.get<UserObserverCubit>();
 
-    return MultiBlocListener(
-        listeners: [
-          BlocListener<UserObserverCubit, UserObserverState>(
-            bloc: userObserverCubit,
-            listener: (context, state) {
-              if (state is UserObserverSuccess &&
-                  state.user.id != currentUser?.id) {
-                currentUser = state.user;
-                Modular.get<RecommendationManagerArchiveCubit>()
-                    .getArchivedRecommendations(state.user.id.value);
-              }
-            },
-          ),
-        ],
+    return BlocListener<UserObserverCubit, UserObserverState>(
+        bloc: userObserverCubit,
+        listener: (context, state) {
+          if (state is UserObserverSuccess &&
+              state.user.id != currentUser?.id) {
+            currentUser = state.user;
+            Modular.get<RecommendationManagerArchiveCubit>()
+                .getArchivedRecommendations(state.user.id.value);
+          }
+        },
         child: BlocBuilder<RecommendationManagerArchiveCubit,
             RecommendationManagerArchiveState>(
           bloc: cubit,

@@ -63,7 +63,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   }
 
   void _initializeUserData() {
-    final userState = BlocProvider.of<UserObserverCubit>(context).state;
+    final userState = Modular.get<UserObserverCubit>().state;
     if (userState is UserObserverSuccess) {
       _loadRecommendationData(userState.user);
     }
