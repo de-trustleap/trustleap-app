@@ -1,23 +1,18 @@
 import 'dart:convert';
+
 import 'package:finanzbegleiter/constants.dart';
-import 'package:flutter/foundation.dart';
-import 'package:web/web.dart' as web;
+import 'package:finanzbegleiter/features/consent/domain/consent_local_storage.dart';
 
 class StoredConsentReader {
   static const String _localStorageConsentKey = 'cookie_consent_preferences';
 
   static bool hasConsent(ConsentCategory category) {
-    if (!kIsWeb) {
-      return true;
-    }
-
     if (category == ConsentCategory.necessary) {
       return true;
     }
 
     try {
-      final consentJson =
-          web.window.localStorage.getItem(_localStorageConsentKey);
+      final consentJson = ConsentLocalStorage.getItem(_localStorageConsentKey);
       if (consentJson == null) {
         return false;
       }

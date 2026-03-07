@@ -71,7 +71,9 @@ class _RecommendationManagerPageState
                   .recommendation_manager_delete_alert_cancel_button,
               actionButtonAction: () =>
                   _submitDeleteRecommendation(recoID, userID, userRecoID),
-              cancelButtonAction: () => navigator.pop());
+              cancelButtonAction: () => navigator.pop(),
+              icon: Icons.delete_outline,
+              isDestructive: true);
         });
   }
 
@@ -94,7 +96,9 @@ class _RecommendationManagerPageState
                   .recommendation_manager_delete_alert_cancel_button,
               actionButtonAction: () =>
                   _submitDeleteRecommendation(recoID, userID, userRecoID),
-              cancelButtonAction: () => navigator.pop());
+              cancelButtonAction: () => navigator.pop(),
+              icon: Icons.delete_outline,
+              isDestructive: true);
         });
   }
 
@@ -113,7 +117,8 @@ class _RecommendationManagerPageState
                   .recommendation_manager_finish_alert_cancel_button,
               actionButtonAction: () =>
                   _submitFinishRecommendation(recommendation, true),
-              cancelButtonAction: () => navigator.pop());
+              cancelButtonAction: () => navigator.pop(),
+              icon: Icons.check_circle_outline);
         });
   }
 
@@ -132,7 +137,9 @@ class _RecommendationManagerPageState
                   .recommendation_manager_failed_alert_cancel_button,
               actionButtonAction: () =>
                   _submitFinishRecommendation(recommendation, false),
-              cancelButtonAction: () => navigator.pop());
+              cancelButtonAction: () => navigator.pop(),
+              icon: Icons.cancel_outlined,
+              isDestructive: true);
         });
   }
 

@@ -10,6 +10,7 @@ class SentryInitialization {
         options.dsn = _dsn;
         options.sendDefaultPii = false;
         options.tracesSampleRate = 0.1;
+        // ignore: experimental_member_use
         options.profilesSampleRate = 0.1;
         options.beforeSend = _beforeSend;
       },

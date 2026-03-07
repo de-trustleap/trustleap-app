@@ -44,4 +44,9 @@ class CustomNavigatorImplementation implements CustomNavigatorBase {
   void pop() {
     Modular.to.pop();
   }
+
+  @override
+  void redirectToSubRoute(String parentPath, String targetPath) {
+    // No-op on native: sub-routes are rendered inline via CustomTabBar
+  }
 }

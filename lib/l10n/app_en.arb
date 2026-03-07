@@ -60,6 +60,10 @@
     "@register_terms_and_condition_text2": {
         "description": "The second part of the Terms and Conditions checkbox text on the registration page"
     },
+    "register_page_title": "Register",
+    "@register_page_title": {
+        "description": "Title of the registration page (native AppBar)"
+    },
     "register_privacy_policy_text": "I approve the",
     "@register_privacy_policy_text": {
         "description": "The first part of the privacy checkbox text on the registration page"
@@ -215,6 +219,10 @@
     "menuitems_recommendation_manager": "Recommendation Manager",
     "@menuitems_recommendation_manager": {
         "description": "the menu entry for the recommendation manager"
+    },
+    "menuitems_manager": "Manager",
+    "@menuitems_manager": {
+        "description": "Short menu entry for the recommendation manager in the bottom tab bar"
     },
     "menuitems_registration_codes": "Codes",
     "@menuitems_registration_codes": {
@@ -3313,6 +3321,14 @@
     "@dashboard_recommendations_filter_title": {
         "description": "Title for the dashboard recommendations filter popup"
     },
+    "recommendation_manager_filter_title": "Filter Recommendations",
+    "@recommendation_manager_filter_title": {
+        "description": "Title for the recommendation manager filter bottom sheet"
+    },
+    "campaign_manager_filter_title": "Filter Campaigns",
+    "@campaign_manager_filter_title": {
+        "description": "Title for the campaign manager filter bottom sheet"
+    },
     "dashboard_recommendations_filter_period": "Period",
     "@dashboard_recommendations_filter_period": {
         "description": "Label for the period filter"
@@ -4480,5 +4496,45 @@
     "campaign_manager_delete_alert_delete_button": "Delete campaign",
     "@campaign_manager_delete_alert_delete_button": {
         "description": "Delete button in the delete campaign alert"
+    },
+    "legals_error_title": "Content could not be loaded",
+    "@legals_error_title": {
+        "description": "Error message when legal content fails to load"
+    },
+    "settings_title": "Settings",
+    "@settings_title": {
+        "description": "Title of the Settings page"
+    },
+    "settings_theme_label": "Appearance",
+    "@settings_theme_label": {
+        "description": "Label for the theme switcher section in Settings"
+    },
+    "settings_theme_light": "Light",
+    "@settings_theme_light": {
+        "description": "Light theme option in Settings"
+    },
+    "settings_theme_dark": "Dark",
+    "@settings_theme_dark": {
+        "description": "Dark theme option in Settings"
+    },
+    "settings_legal_section_title": "Legal",
+    "@settings_legal_section_title": {
+        "description": "Section title for legal links in Settings"
+    },
+    "settings_privacy_policy": "Privacy Policy",
+    "@settings_privacy_policy": {
+        "description": "Link to privacy policy in Settings"
+    },
+    "settings_terms_and_conditions": "Terms and Conditions",
+    "@settings_terms_and_conditions": {
+        "description": "Link to terms and conditions in Settings"
+    },
+    "settings_imprint": "Imprint",
+    "@settings_imprint": {
+        "description": "Link to imprint in Settings"
+    },
+    "settings_logout": "Log out",
+    "@settings_logout": {
+        "description": "Logout button in Settings"
     }
 }

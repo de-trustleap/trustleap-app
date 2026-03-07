@@ -42,6 +42,8 @@ class RecommendationConfirmationDialogError extends StatelessWidget {
         actionButtonTitle: localization.send_recommendation_alert_yes_button,
         cancelButtonTitle: localization.send_recommendation_alert_no_button,
         actionButtonAction: action,
-        cancelButtonAction: cancelAction);
+        cancelButtonAction: cancelAction,
+        icon: Icons.error_outline,
+        isDestructive: true);
   }
 }

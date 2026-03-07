@@ -13,7 +13,9 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class LegalsPage extends StatefulWidget {
-  const LegalsPage({super.key});
+  final LegalsType? legalsType;
+
+  const LegalsPage({super.key, this.legalsType});
 
   @override
   State<LegalsPage> createState() => _LegalsPageState();
@@ -26,15 +28,30 @@ class _LegalsPageState extends State<LegalsPage> {
   void initState() {
     super.initState();
 
-    final currentRoute = Modular.to.path;
-    if (currentRoute.contains("privacy-policy")) {
-      legalsType = LegalsType.privacyPolicy;
-    } else if (currentRoute.contains("terms-and-condition")) {
-      legalsType = LegalsType.termsAndCondition;
+    if (widget.legalsType != null) {
+      legalsType = widget.legalsType!;
     } else {
-      legalsType = LegalsType.imprint;
+      final currentRoute = Modular.to.path;
+      if (currentRoute.contains("privacy-policy")) {
+        legalsType = LegalsType.privacyPolicy;
+      } else if (currentRoute.contains("terms-and-condition")) {
+        legalsType = LegalsType.termsAndCondition;
+      } else {
+        legalsType = LegalsType.imprint;
+      }
     }
     Modular.get<LegalsCubit>().getLegals(legalsType);
+  }
+
+  String _title(AppLocalizations localization) {
+    switch (legalsType) {
+      case LegalsType.privacyPolicy:
+        return localization.settings_privacy_policy;
+      case LegalsType.termsAndCondition:
+        return localization.settings_terms_and_conditions;
+      case LegalsType.imprint:
+        return localization.settings_imprint;
+    }
   }
 
   @override
@@ -44,6 +61,7 @@ class _LegalsPageState extends State<LegalsPage> {
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveHelper.of(context);
     return AuthPageTemplate(
+      title: _title(localization),
       child: Material(
         child: CenteredConstrainedWrapper(
           child: BlocBuilder<LegalsCubit, LegalsState>(

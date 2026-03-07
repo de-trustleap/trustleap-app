@@ -77,7 +77,9 @@ class _ProfileDeleteAccountFormState extends State<ProfileDeleteAccountForm> {
               cancelButtonTitle: localizations
                   .delete_account_confirmation_alert_cancel_button_title,
               actionButtonAction: submitAccountDeletion,
-              cancelButtonAction: () => navigator.pop());
+              cancelButtonAction: () => navigator.pop(),
+              icon: Icons.delete_forever,
+              isDestructive: true);
         });
   }
 

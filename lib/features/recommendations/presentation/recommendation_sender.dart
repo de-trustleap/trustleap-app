@@ -2,10 +2,10 @@ import 'package:finanzbegleiter/features/recommendations/domain/recommendation_i
 import 'package:finanzbegleiter/environment.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/custom_snackbar.dart';
+import 'package:finanzbegleiter/core/helpers/web_interop.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:web/web.dart' as web;
 
 class RecommendationSender {
   String createRecommendationLink(RecommendationItem recommendation) {
@@ -21,7 +21,7 @@ class RecommendationSender {
     required BuildContext context,
     required RecommendationItem recommendation,
     required String message,
-    Function()? onWebOpen,
+    Function()? onOpened,
   }) async {
     final link = createRecommendationLink(recommendation);
     final adaptedMessage = _prepareMessage(message, link);
@@ -32,12 +32,13 @@ class RecommendationSender {
     final convertedURL = Uri.parse(whatsappURL);
 
     if (kIsWeb) {
-      web.window.open(whatsappURL, '_blank');
-      onWebOpen?.call();
+      WebInterop.windowOpen(whatsappURL, '_blank');
+      onOpened?.call();
       return true;
     } else {
       if (await canLaunchUrl(convertedURL)) {
         await launchUrl(convertedURL, mode: LaunchMode.externalApplication);
+        onOpened?.call();
         return true;
       } else {
         if (context.mounted) {
@@ -53,7 +54,7 @@ class RecommendationSender {
     required BuildContext context,
     required RecommendationItem recommendation,
     required String message,
-    Function()? onWebOpen,
+    Function()? onOpened,
   }) async {
     final link = createRecommendationLink(recommendation);
     final adaptedMessage = _prepareMessage(message, link);
@@ -64,12 +65,13 @@ class RecommendationSender {
     final convertedURL = Uri.parse(emailURL);
 
     if (kIsWeb) {
-      web.window.open(emailURL, '_blank');
-      onWebOpen?.call();
+      WebInterop.windowOpen(emailURL, '_blank');
+      onOpened?.call();
       return true;
     } else {
       if (await canLaunchUrl(convertedURL)) {
         await launchUrl(convertedURL, mode: LaunchMode.externalApplication);
+        onOpened?.call();
         return true;
       } else {
         if (context.mounted) {

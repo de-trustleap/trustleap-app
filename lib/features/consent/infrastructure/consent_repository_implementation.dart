@@ -4,13 +4,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/core/helpers/web_interop.dart';
 import 'package:finanzbegleiter/features/consent/domain/consent_preference.dart';
 import 'package:finanzbegleiter/features/consent/domain/consent_repository.dart';
+import 'package:finanzbegleiter/features/consent/domain/consent_local_storage.dart';
 import 'package:finanzbegleiter/features/consent/infrastructure/consent_preference_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
-import 'package:web/web.dart' as web;
 
 class ConsentRepositoryImplementation implements ConsentRepository {
   static const String _localStorageConsentKey = 'cookie_consent_preferences';
@@ -27,17 +28,12 @@ class ConsentRepositoryImplementation implements ConsentRepository {
 
   @override
   bool hasConsentDecision() {
-    if (!kIsWeb) return true;
-    return web.window.localStorage.getItem(_localStorageConsentKey) != null;
+    return ConsentLocalStorage.getItem(_localStorageConsentKey) != null;
   }
 
   @override
   ConsentPreference getConsentPreferences() {
-    if (!kIsWeb) {
-      return ConsentPreference.acceptAll('1.0');
-    }
-
-    final stored = web.window.localStorage.getItem(_localStorageConsentKey);
+    final stored = ConsentLocalStorage.getItem(_localStorageConsentKey);
 
     if (stored == null) {
       return ConsentPreference.initial();
@@ -65,13 +61,11 @@ class ConsentRepositoryImplementation implements ConsentRepository {
     ConsentPreference preference,
   ) async {
     try {
-      if (!kIsWeb) return right(unit);
-
       final model = ConsentPreferenceModel.fromDomain(preference);
       final jsonString = jsonEncode(model.toStorageMap());
 
-      web.window.localStorage.setItem(_localStorageConsentKey, jsonString);
-      web.window.localStorage.setItem(_localStorageLogKey, jsonString);
+      ConsentLocalStorage.setItem(_localStorageConsentKey, jsonString);
+      ConsentLocalStorage.setItem(_localStorageLogKey, jsonString);
 
       await _logToFirestore(preference);
 
@@ -86,8 +80,6 @@ class ConsentRepositoryImplementation implements ConsentRepository {
     String policyVersion,
   ) async {
     try {
-      if (!kIsWeb) return right(unit);
-
       final preference = ConsentPreference.rejectAll(policyVersion);
       return await saveConsentPreference(preference);
     } catch (e) {
@@ -113,7 +105,7 @@ class ConsentRepositoryImplementation implements ConsentRepository {
         {
           ...model.toFirestoreMap(),
           'userId': userId,
-          'userAgent': web.window.navigator.userAgent,
+          'userAgent': WebInterop.userAgent,
           'isAnonymous': currentUser == null,
         },
         SetOptions(merge: true),
@@ -127,10 +119,10 @@ class ConsentRepositoryImplementation implements ConsentRepository {
 
   /// Gets or creates persistent anonymous session ID
   String _getOrCreateAnonymousSessionId() {
-    var sessionId = web.window.localStorage.getItem(_localStorageSessionIdKey);
+    var sessionId = ConsentLocalStorage.getItem(_localStorageSessionIdKey);
     if (sessionId == null) {
       sessionId = 'anon_${const Uuid().v4()}';
-      web.window.localStorage.setItem(_localStorageSessionIdKey, sessionId);
+      ConsentLocalStorage.setItem(_localStorageSessionIdKey, sessionId);
     }
     return sessionId;
   }

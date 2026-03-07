@@ -55,6 +55,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get register_terms_and_condition_text2 => 'zu';
 
   @override
+  String get register_page_title => 'Registrieren';
+
+  @override
   String get register_privacy_policy_text => 'Ich stimme der';
 
   @override
@@ -183,6 +186,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get menuitems_recommendation_manager => 'Empfehlungsmanager';
+
+  @override
+  String get menuitems_manager => 'Manager';
 
   @override
   String get menuitems_registration_codes => 'Codes';
@@ -2889,6 +2895,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get dashboard_recommendations_filter_title => 'Empfehlungen filtern';
 
   @override
+  String get recommendation_manager_filter_title => 'Empfehlungen filtern';
+
+  @override
+  String get campaign_manager_filter_title => 'Kampagnen filtern';
+
+  @override
   String get dashboard_recommendations_filter_period => 'Zeitraum';
 
   @override
@@ -3839,4 +3851,34 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get campaign_manager_delete_alert_delete_button => 'Kampagne löschen';
+
+  @override
+  String get legals_error_title => 'Inhalt konnte nicht geladen werden';
+
+  @override
+  String get settings_title => 'Einstellungen';
+
+  @override
+  String get settings_theme_label => 'Erscheinungsbild';
+
+  @override
+  String get settings_theme_light => 'Hell';
+
+  @override
+  String get settings_theme_dark => 'Dunkel';
+
+  @override
+  String get settings_legal_section_title => 'Rechtliches';
+
+  @override
+  String get settings_privacy_policy => 'Datenschutzerklärung';
+
+  @override
+  String get settings_terms_and_conditions => 'AGB';
+
+  @override
+  String get settings_imprint => 'Impressum';
+
+  @override
+  String get settings_logout => 'Abmelden';
 }

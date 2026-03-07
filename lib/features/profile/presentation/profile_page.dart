@@ -17,6 +17,7 @@ import 'package:finanzbegleiter/features/profile/presentation/widgets/profile_ge
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -36,14 +37,12 @@ class _ProfilePageState extends State<ProfilePage>
   void initState() {
     super.initState();
 
-    // Redirect /profile to /profile/general
-    final currentRoute = Modular.to.path;
-    if (currentRoute == RoutePaths.profilePath) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Modular.to.navigate(
-            "${RoutePaths.homePath}${RoutePaths.profilePath}${RoutePaths.profileGeneralPath}");
-      });
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      CustomNavigator.of(context).redirectToSubRoute(
+        RoutePaths.profilePath,
+        "${RoutePaths.homePath}${RoutePaths.profilePath}${RoutePaths.profileGeneralPath}",
+      );
+    });
 
     if (widget.registeredCompany == "true") {
       WidgetsBinding.instance.addPostFrameCallback((_) {

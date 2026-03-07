@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/core/widgets/shared_elements/app_bottom_sheet.dart';
 import 'package:finanzbegleiter/features/landing_pages/application/landing_page_detail/landing_page_detail_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
@@ -69,9 +70,8 @@ class _LandingPageDetailTrafficChartState
     final localization = AppLocalizations.of(context);
     final cubit = Modular.get<LandingPageDetailCubit>();
 
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
+    showAppBottomSheet(
+      context,
       builder: (context) => StatefulBuilder(
         builder: (context, setModalState) => SafeArea(
           child: Padding(

@@ -16,7 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:web/web.dart' as web;
+import 'package:finanzbegleiter/core/helpers/web_interop.dart';
 
 class RecommendationPreview extends StatefulWidget {
   final String userID;
@@ -152,7 +152,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
       context: context,
       recommendation: recommendation,
       message: message,
-      onWebOpen: () => _startComeBackToPageListener(recommendation),
+      onOpened: () => _startComeBackToPageListener(recommendation),
     );
   }
 
@@ -172,14 +172,14 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
       context: context,
       recommendation: recommendation,
       message: message,
-      onWebOpen: () => _startComeBackToPageListener(recommendation),
+      onOpened: () => _startComeBackToPageListener(recommendation),
     );
   }
 
   void _startComeBackToPageListener(RecommendationItem recommendation) {
     _visibilitySubscription?.cancel();
-    _visibilitySubscription = web.document.onVisibilityChange.listen((event) {
-      if (!web.document.hidden && mounted && !isAlertVisible) {
+    _visibilitySubscription = WebInterop.onDocumentVisibilityChange.listen((_) {
+      if (!WebInterop.documentHidden && mounted && !isAlertVisible) {
         isAlertVisible = true;
         showDialog(
             context: context,

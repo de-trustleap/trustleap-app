@@ -1,10 +1,11 @@
+import 'package:finanzbegleiter/core/refresh/refreshable_state_mixin.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/tab_bar/custom_tabbar.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_archive/recommendation_manager_archive_overview_wrapper.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_manager_overview_wrapper.dart';
+import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 class RecommendationManagerPage extends StatefulWidget {
   const RecommendationManagerPage({super.key});
@@ -15,27 +16,36 @@ class RecommendationManagerPage extends StatefulWidget {
 }
 
 class _RecommendationManagerTabBarPageState
-    extends State<RecommendationManagerPage> {
+    extends State<RecommendationManagerPage>
+    with RefreshableStateMixin {
+  Key _contentKey = UniqueKey();
+
   @override
   void initState() {
     super.initState();
 
-    // Redirect /recommendation-manager to /recommendation-manager/active
-    final currentRoute = Modular.to.path;
-    if (currentRoute == RoutePaths.recommendationManagerPath) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Modular.to.navigate(
-            "${RoutePaths.homePath}${RoutePaths.recommendationManagerPath}${RoutePaths.recommendationManagerActivePath}");
-      });
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      CustomNavigator.of(context).redirectToSubRoute(
+        RoutePaths.recommendationManagerPath,
+        "${RoutePaths.homePath}${RoutePaths.recommendationManagerPath}${RoutePaths.recommendationManagerActivePath}",
+      );
+    });
+  }
+
+  @override
+  Future<void> onRefresh() async {
+    setState(() => _contentKey = UniqueKey());
   }
 
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
 
-    return CustomTabBar(
-      tabs: getCustomTabItems(localization),
+    return KeyedSubtree(
+      key: ValueKey(_contentKey),
+      child: CustomTabBar(
+        tabs: getCustomTabItems(localization),
+      ),
     );
   }
 

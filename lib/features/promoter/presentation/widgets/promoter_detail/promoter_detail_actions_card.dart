@@ -103,6 +103,8 @@ class PromoterDetailActionsCard extends StatelessWidget {
         cancelButtonTitle:
             localization.promoter_overview_delete_promoter_alert_cancel_button,
         cancelButtonAction: () => Navigator.of(dialogContext).pop(),
+        icon: Icons.delete_outline,
+        isDestructive: true,
       ),
     );
   }

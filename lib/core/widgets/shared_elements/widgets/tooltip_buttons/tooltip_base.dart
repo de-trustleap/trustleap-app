@@ -1,5 +1,8 @@
+import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/helpers/device_detection.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/clickable_link.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/custom_alert_dialog.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class TooltipBase extends StatefulWidget {
@@ -84,6 +87,20 @@ class _TooltipBaseState extends State<TooltipBase> {
     _isMouseInside = false;
   }
 
+  void _showNativeDialog(BuildContext context) {
+    final navigator = CustomNavigator.of(context);
+    showDialog(
+      context: context,
+      builder: (_) => CustomAlertDialog(
+        title: '',
+        message: widget.text,
+        actionButtonTitle: 'OK',
+        actionButtonAction: () => navigator.pop(),
+        icon: Icons.info_outline,
+      ),
+    );
+  }
+
   @override
   void dispose() {
     _hideTooltip();
@@ -92,7 +109,12 @@ class _TooltipBaseState extends State<TooltipBase> {
 
   @override
   Widget build(BuildContext context) {
-    if (DeviceDetection.isTouchDevice(context)) {
+    if (!kIsWeb) {
+      return GestureDetector(
+        onTap: () => _showNativeDialog(context),
+        child: widget.child,
+      );
+    } else if (DeviceDetection.isTouchDevice(context)) {
       // On touch devices: use tap gesture
       return GestureDetector(
         onTap: () => _showTooltip(context),

@@ -60,6 +60,10 @@
     "@register_terms_and_condition_text2": {
         "description": "Der zweite Teil des AGB Checkbox Textes auf der Registrieren Seite"
     },
+    "register_page_title": "Registrieren",
+    "@register_page_title": {
+        "description": "Titel der Registrierungs-Seite (native AppBar)"
+    },
     "register_privacy_policy_text": "Ich stimme der",
     "@register_privacy_policy_text": {
         "description": "Der erste Teil des Datenschutz Checkbox Textes auf der Registrieren Seite"
@@ -215,6 +219,10 @@
     "menuitems_recommendation_manager": "Empfehlungsmanager",
     "@menuitems_recommendation_manager": {
         "description": "Der Menüpunkt für den Empfehlungsmanager"
+    },
+    "menuitems_manager": "Manager",
+    "@menuitems_manager": {
+        "description": "Kurzer Menüpunkt für den Empfehlungsmanager in der Bottom TabBar"
     },
     "menuitems_registration_codes": "Codes",
     "@menuitems_registration_codes": {
@@ -3313,6 +3321,14 @@
     "@dashboard_recommendations_filter_title": {
         "description": "Titel für das Filter-Popup der Dashboard-Empfehlungen"
     },
+    "recommendation_manager_filter_title": "Empfehlungen filtern",
+    "@recommendation_manager_filter_title": {
+        "description": "Titel für das Filter-Bottom-Sheet im Empfehlungsmanager"
+    },
+    "campaign_manager_filter_title": "Kampagnen filtern",
+    "@campaign_manager_filter_title": {
+        "description": "Titel für das Filter-Bottom-Sheet im Kampagnenmanager"
+    },
     "dashboard_recommendations_filter_period": "Zeitraum",
     "@dashboard_recommendations_filter_period": {
         "description": "Label für den Zeitraum-Filter"
@@ -4480,5 +4496,45 @@
     "campaign_manager_delete_alert_delete_button": "Kampagne löschen",
     "@campaign_manager_delete_alert_delete_button": {
         "description": "Löschen-Button im Kampagne-Löschen-Alert"
+    },
+    "legals_error_title": "Inhalt konnte nicht geladen werden",
+    "@legals_error_title": {
+        "description": "Fehlertitel wenn Legals-Inhalt nicht geladen werden kann"
+    },
+    "settings_title": "Einstellungen",
+    "@settings_title": {
+        "description": "Titel der nativen Settings-Seite"
+    },
+    "settings_theme_label": "Erscheinungsbild",
+    "@settings_theme_label": {
+        "description": "Label für den Theme-Switch in den Settings"
+    },
+    "settings_theme_light": "Hell",
+    "@settings_theme_light": {
+        "description": "Light-Theme Option in den Settings"
+    },
+    "settings_theme_dark": "Dunkel",
+    "@settings_theme_dark": {
+        "description": "Dark-Theme Option in den Settings"
+    },
+    "settings_legal_section_title": "Rechtliches",
+    "@settings_legal_section_title": {
+        "description": "Abschnittstitel für rechtliche Links in den Settings"
+    },
+    "settings_privacy_policy": "Datenschutzerklärung",
+    "@settings_privacy_policy": {
+        "description": "Link zur Datenschutzerklärung in den Settings"
+    },
+    "settings_terms_and_conditions": "AGB",
+    "@settings_terms_and_conditions": {
+        "description": "Link zu den AGB in den Settings"
+    },
+    "settings_imprint": "Impressum",
+    "@settings_imprint": {
+        "description": "Link zum Impressum in den Settings"
+    },
+    "settings_logout": "Abmelden",
+    "@settings_logout": {
+        "description": "Logout-Button in den Settings"
     }
 }

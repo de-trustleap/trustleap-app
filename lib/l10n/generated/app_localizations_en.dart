@@ -55,6 +55,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get register_terms_and_condition_text2 => '';
 
   @override
+  String get register_page_title => 'Register';
+
+  @override
   String get register_privacy_policy_text => 'I approve the';
 
   @override
@@ -177,6 +180,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get menuitems_recommendation_manager => 'Recommendation Manager';
+
+  @override
+  String get menuitems_manager => 'Manager';
 
   @override
   String get menuitems_registration_codes => 'Codes';
@@ -2839,6 +2845,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dashboard_recommendations_filter_title => 'Filter Recommendations';
 
   @override
+  String get recommendation_manager_filter_title => 'Filter Recommendations';
+
+  @override
+  String get campaign_manager_filter_title => 'Filter Campaigns';
+
+  @override
   String get dashboard_recommendations_filter_period => 'Period';
 
   @override
@@ -3775,4 +3787,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get campaign_manager_delete_alert_delete_button => 'Delete campaign';
+
+  @override
+  String get legals_error_title => 'Content could not be loaded';
+
+  @override
+  String get settings_title => 'Settings';
+
+  @override
+  String get settings_theme_label => 'Appearance';
+
+  @override
+  String get settings_theme_light => 'Light';
+
+  @override
+  String get settings_theme_dark => 'Dark';
+
+  @override
+  String get settings_legal_section_title => 'Legal';
+
+  @override
+  String get settings_privacy_policy => 'Privacy Policy';
+
+  @override
+  String get settings_terms_and_conditions => 'Terms and Conditions';
+
+  @override
+  String get settings_imprint => 'Imprint';
+
+  @override
+  String get settings_logout => 'Log out';
 }

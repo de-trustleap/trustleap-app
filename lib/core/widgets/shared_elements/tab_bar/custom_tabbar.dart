@@ -1,9 +1,11 @@
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import 'custom_tabbar_mixin.dart';
 import 'custom_tabbar_mobile.dart';
+import 'native_segmented_tab_bar.dart';
 
 class CustomTabItem {
   final String title;
@@ -50,6 +52,9 @@ class _CustomTabBarState extends State<CustomTabBar>
 
   @override
   Widget build(BuildContext context) {
+    if (!kIsWeb) {
+      return NativeSegmentedTabBar(tabs: widget.tabs);
+    }
     final responsiveValue = ResponsiveHelper.of(context);
     if (responsiveValue.isMobile) {
       return CustomTabBarMobile(tabs: widget.tabs);

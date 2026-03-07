@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/core/widgets/shared_elements/app_bottom_sheet.dart';
 import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
@@ -7,11 +8,13 @@ import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/expanded_se
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_list_header.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_filter.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_manager_expandable_filter.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_manager_filter_bottom_sheet.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/personalized_recommendation_list.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/campaign_recommendation_overview/campaign_recommendation_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class RecommendationManagerOverview extends StatefulWidget {
   final List<UserRecommendation> recommendations;
@@ -129,9 +132,20 @@ class _RecommendationManagerOverviewState
   }
 
   void onFilterPressed() {
-    setState(() {
-      _filterIsExpanded = !_filterIsExpanded;
-    });
+    if (ResponsiveBreakpoints.of(context).isMobile) {
+      showAppBottomSheet(
+        context,
+        builder: (_) => RecommendationManagerFilterBottomSheet(
+          isArchive: false,
+          isCampaign: _selectedType == RecommendationType.campaign,
+          onFilterChanged: onFilterChanged,
+        ),
+      );
+    } else {
+      setState(() {
+        _filterIsExpanded = !_filterIsExpanded;
+      });
+    }
   }
 
   void onFilterChanged(RecommendationOverviewFilterStates filterStates) {

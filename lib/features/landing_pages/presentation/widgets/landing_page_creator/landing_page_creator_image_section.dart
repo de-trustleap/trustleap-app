@@ -7,7 +7,8 @@ import 'package:finanzbegleiter/core/id.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/image_upload/image_dropped_file.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/image_upload/image_section.dart';
-import 'package:finanzbegleiter/core/widgets/shared_elements/image_upload/image_upload_dropzone.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/image_upload/image_upload_dropzone.dart'
+    if (dart.library.io) 'package:finanzbegleiter/core/widgets/shared_elements/image_upload/image_upload_dropzone_stub.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';

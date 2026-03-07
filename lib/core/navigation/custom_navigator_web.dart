@@ -39,4 +39,11 @@ class CustomNavigatorImplementation implements CustomNavigatorBase {
   void pop() {
     Modular.to.pop();
   }
+
+  @override
+  void redirectToSubRoute(String parentPath, String targetPath) {
+    if (Modular.to.path == parentPath) {
+      navigate(targetPath);
+    }
+  }
 }
