@@ -10,42 +10,34 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/clickable_link.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/loading_indicator.dart';
-import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
-import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
-import 'package:finanzbegleiter/features/recommendations/domain/recommendation_detail_args.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_manager_list_tile_content.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_manager_list_tile_helper.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_manager_notes_textfield.dart';
-import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class RecommendationManagerBaseTile extends StatefulWidget {
+class RecommendationManagerDetailContent extends StatefulWidget {
   final UserRecommendation recommendation;
-  final Function(UserRecommendation) onFavoritePressed;
   final Function(UserRecommendation, bool, bool, bool, bool) onUpdate;
-  final Widget Function(UserRecommendation) buildTitle;
   final List<Widget> Function(UserRecommendation, bool isLoading) buildContent;
   final List<Widget> Function(UserRecommendation)? buildBottomRowTrailing;
 
-  const RecommendationManagerBaseTile({
+  const RecommendationManagerDetailContent({
     super.key,
     required this.recommendation,
-    required this.onFavoritePressed,
     required this.onUpdate,
-    required this.buildTitle,
     required this.buildContent,
     this.buildBottomRowTrailing,
   });
 
   @override
-  State<RecommendationManagerBaseTile> createState() =>
-      _RecommendationManagerBaseTileState();
+  State<RecommendationManagerDetailContent> createState() =>
+      _RecommendationManagerDetailContentState();
 }
 
-class _RecommendationManagerBaseTileState
-    extends State<RecommendationManagerBaseTile> {
+class _RecommendationManagerDetailContentState
+    extends State<RecommendationManagerDetailContent> {
   late UserRecommendation _recommendation;
   bool _addNote = false;
   Timer? _viewTimer;
@@ -55,6 +47,10 @@ class _RecommendationManagerBaseTileState
   void initState() {
     super.initState();
     _recommendation = widget.recommendation;
+    _viewTimer = Timer(const Duration(seconds: 3), () {
+      Modular.get<RecommendationManagerTileCubit>()
+          .markAsViewed(_recommendation.id.value);
+    });
   }
 
   @override
@@ -69,26 +65,11 @@ class _RecommendationManagerBaseTileState
     });
   }
 
-  void _startViewTimer(String recommendationID) {
-    _viewTimer?.cancel();
-    _viewTimer = Timer(const Duration(seconds: 3), () {
-      Modular.get<RecommendationManagerTileCubit>()
-          .markAsViewed(recommendationID);
-    });
-  }
-
-  void _markAsViewedAndCancelTimer(String recommendationID) {
-    _viewTimer?.cancel();
-    Modular.get<RecommendationManagerTileCubit>()
-        .markAsViewed(recommendationID);
-  }
-
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final navigator = CustomNavigator.of(context);
-    final responsiveValue = ResponsiveHelper.of(context);
     final cubit = Modular.get<RecommendationManagerTileCubit>();
 
     return BlocConsumer<RecommendationManagerTileCubit,
@@ -99,7 +80,6 @@ class _RecommendationManagerBaseTileState
               current.recommendation.id == _recommendation.id) ||
           (current is RecommendationSetFinishedSuccessState &&
               current.recommendation.id == _recommendation.id) ||
-          (current is RecommendationManagerTileFavoriteUpdatedState) ||
           (current is RecommendationManagerTileViewedState &&
               current.recommendationID == _recommendation.id.value),
       listener: (context, state) {
@@ -118,25 +98,19 @@ class _RecommendationManagerBaseTileState
               state.settedNotes ?? false);
         } else if (state is RecommendationSetFinishedSuccessState) {
           widget.onUpdate(state.recommendation, true, false, false, false);
-        } else if (state is RecommendationManagerTileFavoriteUpdatedState) {
-          setState(() {
-            _recommendation = state.recommendation;
-          });
+          Navigator.of(context).pop();
         } else if (state is RecommendationManagerTileViewedState) {
           final hadUnseenChanges = _recommendation
               .hasUnseenChanges(cubit.currentUser?.id.value ?? "");
-
           if (hadUnseenChanges) {
             _startBackgroundFadeAnimation();
           }
-
           setState(() {
             final updatedViewedByUsers =
                 List<LastViewed>.of(_recommendation.viewedByUsers);
             updatedViewedByUsers
                 .removeWhere((view) => view.userID == state.lastViewed.userID);
             updatedViewedByUsers.add(state.lastViewed);
-
             _recommendation =
                 _recommendation.copyWith(viewedByUsers: updatedViewedByUsers);
           });
@@ -146,57 +120,10 @@ class _RecommendationManagerBaseTileState
         final isLoading = state is RecommendationSetStatusLoadingState &&
             state.recommendation.id.value == _recommendation.id.value;
 
-        if (responsiveValue.isMobile) {
-          return InkWell(
-            onTap: () => navigator.pushNamed(
-              RoutePaths.homePath +
-                  RoutePaths.recommendationManagerActiveDetailPath,
-              arguments: RecommendationDetailArgs(
-                recommendation: _recommendation,
-                onFavoritePressed: widget.onFavoritePressed,
-                onUpdate: widget.onUpdate,
-                buildContent: widget.buildContent,
-                buildBottomRowTrailing: widget.buildBottomRowTrailing,
-              ),
-            ),
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: Row(
-                children: [
-                  Expanded(child: widget.buildTitle(_recommendation)),
-                  const Icon(Icons.chevron_right, color: Colors.grey),
-                ],
-              ),
-            ),
-          );
-        }
-
-        return Container(
-          color: themeData.colorScheme.surface,
-          child: CollapsibleTile(
-            backgroundColor: Colors.transparent,
-            showDivider: false,
-            onExpansionChanged: (isExpanded) {
-              if (isExpanded) {
-                _startViewTimer(_recommendation.id.value);
-              } else {
-                _markAsViewedAndCancelTimer(_recommendation.id.value);
-              }
-            },
-            titleWidget: widget.buildTitle(_recommendation),
-            backgroundOverlay: AnimatedContainer(
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.easeOut,
-              decoration: BoxDecoration(
-                color: themeData.colorScheme.primary.withValues(
-                    alpha:
-                        RecommendationManagerListTileHelper.getOverlayOpacity(
-                            _recommendation,
-                            cubit.currentUser?.id.value ?? "",
-                            _shouldAnimateToSurface)),
-              ),
-            ),
+        return SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AnimatedSize(
                 duration: const Duration(milliseconds: 300),
@@ -247,11 +174,8 @@ class _RecommendationManagerBaseTileState
                         navigator.openURLInNewTab(
                             "$baseURL?p=${_recommendation.recommendation?.promoterName ?? ""}&id=${_recommendation.recoID}");
                       }),
-                  if (isLoading) ...[
-                    const LoadingIndicator(size: 20)
-                  ],
+                  if (isLoading) const LoadingIndicator(size: 20),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       if (widget.buildBottomRowTrailing != null)
                         ...widget.buildBottomRowTrailing!(_recommendation),
@@ -281,7 +205,7 @@ class _RecommendationManagerBaseTileState
                 const SizedBox(height: 16),
                 RecommendationManagerNotesTextfield(
                     recommendation: _recommendation,
-                    isEditing: _addNote ? true : false,
+                    isEditing: _addNote,
                     onSave: (notes) =>
                         Modular.get<RecommendationManagerTileCubit>()
                             .setNotes(

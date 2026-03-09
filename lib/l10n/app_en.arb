@@ -116,6 +116,10 @@
     "@login_register_text": {
         "description": "Register text on the login page"
     },
+    "login_register_suffix": " and get started",
+    "@login_register_suffix": {
+        "description": "Text after the register link on the login page"
+    },
     "login_permission_error_message": "An error occurred while querying the permissions",
     "@login_permission_error_message": {
         "description": "Error message on the login page if the permissions could not be queried"
@@ -4536,5 +4540,17 @@
     "settings_logout": "Log out",
     "@settings_logout": {
         "description": "Logout button in Settings"
+    },
+    "profile_settings_tab": "Settings",
+    "@profile_settings_tab": {
+        "description": "Settings tab in profile"
+    },
+    "settings_dark_mode_subtitle": "Reduces eye strain in low light",
+    "@settings_dark_mode_subtitle": {
+        "description": "Dark mode subtitle in settings"
+    },
+    "settings_app_version": "App Version",
+    "@settings_app_version": {
+        "description": "App version in settings"
     }
 }

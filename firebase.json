@@ -31,15 +31,15 @@
         "platforms": {
             "android": {
                 "default": {
-                    "projectId": "trustleap-staging",
-                    "appId": "1:326519245330:android:2bbd3db09b27755324e6cb",
+                    "projectId": "finanzwegbegleiter",
+                    "appId": "1:962239137198:android:8e8af086ccdef55544743f",
                     "fileOutput": "android/app/google-services.json"
                 }
             },
             "ios": {
                 "default": {
-                    "projectId": "trustleap-staging",
-                    "appId": "1:326519245330:ios:176587356e92ff5224e6cb",
+                    "projectId": "finanzwegbegleiter",
+                    "appId": "1:962239137198:ios:1179d0d3d875c4ba44743f",
                     "uploadDebugSymbols": false,
                     "fileOutput": "ios/Runner/GoogleService-Info.plist"
                 }
@@ -51,6 +51,22 @@
                         "android": "1:326519245330:android:2bbd3db09b27755324e6cb",
                         "ios": "1:326519245330:ios:176587356e92ff5224e6cb",
                         "web": "1:326519245330:web:f330ea78c3a5415424e6cb"
+                    }
+                },
+                "lib/firebase_options_staging.dart": {
+                    "projectId": "trustleap-staging",
+                    "configurations": {
+                        "android": "1:326519245330:android:6d87caf930eb145924e6cb",
+                        "ios": "1:326519245330:ios:5dbcbf8e1394ba9924e6cb",
+                        "web": "1:326519245330:web:c77040d973d1308624e6cb"
+                    }
+                },
+                "lib/firebase_options_prod.dart": {
+                    "projectId": "finanzwegbegleiter",
+                    "configurations": {
+                        "android": "1:962239137198:android:8e8af086ccdef55544743f",
+                        "ios": "1:962239137198:ios:1179d0d3d875c4ba44743f",
+                        "web": "1:962239137198:web:cae5870aef9e767b44743f"
                     }
                 }
             }

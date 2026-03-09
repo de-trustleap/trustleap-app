@@ -29,11 +29,11 @@ class _RecommendationsPageState extends State<RecommendationsPage>
         width: double.infinity,
         decoration: BoxDecoration(color: themeData.colorScheme.surface),
         child: ListView(children: [
-          SizedBox(height: responsiveValue.isMobile ? 40 : 80),
+          SizedBox(height: responsiveValue.isMobile ? 16 : 80),
           CenteredConstrainedWrapper(
             child: RecommendationsForm(key: _contentKey),
           ),
-          SizedBox(height: responsiveValue.isMobile ? 40 : 80)
+          SizedBox(height: responsiveValue.isMobile ? 16 : 80)
         ]));
   }
 }

@@ -116,6 +116,10 @@
     "@login_register_text": {
         "description": "Registrieren Text auf der Login Seite"
     },
+    "login_register_suffix": " und starten",
+    "@login_register_suffix": {
+        "description": "Text nach dem Registrieren Link auf der Login Seite"
+    },
     "login_permission_error_message": "Bei der Abfrage der Berechtigungen ist ein Fehler aufgetreten",
     "@login_permission_error_message": {
         "description": "Fehlermeldung auf der Login Seite wenn die Permissions nicht abgefragt werden konnten"
@@ -4536,5 +4540,17 @@
     "settings_logout": "Abmelden",
     "@settings_logout": {
         "description": "Logout-Button in den Settings"
+    },
+    "profile_settings_tab": "Einstellungen",
+    "@profile_settings_tab": {
+        "description": "Settings Tab im Profil"
+    },
+    "settings_dark_mode_subtitle": "Reduziert Augenbelastung bei schlechtem Licht",
+    "@settings_dark_mode_subtitle": {
+        "description": "Dark Mode Untertitel in den Settings"
+    },
+    "settings_app_version": "App Version",
+    "@settings_app_version": {
+        "description": "App Version in den Settings"
     }
 }

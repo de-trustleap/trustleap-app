@@ -259,7 +259,7 @@ class _RecommendationManagerPageState
           callback: () => {_requestRecommendations(currentUser)});
     } else if (state is RecommendationGetRecosSuccessState) {
       return ListView(children: [
-        SizedBox(height: responsiveValue.isMobile ? 40 : 80),
+        SizedBox(height: responsiveValue.isMobile ? 16 : 80),
         CenteredConstrainedWrapper(
           child: RecommendationManagerOverview(
               recommendations: state.recoItems,

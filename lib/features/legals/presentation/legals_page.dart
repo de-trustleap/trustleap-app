@@ -75,6 +75,7 @@ class _LegalsPageState extends State<LegalsPage> {
                   final baseFontSize = baseTextStyle?.fontSize ?? 16.0;
 
                   return SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Html(
                       data: state.text ?? "",
                       style: {

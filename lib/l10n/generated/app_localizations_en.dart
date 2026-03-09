@@ -97,6 +97,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login_register_text => 'You don\'\'t have an account? ';
 
   @override
+  String get login_register_suffix => ' and get started';
+
+  @override
   String get login_permission_error_message =>
       'An error occurred while querying the permissions';
 
@@ -3817,4 +3820,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settings_logout => 'Log out';
+
+  @override
+  String get profile_settings_tab => 'Settings';
+
+  @override
+  String get settings_dark_mode_subtitle => 'Reduces eye strain in low light';
+
+  @override
+  String get settings_app_version => 'App Version';
 }

@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/bottom_sheet_wrapper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/features/promoter/presentation/widgets/promoter_overview/promoter_overview_header_expandable_filter.dart';
 import 'package:flutter/material.dart';
@@ -35,37 +36,9 @@ class _PromoterOverviewFilterBottomSheetState
     final localization = AppLocalizations.of(context);
     final themeData = Theme.of(context);
 
-    return Padding(
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom +
-            MediaQuery.of(context).padding.bottom,
-        left: 16,
-        right: 16,
-        top: 16,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                localization.promoter_overview_filter_title,
-                style: themeData.textTheme.bodyLarge!
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
-              IconButton(
-                onPressed: () => Navigator.of(context).pop(),
-                icon: const Icon(Icons.close),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          _buildFilterContent(context, themeData, localization),
-          const SizedBox(height: 16),
-        ],
-      ),
+    return BottomSheetWrapper(
+      title: localization.promoter_overview_filter_title,
+      child: _buildFilterContent(context, themeData, localization),
     );
   }
 

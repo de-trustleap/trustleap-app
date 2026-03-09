@@ -105,7 +105,7 @@ class _RecommendationManagerArchiveOverviewState
     } else if (state
         is RecommendationManagerArchiveGetRecommendationsSuccessState) {
       return ListView(children: [
-        SizedBox(height: responsiveValue.isMobile ? 40 : 80),
+        SizedBox(height: responsiveValue.isMobile ? 16 : 80),
         CenteredConstrainedWrapper(
             child: RecommendationManagerArchiveOverview(
                 recommendations: state.recommendations,

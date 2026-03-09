@@ -1,14 +1,13 @@
 import 'package:finanzbegleiter/core/refresh/native_refresh_notifier.dart';
 import 'package:finanzbegleiter/core/refresh/refresh_scope.dart';
+import 'package:finanzbegleiter/core/router_observer.dart';
 import 'package:finanzbegleiter/core/widgets/page_wrapper/custom_bottom_tabbar.dart';
-import 'package:finanzbegleiter/features/dashboard/presentation/dashboard_page.dart';
+import 'package:finanzbegleiter/core/widgets/page_wrapper/native_appbar_override_scope.dart';
 import 'package:finanzbegleiter/features/menu/presentation/appbar_native.dart';
-import 'package:finanzbegleiter/features/profile/presentation/profile_page.dart';
-import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_page.dart';
-import 'package:finanzbegleiter/features/recommendations/presentation/recommendations_page.dart';
-import 'package:finanzbegleiter/features/settings/presentation/native_settings_page.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class MobileAppTemplate extends StatefulWidget {
   const MobileAppTemplate({super.key});
@@ -18,120 +17,142 @@ class MobileAppTemplate extends StatefulWidget {
 }
 
 class _MobileAppTemplateState extends State<MobileAppTemplate> {
-  int _currentIndex = 0;
-  final Set<int> _visitedTabs = {0};
-  final List<NativeRefreshNotifier> _refreshNotifiers =
-      List.generate(4, (_) => NativeRefreshNotifier());
+  final NativeRefreshNotifier _refreshNotifier = NativeRefreshNotifier();
+  final ValueNotifier<String?> _titleOverride = ValueNotifier(null);
+  final ValueNotifier<List<Widget>?> _actionsOverride = ValueNotifier(null);
+  final RouterOutletObserver _routerOutletObserver = RouterOutletObserver();
 
-  static const int _tabCount = 4;
+  static const List<String> _tabPaths = [
+    RoutePaths.dashboardPath,
+    RoutePaths.recommendationsPath,
+    RoutePaths.recommendationManagerPath,
+    RoutePaths.settingsPath,
+  ];
 
   @override
-  void dispose() {
-    for (final notifier in _refreshNotifiers) {
-      notifier.dispose();
-    }
-    super.dispose();
-  }
-
-  Widget _buildPage(int index) {
-    switch (index) {
-      case 0:
-        return const DashboardPage();
-      case 1:
-        return const RecommendationsPage();
-      case 2:
-        return const RecommendationManagerPage();
-      case 3:
-        return const NativeSettingsPage();
-      default:
-        return const SizedBox.shrink();
-    }
-  }
-
-  Future<void> _onRefresh() {
-    return _refreshNotifiers[_currentIndex].requestRefresh();
-  }
-
-  void _onTabSelected(int index) {
-    setState(() {
-      _visitedTabs.add(index);
-      _currentIndex = index;
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Modular.to.navigate(RoutePaths.homePath + RoutePaths.dashboardPath);
     });
   }
 
+  @override
+  void dispose() {
+    _refreshNotifier.dispose();
+    _titleOverride.dispose();
+    _actionsOverride.dispose();
+    super.dispose();
+  }
+
+  int _getTabIndex(String path) {
+    final index = _tabPaths.indexWhere((tab) =>
+        path == RoutePaths.homePath + tab ||
+        path.startsWith(RoutePaths.homePath + tab + '/'));
+    return index >= 0 ? index : 0;
+  }
+
+  String _defaultTitle(
+      String path, AppLocalizations l, List<String> tabLabels) {
+    final tabIndex = _tabPaths.indexWhere((tab) =>
+        path == RoutePaths.homePath + tab ||
+        path.startsWith(RoutePaths.homePath + tab + '/'));
+    if (tabIndex >= 0) return tabLabels[tabIndex];
+    if (path.startsWith(RoutePaths.homePath + RoutePaths.profilePath)) {
+      return l.menuitems_profile;
+    }
+    return '';
+  }
+
+  void _onTabSelected(int index) {
+    Modular.to.navigate(RoutePaths.homePath + _tabPaths[index]);
+  }
+
   void _openProfile() {
-    final localization = AppLocalizations.of(context);
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (_) => Scaffold(
-        appBar: CustomAppBarNative(title: localization.menuitems_profile),
-        body: const ProfilePage(),
-      ),
-    ));
+    Modular.to.pushNamed(RoutePaths.homePath + RoutePaths.profilePath);
   }
 
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
 
-    final labels = [
+    final tabLabels = [
       localization.menuitems_dashboard,
       localization.menuitems_recommendations,
       localization.menuitems_recommendation_manager,
       localization.settings_title,
     ];
 
-    return Scaffold(
-      appBar: CustomAppBarNative(
-        title: labels[_currentIndex],
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.person_outline),
-            onPressed: _openProfile,
+    final profileButton = IconButton(
+      icon: const Icon(Icons.person_outline),
+      onPressed: _openProfile,
+    );
+
+    return ListenableBuilder(
+      listenable:
+          Listenable.merge([Modular.to, _titleOverride, _actionsOverride]),
+      builder: (context, _) {
+        final path = Modular.to.path;
+        final canPop = Modular.to.navigateHistory.length > 1;
+        final isOnProfileRoute =
+            path.startsWith(RoutePaths.homePath + RoutePaths.profilePath);
+
+        return Scaffold(
+          appBar: CustomAppBarNative(
+            leading: canPop
+                ? BackButton(
+                    onPressed: () =>
+                        _routerOutletObserver.navigator?.maybePop())
+                : null,
+            title: _titleOverride.value ??
+                _defaultTitle(path, localization, tabLabels),
+            actions: _actionsOverride.value ??
+                (isOnProfileRoute ? null : [profileButton]),
           ),
-        ],
-      ),
-      body: ScrollConfiguration(
-        behavior: const _AlwaysScrollableBehavior(),
-        child: RefreshIndicator.adaptive(
-          onRefresh: _onRefresh,
-          child: IndexedStack(
-            index: _currentIndex,
-            children: List.generate(_tabCount, (i) {
-              if (!_visitedTabs.contains(i)) return const SizedBox.shrink();
-              return RefreshScope(
-                notifier: _refreshNotifiers[i],
-                child: _buildPage(i),
-              );
-            }),
+          body: ScrollConfiguration(
+            behavior: const _AlwaysScrollableBehavior(),
+            child: RefreshIndicator.adaptive(
+              onRefresh: () => _refreshNotifier.requestRefresh(),
+              child: RefreshScope(
+                notifier: _refreshNotifier,
+                child: NativeAppBarOverrideScope(
+                  titleOverride: _titleOverride,
+                  actionsOverride: _actionsOverride,
+                  child: RouterOutlet(
+                    observers: [_routerOutletObserver],
+                  ),
+                ),
+              ),
+            ),
           ),
-        ),
-      ),
-      bottomNavigationBar: CustomBottomTabbar(
-        selectedIndex: _currentIndex,
-        onTabSelected: _onTabSelected,
-        items: [
-          CustomBottomTabItem(
-            icon: Icons.pie_chart_outline,
-            selectedIcon: Icons.pie_chart,
-            label: localization.menuitems_dashboard,
+          bottomNavigationBar: CustomBottomTabbar(
+            selectedIndex: _getTabIndex(path),
+            onTabSelected: _onTabSelected,
+            items: [
+              CustomBottomTabItem(
+                icon: Icons.pie_chart_outline,
+                selectedIcon: Icons.pie_chart,
+                label: localization.menuitems_dashboard,
+              ),
+              CustomBottomTabItem(
+                icon: Icons.lightbulb_outline,
+                selectedIcon: Icons.lightbulb,
+                label: localization.menuitems_recommendations,
+              ),
+              CustomBottomTabItem(
+                icon: Icons.checklist_outlined,
+                selectedIcon: Icons.checklist,
+                label: localization.menuitems_manager,
+              ),
+              CustomBottomTabItem(
+                icon: Icons.settings_outlined,
+                selectedIcon: Icons.settings,
+                label: localization.settings_title,
+              ),
+            ],
           ),
-          CustomBottomTabItem(
-            icon: Icons.lightbulb_outline,
-            selectedIcon: Icons.lightbulb,
-            label: localization.menuitems_recommendations,
-          ),
-          CustomBottomTabItem(
-            icon: Icons.checklist_outlined,
-            selectedIcon: Icons.checklist,
-            label: localization.menuitems_manager,
-          ),
-          CustomBottomTabItem(
-            icon: Icons.settings_outlined,
-            selectedIcon: Icons.settings,
-            label: localization.settings_title,
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

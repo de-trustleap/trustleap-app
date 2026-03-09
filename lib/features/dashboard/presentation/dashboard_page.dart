@@ -29,7 +29,7 @@ class _DashboardPageState extends State<DashboardPage>
         width: double.infinity,
         decoration: BoxDecoration(color: themeData.colorScheme.surface),
         child: ListView(children: [
-          SizedBox(height: responsiveValue.isMobile ? 40 : 80),
+          SizedBox(height: responsiveValue.isMobile ? 16 : 80),
           CenteredConstrainedWrapper(
             child: DashboardOverview(key: _contentKey),
           )

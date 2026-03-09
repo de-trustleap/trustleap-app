@@ -9,7 +9,7 @@ class WebInterop {
       web.window.open(url, target);
 
   static Stream<void> get onDocumentVisibilityChange =>
-      web.document.onVisibilityChange.map((_) => null);
+      web.document.onVisibilityChange.map((_) {});
 
   static bool get documentHidden => web.document.hidden;
 }

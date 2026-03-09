@@ -97,6 +97,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get login_register_text => 'Du hast kein Konto? ';
 
   @override
+  String get login_register_suffix => ' und starten';
+
+  @override
   String get login_permission_error_message =>
       'Bei der Abfrage der Berechtigungen ist ein Fehler aufgetreten';
 
@@ -3881,4 +3884,14 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settings_logout => 'Abmelden';
+
+  @override
+  String get profile_settings_tab => 'Einstellungen';
+
+  @override
+  String get settings_dark_mode_subtitle =>
+      'Reduziert Augenbelastung bei schlechtem Licht';
+
+  @override
+  String get settings_app_version => 'App Version';
 }

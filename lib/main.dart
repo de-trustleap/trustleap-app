@@ -54,11 +54,13 @@ Future<void> main() async {
 Future<void> _runApp(bool hasStatisticsConsent) async {
   final environment = Environment();
 
-  await Firebase.initializeApp(
-    options: environment.isStaging()
-        ? DefaultFirebaseOptionsStaging.currentPlatform
-        : DefaultFirebaseOptionsProd.currentPlatform,
-  );
+  if (Firebase.apps.isEmpty) {
+    await Firebase.initializeApp(
+      options: environment.isStaging()
+          ? DefaultFirebaseOptionsStaging.currentPlatform
+          : DefaultFirebaseOptionsProd.currentPlatform,
+    );
+  }
 
   await AppCheckInitializer.initialize(
     webToken: kIsWeb ? environment.getAppCheckToken() : null,
@@ -131,28 +133,23 @@ void routeToInitial(AuthStatus status, CustomNavigatorBase navigator) {
   }
 }
 
-ThemeData getTheme(BuildContext context, ThemeState state) {
-  if (MediaQuery.of(context).size.width < 600) {
-    if (state is ThemeChanged) {
-      if (state.status == ThemeStatus.light) {
-        return MobileAppTheme.lightTheme;
-      } else {
-        return MobileAppTheme.darkTheme;
-      }
-    } else {
-      return MobileAppTheme.lightTheme;
-    }
-  } else {
-    if (state is ThemeChanged) {
-      if (state.status == ThemeStatus.light) {
-        return DesktopAppTheme.lightTheme;
-      } else {
-        return DesktopAppTheme.darkTheme;
-      }
-    } else {
-      return DesktopAppTheme.lightTheme;
-    }
+ThemeData getLightTheme(BuildContext context) {
+  return MediaQuery.of(context).size.width < 600
+      ? MobileAppTheme.lightTheme
+      : DesktopAppTheme.lightTheme;
+}
+
+ThemeData getDarkTheme(BuildContext context) {
+  return MediaQuery.of(context).size.width < 600
+      ? MobileAppTheme.darkTheme
+      : DesktopAppTheme.darkTheme;
+}
+
+ThemeMode getThemeMode(ThemeState state) {
+  if (state is ThemeChanged) {
+    return state.status == ThemeStatus.dark ? ThemeMode.dark : ThemeMode.light;
   }
+  return ThemeMode.system;
 }
 
 class MyApp extends StatelessWidget {
@@ -228,7 +225,9 @@ class MyApp extends StatelessWidget {
                       return MaterialApp.router(
                         routerConfig: Modular.routerConfig,
                         title: "Trust Leap",
-                        theme: getTheme(context, themeState),
+                        theme: getLightTheme(context),
+                        darkTheme: getDarkTheme(context),
+                        themeMode: getThemeMode(themeState),
                         supportedLocales: L10n.all,
                         locale: const Locale("de"),
                         localizationsDelegates: const [

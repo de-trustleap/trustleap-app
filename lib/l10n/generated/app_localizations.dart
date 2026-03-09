@@ -272,6 +272,12 @@ abstract class AppLocalizations {
   /// **'You don\'\'t have an account? '**
   String get login_register_text;
 
+  /// Text after the register link on the login page
+  ///
+  /// In en, this message translates to:
+  /// **' and get started'**
+  String get login_register_suffix;
+
   /// Error message on the login page if the permissions could not be queried
   ///
   /// In en, this message translates to:
@@ -6686,6 +6692,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Log out'**
   String get settings_logout;
+
+  /// Settings tab in profile
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get profile_settings_tab;
+
+  /// Dark mode subtitle in settings
+  ///
+  /// In en, this message translates to:
+  /// **'Reduces eye strain in low light'**
+  String get settings_dark_mode_subtitle;
+
+  /// App version in settings
+  ///
+  /// In en, this message translates to:
+  /// **'App Version'**
+  String get settings_app_version;
 }
 
 class _AppLocalizationsDelegate
