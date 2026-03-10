@@ -21,6 +21,7 @@ class _MobileAppTemplateState extends State<MobileAppTemplate> {
   final ValueNotifier<String?> _titleOverride = ValueNotifier(null);
   final ValueNotifier<List<Widget>?> _actionsOverride = ValueNotifier(null);
   final RouterOutletObserver _routerOutletObserver = RouterOutletObserver();
+  int _baseHistoryLength = 0;
 
   static const List<String> _tabPaths = [
     RoutePaths.dashboardPath,
@@ -34,6 +35,9 @@ class _MobileAppTemplateState extends State<MobileAppTemplate> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Modular.to.navigate(RoutePaths.homePath + RoutePaths.dashboardPath);
+      setState(() {
+        _baseHistoryLength = Modular.to.navigateHistory.length;
+      });
     });
   }
 
@@ -93,7 +97,7 @@ class _MobileAppTemplateState extends State<MobileAppTemplate> {
           Listenable.merge([Modular.to, _titleOverride, _actionsOverride]),
       builder: (context, _) {
         final path = Modular.to.path;
-        final canPop = Modular.to.navigateHistory.length > 1;
+        final canPop = Modular.to.navigateHistory.length > _baseHistoryLength;
         final isOnProfileRoute =
             path.startsWith(RoutePaths.homePath + RoutePaths.profilePath);
 
