@@ -89,27 +89,27 @@ class _LegalsPageState extends State<LegalsPage> {
                         ),
                         "h1": Style(
                           fontSize: FontSize(baseFontSize * 2),
-                          color: const Color(0xFF222222),
+                          color: themeData.colorScheme.onSurface,
                           margin: Margins.only(
                               top: baseFontSize * 1.2,
                               bottom: baseFontSize * 0.5),
                         ),
                         "h2": Style(
                           fontSize: FontSize(baseFontSize * 1.5),
-                          color: const Color(0xFF222222),
+                          color: themeData.colorScheme.onSurface,
                           margin: Margins.only(
                               top: baseFontSize * 1.2,
                               bottom: baseFontSize * 0.5),
                         ),
                         "h3": Style(
                           fontSize: FontSize(baseFontSize * 1.25),
-                          color: const Color(0xFF222222),
+                          color: themeData.colorScheme.onSurface,
                           margin: Margins.only(
                               top: baseFontSize * 1.2,
                               bottom: baseFontSize * 0.5),
                         ),
                         "h4": Style(
-                          color: const Color(0xFF222222),
+                          color: themeData.colorScheme.onSurface,
                           margin: Margins.only(
                               top: baseFontSize * 1.2,
                               bottom: baseFontSize * 0.5),
@@ -130,19 +130,19 @@ class _LegalsPageState extends State<LegalsPage> {
                           margin: Margins.only(bottom: baseFontSize * 1),
                         ),
                         "th": Style(
-                          backgroundColor: const Color(0xFFF7F7F7),
-                          border: const Border.fromBorderSide(
-                              BorderSide(color: Color(0xFFDDDDDD), width: 1)),
+                          backgroundColor: themeData.colorScheme.surfaceVariant,
+                          border: Border.fromBorderSide(
+                              BorderSide(color: themeData.colorScheme.outline, width: 1)),
                           padding: HtmlPaddings.all(8),
                           alignment: Alignment.centerLeft,
                         ),
                         "td": Style(
-                          border: const Border.fromBorderSide(
-                              BorderSide(color: Color(0xFFDDDDDD), width: 1)),
+                          border: Border.fromBorderSide(
+                              BorderSide(color: themeData.colorScheme.outline, width: 1)),
                           padding: HtmlPaddings.all(8),
                         ),
                         "tr": Style(
-                          backgroundColor: const Color(0xFFFAFAFA),
+                          backgroundColor: themeData.colorScheme.surface,
                         ),
                         "strong": Style(
                           fontWeight: FontWeight.bold,

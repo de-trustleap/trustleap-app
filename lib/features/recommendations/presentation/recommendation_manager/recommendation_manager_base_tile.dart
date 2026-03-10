@@ -99,7 +99,8 @@ class _RecommendationManagerBaseTileState
               current.recommendation.id == _recommendation.id) ||
           (current is RecommendationSetFinishedSuccessState &&
               current.recommendation.id == _recommendation.id) ||
-          (current is RecommendationManagerTileFavoriteUpdatedState) ||
+          (current is RecommendationManagerTileFavoriteUpdatedState &&
+              current.recommendation.id == _recommendation.id) ||
           (current is RecommendationManagerTileViewedState &&
               current.recommendationID == _recommendation.id.value),
       listener: (context, state) {
