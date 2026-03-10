@@ -1,4 +1,6 @@
 import 'package:finanzbegleiter/core/custom_navigator.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/primary_button.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +17,7 @@ class BottomSheetWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
 
     return Padding(
       padding: EdgeInsets.only(
@@ -45,6 +48,11 @@ class BottomSheetWrapper extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           child,
+          const SizedBox(height: 16),
+          PrimaryButton(
+            title: localization.pagebuilder_ok,
+            onTap: () => CustomNavigator.of(context).pop(),
+          ),
           const SizedBox(height: 16),
         ],
       ),

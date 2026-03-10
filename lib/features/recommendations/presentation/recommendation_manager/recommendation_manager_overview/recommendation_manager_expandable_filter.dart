@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/custom_dropdown.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -96,59 +97,57 @@ class _RecommendationManagerExpandableFilterState
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          DropdownMenu<RecommendationSortByFilterState>(
+                          CustomDropdown<RecommendationSortByFilterState>(
                               textStyle: themeData.textTheme.bodySmall,
                               width: responsiveValue.largerThan(MOBILE)
                                   ? 250
                                   : 400,
-                              label: Text(
-                                  localization
-                                      .promoter_overview_filter_sortby_choose,
-                                  style: themeData.textTheme.bodySmall!
-                                      .copyWith(fontSize: 12)),
-                              initialSelection:
-                                  RecommendationSortByFilterState.expiresAt,
-                              enableSearch: false,
-                              requestFocusOnTap: false,
-                              dropdownMenuEntries: [
+                              label: localization
+                                  .promoter_overview_filter_sortby_choose,
+                              value: filterStates.sortByFilterState,
+                              type: CustomDropdownType.standard,
+                              useDialogPicker: responsiveValue.isMobile,
+                              items: [
                                 if (widget.isArchive) ...[
-                                  DropdownMenuEntry(
+                                  CustomDropdownItem(
                                       value: RecommendationSortByFilterState
                                           .finishedAt,
                                       label: localization
                                           .recommendation_manager_filter_finished_at),
                                 ] else ...[
-                                  DropdownMenuEntry(
+                                  CustomDropdownItem(
                                       value: RecommendationSortByFilterState
                                           .expiresAt,
                                       label: localization
                                           .recommendation_manager_filter_expires_date),
-                                  DropdownMenuEntry(
+                                  CustomDropdownItem(
                                       value: RecommendationSortByFilterState
                                           .lastUpdated,
                                       label: localization
                                           .recommendation_manager_filter_last_updated),
                                 ],
-                                DropdownMenuEntry(
-                                    value: RecommendationSortByFilterState
-                                        .promoter,
+                                CustomDropdownItem(
+                                    value:
+                                        RecommendationSortByFilterState.promoter,
                                     label: localization
                                         .recommendation_manager_filter_promoter),
-                                DropdownMenuEntry(
+                                CustomDropdownItem(
                                     value: RecommendationSortByFilterState
                                         .recommendationReceiver,
                                     label: localization
                                         .recommendation_manager_filter_recommendation_receiver),
-                                DropdownMenuEntry(
+                                CustomDropdownItem(
                                     value:
                                         RecommendationSortByFilterState.reason,
                                     label: localization
-                                        .recommendation_manager_filter_reason)
+                                        .recommendation_manager_filter_reason),
                               ],
-                              onSelected: (sortBy) {
-                                filterStates.sortByFilterState = sortBy ??
-                                    RecommendationSortByFilterState.expiresAt;
-                                widget.onFilterChanged(filterStates);
+                              onChanged: (sortBy) {
+                                setState(() {
+                                  filterStates.sortByFilterState = sortBy ??
+                                      RecommendationSortByFilterState.expiresAt;
+                                  widget.onFilterChanged(filterStates);
+                                });
                               }),
                           RadioGroup<RecommendationSortOrderFilterState>(
                             groupValue: filterStates.sortOrderFilterState,
@@ -189,120 +188,117 @@ class _RecommendationManagerExpandableFilterState
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                DropdownMenu<RecommendationStatusFilterState>(
+                CustomDropdown<RecommendationStatusFilterState>(
                     textStyle: themeData.textTheme.bodySmall,
                     width: responsiveValue.largerThan(MOBILE) ? 250 : 400,
-                    label: Text(
-                        localization
-                            .recommendation_manager_filter_sort_by_status,
-                        style: themeData.textTheme.bodySmall!
-                            .copyWith(fontSize: 12)),
-                    initialSelection: RecommendationStatusFilterState.all,
-                    enableSearch: false,
-                    requestFocusOnTap: false,
-                    dropdownMenuEntries: [
-                      DropdownMenuEntry(
+                    label: localization
+                        .recommendation_manager_filter_sort_by_status,
+                    value: filterStates.statusFilterState,
+                    type: CustomDropdownType.standard,
+                    useDialogPicker: responsiveValue.isMobile,
+                    items: [
+                      CustomDropdownItem(
                           value: RecommendationStatusFilterState.all,
                           label: localization
                               .recommendation_manager_filter_status_all),
                       if (!widget.isArchive) ...[
-                        DropdownMenuEntry(
+                        CustomDropdownItem(
                             value: RecommendationStatusFilterState
                                 .recommendationSent,
                             label: localization
                                 .recommendation_manager_status_level_1),
-                        DropdownMenuEntry(
+                        CustomDropdownItem(
                             value: RecommendationStatusFilterState.linkClicked,
                             label: localization
                                 .recommendation_manager_status_level_2),
-                        DropdownMenuEntry(
-                            value:
-                                RecommendationStatusFilterState.contactFormSent,
+                        CustomDropdownItem(
+                            value: RecommendationStatusFilterState
+                                .contactFormSent,
                             label: localization
                                 .recommendation_manager_status_level_3),
-                        DropdownMenuEntry(
+                        CustomDropdownItem(
                             value: RecommendationStatusFilterState.appointment,
                             label: localization
-                                .recommendation_manager_status_level_4)
+                                .recommendation_manager_status_level_4),
                       ],
-                      DropdownMenuEntry(
+                      CustomDropdownItem(
                           value: RecommendationStatusFilterState.successful,
                           label: localization
                               .recommendation_manager_status_level_5),
-                      DropdownMenuEntry(
+                      CustomDropdownItem(
                           value: RecommendationStatusFilterState.failed,
                           label: localization
-                              .recommendation_manager_status_level_6)
+                              .recommendation_manager_status_level_6),
                     ],
-                    onSelected: (sortBy) {
-                      filterStates.statusFilterState =
-                          sortBy ?? RecommendationStatusFilterState.all;
-                      widget.onFilterChanged(filterStates);
+                    onChanged: (sortBy) {
+                      setState(() {
+                        filterStates.statusFilterState =
+                            sortBy ?? RecommendationStatusFilterState.all;
+                        widget.onFilterChanged(filterStates);
+                      });
                     }),
                 if (!widget.isArchive) ...[
                   const SizedBox(height: 16),
-                  DropdownMenu<RecommendationFavoriteFilterState>(
+                  CustomDropdown<RecommendationFavoriteFilterState>(
                       textStyle: themeData.textTheme.bodySmall,
                       width: responsiveValue.largerThan(MOBILE) ? 250 : 400,
-                      label: Text(
-                          localization
-                              .recommendation_manager_filter_sort_by_favorites,
-                          style: themeData.textTheme.bodySmall!
-                              .copyWith(fontSize: 12)),
-                      initialSelection: RecommendationFavoriteFilterState.all,
-                      enableSearch: false,
-                      requestFocusOnTap: false,
-                      dropdownMenuEntries: [
-                        DropdownMenuEntry(
+                      label: localization
+                          .recommendation_manager_filter_sort_by_favorites,
+                      value: filterStates.favoriteFilterState,
+                      type: CustomDropdownType.standard,
+                      useDialogPicker: responsiveValue.isMobile,
+                      items: [
+                        CustomDropdownItem(
                             value: RecommendationFavoriteFilterState.all,
                             label: localization
                                 .recommendation_manager_filter_status_all),
-                        DropdownMenuEntry(
+                        CustomDropdownItem(
                             value: RecommendationFavoriteFilterState.isFavorite,
                             label: localization
                                 .recommendation_manager_filter_favorites),
-                        DropdownMenuEntry(
+                        CustomDropdownItem(
                             value:
                                 RecommendationFavoriteFilterState.isNotFavorite,
                             label: localization
                                 .recommendation_manager_filter_no_favorites),
                       ],
-                      onSelected: (sortBy) {
-                        filterStates.favoriteFilterState =
-                            sortBy ?? RecommendationFavoriteFilterState.all;
-                        widget.onFilterChanged(filterStates);
+                      onChanged: (sortBy) {
+                        setState(() {
+                          filterStates.favoriteFilterState =
+                              sortBy ?? RecommendationFavoriteFilterState.all;
+                          widget.onFilterChanged(filterStates);
+                        });
                       }),
                   const SizedBox(height: 16),
-                  DropdownMenu<RecommendationPriorityFilterState>(
+                  CustomDropdown<RecommendationPriorityFilterState>(
                       textStyle: themeData.textTheme.bodySmall,
                       width: responsiveValue.largerThan(MOBILE) ? 250 : 400,
-                      label: Text(
-                          localization
-                              .recommendation_manager_filter_sort_by_priorities,
-                          style: themeData.textTheme.bodySmall!
-                              .copyWith(fontSize: 12)),
-                      initialSelection: RecommendationPriorityFilterState.all,
-                      enableSearch: false,
-                      requestFocusOnTap: false,
-                      dropdownMenuEntries: [
-                        DropdownMenuEntry(
+                      label: localization
+                          .recommendation_manager_filter_sort_by_priorities,
+                      value: filterStates.priorityFilterState,
+                      type: CustomDropdownType.standard,
+                      useDialogPicker: responsiveValue.isMobile,
+                      items: [
+                        CustomDropdownItem(
                             value: RecommendationPriorityFilterState.all,
                             label: localization
                                 .recommendation_manager_filter_status_all),
-                        DropdownMenuEntry(
+                        CustomDropdownItem(
                             value: RecommendationPriorityFilterState.high,
                             label: localization.recommendation_priority_high),
-                        DropdownMenuEntry(
+                        CustomDropdownItem(
                             value: RecommendationPriorityFilterState.medium,
                             label: localization.recommendation_priority_medium),
-                        DropdownMenuEntry(
+                        CustomDropdownItem(
                             value: RecommendationPriorityFilterState.low,
                             label: localization.recommendation_priority_low),
                       ],
-                      onSelected: (sortBy) {
-                        filterStates.priorityFilterState =
-                            sortBy ?? RecommendationPriorityFilterState.all;
-                        widget.onFilterChanged(filterStates);
+                      onChanged: (sortBy) {
+                        setState(() {
+                          filterStates.priorityFilterState =
+                              sortBy ?? RecommendationPriorityFilterState.all;
+                          widget.onFilterChanged(filterStates);
+                        });
                       }),
                 ]
               ],
