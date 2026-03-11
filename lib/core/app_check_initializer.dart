@@ -11,7 +11,7 @@ class AppCheckInitializer {
       await FirebaseAppCheck.instance.activate(
         providerApple: kDebugMode
             ? const AppleDebugProvider()
-            : const AppleDeviceCheckProvider(),
+            : const AppleAppAttestProvider(),
       );
     } else if (defaultTargetPlatform == TargetPlatform.android) {
       await FirebaseAppCheck.instance.activate(

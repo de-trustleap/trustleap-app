@@ -9,6 +9,7 @@ Future<T?> showAppBottomSheet<T>(
     isScrollControlled: true,
     useSafeArea: true,
     showDragHandle: true,
+    useRootNavigator: true,
     builder: builder,
   );
 }

@@ -67,34 +67,37 @@ class CustomDropdown<T> extends StatelessWidget {
   }
 
   void _showBottomSheetPicker(BuildContext context) {
+    T? tempSelected = value;
     showAppBottomSheet(
       context,
-      builder: (ctx) => BottomSheetWrapper(
-        title: label ?? '',
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxHeight: MediaQuery.of(ctx).size.height * 0.5,
-          ),
-          child: ListView(
-            shrinkWrap: true,
-            children: items.map((item) {
-              final isSelected = item.value == value;
-              return ListTile(
-                title: Text(item.label),
-                enabled: item.enabled,
-                selected: isSelected,
-                trailing: isSelected
-                    ? Icon(Icons.check,
-                        color: Theme.of(ctx).colorScheme.secondary)
-                    : null,
-                onTap: item.enabled
-                    ? () {
-                        CustomNavigator.of(ctx).pop();
-                        onChanged?.call(item.value);
-                      }
-                    : null,
-              );
-            }).toList(),
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setSheetState) => BottomSheetWrapper(
+          title: label ?? '',
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(ctx).size.height * 0.5,
+            ),
+            child: ListView(
+              shrinkWrap: true,
+              children: items.map((item) {
+                final isSelected = item.value == tempSelected;
+                return ListTile(
+                  title: Text(item.label),
+                  enabled: item.enabled,
+                  selected: isSelected,
+                  trailing: isSelected
+                      ? Icon(Icons.check,
+                          color: Theme.of(ctx).colorScheme.secondary)
+                      : null,
+                  onTap: item.enabled
+                      ? () {
+                          setSheetState(() => tempSelected = item.value);
+                          onChanged?.call(item.value);
+                        }
+                      : null,
+                );
+              }).toList(),
+            ),
           ),
         ),
       ),
