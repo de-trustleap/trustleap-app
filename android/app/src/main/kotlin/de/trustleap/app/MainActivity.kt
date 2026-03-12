@@ -1,4 +1,4 @@
-package com.example.finanzbegleiter
+package de.trustleap.app
 
 import io.flutter.embedding.android.FlutterActivity
 

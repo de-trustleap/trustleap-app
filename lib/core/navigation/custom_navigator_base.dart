@@ -6,4 +6,5 @@ abstract class CustomNavigatorBase {
   void openInNewTab(String route);
   void openURLInNewTab(String url);
   void pop();
+  void redirectToSubRoute(String parentPath, String targetPath);
 }

@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/features/auth/application/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/features/auth/presentation/widgets/password_forgotten_form.dart';
 import 'package:finanzbegleiter/core/widgets/page_wrapper/auth_page_template.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -11,6 +12,7 @@ class PasswordForgottenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AuthPageTemplate(
+      title: AppLocalizations.of(context).password_forgotten_title,
       child: Center(
         child: BlocProvider<AuthCubit>(
           create: (context) => Modular.get<AuthCubit>(),

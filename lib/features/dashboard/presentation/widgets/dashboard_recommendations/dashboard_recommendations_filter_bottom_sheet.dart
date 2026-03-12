@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/bottom_sheet_wrapper.dart';
 import 'package:finanzbegleiter/features/dashboard/application/recommendation/dashboard_recommendations_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
@@ -56,71 +57,43 @@ class _DashboardRecommendationsFilterBottomSheetState
   Widget build(BuildContext context) {
     final cubit = Modular.get<DashboardRecommendationsCubit>();
     final localization = AppLocalizations.of(context);
-    final themeData = Theme.of(context);
 
     return BlocBuilder<DashboardRecommendationsCubit,
         DashboardRecommendationsState>(
       bloc: cubit,
-      builder: (context, state) => Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-          left: 16,
-          right: 16,
-          top: 16,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  localization.dashboard_recommendations_filter_title,
-                  style: themeData.textTheme.bodyLarge!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-                IconButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  icon: const Icon(Icons.close),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            DashboardRecommendationsFilter(
-              user: widget.user,
-              state: state,
-              selectedTimePeriod: _selectedTimePeriod,
-              selectedStatusLevel: _selectedStatusLevel,
-              selectedPromoterId: _selectedPromoterId,
-              selectedLandingPageId: _selectedLandingPageId,
-              onTimePeriodChanged: (TimePeriod newValue) {
-                setState(() {
-                  _selectedTimePeriod = newValue;
-                });
-                widget.onTimePeriodChanged(newValue);
-              },
-              onStatusLevelChanged: (int? newValue) {
-                setState(() {
-                  _selectedStatusLevel = newValue;
-                });
-                widget.onStatusLevelChanged(newValue);
-              },
-              onPromoterChanged: (String? newValue) {
-                setState(() {
-                  _selectedPromoterId = newValue;
-                });
-                widget.onPromoterChanged(newValue);
-              },
-              onLandingPageChanged: (String? newValue) {
-                setState(() {
-                  _selectedLandingPageId = newValue;
-                });
-                widget.onLandingPageChanged(newValue);
-              },
-            ),
-            const SizedBox(height: 16),
-          ],
+      builder: (context, state) => BottomSheetWrapper(
+        title: localization.dashboard_recommendations_filter_title,
+        child: DashboardRecommendationsFilter(
+          user: widget.user,
+          state: state,
+          selectedTimePeriod: _selectedTimePeriod,
+          selectedStatusLevel: _selectedStatusLevel,
+          selectedPromoterId: _selectedPromoterId,
+          selectedLandingPageId: _selectedLandingPageId,
+          onTimePeriodChanged: (TimePeriod newValue) {
+            setState(() {
+              _selectedTimePeriod = newValue;
+            });
+            widget.onTimePeriodChanged(newValue);
+          },
+          onStatusLevelChanged: (int? newValue) {
+            setState(() {
+              _selectedStatusLevel = newValue;
+            });
+            widget.onStatusLevelChanged(newValue);
+          },
+          onPromoterChanged: (String? newValue) {
+            setState(() {
+              _selectedPromoterId = newValue;
+            });
+            widget.onPromoterChanged(newValue);
+          },
+          onLandingPageChanged: (String? newValue) {
+            setState(() {
+              _selectedLandingPageId = newValue;
+            });
+            widget.onLandingPageChanged(newValue);
+          },
         ),
       ),
     );

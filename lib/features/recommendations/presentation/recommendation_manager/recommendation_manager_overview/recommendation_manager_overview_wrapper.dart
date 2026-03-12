@@ -71,7 +71,9 @@ class _RecommendationManagerPageState
                   .recommendation_manager_delete_alert_cancel_button,
               actionButtonAction: () =>
                   _submitDeleteRecommendation(recoID, userID, userRecoID),
-              cancelButtonAction: () => navigator.pop());
+              cancelButtonAction: () => navigator.pop(),
+              icon: Icons.delete_outline,
+              isDestructive: true);
         });
   }
 
@@ -94,7 +96,9 @@ class _RecommendationManagerPageState
                   .recommendation_manager_delete_alert_cancel_button,
               actionButtonAction: () =>
                   _submitDeleteRecommendation(recoID, userID, userRecoID),
-              cancelButtonAction: () => navigator.pop());
+              cancelButtonAction: () => navigator.pop(),
+              icon: Icons.delete_outline,
+              isDestructive: true);
         });
   }
 
@@ -113,7 +117,8 @@ class _RecommendationManagerPageState
                   .recommendation_manager_finish_alert_cancel_button,
               actionButtonAction: () =>
                   _submitFinishRecommendation(recommendation, true),
-              cancelButtonAction: () => navigator.pop());
+              cancelButtonAction: () => navigator.pop(),
+              icon: Icons.check_circle_outline);
         });
   }
 
@@ -132,7 +137,9 @@ class _RecommendationManagerPageState
                   .recommendation_manager_failed_alert_cancel_button,
               actionButtonAction: () =>
                   _submitFinishRecommendation(recommendation, false),
-              cancelButtonAction: () => navigator.pop());
+              cancelButtonAction: () => navigator.pop(),
+              icon: Icons.cancel_outlined,
+              isDestructive: true);
         });
   }
 
@@ -252,7 +259,7 @@ class _RecommendationManagerPageState
           callback: () => {_requestRecommendations(currentUser)});
     } else if (state is RecommendationGetRecosSuccessState) {
       return ListView(children: [
-        SizedBox(height: responsiveValue.isMobile ? 40 : 80),
+        SizedBox(height: responsiveValue.isMobile ? 16 : 80),
         CenteredConstrainedWrapper(
           child: RecommendationManagerOverview(
               recommendations: state.recoItems,

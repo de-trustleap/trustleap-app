@@ -1,3 +1,5 @@
+import 'package:finanzbegleiter/core/widgets/shared_elements/app_bottom_sheet.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/bottom_sheet_wrapper.dart';
 import 'package:finanzbegleiter/features/landing_pages/application/landing_page_detail/landing_page_detail_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
@@ -65,62 +67,36 @@ class _LandingPageDetailTrafficChartState
   }
 
   void _showFilterBottomSheet() {
-    final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final cubit = Modular.get<LandingPageDetailCubit>();
 
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
+    showAppBottomSheet(
+      context,
       builder: (context) => StatefulBuilder(
-        builder: (context, setModalState) => SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      localization.dashboard_recommendations_filter_tooltip,
-                      style: themeData.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon(Icons.close),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                _buildFilterContent(
-                  localization,
-                  themeData,
-                  cubit.state,
-                  (value) {
-                    setModalState(() {});
-                    setState(() {
-                      _selectedTimePeriod = value;
-                    });
-                  },
-                  (value) {
-                    setModalState(() {});
-                    setState(() {
-                      _selectedStatusLevel = value;
-                    });
-                  },
-                  (value) {
-                    setModalState(() {});
-                    setState(() {
-                      _selectedPromoterId = value;
-                    });
-                  },
-                ),
-              ],
-            ),
+        builder: (context, setModalState) => BottomSheetWrapper(
+          title: localization.dashboard_recommendations_filter_tooltip,
+          child: _buildFilterContent(
+            localization,
+            Theme.of(context),
+            cubit.state,
+            (value) {
+              setModalState(() {});
+              setState(() {
+                _selectedTimePeriod = value;
+              });
+            },
+            (value) {
+              setModalState(() {});
+              setState(() {
+                _selectedStatusLevel = value;
+              });
+            },
+            (value) {
+              setModalState(() {});
+              setState(() {
+                _selectedPromoterId = value;
+              });
+            },
           ),
         ),
       ),

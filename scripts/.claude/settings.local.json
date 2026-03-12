@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc:*)",
+      "WebFetch(domain:pub.dev)",
+      "Bash(flutter run:*)"
+    ]
+  }
+}

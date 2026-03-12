@@ -55,6 +55,7 @@ class _DashboardRecommendationsFilterState
         const SizedBox(height: 4),
         UnderlinedDropdown<TimePeriod>(
           value: widget.selectedTimePeriod,
+          useDialogPicker: true,
           items:
               [TimePeriod.day, TimePeriod.week, TimePeriod.month].map((period) {
             return DropdownMenuItem<TimePeriod>(
@@ -75,6 +76,7 @@ class _DashboardRecommendationsFilterState
         const SizedBox(height: 4),
         UnderlinedDropdown<int>(
           value: widget.selectedStatusLevel,
+          useDialogPicker: true,
           items: _getStatusLevelItems(localization),
           onChanged: widget.onStatusLevelChanged,
         ),
@@ -90,6 +92,7 @@ class _DashboardRecommendationsFilterState
           const SizedBox(height: 4),
           UnderlinedDropdown<String?>(
             value: widget.selectedPromoterId,
+            useDialogPicker: true,
             items: DashboardRecommendationsHelper.getPromoterItems(
                 (widget.state as DashboardRecommendationsGetRecosSuccessState)
                     .promoterRecommendations!,
@@ -115,6 +118,7 @@ class _DashboardRecommendationsFilterState
           const SizedBox(height: 4),
           UnderlinedDropdown<String?>(
             value: widget.selectedLandingPageId,
+            useDialogPicker: true,
             items: [
               DropdownMenuItem<String?>(
                 value: null,

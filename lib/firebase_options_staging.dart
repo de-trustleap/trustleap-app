@@ -48,7 +48,7 @@ class DefaultFirebaseOptionsStaging {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyAUZcZ7P98X28iFRxKOXlGsK0XH4FrcMuU',
-    appId: '1:326519245330:web:f330ea78c3a5415424e6cb',
+    appId: '1:326519245330:web:c77040d973d1308624e6cb',
     messagingSenderId: '326519245330',
     projectId: 'trustleap-staging',
     authDomain: 'trustleap-staging.firebaseapp.com',
@@ -57,7 +57,7 @@ class DefaultFirebaseOptionsStaging {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDiPDl3Fy9f6yGrwBNROdmC32GdMhsv0pU',
-    appId: '1:326519245330:android:2bbd3db09b27755324e6cb',
+    appId: '1:326519245330:android:6d87caf930eb145924e6cb',
     messagingSenderId: '326519245330',
     projectId: 'trustleap-staging',
     storageBucket: 'trustleap-staging.firebasestorage.app',
@@ -65,10 +65,11 @@ class DefaultFirebaseOptionsStaging {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDh8agQbVtDjB5HyRXO1iWHq0MBi0TFPMY',
-    appId: '1:326519245330:ios:176587356e92ff5224e6cb',
+    appId: '1:326519245330:ios:5dbcbf8e1394ba9924e6cb',
     messagingSenderId: '326519245330',
     projectId: 'trustleap-staging',
     storageBucket: 'trustleap-staging.firebasestorage.app',
-    iosBundleId: 'com.example.finanzbegleiter',
+    iosBundleId: 'de.trustleap.app.staging',
   );
+
 }

@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/custom_dropdown.dart';
 import 'package:finanzbegleiter/features/calendly/application/calendly_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -106,11 +107,11 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
     return hasValidSelection ? widget.selectedEventTypeUrl : null;
   }
 
-  List<DropdownMenuEntry<String>> _buildDropdownEntries() {
-    return eventTypes.map<DropdownMenuEntry<String>>((eventType) {
+  List<CustomDropdownItem<String>> _buildDropdownItems() {
+    return eventTypes.map<CustomDropdownItem<String>>((eventType) {
       final name = eventType['name'] as String? ?? 'Unbekannt';
       final schedulingUrl = eventType['scheduling_url'] as String? ?? '';
-      return DropdownMenuEntry<String>(
+      return CustomDropdownItem<String>(
         value: schedulingUrl,
         label: name,
       );
@@ -263,15 +264,14 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
                   children: [
                     LayoutBuilder(
                       builder: (context, constraints) {
-                        return DropdownMenu<String>(
+                        return CustomDropdown<String>(
                           width: constraints.maxWidth,
-                          label: Text(localization
-                              .landingpage_creator_calendly_event_type_select),
-                          initialSelection: _getValidInitialSelection(),
-                          enableSearch: false,
-                          requestFocusOnTap: false,
-                          dropdownMenuEntries: _buildDropdownEntries(),
-                          onSelected: (String? newValue) {
+                          label: localization
+                              .landingpage_creator_calendly_event_type_select,
+                          value: _getValidInitialSelection(),
+                          type: CustomDropdownType.standard,
+                          items: _buildDropdownItems(),
+                          onChanged: (String? newValue) {
                             widget.onEventTypeSelected?.call(newValue);
                             state.didChange(newValue);
                           },

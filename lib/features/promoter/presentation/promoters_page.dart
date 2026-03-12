@@ -5,7 +5,7 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/tab_bar/custom_tabbar.dart';
 import 'package:finanzbegleiter/route_paths.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/features/promoter/presentation/widgets/promoter_overview/promoters_overview_wrapper.dart';
 import 'package:finanzbegleiter/features/promoter/presentation/widgets/promoter_registration/register_promoters_view.dart';
 import 'package:flutter/material.dart';
@@ -27,13 +27,12 @@ class _PromotersPageState extends State<PromotersPage> {
   void initState() {
     super.initState();
 
-    // Redirect /promoters to /promoters/overview
-    final currentRoute = Modular.to.path;
-    if (currentRoute == RoutePaths.promotersPath) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Modular.to.navigate("${RoutePaths.homePath}${RoutePaths.promotersPath}${RoutePaths.promotersOverviewPath}");
-      });
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      CustomNavigator.of(context).redirectToSubRoute(
+        RoutePaths.promotersPath,
+        "${RoutePaths.homePath}${RoutePaths.promotersPath}${RoutePaths.promotersOverviewPath}",
+      );
+    });
 
   }
 

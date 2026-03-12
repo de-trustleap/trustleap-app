@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/core/widgets/shared_elements/app_bottom_sheet.dart';
 import 'package:finanzbegleiter/features/dashboard/application/recommendation/dashboard_recommendations_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
@@ -58,9 +59,8 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
   }
 
   void _showFilterBottomSheet() {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
+    showAppBottomSheet(
+      context,
       builder: (context) => DashboardRecommendationsFilterBottomSheet(
         user: widget.user,
         selectedTimePeriod: _selectedTimePeriod,

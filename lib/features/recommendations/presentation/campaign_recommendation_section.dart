@@ -175,6 +175,7 @@ class _CampaignRecommendationSectionState
                     _isAlertVisible = false;
                     CustomNavigator.of(context).pop();
                   },
+                  icon: Icons.campaign,
                 ),
               );
             },

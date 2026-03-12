@@ -52,6 +52,7 @@ class PersonalizedRecommendationListTile extends StatelessWidget {
         isPromoter: isPromoter,
         onFavoritePressed: onFavoritePressed,
         cubit: cubit,
+        showFavoriteButton: !responsiveValue.isMobile,
       ),
       buildContent: (reco, isLoading) {
         final personalizedReco =
