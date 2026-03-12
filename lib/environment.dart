@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:web/web.dart' as web;
+import 'package:finanzbegleiter/core/helpers/browser_location.dart';
 
 class Environment {
   final prodBaseURL = "app.trust-leap.de";
@@ -14,7 +14,7 @@ class Environment {
       "https://europe-west3-trustleap-staging.cloudfunctions.net";
 
   bool isStaging() {
-    final String currentUrl = web.window.location.hostname;
+    final String currentUrl = BrowserLocation.hostname();
     final bool isStaging = currentUrl.contains(stagingBaseURL) ||
         !const bool.fromEnvironment("dart.vm.product");
     return isStaging;

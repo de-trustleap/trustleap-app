@@ -23,10 +23,16 @@ class CenteredConstrainedWrapper extends StatelessWidget {
       constraints = const BoxConstraints(maxWidth: 1500);
     }
 
+    final horizontalPadding =
+        responsiveData.breakpoint.name == DESKTOP ? 20.0 : 0.0;
+
     return Center(
       child: ConstrainedBox(
         constraints: constraints,
-        child: child,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+          child: child,
+        ),
       ),
     );
   }

@@ -1,11 +1,10 @@
-import 'package:finanzbegleiter/features/consent/application/consent_cubit.dart';
-import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/features/consent/presentation/cookie_consent_texts.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/outlined_custom_button.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/primary_button.dart';
+import 'package:finanzbegleiter/features/consent/application/consent_cubit.dart';
+import 'package:finanzbegleiter/features/consent/presentation/cookie_consent_texts.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class CookieConsentBanner extends StatelessWidget {
   final VoidCallback onCustomizePressed;
@@ -21,9 +20,6 @@ class CookieConsentBanner extends StatelessWidget {
       final theme = Theme.of(context);
       final texts = CookieConsentTexts(AppLocalizations.of(context));
       final cubit = Modular.get<ConsentCubit>();
-
-      final responsiveValue = ResponsiveBreakpoints.of(context);
-      final isMobile = responsiveValue.isMobile;
 
       return Container(
         width: double.infinity,
@@ -41,9 +37,11 @@ class CookieConsentBanner extends StatelessWidget {
         child: Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 1200),
-            child: isMobile
-                ? _buildMobileLayout(context, theme, texts, cubit)
-                : _buildDesktopLayout(context, theme, texts, cubit),
+            child: LayoutBuilder(
+              builder: (context, constraints) => constraints.maxWidth < 600
+                  ? _buildMobileLayout(context, theme, texts, cubit)
+                  : _buildDesktopLayout(context, theme, texts, cubit),
+            ),
           ),
         ),
       );

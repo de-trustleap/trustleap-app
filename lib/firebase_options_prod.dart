@@ -47,18 +47,18 @@ class DefaultFirebaseOptionsProd {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-      apiKey: 'AIzaSyCHxAj-YqzpN4D0RSOmtcVqesfonhAOb8s',
-      appId: '1:962239137198:web:cae5870aef9e767b44743f',
-      messagingSenderId: '962239137198',
-      projectId: 'finanzwegbegleiter',
-      authDomain: 'finanzwegbegleiter.firebaseapp.com',
-      storageBucket: 'finanzwegbegleiter.appspot.com',
-      measurementId: 'G-CQVYXTTT1Q',
-      databaseURL: "");
+    apiKey: 'AIzaSyCHxAj-YqzpN4D0RSOmtcVqesfonhAOb8s',
+    appId: '1:962239137198:web:cae5870aef9e767b44743f',
+    messagingSenderId: '962239137198',
+    projectId: 'finanzwegbegleiter',
+    authDomain: 'finanzwegbegleiter.firebaseapp.com',
+    storageBucket: 'finanzwegbegleiter.appspot.com',
+    measurementId: 'G-CQVYXTTT1Q',
+  );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDYug60Zd671UX-bT9RxV3GMYpvPH33HGk',
-    appId: '1:962239137198:android:1b012781f09e5bd544743f',
+    appId: '1:962239137198:android:8e8af086ccdef55544743f',
     messagingSenderId: '962239137198',
     projectId: 'finanzwegbegleiter',
     storageBucket: 'finanzwegbegleiter.appspot.com',
@@ -66,10 +66,11 @@ class DefaultFirebaseOptionsProd {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAH3bzKrA1fRJaCvp5U5OLVxEDpKdmo1AU',
-    appId: '1:962239137198:ios:b2999c070cea10ba44743f',
+    appId: '1:962239137198:ios:1179d0d3d875c4ba44743f',
     messagingSenderId: '962239137198',
     projectId: 'finanzwegbegleiter',
     storageBucket: 'finanzwegbegleiter.appspot.com',
-    iosBundleId: 'com.example.finanzbegleiter',
+    iosBundleId: 'de.trustleap.app',
   );
+
 }

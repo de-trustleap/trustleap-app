@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "326519245330",
-    "project_id": "trustleap-staging",
-    "storage_bucket": "trustleap-staging.firebasestorage.app"
+    "project_number": "962239137198",
+    "project_id": "finanzwegbegleiter",
+    "storage_bucket": "finanzwegbegleiter.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:326519245330:android:2bbd3db09b27755324e6cb",
+        "mobilesdk_app_id": "1:962239137198:android:8e8af086ccdef55544743f",
         "android_client_info": {
-          "package_name": "com.example.finanzbegleiter"
+          "package_name": "de.trustleap.app"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDiPDl3Fy9f6yGrwBNROdmC32GdMhsv0pU"
+          "current_key": "AIzaSyDYug60Zd671UX-bT9RxV3GMYpvPH33HGk"
         }
       ],
       "services": {

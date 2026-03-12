@@ -13,7 +13,9 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class LegalsPage extends StatefulWidget {
-  const LegalsPage({super.key});
+  final LegalsType? legalsType;
+
+  const LegalsPage({super.key, this.legalsType});
 
   @override
   State<LegalsPage> createState() => _LegalsPageState();
@@ -26,15 +28,30 @@ class _LegalsPageState extends State<LegalsPage> {
   void initState() {
     super.initState();
 
-    final currentRoute = Modular.to.path;
-    if (currentRoute.contains("privacy-policy")) {
-      legalsType = LegalsType.privacyPolicy;
-    } else if (currentRoute.contains("terms-and-condition")) {
-      legalsType = LegalsType.termsAndCondition;
+    if (widget.legalsType != null) {
+      legalsType = widget.legalsType!;
     } else {
-      legalsType = LegalsType.imprint;
+      final currentRoute = Modular.to.path;
+      if (currentRoute.contains("privacy-policy")) {
+        legalsType = LegalsType.privacyPolicy;
+      } else if (currentRoute.contains("terms-and-condition")) {
+        legalsType = LegalsType.termsAndCondition;
+      } else {
+        legalsType = LegalsType.imprint;
+      }
     }
     Modular.get<LegalsCubit>().getLegals(legalsType);
+  }
+
+  String _title(AppLocalizations localization) {
+    switch (legalsType) {
+      case LegalsType.privacyPolicy:
+        return localization.settings_privacy_policy;
+      case LegalsType.termsAndCondition:
+        return localization.settings_terms_and_conditions;
+      case LegalsType.imprint:
+        return localization.settings_imprint;
+    }
   }
 
   @override
@@ -44,6 +61,7 @@ class _LegalsPageState extends State<LegalsPage> {
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveHelper.of(context);
     return AuthPageTemplate(
+      title: _title(localization),
       child: Material(
         child: CenteredConstrainedWrapper(
           child: BlocBuilder<LegalsCubit, LegalsState>(
@@ -57,6 +75,7 @@ class _LegalsPageState extends State<LegalsPage> {
                   final baseFontSize = baseTextStyle?.fontSize ?? 16.0;
 
                   return SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Html(
                       data: state.text ?? "",
                       style: {
@@ -70,27 +89,27 @@ class _LegalsPageState extends State<LegalsPage> {
                         ),
                         "h1": Style(
                           fontSize: FontSize(baseFontSize * 2),
-                          color: const Color(0xFF222222),
+                          color: themeData.colorScheme.onSurface,
                           margin: Margins.only(
                               top: baseFontSize * 1.2,
                               bottom: baseFontSize * 0.5),
                         ),
                         "h2": Style(
                           fontSize: FontSize(baseFontSize * 1.5),
-                          color: const Color(0xFF222222),
+                          color: themeData.colorScheme.onSurface,
                           margin: Margins.only(
                               top: baseFontSize * 1.2,
                               bottom: baseFontSize * 0.5),
                         ),
                         "h3": Style(
                           fontSize: FontSize(baseFontSize * 1.25),
-                          color: const Color(0xFF222222),
+                          color: themeData.colorScheme.onSurface,
                           margin: Margins.only(
                               top: baseFontSize * 1.2,
                               bottom: baseFontSize * 0.5),
                         ),
                         "h4": Style(
-                          color: const Color(0xFF222222),
+                          color: themeData.colorScheme.onSurface,
                           margin: Margins.only(
                               top: baseFontSize * 1.2,
                               bottom: baseFontSize * 0.5),
@@ -111,19 +130,19 @@ class _LegalsPageState extends State<LegalsPage> {
                           margin: Margins.only(bottom: baseFontSize * 1),
                         ),
                         "th": Style(
-                          backgroundColor: const Color(0xFFF7F7F7),
-                          border: const Border.fromBorderSide(
-                              BorderSide(color: Color(0xFFDDDDDD), width: 1)),
+                          backgroundColor: themeData.colorScheme.surfaceVariant,
+                          border: Border.fromBorderSide(
+                              BorderSide(color: themeData.colorScheme.outline, width: 1)),
                           padding: HtmlPaddings.all(8),
                           alignment: Alignment.centerLeft,
                         ),
                         "td": Style(
-                          border: const Border.fromBorderSide(
-                              BorderSide(color: Color(0xFFDDDDDD), width: 1)),
+                          border: Border.fromBorderSide(
+                              BorderSide(color: themeData.colorScheme.outline, width: 1)),
                           padding: HtmlPaddings.all(8),
                         ),
                         "tr": Style(
-                          backgroundColor: const Color(0xFFFAFAFA),
+                          backgroundColor: themeData.colorScheme.surface,
                         ),
                         "strong": Style(
                           fontWeight: FontWeight.bold,

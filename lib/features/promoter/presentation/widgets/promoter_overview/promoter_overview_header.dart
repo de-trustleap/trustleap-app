@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/core/widgets/shared_elements/app_bottom_sheet.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -40,9 +41,8 @@ class _PromoterOverviewHeaderState extends State<PromoterOverviewHeader> {
 
   void onFilterPressed(ResponsiveBreakpointsData responsiveValue) {
     if (responsiveValue.isMobile) {
-      showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
+      showAppBottomSheet(
+        context,
         builder: (context) => PromoterOverviewFilterBottomSheet(
           filterStates: _filterStates,
           onFilterChanged: (PromoterOverviewFilterStates filterStates) {

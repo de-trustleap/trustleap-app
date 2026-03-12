@@ -220,9 +220,9 @@ void main() {
       await tester.pump();
       await tester.pump();
 
-      // Then
-      final button =
-          tester.widget<SecondaryButton>(find.byType(SecondaryButton));
+      // Then - find the form's SecondaryButton (dialog also renders one)
+      final button = tester.widget<SecondaryButton>(
+          find.byType(SecondaryButton).first);
       expect(button.disabled, false);
     });
 

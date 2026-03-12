@@ -6,6 +6,7 @@ echo "========================================="
 echo "Running VM tests..."
 echo "========================================="
 flutter test --exclude-tags chrome
+VM_EXIT=$?
 
 echo ""
 echo "========================================="
@@ -17,6 +18,10 @@ CHROME_TESTS=$(grep -r "@TestOn('chrome')" test/ --include="*_test.dart" -l | tr
 echo "Running tests..."
 if [ -z "$CHROME_TESTS" ]; then
     echo "No Chrome tests found"
+    CHROME_EXIT=0
 else
     flutter test --platform chrome $CHROME_TESTS
+    CHROME_EXIT=$?
 fi
+
+exit $((VM_EXIT || CHROME_EXIT))

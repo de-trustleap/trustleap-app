@@ -124,13 +124,16 @@ class SectionHeader extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 12),
-        Text(
-          title,
-          style: themeData.textTheme.bodyLarge?.copyWith(
-            fontWeight: FontWeight.bold,
+        Expanded(
+          child: Text(
+            title,
+            style: themeData.textTheme.bodyLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+            maxLines: 2,
           ),
         ),
-        if (trailing != null) ...[const Spacer(), trailing!],
+        if (trailing != null) ...[const SizedBox(width: 8), trailing!],
       ],
     );
   }

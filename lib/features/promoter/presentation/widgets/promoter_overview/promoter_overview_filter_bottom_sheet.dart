@@ -1,3 +1,5 @@
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/bottom_sheet_wrapper.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/custom_dropdown.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/features/promoter/presentation/widgets/promoter_overview/promoter_overview_header_expandable_filter.dart';
 import 'package:flutter/material.dart';
@@ -35,36 +37,9 @@ class _PromoterOverviewFilterBottomSheetState
     final localization = AppLocalizations.of(context);
     final themeData = Theme.of(context);
 
-    return Padding(
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom,
-        left: 16,
-        right: 16,
-        top: 16,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                localization.promoter_overview_filter_title,
-                style: themeData.textTheme.bodyLarge!
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
-              IconButton(
-                onPressed: () => Navigator.of(context).pop(),
-                icon: const Icon(Icons.close),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          _buildFilterContent(context, themeData, localization),
-          const SizedBox(height: 16),
-        ],
-      ),
+    return BottomSheetWrapper(
+      title: localization.promoter_overview_filter_title,
+      child: _buildFilterContent(context, themeData, localization),
     );
   }
 
@@ -115,30 +90,27 @@ class _PromoterOverviewFilterBottomSheetState
               .copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
-        DropdownButtonFormField<PromoterSortByFilterState>(
-          initialValue: _filterStates.sortByFilterState,
-          decoration: InputDecoration(
-            labelText: localization.promoter_overview_filter_sortby_choose,
-            border: const OutlineInputBorder(),
-          ),
+        CustomDropdown<PromoterSortByFilterState>(
+          label: localization.promoter_overview_filter_sortby_choose,
+          value: _filterStates.sortByFilterState,
+          type: CustomDropdownType.standard,
+          useDialogPicker: true,
           items: [
-            DropdownMenuItem(
+            CustomDropdownItem(
               value: PromoterSortByFilterState.createdAt,
-              child: Text(localization.promoter_overview_filter_sortby_date),
+              label: localization.promoter_overview_filter_sortby_date,
             ),
-            DropdownMenuItem(
+            CustomDropdownItem(
               value: PromoterSortByFilterState.firstName,
-              child:
-                  Text(localization.promoter_overview_filter_sortby_firstname),
+              label: localization.promoter_overview_filter_sortby_firstname,
             ),
-            DropdownMenuItem(
+            CustomDropdownItem(
               value: PromoterSortByFilterState.lastName,
-              child:
-                  Text(localization.promoter_overview_filter_sortby_lastname),
+              label: localization.promoter_overview_filter_sortby_lastname,
             ),
-            DropdownMenuItem(
+            CustomDropdownItem(
               value: PromoterSortByFilterState.email,
-              child: Text(localization.promoter_overview_filter_sortby_email),
+              label: localization.promoter_overview_filter_sortby_email,
             ),
           ],
           onChanged: (value) {

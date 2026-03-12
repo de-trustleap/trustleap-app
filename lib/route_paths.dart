@@ -19,10 +19,13 @@ class RoutePaths {
   static const String profilePasswordPath = "/change-password";
   static const String profileDeletePath = "/delete-account";
   static const String companyRegistration = "/company-registration";
+  static const String settingsPath = "/settings";
   static const String recommendationsPath = "/recommendations";
   static const String recommendationManagerPath = "/recommendation-manager";
   static const String recommendationManagerActivePath = "/active";
   static const String recommendationManagerArchivePath = "/archive";
+  static const String recommendationManagerActiveDetailPath = "/active-detail";
+  static const String recommendationManagerArchiveDetailPath = "/archive-detail";
   static const String promotersPath = "/promoters";
   static const String promotersOverviewPath = "/overview";
   static const String promotersRegisterPath = "/register";

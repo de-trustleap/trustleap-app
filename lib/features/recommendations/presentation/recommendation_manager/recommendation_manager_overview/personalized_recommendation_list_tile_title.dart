@@ -12,6 +12,7 @@ class PersonalizedRecommendationListTileTitle extends StatelessWidget {
   final bool isPromoter;
   final Function(UserRecommendation) onFavoritePressed;
   final RecommendationManagerTileCubit cubit;
+  final bool showFavoriteButton;
 
   const PersonalizedRecommendationListTileTitle({
     super.key,
@@ -19,6 +20,7 @@ class PersonalizedRecommendationListTileTitle extends StatelessWidget {
     required this.isPromoter,
     required this.onFavoritePressed,
     required this.cubit,
+    this.showFavoriteButton = true,
   });
 
   @override
@@ -96,11 +98,12 @@ class PersonalizedRecommendationListTileTitle extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            RecommendationManagerFavoriteButton(
-              isFavorite: cubit.currentFavoriteRecommendationIDs
-                  .contains(recommendation.id.value),
-              onPressed: () => onFavoritePressed(recommendation),
-            ),
+            if (showFavoriteButton)
+              RecommendationManagerFavoriteButton(
+                isFavorite: cubit.currentFavoriteRecommendationIDs
+                    .contains(recommendation.id.value),
+                onPressed: () => onFavoritePressed(recommendation),
+              ),
           ],
         ),
         const SizedBox(height: 8),

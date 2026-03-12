@@ -75,7 +75,6 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
   @override
   void dispose() {
     _controller.dispose();
-    Modular.get<PromoterObserverCubit>().stopObserving();
     super.dispose();
   }
 
@@ -153,7 +152,9 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
               cancelButtonTitle: localization
                   .promoter_overview_delete_promoter_alert_cancel_button,
               actionButtonAction: () => submitDeletion(id, isRegistered),
-              cancelButtonAction: () => navigator.pop());
+              cancelButtonAction: () => navigator.pop(),
+              icon: Icons.delete_outline,
+              isDestructive: true);
         });
   }
 

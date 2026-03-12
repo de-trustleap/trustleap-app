@@ -12,7 +12,7 @@ import 'package:finanzbegleiter/features/feedback/domain/feedback_item.dart';
 import 'package:finanzbegleiter/features/feedback/domain/feedback_repository.dart';
 import 'package:finanzbegleiter/features/feedback/infrastructure/feedback_item_model.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
-import 'package:web/web.dart';
+import 'package:finanzbegleiter/core/helpers/web_interop.dart';
 
 class FeedbackRepositoryImplementation implements FeedbackRepository {
   final FirebaseFunctions firebaseFunctions;
@@ -32,7 +32,7 @@ class FeedbackRepositoryImplementation implements FeedbackRepository {
     HttpsCallable callable = firebaseFunctions.httpsCallable("sendFeedback");
     final feedbackModel = FeedbackItemModel.fromDomain(feedback);
 
-    final userAgent = window.navigator.userAgent.toLowerCase();
+    final userAgent = WebInterop.userAgent.toLowerCase();
     final compressedImages = await ImageCompressor.compressImages(images);
     final encodedImages =
         compressedImages.map((imageData) => base64Encode(imageData)).toList();

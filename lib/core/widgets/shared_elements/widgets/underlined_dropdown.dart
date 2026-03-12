@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 
 class UnderlinedDropdown<T> extends StatelessWidget {
@@ -5,6 +6,7 @@ class UnderlinedDropdown<T> extends StatelessWidget {
   final List<DropdownMenuItem<T>> items;
   final ValueChanged<T?>? onChanged;
   final String? hint;
+  final bool useDialogPicker;
 
   const UnderlinedDropdown({
     super.key,
@@ -12,90 +14,30 @@ class UnderlinedDropdown<T> extends StatelessWidget {
     required this.items,
     required this.onChanged,
     this.hint,
+    this.useDialogPicker = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
+    final customItems = items.map((item) {
+      String label = '';
+      if (item.child is Text) {
+        label = (item.child as Text).data ?? '';
+      }
+      return CustomDropdownItem<T>(
+        value: item.value as T,
+        label: label,
+        enabled: item.enabled,
+      );
+    }).toList();
 
-    return DropdownButtonHideUnderline(
-      child: DropdownButton<T>(
-        value: value,
-        hint: hint != null
-            ? Container(
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: themeData.colorScheme.secondary,
-                      width: 1.0,
-                    ),
-                  ),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      Icons.keyboard_arrow_down,
-                      size: 16,
-                      color: themeData.colorScheme.secondary,
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      hint!,
-                      style: themeData.textTheme.bodyMedium?.copyWith(
-                        color: themeData.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            : null,
-        selectedItemBuilder: (context) {
-          return items.map((item) {
-            final itemWidget = item.child;
-            String displayText = "";
-
-            if (itemWidget is Text) {
-              displayText = itemWidget.data ?? "";
-            } else {
-              displayText = itemWidget.toString();
-            }
-
-            return Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    color: themeData.colorScheme.secondary,
-                    width: 1.0,
-                  ),
-                ),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.keyboard_arrow_down,
-                    size: 16,
-                    color: themeData.colorScheme.secondary,
-                  ),
-                  const SizedBox(width: 4),
-                  Text(
-                    displayText,
-                    style: themeData.textTheme.bodyMedium?.copyWith(
-                      color: themeData.colorScheme.onSurface,
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }).toList();
-        },
-        items: items,
-        onChanged: onChanged,
-        icon: const SizedBox.shrink(),
-        isDense: true,
-        style: themeData.textTheme.bodyMedium,
-      ),
+    return CustomDropdown<T>(
+      value: value,
+      items: customItems,
+      onChanged: onChanged,
+      label: hint,
+      type: CustomDropdownType.underlined,
+      useDialogPicker: useDialogPicker,
     );
   }
 }

@@ -188,6 +188,12 @@ abstract class AppLocalizations {
   /// **''**
   String get register_terms_and_condition_text2;
 
+  /// Title of the registration page (native AppBar)
+  ///
+  /// In en, this message translates to:
+  /// **'Register'**
+  String get register_page_title;
+
   /// The first part of the privacy checkbox text on the registration page
   ///
   /// In en, this message translates to:
@@ -265,6 +271,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You don\'\'t have an account? '**
   String get login_register_text;
+
+  /// Text after the register link on the login page
+  ///
+  /// In en, this message translates to:
+  /// **' and get started'**
+  String get login_register_suffix;
 
   /// Error message on the login page if the permissions could not be queried
   ///
@@ -421,6 +433,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Recommendation Manager'**
   String get menuitems_recommendation_manager;
+
+  /// Short menu entry for the recommendation manager in the bottom tab bar
+  ///
+  /// In en, this message translates to:
+  /// **'Manager'**
+  String get menuitems_manager;
 
   /// the menu entry for the registration codes
   ///
@@ -4881,6 +4899,18 @@ abstract class AppLocalizations {
   /// **'Filter Recommendations'**
   String get dashboard_recommendations_filter_title;
 
+  /// Title for the recommendation manager filter bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Filter Recommendations'**
+  String get recommendation_manager_filter_title;
+
+  /// Title for the campaign manager filter bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Filter Campaigns'**
+  String get campaign_manager_filter_title;
+
   /// Label for the period filter
   ///
   /// In en, this message translates to:
@@ -6602,6 +6632,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete campaign'**
   String get campaign_manager_delete_alert_delete_button;
+
+  /// Error message when legal content fails to load
+  ///
+  /// In en, this message translates to:
+  /// **'Content could not be loaded'**
+  String get legals_error_title;
+
+  /// Title of the Settings page
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings_title;
+
+  /// Label for the theme switcher section in Settings
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get settings_theme_label;
+
+  /// Light theme option in Settings
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get settings_theme_light;
+
+  /// Dark theme option in Settings
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get settings_theme_dark;
+
+  /// Section title for legal links in Settings
+  ///
+  /// In en, this message translates to:
+  /// **'Legal'**
+  String get settings_legal_section_title;
+
+  /// Link to privacy policy in Settings
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get settings_privacy_policy;
+
+  /// Link to terms and conditions in Settings
+  ///
+  /// In en, this message translates to:
+  /// **'Terms and Conditions'**
+  String get settings_terms_and_conditions;
+
+  /// Link to imprint in Settings
+  ///
+  /// In en, this message translates to:
+  /// **'Imprint'**
+  String get settings_imprint;
+
+  /// Logout button in Settings
+  ///
+  /// In en, this message translates to:
+  /// **'Log out'**
+  String get settings_logout;
+
+  /// Settings tab in profile
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get profile_settings_tab;
+
+  /// Dark mode subtitle in settings
+  ///
+  /// In en, this message translates to:
+  /// **'Reduces eye strain in low light'**
+  String get settings_dark_mode_subtitle;
+
+  /// App version in settings
+  ///
+  /// In en, this message translates to:
+  /// **'App Version'**
+  String get settings_app_version;
 }
 
 class _AppLocalizationsDelegate

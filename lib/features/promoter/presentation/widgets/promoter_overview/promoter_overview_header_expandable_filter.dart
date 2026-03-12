@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/custom_dropdown.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -93,38 +94,37 @@ class _PromoterOverviewHeaderExpandableFilterState
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              DropdownMenu<PromoterSortByFilterState>(
+              CustomDropdown<PromoterSortByFilterState>(
                   textStyle: themeData.textTheme.bodySmall,
                   width: responsiveValue.largerThan(MOBILE) ? 250 : 190,
-                  label: Text(
-                      localization.promoter_overview_filter_sortby_choose,
-                      style: themeData.textTheme.bodySmall!
-                          .copyWith(fontSize: 12)),
-                  initialSelection: PromoterSortByFilterState.createdAt,
-                  enableSearch: false,
-                  requestFocusOnTap: false,
-                  dropdownMenuEntries: [
-                    DropdownMenuEntry(
+                  label: localization.promoter_overview_filter_sortby_choose,
+                  value: filterStates.sortByFilterState,
+                  type: CustomDropdownType.standard,
+                  useDialogPicker: responsiveValue.isMobile,
+                  items: [
+                    CustomDropdownItem(
                         value: PromoterSortByFilterState.createdAt,
                         label:
                             localization.promoter_overview_filter_sortby_date),
-                    DropdownMenuEntry(
+                    CustomDropdownItem(
                         value: PromoterSortByFilterState.firstName,
                         label: localization
                             .promoter_overview_filter_sortby_firstname),
-                    DropdownMenuEntry(
+                    CustomDropdownItem(
                         value: PromoterSortByFilterState.lastName,
                         label: localization
                             .promoter_overview_filter_sortby_lastname),
-                    DropdownMenuEntry(
+                    CustomDropdownItem(
                         value: PromoterSortByFilterState.email,
                         label:
-                            localization.promoter_overview_filter_sortby_email)
+                            localization.promoter_overview_filter_sortby_email),
                   ],
-                  onSelected: (sortBy) {
-                    filterStates.sortByFilterState =
-                        sortBy ?? PromoterSortByFilterState.createdAt;
-                    widget.onFilterChanged(filterStates);
+                  onChanged: (sortBy) {
+                    setState(() {
+                      filterStates.sortByFilterState =
+                          sortBy ?? PromoterSortByFilterState.createdAt;
+                      widget.onFilterChanged(filterStates);
+                    });
                   }),
               RadioGroup<PromoterSortOrderFilterState>(
                 groupValue: filterStates.sortOrderFilterState,

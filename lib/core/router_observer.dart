@@ -4,6 +4,10 @@ import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+/// Minimal observer passed to [RouterOutlet] to expose its internal
+/// [NavigatorState] via [navigator]. Used for back-button navigation on native.
+class RouterOutletObserver extends NavigatorObserver {}
+
 class RouterObserver extends NavigatorObserver {
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {

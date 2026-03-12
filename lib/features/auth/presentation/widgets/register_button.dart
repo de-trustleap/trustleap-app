@@ -17,7 +17,7 @@ class RegisterButton extends StatelessWidget {
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
 
-    return Row(
+    return Wrap(
       children: [
         SelectableText(localization.login_register_text,
             style: responsiveValue.isMobile
@@ -31,7 +31,7 @@ class RegisterButton extends StatelessWidget {
                         .copyWith(color: themeData.colorScheme.secondary)
                     : themeData.textTheme.bodyMedium!
                         .copyWith(color: themeData.colorScheme.secondary))),
-        SelectableText(" und starten",
+        SelectableText(localization.login_register_suffix,
             style: responsiveValue.isMobile
                 ? themeData.textTheme.bodySmall
                 : themeData.textTheme.bodyMedium),

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "326519245330",
+    "project_id": "trustleap-staging",
+    "storage_bucket": "trustleap-staging.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326519245330:android:6d87caf930eb145924e6cb",
+        "android_client_info": {
+          "package_name": "de.trustleap.app.staging"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiPDl3Fy9f6yGrwBNROdmC32GdMhsv0pU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

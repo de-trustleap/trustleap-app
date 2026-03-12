@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/core/widgets/page_wrapper/mobile_app_template.dart';
 import 'package:finanzbegleiter/features/permissions/application/permission_cubit.dart';
 import 'package:finanzbegleiter/features/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
@@ -10,6 +11,7 @@ import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/error_view.
 import 'package:finanzbegleiter/features/feedback/presentation/feedback_floating_action_button.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -40,6 +42,10 @@ class PageTemplate extends StatelessWidget {
   }
 
   Widget getResponsiveWidget(BuildContext context) {
+    if (!kIsWeb) {
+      return const MobileAppTemplate();
+    }
+
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final themeData = Theme.of(context);
 

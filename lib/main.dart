@@ -8,6 +8,7 @@ import 'package:finanzbegleiter/features/user_observer/user_observer_cubit.dart'
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/helpers/stored_consent_reader.dart';
+import 'package:finanzbegleiter/features/consent/domain/consent_local_storage.dart';
 import 'package:finanzbegleiter/core/modules/app_module.dart';
 import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
 import 'package:finanzbegleiter/core/router_observer.dart';
@@ -21,7 +22,6 @@ import 'package:finanzbegleiter/features/consent/presentation/consent_banner_wra
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:finanzbegleiter/theme/desktop_theme.dart';
 import 'package:finanzbegleiter/theme/mobile_theme.dart';
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -32,9 +32,13 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:finanzbegleiter/core/sentry_initialization.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:url_strategy/url_strategy.dart';
-import 'package:web/web.dart' as web;
+import 'package:finanzbegleiter/core/app_check_initializer.dart';
+import 'package:finanzbegleiter/core/helpers/browser_location.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await ConsentLocalStorage.initialize();
+
   final hasStatisticsConsent = StoredConsentReader.hasStatisticsConsent();
 
   if (hasStatisticsConsent) {
@@ -48,21 +52,19 @@ Future<void> main() async {
 }
 
 Future<void> _runApp(bool hasStatisticsConsent) async {
-  WidgetsFlutterBinding.ensureInitialized();
-
   final environment = Environment();
 
-  await Firebase.initializeApp(
-    options: environment.isStaging()
-        ? DefaultFirebaseOptionsStaging.currentPlatform
-        : DefaultFirebaseOptionsProd.currentPlatform,
-  );
-
-  if (kIsWeb) {
-    await FirebaseAppCheck.instance.activate(
-      providerWeb: ReCaptchaV3Provider(environment.getAppCheckToken()),
+  if (Firebase.apps.isEmpty) {
+    await Firebase.initializeApp(
+      options: environment.isStaging()
+          ? DefaultFirebaseOptionsStaging.currentPlatform
+          : DefaultFirebaseOptionsProd.currentPlatform,
     );
   }
+
+  await AppCheckInitializer.initialize(
+    webToken: kIsWeb ? environment.getAppCheckToken() : null,
+  );
 
   setPathUrlStrategy();
 
@@ -97,10 +99,7 @@ void routeToInitial(AuthStatus status, CustomNavigatorBase navigator) {
   late String lastRoute;
   WebCrashReporter.report("App started", null, LogLevel.info);
   if (kIsWeb) {
-    String path = web.window.location.pathname;
-    String query = web.window.location.search;
-
-    lastRoute = path + query;
+    lastRoute = BrowserLocation.pathname() + BrowserLocation.search();
   } else {
     lastRoute = WidgetsBinding.instance.platformDispatcher.defaultRouteName;
   }
@@ -134,28 +133,23 @@ void routeToInitial(AuthStatus status, CustomNavigatorBase navigator) {
   }
 }
 
-ThemeData getTheme(BuildContext context, ThemeState state) {
-  if (MediaQuery.of(context).size.width < 600) {
-    if (state is ThemeChanged) {
-      if (state.status == ThemeStatus.light) {
-        return MobileAppTheme.lightTheme;
-      } else {
-        return MobileAppTheme.darkTheme;
-      }
-    } else {
-      return MobileAppTheme.lightTheme;
-    }
-  } else {
-    if (state is ThemeChanged) {
-      if (state.status == ThemeStatus.light) {
-        return DesktopAppTheme.lightTheme;
-      } else {
-        return DesktopAppTheme.darkTheme;
-      }
-    } else {
-      return DesktopAppTheme.lightTheme;
-    }
+ThemeData getLightTheme(BuildContext context) {
+  return MediaQuery.of(context).size.width < 600
+      ? MobileAppTheme.lightTheme
+      : DesktopAppTheme.lightTheme;
+}
+
+ThemeData getDarkTheme(BuildContext context) {
+  return MediaQuery.of(context).size.width < 600
+      ? MobileAppTheme.darkTheme
+      : DesktopAppTheme.darkTheme;
+}
+
+ThemeMode getThemeMode(ThemeState state) {
+  if (state is ThemeChanged) {
+    return state.status == ThemeStatus.dark ? ThemeMode.dark : ThemeMode.light;
   }
+  return ThemeMode.system;
 }
 
 class MyApp extends StatelessWidget {
@@ -231,7 +225,9 @@ class MyApp extends StatelessWidget {
                       return MaterialApp.router(
                         routerConfig: Modular.routerConfig,
                         title: "Trust Leap",
-                        theme: getTheme(context, themeState),
+                        theme: getLightTheme(context),
+                        darkTheme: getDarkTheme(context),
+                        themeMode: getThemeMode(themeState),
                         supportedLocales: L10n.all,
                         locale: const Locale("de"),
                         localizationsDelegates: const [

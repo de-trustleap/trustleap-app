@@ -4,7 +4,7 @@ import 'package:finanzbegleiter/features/web_logging/application/web_logging_cub
 import 'package:finanzbegleiter/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:web/web.dart';
+import 'package:finanzbegleiter/core/helpers/web_interop.dart';
 
 class WebCrashReporter {
   static void initialize() {
@@ -24,6 +24,6 @@ class WebCrashReporter {
   }
 
   static String _detectBrowser() {
-    return window.navigator.userAgent.toLowerCase();
+    return WebInterop.userAgent.toLowerCase();
   }
 }

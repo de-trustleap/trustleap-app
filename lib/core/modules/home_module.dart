@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/core/page_transitions.dart';
+import 'package:flutter/foundation.dart';
 import 'package:finanzbegleiter/core/widgets/page_wrapper/home_page.dart';
 import 'package:finanzbegleiter/features/dashboard/presentation/dashboard_page.dart';
 import 'package:finanzbegleiter/features/landing_pages/presentation/landing_page.dart';
@@ -11,8 +12,13 @@ import 'package:finanzbegleiter/features/profile/presentation/widgets/company_re
 import 'package:finanzbegleiter/features/promoter/presentation/promoters_page.dart';
 import 'package:finanzbegleiter/features/promoter/presentation/widgets/promoter_detail/promoter_detail_page.dart';
 import 'package:finanzbegleiter/features/promoter/presentation/widgets/promoter_edit/promoter_edit_page.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/archived_recommendation_detail_args.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_detail_args.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_archive/recommendation_manager_archive_detail_page.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_manager_detail_page.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_page.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendations_page.dart';
+import 'package:finanzbegleiter/features/settings/presentation/native_settings_page.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -21,11 +27,15 @@ class HomeModule extends Module {
   void routes(r) {
     r.child(Modular.initialRoute,
         child: (_) => const HomePage(),
-        transition: TransitionType.custom,
-        customTransition: PageTransitions.fadePageTransition,
+        transition:
+            kIsWeb ? TransitionType.custom : TransitionType.rightToLeft,
+        customTransition:
+            kIsWeb ? PageTransitions.fadePageTransition : null,
         children: [
           ChildRoute(RoutePaths.dashboardPath,
               child: (_) => const DashboardPage()),
+          ChildRoute(RoutePaths.settingsPath,
+              child: (_) => const NativeSettingsPage()),
           ChildRoute(RoutePaths.profilePath,
               child: (_) => ProfilePage(
                   registeredCompany: r.args.queryParams["registeredCompany"]),
@@ -59,6 +69,12 @@ class HomeModule extends Module {
                 ChildRoute(RoutePaths.recommendationManagerArchivePath,
                     child: (_) => const RecommendationManagerPage()),
               ]),
+          ChildRoute(RoutePaths.recommendationManagerActiveDetailPath,
+              child: (_) => RecommendationManagerDetailPage(
+                  args: r.args.data as RecommendationDetailArgs)),
+          ChildRoute(RoutePaths.recommendationManagerArchiveDetailPath,
+              child: (_) => RecommendationManagerArchiveDetailPage(
+                  args: r.args.data as ArchivedRecommendationDetailArgs)),
           ChildRoute(RoutePaths.promotersPath,
               child: (_) => PromotersPage(
                     editedPromoter: r.args.queryParams["editedPromoter"],

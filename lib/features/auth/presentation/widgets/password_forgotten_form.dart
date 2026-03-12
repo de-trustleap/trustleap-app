@@ -69,7 +69,8 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
                   localizations.password_forgotten_success_dialog_description,
               actionButtonTitle: localizations
                   .password_forgotten_success_dialog_ok_button_title,
-              actionButtonAction: alertAction);
+              actionButtonAction: alertAction,
+              icon: Icons.check_circle_outline);
         });
   }
 

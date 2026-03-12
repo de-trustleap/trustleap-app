@@ -10,10 +10,13 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/clickable_link.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_detail_args.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_manager_list_tile_content.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_manager_list_tile_helper.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_manager_notes_textfield.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -85,6 +88,7 @@ class _RecommendationManagerBaseTileState
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final navigator = CustomNavigator.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
     final cubit = Modular.get<RecommendationManagerTileCubit>();
 
     return BlocConsumer<RecommendationManagerTileCubit,
@@ -95,7 +99,8 @@ class _RecommendationManagerBaseTileState
               current.recommendation.id == _recommendation.id) ||
           (current is RecommendationSetFinishedSuccessState &&
               current.recommendation.id == _recommendation.id) ||
-          (current is RecommendationManagerTileFavoriteUpdatedState) ||
+          (current is RecommendationManagerTileFavoriteUpdatedState &&
+              current.recommendation.id == _recommendation.id) ||
           (current is RecommendationManagerTileViewedState &&
               current.recommendationID == _recommendation.id.value),
       listener: (context, state) {
@@ -141,6 +146,32 @@ class _RecommendationManagerBaseTileState
       builder: (context, state) {
         final isLoading = state is RecommendationSetStatusLoadingState &&
             state.recommendation.id.value == _recommendation.id.value;
+
+        if (responsiveValue.isMobile) {
+          return InkWell(
+            onTap: () => navigator.pushNamed(
+              RoutePaths.homePath +
+                  RoutePaths.recommendationManagerActiveDetailPath,
+              arguments: RecommendationDetailArgs(
+                recommendation: _recommendation,
+                onFavoritePressed: widget.onFavoritePressed,
+                onUpdate: widget.onUpdate,
+                buildContent: widget.buildContent,
+                buildBottomRowTrailing: widget.buildBottomRowTrailing,
+              ),
+            ),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              child: Row(
+                children: [
+                  Expanded(child: widget.buildTitle(_recommendation)),
+                  const Icon(Icons.chevron_right, color: Colors.grey),
+                ],
+              ),
+            ),
+          );
+        }
 
         return Container(
           color: themeData.colorScheme.surface,
