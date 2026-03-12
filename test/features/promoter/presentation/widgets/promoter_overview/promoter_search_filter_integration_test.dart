@@ -18,6 +18,7 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/features/promoter/presentation/widgets/promoter_overview/promoter_overview_header_expandable_filter.dart';
 import 'package:finanzbegleiter/features/promoter/presentation/widgets/promoter_overview/promoters_overview_grid_tile.dart';
 import 'package:finanzbegleiter/features/promoter/presentation/widgets/promoter_overview/promoters_overview_page.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/underlined_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -275,7 +276,7 @@ void main() {
         await tester.pumpAndSettle();
 
         // Change search option to email
-        final dropdown = find.byType(DropdownButton<PromoterSearchOption>);
+        final dropdown = find.byType(UnderlinedDropdown<PromoterSearchOption>);
         await tester.tap(dropdown);
         await tester.pumpAndSettle();
         final emailOption = find.text('Suche nach E-Mail').last;

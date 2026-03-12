@@ -75,7 +75,6 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
   @override
   void dispose() {
     _controller.dispose();
-    Modular.get<PromoterObserverCubit>().stopObserving();
     super.dispose();
   }
 

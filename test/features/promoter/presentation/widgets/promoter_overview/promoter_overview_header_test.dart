@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/features/promoter/presentation/widgets/promoter_overview/promoter_overview_filter_bottom_sheet.dart';
 import 'package:finanzbegleiter/features/promoter/presentation/widgets/promoter_overview/promoter_overview_header.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/underlined_dropdown.dart';
 import 'package:finanzbegleiter/features/promoter/presentation/widgets/promoter_overview/promoter_overview_header_expandable_filter.dart';
 import 'package:finanzbegleiter/features/promoter/presentation/widgets/promoter_overview/promoter_overview_view_state_button.dart';
 import 'package:finanzbegleiter/features/promoter/presentation/widgets/promoter_overview/promoters_overview_page.dart';
@@ -178,7 +179,7 @@ void main() {
       await tester.pump();
 
       // Then
-      expect(find.byType(DropdownButton<PromoterSearchOption>), findsOneWidget);
+      expect(find.byType(UnderlinedDropdown<PromoterSearchOption>), findsOneWidget);
     });
 
     testWidgets('should call onSearchOptionChanged when option is selected',
@@ -196,7 +197,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Open dropdown
-      final dropdown = find.byType(DropdownButton<PromoterSearchOption>);
+      final dropdown = find.byType(UnderlinedDropdown<PromoterSearchOption>);
       await tester.tap(dropdown);
       await tester.pumpAndSettle();
 

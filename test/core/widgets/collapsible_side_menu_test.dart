@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/features/menu/application/menu_cubit.dart';
 import 'package:finanzbegleiter/features/permissions/application/permission_cubit.dart';
 import 'package:finanzbegleiter/features/permissions/domain/permissions.dart';
 import 'package:finanzbegleiter/features/permissions/domain/permission_repository.dart';
+import 'package:finanzbegleiter/theme/theme_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
@@ -42,6 +43,7 @@ class CollapsibleSideMenuTestModule extends Module {
     i.addLazySingleton<PermissionRepository>(() => mockPermissionRepository);
     i.addSingleton<MenuCubit>(() => menuCubit);
     i.addSingleton<PermissionCubit>(() => permissionCubit);
+    i.addSingleton<ThemeCubit>(() => ThemeCubit());
   }
 
   @override
@@ -68,6 +70,7 @@ void main() {
 
     provideDummy<MenuState>(MenuInitial());
     provideDummy<PermissionState>(PermissionInitial());
+    provideDummy<ThemeState>(ThemeInitial());
 
     menuCubit = MenuCubit();
     mockPermissionRepository = MockPermissionRepository();
