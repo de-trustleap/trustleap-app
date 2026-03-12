@@ -33,7 +33,9 @@ class _NativeSegmentedTabBarState extends State<NativeSegmentedTabBar> {
       maxLines: 1,
       textDirection: TextDirection.ltr,
     )..layout();
-    return painter.width;
+    final width = painter.width;
+    painter.dispose();
+    return width;
   }
 
   void _scrollToChip(int index) {

@@ -10,15 +10,16 @@ class NativeRefreshNotifier extends ChangeNotifier {
   Completer<void>? _completer;
 
   Future<void> requestRefresh() {
-    _completer = Completer<void>();
+    final completer = Completer<void>();
+    _completer = completer;
     notifyListeners();
     Future.delayed(timeout, () {
-      if (!(_completer?.isCompleted ?? true)) {
-        _completer?.complete();
-        _completer = null;
+      if (!completer.isCompleted) {
+        completer.complete();
+        if (_completer == completer) _completer = null;
       }
     });
-    return _completer!.future;
+    return completer.future;
   }
 
   void complete() {

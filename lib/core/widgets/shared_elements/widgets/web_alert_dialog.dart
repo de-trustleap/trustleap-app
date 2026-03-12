@@ -37,8 +37,8 @@ class WebAlertDialog extends StatelessWidget {
     return AlertDialog(
         actions: [
           TextButton(
-              onPressed: () =>
-                  actionButtonDisabled ? null : actionButtonAction(),
+              onPressed:
+                  actionButtonDisabled ? null : () => actionButtonAction(),
               child: Text(actionButtonTitle,
                   style: responsiveValue.isMobile
                       ? themeData.textTheme.bodySmall!

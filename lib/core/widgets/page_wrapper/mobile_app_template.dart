@@ -166,5 +166,5 @@ class _AlwaysScrollableBehavior extends ScrollBehavior {
 
   @override
   ScrollPhysics getScrollPhysics(BuildContext context) =>
-      const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics());
+      AlwaysScrollableScrollPhysics(parent: super.getScrollPhysics(context));
 }

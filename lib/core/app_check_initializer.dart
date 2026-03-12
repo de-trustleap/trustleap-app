@@ -3,9 +3,9 @@ import 'package:flutter/foundation.dart';
 
 class AppCheckInitializer {
   static Future<void> initialize({String? webToken}) async {
-    if (kIsWeb) {
+    if (kIsWeb && webToken != null) {
       await FirebaseAppCheck.instance.activate(
-        providerWeb: ReCaptchaV3Provider(webToken!),
+        providerWeb: ReCaptchaV3Provider(webToken),
       );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       await FirebaseAppCheck.instance.activate(
