@@ -186,7 +186,7 @@ class AppModule extends Module {
       ..add(SignInCubit.new)
       ..add(AuthCubit.new)
       ..add(AuthObserverBloc.new)
-      ..add(ThemeCubit.new)
+      ..addLazySingleton(ThemeCubit.new)
       ..add(ProfileImageBloc.new)
       ..add(CompanyImageBloc.new)
       ..add(LandingPageImageBloc.new)

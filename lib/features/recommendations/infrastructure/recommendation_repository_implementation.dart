@@ -46,6 +46,8 @@ class RecommendationRepositoryImplementation
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    } catch (e) {
+      rethrow;
     }
   }
 
