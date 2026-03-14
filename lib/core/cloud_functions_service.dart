@@ -39,6 +39,8 @@ class CloudFunctionsService {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    } catch (_) {
+      return left(BackendFailure());
     }
   }
 }
