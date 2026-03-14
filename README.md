@@ -4,17 +4,20 @@
 
 ### Stack
 
-- Flutter 3.41.2
-- Dart 3.11.0
+- Flutter 3.41.4
+- Dart 3.11.1
 - Visual Studio Code
 - Firebase
 - BLoC
+- Sentry
+- Figma
 
 ### Architecture
 
 - BLoC State Management
 - Repositories, Models, Widgets
 - Modular
+- Domain Driven Design
 
 ## Development
 
