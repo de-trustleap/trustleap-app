@@ -192,3 +192,5 @@ class _SegmentChip extends StatelessWidget {
     );
   }
 }
+// TODO: LEGAL TEXTE EINPFLEGEN
+// TODO: EIGENES IPHONE DEBUG APPCHECK TOKEN REGISTRIEREN

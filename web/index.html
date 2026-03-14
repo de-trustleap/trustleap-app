@@ -31,19 +31,11 @@
   </div>
 
   <script>
-    // AppCheck Token logic
-    function getAppCheckDebugToken() {
-      const currentUrl = window.location.hostname;
-      const isStaging = currentUrl.includes("localhost") || currentUrl.includes("staging");
-
-      const stagingToken = "a323d75a-66be-445f-aca5-efdf1a120d3e";
-      const prodToken = "A0791EC5-107E-4C90-BF82-34E5FE2EA2DF";
-
-      return isStaging ? stagingToken : prodToken;
+    // AppCheck debug token only for local development (not for deployed staging/prod)
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+      self.FIREBASE_APPCHECK_DEBUG_TOKEN = "DAB2E213-57BF-40CF-BA0F-2BF70700DC7F";
+      console.log("✅ AppCheck Debug Token (localhost):", self.FIREBASE_APPCHECK_DEBUG_TOKEN);
     }
-
-    self.FIREBASE_APPCHECK_DEBUG_TOKEN = getAppCheckDebugToken();
-    console.log("✅ Aktueller AppCheck Debug Token:", self.FIREBASE_APPCHECK_DEBUG_TOKEN);
   </script>
 
   <!-- Startup Loading Animation JavaScript -->

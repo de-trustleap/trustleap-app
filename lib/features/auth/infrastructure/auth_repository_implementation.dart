@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:dartz/dartz.dart';
+import 'package:finanzbegleiter/core/cloud_functions_service.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/failures/failure.dart';
@@ -18,12 +19,14 @@ class AuthRepositoryImplementation implements AuthRepository {
   final FirebaseFirestore firestore;
   final FirebaseFunctions firebaseFunctions;
   final FirebaseAppCheck appCheck;
+  final CloudFunctionsService cloudFunctions;
 
   AuthRepositoryImplementation(
       {required this.firebaseAuth,
       required this.firestore,
       required this.firebaseFunctions,
-      required this.appCheck});
+      required this.appCheck,
+      required this.cloudFunctions});
 
   @override
   Future<Either<AuthFailure, UserCredential>> loginWithEmailAndPassword(
@@ -116,31 +119,22 @@ class AuthRepositoryImplementation implements AuthRepository {
 
   @override
   Future<Either<DatabaseFailure, Unit>> resendEmailVerification() async {
-    final appCheckToken = await appCheck.getToken();
     final email = firebaseAuth.currentUser?.email;
-    HttpsCallable callable =
-        firebaseFunctions.httpsCallable("sendVerificationEmail");
-    try {
-      await callable
-          .call({"appCheckToken": appCheckToken, "email": email ?? ""});
-      return right(unit);
-    } on FirebaseFunctionsException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
+    return cloudFunctions.call(
+      'sendVerificationEmail',
+      {'email': email ?? ''},
+      (_) => unit,
+    );
   }
 
   @override
   Future<Either<DatabaseFailure, Unit>> resetPassword(
       {required String email}) async {
-    final appCheckToken = await appCheck.getToken();
-    HttpsCallable callable =
-        firebaseFunctions.httpsCallable("sendPasswordResetEmail");
-    try {
-      await callable.call({"appCheckToken": appCheckToken, "email": email});
-      return right(unit);
-    } on FirebaseFunctionsException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
+    return cloudFunctions.call(
+      'sendPasswordResetEmail',
+      {'email': email},
+      (_) => unit,
+    );
   }
 
   @override

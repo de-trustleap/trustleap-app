@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
+import 'package:finanzbegleiter/core/cloud_functions_service.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
@@ -13,34 +13,22 @@ import 'package:finanzbegleiter/features/promoter/domain/promoter_repository.dar
 import 'package:finanzbegleiter/features/landing_pages/infrastructure/landing_page_model.dart';
 import 'package:finanzbegleiter/features/promoter/infrastructure/unregistered_promoter_model.dart';
 import 'package:finanzbegleiter/features/profile/infrastructure/user_model.dart';
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:rxdart/rxdart.dart';
 
 class PromoterRepositoryImplementation implements PromoterRepository {
   final FirebaseFirestore firestore;
-  final FirebaseFunctions firebaseFunctions;
-  final FirebaseAppCheck appCheck;
+  final CloudFunctionsService cloudFunctions;
 
   PromoterRepositoryImplementation(
-      {required this.firestore,
-      required this.firebaseFunctions,
-      required this.appCheck});
+      {required this.firestore, required this.cloudFunctions});
 
   @override
   Future<Either<DatabaseFailure, Unit>> registerPromoter(
       {required UnregisteredPromoter promoter}) async {
-    final appCheckToken = await appCheck.getToken();
-    HttpsCallable callable = firebaseFunctions.httpsCallable("createPromoter");
     final promoterMap = UnregisteredPromoterModel.fromDomain(promoter).toMap();
-    promoterMap.remove("createdAt");
-    promoterMap.remove("expiresAt");
-    promoterMap["appCheckToken"] = appCheckToken;
-    try {
-      await callable.call(promoterMap);
-      return right(unit);
-    } on FirebaseFunctionsException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
+    promoterMap.remove('createdAt');
+    promoterMap.remove('expiresAt');
+    return cloudFunctions.call('createPromoter', promoterMap, (_) => unit);
   }
 
   @override
@@ -356,18 +344,11 @@ class PromoterRepositoryImplementation implements PromoterRepository {
   @override
   Future<Either<DatabaseFailure, Unit>> deletePromoter(
       {required String id, required bool isRegistered}) async {
-    final appCheckToken = await appCheck.getToken();
-    HttpsCallable callable = firebaseFunctions.httpsCallable("deletePromoter");
-    try {
-      await callable.call({
-        "appCheckToken": appCheckToken,
-        "isRegistered": isRegistered,
-        "id": id,
-      });
-      return right(unit);
-    } on FirebaseFunctionsException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
+    return cloudFunctions.call(
+      'deletePromoter',
+      {'isRegistered': isRegistered, 'id': id},
+      (_) => unit,
+    );
   }
 
   @override
@@ -375,19 +356,11 @@ class PromoterRepositoryImplementation implements PromoterRepository {
       {required bool isRegistered,
       required List<String> landingPageIDs,
       required String promoterID}) async {
-    final appCheckToken = await appCheck.getToken();
-    HttpsCallable callable = firebaseFunctions.httpsCallable("editPromoter");
-    try {
-      await callable.call({
-        "appCheckToken": appCheckToken,
-        "isRegistered": isRegistered,
-        "ids": landingPageIDs,
-        "promoterID": promoterID
-      });
-      return right(unit);
-    } on FirebaseFunctionsException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
+    return cloudFunctions.call(
+      'editPromoter',
+      {'isRegistered': isRegistered, 'ids': landingPageIDs, 'promoterID': promoterID},
+      (_) => unit,
+    );
   }
 
   @override
