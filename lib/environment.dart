@@ -23,7 +23,7 @@ class Environment {
   String getAppCheckToken() {
     if (isStaging()) {
       if (kDebugMode) {
-        return "a323d75a-66be-445f-aca5-efdf1a120d3e";
+        return "DAB2E213-57BF-40CF-BA0F-2BF70700DC7F";
       } else {
         return "6LeQCdQqAAAAAKGfloIpjaK8QSnXYAI3E9Lyljtq";
       }

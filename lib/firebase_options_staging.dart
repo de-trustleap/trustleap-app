@@ -48,7 +48,7 @@ class DefaultFirebaseOptionsStaging {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyAUZcZ7P98X28iFRxKOXlGsK0XH4FrcMuU',
-    appId: '1:326519245330:web:c77040d973d1308624e6cb',
+    appId: '1:326519245330:web:f330ea78c3a5415424e6cb',
     messagingSenderId: '326519245330',
     projectId: 'trustleap-staging',
     authDomain: 'trustleap-staging.firebaseapp.com',

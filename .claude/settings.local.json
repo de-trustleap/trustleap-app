@@ -16,7 +16,15 @@
       "Bash(sed:*)",
       "WebSearch",
       "Bash(cat:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "mcp__sentry__search_issues",
+      "mcp__sentry__find_organizations",
+      "mcp__sentry__find_projects",
+      "mcp__sentry__get_issue_details",
+      "WebFetch(domain:pub.dev)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:firebase.google.com)",
+      "mcp__plugin_firebase_firebase__firebase_get_environment"
     ],
     "deny": []
   }

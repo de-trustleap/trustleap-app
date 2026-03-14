@@ -130,7 +130,7 @@ class _LegalsPageState extends State<LegalsPage> {
                           margin: Margins.only(bottom: baseFontSize * 1),
                         ),
                         "th": Style(
-                          backgroundColor: themeData.colorScheme.surfaceVariant,
+                          backgroundColor: themeData.colorScheme.surfaceContainerHighest,
                           border: Border.fromBorderSide(
                               BorderSide(color: themeData.colorScheme.outline, width: 1)),
                           padding: HtmlPaddings.all(8),

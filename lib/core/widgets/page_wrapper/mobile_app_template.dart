@@ -52,7 +52,7 @@ class _MobileAppTemplateState extends State<MobileAppTemplate> {
   int _getTabIndex(String path) {
     final index = _tabPaths.indexWhere((tab) =>
         path == RoutePaths.homePath + tab ||
-        path.startsWith(RoutePaths.homePath + tab + '/'));
+        path.startsWith('${RoutePaths.homePath}$tab/'));
     return index >= 0 ? index : 0;
   }
 
@@ -60,7 +60,7 @@ class _MobileAppTemplateState extends State<MobileAppTemplate> {
       String path, AppLocalizations l, List<String> tabLabels) {
     final tabIndex = _tabPaths.indexWhere((tab) =>
         path == RoutePaths.homePath + tab ||
-        path.startsWith(RoutePaths.homePath + tab + '/'));
+        path.startsWith('${RoutePaths.homePath}$tab/'));
     if (tabIndex >= 0) return tabLabels[tabIndex];
     if (path.startsWith(RoutePaths.homePath + RoutePaths.profilePath)) {
       return l.menuitems_profile;

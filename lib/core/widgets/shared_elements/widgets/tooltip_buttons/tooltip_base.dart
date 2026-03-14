@@ -50,7 +50,7 @@ class _TooltipBaseState extends State<TooltipBase> {
               child: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(8),
                   boxShadow: const [
                     BoxShadow(color: Colors.black26, blurRadius: 5)

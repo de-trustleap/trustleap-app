@@ -3,55 +3,47 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:dartz/dartz.dart';
+import 'package:finanzbegleiter/core/cloud_functions_service.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/core/helpers/image_compressor.dart';
 import 'package:finanzbegleiter/features/feedback/domain/feedback_item.dart';
 import 'package:finanzbegleiter/features/feedback/domain/feedback_repository.dart';
 import 'package:finanzbegleiter/features/feedback/infrastructure/feedback_item_model.dart';
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:finanzbegleiter/core/helpers/web_interop.dart';
 
 class FeedbackRepositoryImplementation implements FeedbackRepository {
-  final FirebaseFunctions firebaseFunctions;
-  final FirebaseAppCheck appCheck;
+  final CloudFunctionsService cloudFunctions;
   final FirebaseFirestore firestore;
 
   FeedbackRepositoryImplementation({
-    required this.firebaseFunctions,
-    required this.appCheck,
+    required this.cloudFunctions,
     required this.firestore,
   });
 
   @override
   Future<Either<DatabaseFailure, Unit>> sendFeedback(
       FeedbackItem feedback, List<Uint8List> images) async {
-    final appCheckToken = await appCheck.getToken();
-    HttpsCallable callable = firebaseFunctions.httpsCallable("sendFeedback");
     final feedbackModel = FeedbackItemModel.fromDomain(feedback);
-
     final userAgent = WebInterop.userAgent.toLowerCase();
     final compressedImages = await ImageCompressor.compressImages(images);
     final encodedImages =
         compressedImages.map((imageData) => base64Encode(imageData)).toList();
 
-    try {
-      await callable.call({
-        "appCheckToken": appCheckToken,
-        "id": feedbackModel.id,
-        "title": feedbackModel.title,
-        "description": feedbackModel.description,
-        "email": feedbackModel.email,
-        "type": feedbackModel.type,
-        "images": encodedImages,
-        "userAgent": userAgent
-      });
-      return right(unit);
-    } on FirebaseFunctionsException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
+    return cloudFunctions.call(
+      'sendFeedback',
+      {
+        'id': feedbackModel.id,
+        'title': feedbackModel.title,
+        'description': feedbackModel.description,
+        'email': feedbackModel.email,
+        'type': feedbackModel.type,
+        'images': encodedImages,
+        'userAgent': userAgent,
+      },
+      (_) => unit,
+    );
   }
 
   @override
@@ -84,13 +76,10 @@ class FeedbackRepositoryImplementation implements FeedbackRepository {
 
   @override
   Future<Either<DatabaseFailure, Unit>> deleteFeedback(String id) async {
-    final appCheckToken = await appCheck.getToken();
-    HttpsCallable callable = firebaseFunctions.httpsCallable("deleteFeedback");
-    try {
-      await callable.call({"appCheckToken": appCheckToken, "feedbackID": id});
-      return right(unit);
-    } on FirebaseFunctionsException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
+    return cloudFunctions.call(
+      'deleteFeedback',
+      {'feedbackID': id},
+      (_) => unit,
+    );
   }
 }

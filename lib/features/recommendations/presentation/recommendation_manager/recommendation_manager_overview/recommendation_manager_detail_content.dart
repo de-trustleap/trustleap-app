@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager/recommendation_manager_cubit.dart';
 import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
@@ -72,8 +73,15 @@ class _RecommendationManagerDetailContentState
     final navigator = CustomNavigator.of(context);
     final cubit = Modular.get<RecommendationManagerTileCubit>();
 
-    return BlocConsumer<RecommendationManagerTileCubit,
-        RecommendationManagerTileState>(
+    return BlocListener<RecommendationManagerCubit, RecommendationManagerState>(
+      bloc: Modular.get<RecommendationManagerCubit>(),
+      listener: (context, state) {
+        if (state is RecommendationDeleteRecoSuccessState) {
+          Navigator.of(context).pop();
+        }
+      },
+      child: BlocConsumer<RecommendationManagerTileCubit,
+          RecommendationManagerTileState>(
       bloc: cubit,
       listenWhen: (previous, current) =>
           (current is RecommendationSetStatusSuccessState &&
@@ -222,6 +230,6 @@ class _RecommendationManagerDetailContentState
           ),
         );
       },
-    );
+    ));
   }
 }

@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
+import 'package:finanzbegleiter/core/cloud_functions_service.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/features/legals/domain/archived_landing_page_legals.dart';
@@ -21,21 +22,18 @@ import 'package:finanzbegleiter/features/page_builder/infrastructure/models/page
 import 'package:finanzbegleiter/features/promoter/infrastructure/unregistered_promoter_model.dart';
 import 'package:finanzbegleiter/features/profile/infrastructure/user_model.dart';
 import 'package:finanzbegleiter/features/landing_pages/infrastructure/landing_page_repository_sorting_helper.dart';
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rxdart/rxdart.dart';
 
 class LandingPageRepositoryImplementation implements LandingPageRepository {
   final FirebaseFirestore firestore;
-  final FirebaseFunctions firebaseFunctions;
+  final CloudFunctionsService cloudFunctions;
   final FirebaseAuth firebaseAuth;
-  final FirebaseAppCheck appCheck;
 
   LandingPageRepositoryImplementation(
       {required this.firestore,
-      required this.firebaseFunctions,
-      required this.firebaseAuth,
-      required this.appCheck});
+      required this.cloudFunctions,
+      required this.firebaseAuth});
 
   @override
   Stream<Either<DatabaseFailure, List<LandingPage>>> observeLandingPagesByIds(
@@ -151,10 +149,6 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       bool imageHasChanged,
       String templateID,
       PagebuilderAiGeneration? aiGeneration) async {
-    final appCheckToken = await appCheck.getToken();
-    HttpsCallable callable = firebaseFunctions.httpsCallable(
-        "createLandingPage",
-        options: HttpsCallableOptions(timeout: const Duration(minutes: 6)));
     final landingPageModel = LandingPageModel.fromDomain(landingPage);
     var companyData = landingPageModel.companyData;
     var aiGenerationMap = {};
@@ -163,120 +157,102 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
           PagebuilderAiGenerationModel.fromDomain(aiGeneration).toMap();
     }
     companyData = {
-      "id": companyData?["id"],
-      "name": companyData?["name"],
-      "industry": companyData?["industry"],
-      "address": companyData?["address"],
-      "postCode": companyData?["postCode"],
-      "place": companyData?["place"],
-      "phoneNumber": companyData?["phoneNumber"],
-      "websiteURL": companyData?["websiteURL"]
+      'id': companyData?['id'],
+      'name': companyData?['name'],
+      'industry': companyData?['industry'],
+      'address': companyData?['address'],
+      'postCode': companyData?['postCode'],
+      'place': companyData?['place'],
+      'phoneNumber': companyData?['phoneNumber'],
+      'websiteURL': companyData?['websiteURL'],
     };
-    try {
-      await callable.call({
-        "appCheckToken": appCheckToken,
-        "id": landingPageModel.id,
-        "name": landingPageModel.name,
-        "description": landingPageModel.description,
-        "promotionTemplate": landingPageModel.promotionTemplate,
-        "impressum": landingPage.impressum,
-        "privacyPolicy": landingPage.privacyPolicy,
-        "initialInformation": landingPage.initialInformation,
-        "termsAndConditions": landingPage.termsAndConditions,
-        "scripts": landingPage.scriptTags,
-        "ownerID": landingPageModel.ownerID,
-        "imageData": base64Encode(imageData),
-        "imageHasChanged": imageHasChanged,
-        "isDefaultPage": landingPageModel.isDefaultPage,
-        "isActive": landingPageModel.isActive,
-        "templateID": templateID,
-        "contactEmailAddress": landingPageModel.contactEmailAddress,
-        "businessModel": landingPageModel.businessModel,
-        "contactOption": landingPageModel.contactOption,
-        "calendlyEventURL": landingPageModel.calendlyEventURL,
-        "companyData":
-            landingPageModel.companyData != null ? companyData : null,
-        "aiGeneration": aiGeneration != null ? aiGenerationMap : null
-      });
-      return right(unit);
-    } on FirebaseFunctionsException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
+    return cloudFunctions.call(
+      'createLandingPage',
+      {
+        'id': landingPageModel.id,
+        'name': landingPageModel.name,
+        'description': landingPageModel.description,
+        'promotionTemplate': landingPageModel.promotionTemplate,
+        'impressum': landingPage.impressum,
+        'privacyPolicy': landingPage.privacyPolicy,
+        'initialInformation': landingPage.initialInformation,
+        'termsAndConditions': landingPage.termsAndConditions,
+        'scripts': landingPage.scriptTags,
+        'ownerID': landingPageModel.ownerID,
+        'imageData': base64Encode(imageData),
+        'imageHasChanged': imageHasChanged,
+        'isDefaultPage': landingPageModel.isDefaultPage,
+        'isActive': landingPageModel.isActive,
+        'templateID': templateID,
+        'contactEmailAddress': landingPageModel.contactEmailAddress,
+        'businessModel': landingPageModel.businessModel,
+        'contactOption': landingPageModel.contactOption,
+        'calendlyEventURL': landingPageModel.calendlyEventURL,
+        'companyData': landingPageModel.companyData != null ? companyData : null,
+        'aiGeneration': aiGeneration != null ? aiGenerationMap : null,
+      },
+      (_) => unit,
+      options: HttpsCallableOptions(timeout: const Duration(minutes: 6)),
+    );
   }
 
   @override
   Future<Either<DatabaseFailure, Unit>> deleteLandingPage(
       String id, String ownerID) async {
-    final appCheckToken = await appCheck.getToken();
-    HttpsCallable callable =
-        firebaseFunctions.httpsCallable("deleteLandingPage");
-    try {
-      await callable
-          .call({"appCheckToken": appCheckToken, "id": id, "ownerID": ownerID});
-      return right(unit);
-    } on FirebaseFunctionsException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
+    return cloudFunctions.call(
+      'deleteLandingPage',
+      {'id': id, 'ownerID': ownerID},
+      (_) => unit,
+    );
   }
 
   @override
   Future<Either<DatabaseFailure, Unit>> editLandingPage(LandingPage landingPage,
       Uint8List? imageData, bool imageHasChanged) async {
-    final appCheckToken = await appCheck.getToken();
     final landingPageModel = LandingPageModel.fromDomain(landingPage);
-    HttpsCallable callable = firebaseFunctions.httpsCallable("editLandingPage");
-    try {
-      await callable.call({
-        "appCheckToken": appCheckToken,
-        "id": landingPageModel.id,
-        "title": landingPageModel.name,
-        "description": landingPageModel.description,
-        "promotionTemplate": landingPageModel.promotionTemplate,
-        "impressum": landingPageModel.impressum,
-        "privacyPolicy": landingPageModel.privacyPolicy,
-        "initialInformation": landingPageModel.initialInformation,
-        "termsAndConditions": landingPageModel.termsAndConditions,
-        "scripts": landingPageModel.scriptTags,
-        "ownerID": landingPageModel.ownerID,
-        "imageData": imageData != null ? base64Encode(imageData) : null,
-        "imageHasChanged": imageHasChanged,
-        "isDefaultPage": landingPageModel.isDefaultPage,
-        "isActive": landingPageModel.isActive,
-        "businessModel": landingPageModel.businessModel,
-        "contactEmailAddress": landingPageModel.contactEmailAddress,
-        "contactOption": landingPageModel.contactOption,
-        "calendlyEventURL": landingPageModel.calendlyEventURL,
-      });
-      return right(unit);
-    } on FirebaseFunctionsException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
+    return cloudFunctions.call(
+      'editLandingPage',
+      {
+        'id': landingPageModel.id,
+        'title': landingPageModel.name,
+        'description': landingPageModel.description,
+        'promotionTemplate': landingPageModel.promotionTemplate,
+        'impressum': landingPageModel.impressum,
+        'privacyPolicy': landingPageModel.privacyPolicy,
+        'initialInformation': landingPageModel.initialInformation,
+        'termsAndConditions': landingPageModel.termsAndConditions,
+        'scripts': landingPageModel.scriptTags,
+        'ownerID': landingPageModel.ownerID,
+        'imageData': imageData != null ? base64Encode(imageData) : null,
+        'imageHasChanged': imageHasChanged,
+        'isDefaultPage': landingPageModel.isDefaultPage,
+        'isActive': landingPageModel.isActive,
+        'businessModel': landingPageModel.businessModel,
+        'contactEmailAddress': landingPageModel.contactEmailAddress,
+        'contactOption': landingPageModel.contactOption,
+        'calendlyEventURL': landingPageModel.calendlyEventURL,
+      },
+      (_) => unit,
+    );
   }
 
   @override
   Future<Either<DatabaseFailure, Unit>> duplicateLandingPage(String id) async {
-    final appCheckToken = await appCheck.getToken();
-    HttpsCallable callable =
-        firebaseFunctions.httpsCallable("duplicateLandingPage");
-    try {
-      await callable.call({"appCheckToken": appCheckToken, "id": id});
-      return right(unit);
-    } on FirebaseFunctionsException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
+    return cloudFunctions.call(
+      'duplicateLandingPage',
+      {'id': id},
+      (_) => unit,
+    );
   }
 
   @override
   Future<Either<DatabaseFailure, Unit>> toggleLandingPageActivity(
       String id, bool isActive, String userId) async {
-    HttpsCallable callable =
-        firebaseFunctions.httpsCallable("toggleLandingPageActivity");
-    try {
-      await callable.call({"id": id, "isActive": isActive, "userId": userId});
-      return right(unit);
-    } on FirebaseFunctionsException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
+    return cloudFunctions.call(
+      'toggleLandingPageActivity',
+      {'id': id, 'isActive': isActive, 'userId': userId},
+      (_) => unit,
+    );
   }
 
   @override

@@ -1,24 +1,20 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/core/cloud_functions_service.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/features/legals/domain/legals.dart';
 import 'package:finanzbegleiter/features/legals/domain/legals_repository.dart';
 import 'package:finanzbegleiter/features/legals/infrastructure/legals_model.dart';
-import 'package:firebase_app_check/firebase_app_check.dart';
 
 class LegalsRepositoryImplementation implements LegalsRepository {
   final FirebaseFirestore firestore;
-  final FirebaseAppCheck appCheck;
-  final FirebaseFunctions firebaseFunctions;
+  final CloudFunctionsService cloudFunctions;
 
   LegalsRepositoryImplementation(
-      {required this.firestore,
-      required this.appCheck,
-      required this.firebaseFunctions});
+      {required this.firestore, required this.cloudFunctions});
 
   @override
   Future<Either<DatabaseFailure, String?>> getLegals(LegalsType type) async {
@@ -61,20 +57,16 @@ class LegalsRepositoryImplementation implements LegalsRepository {
 
   @override
   Future<Either<DatabaseFailure, Unit>> saveLegals(Legals legals) async {
-    final appCheckToken = await appCheck.getToken();
     final model = LegalsModel.fromDomain(legals);
-    HttpsCallable callable = firebaseFunctions.httpsCallable("saveLegals");
-    try {
-      await callable.call({
-        "appCheckToken": appCheckToken,
-        "avv": model.avv,
-        "privacyPolicy": model.privacyPolicy,
-        "termsAndConditions": model.termsAndCondition,
-        "imprint": model.imprint
-      });
-      return right(unit);
-    } on FirebaseFunctionsException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
+    return cloudFunctions.call(
+      'saveLegals',
+      {
+        'avv': model.avv,
+        'privacyPolicy': model.privacyPolicy,
+        'termsAndConditions': model.termsAndCondition,
+        'imprint': model.imprint,
+      },
+      (_) => unit,
+    );
   }
 }

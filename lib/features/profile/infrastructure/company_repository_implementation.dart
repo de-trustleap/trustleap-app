@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
+import 'package:finanzbegleiter/core/cloud_functions_service.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/features/profile/domain/company.dart';
@@ -12,17 +12,13 @@ import 'package:finanzbegleiter/features/profile/domain/company_repository.dart'
 import 'package:finanzbegleiter/features/profile/infrastructure/company_model.dart';
 import 'package:finanzbegleiter/features/admin/infrastructure/company_request_model.dart';
 import 'package:finanzbegleiter/features/profile/infrastructure/user_model.dart';
-import 'package:firebase_app_check/firebase_app_check.dart';
 
 class CompanyRepositoryImplementation implements CompanyRepository {
   final FirebaseFirestore firestore;
-  final FirebaseFunctions firebaseFunctions;
-  final FirebaseAppCheck appCheck;
+  final CloudFunctionsService cloudFunctions;
 
   CompanyRepositoryImplementation(
-      {required this.firestore,
-      required this.firebaseFunctions,
-      required this.appCheck});
+      {required this.firestore, required this.cloudFunctions});
 
   @override
   Stream<Either<DatabaseFailure, Company>> observeCompany(
@@ -48,26 +44,22 @@ class CompanyRepositoryImplementation implements CompanyRepository {
   @override
   Future<Either<DatabaseFailure, Unit>> updateCompany(
       Company company, bool avvAccepted) async {
-    final appCheckToken = await appCheck.getToken();
-    HttpsCallable callable = firebaseFunctions.httpsCallable("editCompany");
     final companyModel = CompanyModel.fromDomain(company);
-    try {
-      await callable.call({
-        "appCheckToken": appCheckToken,
-        "id": companyModel.id,
-        "name": company.name,
-        "industry": company.industry,
-        "address": company.address,
-        "postCode": company.postCode,
-        "place": company.place,
-        "phoneNumber": company.phoneNumber,
-        "websiteURL": company.websiteURL,
-        "avvAccepted": avvAccepted
-      });
-      return right(unit);
-    } on FirebaseException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
+    return cloudFunctions.call(
+      'editCompany',
+      {
+        'id': companyModel.id,
+        'name': company.name,
+        'industry': company.industry,
+        'address': company.address,
+        'postCode': company.postCode,
+        'place': company.place,
+        'phoneNumber': company.phoneNumber,
+        'websiteURL': company.websiteURL,
+        'avvAccepted': avvAccepted,
+      },
+      (_) => unit,
+    );
   }
 
   @override
@@ -91,28 +83,23 @@ class CompanyRepositoryImplementation implements CompanyRepository {
   @override
   Future<Either<DatabaseFailure, Unit>> registerCompany(
       Company company, bool avvAccepted) async {
-    final appCheckToken = await appCheck.getToken();
-    HttpsCallable callable = firebaseFunctions.httpsCallable("registerCompany");
     final companyModel = CompanyModel.fromDomain(company);
-
-    try {
-      await callable.call({
-        "appCheckToken": appCheckToken,
-        "id": companyModel.id,
-        "name": companyModel.name,
-        "industry": companyModel.industry,
-        "websiteURL": companyModel.websiteURL,
-        "address": companyModel.address,
-        "postCode": companyModel.postCode,
-        "place": companyModel.place,
-        "phoneNumber": companyModel.phoneNumber,
-        "ownerID": companyModel.ownerID,
-        "avvAccepted": avvAccepted
-      });
-      return right(unit);
-    } on FirebaseFunctionsException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
+    return cloudFunctions.call(
+      'registerCompany',
+      {
+        'id': companyModel.id,
+        'name': companyModel.name,
+        'industry': companyModel.industry,
+        'websiteURL': companyModel.websiteURL,
+        'address': companyModel.address,
+        'postCode': companyModel.postCode,
+        'place': companyModel.place,
+        'phoneNumber': companyModel.phoneNumber,
+        'ownerID': companyModel.ownerID,
+        'avvAccepted': avvAccepted,
+      },
+      (_) => unit,
+    );
   }
 
   @override
@@ -190,50 +177,31 @@ class CompanyRepositoryImplementation implements CompanyRepository {
   @override
   Future<Either<DatabaseFailure, Unit>> processCompanyRequest(
       String id, String userID, bool accepted) async {
-    final appCheckToken = await appCheck.getToken();
-    HttpsCallable callable =
-        firebaseFunctions.httpsCallable("processCompanyRequest");
-    try {
-      await callable.call({
-        "appCheckToken": appCheckToken,
-        "id": id,
-        "accepted": accepted,
-        "userID": userID
-      });
-      return right(unit);
-    } on FirebaseFunctionsException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
+    return cloudFunctions.call(
+      'processCompanyRequest',
+      {'id': id, 'accepted': accepted, 'userID': userID},
+      (_) => unit,
+    );
   }
 
   @override
   Future<Either<DatabaseFailure, String>> getAVVDownloadURL(
       Company company, bool isPreview) async {
-    final appCheckToken = await appCheck.getToken();
-    HttpsCallable callable =
-        firebaseFunctions.httpsCallable("createAVVPDFFile");
     final companyModel = CompanyModel.fromDomain(company);
-    try {
-      final result = await callable.call({
-        "appCheckToken": appCheckToken,
-        "id": companyModel.id,
-        "name": companyModel.name,
-        "industry": companyModel.industry,
-        "website": companyModel.websiteURL,
-        "address": companyModel.address,
-        "postCode": companyModel.postCode,
-        "place": companyModel.place,
-        "phoneNumber": companyModel.phoneNumber,
-        "isPreview": isPreview
-      });
-      if (result.data["success"] == true) {
-        String downloadURL = result.data["downloadURL"] as String;
-        return right(downloadURL);
-      } else {
-        return right("");
-      }
-    } on FirebaseFunctionsException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
+    return cloudFunctions.call(
+      'createAVVPDFFile',
+      {
+        'id': companyModel.id,
+        'name': companyModel.name,
+        'industry': companyModel.industry,
+        'website': companyModel.websiteURL,
+        'address': companyModel.address,
+        'postCode': companyModel.postCode,
+        'place': companyModel.place,
+        'phoneNumber': companyModel.phoneNumber,
+        'isPreview': isPreview,
+      },
+      (data) => data['success'] == true ? data['downloadURL'] as String : '',
+    );
   }
 }

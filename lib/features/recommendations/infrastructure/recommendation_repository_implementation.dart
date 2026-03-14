@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
+import 'package:finanzbegleiter/core/cloud_functions_service.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/archived_recommendation_item.dart';
@@ -18,37 +18,24 @@ import 'package:finanzbegleiter/features/recommendations/infrastructure/archived
 import 'package:finanzbegleiter/features/recommendations/infrastructure/recommendation_item_model.dart';
 import 'package:finanzbegleiter/features/profile/infrastructure/user_model.dart';
 import 'package:finanzbegleiter/features/recommendations/infrastructure/user_recommendation_model.dart';
-import 'package:firebase_app_check/firebase_app_check.dart';
 
 class RecommendationRepositoryImplementation
     implements RecommendationRepository {
   final FirebaseFirestore firestore;
-  final FirebaseFunctions firebaseFunctions;
-  final FirebaseAppCheck appCheck;
+  final CloudFunctionsService cloudFunctions;
 
   RecommendationRepositoryImplementation(
-      {required this.firestore,
-      required this.firebaseFunctions,
-      required this.appCheck});
+      {required this.firestore, required this.cloudFunctions});
 
   @override
   Future<Either<DatabaseFailure, Unit>> saveRecommendation(
       RecommendationItem recommendation, String userID) async {
-    final appCheckToken = await appCheck.getToken();
     final recoMap = RecommendationItemModel.fromDomain(recommendation).toMap();
-    HttpsCallable callable =
-        firebaseFunctions.httpsCallable("saveRecommendation");
-    try {
-      await callable.call({
-        "appCheckToken": appCheckToken,
-        "recommendation": recoMap,
-      });
-      return right(unit);
-    } on FirebaseFunctionsException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    } catch (e) {
-      rethrow;
-    }
+    return cloudFunctions.call(
+      'saveRecommendation',
+      {'recommendation': recoMap},
+      (_) => unit,
+    );
   }
 
   @override
@@ -134,20 +121,11 @@ class RecommendationRepositoryImplementation
   @override
   Future<Either<DatabaseFailure, Unit>> deleteRecommendation(
       String recoID, String userID, String userRecoID) async {
-    final appCheckToken = await appCheck.getToken();
-    HttpsCallable callable =
-        firebaseFunctions.httpsCallable("deleteRecommendation");
-    try {
-      await callable.call({
-        "appCheckToken": appCheckToken,
-        "recommendationID": recoID,
-        "userID": userID,
-        "userRecommendationID": userRecoID
-      });
-      return right(unit);
-    } on FirebaseFunctionsException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
+    return cloudFunctions.call(
+      'deleteRecommendation',
+      {'recommendationID': recoID, 'userID': userID, 'userRecommendationID': userRecoID},
+      (_) => unit,
+    );
   }
 
   @override
@@ -182,20 +160,15 @@ class RecommendationRepositoryImplementation
   @override
   Future<Either<DatabaseFailure, UserRecommendation>> finishRecommendation(
       UserRecommendation recommendation, bool completed) async {
-    final appCheckToken = await appCheck.getToken();
-    HttpsCallable callable =
-        firebaseFunctions.httpsCallable("finishRecommendationX");
-    try {
-      await callable.call({
-        "appCheckToken": appCheckToken,
-        "recommendationID": recommendation.id.value,
-        "userID": recommendation.userID,
-        "success": completed
-      });
-      return right(recommendation);
-    } on FirebaseFunctionsException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
+    return cloudFunctions.call(
+      'finishRecommendationX',
+      {
+        'recommendationID': recommendation.id.value,
+        'userID': recommendation.userID,
+        'success': completed,
+      },
+      (_) => recommendation,
+    );
   }
 
   @override
