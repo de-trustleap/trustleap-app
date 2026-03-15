@@ -1,13 +1,16 @@
+import 'package:finanzbegleiter/features/dashboard/presentation/skeleton_data.dart';
 import 'package:finanzbegleiter/features/landing_pages/application/landingpage_observer/landingpage_observer_cubit.dart';
+import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
+import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/features/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/id.dart';
-import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
+import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/skeleton_loading.dart';
 import 'package:finanzbegleiter/environment.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/core/widgets/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/error_view.dart';
-import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_detail/landing_page_detail_config_card.dart';
 import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_detail/landing_page_detail_header.dart';
 import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_detail/landing_page_detail_promoters_section.dart';
@@ -40,6 +43,51 @@ class _LandingPageDetailPageState extends State<LandingPageDetailPage> {
     }
   }
 
+  Widget _buildContent(LandingPage landingPage, CustomUser user,
+      ResponsiveBreakpointsData responsiveValue, CustomNavigatorBase navigator) {
+    return ListView(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      children: [
+        SizedBox(height: responsiveValue.isMobile ? 40 : 80),
+        CenteredConstrainedWrapper(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              LandingPageDetailHeader(
+                landingPage: landingPage,
+                onPreviewPressed: () {
+                  final baseURL = Environment().getLandingpageBaseURL();
+                  navigator.openURLInNewTab(
+                      "$baseURL?preview=true&id=${landingPage.id.value}");
+                },
+                onOpenBuilderPressed: () {
+                  navigator.openInNewTab(
+                      "${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${widget.landingPageId}");
+                },
+              ),
+              const SizedBox(height: 24),
+              LandingPageDetailStatistics(
+                totalVisits: landingPage.totalVisits ?? 0,
+                landingPageId: widget.landingPageId,
+                user: user,
+              ),
+              const SizedBox(height: 24),
+              LandingPageDetailRecommendationChart(
+                landingPageId: widget.landingPageId,
+                user: user,
+              ),
+              const SizedBox(height: 24),
+              LandingPageDetailConfigCard(landingPage: landingPage),
+              const SizedBox(height: 24),
+              LandingPageDetailPromotersSection(landingPage: landingPage),
+              const SizedBox(height: 40),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
@@ -60,8 +108,9 @@ class _LandingPageDetailPageState extends State<LandingPageDetailPage> {
         builder: (context, lpState) {
           if (lpState is LandingPageObserverInitial ||
               lpState is LandingPageObserverLoading) {
-            return const CenteredConstrainedWrapper(
-              child: Center(child: LoadingIndicator()),
+            return SkeletonLoading(
+              child: _buildContent(
+                  SkeletonData.landingPage, SkeletonData.user, responsiveValue, navigator),
             );
           }
 
@@ -79,8 +128,9 @@ class _LandingPageDetailPageState extends State<LandingPageDetailPage> {
           }
 
           if (lpState is! LandingPageObserverSuccess) {
-            return const CenteredConstrainedWrapper(
-              child: Center(child: LoadingIndicator()),
+            return SkeletonLoading(
+              child: _buildContent(
+                  SkeletonData.landingPage, SkeletonData.user, responsiveValue, navigator),
             );
           }
 
@@ -102,51 +152,7 @@ class _LandingPageDetailPageState extends State<LandingPageDetailPage> {
             );
           }
 
-          return ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            children: [
-              SizedBox(height: responsiveValue.isMobile ? 40 : 80),
-              CenteredConstrainedWrapper(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    LandingPageDetailHeader(
-                      landingPage: landingPage,
-                      onPreviewPressed: () {
-                        final baseURL = Environment().getLandingpageBaseURL();
-                        navigator.openURLInNewTab(
-                            "$baseURL?preview=true&id=${landingPage.id.value}");
-                      },
-                      onOpenBuilderPressed: () {
-                        navigator.openInNewTab(
-                            "${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${widget.landingPageId}");
-                      },
-                    ),
-                    const SizedBox(height: 24),
-                    LandingPageDetailStatistics(
-                      totalVisits: landingPage.totalVisits ?? 0,
-                      landingPageId: widget.landingPageId,
-                      user: lpState.user,
-                    ),
-                    const SizedBox(height: 24),
-                    LandingPageDetailRecommendationChart(
-                      landingPageId: widget.landingPageId,
-                      user: lpState.user,
-                    ),
-                    const SizedBox(height: 24),
-                    LandingPageDetailConfigCard(
-                      landingPage: landingPage,
-                    ),
-                    const SizedBox(height: 24),
-                    LandingPageDetailPromotersSection(
-                      landingPage: landingPage,
-                    ),
-                    const SizedBox(height: 40),
-                  ],
-                ),
-              ),
-            ],
-          );
+          return _buildContent(landingPage, lpState.user, responsiveValue, navigator);
         },
       ),
     );

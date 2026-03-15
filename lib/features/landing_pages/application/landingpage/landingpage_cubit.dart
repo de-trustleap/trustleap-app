@@ -94,7 +94,7 @@ class LandingPageCubit extends Cubit<LandingPageState> {
   }
 
   void deleteLandingPage(String id, String parentUserID) async {
-    emit(DeleteLandingPageLoadingState());
+    emit(DeleteLandingPageLoadingState(landingPageId: id));
     final failureOrSuccess =
         await landingPageRepo.deleteLandingPage(id, parentUserID);
     failureOrSuccess.fold(
@@ -103,7 +103,7 @@ class LandingPageCubit extends Cubit<LandingPageState> {
   }
 
   void duplicateLandingPage(String id) async {
-    emit(DuplicateLandingPageLoadingState());
+    emit(DuplicateLandingPageLoadingState(landingPageId: id));
     final failureOrSuccess = await landingPageRepo.duplicateLandingPage(id);
     failureOrSuccess.fold(
         (failure) => emit(DuplicateLandingPageFailureState(failure: failure)),
@@ -112,7 +112,7 @@ class LandingPageCubit extends Cubit<LandingPageState> {
 
   void toggleLandingPageActivity(
       String id, bool isActive, String userId) async {
-    emit(ToggleLandingPageActivityLoadingState());
+    emit(ToggleLandingPageActivityLoadingState(landingPageId: id));
     final failureOrSuccess =
         await landingPageRepo.toggleLandingPageActivity(id, isActive, userId);
     failureOrSuccess.fold(

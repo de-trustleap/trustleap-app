@@ -24,13 +24,12 @@ final class PromotersObserverFailure extends PromoterObserverState {
 
 final class PromotersObserverSuccess extends PromoterObserverState {
   final List<Promoter> promoters;
+  final DateTime _timestamp;
 
-  const PromotersObserverSuccess({
-    required this.promoters,
-  });
+  PromotersObserverSuccess({required this.promoters}) : _timestamp = DateTime.now();
 
   @override
-  List<Object> get props => [promoters];
+  List<Object> get props => [_timestamp];
 }
 
 final class PromotersObserverGetElementsSuccess extends PromoterObserverState {

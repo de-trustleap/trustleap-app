@@ -110,7 +110,8 @@ class DesktopAppTheme {
       popupMenuTheme: AppTheme.lightPopupMenuTheme,
       checkboxTheme: AppTheme.lightCheckboxTheme,
       switchTheme: AppTheme.lightSwitchTheme,
-      progressIndicatorTheme: AppTheme.lightProgressIndicatorTheme);
+      progressIndicatorTheme: AppTheme.lightProgressIndicatorTheme,
+      extensions: [AppTheme.lightSkeletonizerConfig]);
 
   static final ThemeData darkTheme = ThemeData(
       colorScheme: const ColorScheme.dark(
@@ -136,5 +137,6 @@ class DesktopAppTheme {
       popupMenuTheme: AppTheme.darkPopupMenuTheme,
       checkboxTheme: AppTheme.darkCheckboxTheme,
       switchTheme: AppTheme.darkSwitchTheme,
-      progressIndicatorTheme: AppTheme.darkProgressIndicatorTheme);
+      progressIndicatorTheme: AppTheme.darkProgressIndicatorTheme,
+      extensions: [AppTheme.darkSkeletonizerConfig]);
 }

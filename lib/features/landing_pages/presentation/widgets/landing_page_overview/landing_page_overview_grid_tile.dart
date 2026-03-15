@@ -1,6 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:finanzbegleiter/features/landing_pages/application/landingpage/landingpage_cubit.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/skeleton_loading.dart';
 import 'package:finanzbegleiter/features/permissions/application/permission_cubit.dart';
+import 'package:flutter_modular/flutter_modular.dart' show Modular;
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/helpers/date_time_formatter.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
@@ -88,17 +91,37 @@ class LandingPageOverviewGridTile extends StatelessWidget {
             as PermissionSuccessState)
         .permissions;
 
-    if ((landingPage.ownerID == user.id ||
-            (permissions.hasEditLandingPagePermission())) &&
-        !_isDefaultPage() &&
-        !_isPending()) {
-      return InkWell(
-          onTap: () => navigator.navigate(
-              "${RoutePaths.homePath}${RoutePaths.landingPageDetailPath}/${landingPage.id.value}"),
-          child: buildTile(themeData, responsiveValue, localizations, context));
-    } else {
-      return buildTile(themeData, responsiveValue, localizations, context);
-    }
+    return BlocBuilder<LandingPageCubit, LandingPageState>(
+      bloc: Modular.get<LandingPageCubit>(),
+      builder: (context, state) {
+        final isTogglingActivity =
+            state is ToggleLandingPageActivityLoadingState &&
+                state.landingPageId == landingPage.id.value;
+        final isDeletingPage = state is DeleteLandingPageLoadingState &&
+            state.landingPageId == landingPage.id.value;
+        final isDuplicatingPage = state is DuplicateLandingPageLoadingState &&
+            state.landingPageId == landingPage.id.value;
+
+        final tile =
+            buildTile(themeData, responsiveValue, localizations, context);
+        final tileWidget =
+            (isTogglingActivity || isDeletingPage || isDuplicatingPage)
+                ? SkeletonLoading(child: tile)
+                : tile;
+
+        if ((landingPage.ownerID == user.id ||
+                permissions.hasEditLandingPagePermission()) &&
+            !_isDefaultPage() &&
+            !_isPending()) {
+          return InkWell(
+              onTap: () => navigator.navigate(
+                  "${RoutePaths.homePath}${RoutePaths.landingPageDetailPath}/${landingPage.id.value}"),
+              child: tileWidget);
+        } else {
+          return tileWidget;
+        }
+      },
+    );
   }
 
   Widget buildTile(
@@ -195,8 +218,10 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                           StatusBadge(
                             isPositive: landingPage.isActive ?? false,
                             label: landingPage.isActive ?? false
-                                ? localizations.landing_page_detail_status_active
-                                : localizations.landing_page_detail_status_inactive,
+                                ? localizations
+                                    .landing_page_detail_status_active
+                                : localizations
+                                    .landing_page_detail_status_inactive,
                           ),
                         ],
                       ],

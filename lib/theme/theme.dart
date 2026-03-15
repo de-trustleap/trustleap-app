@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class AppTheme {
   AppTheme._();
@@ -355,4 +356,18 @@ class AppTheme {
       const ProgressIndicatorThemeData(
           color: darkSecondaryColor,
           linearTrackColor: darkBackgroundContrastColor);
+
+  static const SkeletonizerConfigData lightSkeletonizerConfig =
+      SkeletonizerConfigData(
+          effect: ShimmerEffect(
+    baseColor: lightBackgroundContrastColor,
+    highlightColor: lightCardColor,
+  ));
+
+  static const SkeletonizerConfigData darkSkeletonizerConfig =
+      SkeletonizerConfigData.dark(
+          effect: ShimmerEffect(
+    baseColor: darkBackgroundColor,
+    highlightColor: darkCardColor,
+  ));
 }

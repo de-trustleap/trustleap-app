@@ -222,11 +222,7 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
                 LandingPageObserverState>(
               bloc: landingPageObserverCubit,
               builder: (context, observerState) {
-                if (state is DeleteLandingPageLoadingState ||
-                    state is DuplicateLandingPageLoadingState ||
-                    state is ToggleLandingPageActivityLoadingState) {
-                  return const LoadingIndicator();
-                } else if (observerState is LandingPageObserverSuccess) {
+                if (observerState is LandingPageObserverSuccess) {
                   if (showEmptyPage(
                       observerState.landingPages, observerState.user)) {
                     return EmptyPage(

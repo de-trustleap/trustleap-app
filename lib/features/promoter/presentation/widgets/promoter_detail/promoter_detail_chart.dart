@@ -4,7 +4,8 @@ import 'package:finanzbegleiter/features/promoter/domain/promoter.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/custom_line_chart.dart';
-import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/features/dashboard/presentation/skeleton_data.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/skeleton_loading.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/underlined_dropdown.dart';
 import 'package:finanzbegleiter/features/promoter/presentation/widgets/promoter_detail/promoter_detail_chart_helper.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,7 @@ class _PromoterDetailChartState extends State<PromoterDetailChart> {
         bloc: promoterDetailCubit,
         builder: (context, state) {
           if (state is! PromoterDetailLoaded) {
-            return const LoadingIndicator();
+            return SkeletonLoading(child: SkeletonData.chart());
           }
 
           return Column(
@@ -99,7 +100,7 @@ class _PromoterDetailChartState extends State<PromoterDetailChart> {
                   ),
                 )
               else
-                const LoadingIndicator(),
+                SkeletonLoading(child: SkeletonData.chart()),
             ],
           );
         },
