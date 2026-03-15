@@ -7,7 +7,7 @@ import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/error_view.
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/tooltip_buttons/info_button.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/skeleton_loading.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/underlined_dropdown.dart';
-import 'package:finanzbegleiter/features/dashboard/presentation/skeleton_data.dart';
+import 'package:finanzbegleiter/core/skeleton/skeleton_data.dart';
 import 'package:finanzbegleiter/features/dashboard/presentation/widgets/dashboard_promoters/dashboard_promoters_chart.dart';
 import 'package:finanzbegleiter/features/dashboard/presentation/widgets/dashboard_promoters/dashboard_promoters_helper.dart';
 import 'package:flutter/material.dart';

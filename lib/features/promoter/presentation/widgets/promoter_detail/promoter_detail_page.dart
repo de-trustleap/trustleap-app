@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/features/dashboard/presentation/skeleton_data.dart';
+import 'package:finanzbegleiter/core/skeleton/skeleton_data.dart';
 import 'package:finanzbegleiter/features/promoter/application/promoter_detail/promoter_detail_cubit.dart';
 import 'package:finanzbegleiter/features/promoter/domain/promoter.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';

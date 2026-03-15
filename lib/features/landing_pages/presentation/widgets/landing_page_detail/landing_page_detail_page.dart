@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/features/dashboard/presentation/skeleton_data.dart';
+import 'package:finanzbegleiter/core/skeleton/skeleton_data.dart';
 import 'package:finanzbegleiter/features/landing_pages/application/landingpage_observer/landingpage_observer_cubit.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
@@ -106,14 +106,6 @@ class _LandingPageDetailPageState extends State<LandingPageDetailPage> {
       child: BlocBuilder<LandingPageObserverCubit, LandingPageObserverState>(
         bloc: landingPageObserverCubit,
         builder: (context, lpState) {
-          if (lpState is LandingPageObserverInitial ||
-              lpState is LandingPageObserverLoading) {
-            return SkeletonLoading(
-              child: _buildContent(
-                  SkeletonData.landingPage, SkeletonData.user, responsiveValue, navigator),
-            );
-          }
-
           if (lpState is LandingPageObserverFailure) {
             return CenteredConstrainedWrapper(
               child: Center(

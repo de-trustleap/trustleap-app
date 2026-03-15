@@ -9,7 +9,7 @@ import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/expanded_se
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/tooltip_buttons/info_button.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/skeleton_loading.dart';
 import 'package:finanzbegleiter/features/dashboard/presentation/widgets/dashboard_recommendations/dashboard_recommendations_chart.dart';
-import 'package:finanzbegleiter/features/dashboard/presentation/skeleton_data.dart';
+import 'package:finanzbegleiter/core/skeleton/skeleton_data.dart';
 import 'package:finanzbegleiter/features/dashboard/presentation/widgets/dashboard_recommendations/dashboard_recommendations_filter.dart';
 import 'package:finanzbegleiter/features/dashboard/presentation/widgets/dashboard_recommendations/dashboard_recommendations_filter_bottom_sheet.dart';
 import 'package:finanzbegleiter/features/dashboard/presentation/widgets/dashboard_recommendations/dashboard_recommendations_helper.dart';

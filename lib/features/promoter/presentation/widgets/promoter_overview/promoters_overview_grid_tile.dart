@@ -33,6 +33,8 @@ class PromotersOverviewGridTile extends StatelessWidget {
     final permissions = (context.watchModular<PermissionCubit>().state
             as PermissionSuccessState)
         .permissions;
+    final promoterDateText =
+        PromoterHelper(localization: localization).getPromoterDateText(context, promoter);
     return InkWell(
       onTap: () => navigator.navigate(
           "${RoutePaths.homePath}${RoutePaths.promoterDetailPath}/${promoter.id.value}"),
@@ -88,11 +90,12 @@ class PromotersOverviewGridTile extends StatelessWidget {
                                               Text(
                                                   localization
                                                       .promoter_overview_edit_promoter_tooltip,
-                                                  style: responsiveValue.isMobile
-                                                      ? themeData
-                                                          .textTheme.bodySmall
-                                                      : themeData
-                                                          .textTheme.bodyMedium)
+                                                  style:
+                                                      responsiveValue.isMobile
+                                                          ? themeData.textTheme
+                                                              .bodySmall
+                                                          : themeData.textTheme
+                                                              .bodyMedium)
                                             ])),
                                   ],
                                   if (permissions
@@ -111,11 +114,12 @@ class PromotersOverviewGridTile extends StatelessWidget {
                                               Text(
                                                   localization
                                                       .promoter_overview_delete_promoter_tooltip,
-                                                  style: responsiveValue.isMobile
-                                                      ? themeData
-                                                          .textTheme.bodySmall
-                                                      : themeData
-                                                          .textTheme.bodyMedium)
+                                                  style:
+                                                      responsiveValue.isMobile
+                                                          ? themeData.textTheme
+                                                              .bodySmall
+                                                          : themeData.textTheme
+                                                              .bodyMedium)
                                             ])),
                                   ]
                                 ],
@@ -131,8 +135,9 @@ class PromotersOverviewGridTile extends StatelessWidget {
                       ]
                     ]),
                 PromoterAvatar(
-                  thumbnailDownloadURL:
-                      (promoter.registered == true) ? promoter.thumbnailDownloadURL : null,
+                  thumbnailDownloadURL: (promoter.registered == true)
+                      ? promoter.thumbnailDownloadURL
+                      : null,
                   firstName: promoter.firstName,
                   lastName: promoter.lastName,
                   size: responsiveValue.largerThan(MOBILE) ? 120 : 140,
@@ -157,17 +162,16 @@ class PromotersOverviewGridTile extends StatelessWidget {
                   StatusBadge(
                     isPositive: promoter.registered!,
                     label: promoter.registered!
-                        ? localization.promoter_overview_registration_badge_registered
-                        : localization.promoter_overview_registration_badge_unregistered,
+                        ? localization
+                            .promoter_overview_registration_badge_registered
+                        : localization
+                            .promoter_overview_registration_badge_unregistered,
                   ),
                 ],
-                if (PromoterHelper(localization: localization)
-                        .getPromoterDateText(context, promoter) !=
-                    null) ...[
+                if (promoterDateText != null) ...[
                   const SizedBox(height: 8),
                   SelectableText(
-                      PromoterHelper(localization: localization)
-                          .getPromoterDateText(context, promoter)!,
+                      promoterDateText,
                       style: themeData.textTheme.bodySmall!.copyWith(
                           fontSize: responsiveValue.isMobile ? 10 : 12,
                           color: themeData.colorScheme.surfaceTint
@@ -193,5 +197,4 @@ class PromotersOverviewGridTile extends StatelessWidget {
       },
     );
   }
-
 }
