@@ -5,8 +5,9 @@ import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/error_view.dart';
-import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/skeleton_loading.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/tooltip_buttons/info_button.dart';
+import 'package:finanzbegleiter/core/skeleton/skeleton_data.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/underlined_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -76,7 +77,9 @@ class _DashboardLandingpageRankingState
                 is DashboardLandingPageRankingGetTop3SuccessState) ...[
               _buildPromoterList(state.landingPages, themeData, localizations)
             ] else ...[
-              const LoadingIndicator()
+              SkeletonLoading(
+                child: _buildPromoterList(SkeletonData.landingpageRanking, themeData, localizations),
+              )
             ]
           ],
         ));

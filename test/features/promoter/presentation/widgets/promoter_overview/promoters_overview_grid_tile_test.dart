@@ -1,5 +1,7 @@
 import 'package:finanzbegleiter/features/permissions/application/permission_cubit.dart';
+import 'package:finanzbegleiter/features/promoter/application/promoter/promoter_cubit.dart';
 import 'package:finanzbegleiter/features/promoter/application/promoter_observer/promoter_observer_cubit.dart';
+import 'package:finanzbegleiter/features/landing_pages/domain/landing_page_repository.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/core/id.dart';
@@ -21,16 +23,19 @@ import '../../../../../mocks.mocks.dart';
 class PromotersOverviewGridTileTestModule extends Module {
   final PermissionCubit permissionCubit;
   final PromoterObserverCubit promoterObserverCubit;
+  final PromoterCubit promoterCubit;
 
   PromotersOverviewGridTileTestModule(
     this.permissionCubit,
     this.promoterObserverCubit,
+    this.promoterCubit,
   );
 
   @override
   void binds(i) {
     i.addSingleton<PermissionCubit>(() => permissionCubit);
     i.addSingleton<PromoterObserverCubit>(() => promoterObserverCubit);
+    i.addSingleton<PromoterCubit>(() => promoterCubit);
   }
 
   @override
@@ -40,8 +45,10 @@ class PromotersOverviewGridTileTestModule extends Module {
 void main() {
   late MockPermissionRepository mockPermissionRepository;
   late MockPromoterRepository mockPromoterRepository;
+  late MockLandingPageRepository mockLandingPageRepository;
   late PermissionCubit permissionCubit;
   late PromoterObserverCubit promoterObserverCubit;
+  late PromoterCubit promoterCubit;
 
   Permissions createTestPermissions({
     bool editPromoter = true,
@@ -63,12 +70,15 @@ void main() {
 
     provideDummy<PermissionState>(PermissionInitial());
     provideDummy<PromoterObserverState>(PromoterObserverInitial());
+    provideDummy<PromoterState>(PromoterInitial());
 
     mockPermissionRepository = MockPermissionRepository();
     mockPromoterRepository = MockPromoterRepository();
+    mockLandingPageRepository = MockLandingPageRepository();
 
     permissionCubit = PermissionCubit(permissionRepo: mockPermissionRepository);
     promoterObserverCubit = PromoterObserverCubit(mockPromoterRepository);
+    promoterCubit = PromoterCubit(mockPromoterRepository, mockLandingPageRepository);
 
     permissionCubit.emit(PermissionSuccessState(
       permissions: createTestPermissions(),
@@ -80,6 +90,7 @@ void main() {
     ResponsiveHelper.disableTestMode();
     permissionCubit.close();
     promoterObserverCubit.close();
+    promoterCubit.close();
     Modular.destroy();
   });
 
@@ -109,6 +120,7 @@ void main() {
     final module = PromotersOverviewGridTileTestModule(
       permissionCubit,
       promoterObserverCubit,
+      promoterCubit,
     );
 
     return ModularApp(

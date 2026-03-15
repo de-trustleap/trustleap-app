@@ -46,8 +46,12 @@ class CreatedLandingPageSuccessState extends LandingPageState
 
 class DeleteLandingPageLoadingState extends LandingPageState
     with EquatableMixin {
+  final String landingPageId;
+
+  DeleteLandingPageLoadingState({required this.landingPageId});
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [landingPageId];
 }
 
 class DeleteLandingPageFailureState extends LandingPageState
@@ -106,8 +110,12 @@ class LandingPageNoImageFailureState extends LandingPageState
 
 class DuplicateLandingPageLoadingState extends LandingPageState
     with EquatableMixin {
+  final String landingPageId;
+
+  DuplicateLandingPageLoadingState({required this.landingPageId});
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [landingPageId];
 }
 
 class DuplicateLandingPageFailureState extends LandingPageState
@@ -128,8 +136,12 @@ class DuplicateLandingPageSuccessState extends LandingPageState
 
 class ToggleLandingPageActivityLoadingState extends LandingPageState
     with EquatableMixin {
+  final String landingPageId;
+
+  ToggleLandingPageActivityLoadingState({required this.landingPageId});
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [landingPageId];
 }
 
 class ToggleLandingPageActivityFailureState extends LandingPageState

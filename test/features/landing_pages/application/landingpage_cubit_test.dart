@@ -170,7 +170,7 @@ void main() {
         () async {
       // Given
       final expectedResult = [
-        ToggleLandingPageActivityLoadingState(),
+        ToggleLandingPageActivityLoadingState(landingPageId: testId),
         ToggleLandingPageActivitySuccessState(isActive: testIsActive)
       ];
       // When
@@ -188,7 +188,7 @@ void main() {
         () async {
       // Given
       final expectedResult = [
-        ToggleLandingPageActivityLoadingState(),
+        ToggleLandingPageActivityLoadingState(landingPageId: testId),
         ToggleLandingPageActivityFailureState(failure: BackendFailure())
       ];
       // When
@@ -223,7 +223,7 @@ void main() {
         () async {
       // Given
       final expectedResult = [
-        DeleteLandingPageLoadingState(),
+        DeleteLandingPageLoadingState(landingPageId: testId),
         DeleteLandingPageSuccessState()
       ];
       // When
@@ -239,7 +239,7 @@ void main() {
         () async {
       // Given
       final expectedResult = [
-        DeleteLandingPageLoadingState(),
+        DeleteLandingPageLoadingState(landingPageId: testId),
         DeleteLandingPageFailureState(failure: BackendFailure())
       ];
       // When
@@ -269,7 +269,7 @@ void main() {
         () async {
       // Given
       final expectedResult = [
-        DuplicateLandingPageLoadingState(),
+        DuplicateLandingPageLoadingState(landingPageId: testId),
         DuplicateLandingPageSuccessState()
       ];
       // When
@@ -285,7 +285,7 @@ void main() {
         () async {
       // Given
       final expectedResult = [
-        DuplicateLandingPageLoadingState(),
+        DuplicateLandingPageLoadingState(landingPageId: testId),
         DuplicateLandingPageFailureState(failure: BackendFailure())
       ];
       // When

@@ -20,6 +20,8 @@ class PromoterObserverCubit extends Cubit<PromoterObserverState> {
   List<String> _currentRegisteredIds = [];
   List<String> _currentUnregisteredIds = [];
 
+  List<Promoter> _cachedPromoters = [];
+
   PromoterObserverCubit(
     this.promoterRepo,
   ) : super(PromoterObserverInitial());
@@ -33,6 +35,7 @@ class PromoterObserverCubit extends Cubit<PromoterObserverState> {
         _promotersStreamSub != null &&
         const ListEquality().equals(_currentRegisteredIds, registeredIds) &&
         const ListEquality().equals(_currentUnregisteredIds, unregisteredIds)) {
+      emit(PromotersObserverSuccess(promoters: _cachedPromoters));
       return;
     }
     _currentUserId = user.id.value;
@@ -52,7 +55,7 @@ class PromoterObserverCubit extends Cubit<PromoterObserverState> {
           .listen(
               (failureOrSuccess) => _promoterObserverUpdated(failureOrSuccess));
     } else {
-      emit(const PromotersObserverSuccess(promoters: []));
+      emit(PromotersObserverSuccess(promoters: []));
     }
   }
 
@@ -60,7 +63,10 @@ class PromoterObserverCubit extends Cubit<PromoterObserverState> {
       Either<DatabaseFailure, List<Promoter>> failureOrPromoters) {
     failureOrPromoters.fold(
       (failure) => emit(PromotersObserverFailure(failure: failure)),
-      (promoters) => emit(PromotersObserverSuccess(promoters: promoters)),
+      (promoters) {
+        _cachedPromoters = promoters;
+        emit(PromotersObserverSuccess(promoters: promoters));
+      },
     );
   }
 

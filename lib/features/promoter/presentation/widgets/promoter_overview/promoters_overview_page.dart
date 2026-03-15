@@ -212,7 +212,8 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
                   }
                 },
                 builder: (context, promoterState) {
-                  if (promoterState is PromoterLoadingState) {
+                  if (promoterState is PromoterLoadingState &&
+                      promoterState.promoterId == null) {
                     return const LoadingIndicator();
                   }
                   if (state is PromotersObserverGetElementsSuccess) {
