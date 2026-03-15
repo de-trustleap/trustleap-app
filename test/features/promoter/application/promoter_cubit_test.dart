@@ -45,7 +45,7 @@ void main() {
         () async {
       // Given
       final expectedResult = [
-        PromoterLoadingState(),
+        PromoterLoadingState(promoterId: testID),
         PromoterDeleteSuccessState()
       ];
       when(mockPromoterRepo.deletePromoter(id: testID, isRegistered: false))
@@ -60,7 +60,7 @@ void main() {
         () async {
       // Given
       final expectedResult = [
-        PromoterLoadingState(),
+        PromoterLoadingState(promoterId: testID),
         PromoterDeleteFailureState(failure: BackendFailure())
       ];
       when(mockPromoterRepo.deletePromoter(id: testID, isRegistered: false))
