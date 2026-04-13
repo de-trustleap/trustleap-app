@@ -2348,6 +2348,10 @@
     "@landingpage_creator_ai_form_title": {
         "description": "Title for the AI ​​Generation Section in the Landing Page Creator"
     },
+    "landingpage_creator_ai_form_data_notice": "Your input will be transmitted to OpenAI for AI-assisted landing page creation (processed in the backend, not used for training purposes). Please do not enter any personal data of third parties.",
+    "@landingpage_creator_ai_form_data_notice": {
+        "description": "Data privacy notice for AI generation in the Landing Page Creator"
+    },
     "landingpage_creator_ai_form_radio_title": "Kind of landing page:",
     "@landingpage_creator_ai_form_radio_title": {
         "description": "Title for Radio Button Section for the AI ​​Generation Section in the Landing Page Creator"
@@ -2733,6 +2737,10 @@
     "recommendation_missing_landingpage_button": "To the landingpages",
     "@recommendation_missing_landingpage_button": {
         "description": "Button on the page that is displayed on the recommendation page if no landing page was found, which leads to the landing page menu"
+    },
+    "recommendation_no_landingpage_assigned_text": "No landing pages have been assigned to you yet. Please contact your service provider.",
+    "@recommendation_no_landingpage_assigned_text": {
+        "description": "Text displayed when a promoter without landing page creation rights has no landing pages assigned"
     },
     "recommendation_priority_high": "High",
     "@recommendation_priority_high": {

@@ -10,7 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 class RecommendationSender {
   String createRecommendationLink(RecommendationItem recommendation) {
     final baseURL = Environment().getLandingpageBaseURL();
-    return "$baseURL?p=${recommendation.promoterName}&id=${recommendation.id}";
+    return "$baseURL?p=${Uri.encodeComponent(recommendation.promoterName ?? '')}&id=${recommendation.id}";
   }
 
   String _prepareMessage(String message, String link) {

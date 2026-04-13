@@ -7,26 +7,24 @@ import 'package:finanzbegleiter/features/recommendations/domain/user_recommendat
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page_repository.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_repository.dart';
 
-part 'dashboard_recommendations_state.dart';
+part 'recommendation_chart_state.dart';
 
-class DashboardRecommendationsCubit
-    extends Cubit<DashboardRecommendationsState> {
+class RecommendationChartCubit extends Cubit<RecommendationChartState> {
   final RecommendationRepository recommendationRepo;
   final LandingPageRepository landingPageRepo;
 
-  DashboardRecommendationsCubit(this.recommendationRepo, this.landingPageRepo)
-      : super(DashboardRecommendationsInitial());
+  RecommendationChartCubit(this.recommendationRepo, this.landingPageRepo)
+      : super(RecommendationChartInitial());
 
   void getRecommendationsCompany(String userID) async {
-    emit(DashboardRecommendationsGetRecosLoadingState());
+    emit(RecommendationChartLoadingState());
 
     final failureOrSuccess =
         await recommendationRepo.getRecommendationsCompanyWithArchived(userID);
     failureOrSuccess.fold(
         (failure) => failure is NotFoundFailure
-            ? emit(DashboardRecommendationsGetRecosNotFoundFailureState())
-            : emit(
-                DashboardRecommendationsGetRecosFailureState(failure: failure)),
+            ? emit(RecommendationChartNotFoundState())
+            : emit(RecommendationChartFailureState(failure: failure)),
         (result) async {
       final allLandingPageIds = <String>{};
       for (final promoterRec in result.promoterRecommendations) {
@@ -38,7 +36,7 @@ class DashboardRecommendationsCubit
       final allLandingPages =
           await _loadLandingPages(allLandingPageIds.toList());
 
-      emit(DashboardRecommendationsGetRecosSuccessState(
+      emit(RecommendationChartSuccessState(
         recommendation: result.allRecommendations,
         promoterRecommendations: result.promoterRecommendations,
         allLandingPages: allLandingPages,
@@ -49,19 +47,18 @@ class DashboardRecommendationsCubit
 
   void getRecommendationsPromoter(
       String userID, List<String>? landingPageIDs) async {
-    emit(DashboardRecommendationsGetRecosLoadingState());
+    emit(RecommendationChartLoadingState());
 
     final failureOrSuccess =
         await recommendationRepo.getRecommendationsWithArchived(userID);
     failureOrSuccess.fold(
         (failure) => failure is NotFoundFailure
-            ? emit(DashboardRecommendationsGetRecosNotFoundFailureState())
-            : emit(
-                DashboardRecommendationsGetRecosFailureState(failure: failure)),
+            ? emit(RecommendationChartNotFoundState())
+            : emit(RecommendationChartFailureState(failure: failure)),
         (recommendations) async {
       final allLandingPages = await _loadLandingPages(landingPageIDs ?? []);
 
-      emit(DashboardRecommendationsGetRecosSuccessState(
+      emit(RecommendationChartSuccessState(
         recommendation: recommendations,
         allLandingPages: allLandingPages,
         filteredLandingPages: allLandingPages,
@@ -71,7 +68,7 @@ class DashboardRecommendationsCubit
 
   void filterLandingPagesForPromoter(String? promoterId) {
     final currentState = state;
-    if (currentState is DashboardRecommendationsGetRecosSuccessState) {
+    if (currentState is RecommendationChartSuccessState) {
       if (promoterId == null) {
         emit(currentState.copyWith(
             filteredLandingPages: currentState.allLandingPages));

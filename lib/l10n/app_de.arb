@@ -2348,6 +2348,10 @@
     "@landingpage_creator_ai_form_title": {
         "description": "Titel für die KI Generierung Section im Landingpage Creator"
     },
+    "landingpage_creator_ai_form_data_notice": "Ihre Eingaben werden zur KI-gestützten Erstellung der Landingpage an OpenAI übermittelt (Verarbeitung im Backend, nicht für Trainingszwecke verwendet). Bitte geben Sie keine personenbezogenen Daten Dritter ein.",
+    "@landingpage_creator_ai_form_data_notice": {
+        "description": "Datenschutzhinweis für KI-Generierung im Landingpage Creator"
+    },
     "landingpage_creator_ai_form_radio_title": "Art der Landing Page:",
     "@landingpage_creator_ai_form_radio_title": {
         "description": "Titel für Radio Button Section für die KI Generierung Section im Landingpage Creator"
@@ -2733,6 +2737,10 @@
     "recommendation_missing_landingpage_button": "Zu den Landingpages",
     "@recommendation_missing_landingpage_button": {
         "description": "Button auf der Seite die auf der Empfehlungsseite angezeigt wird, wenn keine Landingpage gefunden wurde, der zum Landingpage Menü führt"
+    },
+    "recommendation_no_landingpage_assigned_text": "Dir wurden noch keine Landingpages zugewiesen. Wende dich bitte an deinen Dienstleister.",
+    "@recommendation_no_landingpage_assigned_text": {
+        "description": "Text der angezeigt wird, wenn ein Promoter ohne Landingpage-Erstellungsrecht keine Landingpages zugewiesen bekommen hat"
     },
     "recommendation_priority_high": "Hoch",
     "@recommendation_priority_high": {

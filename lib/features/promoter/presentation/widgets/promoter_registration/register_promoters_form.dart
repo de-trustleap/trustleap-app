@@ -14,7 +14,7 @@ import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/error_view.
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/gender_picker.dart';
-import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/legals_check.dart';
+
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/features/promoter/presentation/widgets/landingpage_checkbox_item.dart';
@@ -52,8 +52,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
   bool validationHasError = false;
   String? genderValid;
   bool buttonDisabled = false;
-  var privacyPolicyChecked = false;
-  var termsAndConditionsChecked = false;
+  var consentChecked = false;
 
   @override
   void initState() {
@@ -71,7 +70,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
 
   @override
   void didChangeDependencies() {
-    if (!privacyPolicyChecked || !termsAndConditionsChecked) {
+    if (!consentChecked) {
       setButtonToDisabled(true);
     }
     super.didChangeDependencies();
@@ -171,7 +170,15 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
     final validator = AuthValidator(localization: localization);
     final promoterCubit = Modular.get<PromoterCubit>();
     const double textFieldSpacing = 20;
-    return BlocConsumer<PromoterCubit, PromoterState>(
+    return BlocListener<UserObserverCubit, UserObserverState>(
+      listener: (context, userState) {
+        if (userState is UserObserverSuccess && landingPageItems.isEmpty) {
+          currentUser = userState.user;
+          Modular.get<PromoterCubit>()
+              .getPromotingLandingPages(currentUser?.landingPageIDs ?? []);
+        }
+      },
+      child: BlocConsumer<PromoterCubit, PromoterState>(
       bloc: promoterCubit,
       listener: (context, state) {
         if (state is PromoterRegisterFailureState) {
@@ -302,23 +309,30 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                       const SizedBox(height: 8),
                       Column(children: createCheckboxes()),
                       const SizedBox(height: textFieldSpacing),
-                      LegalsCheck(
-                        maxWidth: maxWidth - textFieldSpacing,
-                        initialTermsAndConditionsChecked:
-                            termsAndConditionsChecked,
-                        initialPrivacyPolicyChecked: privacyPolicyChecked,
-                        isLoggedIn: true,
-                        onChanged: (termsChecked, privacyChecked) {
-                          if (termsChecked && privacyChecked) {
-                            setButtonToDisabled(false);
-                          } else {
-                            setButtonToDisabled(true);
-                          }
-                          setState(() {
-                            termsAndConditionsChecked = termsChecked;
-                            privacyPolicyChecked = privacyChecked;
-                          });
-                        },
+                      SizedBox(
+                        width: maxWidth - textFieldSpacing,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Checkbox(
+                              value: consentChecked,
+                              onChanged: (value) {
+                                setState(() {
+                                  consentChecked = value ?? false;
+                                });
+                                setButtonToDisabled(!(value ?? false));
+                              },
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                'Ich bestätige, dass ich berechtigt bin, die Kontaktdaten dieser Person an Trust Leap zu übermitteln, damit sie eine Einladungs-E-Mail erhält. Die Person wird in dieser E-Mail gemäß Art. 14 DSGVO über die Datenverarbeitung informiert.',
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(height: textFieldSpacing * 2),
                       Row(
@@ -360,6 +374,6 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
           }
         }));
       },
-    );
+    ));
   }
 }
