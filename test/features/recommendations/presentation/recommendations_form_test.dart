@@ -1,6 +1,7 @@
 @TestOn('chrome')
 library;
 
+import 'package:finanzbegleiter/features/permissions/application/permission_cubit.dart';
 import 'package:finanzbegleiter/features/recommendations/application/recommendations_cubit.dart';
 import 'package:finanzbegleiter/features/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
@@ -28,16 +29,19 @@ import '../../../mocks.mocks.dart';
 class RecommendationsFormTestModule extends Module {
   final RecommendationsCubit recommendationsCubit;
   final UserObserverCubit userObserverCubit;
+  final PermissionCubit permissionCubit;
 
   RecommendationsFormTestModule({
     required this.recommendationsCubit,
     required this.userObserverCubit,
+    required this.permissionCubit,
   });
 
   @override
   void binds(i) {
     i.addSingleton<RecommendationsCubit>(() => recommendationsCubit);
     i.addSingleton<UserObserverCubit>(() => userObserverCubit);
+    i.addSingleton<PermissionCubit>(() => permissionCubit);
   }
 
   @override
@@ -50,8 +54,10 @@ void main() {
   late MockUserRepository mockUserRepository;
   late MockLandingPageRepository mockLandingPageRepository;
   late MockAuthRepository mockAuthRepository;
+  late MockPermissionRepository mockPermissionRepository;
   late RecommendationsCubit recommendationsCubit;
   late UserObserverCubit userObserverCubit;
+  late PermissionCubit permissionCubit;
 
   setUp(() {
     ResponsiveHelper.enableTestMode();
@@ -59,6 +65,7 @@ void main() {
     mockUserRepository = MockUserRepository();
     mockLandingPageRepository = MockLandingPageRepository();
     mockAuthRepository = MockAuthRepository();
+    mockPermissionRepository = MockPermissionRepository();
 
     when(mockAuthRepository.getCurrentUser()).thenReturn(null);
     when(mockAuthRepository.getSignedInUser()).thenReturn(none());
@@ -73,6 +80,7 @@ void main() {
     );
 
     userObserverCubit = UserObserverCubit(mockUserRepository);
+    permissionCubit = PermissionCubit(permissionRepo: mockPermissionRepository);
   });
 
   tearDown(() {
@@ -80,6 +88,7 @@ void main() {
     Modular.destroy();
     recommendationsCubit.close();
     userObserverCubit.close();
+    permissionCubit.close();
   });
 
   CustomUser createTestUser({
@@ -108,6 +117,7 @@ void main() {
     final module = RecommendationsFormTestModule(
       recommendationsCubit: recommendationsCubit,
       userObserverCubit: userObserverCubit,
+      permissionCubit: permissionCubit,
     );
 
     return ModularApp(
