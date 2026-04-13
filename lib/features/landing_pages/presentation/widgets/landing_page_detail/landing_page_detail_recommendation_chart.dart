@@ -1,6 +1,6 @@
 import 'package:finanzbegleiter/core/widgets/shared_elements/app_bottom_sheet.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/bottom_sheet_wrapper.dart';
-import 'package:finanzbegleiter/features/landing_pages/application/landing_page_detail/landing_page_detail_cubit.dart';
+import 'package:finanzbegleiter/features/recommendations/application/recommendation_chart/recommendation_chart_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
@@ -48,11 +48,13 @@ class _LandingPageDetailTrafficChartState
   }
 
   void _loadRecommendations() {
-    Modular.get<LandingPageDetailCubit>().loadRecommendations(
-      userId: widget.user.id.value,
-      role: widget.user.role ?? Role.none,
-      landingPageIds: widget.user.landingPageIDs,
-    );
+    final cubit = Modular.get<RecommendationChartCubit>();
+    if (widget.user.role == Role.company) {
+      cubit.getRecommendationsCompany(widget.user.id.value);
+    } else {
+      cubit.getRecommendationsPromoter(
+          widget.user.id.value, widget.user.landingPageIDs);
+    }
   }
 
   void _onFilterPressed() {
@@ -69,7 +71,7 @@ class _LandingPageDetailTrafficChartState
 
   void _showFilterBottomSheet() {
     final localization = AppLocalizations.of(context);
-    final cubit = Modular.get<LandingPageDetailCubit>();
+    final cubit = Modular.get<RecommendationChartCubit>();
 
     showAppBottomSheet(
       context,
@@ -108,11 +110,11 @@ class _LandingPageDetailTrafficChartState
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
-    final cubit = Modular.get<LandingPageDetailCubit>();
+    final cubit = Modular.get<RecommendationChartCubit>();
 
     return CardContainer(
       maxWidth: double.infinity,
-      child: BlocBuilder<LandingPageDetailCubit, LandingPageDetailState>(
+      child: BlocBuilder<RecommendationChartCubit, RecommendationChartState>(
         bloc: cubit,
         builder: (context, state) {
           return Column(
@@ -172,7 +174,7 @@ class _LandingPageDetailTrafficChartState
                 ),
               ),
 
-              if (state is LandingPageDetailRecommendationsSuccess)
+              if (state is RecommendationChartSuccessState)
                 SelectableText(
                   _getSummaryText(state, localization),
                   style: themeData.textTheme.bodySmall?.copyWith(
@@ -181,7 +183,7 @@ class _LandingPageDetailTrafficChartState
                 ),
               const SizedBox(height: 16),
 
-              if (state is LandingPageDetailRecommendationsSuccess)
+              if (state is RecommendationChartSuccessState)
                 DashboardRecommendationsChart(
                   recommendations: _getFilteredRecommendations(state),
                   timePeriod: _selectedTimePeriod,
@@ -192,13 +194,13 @@ class _LandingPageDetailTrafficChartState
                     statusLevel: _selectedStatusLevel,
                   ),
                 )
-              else if (state is LandingPageDetailRecommendationsNotFound)
+              else if (state is RecommendationChartNotFoundState)
                 DashboardRecommendationsChart(
                   recommendations: const [],
                   timePeriod: _selectedTimePeriod,
                   statusLevel: _selectedStatusLevel,
                 )
-              else if (state is LandingPageDetailRecommendationsFailure)
+              else if (state is RecommendationChartFailureState)
                 ErrorView(
                   title: localization
                       .dashboard_recommendations_loading_error_title,
@@ -217,7 +219,7 @@ class _LandingPageDetailTrafficChartState
   Widget _buildFilterContent(
     AppLocalizations localization,
     ThemeData themeData,
-    LandingPageDetailState state,
+    RecommendationChartState state,
     Function(TimePeriod) onTimePeriodChanged,
     Function(int?) onStatusLevelChanged,
     Function(String?) onPromoterChanged,
@@ -287,7 +289,7 @@ class _LandingPageDetailTrafficChartState
         ),
         const SizedBox(height: 16),
         if (widget.user.role == Role.company &&
-            state is LandingPageDetailRecommendationsSuccess &&
+            state is RecommendationChartSuccessState &&
             state.promoterRecommendations != null) ...[
           Text(
             localization.dashboard_recommendations_filter_promoter,
@@ -311,9 +313,9 @@ class _LandingPageDetailTrafficChartState
   }
 
   List<UserRecommendation> _getFilteredRecommendations(
-      LandingPageDetailRecommendationsSuccess state) {
+      RecommendationChartSuccessState state) {
     return RecommendationsStatistics.getFilteredRecommendations(
-      recommendations: state.recommendations,
+      recommendations: state.recommendation,
       selectedPromoterId: _selectedPromoterId,
       userRole: widget.user.role ?? Role.none,
       promoterRecommendations: state.promoterRecommendations,
@@ -323,7 +325,7 @@ class _LandingPageDetailTrafficChartState
   }
 
   String _getSummaryText(
-    LandingPageDetailRecommendationsSuccess state,
+    RecommendationChartSuccessState state,
     AppLocalizations localization,
   ) {
     final recommendations = _getFilteredRecommendations(state);

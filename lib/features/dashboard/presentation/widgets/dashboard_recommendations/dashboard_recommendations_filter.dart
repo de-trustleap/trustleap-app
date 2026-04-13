@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/features/dashboard/application/recommendation/dashboard_recommendations_cubit.dart';
+import 'package:finanzbegleiter/features/recommendations/application/recommendation_chart/recommendation_chart_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -9,7 +9,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class DashboardRecommendationsFilter extends StatefulWidget {
   final CustomUser user;
-  final DashboardRecommendationsState state;
+  final RecommendationChartState state;
   final TimePeriod selectedTimePeriod;
   final int? selectedStatusLevel;
   final String? selectedPromoterId;
@@ -44,7 +44,7 @@ class _DashboardRecommendationsFilterState
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
-    final cubit = Modular.get<DashboardRecommendationsCubit>();
+    final cubit = Modular.get<RecommendationChartCubit>();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,8 +82,8 @@ class _DashboardRecommendationsFilterState
         ),
         const SizedBox(height: 16),
         if (widget.user.role == Role.company &&
-            widget.state is DashboardRecommendationsGetRecosSuccessState &&
-            (widget.state as DashboardRecommendationsGetRecosSuccessState)
+            widget.state is RecommendationChartSuccessState &&
+            (widget.state as RecommendationChartSuccessState)
                     .promoterRecommendations !=
                 null) ...[
           Text(localization.dashboard_recommendations_filter_promoter,
@@ -94,7 +94,7 @@ class _DashboardRecommendationsFilterState
             value: widget.selectedPromoterId,
             useDialogPicker: true,
             items: DashboardRecommendationsHelper.getPromoterItems(
-                (widget.state as DashboardRecommendationsGetRecosSuccessState)
+                (widget.state as RecommendationChartSuccessState)
                     .promoterRecommendations!,
                 localization,
                 widget.user.id.value),
@@ -105,11 +105,11 @@ class _DashboardRecommendationsFilterState
           ),
           const SizedBox(height: 16),
         ],
-        if (widget.state is DashboardRecommendationsGetRecosSuccessState &&
-            (widget.state as DashboardRecommendationsGetRecosSuccessState)
+        if (widget.state is RecommendationChartSuccessState &&
+            (widget.state as RecommendationChartSuccessState)
                     .allLandingPages !=
                 null &&
-            (widget.state as DashboardRecommendationsGetRecosSuccessState)
+            (widget.state as RecommendationChartSuccessState)
                 .allLandingPages!
                 .isNotEmpty) ...[
           Text(localization.dashboard_recommendations_filter_landingpage,
@@ -125,7 +125,7 @@ class _DashboardRecommendationsFilterState
                 child: Text(
                     localization.dashboard_recommendations_all_landingpages),
               ),
-              ...(widget.state as DashboardRecommendationsGetRecosSuccessState)
+              ...(widget.state as RecommendationChartSuccessState)
                   .filteredLandingPages!
                   .map((landingPage) {
                 return DropdownMenuItem<String?>(

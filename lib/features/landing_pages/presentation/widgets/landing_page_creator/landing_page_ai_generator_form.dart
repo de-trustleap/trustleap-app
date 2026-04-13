@@ -80,6 +80,36 @@ class _LandingPageAIGenerationFormState
               localization.landingpage_creator_ai_form_title,
               style: themeData.textTheme.bodyLarge,
             ),
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: themeData.colorScheme.primary.withValues(alpha: 0.06),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: themeData.colorScheme.outline.withValues(alpha: 0.2),
+                ),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.info_outline,
+                    size: 18,
+                    color: themeData.colorScheme.secondary,
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      localization.landingpage_creator_ai_form_data_notice,
+                      style: themeData.textTheme.bodySmall?.copyWith(
+                        color: themeData.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             const SizedBox(height: 24),
             Text(
               localization.landingpage_creator_ai_form_radio_title,

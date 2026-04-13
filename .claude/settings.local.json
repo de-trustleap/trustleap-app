@@ -24,7 +24,10 @@
       "WebFetch(domain:pub.dev)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:firebase.google.com)",
-      "mcp__plugin_firebase_firebase__firebase_get_environment"
+      "mcp__plugin_firebase_firebase__firebase_get_environment",
+      "mcp__github__pull_request_read",
+      "Bash(find /Users/marcelspindler/Documents/Dev/Finanzbegleiter/trustleapLandingpages -type f \\\\\\(-name *.ts -o -name *.tsx -o -name *.js -o -name *.jsx \\\\\\))",
+      "Bash(find /Users/marcelspindler/Documents/Dev/Finanzbegleiter/trustleap-page-renderer/src -type f \\\\\\(-name *.ts -o -name *.tsx -o -name *.js -o -name *.jsx \\\\\\))"
     ],
     "deny": []
   }

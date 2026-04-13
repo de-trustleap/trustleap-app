@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
+import 'package:finanzbegleiter/features/permissions/application/permission_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/core/widgets/page_wrapper/centered_constrained_wrapper.dart';
@@ -249,14 +250,23 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                 return const LoadingIndicator();
               }
               if (state is RecommendationNoReasonsState) {
+                final permissionState =
+                    Modular.get<PermissionCubit>().state;
+                final canCreateLandingPage = permissionState
+                        is PermissionSuccessState &&
+                    permissionState.permissions
+                        .hasCreateLandingPagePermission();
                 return EmptyPage(
                     icon: Icons.person_add,
                     title:
                         localization.recommendation_missing_landingpage_title,
-                    subTitle:
-                        localization.recommendation_missing_landingpage_text,
+                    subTitle: canCreateLandingPage
+                        ? localization.recommendation_missing_landingpage_text
+                        : localization
+                            .recommendation_no_landingpage_assigned_text,
                     buttonTitle: localization
                         .recommendation_missing_landingpage_button,
+                    isButtonHidden: !canCreateLandingPage,
                     onTap: () {
                       navigator.navigate(
                           RoutePaths.homePath + RoutePaths.landingPagePath);

@@ -104,7 +104,7 @@ class LandingPageDetailHeader extends StatelessWidget {
           title: localization.landing_page_detail_preview,
           icon: Icons.visibility_outlined,
           onTap: onPreviewPressed,
-          backgroundColor: Colors.white,
+          backgroundColor: themeData.colorScheme.onPrimaryContainer,
           textColor: themeData.colorScheme.onSurface,
         ),
         if (responsiveValue.isDesktop) ...[

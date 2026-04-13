@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import 'custom_tabbar.dart';
 
@@ -22,9 +23,30 @@ class _NativeSegmentedTabBarState extends State<NativeSegmentedTabBar> {
   static const double _horizontalPadding = 16.0;
 
   @override
+  void initState() {
+    super.initState();
+    Modular.to.addListener(_onRouteChanged);
+  }
+
+  @override
   void dispose() {
+    Modular.to.removeListener(_onRouteChanged);
     _scrollController.dispose();
     super.dispose();
+  }
+
+  void _onRouteChanged() {
+    final newRoute = Modular.to.path;
+    final routeIndex =
+        widget.tabs.indexWhere((tab) => tab.route == newRoute);
+    if (routeIndex >= 0 && routeIndex != _selectedIndex) {
+      setState(() {
+        _selectedIndex = routeIndex;
+      });
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _scrollToChip(routeIndex);
+      });
+    }
   }
 
   double _measureTextWidth(String text, TextStyle style) {
@@ -193,5 +215,3 @@ class _SegmentChip extends StatelessWidget {
   }
 }
 // TODO: EIGENES IPHONE DEBUG APPCHECK TOKEN REGISTRIEREN
-// TODO: SKELETON IN DETAIL PAGES
-// TODO: LANDINGPAGES AI TEXT

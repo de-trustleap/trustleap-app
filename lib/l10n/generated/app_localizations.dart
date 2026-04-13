@@ -3518,6 +3518,12 @@ abstract class AppLocalizations {
   /// **'Enter some information about your business and let the AI ​​create a customized landing page.'**
   String get landingpage_creator_ai_form_title;
 
+  /// Data privacy notice for AI generation in the Landing Page Creator
+  ///
+  /// In en, this message translates to:
+  /// **'Your input will be transmitted to OpenAI for AI-assisted landing page creation (processed in the backend, not used for training purposes). Please do not enter any personal data of third parties.'**
+  String get landingpage_creator_ai_form_data_notice;
+
   /// Title for Radio Button Section for the AI ​​Generation Section in the Landing Page Creator
   ///
   /// In en, this message translates to:
@@ -4087,6 +4093,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'To the landingpages'**
   String get recommendation_missing_landingpage_button;
+
+  /// Text displayed when a promoter without landing page creation rights has no landing pages assigned
+  ///
+  /// In en, this message translates to:
+  /// **'No landing pages have been assigned to you yet. Please contact your service provider.'**
+  String get recommendation_no_landingpage_assigned_text;
 
   /// The priority High for a recommendation
   ///

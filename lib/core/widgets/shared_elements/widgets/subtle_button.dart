@@ -4,6 +4,7 @@ class SubtleButton extends StatelessWidget {
   final String title;
   final double? width;
   final bool disabled;
+  final bool isLoading;
   final Function? onTap;
   final IconData? icon;
   final Color? backgroundColor;
@@ -15,6 +16,7 @@ class SubtleButton extends StatelessWidget {
     this.onTap,
     this.width,
     this.disabled = false,
+    this.isLoading = false,
     this.icon,
     this.backgroundColor,
     this.textColor,
@@ -29,7 +31,7 @@ class SubtleButton extends StatelessWidget {
     final fgColor = textColor ?? Colors.white;
 
     return IgnorePointer(
-      ignoring: disabled,
+      ignoring: disabled || isLoading,
       child: InkWell(
         onTap: () => onTap?.call(),
         borderRadius: BorderRadius.circular(8),
@@ -42,7 +44,13 @@ class SubtleButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         child: Center(
-          child: icon != null
+          child: isLoading
+              ? const SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(color: Colors.white),
+                )
+              : icon != null
               ? Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -2039,6 +2039,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Gib ein paar Informationen zu deinem Unternehmen ein und lass die KI eine maßgeschneiderte Landing Page erstellen.';
 
   @override
+  String get landingpage_creator_ai_form_data_notice =>
+      'Ihre Eingaben werden zur KI-gestützten Erstellung der Landingpage an OpenAI übermittelt (Verarbeitung im Backend, nicht für Trainingszwecke verwendet). Bitte geben Sie keine personenbezogenen Daten Dritter ein.';
+
+  @override
   String get landingpage_creator_ai_form_radio_title => 'Art der Landing Page:';
 
   @override
@@ -2373,6 +2377,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get recommendation_missing_landingpage_button => 'Zu den Landingpages';
+
+  @override
+  String get recommendation_no_landingpage_assigned_text =>
+      'Dir wurden noch keine Landingpages zugewiesen. Wende dich bitte an deinen Dienstleister.';
 
   @override
   String get recommendation_priority_high => 'Hoch';
