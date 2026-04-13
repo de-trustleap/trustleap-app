@@ -10,7 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class PromoterDetailActionsCard extends StatelessWidget {
+class PromoterDetailActionsCard extends StatefulWidget {
   final Promoter promoter;
   final VoidCallback onDeleted;
 
@@ -19,6 +19,14 @@ class PromoterDetailActionsCard extends StatelessWidget {
     required this.promoter,
     required this.onDeleted,
   });
+
+  @override
+  State<PromoterDetailActionsCard> createState() =>
+      _PromoterDetailActionsCardState();
+}
+
+class _PromoterDetailActionsCardState extends State<PromoterDetailActionsCard> {
+  bool _isDeleting = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +41,9 @@ class PromoterDetailActionsCard extends StatelessWidget {
           CustomSnackBar.of(context).showCustomSnackBar(
             localization.promoter_overview_delete_promoter_success_snackbar,
           );
-          onDeleted();
+          widget.onDeleted();
         } else if (state is PromoterDeleteFailureState) {
+          setState(() => _isDeleting = false);
           CustomSnackBar.of(context).showCustomSnackBar(
             localization.promoter_overview_delete_promoter_failure_snackbar,
             SnackBarType.failure,
@@ -57,13 +66,13 @@ class PromoterDetailActionsCard extends StatelessWidget {
               spacing: 12,
               runSpacing: 12,
               children: [
-                if (promoter.email != null)
+                if (widget.promoter.email != null)
                   SubtleButton(
                     title: localization.promoter_detail_send_email,
                     icon: Icons.email_outlined,
                     width: 300,
                     onTap: () {
-                      launchUrl(Uri.parse('mailto:${promoter.email}'));
+                      launchUrl(Uri.parse('mailto:${widget.promoter.email}'));
                     },
                   ),
                 SubtleButton(
@@ -71,6 +80,7 @@ class PromoterDetailActionsCard extends StatelessWidget {
                   icon: Icons.delete_outlined,
                   width: 300,
                   backgroundColor: themeData.colorScheme.error,
+                  isLoading: _isDeleting,
                   onTap: () => _showDeleteDialog(context),
                 ),
               ],
@@ -89,15 +99,15 @@ class PromoterDetailActionsCard extends StatelessWidget {
       context: context,
       builder: (dialogContext) => CustomAlertDialog(
         title: localization.promoter_overview_delete_promoter_alert_title,
-        message:
-            localization.promoter_overview_delete_promoter_alert_description,
+        message: localization.promoter_overview_delete_promoter_alert_description,
         actionButtonTitle:
             localization.promoter_overview_delete_promoter_alert_delete_button,
         actionButtonAction: () {
           Navigator.of(dialogContext).pop();
+          setState(() => _isDeleting = true);
           promoterCubit.deletePromoter(
-            promoter.id.value,
-            promoter.registered == true,
+            widget.promoter.id.value,
+            widget.promoter.registered == true,
           );
         },
         cancelButtonTitle:

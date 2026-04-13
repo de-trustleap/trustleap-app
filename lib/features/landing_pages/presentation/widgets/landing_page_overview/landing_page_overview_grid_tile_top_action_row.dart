@@ -189,7 +189,6 @@ class LandingPageOverviewGridTileTopActionRow extends StatelessWidget {
               const SizedBox(height: 40)
             ],
             const Spacer(),
-            _getPreviewButton(themeData, localization, navigator),
           ]);
     }
 

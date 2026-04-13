@@ -1,5 +1,5 @@
 import 'package:finanzbegleiter/core/widgets/shared_elements/app_bottom_sheet.dart';
-import 'package:finanzbegleiter/features/dashboard/application/recommendation/dashboard_recommendations_cubit.dart';
+import 'package:finanzbegleiter/features/recommendations/application/recommendation_chart/recommendation_chart_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -24,10 +24,10 @@ class DashboardRecommendations extends StatefulWidget {
 
   @override
   State<DashboardRecommendations> createState() =>
-      _DashboardRecommendationsState();
+      _RecommendationChartState();
 }
 
-class _DashboardRecommendationsState extends State<DashboardRecommendations> {
+class _RecommendationChartState extends State<DashboardRecommendations> {
   TimePeriod _selectedTimePeriod = TimePeriod.week;
   int? _selectedStatusLevel = 1;
   String? _selectedPromoterId;
@@ -39,10 +39,10 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
     super.initState();
 
     if (widget.user.role == Role.company) {
-      Modular.get<DashboardRecommendationsCubit>()
+      Modular.get<RecommendationChartCubit>()
           .getRecommendationsCompany(widget.user.id.value);
     } else {
-      Modular.get<DashboardRecommendationsCubit>().getRecommendationsPromoter(
+      Modular.get<RecommendationChartCubit>().getRecommendationsPromoter(
           widget.user.id.value, widget.user.landingPageIDs);
     }
   }
@@ -97,11 +97,11 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
-    final cubit = Modular.get<DashboardRecommendationsCubit>();
+    final cubit = Modular.get<RecommendationChartCubit>();
 
     return CardContainer(
-      child: BlocBuilder<DashboardRecommendationsCubit,
-          DashboardRecommendationsState>(
+      child: BlocBuilder<RecommendationChartCubit,
+          RecommendationChartState>(
         bloc: cubit,
         builder: (context, state) {
           return Column(
@@ -165,7 +165,7 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
                   },
                 ),
               ),
-              if (state is DashboardRecommendationsGetRecosSuccessState)
+              if (state is RecommendationChartSuccessState)
                 Text(
                   DashboardRecommendationsHelper.getTimePeriodSummaryText(
                     state: state,
@@ -179,7 +179,7 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               const SizedBox(height: 16),
-              if (state is DashboardRecommendationsGetRecosSuccessState)
+              if (state is RecommendationChartSuccessState)
                 DashboardRecommendationsChart(
                   recommendations:
                       DashboardRecommendationsHelper.getFilteredRecommendations(
@@ -200,13 +200,13 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
                   ),
                 )
               else if (state
-                  is DashboardRecommendationsGetRecosNotFoundFailureState)
+                  is RecommendationChartNotFoundState)
                 DashboardRecommendationsChart(
                   recommendations: [],
                   timePeriod: _selectedTimePeriod,
                   statusLevel: _selectedStatusLevel,
                 )
-              else if (state is DashboardRecommendationsGetRecosFailureState)
+              else if (state is RecommendationChartFailureState)
                 ErrorView(
                     title: localization
                         .dashboard_recommendations_loading_error_title,

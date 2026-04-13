@@ -2,7 +2,7 @@
 
 This project uses the following third-party libraries and their respective licenses.
 
-Last updated: 2026-03-12 22:30:45
+Last updated: 2026-03-19 14:43:23
 
 ---
 
@@ -36,7 +36,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### build_runner
 
-- **Version**: 2.12.2
+- **Version**: 2.13.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/build/tree/master/build_runner>
@@ -174,7 +174,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### fl_chart
 
-- **Version**: 1.1.1
+- **Version**: 1.2.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://flchart.dev/>
@@ -358,7 +358,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### sentry_flutter
 
-- **Version**: 9.14.0
+- **Version**: 9.15.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://docs.sentry.io/platforms/flutter/>
@@ -373,6 +373,14 @@ These are the packages explicitly listed in your pubspec.yaml:
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/shared_preferences/shared_preferences>
 - **Description**: Flutter plugin for reading and writing simple key-value pairs. Wraps
   NSUserDefaults on iOS and SharedPreferences on Android.
+
+### skeletonizer
+
+- **Version**: 2.1.3
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/Milad-Akarie/skeletonizer>
+- **Description**: Converts already built widgets into skeleton loaders with no extra effort.
 
 ### url_launcher
 
@@ -415,7 +423,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### _fe_analyzer_shared
 
-- **Version**: 97.0.0
+- **Version**: 98.0.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/sdk/tree/main/pkg/_fe_analyzer_shared>
@@ -431,7 +439,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### analyzer
 
-- **Version**: 11.0.0
+- **Version**: 12.0.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/sdk/tree/main/pkg/analyzer>
@@ -683,11 +691,12 @@ These packages are automatically included as dependencies of your direct depende
 
 ### csv
 
-- **Version**: 7.2.0
+- **Version**: 8.0.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/close2/csv>
-- **Description**: A codec to transform between a string and a list of values.
+- **Description**: A high-quality CSV library. Encode and decode CSV strings, with
+  stream support (one row per event), auto-detection, and Excel compatibility.
 
   The string must be comma (configurable) separated values.
 
@@ -702,7 +711,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### dart_style
 
-- **Version**: 3.1.7
+- **Version**: 3.1.8
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/dart_style>
@@ -1283,15 +1292,6 @@ These packages are automatically included as dependencies of your direct depende
 - **Description**: A library to access JNI from Dart and Flutter that acts as a support library
   for package:jnigen.
 
-### json2yaml
-
-- **Version**: 3.0.1
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://github.com/alexei-sintotski/json2yaml>
-- **Description**: Dart package to render JSON data to YAML with built-in automatic beautifier and
-  support for Dart pubspec.yaml and pubspec.lock conventions
-
 ### json_annotation
 
 - **Version**: 4.11.0
@@ -1300,6 +1300,15 @@ These packages are automatically included as dependencies of your direct depende
 - **Website**: <https://github.com/google/json_serializable.dart/tree/master/json_annotation>
 - **Description**: Classes and helper functions that support JSON code generation via the
   `json_serializable` package.
+
+### json2yaml
+
+- **Version**: 3.0.1
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/alexei-sintotski/json2yaml>
+- **Description**: Dart package to render JSON data to YAML with built-in automatic beautifier and
+  support for Dart pubspec.yaml and pubspec.lock conventions
 
 ### leak_tracker
 
@@ -1380,7 +1389,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### meta
 
-- **Version**: 1.18.1
+- **Version**: 1.18.2
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/sdk/tree/main/pkg/meta>
@@ -1423,7 +1432,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### native_toolchain_c
 
-- **Version**: 0.17.5
+- **Version**: 0.17.6
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/native/tree/main/pkgs/native_toolchain_c>
@@ -1694,7 +1703,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### sentry
 
-- **Version**: 9.14.0
+- **Version**: 9.15.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://docs.sentry.io/platforms/dart/>
@@ -1785,7 +1794,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### source_gen
 
-- **Version**: 4.2.0
+- **Version**: 4.2.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/source_gen/tree/master/source_gen>
@@ -1922,7 +1931,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### test_api
 
-- **Version**: 0.7.10
+- **Version**: 0.7.11
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/test/tree/master/pkgs/test_api>
@@ -2018,7 +2027,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### vector_math
 
-- **Version**: 2.2.0
+- **Version**: 2.3.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/google/vector_math.dart>

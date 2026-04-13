@@ -51,9 +51,11 @@ class _LandingPageCreatorMultiPageFormState
       );
     } else if (creatorCubit.state.landingPage == null) {
       // Initialize empty state only if cubit has no data
+      // Preserve createDefaultPage: true if already set (child routes don't pass args)
       creatorCubit.initialize(
         landingPage: null,
-        createDefaultPage: widget.createDefaultPage,
+        createDefaultPage:
+            widget.createDefaultPage || creatorCubit.state.createDefaultPage,
       );
     }
 
@@ -124,12 +126,12 @@ class _LandingPageCreatorMultiPageFormState
           key: ValueKey('step1_${creatorState.landingPage?.id.value ?? "new"}'),
           landingPage: creatorState.landingPage,
           isEditMode: creatorState.isEditMode,
-          createDefaultPage: widget.createDefaultPage,
+          createDefaultPage: creatorState.createDefaultPage,
           company: creatorState.company,
           onContinue: (landingPage, image, imageHasChanged) {
             final currentState = creatorCubit.state;
             if (currentState.imageValid) {
-              creatorCubit.updateLandingPage(widget.createDefaultPage
+              creatorCubit.updateLandingPage(currentState.createDefaultPage
                   ? landingPage.copyWith(isDefaultPage: true)
                   : landingPage.copyWith(isDefaultPage: false));
               creatorCubit.updateImage(image, imageHasChanged);
@@ -178,7 +180,7 @@ class _LandingPageCreatorMultiPageFormState
                 RoutePaths.landingPageCreatorPath +
                 RoutePaths.landingPageCreatorStep1Path);
           }),
-      if (!widget.createDefaultPage)
+      if (!creatorState.createDefaultPage)
         LandingPageCreatorThirdStep(
             landingPage: creatorState.landingPage,
             image: creatorState.image,
@@ -199,7 +201,7 @@ class _LandingPageCreatorMultiPageFormState
                   RoutePaths.landingPageCreatorPath +
                   RoutePaths.landingPageCreatorStep4Path);
             }),
-      if (!widget.createDefaultPage && !creatorState.isEditMode)
+      if (!creatorState.createDefaultPage && !creatorState.isEditMode)
         LandingPageCreatorFourthStep(
             landingPage: creatorState.landingPage,
             image: creatorState.image,

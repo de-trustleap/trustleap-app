@@ -22,6 +22,7 @@ class CompanyCubit extends Cubit<CompanyState> {
       emit(CompanyUpdateContactInformationLoadingState());
       final failureOrSuccess =
           await companyRepo.updateCompany(company, avvAccepted);
+      if (isClosed) return;
       failureOrSuccess.fold(
           (failure) => emit(
               CompanyUpdateContactInformationFailureState(failure: failure)),
@@ -32,6 +33,7 @@ class CompanyCubit extends Cubit<CompanyState> {
   void getCompany(String companyID) async {
     emit(GetCompanyLoadingState());
     final failureOrSuccess = await companyRepo.getCompany(companyID);
+    if (isClosed) return;
     failureOrSuccess.fold(
         (failure) => emit(GetCompanyFailureState(failure: failure)),
         (company) => emit(GetCompanySuccessState(company: company)));
@@ -44,6 +46,7 @@ class CompanyCubit extends Cubit<CompanyState> {
       emit(CompanyRegisterLoadingState());
       final failureOrSuccess =
           await companyRepo.registerCompany(company, avvAccepted);
+      if (isClosed) return;
       failureOrSuccess.fold(
           (failure) => emit(CompanyRegisterFailureState(failure: failure)),
           (_) => emit(CompanyRegisterSuccessState()));
@@ -57,6 +60,7 @@ class CompanyCubit extends Cubit<CompanyState> {
       emit(CompanyGetAVVPDFLoadingState());
       final failureOrSuccess =
           await companyRepo.getAVVDownloadURL(company, isPreview);
+      if (isClosed) return;
       failureOrSuccess.fold(
           (failure) => emit(CompanyGetAVVPDFFailureState(failure: failure)),
           (downloadURL) =>
@@ -67,6 +71,7 @@ class CompanyCubit extends Cubit<CompanyState> {
   void getCurrentUser() async {
     // ignore: await_only_futures
     final currentUser = await authRepo.getCurrentUser();
+    if (isClosed) return;
     emit(CompanyGetCurrentUserSuccessState(user: currentUser));
   }
 }

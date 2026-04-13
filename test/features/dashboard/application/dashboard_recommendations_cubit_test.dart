@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/features/dashboard/application/recommendation/dashboard_recommendations_cubit.dart';
+import 'package:finanzbegleiter/features/recommendations/application/recommendation_chart/recommendation_chart_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart';
@@ -14,23 +14,23 @@ import 'package:mockito/mockito.dart';
 import '../../../mocks.mocks.dart';
 
 void main() {
-  late DashboardRecommendationsCubit cubit;
+  late RecommendationChartCubit cubit;
   late MockRecommendationRepository mockRecommendationRepo;
   late MockLandingPageRepository mockLandingPageRepo;
 
   setUp(() {
     mockRecommendationRepo = MockRecommendationRepository();
     mockLandingPageRepo = MockLandingPageRepository();
-    cubit = DashboardRecommendationsCubit(mockRecommendationRepo, mockLandingPageRepo);
+    cubit = RecommendationChartCubit(mockRecommendationRepo, mockLandingPageRepo);
   });
 
-  group("DashboardRecommendationsCubit_InitialState", () {
-    test("init state should be DashboardRecommendationsInitial", () {
-      expect(cubit.state, DashboardRecommendationsInitial());
+  group("RecommendationChartCubit_InitialState", () {
+    test("init state should be RecommendationChartInitial", () {
+      expect(cubit.state, RecommendationChartInitial());
     });
   });
 
-  group("DashboardRecommendationsCubit_GetRecommendationsCompany", () {
+  group("RecommendationChartCubit_GetRecommendationsCompany", () {
     final userID = "1";
     final date = DateTime.now();
     
@@ -109,8 +109,8 @@ void main() {
     test("should emit LoadingState and then SuccessState when getRecommendationsCompany is called", () {
       // Given
       final expectedResult = [
-        DashboardRecommendationsGetRecosLoadingState(),
-        DashboardRecommendationsGetRecosSuccessState(
+        RecommendationChartLoadingState(),
+        RecommendationChartSuccessState(
           recommendation: [testUserRecommendation],
           promoterRecommendations: testPromoterRecommendations,
           allLandingPages: testLandingPages,
@@ -133,8 +133,8 @@ void main() {
     test("should emit LoadingState and then FailureState when getRecommendationsCompany fails", () {
       // Given
       final expectedResult = [
-        DashboardRecommendationsGetRecosLoadingState(),
-        DashboardRecommendationsGetRecosFailureState(failure: BackendFailure())
+        RecommendationChartLoadingState(),
+        RecommendationChartFailureState(failure: BackendFailure())
       ];
       when(mockRecommendationRepo.getRecommendationsCompanyWithArchived(userID))
           .thenAnswer((_) async => left(BackendFailure()));
@@ -147,8 +147,8 @@ void main() {
     test("should emit LoadingState and then NotFoundFailureState when getRecommendationsCompany returns NotFoundFailure", () {
       // Given
       final expectedResult = [
-        DashboardRecommendationsGetRecosLoadingState(),
-        DashboardRecommendationsGetRecosNotFoundFailureState()
+        RecommendationChartLoadingState(),
+        RecommendationChartNotFoundState()
       ];
       when(mockRecommendationRepo.getRecommendationsCompanyWithArchived(userID))
           .thenAnswer((_) async => left(NotFoundFailure()));
@@ -159,7 +159,7 @@ void main() {
     });
   });
 
-  group("DashboardRecommendationsCubit_GetRecommendationsPromoter", () {
+  group("RecommendationChartCubit_GetRecommendationsPromoter", () {
     final userID = "1";
     final date = DateTime.now();
     
@@ -220,8 +220,8 @@ void main() {
     test("should emit LoadingState and then SuccessState when getRecommendationsPromoter is called", () {
       // Given
       final expectedResult = [
-        DashboardRecommendationsGetRecosLoadingState(),
-        DashboardRecommendationsGetRecosSuccessState(
+        RecommendationChartLoadingState(),
+        RecommendationChartSuccessState(
           recommendation: testRecommendations,
           allLandingPages: testPromoterLandingPages,
           filteredLandingPages: testPromoterLandingPages,
@@ -240,8 +240,8 @@ void main() {
     test("should emit LoadingState and then FailureState when getRecommendationsPromoter fails", () {
       // Given
       final expectedResult = [
-        DashboardRecommendationsGetRecosLoadingState(),
-        DashboardRecommendationsGetRecosFailureState(failure: BackendFailure())
+        RecommendationChartLoadingState(),
+        RecommendationChartFailureState(failure: BackendFailure())
       ];
       when(mockRecommendationRepo.getRecommendationsWithArchived(userID))
           .thenAnswer((_) async => left(BackendFailure()));
@@ -254,8 +254,8 @@ void main() {
     test("should emit LoadingState and then NotFoundFailureState when getRecommendationsPromoter returns NotFoundFailure", () {
       // Given
       final expectedResult = [
-        DashboardRecommendationsGetRecosLoadingState(),
-        DashboardRecommendationsGetRecosNotFoundFailureState()
+        RecommendationChartLoadingState(),
+        RecommendationChartNotFoundState()
       ];
       when(mockRecommendationRepo.getRecommendationsWithArchived(userID))
           .thenAnswer((_) async => left(NotFoundFailure()));
@@ -266,7 +266,7 @@ void main() {
     });
   });
 
-  group("DashboardRecommendationsCubit_FilterLandingPagesForPromoter", () {
+  group("RecommendationChartCubit_FilterLandingPagesForPromoter", () {
     final date = DateTime.now();
     
     final promoter1 = CustomUser(
@@ -320,7 +320,7 @@ void main() {
 
     test("should filter landing pages for selected promoter", () {
       // Given
-      final initialState = DashboardRecommendationsGetRecosSuccessState(
+      final initialState = RecommendationChartSuccessState(
         recommendation: [testUserRecommendation],
         promoterRecommendations: promoterRecommendations,
         allLandingPages: allLandingPages,
@@ -332,7 +332,7 @@ void main() {
       cubit.filterLandingPagesForPromoter("promoter1");
 
       // Then
-      final state = cubit.state as DashboardRecommendationsGetRecosSuccessState;
+      final state = cubit.state as RecommendationChartSuccessState;
       expect(state.filteredLandingPages?.length, equals(2));
       expect(state.filteredLandingPages?.map((lp) => lp.id.value), containsAll(["lp1", "lp2"]));
       expect(state.allLandingPages, equals(allLandingPages)); // allLandingPages should remain unchanged
@@ -340,7 +340,7 @@ void main() {
 
     test("should show all landing pages when no promoter selected", () {
       // Given
-      final initialState = DashboardRecommendationsGetRecosSuccessState(
+      final initialState = RecommendationChartSuccessState(
         recommendation: [testUserRecommendation],
         promoterRecommendations: promoterRecommendations,
         allLandingPages: allLandingPages,
@@ -352,7 +352,7 @@ void main() {
       cubit.filterLandingPagesForPromoter(null);
 
       // Then
-      final state = cubit.state as DashboardRecommendationsGetRecosSuccessState;
+      final state = cubit.state as RecommendationChartSuccessState;
       expect(state.filteredLandingPages, equals(allLandingPages));
     });
 
@@ -373,7 +373,7 @@ void main() {
         PromoterRecommendations(promoter: promoterWithoutLandingPages, recommendations: [testUserRecommendation]),
       ];
 
-      final initialState = DashboardRecommendationsGetRecosSuccessState(
+      final initialState = RecommendationChartSuccessState(
         recommendation: [testUserRecommendation],
         promoterRecommendations: promoterRecommendationsWithEmptyPromoter,
         allLandingPages: allLandingPages,
@@ -385,23 +385,23 @@ void main() {
       cubit.filterLandingPagesForPromoter("promoter3");
 
       // Then
-      final state = cubit.state as DashboardRecommendationsGetRecosSuccessState;
+      final state = cubit.state as RecommendationChartSuccessState;
       expect(state.filteredLandingPages, isEmpty);
     });
 
     test("should handle state when not success state", () {
       // Given
-      cubit.emit(DashboardRecommendationsGetRecosLoadingState());
+      cubit.emit(RecommendationChartLoadingState());
 
       // When
       cubit.filterLandingPagesForPromoter("promoter1");
 
       // Then
-      expect(cubit.state, isA<DashboardRecommendationsGetRecosLoadingState>());
+      expect(cubit.state, isA<RecommendationChartLoadingState>());
     });
   });
 
-  group("DashboardRecommendationsCubit_LandingPageHandling", () {
+  group("RecommendationChartCubit_LandingPageHandling", () {
     final userID = "1";
     final landingPageIDs = ["lp1", "lp2"];
 
@@ -419,8 +419,8 @@ void main() {
       ];
 
       final expectedResult = [
-        DashboardRecommendationsGetRecosLoadingState(),
-        DashboardRecommendationsGetRecosSuccessState(
+        RecommendationChartLoadingState(),
+        RecommendationChartSuccessState(
           recommendation: testRecommendations,
           allLandingPages: null,
           filteredLandingPages: null,
@@ -451,8 +451,8 @@ void main() {
       ];
 
       final expectedResult = [
-        DashboardRecommendationsGetRecosLoadingState(),
-        DashboardRecommendationsGetRecosSuccessState(
+        RecommendationChartLoadingState(),
+        RecommendationChartSuccessState(
           recommendation: testRecommendations,
           allLandingPages: null,
           filteredLandingPages: null,

@@ -8,7 +8,7 @@ import 'package:finanzbegleiter/features/admin/application/company_request/compa
 import 'package:finanzbegleiter/features/dashboard/application/landingpage_ranking/dashboard_landingpage_ranking_cubit.dart';
 import 'package:finanzbegleiter/features/dashboard/application/promoter_ranking/dashboard_promoter_ranking_cubit.dart';
 import 'package:finanzbegleiter/features/dashboard/application/promoters/dashboard_promoters_cubit.dart';
-import 'package:finanzbegleiter/features/dashboard/application/recommendation/dashboard_recommendations_cubit.dart';
+import 'package:finanzbegleiter/features/recommendations/application/recommendation_chart/recommendation_chart_cubit.dart';
 import 'package:finanzbegleiter/features/dashboard/application/tutorial/dashboard_tutorial_cubit.dart';
 import 'package:finanzbegleiter/features/feedback/application/admin_feedback/admin_feedback_cubit.dart';
 import 'package:finanzbegleiter/features/feedback/application/feedback_cubit.dart';
@@ -173,7 +173,7 @@ class TestModule extends Module {
       ..addLazySingleton(RecommendationManagerTileCubit.new)
       ..addLazySingleton(RecommendationManagerArchiveCubit.new)
       ..addLazySingleton(WebLoggingCubit.new)
-      ..addLazySingleton(DashboardRecommendationsCubit.new)
+      ..addLazySingleton(RecommendationChartCubit.new)
       ..addLazySingleton(DashboardPromotersCubit.new)
       ..addLazySingleton(FeedbackCubit.new)
       ..addLazySingleton(AdminFeedbackCubit.new)

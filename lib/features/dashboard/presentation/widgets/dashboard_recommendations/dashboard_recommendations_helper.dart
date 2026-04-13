@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/features/dashboard/application/recommendation/dashboard_recommendations_cubit.dart';
+import 'package:finanzbegleiter/features/recommendations/application/recommendation_chart/recommendation_chart_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/features/dashboard/domain/chart_trend.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart';
@@ -77,7 +77,7 @@ class DashboardRecommendationsHelper {
   }
 
   static List<UserRecommendation> getFilteredRecommendations({
-    required DashboardRecommendationsGetRecosSuccessState state,
+    required RecommendationChartSuccessState state,
     required String? selectedPromoterId,
     required Role userRole,
     String? selectedLandingPageId,
@@ -93,7 +93,7 @@ class DashboardRecommendationsHelper {
   }
 
   static String getTimePeriodSummaryText({
-    required DashboardRecommendationsGetRecosSuccessState state,
+    required RecommendationChartSuccessState state,
     required String? selectedPromoterId,
     required Role userRole,
     required TimePeriod timePeriod,
@@ -115,7 +115,7 @@ class DashboardRecommendationsHelper {
   }
 
   static ChartTrend calculateTrend({
-    required DashboardRecommendationsGetRecosSuccessState state,
+    required RecommendationChartSuccessState state,
     required String? selectedPromoterId,
     required Role userRole,
     required TimePeriod timePeriod,

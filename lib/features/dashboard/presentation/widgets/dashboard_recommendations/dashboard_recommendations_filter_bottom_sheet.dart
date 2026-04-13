@@ -1,5 +1,5 @@
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/bottom_sheet_wrapper.dart';
-import 'package:finanzbegleiter/features/dashboard/application/recommendation/dashboard_recommendations_cubit.dart';
+import 'package:finanzbegleiter/features/recommendations/application/recommendation_chart/recommendation_chart_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -55,11 +55,11 @@ class _DashboardRecommendationsFilterBottomSheetState
 
   @override
   Widget build(BuildContext context) {
-    final cubit = Modular.get<DashboardRecommendationsCubit>();
+    final cubit = Modular.get<RecommendationChartCubit>();
     final localization = AppLocalizations.of(context);
 
-    return BlocBuilder<DashboardRecommendationsCubit,
-        DashboardRecommendationsState>(
+    return BlocBuilder<RecommendationChartCubit,
+        RecommendationChartState>(
       bloc: cubit,
       builder: (context, state) => BottomSheetWrapper(
         title: localization.dashboard_recommendations_filter_title,

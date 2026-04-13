@@ -413,12 +413,13 @@ class PromoterRepositoryImplementation implements PromoterRepository {
       }
       if (unregisteredPromoter.exists && unregisteredPromoter.data() != null) {
         return right(Promoter.fromUnregisteredPromoter(
-            UnregisteredPromoterModel.fromMap(unregisteredPromoter.data()!)
+            UnregisteredPromoterModel.fromFirestore(
+                    unregisteredPromoter.data()!, unregisteredPromoter.id)
                 .toDomain()));
       } else if (registeredPromoter.exists &&
           registeredPromoter.data() != null) {
         return right(Promoter.fromUser(
-            UserModel.fromMap(registeredPromoter.data()!).toDomain()));
+            UserModel.fromFirestore(registeredPromoter.data()!, registeredPromoter.id).toDomain()));
       } else {
         return left(NotFoundFailure());
       }

@@ -44,33 +44,30 @@ class _DashboardOverviewState extends State<DashboardOverview> {
                 const SizedBox(height: 40)
               ],
               if (state.user.role == Role.promoter) ...[
-                LayoutBuilder(
-                  builder: (context, constraints) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          DashboardQuicklink(
-                            text: localization
-                                .dashboard_quicklink_recommendation_text,
-                            buttonText: localization
-                                .dashboard_quicklink_recommendation_button,
-                            path: RoutePaths.homePath +
-                                RoutePaths.recommendationsPath,
-                          ),
-                          const SizedBox(width: 20),
-                          DashboardQuicklink(
-                            text: localization.dashboard_quicklink_manager_text,
-                            buttonText:
-                                localization.dashboard_quicklink_manager_button,
-                            path: RoutePaths.homePath +
-                                RoutePaths.recommendationManagerPath,
-                          ),
-                        ],
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      DashboardQuicklink(
+                        text: localization
+                            .dashboard_quicklink_recommendation_text,
+                        buttonText: localization
+                            .dashboard_quicklink_recommendation_button,
+                        path: RoutePaths.homePath +
+                            RoutePaths.recommendationsPath,
                       ),
-                    );
-                  },
+                      const SizedBox(width: 20),
+                      DashboardQuicklink(
+                        text: localization.dashboard_quicklink_manager_text,
+                        buttonText:
+                            localization.dashboard_quicklink_manager_button,
+                        path: RoutePaths.homePath +
+                            RoutePaths.recommendationManagerPath,
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 40),
               ],
