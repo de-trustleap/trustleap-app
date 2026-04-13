@@ -28,6 +28,17 @@ mixin CustomTabBarMixin<T extends StatefulWidget> on State<T>, TickerProviderSta
     currentRoute = Modular.to.path;
     tabController = TabController(length: tabs.length, vsync: this);
     updateTabController();
+    Modular.to.addListener(_onRouteChanged);
+  }
+
+  void _onRouteChanged() {
+    final newRoute = Modular.to.path;
+    if (newRoute != currentRoute && tabs.any((tab) => tab.route == newRoute)) {
+      setState(() {
+        currentRoute = newRoute;
+      });
+      updateTabController();
+    }
   }
 
   void updateTabController() {
@@ -98,6 +109,7 @@ mixin CustomTabBarMixin<T extends StatefulWidget> on State<T>, TickerProviderSta
 
   @override
   void dispose() {
+    Modular.to.removeListener(_onRouteChanged);
     tabController.dispose();
     super.dispose();
   }

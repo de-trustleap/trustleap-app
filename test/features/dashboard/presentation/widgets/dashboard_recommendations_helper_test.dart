@@ -1,4 +1,4 @@
-import "package:finanzbegleiter/features/dashboard/application/recommendation/dashboard_recommendations_cubit.dart";
+import "package:finanzbegleiter/features/recommendations/application/recommendation_chart/recommendation_chart_cubit.dart";
 import "package:finanzbegleiter/constants.dart";
 import "package:finanzbegleiter/core/id.dart";
 import "package:finanzbegleiter/features/landing_pages/domain/landing_page.dart";
@@ -175,7 +175,7 @@ void main() {
     });
 
     group("getFilteredRecommendations", () {
-      late DashboardRecommendationsGetRecosSuccessState state;
+      late RecommendationChartSuccessState state;
       late List<UserRecommendation> allRecommendations;
       late List<UserRecommendation> recommendations1;
       late List<UserRecommendation> recommendations2;
@@ -227,7 +227,7 @@ void main() {
           lastName: "Smith",
         );
 
-        state = DashboardRecommendationsGetRecosSuccessState(
+        state = RecommendationChartSuccessState(
           recommendation: allRecommendations,
           promoterRecommendations: [
             PromoterRecommendations(
@@ -279,7 +279,7 @@ void main() {
       });
 
       test("should return all recommendations when promoterRecommendations is null", () {
-        final stateWithoutPromoterRecs = DashboardRecommendationsGetRecosSuccessState(
+        final stateWithoutPromoterRecs = RecommendationChartSuccessState(
           recommendation: allRecommendations,
           promoterRecommendations: null,
         );
@@ -347,7 +347,7 @@ void main() {
           ),
         );
 
-        final stateWithLandingPages = DashboardRecommendationsGetRecosSuccessState(
+        final stateWithLandingPages = RecommendationChartSuccessState(
           recommendation: [recommendationWithInvestment, recommendationWithSavings],
           promoterRecommendations: null,
           allLandingPages: [landingPage1, landingPage2],
@@ -393,7 +393,7 @@ void main() {
           ),
         );
 
-        final stateWithLandingPages = DashboardRecommendationsGetRecosSuccessState(
+        final stateWithLandingPages = RecommendationChartSuccessState(
           recommendation: [recommendationWithInvestment],
           promoterRecommendations: null,
           allLandingPages: [landingPage1],
@@ -439,7 +439,7 @@ void main() {
           ),
         );
 
-        final stateWithLandingPages = DashboardRecommendationsGetRecosSuccessState(
+        final stateWithLandingPages = RecommendationChartSuccessState(
           recommendation: [recommendationWithDifferentReason],
           promoterRecommendations: null,
           allLandingPages: [landingPage1],
@@ -540,7 +540,7 @@ void main() {
           ),
         );
 
-        final stateWithBothFilters = DashboardRecommendationsGetRecosSuccessState(
+        final stateWithBothFilters = RecommendationChartSuccessState(
           recommendation: [rec1, rec2, rec3],
           promoterRecommendations: [
             PromoterRecommendations(promoter: promoter1, recommendations: [rec1, rec2]),
@@ -565,7 +565,7 @@ void main() {
     });
 
     group("getTimePeriodSummaryText", () {
-      late DashboardRecommendationsGetRecosSuccessState state;
+      late RecommendationChartSuccessState state;
       late List<UserRecommendation> recommendations;
 
       setUp(() {
@@ -621,7 +621,7 @@ void main() {
           ),
         ];
 
-        state = DashboardRecommendationsGetRecosSuccessState(
+        state = RecommendationChartSuccessState(
           recommendation: recommendations,
           promoterRecommendations: null,
         );
@@ -693,7 +693,7 @@ void main() {
             createdAt: yesterday,
           ),
         )];
-        final stateWithSingleRec = DashboardRecommendationsGetRecosSuccessState(
+        final stateWithSingleRec = RecommendationChartSuccessState(
           recommendation: singleRecommendation,
           promoterRecommendations: null,
         );
@@ -711,7 +711,7 @@ void main() {
       });
 
       test("should return correct text for zero recommendations", () {
-        final emptyState = DashboardRecommendationsGetRecosSuccessState(
+        final emptyState = RecommendationChartSuccessState(
           recommendation: [],
           promoterRecommendations: null,
         );
@@ -790,7 +790,7 @@ void main() {
           ),
         )];
 
-        final stateWithPromoters = DashboardRecommendationsGetRecosSuccessState(
+        final stateWithPromoters = RecommendationChartSuccessState(
           recommendation: [...recommendations1, ...recommendations2],
           promoterRecommendations: [
             PromoterRecommendations(
@@ -914,7 +914,7 @@ void main() {
           ),
         ];
 
-        final stateWithTimeFiltering = DashboardRecommendationsGetRecosSuccessState(
+        final stateWithTimeFiltering = RecommendationChartSuccessState(
           recommendation: recommendationsWithTime,
           promoterRecommendations: null,
         );
@@ -1008,7 +1008,7 @@ void main() {
           ),
         );
 
-        final stateWithLandingPageFiltering = DashboardRecommendationsGetRecosSuccessState(
+        final stateWithLandingPageFiltering = RecommendationChartSuccessState(
           recommendation: [recommendationWithMatchingReason, recommendationWithDifferentReason],
           promoterRecommendations: null,
           allLandingPages: [landingPage1],
@@ -1030,7 +1030,7 @@ void main() {
     });
 
     group("calculateTrend", () {
-      late DashboardRecommendationsGetRecosSuccessState state;
+      late RecommendationChartSuccessState state;
       late DateTime now;
 
       setUp(() {
@@ -1078,7 +1078,7 @@ void main() {
             createRecommendation(id: "rec5", createdAt: now.subtract(Duration(hours: 40))),
           ];
 
-          state = DashboardRecommendationsGetRecosSuccessState(
+          state = RecommendationChartSuccessState(
             recommendation: recommendations,
             promoterRecommendations: null,
           );
@@ -1109,7 +1109,7 @@ void main() {
             createRecommendation(id: "rec4", createdAt: now.subtract(Duration(hours: 42))),
           ];
 
-          state = DashboardRecommendationsGetRecosSuccessState(
+          state = RecommendationChartSuccessState(
             recommendation: recommendations,
             promoterRecommendations: null,
           );
@@ -1140,7 +1140,7 @@ void main() {
             createRecommendation(id: "rec4", createdAt: now.subtract(Duration(hours: 42))),
           ];
 
-          state = DashboardRecommendationsGetRecosSuccessState(
+          state = RecommendationChartSuccessState(
             recommendation: recommendations,
             promoterRecommendations: null,
           );
@@ -1175,7 +1175,7 @@ void main() {
             createRecommendation(id: "rec6", createdAt: now.subtract(Duration(days: 12))),
           ];
 
-          state = DashboardRecommendationsGetRecosSuccessState(
+          state = RecommendationChartSuccessState(
             recommendation: recommendations,
             promoterRecommendations: null,
           );
@@ -1206,7 +1206,7 @@ void main() {
             createRecommendation(id: "rec4", createdAt: DateTime(2023, 12, 15)),
           ];
 
-          state = DashboardRecommendationsGetRecosSuccessState(
+          state = RecommendationChartSuccessState(
             recommendation: recommendations,
             promoterRecommendations: null,
           );
@@ -1238,7 +1238,7 @@ void main() {
             createRecommendation(id: "rec5", createdAt: now.subtract(Duration(hours: 36)), statusLevel: StatusLevel.linkClicked),        // index 1
           ];
 
-          state = DashboardRecommendationsGetRecosSuccessState(
+          state = RecommendationChartSuccessState(
             recommendation: recommendations,
             promoterRecommendations: null,
           );
@@ -1268,7 +1268,7 @@ void main() {
             createRecommendation(id: "rec4", createdAt: now.subtract(Duration(hours: 36)), statusLevel: StatusLevel.successful), // archived
           ];
 
-          state = DashboardRecommendationsGetRecosSuccessState(
+          state = RecommendationChartSuccessState(
             recommendation: recommendations,
             promoterRecommendations: null,
           );
@@ -1291,7 +1291,7 @@ void main() {
 
       group("Edge cases", () {
         test("should handle empty recommendations list", () {
-          state = DashboardRecommendationsGetRecosSuccessState(
+          state = RecommendationChartSuccessState(
             recommendation: [],
             promoterRecommendations: null,
           );
@@ -1318,7 +1318,7 @@ void main() {
             // Previous period: 0 recommendations (no data)
           ];
 
-          state = DashboardRecommendationsGetRecosSuccessState(
+          state = RecommendationChartSuccessState(
             recommendation: recommendations,
             promoterRecommendations: null,
           );
@@ -1346,7 +1346,7 @@ void main() {
             createRecommendation(id: "rec3", createdAt: now.subtract(Duration(hours: 42))),
           ];
 
-          state = DashboardRecommendationsGetRecosSuccessState(
+          state = RecommendationChartSuccessState(
             recommendation: recommendations,
             promoterRecommendations: null,
           );
@@ -1378,7 +1378,7 @@ void main() {
             createRecommendation(id: "rec2", createdAt: now.subtract(Duration(hours: 12))),
           ];
 
-          state = DashboardRecommendationsGetRecosSuccessState(
+          state = RecommendationChartSuccessState(
             recommendation: recommendationsWithNullDate,
             promoterRecommendations: null,
           );
@@ -1419,7 +1419,7 @@ void main() {
             createRecommendation(id: "rec4", createdAt: now.subtract(Duration(hours: 30))),
           ];
 
-          state = DashboardRecommendationsGetRecosSuccessState(
+          state = RecommendationChartSuccessState(
             recommendation: [...promoter1Recs, ...promoter2Recs],
             promoterRecommendations: [
               PromoterRecommendations(promoter: promoter1, recommendations: promoter1Recs),
@@ -1495,7 +1495,7 @@ void main() {
             ),
           ];
 
-          state = DashboardRecommendationsGetRecosSuccessState(
+          state = RecommendationChartSuccessState(
             recommendation: recommendations,
             promoterRecommendations: null,
             allLandingPages: [landingPage1],

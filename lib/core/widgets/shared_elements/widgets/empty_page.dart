@@ -29,7 +29,6 @@ class EmptyPage extends StatelessWidget {
 
     return Container(
         constraints: const BoxConstraints(maxWidth: 800),
-        decoration: BoxDecoration(color: themeData.colorScheme.surface),
         child: CenteredConstrainedWrapper(
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -49,18 +48,15 @@ class EmptyPage extends StatelessWidget {
                 textAlign: TextAlign.center),
             if (!isButtonHidden) ...[
               const SizedBox(height: 24),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  PrimaryButton(
-                      title: buttonTitle,
-                      width: responsiveValue.isMobile
-                          ? responsiveValue.screenWidth - 20
-                          : 300,
-                      onTap: () => onTap != null ? onTap!() : {}),
-                ],
-              )
+              Padding(
+                padding: responsiveValue.isMobile
+                    ? const EdgeInsets.symmetric(horizontal: 16)
+                    : EdgeInsets.zero,
+                child: PrimaryButton(
+                    title: buttonTitle,
+                    width: responsiveValue.isMobile ? double.infinity : 300,
+                    onTap: () => onTap != null ? onTap!() : {}),
+              ),
             ]
           ],
         )));
