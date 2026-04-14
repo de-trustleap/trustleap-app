@@ -646,7 +646,7 @@
     "@profile_page_email_section_change_email_password_continue_button_title": {
         "description": "button title of the continue button of the passwort entry in the email area on the profile page."
     },
-    "profile_page_email_section_resend_verify_email_button_title": "Resend link for email verification",
+    "profile_page_email_section_resend_verify_email_button_title": "Send link for email verification",
     "@profile_page_email_section_resend_verify_email_button_title": {
         "description": "button title of the resend email verification button in the email area on the profile page."
     },

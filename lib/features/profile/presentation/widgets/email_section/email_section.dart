@@ -55,25 +55,12 @@ class _EmailSectionState extends State<EmailSection> {
   @override
   void initState() {
     super.initState();
-    _verifyEmailIfNeeded();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _verifyEmailIfNeeded();
-  }
-
-  void _verifyEmailIfNeeded() {
-    final currentState = Modular.get<ProfileCubit>().state;
-    if (currentState is! ProfileEmailVerifySuccessState &&
-        _cachedEmailVerificationStatus == null) {
-      Modular.get<ProfileCubit>().verifyEmail();
-    }
+    Modular.get<ProfileCubit>().startEmailVerificationPolling();
   }
 
   @override
   void dispose() {
+    Modular.get<ProfileCubit>().stopEmailVerificationPolling();
     passwordTextController.dispose();
     emailTextController.dispose();
 
