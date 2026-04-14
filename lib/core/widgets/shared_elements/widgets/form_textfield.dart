@@ -23,6 +23,7 @@ class FormTextfield extends StatelessWidget {
   final TextStyle? desktopStyle;
   final Key? accessibilityKey;
   final Function? onTap;
+  final Widget? suffixIcon;
 
   const FormTextfield(
       {super.key,
@@ -44,7 +45,8 @@ class FormTextfield extends StatelessWidget {
       this.inputFormatters,
       this.desktopStyle,
       this.accessibilityKey,
-      this.onTap});
+      this.onTap,
+      this.suffixIcon});
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +69,8 @@ class FormTextfield extends StatelessWidget {
               inputFormatters: inputFormatters,
               desktopStyle: desktopStyle,
               key: accessibilityKey,
-              onTap: onTap));
+              onTap: onTap,
+              suffixIcon: suffixIcon));
     } else {
       return RawFormTextField(
           controller: controller,
@@ -85,7 +88,8 @@ class FormTextfield extends StatelessWidget {
           inputFormatters: inputFormatters,
           desktopStyle: desktopStyle,
           key: accessibilityKey,
-          onTap: onTap);
+          onTap: onTap,
+          suffixIcon: suffixIcon);
     }
   }
 }

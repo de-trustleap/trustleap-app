@@ -398,6 +398,14 @@
     "@landingpage_create_promotion_template_description": {
         "description": "Beschreibung für das Promotion Template Textfeld auf der Landingpage erstellen Seite"
     },
+    "landingpage_create_description_info": "Die hier angegebene Beschreibung dient nur zur eigenen Einordnung. Es ist kein Meta Tag für die Webseite.",
+    "@landingpage_create_description_info": {
+        "description": "Info-Text für das Beschreibungsfeld beim Erstellen einer Landingpage"
+    },
+    "landingpage_create_promotion_template_info": "Die Promoter Vorlage dient dazu dem Promoter einen fertigen Text zum Empfehlen bereitzustellen in welchen der Empfehlungslink eingefügt wird.",
+    "@landingpage_create_promotion_template_info": {
+        "description": "Info-Text für das Promoter-Vorlage-Textfeld beim Erstellen einer Landingpage"
+    },
     "landingpage_create_promotion_template_placeholder": "Vorlage für Promoter (optional)",
     "@landingpage_create_promotion_template_placeholder": {
         "description": "Platzhalter für das Promotion Template Textfeld"
@@ -457,6 +465,10 @@
     "placeholder_title": "Titel",
     "@placeholder_title": {
         "description": "Platzhalter textbox für Titel"
+    },
+    "landingpage_creator_title_info_tooltip": "Der Titel den du hier angibst ist der offizielle Titel der Webseite. Dieser wird später auch im Browser dargestellt",
+    "@landingpage_creator_title_info_tooltip": {
+        "description": "Tooltip für das Titel-Feld im Landingpage Creator"
     },
     "placeholder_description": "Beschreibung",
     "@placeholder_description": {

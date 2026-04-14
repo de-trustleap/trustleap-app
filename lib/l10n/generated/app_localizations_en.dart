@@ -335,6 +335,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'Below you can create a template that your promoters will use to send recommendations via WhatsApp.\nYou can use different placeholders which you can choose from the placeholder menu.';
 
   @override
+  String get landingpage_create_description_info =>
+      'The description entered here is only for your own reference. It is not a meta tag for the website.';
+
+  @override
+  String get landingpage_create_promotion_template_info =>
+      'The promoter template provides the promoter with a ready-made text for recommendations into which the referral link is inserted.';
+
+  @override
   String get landingpage_create_promotion_template_placeholder =>
       'Template for promoter (optional)';
 
@@ -390,6 +398,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get placeholder_title => 'Title';
+
+  @override
+  String get landingpage_creator_title_info_tooltip =>
+      'The title you enter here is the official title of the website. This will also be displayed in the browser later.';
 
   @override
   String get placeholder_description => 'Description';

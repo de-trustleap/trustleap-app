@@ -21,6 +21,7 @@ class RawFormTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final TextStyle? desktopStyle;
   final Function? onTap;
+  final Widget? suffixIcon;
 
   const RawFormTextField(
       {super.key,
@@ -40,7 +41,8 @@ class RawFormTextField extends StatelessWidget {
       this.contentPadding,
       this.inputFormatters,
       this.desktopStyle,
-      this.onTap});
+      this.onTap,
+      this.suffixIcon});
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +74,7 @@ class RawFormTextField extends StatelessWidget {
       onTap: () => onTap != null ? onTap!() : (),
       decoration: InputDecoration(
           prefixIcon: prefixIcon != null ? Icon(prefixIcon!) : null,
+          suffixIcon: suffixIcon,
           labelText: placeholder,
           hoverColor: Colors.transparent,
           filled: disabled ? true : false,
