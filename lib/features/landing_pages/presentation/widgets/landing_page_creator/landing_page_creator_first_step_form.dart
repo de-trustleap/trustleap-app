@@ -13,6 +13,7 @@ import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/card_contai
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/custom_emoji_picker.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/expanded_section.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/form_textfield.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/tooltip_buttons/info_button.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_creator/landing_page_creator_form_validator.dart';
 import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_creator/landing_page_creator_placeholder_picker.dart';
@@ -182,7 +183,8 @@ class _LandingPageCreatorFormState
                                   controller: nameTextController,
                                   disabled: false,
                                   placeholder: localization.placeholder_title,
-                                  validator: validator.validateLandingPageName)
+                                  validator: validator.validateLandingPageName,
+                                  suffixIcon: InfoButton(text: localization.landingpage_creator_title_info_tooltip))
                             ]),
                         const SizedBox(height: textFieldSpacing),
                         Row(
@@ -197,7 +199,8 @@ class _LandingPageCreatorFormState
                                   validator: validator.validateLandingPageText,
                                   minLines: 2,
                                   maxLines: 5,
-                                  keyboardType: TextInputType.multiline)
+                                  keyboardType: TextInputType.multiline,
+                                  suffixIcon: InfoButton(text: localization.landingpage_create_description_info))
                             ]),
                         const SizedBox(height: textFieldSpacing),
                         if (!widget.createDefaultPage) ...[
@@ -252,7 +255,8 @@ class _LandingPageCreatorFormState
                                         .landingpage_create_promotion_template_placeholder,
                                     minLines: 4,
                                     maxLines: 10,
-                                    keyboardType: TextInputType.multiline)
+                                    keyboardType: TextInputType.multiline,
+                                    suffixIcon: InfoButton(text: localization.landingpage_create_promotion_template_info))
                               ]),
                           const SizedBox(height: textFieldSpacing * 2),
                         ],

@@ -398,6 +398,14 @@
     "@landingpage_create_promotion_template_description": {
         "description": "Description for the promotion template textfield on the create landingpage form"
     },
+    "landingpage_create_description_info": "The description entered here is only for your own reference. It is not a meta tag for the website.",
+    "@landingpage_create_description_info": {
+        "description": "Info text for the description field when creating a landing page"
+    },
+    "landingpage_create_promotion_template_info": "The promoter template provides the promoter with a ready-made text for recommendations into which the referral link is inserted.",
+    "@landingpage_create_promotion_template_info": {
+        "description": "Info text for the promoter template textfield when creating a landing page"
+    },
     "landingpage_create_promotion_template_placeholder": "Template for promoter (optional)",
     "@landingpage_create_promotion_template_placeholder": {
         "description": "Placeholder for the promotion template textfield"
@@ -457,6 +465,10 @@
     "placeholder_title": "Title",
     "@placeholder_title": {
         "description": "Platzhalter textbox for Title"
+    },
+    "landingpage_creator_title_info_tooltip": "The title you enter here is the official title of the website. This will also be displayed in the browser later.",
+    "@landingpage_creator_title_info_tooltip": {
+        "description": "Tooltip for the title field in the landing page creator"
     },
     "placeholder_description": "Description",
     "@placeholder_description": {

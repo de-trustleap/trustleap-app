@@ -681,6 +681,18 @@ abstract class AppLocalizations {
   /// **'Below you can create a template that your promoters will use to send recommendations via WhatsApp.\nYou can use different placeholders which you can choose from the placeholder menu.'**
   String get landingpage_create_promotion_template_description;
 
+  /// Info text for the description field when creating a landing page
+  ///
+  /// In en, this message translates to:
+  /// **'The description entered here is only for your own reference. It is not a meta tag for the website.'**
+  String get landingpage_create_description_info;
+
+  /// Info text for the promoter template textfield when creating a landing page
+  ///
+  /// In en, this message translates to:
+  /// **'The promoter template provides the promoter with a ready-made text for recommendations into which the referral link is inserted.'**
+  String get landingpage_create_promotion_template_info;
+
   /// Placeholder for the promotion template textfield
   ///
   /// In en, this message translates to:
@@ -772,6 +784,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Title'**
   String get placeholder_title;
+
+  /// Tooltip for the title field in the landing page creator
+  ///
+  /// In en, this message translates to:
+  /// **'The title you enter here is the official title of the website. This will also be displayed in the browser later.'**
+  String get landingpage_creator_title_info_tooltip;
 
   /// Placeholder textbox for description
   ///

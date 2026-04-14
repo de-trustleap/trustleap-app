@@ -342,6 +342,14 @@ class AppLocalizationsDe extends AppLocalizations {
       'Nachfolgend kannst du eine Vorlage erstellen, die deine Promoter nutzen werden um Empfehlungen per Whatsapp zu versenden.\nDu kannst verschiedene Platzhalter nutzen welche du über das Platzhalter Menü auswählen kannst.';
 
   @override
+  String get landingpage_create_description_info =>
+      'Die hier angegebene Beschreibung dient nur zur eigenen Einordnung. Es ist kein Meta Tag für die Webseite.';
+
+  @override
+  String get landingpage_create_promotion_template_info =>
+      'Die Promoter Vorlage dient dazu dem Promoter einen fertigen Text zum Empfehlen bereitzustellen in welchen der Empfehlungslink eingefügt wird.';
+
+  @override
   String get landingpage_create_promotion_template_placeholder =>
       'Vorlage für Promoter (optional)';
 
@@ -397,6 +405,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get placeholder_title => 'Titel';
+
+  @override
+  String get landingpage_creator_title_info_tooltip =>
+      'Der Titel den du hier angibst ist der offizielle Titel der Webseite. Dieser wird später auch im Browser dargestellt';
 
   @override
   String get placeholder_description => 'Beschreibung';
