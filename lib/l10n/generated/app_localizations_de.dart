@@ -574,7 +574,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get profile_page_email_section_resend_verify_email_button_title =>
-      'Link zur Email-Verifikation erneut senden';
+      'Link zur Email-Verifikation senden';
 
   @override
   String get profile_page_email_section_title => 'E-Mail Einstellungen';

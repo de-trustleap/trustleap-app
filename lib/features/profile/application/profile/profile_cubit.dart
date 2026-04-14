@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
@@ -12,6 +14,7 @@ part 'profile_state.dart';
 class ProfileCubit extends Cubit<ProfileState> {
   final UserRepository userRepo;
   final AuthRepository authRepo;
+  Timer? _emailVerificationPollingTimer;
 
   ProfileCubit({required this.userRepo, required this.authRepo})
       : super(ProfileInitial());
@@ -87,7 +90,23 @@ class ProfileCubit extends Cubit<ProfileState> {
     final isEmailVerified = await userRepo.isEmailVerified();
     // delay here is needed to trigger reload of the profile email section
     await Future.delayed(const Duration(milliseconds: 500));
+    if (isEmailVerified) {
+      _emailVerificationPollingTimer?.cancel();
+      _emailVerificationPollingTimer = null;
+    }
     emit(ProfileEmailVerifySuccessState(isEmailVerified: isEmailVerified));
+  }
+
+  void startEmailVerificationPolling() {
+    if (_emailVerificationPollingTimer != null) return;
+    verifyEmail();
+    _emailVerificationPollingTimer =
+        Timer.periodic(const Duration(seconds: 3), (_) => verifyEmail());
+  }
+
+  void stopEmailVerificationPolling() {
+    _emailVerificationPollingTimer?.cancel();
+    _emailVerificationPollingTimer = null;
   }
 
   void updatePassword(String? password) async {
@@ -119,5 +138,11 @@ class ProfileCubit extends Cubit<ProfileState> {
     failureOrSuccess.fold(
         (failure) => emit(ProfileAccountDeletionFailureState(failure: failure)),
         (_) => emit(ProfileAccountDeletionSuccessState()));
+  }
+
+  @override
+  Future<void> close() {
+    _emailVerificationPollingTimer?.cancel();
+    return super.close();
   }
 }

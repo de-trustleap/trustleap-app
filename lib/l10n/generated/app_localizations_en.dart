@@ -563,7 +563,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile_page_email_section_resend_verify_email_button_title =>
-      'Resend link for email verification';
+      'Send link for email verification';
 
   @override
   String get profile_page_email_section_title => 'E-Mail Settings';

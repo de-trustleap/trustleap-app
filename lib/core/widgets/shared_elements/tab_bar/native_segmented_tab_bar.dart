@@ -37,8 +37,7 @@ class _NativeSegmentedTabBarState extends State<NativeSegmentedTabBar> {
 
   void _onRouteChanged() {
     final newRoute = Modular.to.path;
-    final routeIndex =
-        widget.tabs.indexWhere((tab) => tab.route == newRoute);
+    final routeIndex = widget.tabs.indexWhere((tab) => tab.route == newRoute);
     if (routeIndex >= 0 && routeIndex != _selectedIndex) {
       setState(() {
         _selectedIndex = routeIndex;
@@ -214,4 +213,3 @@ class _SegmentChip extends StatelessWidget {
     );
   }
 }
-// TODO: EIGENES IPHONE DEBUG APPCHECK TOKEN REGISTRIEREN

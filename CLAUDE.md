@@ -2,9 +2,12 @@
 
 Flutter-Web-App für Finanzempfehlungen mit Promoter-System und Landing-Page-Builder.
 
+Mache keine Änderungen bis du nicht zu 95% sicher bist was du bauen sollst. Stelle mir weitere Fragen bis du dir sicher bist.
+
 ## Architektur
 
 **Clean Architecture mit BLoC-Pattern:**
+
 ```
 presentation/ → application/ (Cubit/Bloc) → domain/ → infrastructure/
     UI              State-Mgmt           Entities    Firebase-Repos

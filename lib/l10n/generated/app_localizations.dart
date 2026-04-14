@@ -1059,7 +1059,7 @@ abstract class AppLocalizations {
   /// button title of the resend email verification button in the email area on the profile page.
   ///
   /// In en, this message translates to:
-  /// **'Resend link for email verification'**
+  /// **'Send link for email verification'**
   String get profile_page_email_section_resend_verify_email_button_title;
 
   /// title of the email area on the profile page.
