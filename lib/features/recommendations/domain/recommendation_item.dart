@@ -7,7 +7,26 @@ enum StatusLevel {
   contactFormSent,
   appointment,
   successful,
-  failed,
+  failed;
+
+  static StatusLevel? fromString(String? value) {
+    switch (value) {
+      case "recommendationSend":
+        return StatusLevel.recommendationSend;
+      case "linkClicked":
+        return StatusLevel.linkClicked;
+      case "contactFormSent":
+        return StatusLevel.contactFormSent;
+      case "appointment":
+        return StatusLevel.appointment;
+      case "successful":
+        return StatusLevel.successful;
+      case "failed":
+        return StatusLevel.failed;
+      default:
+        return null;
+    }
+  }
 }
 
 enum RecommendationType { personalized, campaign }

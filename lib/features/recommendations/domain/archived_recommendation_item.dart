@@ -18,6 +18,7 @@ class ArchivedRecommendationItem extends Equatable {
   final String? campaignName;
   final int? campaignDurationDays;
   final RecommendationStatusCounts? statusCounts;
+  final Map<int, DateTime?>? statusTimestamps;
 
   const ArchivedRecommendationItem({
     required this.id,
@@ -33,6 +34,7 @@ class ArchivedRecommendationItem extends Equatable {
     required this.campaignName,
     required this.campaignDurationDays,
     required this.statusCounts,
+    this.statusTimestamps,
   });
 
   ArchivedRecommendationItem copyWith({
@@ -49,6 +51,7 @@ class ArchivedRecommendationItem extends Equatable {
     String? campaignName,
     int? campaignDurationDays,
     RecommendationStatusCounts? statusCounts,
+    Map<int, DateTime?>? statusTimestamps,
   }) {
     return ArchivedRecommendationItem(
       id: id ?? this.id,
@@ -64,6 +67,7 @@ class ArchivedRecommendationItem extends Equatable {
       campaignName: campaignName ?? this.campaignName,
       campaignDurationDays: campaignDurationDays ?? this.campaignDurationDays,
       statusCounts: statusCounts ?? this.statusCounts,
+      statusTimestamps: statusTimestamps ?? this.statusTimestamps,
     );
   }
 

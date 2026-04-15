@@ -197,7 +197,7 @@ class RecommendationItemModel extends Equatable {
         promoterName: promoterName,
         serviceProviderName: serviceProviderName,
         defaultLandingPageID: defaultLandingPageID,
-        statusLevel: _getStatusLevelFromString(statusLevel),
+        statusLevel: StatusLevel.fromString(statusLevel),
         statusTimestamps: statusTimestamps,
         userID: userID,
         promoterImageDownloadURL: promoterImageDownloadURL,
@@ -263,28 +263,6 @@ class RecommendationItemModel extends Equatable {
       case "general":
       case "campaign":
         return RecommendationType.campaign;
-      default:
-        return null;
-    }
-  }
-
-  StatusLevel? _getStatusLevelFromString(String? statusLevel) {
-    if (statusLevel == null) {
-      return null;
-    }
-    switch (statusLevel) {
-      case "recommendationSend":
-        return StatusLevel.recommendationSend;
-      case "linkClicked":
-        return StatusLevel.linkClicked;
-      case "contactFormSent":
-        return StatusLevel.contactFormSent;
-      case "appointment":
-        return StatusLevel.appointment;
-      case "successful":
-        return StatusLevel.successful;
-      case "failed":
-        return StatusLevel.failed;
       default:
         return null;
     }

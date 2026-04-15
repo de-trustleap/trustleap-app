@@ -25,7 +25,8 @@ void main() {
           recommendationType: "personalized",
           campaignName: null,
           campaignDurationDays: null,
-          statusCounts: null);
+          statusCounts: null,
+          statusTimestamps: null);
       final expectedResult = ArchivedRecommendationItemModel(
           id: "1",
           reason: "Test",
@@ -39,7 +40,8 @@ void main() {
           recommendationType: "personalized",
           campaignName: null,
           campaignDurationDays: null,
-          statusCounts: null);
+          statusCounts: null,
+          statusTimestamps: null);
       // When
       final result = model.copyWith(promoterName: "Test new");
       // Then
@@ -64,7 +66,8 @@ void main() {
           recommendationType: "personalized",
           campaignName: null,
           campaignDurationDays: null,
-          statusCounts: null);
+          statusCounts: null,
+          statusTimestamps: null);
       final expectedResult = {
         "id": "1",
         "reason": "Test",
@@ -116,11 +119,40 @@ void main() {
           recommendationType: "personalized",
           campaignName: null,
           campaignDurationDays: null,
-          statusCounts: null);
+          statusCounts: null,
+          statusTimestamps: null);
       // When
       final result = ArchivedRecommendationItemModel.fromMap(map);
       // Then
       expect(result, expectedResult);
+    });
+
+    test("check if statusTimestamps are correctly parsed from map", () {
+      // Given
+      final ts0 = DateTime(2024, 1, 1, 12, 0, 0);
+      final ts1 = DateTime(2024, 1, 2, 8, 0, 0);
+      final map = {
+        "id": "1",
+        "reason": "Test",
+        "landingPageID": "test-landing-page",
+        "promoterName": "Test",
+        "serviceProviderName": "Test",
+        "success": true,
+        "userID": "2",
+        "createdAt": Timestamp.fromDate(date),
+        "finishedTimeStamp": Timestamp.fromDate(date),
+        "recommendationType": "personalized",
+        "statusTimestamps": {
+          "0": ts0.toIso8601String(),
+          "1": ts1.toIso8601String(),
+        },
+      };
+      // When
+      final result = ArchivedRecommendationItemModel.fromMap(map);
+      // Then
+      expect(result.statusTimestamps?[0], ts0);
+      expect(result.statusTimestamps?[1], ts1);
+      expect(result.statusTimestamps?.length, 2);
     });
   });
 
@@ -153,7 +185,8 @@ void main() {
           recommendationType: "personalized",
           campaignName: null,
           campaignDurationDays: null,
-          statusCounts: null);
+          statusCounts: null,
+          statusTimestamps: null);
       // When
       final result = ArchivedRecommendationItemModel.fromFirestore(map, "1");
       // Then
@@ -180,7 +213,8 @@ void main() {
           recommendationType: "personalized",
           campaignName: null,
           campaignDurationDays: null,
-          statusCounts: null);
+          statusCounts: null,
+          statusTimestamps: null);
       final expectedResult = ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("1"),
           reason: "Test",
@@ -235,7 +269,8 @@ void main() {
           recommendationType: "personalized",
           campaignName: null,
           campaignDurationDays: null,
-          statusCounts: null);
+          statusCounts: null,
+          statusTimestamps: null);
       // When
       final result = ArchivedRecommendationItemModel.fromDomain(model);
       // Then
@@ -260,7 +295,8 @@ void main() {
           recommendationType: "personalized",
           campaignName: null,
           campaignDurationDays: null,
-          statusCounts: null);
+          statusCounts: null,
+          statusTimestamps: null);
       final model2 = ArchivedRecommendationItemModel(
           id: "1",
           reason: "Test",
@@ -274,7 +310,8 @@ void main() {
           recommendationType: "personalized",
           campaignName: null,
           campaignDurationDays: null,
-          statusCounts: null);
+          statusCounts: null,
+          statusTimestamps: null);
       // Then
       expect(model, model2);
     });

@@ -135,13 +135,20 @@ class RecommendationsStatistics {
         if (statusLevel != null) {
           final reco = rec.recommendation;
           if (reco is PersonalizedRecommendationItem) {
-            final recStatusLevel = reco.statusLevel;
-            if (recStatusLevel != null) {
-              if (recStatusLevel == StatusLevel.successful ||
-                  recStatusLevel == StatusLevel.failed) {
+            final timestamps = reco.statusTimestamps;
+            if (timestamps != null) {
+              matchesStatusLevel = timestamps.containsKey(statusLevel - 1) &&
+                  timestamps[statusLevel - 1] != null;
+            } else {
+              // Fallback für alte Daten ohne Timestamps
+              final recStatusLevel = reco.statusLevel;
+              if (recStatusLevel == null) {
+                matchesStatusLevel = false;
+              } else if (recStatusLevel == StatusLevel.failed ||
+                  recStatusLevel == StatusLevel.successful) {
                 matchesStatusLevel = true;
               } else {
-                matchesStatusLevel = recStatusLevel.index + 1 <= statusLevel;
+                matchesStatusLevel = recStatusLevel.index >= statusLevel - 1;
               }
             }
           } else if (reco is CampaignRecommendationItem) {
