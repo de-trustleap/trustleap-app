@@ -712,13 +712,16 @@ class RecommendationRepositoryImplementation
       statusLevel = StatusLevel.recommendationSend;
     }
 
-    final Map<int, DateTime?> statusTimestamps = {
-      0: archived.createdAt,
-    };
-    if (statusLevel == StatusLevel.successful) {
+    final Map<int, DateTime?> statusTimestamps =
+        archived.statusTimestamps != null
+            ? Map<int, DateTime?>.from(archived.statusTimestamps!)
+            : {0: archived.createdAt};
+    if (statusLevel == StatusLevel.successful &&
+        !statusTimestamps.containsKey(StatusLevel.successful.index)) {
       statusTimestamps[StatusLevel.successful.index] =
           archived.finishedTimeStamp;
-    } else if (statusLevel == StatusLevel.failed) {
+    } else if (statusLevel == StatusLevel.failed &&
+        !statusTimestamps.containsKey(StatusLevel.failed.index)) {
       statusTimestamps[StatusLevel.failed.index] = archived.finishedTimeStamp;
     }
 

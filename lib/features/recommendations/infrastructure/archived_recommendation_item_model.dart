@@ -21,6 +21,7 @@ class ArchivedRecommendationItemModel extends Equatable {
   final String? campaignName;
   final int? campaignDurationDays;
   final RecommendationStatusCounts? statusCounts;
+  final Map<int, DateTime?>? statusTimestamps;
 
   const ArchivedRecommendationItemModel({
     required this.id,
@@ -36,6 +37,7 @@ class ArchivedRecommendationItemModel extends Equatable {
     required this.campaignName,
     required this.campaignDurationDays,
     required this.statusCounts,
+    required this.statusTimestamps,
   });
 
   ArchivedRecommendationItemModel copyWith({
@@ -52,6 +54,7 @@ class ArchivedRecommendationItemModel extends Equatable {
     String? campaignName,
     int? campaignDurationDays,
     RecommendationStatusCounts? statusCounts,
+    Map<int, DateTime?>? statusTimestamps,
   }) {
     return ArchivedRecommendationItemModel(
       id: id ?? this.id,
@@ -67,6 +70,7 @@ class ArchivedRecommendationItemModel extends Equatable {
       campaignName: campaignName ?? this.campaignName,
       campaignDurationDays: campaignDurationDays ?? this.campaignDurationDays,
       statusCounts: statusCounts ?? this.statusCounts,
+      statusTimestamps: statusTimestamps ?? this.statusTimestamps,
     );
   }
 
@@ -121,6 +125,10 @@ class ArchivedRecommendationItemModel extends Equatable {
             ? RecommendationStatusCountsModel.fromMap(
                     map['statusCounts'] as Map<String, dynamic>)
                 .toDomain()
+            : null,
+        statusTimestamps: map['statusTimestamps'] != null
+            ? (map['statusTimestamps'] as Map<String, dynamic>).map(
+                (key, value) => MapEntry(int.parse(key), DateTime.parse(value)))
             : null);
   }
 
@@ -143,7 +151,8 @@ class ArchivedRecommendationItemModel extends Equatable {
         recommendationType: _getRecommendationTypeFromString(recommendationType),
         campaignName: campaignName,
         campaignDurationDays: campaignDurationDays,
-        statusCounts: statusCounts);
+        statusCounts: statusCounts,
+        statusTimestamps: statusTimestamps);
   }
 
   factory ArchivedRecommendationItemModel.fromDomain(
@@ -161,7 +170,8 @@ class ArchivedRecommendationItemModel extends Equatable {
         recommendationType: recommendation.recommendationType.name,
         campaignName: recommendation.campaignName,
         campaignDurationDays: recommendation.campaignDurationDays,
-        statusCounts: recommendation.statusCounts);
+        statusCounts: recommendation.statusCounts,
+        statusTimestamps: recommendation.statusTimestamps);
   }
 
   RecommendationType _getRecommendationTypeFromString(String? type) {

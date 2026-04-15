@@ -1,4 +1,6 @@
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/skeleton/skeleton_data.dart';
+import 'package:finanzbegleiter/features/landing_pages/application/landing_page_detail/landing_page_detail_cubit.dart';
 import 'package:finanzbegleiter/features/landing_pages/application/landingpage_observer/landingpage_observer_cubit.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
@@ -40,11 +42,19 @@ class _LandingPageDetailPageState extends State<LandingPageDetailPage> {
     if (currentUserState is UserObserverSuccess) {
       Modular.get<LandingPageObserverCubit>()
           .observeLandingPagesForUser(currentUserState.user);
+      Modular.get<LandingPageDetailCubit>().loadRecommendations(
+        userId: currentUserState.user.id.value,
+        role: currentUserState.user.role ?? Role.none,
+        landingPageIds: currentUserState.user.landingPageIDs,
+      );
     }
   }
 
-  Widget _buildContent(LandingPage landingPage, CustomUser user,
-      ResponsiveBreakpointsData responsiveValue, CustomNavigatorBase navigator) {
+  Widget _buildContent(
+      LandingPage landingPage,
+      CustomUser user,
+      ResponsiveBreakpointsData responsiveValue,
+      CustomNavigatorBase navigator) {
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       children: [
@@ -101,6 +111,11 @@ class _LandingPageDetailPageState extends State<LandingPageDetailPage> {
       listener: (context, state) {
         if (state is UserObserverSuccess) {
           landingPageObserverCubit.observeLandingPagesForUser(state.user);
+          Modular.get<LandingPageDetailCubit>().loadRecommendations(
+            userId: state.user.id.value,
+            role: state.user.role ?? Role.none,
+            landingPageIds: state.user.landingPageIDs,
+          );
         }
       },
       child: BlocBuilder<LandingPageObserverCubit, LandingPageObserverState>(
@@ -121,8 +136,8 @@ class _LandingPageDetailPageState extends State<LandingPageDetailPage> {
 
           if (lpState is! LandingPageObserverSuccess) {
             return SkeletonLoading(
-              child: _buildContent(
-                  SkeletonData.landingPage, SkeletonData.user, responsiveValue, navigator),
+              child: _buildContent(SkeletonData.landingPage, SkeletonData.user,
+                  responsiveValue, navigator),
             );
           }
 
@@ -144,9 +159,13 @@ class _LandingPageDetailPageState extends State<LandingPageDetailPage> {
             );
           }
 
-          return _buildContent(landingPage, lpState.user, responsiveValue, navigator);
+          return _buildContent(
+              landingPage, lpState.user, responsiveValue, navigator);
         },
       ),
     );
   }
 }
+
+// TODO: CONVERSIONRATE TESTEN
+// TODO: Graph werden  falsch dargestellt, wenn man eine Empehlung ausspricht und der Links bereits geklickt wurde. Dann wird die Empfehlung nicht mehr unter “Empfehlung ausgesprochen” gelistet, sondern nur noch unter “link geklickt” UMSETZEN

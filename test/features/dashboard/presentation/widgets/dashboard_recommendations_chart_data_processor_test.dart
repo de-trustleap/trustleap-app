@@ -263,9 +263,49 @@ void main() {
         final spots = processor.generateSpots();
         expect(spots.length, 7);
         
-        // Should only count recommendations with statusLevel.index == 0
+        // Should count recommendations that have reached at least statusLevel index 0 (all recs)
         final totalCount = spots.map((spot) => spot.y).reduce((a, b) => a + b);
-        expect(totalCount, 1); // Only one recommendation should match
+        expect(totalCount, 2); // Both recommendations have statusTimestamps[0], so both match
+      });
+
+      test('should not plot recommendations with null statusTimestamps even if statusLevel matches', () {
+        final now = DateTime.now();
+        final recWithNullTimestamps = PersonalizedRecommendationItem(
+          id: "3",
+          name: "Fallback Rec",
+          reason: "Test",
+          landingPageID: "1",
+          promotionTemplate: "",
+          promoterName: "Test Promoter",
+          serviceProviderName: "Test Service",
+          defaultLandingPageID: "2",
+          userID: "user1",
+          statusLevel: StatusLevel.linkClicked,
+          statusTimestamps: null,
+          promoterImageDownloadURL: null,
+          createdAt: now.subtract(const Duration(days: 1)),
+        );
+        final recsWithFallback = [
+          UserRecommendation(
+            id: UniqueID.fromUniqueString("3"),
+            recoID: "3",
+            userID: "user1",
+            priority: RecommendationPriority.medium,
+            notes: "Test",
+            recommendation: recWithNullTimestamps,
+          ),
+        ];
+
+        // statusLevel 2 → statusIndex 1 (linkClicked, index 1 >= 1 → fallback matches),
+        // but no statusTimestamps[1] to position the spot → nothing plotted
+        processor = DashboardRecommendationsChartDataProcessor(
+          recommendations: recsWithFallback,
+          timePeriod: TimePeriod.week,
+          statusLevel: 2,
+        );
+        final spots = processor.generateSpots();
+        final totalCount = spots.map((s) => s.y).reduce((a, b) => a + b);
+        expect(totalCount, 0);
       });
 
       test('should include all recommendations when no status level filter', () {

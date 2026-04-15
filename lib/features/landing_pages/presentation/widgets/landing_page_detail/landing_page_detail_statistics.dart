@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/core/helpers/conversion_rate_formatter.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/features/landing_pages/application/landing_page_detail/landing_page_detail_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/campaign_recommendation_item.dart';
@@ -25,10 +26,9 @@ class LandingPageDetailStatistics extends StatelessWidget {
     required this.user,
   });
 
-  int _getCompletedRecommendationsCount(
+  List _getFilteredRecommendations(
       LandingPageDetailRecommendationsSuccess state) {
-    final recommendations =
-        RecommendationsStatistics.getFilteredRecommendations(
+    return RecommendationsStatistics.getFilteredRecommendations(
       recommendations: state.recommendations,
       selectedPromoterId: null,
       userRole: user.role ?? Role.none,
@@ -36,19 +36,21 @@ class LandingPageDetailStatistics extends StatelessWidget {
       selectedLandingPageId: landingPageId,
       allLandingPages: state.allLandingPages,
     );
+  }
 
-    return recommendations
-        .where(
-            (rec) {
-              final reco = rec.recommendation;
-              if (reco is PersonalizedRecommendationItem) {
-                return reco.statusLevel == StatusLevel.successful;
-              }
-              if (reco is CampaignRecommendationItem) {
-                return (reco.statusCounts?.successful ?? 0) > 0;
-              }
-              return false;
-            })
+  int _getCompletedRecommendationsCount(
+      LandingPageDetailRecommendationsSuccess state) {
+    return _getFilteredRecommendations(state)
+        .where((rec) {
+          final reco = rec.recommendation;
+          if (reco is PersonalizedRecommendationItem) {
+            return reco.statusLevel == StatusLevel.successful;
+          }
+          if (reco is CampaignRecommendationItem) {
+            return (reco.statusCounts?.successful ?? 0) > 0;
+          }
+          return false;
+        })
         .length;
   }
 
@@ -60,13 +62,23 @@ class LandingPageDetailStatistics extends StatelessWidget {
 
     return BlocBuilder<LandingPageDetailCubit, LandingPageDetailState>(
       bloc: detailCubit,
+      buildWhen: (_, current) =>
+          current is LandingPageDetailInitial ||
+          current is LandingPageDetailRecommendationsLoading ||
+          current is LandingPageDetailRecommendationsSuccess ||
+          current is LandingPageDetailRecommendationsFailure ||
+          current is LandingPageDetailRecommendationsNotFound,
       builder: (context, state) {
+        final isLoading = state is LandingPageDetailInitial ||
+            state is LandingPageDetailRecommendationsLoading;
+        final successState =
+            state is LandingPageDetailRecommendationsSuccess ? state : null;
+        final totalRecommendations =
+            successState != null ? _getFilteredRecommendations(successState).length : 0;
         final completedRecommendations =
-            state is LandingPageDetailRecommendationsSuccess
-                ? _getCompletedRecommendationsCount(state)
-                : 0;
+            successState != null ? _getCompletedRecommendationsCount(successState) : 0;
         final conversionRate = ConversionRateFormatter.format(
-          total: totalVisits,
+          total: totalRecommendations,
           successful: completedRecommendations,
         );
 
@@ -86,6 +98,7 @@ class LandingPageDetailStatistics extends StatelessWidget {
                   icon: Icons.trending_up,
                   title: localization.landing_page_detail_conversion_rate,
                   value: conversionRate,
+                  isLoading: isLoading,
                 ),
               ),
             ],
@@ -103,6 +116,7 @@ class LandingPageDetailStatistics extends StatelessWidget {
                 icon: Icons.trending_up,
                 title: localization.landing_page_detail_conversion_rate,
                 value: conversionRate,
+                isLoading: isLoading,
               ),
             ],
           );
@@ -116,11 +130,13 @@ class _StatisticCard extends StatelessWidget {
   final IconData icon;
   final String title;
   final String value;
+  final bool isLoading;
 
   const _StatisticCard({
     required this.icon,
     required this.title,
     required this.value,
+    this.isLoading = false,
   });
 
   @override
@@ -155,12 +171,14 @@ class _StatisticCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 4),
-              SelectableText(
-                value,
-                style: themeData.textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              isLoading
+                  ? const LoadingIndicator(size: 24)
+                  : SelectableText(
+                      value,
+                      style: themeData.textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
             ],
           ),
         ],

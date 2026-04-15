@@ -1058,7 +1058,9 @@ void main() {
             serviceProviderName: "Test",
             defaultLandingPageID: "test",
             statusLevel: statusLevel,
-            statusTimestamps: {},
+            statusTimestamps: Map.fromEntries(
+              List.generate(statusLevel.index + 1, (i) => MapEntry(i, createdAt)),
+            ),
             userID: "user1",
             promoterImageDownloadURL: "test",
             createdAt: createdAt,
@@ -1243,7 +1245,7 @@ void main() {
             promoterRecommendations: null,
           );
 
-          // Test filtering for statusLevel 2 - should include statusLevel <= 2
+          // Test filtering for statusLevel 2 - should include recs that have reached at least level 1 (linkClicked)
           final result = DashboardRecommendationsHelper.calculateTrend(
             state: state,
             selectedPromoterId: null,
@@ -1253,9 +1255,79 @@ void main() {
             now: now,
           );
 
-          expect(result.currentPeriodCount, equals(2)); // rec1 (0) + rec2 (1) 
-          expect(result.previousPeriodCount, equals(2)); // rec4 (0) + rec5 (1)
-          expect(result.percentageChange, equals(0.0));
+          expect(result.currentPeriodCount, equals(2)); // rec2 (1) + rec3 (2)
+          expect(result.previousPeriodCount, equals(1)); // rec5 (1)
+          expect(result.percentageChange, equals(100.0));
+        });
+
+        test("should use statusLevel fallback when statusTimestamps is null", () {
+          // Recs without statusTimestamps fall back to statusLevel-based matching.
+          // calculateTrend uses createdAt for positioning, so they still appear in counts.
+          final recommendations = [
+            // Current period - null timestamps, statusLevel fallback
+            UserRecommendation(
+              id: UniqueID.fromUniqueString("rec1"),
+              recoID: "rec1",
+              userID: "user1",
+              priority: RecommendationPriority.medium,
+              notes: "Test",
+              recommendation: PersonalizedRecommendationItem(
+                id: "rec1",
+                name: "Test",
+                reason: "Test",
+                landingPageID: "test",
+                promotionTemplate: "test",
+                promoterName: "Test",
+                serviceProviderName: "Test",
+                defaultLandingPageID: "test",
+                statusLevel: StatusLevel.linkClicked, // index 1 >= filterIndex 1 → match
+                statusTimestamps: null,
+                userID: "user1",
+                promoterImageDownloadURL: null,
+                createdAt: now.subtract(const Duration(hours: 12)),
+              ),
+            ),
+            UserRecommendation(
+              id: UniqueID.fromUniqueString("rec2"),
+              recoID: "rec2",
+              userID: "user1",
+              priority: RecommendationPriority.medium,
+              notes: "Test",
+              recommendation: PersonalizedRecommendationItem(
+                id: "rec2",
+                name: "Test",
+                reason: "Test",
+                landingPageID: "test",
+                promotionTemplate: "test",
+                promoterName: "Test",
+                serviceProviderName: "Test",
+                defaultLandingPageID: "test",
+                statusLevel: StatusLevel.recommendationSend, // index 0 < filterIndex 1 → no match
+                statusTimestamps: null,
+                userID: "user1",
+                promoterImageDownloadURL: null,
+                createdAt: now.subtract(const Duration(hours: 12)),
+              ),
+            ),
+          ];
+
+          state = RecommendationChartSuccessState(
+            recommendation: recommendations,
+            promoterRecommendations: null,
+          );
+
+          // statusLevel 2 → filterIndex 1; only rec1 (linkClicked, 1 >= 1) matches via fallback
+          final result = DashboardRecommendationsHelper.calculateTrend(
+            state: state,
+            selectedPromoterId: null,
+            userRole: Role.promoter,
+            timePeriod: TimePeriod.day,
+            statusLevel: 2,
+            now: now,
+          );
+
+          expect(result.currentPeriodCount, equals(1)); // only rec1
+          expect(result.previousPeriodCount, equals(0));
         });
 
         test("should include archived recommendations (successful/failed) for all status levels", () {

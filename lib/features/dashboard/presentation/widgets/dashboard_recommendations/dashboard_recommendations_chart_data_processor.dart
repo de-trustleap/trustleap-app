@@ -72,7 +72,7 @@ class DashboardRecommendationsChartDataProcessor {
             .where((rec) {
                 final reco = rec.recommendation;
                 if (reco is PersonalizedRecommendationItem) {
-                  return reco.statusLevel?.index == (statusLevel! - 1);
+                  return _personalizedMatchesStatusLevel(reco, statusLevel! - 1);
                 }
                 if (reco is CampaignRecommendationItem) {
                   return _campaignMatchesStatusLevel(reco, statusLevel! - 1);
@@ -98,6 +98,22 @@ class DashboardRecommendationsChartDataProcessor {
     }
 
     return groupedData;
+  }
+
+  bool _personalizedMatchesStatusLevel(
+      PersonalizedRecommendationItem reco, int statusIndex) {
+    final timestamps = reco.statusTimestamps;
+    if (timestamps != null) {
+      return timestamps.containsKey(statusIndex) &&
+          timestamps[statusIndex] != null;
+    }
+    // Fallback für alte Daten ohne Timestamps
+    final level = reco.statusLevel;
+    if (level == null) return false;
+    if (level == StatusLevel.failed || level == StatusLevel.successful) {
+      return true;
+    }
+    return level.index >= statusIndex;
   }
 
   bool _campaignMatchesStatusLevel(CampaignRecommendationItem reco, int statusIndex) {
