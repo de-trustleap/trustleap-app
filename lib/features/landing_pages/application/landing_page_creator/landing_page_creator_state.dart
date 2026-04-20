@@ -1,11 +1,11 @@
-part of 'landing_page_creator_cubit.dart';
+part of "landing_page_creator_cubit.dart";
 
 class LandingPageCreatorDataState extends Equatable {
   final UniqueID? id;
   final Company? company;
   final LandingPage? landingPage;
-  final Uint8List? image;
-  final bool imageHasChanged;
+  final LandingPageImageData imageData;
+  final List<String>? shareImageTemplateUrls;
   final bool showError;
   final bool isEditMode;
   final bool imageValid;
@@ -19,8 +19,8 @@ class LandingPageCreatorDataState extends Equatable {
     required this.id,
     this.company,
     this.landingPage,
-    this.image,
-    this.imageHasChanged = false,
+    required this.imageData,
+    this.shareImageTemplateUrls,
     this.showError = false,
     required this.isEditMode,
     this.imageValid = false,
@@ -28,15 +28,15 @@ class LandingPageCreatorDataState extends Equatable {
     this.isLoading = false,
     this.isAIGenerating = false,
     required this.createDefaultPage,
-    this.errorMessage = '',
+    this.errorMessage = "",
   });
 
   LandingPageCreatorDataState copyWith({
     UniqueID? id,
     Company? company,
     LandingPage? landingPage,
-    Uint8List? image,
-    bool? imageHasChanged,
+    LandingPageImageData? imageData,
+    List<String>? shareImageTemplateUrls,
     bool? showError,
     bool? isEditMode,
     bool? imageValid,
@@ -50,8 +50,9 @@ class LandingPageCreatorDataState extends Equatable {
       id: id ?? this.id,
       company: company ?? this.company,
       landingPage: landingPage ?? this.landingPage,
-      image: image ?? this.image,
-      imageHasChanged: imageHasChanged ?? this.imageHasChanged,
+      imageData: imageData ?? this.imageData,
+      shareImageTemplateUrls:
+          shareImageTemplateUrls ?? this.shareImageTemplateUrls,
       showError: showError ?? this.showError,
       isEditMode: isEditMode ?? this.isEditMode,
       imageValid: imageValid ?? this.imageValid,
@@ -69,8 +70,8 @@ class LandingPageCreatorDataState extends Equatable {
         id,
         company,
         landingPage,
-        image,
-        imageHasChanged,
+        imageData,
+        shareImageTemplateUrls,
         showError,
         isEditMode,
         imageValid,

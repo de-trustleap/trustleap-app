@@ -44,7 +44,9 @@ void main() {
           scriptTags: "<script> Test </script>",
           contactEmailAddress: "test@x.de",
           calendlyEventURL: null,
-          companyData: null);
+          companyData: null,
+          faviconUrl: "https://favicon.url",
+          shareImageUrl: "https://share.url");
 
       final expectedResult = {
         "id": "1",
@@ -70,7 +72,9 @@ void main() {
         "contactOption": null,
         "calendlyEventURL": null,
         "companyData": null,
-        "totalVisits": null
+        "totalVisits": null,
+        "faviconUrl": "https://favicon.url",
+        "shareImageUrl": "https://share.url"
       };
       // When
       final result = model.toMap();
@@ -93,7 +97,9 @@ void main() {
         "lastUpdatedAt": Timestamp(100000, 0),
         "isDefaultPage": false,
         "createdAt": Timestamp(100000, 0),
-        "isActive": true
+        "isActive": true,
+        "faviconUrl": "https://favicon.url",
+        "shareImageUrl": "https://share.url"
       };
       final expectedResult = LandingPageModel(
           id: "",
@@ -107,7 +113,9 @@ void main() {
           isDefaultPage: false,
           createdAt: Timestamp(100000, 0),
           isActive: true,
-          calendlyEventURL: null);
+          calendlyEventURL: null,
+          faviconUrl: "https://favicon.url",
+          shareImageUrl: "https://share.url");
       // When
       final result = LandingPageModel.fromMap(map);
       // Then
@@ -128,7 +136,9 @@ void main() {
         "associatedUsersIDs": ["1", "2"],
         "lastUpdatedAt": Timestamp(100000, 0),
         "isDefaultPage": false,
-        "createdAt": Timestamp(100000, 0)
+        "createdAt": Timestamp(100000, 0),
+        "faviconUrl": "https://favicon.url",
+        "shareImageUrl": "https://share.url"
       };
       final expectedResult = LandingPageModel(
           id: "1",
@@ -141,7 +151,9 @@ void main() {
           lastUpdatedAt: Timestamp(100000, 0).toDate(),
           isDefaultPage: false,
           createdAt: Timestamp(100000, 0),
-          calendlyEventURL: null);
+          calendlyEventURL: null,
+          faviconUrl: "https://favicon.url",
+          shareImageUrl: "https://share.url");
       // When
       final result = LandingPageModel.fromFirestore(map, "1");
       // Then
@@ -163,7 +175,9 @@ void main() {
           lastUpdatedAt: Timestamp(100000, 0).toDate(),
           isDefaultPage: false,
           createdAt: Timestamp(100000, 0),
-          calendlyEventURL: null);
+          calendlyEventURL: null,
+          faviconUrl: "https://favicon.url",
+          shareImageUrl: "https://share.url");
       final exoectedResult = LandingPage(
           id: UniqueID.fromUniqueString("1"),
           name: "Test",
@@ -174,7 +188,9 @@ void main() {
           associatedUsersIDs: const ["1", "2"],
           lastUpdatedAt: Timestamp(100000, 0).toDate(),
           isDefaultPage: false,
-          createdAt: Timestamp(100000, 0).toDate());
+          createdAt: Timestamp(100000, 0).toDate(),
+          faviconUrl: "https://favicon.url",
+          shareImageUrl: "https://share.url");
       // When
       final result = model.toDomain();
       expect(result, exoectedResult);
@@ -194,7 +210,9 @@ void main() {
           associatedUsersIDs: const ["1", "2"],
           lastUpdatedAt: Timestamp(100000, 0).toDate(),
           isDefaultPage: false,
-          createdAt: Timestamp(100000, 0).toDate());
+          createdAt: Timestamp(100000, 0).toDate(),
+          faviconUrl: "https://favicon.url",
+          shareImageUrl: "https://share.url");
       final expectedResult = LandingPageModel(
           id: "1",
           name: "Test",
@@ -206,7 +224,9 @@ void main() {
           lastUpdatedAt: Timestamp(100000, 0).toDate(),
           isDefaultPage: false,
           createdAt: Timestamp(100000, 0),
-          calendlyEventURL: null);
+          calendlyEventURL: null,
+          faviconUrl: "https://favicon.url",
+          shareImageUrl: "https://share.url");
       // When
       final result = LandingPageModel.fromDomain(model);
       // Then
@@ -228,7 +248,9 @@ void main() {
           lastUpdatedAt: Timestamp(100000, 0).toDate(),
           isDefaultPage: false,
           createdAt: Timestamp(100000, 0),
-          calendlyEventURL: null);
+          calendlyEventURL: null,
+          faviconUrl: "https://favicon.url",
+          shareImageUrl: "https://share.url");
       final model2 = LandingPageModel(
           id: "1",
           name: "Test",
@@ -240,7 +262,9 @@ void main() {
           lastUpdatedAt: Timestamp(100000, 0).toDate(),
           isDefaultPage: false,
           createdAt: Timestamp(100000, 0),
-          calendlyEventURL: null);
+          calendlyEventURL: null,
+          faviconUrl: "https://favicon.url",
+          shareImageUrl: "https://share.url");
       // Then
       expect(model, model2);
     });

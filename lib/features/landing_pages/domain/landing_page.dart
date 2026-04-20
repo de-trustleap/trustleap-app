@@ -28,6 +28,8 @@ class LandingPage extends Equatable {
   final ContactOption? contactOption;
   final Map<String, dynamic>? companyData;
   final int? totalVisits;
+  final String? faviconUrl;
+  final String? shareImageUrl;
 
   const LandingPage(
       {required this.id,
@@ -53,7 +55,9 @@ class LandingPage extends Equatable {
       this.businessModel,
       this.contactOption,
       this.companyData,
-      this.totalVisits});
+      this.totalVisits,
+      this.faviconUrl,
+      this.shareImageUrl});
 
   LandingPage copyWith(
       {UniqueID? id,
@@ -79,7 +83,9 @@ class LandingPage extends Equatable {
       BusinessModel? businessModel,
       ContactOption? contactOption,
       Map<String, dynamic>? companyData,
-      int? totalVisits}) {
+      int? totalVisits,
+      String? faviconUrl,
+      String? shareImageUrl}) {
     return LandingPage(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -104,7 +110,9 @@ class LandingPage extends Equatable {
         businessModel: businessModel ?? this.businessModel,
         contactOption: contactOption ?? this.contactOption,
         companyData: companyData ?? this.companyData,
-        totalVisits: totalVisits ?? this.totalVisits);
+        totalVisits: totalVisits ?? this.totalVisits,
+        faviconUrl: faviconUrl ?? this.faviconUrl,
+        shareImageUrl: shareImageUrl ?? this.shareImageUrl);
   }
 
   @override
@@ -130,6 +138,8 @@ class LandingPage extends Equatable {
         businessModel,
         contactOption,
         companyData,
-        totalVisits
+        totalVisits,
+        faviconUrl,
+        shareImageUrl,
       ];
 }

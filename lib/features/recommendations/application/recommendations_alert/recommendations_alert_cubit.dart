@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/draft_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_repository.dart';
 
@@ -21,5 +22,13 @@ class RecommendationsAlertCubit extends Cubit<RecommendationsAlertState> {
             failure: failure, recommendation: recommendation)),
         (_) => emit(
             RecommendationSaveSuccessState(recommendation: recommendation)));
+  }
+
+  Future<void> createDraftRecommendation(DraftRecommendationItem draft) async {
+    await recommendationRepo.createDraftRecommendation(draft);
+  }
+
+  Future<void> deleteDraftRecommendation(String id) async {
+    await recommendationRepo.deleteDraftRecommendation(id);
   }
 }

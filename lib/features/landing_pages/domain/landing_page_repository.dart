@@ -1,9 +1,9 @@
-import 'dart:typed_data';
-
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/core/failures/storage_failures.dart';
 import 'package:finanzbegleiter/features/legals/domain/archived_landing_page_legals.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
+import 'package:finanzbegleiter/features/landing_pages/domain/landing_page_image_data.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page_template.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_ai_generation.dart';
 import 'package:finanzbegleiter/features/promoter/domain/promoter.dart';
@@ -17,8 +17,7 @@ abstract class LandingPageRepository {
 
   Future<Either<DatabaseFailure, Unit>> createLandingPage(
       LandingPage landingPage,
-      Uint8List imageData,
-      bool imageHasChanged,
+      LandingPageImageData imageData,
       String templateID,
       PagebuilderAiGeneration? aiGeneration);
 
@@ -26,7 +25,7 @@ abstract class LandingPageRepository {
       String id, String ownerID);
 
   Future<Either<DatabaseFailure, Unit>> editLandingPage(
-      LandingPage landingPage, Uint8List? imageData, bool imageHasChanged);
+      LandingPage landingPage, LandingPageImageData imageData);
 
   Future<Either<DatabaseFailure, Unit>> duplicateLandingPage(String id);
 
@@ -49,4 +48,6 @@ abstract class LandingPageRepository {
 
   Future<Either<DatabaseFailure, ArchivedLandingPageLegals>>
       getArchivedLandingPageLegals(String landingPageId);
+
+  Future<Either<StorageFailure, List<String>>> getShareImageTemplateUrls();
 }

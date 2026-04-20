@@ -12,16 +12,24 @@ void main() {
           id: UniqueID.fromUniqueString("1"),
           name: "Test",
           description: "TestText",
-          downloadImageUrl: "www.downloadImageUrl.de");
+          downloadImageUrl: "www.downloadImageUrl.de",
+          faviconUrl: "https://favicon.url",
+          shareImageUrl: "https://share.url");
 
       final expectedResult = LandingPage(
           id: UniqueID.fromUniqueString("1"),
           name: "TestNew",
           description: "TestTextNew",
-          downloadImageUrl: "https://trust-leap.de");
+          downloadImageUrl: "https://trust-leap.de",
+          faviconUrl: "https://favicon-new.url",
+          shareImageUrl: "https://share-new.url");
       // When
-      final result =
-          landingPage.copyWith(name: "TestNew", description: "TestTextNew", downloadImageUrl: "https://trust-leap.de");
+      final result = landingPage.copyWith(
+          name: "TestNew",
+          description: "TestTextNew",
+          downloadImageUrl: "https://trust-leap.de",
+          faviconUrl: "https://favicon-new.url",
+          shareImageUrl: "https://share-new.url");
       // Then
       expect(result, expectedResult);
     });
@@ -37,8 +45,9 @@ void main() {
           downloadImageUrl: "https://trust-leap.de",
           thumbnailDownloadURL: "TestThumbnailDownloadURL",
           ownerID: UniqueID.fromUniqueString("1"),
-          isDefaultPage: false
-          );
+          isDefaultPage: false,
+          faviconUrl: "https://favicon.url",
+          shareImageUrl: "https://share.url");
 
       final landingPage2 = LandingPage(
           id: UniqueID.fromUniqueString("1"),
@@ -47,7 +56,9 @@ void main() {
           downloadImageUrl: "https://trust-leap.de",
           thumbnailDownloadURL: "TestThumbnailDownloadURL",
           ownerID: UniqueID.fromUniqueString("1"),
-          isDefaultPage: false);
+          isDefaultPage: false,
+          faviconUrl: "https://favicon.url",
+          shareImageUrl: "https://share.url");
       // Then
       expect(landingPage1, landingPage2);
     });

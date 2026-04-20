@@ -102,10 +102,6 @@ class _MyWidgetState extends State<ProfileImageSection> {
                     setHovered(false);
                     onDroppedFile([file]);
                   },
-                  onDroppedMultipleFiles: (files) {
-                    setHovered(false);
-                    onDroppedFile(files);
-                  },
                   onHover: () {
                     setHovered(true);
                   },

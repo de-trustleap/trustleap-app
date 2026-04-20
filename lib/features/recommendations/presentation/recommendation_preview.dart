@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:finanzbegleiter/features/recommendations/application/recommendations_alert/recommendations_alert_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/draft_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/loading_overlay.dart';
@@ -136,8 +137,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
   }
 
 
-  Future<void> _sendMessage(
-      RecommendationItem recommendation, String message) async {
+  void _sendMessage(RecommendationItem recommendation, String message) {
     if (!message.contains("[LINK]")) {
       setState(() {
         showMissingLinkError = true;
@@ -148,7 +148,14 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
       showMissingLinkError = false;
     });
 
-    await _sender.sendViaWhatsApp(
+    Modular.get<RecommendationsAlertCubit>().createDraftRecommendation(
+      DraftRecommendationItem.fromRecommendationItem(
+        recommendation,
+        ownerID: widget.userID,
+      ),
+    );
+
+    _sender.sendViaWhatsApp(
       context: context,
       recommendation: recommendation,
       message: message,
@@ -156,8 +163,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
     );
   }
 
-  Future<void> _sendEmail(
-      RecommendationItem recommendation, String message) async {
+  void _sendEmail(RecommendationItem recommendation, String message) {
     if (!message.contains("[LINK]")) {
       setState(() {
         showMissingLinkError = true;
@@ -168,7 +174,14 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
       showMissingLinkError = false;
     });
 
-    await _sender.sendViaEmail(
+    Modular.get<RecommendationsAlertCubit>().createDraftRecommendation(
+      DraftRecommendationItem.fromRecommendationItem(
+        recommendation,
+        ownerID: widget.userID,
+      ),
+    );
+
+    _sender.sendViaEmail(
       context: context,
       recommendation: recommendation,
       message: message,
@@ -188,6 +201,8 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
                   recommendationReceiverName: recommendation.displayName,
                   cancelAction: () {
                     isAlertVisible = false;
+                    Modular.get<RecommendationsAlertCubit>()
+                        .deleteDraftRecommendation(recommendation.id);
                     CustomNavigator.of(context).pop();
                   },
                   action: () =>

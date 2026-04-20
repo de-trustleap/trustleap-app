@@ -2098,6 +2098,51 @@ class AppLocalizationsDe extends AppLocalizations {
       'Wähle ein Template aus';
 
   @override
+  String get landingpage_creator_favicon_section_title => 'Favicon';
+
+  @override
+  String get landingpage_creator_favicon_info_tooltip =>
+      'Das Favicon wird im Browser in Tabs, Lesezeichenlisten und Suchergebnissen angezeigt. Es steigert den Wiedererkennungswert, professionalisiert den Markenauftritt und verbessert die Nutzererfahrung.';
+
+  @override
+  String get landingpage_creator_share_image_section_title => 'Share-Bild';
+
+  @override
+  String get landingpage_creator_share_image_info_tooltip =>
+      'Dieses Bild wird für den Social Media Auftritt und für das Teilen über WhatsApp verwendet. Es hat idealerweise ein Seitenverhältnis von 1.91:1.';
+
+  @override
+  String get landingpage_creator_favicon_crop_hint =>
+      'Für beste Ergebnisse ein Bild im Format 1:1 hochladen.';
+
+  @override
+  String get landingpage_creator_share_image_crop_hint =>
+      'Für beste Ergebnisse ein Bild im Format 1.91:1 (z.B. 1200×630px) hochladen – das Standard-Format für Social Media Vorschauen.';
+
+  @override
+  String get landingpage_creator_share_image_templates_label =>
+      'Oder wähle eine Vorlage:';
+
+  @override
+  String get landingpage_creator_crop_dialog_title => 'Bild zuschneiden';
+
+  @override
+  String landingpage_creator_crop_dialog_hint(String ratio) {
+    return 'Das Bild wird auf das Format $ratio zugeschnitten. Verschiebe und zoome auf den gewünschten Ausschnitt.';
+  }
+
+  @override
+  String get landingpage_creator_crop_dialog_gesture_hint =>
+      'Ziehen zum Verschieben · Trackpad-Pinch oder Mausrad zum Zoomen';
+
+  @override
+  String get landingpage_creator_crop_dialog_confirm => 'Übernehmen';
+
+  @override
+  String get landingpage_creator_image_upload_hint =>
+      'Klicke oder ziehe ein Bild hierher';
+
+  @override
   String get landingpage_overview_no_default_page_title =>
       'Landingpage einrichten';
 
@@ -2134,6 +2179,10 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get save_recommendation_loading_subtitle =>
       'Die Empfehlung wird gespeichert';
+
+  @override
+  String get save_recommendation_draft_error =>
+      'Es ist ein Fehler aufgetreten. Versuche es später erneut.';
 
   @override
   String get save_campaign_loading_title => 'Kampagne wird erstellt';

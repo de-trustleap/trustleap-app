@@ -3614,6 +3614,78 @@ abstract class AppLocalizations {
   /// **'Select a template'**
   String get landingpage_creator_select_template_title;
 
+  /// Section title for favicon upload in the creator
+  ///
+  /// In en, this message translates to:
+  /// **'Favicon'**
+  String get landingpage_creator_favicon_section_title;
+
+  /// Tooltip for the favicon info button in the creator
+  ///
+  /// In en, this message translates to:
+  /// **'The favicon is displayed in browser tabs, bookmark lists and search results. It increases brand recognition, professionalises the brand appearance and improves the user experience.'**
+  String get landingpage_creator_favicon_info_tooltip;
+
+  /// Section title for share image in the creator
+  ///
+  /// In en, this message translates to:
+  /// **'Share Image'**
+  String get landingpage_creator_share_image_section_title;
+
+  /// Tooltip for the share image info button in the creator
+  ///
+  /// In en, this message translates to:
+  /// **'This image is used for social media appearances and for sharing via WhatsApp. It ideally has an aspect ratio of 1.91:1.'**
+  String get landingpage_creator_share_image_info_tooltip;
+
+  /// Hint about the recommended format for the favicon
+  ///
+  /// In en, this message translates to:
+  /// **'For best results upload an image in 1:1 format.'**
+  String get landingpage_creator_favicon_crop_hint;
+
+  /// Hint that the share image will be cropped to 1.91:1
+  ///
+  /// In en, this message translates to:
+  /// **'For best results upload an image in 1.91:1 format (e.g. 1200×630px) – the standard format for social media previews.'**
+  String get landingpage_creator_share_image_crop_hint;
+
+  /// Label above the template selection for the share image
+  ///
+  /// In en, this message translates to:
+  /// **'Or select a template:'**
+  String get landingpage_creator_share_image_templates_label;
+
+  /// Title of the crop dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Crop image'**
+  String get landingpage_creator_crop_dialog_title;
+
+  /// Hint text in the crop dialog with aspect ratio
+  ///
+  /// In en, this message translates to:
+  /// **'The image will be cropped to the {ratio} format. Drag and zoom to the desired section.'**
+  String landingpage_creator_crop_dialog_hint(String ratio);
+
+  /// Gesture hint in the crop dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Drag to pan · Trackpad pinch or mouse wheel to zoom'**
+  String get landingpage_creator_crop_dialog_gesture_hint;
+
+  /// Confirm button in the crop dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get landingpage_creator_crop_dialog_confirm;
+
+  /// Hint text in the image upload box
+  ///
+  /// In en, this message translates to:
+  /// **'Click or drag an image here'**
+  String get landingpage_creator_image_upload_hint;
+
   /// Title for the page that is displayed if you have not yet created a default landing page.
   ///
   /// In en, this message translates to:
@@ -3679,6 +3751,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The recommendation is being saved'**
   String get save_recommendation_loading_subtitle;
+
+  /// Error message when creating a draft recommendation fails
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred. Please try again later.'**
+  String get save_recommendation_draft_error;
 
   /// Title of the loading dialog when saving a campaign
   ///

@@ -133,6 +133,12 @@ class HomeModule extends Module {
                   landingPage: args?["landingPage"],
                   createDefaultPage: args?["createDefaultPage"] ?? false);
             }),
+            ChildRoute(RoutePaths.landingPageCreatorStep5Path, child: (_) {
+              final args = r.args.data as Map<String, dynamic>?;
+              return LandingPageCreator(
+                  landingPage: args?["landingPage"],
+                  createDefaultPage: args?["createDefaultPage"] ?? false);
+            }),
           ])
         ]);
     r.child("${Modular.initialRoute}${RoutePaths.landingPageBuilderPath}/:id",

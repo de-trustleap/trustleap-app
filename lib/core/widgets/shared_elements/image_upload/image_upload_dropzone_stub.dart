@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 class ImageUploadDropzone extends StatelessWidget {
   final Widget child;
   final ValueChanged<ImageDroppedFile> onDroppedFile;
-  final ValueChanged<List<ImageDroppedFile>> onDroppedMultipleFiles;
   final Function onHover;
   final Function onLeave;
 
@@ -13,7 +12,6 @@ class ImageUploadDropzone extends StatelessWidget {
     super.key,
     required this.child,
     required this.onDroppedFile,
-    required this.onDroppedMultipleFiles,
     required this.onHover,
     required this.onLeave,
   });

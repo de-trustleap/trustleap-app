@@ -3,6 +3,10 @@ import 'package:finanzbegleiter/features/landing_pages/application/landingpage/l
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/id.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
+import 'package:finanzbegleiter/features/landing_pages/domain/landing_page_image_data.dart';
+import 'package:finanzbegleiter/features/landing_pages/domain/landing_page_template.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_ai_generation.dart';
+import 'package:finanzbegleiter/features/profile/domain/company.dart';
 import 'package:finanzbegleiter/features/promoter/domain/promoter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -28,22 +32,27 @@ void main() {
         name: "Test",
         description: "Test",
         ownerID: UniqueID.fromUniqueString("1"));
-    final testImageData = Uint8List(1);
-    const imageHasChanged = false;
+    final testImageData = LandingPageImageData(
+        mainImage: Uint8List(1),
+        mainImageHasChanged: false,
+        faviconImage: null,
+        faviconImageHasChanged: false,
+        shareImage: null,
+        shareImageHasChanged: false);
     const templateID = "1";
     test("should call landingpage repo if function is called", () async {
       // Given
-      when(mockLandingPageRepo.createLandingPage(testLandingPage, testImageData,
-              imageHasChanged, templateID, null))
+      when(mockLandingPageRepo.createLandingPage(
+              testLandingPage, testImageData, templateID, null))
           .thenAnswer((_) async => right(unit));
       // When
       landingPageCubit.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged, templateID);
+          testLandingPage, testImageData, templateID);
       await untilCalled(mockLandingPageRepo.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged, templateID, null));
+          testLandingPage, testImageData, templateID, null));
       // Then
       verify(mockLandingPageRepo.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged, templateID, null));
+          testLandingPage, testImageData, templateID, null));
       verifyNoMoreInteractions(mockLandingPageRepo);
     });
 
@@ -56,13 +65,13 @@ void main() {
         CreatedLandingPageSuccessState()
       ];
       // When
-      when(mockLandingPageRepo.createLandingPage(testLandingPage, testImageData,
-              imageHasChanged, templateID, null))
+      when(mockLandingPageRepo.createLandingPage(
+              testLandingPage, testImageData, templateID, null))
           .thenAnswer((_) async => right(unit));
       // Then
       expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
       landingPageCubit.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged, templateID);
+          testLandingPage, testImageData, templateID);
     });
 
     test(
@@ -74,13 +83,13 @@ void main() {
         CreateLandingPageFailureState(failure: BackendFailure())
       ];
       // When
-      when(mockLandingPageRepo.createLandingPage(testLandingPage, testImageData,
-              imageHasChanged, templateID, null))
+      when(mockLandingPageRepo.createLandingPage(
+              testLandingPage, testImageData, templateID, null))
           .thenAnswer((_) async => left(BackendFailure()));
       // Then
       expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
       landingPageCubit.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged, templateID);
+          testLandingPage, testImageData, templateID);
     });
   });
 
@@ -90,21 +99,23 @@ void main() {
         name: "Test",
         description: "Test",
         ownerID: UniqueID.fromUniqueString("2"));
-    final testImageData = Uint8List(2);
-    const imageHasChanged = true;
+    final testImageData = LandingPageImageData(
+        mainImage: Uint8List(2),
+        mainImageHasChanged: true,
+        faviconImage: null,
+        faviconImageHasChanged: false,
+        shareImage: null,
+        shareImageHasChanged: false);
     test("should call landingpage repo if function is called", () async {
       // Given
-      when(mockLandingPageRepo.editLandingPage(
-              testLandingPage, testImageData, imageHasChanged))
+      when(mockLandingPageRepo.editLandingPage(testLandingPage, testImageData))
           .thenAnswer((_) async => right(unit));
       // When
-      landingPageCubit.editLandingPage(
-          testLandingPage, testImageData, imageHasChanged);
-      await untilCalled(mockLandingPageRepo.editLandingPage(
-          testLandingPage, testImageData, imageHasChanged));
+      landingPageCubit.editLandingPage(testLandingPage, testImageData);
+      await untilCalled(
+          mockLandingPageRepo.editLandingPage(testLandingPage, testImageData));
       // Then
-      verify(mockLandingPageRepo.editLandingPage(
-          testLandingPage, testImageData, imageHasChanged));
+      verify(mockLandingPageRepo.editLandingPage(testLandingPage, testImageData));
       verifyNoMoreInteractions(mockLandingPageRepo);
     });
 
@@ -117,13 +128,11 @@ void main() {
         EditLandingPageSuccessState()
       ];
       // When
-      when(mockLandingPageRepo.editLandingPage(
-              testLandingPage, testImageData, imageHasChanged))
+      when(mockLandingPageRepo.editLandingPage(testLandingPage, testImageData))
           .thenAnswer((_) async => right(unit));
       // Then
       expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
-      landingPageCubit.editLandingPage(
-          testLandingPage, testImageData, imageHasChanged);
+      landingPageCubit.editLandingPage(testLandingPage, testImageData);
     });
 
     test(
@@ -135,13 +144,11 @@ void main() {
         EditLandingPageFailureState(failure: BackendFailure())
       ];
       // When
-      when(mockLandingPageRepo.editLandingPage(
-              testLandingPage, testImageData, imageHasChanged))
+      when(mockLandingPageRepo.editLandingPage(testLandingPage, testImageData))
           .thenAnswer((_) async => left(BackendFailure()));
       // Then
       expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
-      landingPageCubit.editLandingPage(
-          testLandingPage, testImageData, imageHasChanged);
+      landingPageCubit.editLandingPage(testLandingPage, testImageData);
     });
   });
 
@@ -310,7 +317,13 @@ void main() {
         description: "Test",
         thumbnailDownloadURL: "Test",
         ownerID: UniqueID.fromUniqueString("1"));
-    final testImageData = Uint8List(1);
+    final testImageData = LandingPageImageData(
+        mainImage: Uint8List(1),
+        mainImageHasChanged: false,
+        faviconImage: null,
+        faviconImageHasChanged: false,
+        shareImage: null,
+        shareImageHasChanged: false);
     test("should emit LandingPageImageValid when there is a download url", () {
       // Given
       final expectedResult = [isA<LandingPageImageValid>()];
@@ -336,7 +349,8 @@ void main() {
       final expectedResult = [LandingPageNoImageFailureState()];
       // Then
       expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
-      landingPageCubit.checkLandingPageImage(testLandingPage, null);
+      landingPageCubit.checkLandingPageImage(
+          testLandingPage, const LandingPageImageData.empty());
     });
   });
 
@@ -612,6 +626,147 @@ void main() {
 
       // Then
       expect(result, isEmpty);
+    });
+  });
+
+  group("LandingPageCubit_CreateLandingPageWithAI", () {
+    final testLandingPage = LandingPage(
+        id: UniqueID.fromUniqueString("1"),
+        name: "Test",
+        description: "Test",
+        ownerID: UniqueID.fromUniqueString("1"));
+    final testImageData = LandingPageImageData(
+        mainImage: Uint8List(1),
+        mainImageHasChanged: false,
+        faviconImage: null,
+        faviconImageHasChanged: false,
+        shareImage: null,
+        shareImageHasChanged: false);
+    const testAiGeneration = PagebuilderAiGeneration(
+        businessType: "Finance", customDescription: "Test description");
+
+    test("should call landingpage repo with aiGeneration when function is called",
+        () async {
+      // Given
+      when(mockLandingPageRepo.createLandingPage(
+              testLandingPage, testImageData, "", testAiGeneration))
+          .thenAnswer((_) async => right(unit));
+      // When
+      landingPageCubit.createLandingPageWithAI(
+          testLandingPage, testImageData, testAiGeneration);
+      await untilCalled(mockLandingPageRepo.createLandingPage(
+          testLandingPage, testImageData, "", testAiGeneration));
+      // Then
+      verify(mockLandingPageRepo.createLandingPage(
+          testLandingPage, testImageData, "", testAiGeneration));
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+
+    test(
+        "should emit CreateLandingPageWithAILoadingState and then CreatedLandingPageSuccessState when successful",
+        () async {
+      // Given
+      final expectedResult = [
+        CreateLandingPageWithAILoadingState(),
+        CreatedLandingPageSuccessState()
+      ];
+      when(mockLandingPageRepo.createLandingPage(
+              testLandingPage, testImageData, "", testAiGeneration))
+          .thenAnswer((_) async => right(unit));
+      // Then
+      expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
+      landingPageCubit.createLandingPageWithAI(
+          testLandingPage, testImageData, testAiGeneration);
+    });
+
+    test(
+        "should emit CreateLandingPageWithAILoadingState and then CreateLandingPageFailureState when there was an error",
+        () async {
+      // Given
+      final expectedResult = [
+        CreateLandingPageWithAILoadingState(),
+        CreateLandingPageFailureState(failure: BackendFailure())
+      ];
+      when(mockLandingPageRepo.createLandingPage(
+              testLandingPage, testImageData, "", testAiGeneration))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // Then
+      expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
+      landingPageCubit.createLandingPageWithAI(
+          testLandingPage, testImageData, testAiGeneration);
+    });
+  });
+
+  group("LandingPageCubit_GetAllLandingPageTemplates", () {
+    final testTemplates = [
+      LandingPageTemplate(
+          id: UniqueID.fromUniqueString("1"),
+          name: "Template 1",
+          thumbnailDownloadURL: "https://thumb.url",
+          page: null),
+    ];
+
+    test("should call landingpage repo when function is called", () async {
+      // Given
+      when(mockLandingPageRepo.getAllLandingPageTemplates())
+          .thenAnswer((_) async => right(testTemplates));
+      // When
+      landingPageCubit.getAllLandingPageTemplates();
+      await untilCalled(mockLandingPageRepo.getAllLandingPageTemplates());
+      // Then
+      verify(mockLandingPageRepo.getAllLandingPageTemplates());
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+
+    test(
+        "should emit GetLandingPageTemplatesLoadingState and then GetLandingPageTemplatesSuccessState when successful",
+        () async {
+      // Given
+      final expectedResult = [
+        GetLandingPageTemplatesLoadingState(),
+        GetLandingPageTemplatesSuccessState(templates: testTemplates)
+      ];
+      when(mockLandingPageRepo.getAllLandingPageTemplates())
+          .thenAnswer((_) async => right(testTemplates));
+      // Then
+      expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
+      landingPageCubit.getAllLandingPageTemplates();
+    });
+
+    test(
+        "should emit GetLandingPageTemplatesLoadingState and then GetLandingPageTemplatesFailureState when there was an error",
+        () async {
+      // Given
+      final expectedResult = [
+        GetLandingPageTemplatesLoadingState(),
+        GetLandingPageTemplatesFailureState(failure: BackendFailure())
+      ];
+      when(mockLandingPageRepo.getAllLandingPageTemplates())
+          .thenAnswer((_) async => left(BackendFailure()));
+      // Then
+      expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
+      landingPageCubit.getAllLandingPageTemplates();
+    });
+  });
+
+  group("LandingPageCubit_CheckCompanyData", () {
+    test("should emit CheckCompanyDataMissingCompanyState when company is null",
+        () {
+      // Given
+      final expectedResult = [CheckCompanyDataMissingCompanyState()];
+      // Then
+      expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
+      landingPageCubit.checkCompanyData(null);
+    });
+
+    test("should emit CheckCompanyValidState when company is provided", () {
+      // Given
+      final company = Company(
+          id: UniqueID.fromUniqueString("1"), name: "Test GmbH");
+      final expectedResult = [CheckCompanyValidState()];
+      // Then
+      expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
+      landingPageCubit.checkCompanyData(company);
     });
   });
 

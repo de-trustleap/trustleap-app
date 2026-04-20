@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
@@ -8,9 +7,11 @@ import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/cloud_functions_service.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/core/failures/storage_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/features/legals/domain/archived_landing_page_legals.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
+import 'package:finanzbegleiter/features/landing_pages/domain/landing_page_image_data.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page_template.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_ai_generation.dart';
 import 'package:finanzbegleiter/features/promoter/domain/promoter.dart';
@@ -23,17 +24,20 @@ import 'package:finanzbegleiter/features/promoter/infrastructure/unregistered_pr
 import 'package:finanzbegleiter/features/profile/infrastructure/user_model.dart';
 import 'package:finanzbegleiter/features/landing_pages/infrastructure/landing_page_repository_sorting_helper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:rxdart/rxdart.dart';
 
 class LandingPageRepositoryImplementation implements LandingPageRepository {
   final FirebaseFirestore firestore;
   final CloudFunctionsService cloudFunctions;
   final FirebaseAuth firebaseAuth;
+  final FirebaseStorage firebaseStorage;
 
   LandingPageRepositoryImplementation(
       {required this.firestore,
       required this.cloudFunctions,
-      required this.firebaseAuth});
+      required this.firebaseAuth,
+      required this.firebaseStorage});
 
   @override
   Stream<Either<DatabaseFailure, List<LandingPage>>> observeLandingPagesByIds(
@@ -145,8 +149,7 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
   @override
   Future<Either<DatabaseFailure, Unit>> createLandingPage(
       LandingPage landingPage,
-      Uint8List imageData,
-      bool imageHasChanged,
+      LandingPageImageData imageData,
       String templateID,
       PagebuilderAiGeneration? aiGeneration) async {
     final landingPageModel = LandingPageModel.fromDomain(landingPage);
@@ -179,8 +182,18 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         'termsAndConditions': landingPage.termsAndConditions,
         'scripts': landingPage.scriptTags,
         'ownerID': landingPageModel.ownerID,
-        'imageData': base64Encode(imageData),
-        'imageHasChanged': imageHasChanged,
+        'imageData': imageData.mainImage != null
+            ? base64Encode(imageData.mainImage!)
+            : null,
+        'imageHasChanged': imageData.mainImageHasChanged,
+        'faviconData': imageData.faviconImage != null
+            ? base64Encode(imageData.faviconImage!)
+            : null,
+        'faviconHasChanged': imageData.faviconImageHasChanged,
+        'shareImageData': imageData.shareImage != null
+            ? base64Encode(imageData.shareImage!)
+            : null,
+        'shareImageHasChanged': imageData.shareImageHasChanged,
         'isDefaultPage': landingPageModel.isDefaultPage,
         'isActive': landingPageModel.isActive,
         'templateID': templateID,
@@ -207,8 +220,8 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
   }
 
   @override
-  Future<Either<DatabaseFailure, Unit>> editLandingPage(LandingPage landingPage,
-      Uint8List? imageData, bool imageHasChanged) async {
+  Future<Either<DatabaseFailure, Unit>> editLandingPage(
+      LandingPage landingPage, LandingPageImageData imageData) async {
     final landingPageModel = LandingPageModel.fromDomain(landingPage);
     return cloudFunctions.call(
       'editLandingPage',
@@ -223,8 +236,18 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         'termsAndConditions': landingPageModel.termsAndConditions,
         'scripts': landingPageModel.scriptTags,
         'ownerID': landingPageModel.ownerID,
-        'imageData': imageData != null ? base64Encode(imageData) : null,
-        'imageHasChanged': imageHasChanged,
+        'imageData': imageData.mainImageHasChanged && imageData.mainImage != null
+            ? base64Encode(imageData.mainImage!)
+            : null,
+        'imageHasChanged': imageData.mainImageHasChanged,
+        'faviconData': imageData.faviconImage != null
+            ? base64Encode(imageData.faviconImage!)
+            : null,
+        'faviconHasChanged': imageData.faviconImageHasChanged,
+        'shareImageData': imageData.shareImage != null
+            ? base64Encode(imageData.shareImage!)
+            : null,
+        'shareImageHasChanged': imageData.shareImageHasChanged,
         'isDefaultPage': landingPageModel.isDefaultPage,
         'isActive': landingPageModel.isActive,
         'businessModel': landingPageModel.businessModel,
@@ -404,6 +427,21 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       return right(ArchivedLandingPageLegalsModel.fromMap(data).toDomain());
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<StorageFailure, List<String>>>
+      getShareImageTemplateUrls() async {
+    try {
+      final listResult = await firebaseStorage
+          .ref("landingPageShareImageTemplates")
+          .listAll();
+      final urls = await Future.wait(
+          listResult.items.map((ref) => ref.getDownloadURL()));
+      return right(urls);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getStorageException(code: e.code));
     }
   }
 }

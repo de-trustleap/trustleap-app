@@ -1,11 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:typed_data';
-
 import 'package:finanzbegleiter/features/landing_pages/application/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/features/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/features/profile/domain/company.dart';
 import 'package:finanzbegleiter/core/id.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
+import 'package:finanzbegleiter/features/landing_pages/domain/landing_page_image_data.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/features/profile/infrastructure/company_model.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -104,6 +103,8 @@ class _LandingPageCreatorFormState
           businessModel: widget.landingPage?.businessModel,
           contactOption: widget.landingPage?.contactOption,
           calendlyEventURL: widget.landingPage?.calendlyEventURL,
+          faviconUrl: widget.landingPage?.faviconUrl,
+          shareImageUrl: widget.landingPage?.shareImageUrl,
           ownerID: user!.id,
           companyData: (widget.company != null && widget.createDefaultPage)
               ? CompanyModel.fromDomain(widget.company!).toMap()
@@ -111,7 +112,7 @@ class _LandingPageCreatorFormState
     } else {
       validationHasError = true;
       Modular.get<LandingPageCubit>()
-          .createLandingPage(null, Uint8List(0), false, "");
+          .createLandingPage(null, const LandingPageImageData.empty(), "");
     }
   }
 

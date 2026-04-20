@@ -12,6 +12,7 @@ import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/form_error_
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/loading_overlay.dart';
 import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_creator/landing_page_creator_first_step.dart';
 import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_creator/landing_page_creator_fourth_step.dart';
+import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_creator/landing_page_creator_fifth_step.dart';
 import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_creator/landing_page_creator_progress_indicator.dart';
 import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_creator/landing_page_creator_second_step.dart';
 import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_creator/landing_page_creator_third_step.dart';
@@ -115,6 +116,8 @@ class _LandingPageCreatorMultiPageFormState
       return 2;
     } else if (currentRoute.contains(RoutePaths.landingPageCreatorStep4Path)) {
       return 3;
+    } else if (currentRoute.contains(RoutePaths.landingPageCreatorStep5Path)) {
+      return 4;
     }
     return 0;
   }
@@ -134,7 +137,7 @@ class _LandingPageCreatorMultiPageFormState
               creatorCubit.updateLandingPage(currentState.createDefaultPage
                   ? landingPage.copyWith(isDefaultPage: true)
                   : landingPage.copyWith(isDefaultPage: false));
-              creatorCubit.updateImage(image, imageHasChanged);
+              creatorCubit.updateMainImage(image, imageHasChanged);
               Modular.to.navigate(RoutePaths.homePath +
                   RoutePaths.landingPageCreatorPath +
                   RoutePaths.landingPageCreatorStep2Path);
@@ -145,29 +148,19 @@ class _LandingPageCreatorMultiPageFormState
               ? (creatorState.landingPage?.id ?? UniqueID())
               : (creatorState.id ?? UniqueID()),
           landingPage: creatorState.landingPage,
-          image: creatorState.image,
-          imageHasChanged: creatorState.imageHasChanged,
           buttonsDisabled: creatorState.lastFormButtonsDisabled,
           isLoading: creatorState.isLoading,
           isEditMode: creatorState.isEditMode,
-          onContinueTapped: (landingPage, image, imageHasChanged, isEditMode) {
+          onContinueTapped: (landingPage, isEditMode) {
             final currentState = creatorCubit.state;
             if (currentState.isEditMode &&
                 (landingPage.isDefaultPage ?? false)) {
               Modular.get<LandingPageCubit>()
-                  .editLandingPage(landingPage, image, imageHasChanged);
-            } else if (currentState.isEditMode &&
-                !(landingPage.isDefaultPage ?? false)) {
-              creatorCubit.updateImage(image, imageHasChanged);
-              creatorCubit.updateLandingPage(landingPage);
-              Modular.to.navigate(RoutePaths.homePath +
-                  RoutePaths.landingPageCreatorPath +
-                  RoutePaths.landingPageCreatorStep3Path);
-            } else if ((landingPage.isDefaultPage ?? false) && image != null) {
+                  .editLandingPage(landingPage, currentState.imageData);
+            } else if (landingPage.isDefaultPage ?? false) {
               Modular.get<LandingPageCubit>()
-                  .createLandingPage(landingPage, image, imageHasChanged, "");
-            } else if (image != null) {
-              creatorCubit.updateImage(image, imageHasChanged);
+                  .createLandingPage(landingPage, currentState.imageData, "");
+            } else {
               creatorCubit.updateLandingPage(landingPage);
               Modular.to.navigate(RoutePaths.homePath +
                   RoutePaths.landingPageCreatorPath +
@@ -183,8 +176,6 @@ class _LandingPageCreatorMultiPageFormState
       if (!creatorState.createDefaultPage)
         LandingPageCreatorThirdStep(
             landingPage: creatorState.landingPage,
-            image: creatorState.image,
-            imageHasChanged: creatorState.imageHasChanged,
             buttonsDisabled: creatorState.lastFormButtonsDisabled,
             isLoading: creatorState.isLoading,
             isEditMode: creatorState.isEditMode,
@@ -194,37 +185,59 @@ class _LandingPageCreatorMultiPageFormState
                   RoutePaths.landingPageCreatorPath +
                   RoutePaths.landingPageCreatorStep2Path);
             },
-            onContinue: (landingPage, image, imageHasChanged) {
+            onContinue: (landingPage) {
               creatorCubit.updateLandingPage(landingPage);
-              creatorCubit.updateImage(image, imageHasChanged);
               Modular.to.navigate(RoutePaths.homePath +
                   RoutePaths.landingPageCreatorPath +
                   RoutePaths.landingPageCreatorStep4Path);
             }),
-      if (!creatorState.createDefaultPage && !creatorState.isEditMode)
+      if (!creatorState.createDefaultPage)
         LandingPageCreatorFourthStep(
             landingPage: creatorState.landingPage,
-            image: creatorState.image,
-            imageHasChanged: creatorState.imageHasChanged,
+            imageData: creatorState.imageData,
+            company: creatorState.company,
             buttonsDisabled: creatorState.lastFormButtonsDisabled,
             isLoading: creatorState.isLoading,
+            isEditMode: creatorState.isEditMode,
             onBack: (landingPage) {
               creatorCubit.updateLandingPage(landingPage);
               Modular.to.navigate(RoutePaths.homePath +
                   RoutePaths.landingPageCreatorPath +
                   RoutePaths.landingPageCreatorStep3Path);
             },
-            onSaveTapped: (landingPage, image, imageHasChanged, templateID) {
-              if (image != null) {
-                Modular.get<LandingPageCubit>().createLandingPage(
-                    landingPage, image, imageHasChanged, templateID);
+            onContinue: (landingPage, imageData) {
+              creatorCubit.updateLandingPage(landingPage);
+              creatorCubit.updateFaviconImage(
+                  imageData.faviconImage, imageData.faviconImageHasChanged);
+              creatorCubit.updateShareImage(
+                  imageData.shareImage, imageData.shareImageHasChanged);
+              if (creatorCubit.state.isEditMode) {
+                Modular.get<LandingPageCubit>().editLandingPage(
+                    landingPage, creatorCubit.state.imageData);
+              } else {
+                Modular.to.navigate(RoutePaths.homePath +
+                    RoutePaths.landingPageCreatorPath +
+                    RoutePaths.landingPageCreatorStep5Path);
               }
+            }),
+      if (!creatorState.createDefaultPage && !creatorState.isEditMode)
+        LandingPageCreatorFifthStep(
+            landingPage: creatorState.landingPage,
+            buttonsDisabled: creatorState.lastFormButtonsDisabled,
+            isLoading: creatorState.isLoading,
+            onBack: (landingPage) {
+              creatorCubit.updateLandingPage(landingPage);
+              Modular.to.navigate(RoutePaths.homePath +
+                  RoutePaths.landingPageCreatorPath +
+                  RoutePaths.landingPageCreatorStep4Path);
             },
-            onAISaveTapped: (landingPage, image, imageHasChanged, aiData) {
-              if (image != null) {
-                Modular.get<LandingPageCubit>().createLandingPageWithAI(
-                    landingPage, image, imageHasChanged, aiData);
-              }
+            onSaveTapped: (landingPage, templateID) {
+              Modular.get<LandingPageCubit>().createLandingPage(
+                  landingPage, creatorCubit.state.imageData, templateID);
+            },
+            onAISaveTapped: (landingPage, aiData) {
+              Modular.get<LandingPageCubit>().createLandingPageWithAI(
+                  landingPage, creatorCubit.state.imageData, aiData);
             })
     ];
   }

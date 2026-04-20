@@ -1,17 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:typed_data';
+import "package:bloc/bloc.dart";
+import "package:equatable/equatable.dart";
+import "package:finanzbegleiter/core/failures/database_failures.dart";
+import "package:finanzbegleiter/features/profile/domain/company.dart";
+import "package:finanzbegleiter/features/landing_pages/domain/landing_page.dart";
+import "package:finanzbegleiter/features/landing_pages/domain/landing_page_image_data.dart";
+import "package:finanzbegleiter/features/landing_pages/domain/landing_page_template.dart";
+import "package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_ai_generation.dart";
+import "package:finanzbegleiter/features/promoter/domain/promoter.dart";
+import "package:finanzbegleiter/features/landing_pages/domain/landing_page_repository.dart";
 
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:finanzbegleiter/core/failures/database_failures.dart';
-import 'package:finanzbegleiter/features/profile/domain/company.dart';
-import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
-import 'package:finanzbegleiter/features/landing_pages/domain/landing_page_template.dart';
-import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_ai_generation.dart';
-import 'package:finanzbegleiter/features/promoter/domain/promoter.dart';
-import 'package:finanzbegleiter/features/landing_pages/domain/landing_page_repository.dart';
-
-part 'landingpage_state.dart';
+part "landingpage_state.dart";
 
 class LandingPageCubit extends Cubit<LandingPageState> {
   final LandingPageRepository landingPageRepo;
@@ -21,64 +20,69 @@ class LandingPageCubit extends Cubit<LandingPageState> {
     this.landingPageRepo,
   ) : super(LandingPageInitial());
 
-  void createLandingPage(LandingPage? landingpage, Uint8List imageData,
-      bool imageHasChanged, String templateID) async {
+  void createLandingPage(LandingPage? landingpage,
+      LandingPageImageData imageData, String templateID) async {
     if (landingpage == null) {
       emit(LandingPageShowValidationState());
-    } else if (imageData == [0]) {
+    } else if (imageData.mainImage == null ||
+        imageData.mainImage == [0]) {
       emit(LandingPageNoImageFailureState());
-    } else if (imageData.lengthInBytes > fileSizeLimit) {
+    } else if (imageData.mainImage!.lengthInBytes > fileSizeLimit) {
       emit(LandingPageImageExceedsFileSizeLimitFailureState());
     } else {
       emit(CreateLandingPageLoadingState());
       final failureOrSuccess = await landingPageRepo.createLandingPage(
-          landingpage, imageData, imageHasChanged, templateID, null);
+          landingpage, imageData, templateID, null);
       failureOrSuccess.fold(
           (failure) => emit(CreateLandingPageFailureState(failure: failure)),
           (_) => emit(CreatedLandingPageSuccessState()));
     }
   }
 
-  void createLandingPageWithAI(LandingPage? landingpage, Uint8List imageData,
-      bool imageHasChanged, PagebuilderAiGeneration aiGeneration) async {
+  void createLandingPageWithAI(LandingPage? landingpage,
+      LandingPageImageData imageData,
+      PagebuilderAiGeneration aiGeneration) async {
     if (landingpage == null) {
       emit(LandingPageShowValidationState());
-    } else if (imageData == [0]) {
+    } else if (imageData.mainImage == null ||
+        imageData.mainImage == [0]) {
       emit(LandingPageNoImageFailureState());
-    } else if (imageData.lengthInBytes > fileSizeLimit) {
+    } else if (imageData.mainImage!.lengthInBytes > fileSizeLimit) {
       emit(LandingPageImageExceedsFileSizeLimitFailureState());
     } else {
       emit(CreateLandingPageWithAILoadingState());
       final failureOrSuccess = await landingPageRepo.createLandingPage(
-          landingpage, imageData, imageHasChanged, "", aiGeneration);
+          landingpage, imageData, "", aiGeneration);
       failureOrSuccess.fold(
           (failure) => emit(CreateLandingPageFailureState(failure: failure)),
           (_) => emit(CreatedLandingPageSuccessState()));
     }
   }
 
-  void editLandingPage(LandingPage? landingPage, Uint8List? imageData,
-      bool imageHasChanged) async {
+  void editLandingPage(
+      LandingPage? landingPage, LandingPageImageData imageData) async {
     if (landingPage == null) {
       emit(LandingPageShowValidationState());
-    } else if (imageData != null && imageData.lengthInBytes > fileSizeLimit) {
+    } else if (imageData.mainImage != null &&
+        imageData.mainImage!.lengthInBytes > fileSizeLimit) {
       emit(LandingPageImageExceedsFileSizeLimitFailureState());
     } else {
       emit(EditLandingPageLoadingState());
-      final failureOrSuccess = await landingPageRepo.editLandingPage(
-          landingPage, imageData, imageHasChanged);
+      final failureOrSuccess =
+          await landingPageRepo.editLandingPage(landingPage, imageData);
       failureOrSuccess.fold(
           (failure) => emit(EditLandingPageFailureState(failure: failure)),
           (_) => emit(EditLandingPageSuccessState()));
     }
   }
 
-  void checkLandingPageImage(LandingPage? landingPage, Uint8List? imageData) {
+  void checkLandingPageImage(
+      LandingPage? landingPage, LandingPageImageData imageData) {
     if (landingPage != null && landingPage.thumbnailDownloadURL != null) {
       emit(LandingPageImageValid());
-    } else if (imageData == null || imageData == [0]) {
+    } else if (imageData.mainImage == null || imageData.mainImage == [0]) {
       emit(LandingPageNoImageFailureState());
-    } else if (imageData.lengthInBytes > fileSizeLimit) {
+    } else if (imageData.mainImage!.lengthInBytes > fileSizeLimit) {
       emit(LandingPageImageExceedsFileSizeLimitFailureState());
     } else {
       emit(LandingPageImageValid());
@@ -201,5 +205,4 @@ class LandingPageCubit extends Cubit<LandingPageState> {
       return hasNoLandingPages || hasNoActiveLandingPages;
     }).toList();
   }
-
 }
