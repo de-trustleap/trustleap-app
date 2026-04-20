@@ -30,6 +30,8 @@ class LandingPageModel extends Equatable {
   final String? calendlyEventURL;
   final Map<String, dynamic>? companyData;
   final int? totalVisits;
+  final String? faviconUrl;
+  final String? shareImageUrl;
 
   const LandingPageModel(
       {required this.id,
@@ -55,7 +57,9 @@ class LandingPageModel extends Equatable {
       this.contactOption,
       this.calendlyEventURL,
       this.companyData,
-      this.totalVisits});
+      this.totalVisits,
+      this.faviconUrl,
+      this.shareImageUrl});
 
   LandingPageModel copyWith(
       {String? id,
@@ -81,7 +85,9 @@ class LandingPageModel extends Equatable {
       String? contactOption,
       String? calendlyEventURL,
       Map<String, dynamic>? companyData,
-      int? totalVisits}) {
+      int? totalVisits,
+      String? faviconUrl,
+      String? shareImageUrl}) {
     return LandingPageModel(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -106,7 +112,9 @@ class LandingPageModel extends Equatable {
         contactOption: contactOption ?? this.contactOption,
         calendlyEventURL: calendlyEventURL ?? this.calendlyEventURL,
         companyData: companyData ?? this.companyData,
-        totalVisits: totalVisits ?? this.totalVisits);
+        totalVisits: totalVisits ?? this.totalVisits,
+        faviconUrl: faviconUrl ?? this.faviconUrl,
+        shareImageUrl: shareImageUrl ?? this.shareImageUrl);
   }
 
   Map<String, dynamic> toMap() {
@@ -134,7 +142,9 @@ class LandingPageModel extends Equatable {
       'contactOption': contactOption,
       'calendlyEventURL': calendlyEventURL,
       'companyData': companyData,
-      'totalVisits': totalVisits
+      'totalVisits': totalVisits,
+      'faviconUrl': faviconUrl,
+      'shareImageUrl': shareImageUrl,
     };
   }
 
@@ -192,7 +202,9 @@ class LandingPageModel extends Equatable {
         companyData: map['companyData'] != null
             ? map['companyData'] as Map<String, dynamic>
             : null,
-        totalVisits: map['totalVisits'] != null ? map['totalVisits'] as int : null);
+        totalVisits: map['totalVisits'] != null ? map['totalVisits'] as int : null,
+        faviconUrl: map['faviconUrl'] != null ? map['faviconUrl'] as String : null,
+        shareImageUrl: map['shareImageUrl'] != null ? map['shareImageUrl'] as String : null);
   }
 
   factory LandingPageModel.fromFirestore(Map<String, dynamic> doc, String id) {
@@ -228,7 +240,9 @@ class LandingPageModel extends Equatable {
         contactOption: convertedContactOption,
         calendlyEventURL: calendlyEventURL,
         companyData: companyData,
-        totalVisits: totalVisits);
+        totalVisits: totalVisits,
+        faviconUrl: faviconUrl,
+        shareImageUrl: shareImageUrl);
   }
 
   factory LandingPageModel.fromDomain(LandingPage landingPage) {
@@ -256,7 +270,9 @@ class LandingPageModel extends Equatable {
         contactOption: landingPage.contactOption?.name,
         calendlyEventURL: landingPage.calendlyEventURL,
         companyData: landingPage.companyData,
-        totalVisits: landingPage.totalVisits);
+        totalVisits: landingPage.totalVisits,
+        faviconUrl: landingPage.faviconUrl,
+        shareImageUrl: landingPage.shareImageUrl);
   }
 
   BusinessModel? _getBusinessModelFromString(String? businessModel) {
@@ -311,6 +327,8 @@ class LandingPageModel extends Equatable {
         contactOption,
         calendlyEventURL,
         companyData,
-        totalVisits
+        totalVisits,
+        faviconUrl,
+        shareImageUrl,
       ];
 }

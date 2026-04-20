@@ -6,7 +6,6 @@ import 'package:flutter_dropzone/flutter_dropzone.dart';
 class ImageUploadDropzone extends StatefulWidget {
   final Widget child;
   final ValueChanged<ImageDroppedFile> onDroppedFile;
-  final ValueChanged<List<ImageDroppedFile>> onDroppedMultipleFiles;
   final Function onHover;
   final Function onLeave;
 
@@ -14,7 +13,6 @@ class ImageUploadDropzone extends StatefulWidget {
       {super.key,
       required this.child,
       required this.onDroppedFile,
-      required this.onDroppedMultipleFiles,
       required this.onHover,
       required this.onLeave});
 
@@ -25,39 +23,15 @@ class ImageUploadDropzone extends StatefulWidget {
 class _ImageUploadDropzoneState extends State<ImageUploadDropzone> {
   late DropzoneViewController controller;
 
-  Future fileDropped(dynamic event) async {
+  Future filesDropped(List<dynamic>? events) async {
+    if (events == null || events.isEmpty) return;
+    final event = events.first;
     final name = event.name;
     final mime = await controller.getFileMIME(event);
     final bytes = await controller.getFileSize(event);
     final data = await controller.getFileData(event);
-    final droppedFile =
-        ImageDroppedFile(data: data, name: name, mime: mime, bytes: bytes);
-    widget.onDroppedFile(droppedFile);
-  }
-
-  Future multipleFilesDropped(List<dynamic>? events) async {
-    if (events != null) {
-      final List<ImageDroppedFile> fileList = [];
-      for (var event in events) {
-        final name = event.name;
-        final mime = await controller.getFileMIME(event);
-        final bytes = await controller.getFileSize(event);
-        final data = await controller.getFileData(event);
-
-        final droppedFile =
-            ImageDroppedFile(data: data, name: name, mime: mime, bytes: bytes);
-        fileList.add(droppedFile);
-      }
-      widget.onDroppedMultipleFiles(fileList);
-    }
-  }
-
-  Future hovered() async {
-    widget.onHover();
-  }
-
-  Future leaved() async {
-    widget.onLeave();
+    widget.onDroppedFile(
+        ImageDroppedFile(data: data, name: name, mime: mime, bytes: bytes));
   }
 
   @override
@@ -66,10 +40,9 @@ class _ImageUploadDropzoneState extends State<ImageUploadDropzone> {
       DropzoneView(
           operation: DragOperation.copy,
           onCreated: (controller) => this.controller = controller,
-          onDropFile: fileDropped,
-          onDropFiles: multipleFilesDropped,
-          onHover: hovered,
-          onLeave: leaved),
+          onDropFiles: filesDropped,
+          onHover: () => widget.onHover(),
+          onLeave: () => widget.onLeave()),
       Center(child: widget.child)
     ]);
   }

@@ -1,12 +1,13 @@
-import 'package:finanzbegleiter/features/landing_pages/application/landingpage/landingpage_cubit.dart';
-import 'package:finanzbegleiter/features/profile/domain/company.dart';
 import 'package:finanzbegleiter/core/id.dart';
-import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
-import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/core/widgets/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/form_error_view.dart';
+import 'package:finanzbegleiter/features/landing_pages/application/landingpage/landingpage_cubit.dart';
+import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
+import 'package:finanzbegleiter/features/landing_pages/domain/landing_page_image_data.dart';
 import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_creator/landing_page_creator_first_step_form.dart';
 import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_creator/landing_page_creator_image_section.dart';
+import 'package:finanzbegleiter/features/profile/domain/company.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,7 +51,13 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
   void _onContinue(LandingPage landingPage) {
     this.landingPage = landingPage;
     final landingPageCubit = Modular.get<LandingPageCubit>();
-    landingPageCubit.checkLandingPageImage(widget.landingPage, image);
+    landingPageCubit.checkLandingPageImage(
+      widget.landingPage,
+      const LandingPageImageData.empty().copyWith(
+        mainImage: image,
+        mainImageHasChanged: imageHasChanged,
+      ),
+    );
   }
 
   @override

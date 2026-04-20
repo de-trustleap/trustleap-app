@@ -175,6 +175,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get register_page_title => (super.noSuchMethod(
+        Invocation.getter(#register_page_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#register_page_title),
+        ),
+      ) as String);
+
+  @override
   String get register_privacy_policy_text => (super.noSuchMethod(
         Invocation.getter(#register_privacy_policy_text),
         returnValue: _i3.dummyValue<String>(
@@ -288,6 +297,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#login_register_text),
+        ),
+      ) as String);
+
+  @override
+  String get login_register_suffix => (super.noSuchMethod(
+        Invocation.getter(#login_register_suffix),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#login_register_suffix),
         ),
       ) as String);
 
@@ -523,6 +541,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#menuitems_recommendation_manager),
+        ),
+      ) as String);
+
+  @override
+  String get menuitems_manager => (super.noSuchMethod(
+        Invocation.getter(#menuitems_manager),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#menuitems_manager),
         ),
       ) as String);
 
@@ -893,6 +920,24 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_create_description_info => (super.noSuchMethod(
+        Invocation.getter(#landingpage_create_description_info),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_create_description_info),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_create_promotion_template_info => (super.noSuchMethod(
+        Invocation.getter(#landingpage_create_promotion_template_info),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_create_promotion_template_info),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_create_promotion_template_placeholder =>
       (super.noSuchMethod(
         Invocation.getter(#landingpage_create_promotion_template_placeholder),
@@ -1051,6 +1096,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#placeholder_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_title_info_tooltip => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_title_info_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_title_info_tooltip),
         ),
       ) as String);
 
@@ -5476,6 +5530,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_creator_ai_form_data_notice => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_ai_form_data_notice),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_ai_form_data_notice),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_creator_ai_form_radio_title => (super.noSuchMethod(
         Invocation.getter(#landingpage_creator_ai_form_radio_title),
         returnValue: _i3.dummyValue<String>(
@@ -5591,6 +5654,109 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_creator_favicon_section_title => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_favicon_section_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_favicon_section_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_favicon_info_tooltip => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_favicon_info_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_favicon_info_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_share_image_section_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_share_image_section_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_share_image_section_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_share_image_info_tooltip =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_share_image_info_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_share_image_info_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_favicon_crop_hint => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_favicon_crop_hint),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_favicon_crop_hint),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_share_image_crop_hint => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_share_image_crop_hint),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_share_image_crop_hint),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_share_image_templates_label =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_share_image_templates_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_share_image_templates_label),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_crop_dialog_title => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_crop_dialog_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_crop_dialog_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_crop_dialog_gesture_hint =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_crop_dialog_gesture_hint),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_crop_dialog_gesture_hint),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_crop_dialog_confirm => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_crop_dialog_confirm),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_crop_dialog_confirm),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_image_upload_hint => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_image_upload_hint),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_image_upload_hint),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_overview_no_default_page_title => (super.noSuchMethod(
         Invocation.getter(#landingpage_overview_no_default_page_title),
         returnValue: _i3.dummyValue<String>(
@@ -5688,6 +5854,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#save_recommendation_loading_subtitle),
+        ),
+      ) as String);
+
+  @override
+  String get save_recommendation_draft_error => (super.noSuchMethod(
+        Invocation.getter(#save_recommendation_draft_error),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#save_recommendation_draft_error),
         ),
       ) as String);
 
@@ -6364,6 +6539,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#recommendation_missing_landingpage_button),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_no_landingpage_assigned_text => (super.noSuchMethod(
+        Invocation.getter(#recommendation_no_landingpage_assigned_text),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_no_landingpage_assigned_text),
         ),
       ) as String);
 
@@ -7554,6 +7738,24 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#dashboard_recommendations_filter_title),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_filter_title => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_filter_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_filter_title),
+        ),
+      ) as String);
+
+  @override
+  String get campaign_manager_filter_title => (super.noSuchMethod(
+        Invocation.getter(#campaign_manager_filter_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#campaign_manager_filter_title),
         ),
       ) as String);
 
@@ -10168,6 +10370,123 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get legals_error_title => (super.noSuchMethod(
+        Invocation.getter(#legals_error_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#legals_error_title),
+        ),
+      ) as String);
+
+  @override
+  String get settings_title => (super.noSuchMethod(
+        Invocation.getter(#settings_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#settings_title),
+        ),
+      ) as String);
+
+  @override
+  String get settings_theme_label => (super.noSuchMethod(
+        Invocation.getter(#settings_theme_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#settings_theme_label),
+        ),
+      ) as String);
+
+  @override
+  String get settings_theme_light => (super.noSuchMethod(
+        Invocation.getter(#settings_theme_light),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#settings_theme_light),
+        ),
+      ) as String);
+
+  @override
+  String get settings_theme_dark => (super.noSuchMethod(
+        Invocation.getter(#settings_theme_dark),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#settings_theme_dark),
+        ),
+      ) as String);
+
+  @override
+  String get settings_legal_section_title => (super.noSuchMethod(
+        Invocation.getter(#settings_legal_section_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#settings_legal_section_title),
+        ),
+      ) as String);
+
+  @override
+  String get settings_privacy_policy => (super.noSuchMethod(
+        Invocation.getter(#settings_privacy_policy),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#settings_privacy_policy),
+        ),
+      ) as String);
+
+  @override
+  String get settings_terms_and_conditions => (super.noSuchMethod(
+        Invocation.getter(#settings_terms_and_conditions),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#settings_terms_and_conditions),
+        ),
+      ) as String);
+
+  @override
+  String get settings_imprint => (super.noSuchMethod(
+        Invocation.getter(#settings_imprint),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#settings_imprint),
+        ),
+      ) as String);
+
+  @override
+  String get settings_logout => (super.noSuchMethod(
+        Invocation.getter(#settings_logout),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#settings_logout),
+        ),
+      ) as String);
+
+  @override
+  String get profile_settings_tab => (super.noSuchMethod(
+        Invocation.getter(#profile_settings_tab),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_settings_tab),
+        ),
+      ) as String);
+
+  @override
+  String get settings_dark_mode_subtitle => (super.noSuchMethod(
+        Invocation.getter(#settings_dark_mode_subtitle),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#settings_dark_mode_subtitle),
+        ),
+      ) as String);
+
+  @override
+  String get settings_app_version => (super.noSuchMethod(
+        Invocation.getter(#settings_app_version),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#settings_app_version),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
@@ -10360,6 +10679,22 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
               firstName,
               lastName,
             ],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String landingpage_creator_crop_dialog_hint(String? ratio) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #landingpage_creator_crop_dialog_hint,
+          [ratio],
+        ),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.method(
+            #landingpage_creator_crop_dialog_hint,
+            [ratio],
           ),
         ),
       ) as String);

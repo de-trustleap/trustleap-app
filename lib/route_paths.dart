@@ -38,6 +38,7 @@ class RoutePaths {
   static const String landingPageCreatorStep2Path = "/step-2";
   static const String landingPageCreatorStep3Path = "/step-3";
   static const String landingPageCreatorStep4Path = "/step-4";
+  static const String landingPageCreatorStep5Path = "/step-5";
 
   static const String loginPath = "/";
   static const String registerPath = "/register";

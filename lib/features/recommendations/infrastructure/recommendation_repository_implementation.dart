@@ -13,8 +13,10 @@ import 'package:finanzbegleiter/features/recommendations/domain/personalized_rec
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/draft_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_repository.dart';
 import 'package:finanzbegleiter/features/recommendations/infrastructure/archived_recommendation_item_model.dart';
+import 'package:finanzbegleiter/features/recommendations/infrastructure/draft_recommendation_item_model.dart';
 import 'package:finanzbegleiter/features/recommendations/infrastructure/recommendation_item_model.dart';
 import 'package:finanzbegleiter/features/profile/infrastructure/user_model.dart';
 import 'package:finanzbegleiter/features/recommendations/infrastructure/user_recommendation_model.dart';
@@ -739,6 +741,37 @@ class RecommendationRepositoryImplementation
       userID: archived.userID,
       promoterImageDownloadURL: null,
       createdAt: archived.createdAt ?? DateTime.now(),
+    );
+  }
+
+  @override
+  Future<Either<DatabaseFailure, Unit>> createDraftRecommendation(
+      DraftRecommendationItem draft) async {
+    try {
+      final map = DraftRecommendationItemModel.fromDomain(draft).toMap();
+      map['expiresAt'] = Timestamp.fromDate(
+        DateTime.now().add(const Duration(days: 1)),
+      );
+      map['createdAt'] = FieldValue.serverTimestamp();
+      await firestore
+          .collection('draftRecommendations')
+          .doc(draft.id)
+          .set(map);
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    } catch (_) {
+      return left(BackendFailure());
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, Unit>> deleteDraftRecommendation(
+      String id) async {
+    return cloudFunctions.call(
+      'deleteDraftRecommendation',
+      {'id': id},
+      (_) => unit,
     );
   }
 

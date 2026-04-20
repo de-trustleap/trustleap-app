@@ -27,7 +27,18 @@
       "mcp__plugin_firebase_firebase__firebase_get_environment",
       "mcp__github__pull_request_read",
       "Bash(find /Users/marcelspindler/Documents/Dev/Finanzbegleiter/trustleapLandingpages -type f \\\\\\(-name *.ts -o -name *.tsx -o -name *.js -o -name *.jsx \\\\\\))",
-      "Bash(find /Users/marcelspindler/Documents/Dev/Finanzbegleiter/trustleap-page-renderer/src -type f \\\\\\(-name *.ts -o -name *.tsx -o -name *.js -o -name *.jsx \\\\\\))"
+      "Bash(find /Users/marcelspindler/Documents/Dev/Finanzbegleiter/trustleap-page-renderer/src -type f \\\\\\(-name *.ts -o -name *.tsx -o -name *.js -o -name *.jsx \\\\\\))",
+      "mcp__github__get_file_contents",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "mcp__plugin_firebase_firebase__storage_get_object_download_url",
+      "WebFetch(domain:firebasestorage.googleapis.com)",
+      "Bash(curl -s \"https://firebasestorage.googleapis.com/v0/b/finanzwegbegleiter.appspot.com/o/generatedHtml%2Fead76fb0-3b17-11f1-a022-3950d9c41376.html?alt=media&token=f5a533a4-f9ba-4124-ae06-6b6812648579\")",
+      "Bash(curl -s \"https://firebasestorage.googleapis.com/v0/b/finanzwegbegleiter.appspot.com/o/generatedHtml%2F85ff6c00-3b44-11f1-a182-fdb1581f3168.html?alt=media&token=6e606d49-5d9b-4c2b-9b38-3656c26a813c\")",
+      "mcp__plugin_firebase_firebase__firestore_get_document",
+      "mcp__plugin_firebase_firebase__firestore_query_collection",
+      "mcp__plugin_firebase_firebase__functions_get_logs",
+      "mcp__github__search_pull_requests",
+      "WebFetch(domain:storage.googleapis.com)"
     ],
     "deny": []
   }

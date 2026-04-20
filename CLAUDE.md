@@ -64,3 +64,4 @@ dart run build_runner build --delete-conflicting-outputs
 - **Tests:** Bei neuen Tests an bestehenden vergleichbaren Tests im `test/`-Verzeichnis orientieren und deren Patterns übernehmen
 - **Navigation:** CustomNavigator statt Navigator verwenden
 - **Snackbars:** CustomSnackbar für alle Snackbar-Anzeigen nutzen
+- **Texte:** Für Texte statt Text Widgets immer SelectableText nutzen

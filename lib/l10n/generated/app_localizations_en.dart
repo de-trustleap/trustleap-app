@@ -2067,6 +2067,51 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_creator_select_template_title => 'Select a template';
 
   @override
+  String get landingpage_creator_favicon_section_title => 'Favicon';
+
+  @override
+  String get landingpage_creator_favicon_info_tooltip =>
+      'The favicon is displayed in browser tabs, bookmark lists and search results. It increases brand recognition, professionalises the brand appearance and improves the user experience.';
+
+  @override
+  String get landingpage_creator_share_image_section_title => 'Share Image';
+
+  @override
+  String get landingpage_creator_share_image_info_tooltip =>
+      'This image is used for social media appearances and for sharing via WhatsApp. It ideally has an aspect ratio of 1.91:1.';
+
+  @override
+  String get landingpage_creator_favicon_crop_hint =>
+      'For best results upload an image in 1:1 format.';
+
+  @override
+  String get landingpage_creator_share_image_crop_hint =>
+      'For best results upload an image in 1.91:1 format (e.g. 1200×630px) – the standard format for social media previews.';
+
+  @override
+  String get landingpage_creator_share_image_templates_label =>
+      'Or select a template:';
+
+  @override
+  String get landingpage_creator_crop_dialog_title => 'Crop image';
+
+  @override
+  String landingpage_creator_crop_dialog_hint(String ratio) {
+    return 'The image will be cropped to the $ratio format. Drag and zoom to the desired section.';
+  }
+
+  @override
+  String get landingpage_creator_crop_dialog_gesture_hint =>
+      'Drag to pan · Trackpad pinch or mouse wheel to zoom';
+
+  @override
+  String get landingpage_creator_crop_dialog_confirm => 'Apply';
+
+  @override
+  String get landingpage_creator_image_upload_hint =>
+      'Click or drag an image here';
+
+  @override
   String get landingpage_overview_no_default_page_title => 'Setup Landingpage';
 
   @override
@@ -2102,6 +2147,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get save_recommendation_loading_subtitle =>
       'The recommendation is being saved';
+
+  @override
+  String get save_recommendation_draft_error =>
+      'An error occurred. Please try again later.';
 
   @override
   String get save_campaign_loading_title => 'Creating campaign';

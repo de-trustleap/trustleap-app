@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/features/recommendations/domain/draft_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/core/id.dart';
@@ -577,6 +578,78 @@ void main() {
       // Then
       verify(mockRecoRepo.markAsViewed(recommendationID1, lastViewed1)).called(1);
       verify(mockRecoRepo.markAsViewed(recommendationID2, lastViewed1)).called(1);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+  });
+
+  group("RecommendationRepositoryImplementation_CreateDraftRecommendation", () {
+    final draft = DraftRecommendationItem(
+      id: "1",
+      ownerID: "owner1",
+      landingPageID: "lp1",
+      defaultLandingPageID: "dlp1",
+      promoterName: "Promoter",
+      name: "Customer",
+      serviceProviderName: "Provider",
+    );
+
+    test("should return unit when creating draft recommendation was successful",
+        () async {
+      // Given
+      final expectedResult = right(unit);
+      when(mockRecoRepo.createDraftRecommendation(draft))
+          .thenAnswer((_) async => right(unit));
+      // When
+      final result = await mockRecoRepo.createDraftRecommendation(draft);
+      // Then
+      verify(mockRecoRepo.createDraftRecommendation(draft));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+
+    test("should return failure when creating draft recommendation failed",
+        () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockRecoRepo.createDraftRecommendation(draft))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockRecoRepo.createDraftRecommendation(draft);
+      // Then
+      verify(mockRecoRepo.createDraftRecommendation(draft));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+  });
+
+  group("RecommendationRepositoryImplementation_DeleteDraftRecommendation", () {
+    final draftID = "draft1";
+
+    test("should return unit when deleting draft recommendation was successful",
+        () async {
+      // Given
+      final expectedResult = right(unit);
+      when(mockRecoRepo.deleteDraftRecommendation(draftID))
+          .thenAnswer((_) async => right(unit));
+      // When
+      final result = await mockRecoRepo.deleteDraftRecommendation(draftID);
+      // Then
+      verify(mockRecoRepo.deleteDraftRecommendation(draftID));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+
+    test("should return failure when deleting draft recommendation failed",
+        () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockRecoRepo.deleteDraftRecommendation(draftID))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockRecoRepo.deleteDraftRecommendation(draftID);
+      // Then
+      verify(mockRecoRepo.deleteDraftRecommendation(draftID));
+      expect(expectedResult, result);
       verifyNoMoreInteractions(mockRecoRepo);
     });
   });

@@ -2412,6 +2412,59 @@
     "@landingpage_creator_select_template_title": {
         "description": "Title for the template selection in the fourth step of the landing page creator"
     },
+    "landingpage_creator_favicon_section_title": "Favicon",
+    "@landingpage_creator_favicon_section_title": {
+        "description": "Section title for favicon upload in the creator"
+    },
+    "landingpage_creator_favicon_info_tooltip": "The favicon is displayed in browser tabs, bookmark lists and search results. It increases brand recognition, professionalises the brand appearance and improves the user experience.",
+    "@landingpage_creator_favicon_info_tooltip": {
+        "description": "Tooltip for the favicon info button in the creator"
+    },
+    "landingpage_creator_share_image_section_title": "Share Image",
+    "@landingpage_creator_share_image_section_title": {
+        "description": "Section title for share image in the creator"
+    },
+    "landingpage_creator_share_image_info_tooltip": "This image is used for social media appearances and for sharing via WhatsApp. It ideally has an aspect ratio of 1.91:1.",
+    "@landingpage_creator_share_image_info_tooltip": {
+        "description": "Tooltip for the share image info button in the creator"
+    },
+    "landingpage_creator_favicon_crop_hint": "For best results upload an image in 1:1 format.",
+    "@landingpage_creator_favicon_crop_hint": {
+        "description": "Hint about the recommended format for the favicon"
+    },
+    "landingpage_creator_share_image_crop_hint": "For best results upload an image in 1.91:1 format (e.g. 1200×630px) – the standard format for social media previews.",
+    "@landingpage_creator_share_image_crop_hint": {
+        "description": "Hint that the share image will be cropped to 1.91:1"
+    },
+    "landingpage_creator_share_image_templates_label": "Or select a template:",
+    "@landingpage_creator_share_image_templates_label": {
+        "description": "Label above the template selection for the share image"
+    },
+    "landingpage_creator_crop_dialog_title": "Crop image",
+    "@landingpage_creator_crop_dialog_title": {
+        "description": "Title of the crop dialog"
+    },
+    "landingpage_creator_crop_dialog_hint": "The image will be cropped to the {ratio} format. Drag and zoom to the desired section.",
+    "@landingpage_creator_crop_dialog_hint": {
+        "description": "Hint text in the crop dialog with aspect ratio",
+        "placeholders": {
+            "ratio": {
+                "type": "String"
+            }
+        }
+    },
+    "landingpage_creator_crop_dialog_gesture_hint": "Drag to pan · Trackpad pinch or mouse wheel to zoom",
+    "@landingpage_creator_crop_dialog_gesture_hint": {
+        "description": "Gesture hint in the crop dialog"
+    },
+    "landingpage_creator_crop_dialog_confirm": "Apply",
+    "@landingpage_creator_crop_dialog_confirm": {
+        "description": "Confirm button in the crop dialog"
+    },
+    "landingpage_creator_image_upload_hint": "Click or drag an image here",
+    "@landingpage_creator_image_upload_hint": {
+        "description": "Hint text in the image upload box"
+    },
     "landingpage_overview_no_default_page_title": "Setup Landingpage",
     "@landingpage_overview_no_default_page_title": {
         "description": "Title for the page that is displayed if you have not yet created a default landing page."
@@ -2455,6 +2508,10 @@
     "save_recommendation_loading_subtitle": "The recommendation is being saved",
     "@save_recommendation_loading_subtitle": {
         "description": "Subtitle of the loading dialog when saving a recommendation"
+    },
+    "save_recommendation_draft_error": "An error occurred. Please try again later.",
+    "@save_recommendation_draft_error": {
+        "description": "Error message when creating a draft recommendation fails"
     },
     "save_campaign_loading_title": "Creating campaign",
     "@save_campaign_loading_title": {

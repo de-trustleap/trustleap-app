@@ -1,6 +1,3 @@
-import 'dart:typed_data';
-
-import 'package:finanzbegleiter/features/landing_pages/application/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -15,24 +12,19 @@ import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/tooltip_but
 import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_creator/calendly_connection_widget.dart';
 import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_creator/landing_page_creator_form_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageCreatorThirdStep extends StatefulWidget {
   final LandingPage? landingPage;
-  final Uint8List? image;
-  final bool imageHasChanged;
   final bool buttonsDisabled;
   final bool isLoading;
   final bool isEditMode;
   final Function(LandingPage) onBack;
-  final Function(LandingPage, Uint8List?, bool) onContinue;
+  final Function(LandingPage) onContinue;
 
   const LandingPageCreatorThirdStep({
     super.key,
     required this.landingPage,
-    required this.image,
-    required this.imageHasChanged,
     required this.buttonsDisabled,
     required this.isLoading,
     required this.isEditMode,
@@ -102,13 +94,7 @@ class _LandingPageCreatorThirdStepState
         calendlyEventURL: selectedEventTypeUrl,
       );
       if (updatedLandingPage != null) {
-        if (widget.isEditMode) {
-          Modular.get<LandingPageCubit>().editLandingPage(
-              updatedLandingPage, widget.image, widget.imageHasChanged);
-        } else {
-          widget.onContinue(
-              updatedLandingPage, widget.image, widget.imageHasChanged);
-        }
+        widget.onContinue(updatedLandingPage);
       }
     }
   }
@@ -385,10 +371,7 @@ class _LandingPageCreatorThirdStepState
                           child: SizedBox(width: 20, height: 20)),
                       ResponsiveRowColumnItem(
                         child: PrimaryButton(
-                          title: widget.isEditMode
-                              ? localization
-                                  .landingpage_creation_edit_button_text
-                              : localization.landingpage_creation_continue,
+                          title: localization.landingpage_creation_continue,
                           disabled: !_isButtonEnabled(),
                           isLoading: widget.isLoading,
                           width: responsiveValue.isMobile

@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/archived_recommendation_item.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/last_viewed.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/draft_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
@@ -32,4 +33,7 @@ abstract class RecommendationRepository {
       String userID);
   Future<Either<DatabaseFailure, List<UserRecommendation>>> getRecommendationsWithArchived(
       String userID);
+  Future<Either<DatabaseFailure, Unit>> createDraftRecommendation(
+      DraftRecommendationItem draft);
+  Future<Either<DatabaseFailure, Unit>> deleteDraftRecommendation(String id);
 }

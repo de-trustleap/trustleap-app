@@ -2,9 +2,11 @@ import 'dart:typed_data';
 
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/core/failures/storage_failures.dart';
 import 'package:finanzbegleiter/features/legals/domain/archived_landing_page_legals.dart';
 import 'package:finanzbegleiter/core/id.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
+import 'package:finanzbegleiter/features/landing_pages/domain/landing_page_image_data.dart';
 import 'package:finanzbegleiter/features/legals/domain/legal_version.dart';
 import 'package:finanzbegleiter/features/promoter/domain/promoter.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page_template.dart';
@@ -59,23 +61,28 @@ void main() {
         name: "Test",
         description: "Test",
         ownerID: UniqueID.fromUniqueString("1"));
-    final testImageData = Uint8List(1);
-    const imageHasChanged = false;
+    final testImageData = LandingPageImageData(
+        mainImage: Uint8List(1),
+        mainImageHasChanged: false,
+        faviconImage: null,
+        faviconImageHasChanged: false,
+        shareImage: null,
+        shareImageHasChanged: false);
     const templateID = "1";
     test(
         "should return unit when landingpage has been created and the call was successful",
         () async {
       // Given
       final expectedResult = right(unit);
-      when(mockLandingPageRepo.createLandingPage(testLandingPage, testImageData,
-              imageHasChanged, templateID, null))
+      when(mockLandingPageRepo.createLandingPage(
+              testLandingPage, testImageData, templateID, null))
           .thenAnswer((_) async => right(unit));
       // When
       final result = await mockLandingPageRepo.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged, templateID, null);
+          testLandingPage, testImageData, templateID, null);
       // Then
       verify(mockLandingPageRepo.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged, templateID, null));
+          testLandingPage, testImageData, templateID, null));
       expect(result, expectedResult);
       verifyNoMoreInteractions(mockLandingPageRepo);
     });
@@ -83,15 +90,15 @@ void main() {
     test("should return failure when the call has failed", () async {
       // Given
       final expectedResult = left(BackendFailure());
-      when(mockLandingPageRepo.createLandingPage(testLandingPage, testImageData,
-              imageHasChanged, templateID, null))
+      when(mockLandingPageRepo.createLandingPage(
+              testLandingPage, testImageData, templateID, null))
           .thenAnswer((_) async => left(BackendFailure()));
       // When
       final result = await mockLandingPageRepo.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged, templateID, null);
+          testLandingPage, testImageData, templateID, null);
       // Then
       verify(mockLandingPageRepo.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged, templateID, null));
+          testLandingPage, testImageData, templateID, null));
       expect(result, expectedResult);
       verifyNoMoreInteractions(mockLandingPageRepo);
     });
@@ -137,22 +144,25 @@ void main() {
         name: "Test",
         description: "Test",
         ownerID: UniqueID.fromUniqueString("1"));
-    final testImageData = Uint8List(1);
-    const imageHasChanged = false;
+    final testImageData = LandingPageImageData(
+        mainImage: Uint8List(1),
+        mainImageHasChanged: false,
+        faviconImage: null,
+        faviconImageHasChanged: false,
+        shareImage: null,
+        shareImageHasChanged: false);
     test(
         "should return unit when landingpage has been edited and the call was successful",
         () async {
       // Given
       final expectedResult = right(unit);
-      when(mockLandingPageRepo.editLandingPage(
-              testLandingPage, testImageData, imageHasChanged))
+      when(mockLandingPageRepo.editLandingPage(testLandingPage, testImageData))
           .thenAnswer((_) async => right(unit));
       // When
       final result = await mockLandingPageRepo.editLandingPage(
-          testLandingPage, testImageData, imageHasChanged);
+          testLandingPage, testImageData);
       // Then
-      verify(mockLandingPageRepo.editLandingPage(
-          testLandingPage, testImageData, imageHasChanged));
+      verify(mockLandingPageRepo.editLandingPage(testLandingPage, testImageData));
       expect(result, expectedResult);
       verifyNoMoreInteractions(mockLandingPageRepo);
     });
@@ -160,15 +170,13 @@ void main() {
     test("should return failure when the call has failed", () async {
       // Given
       final expectedResult = left(BackendFailure());
-      when(mockLandingPageRepo.editLandingPage(
-              testLandingPage, testImageData, imageHasChanged))
+      when(mockLandingPageRepo.editLandingPage(testLandingPage, testImageData))
           .thenAnswer((_) async => left(BackendFailure()));
       // When
       final result = await mockLandingPageRepo.editLandingPage(
-          testLandingPage, testImageData, imageHasChanged);
+          testLandingPage, testImageData);
       // Then
-      verify(mockLandingPageRepo.editLandingPage(
-          testLandingPage, testImageData, imageHasChanged));
+      verify(mockLandingPageRepo.editLandingPage(testLandingPage, testImageData));
       expect(result, expectedResult);
       verifyNoMoreInteractions(mockLandingPageRepo);
     });
@@ -444,7 +452,7 @@ void main() {
         "should return empty archived legals when no document exists",
         () async {
       // Given
-      final emptyLegals =
+      const emptyLegals =
           ArchivedLandingPageLegals(id: landingPageId);
       final expectedResult = right(emptyLegals);
       when(mockLandingPageRepo.getArchivedLandingPageLegals(landingPageId))
@@ -455,6 +463,39 @@ void main() {
       // Then
       verify(
           mockLandingPageRepo.getArchivedLandingPageLegals(landingPageId));
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+  });
+
+  group("LandingPageRepositoryImplementation_getShareImageTemplateUrls", () {
+    final testUrls = [
+      "https://storage.googleapis.com/bucket/shareImageTemplates/template1.jpg",
+      "https://storage.googleapis.com/bucket/shareImageTemplates/template2.jpg",
+    ];
+
+    test("should return list of URLs when the call was successful", () async {
+      // Given
+      final expectedResult = right(testUrls);
+      when(mockLandingPageRepo.getShareImageTemplateUrls())
+          .thenAnswer((_) async => right(testUrls));
+      // When
+      final result = await mockLandingPageRepo.getShareImageTemplateUrls();
+      // Then
+      verify(mockLandingPageRepo.getShareImageTemplateUrls());
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+
+    test("should return failure when the call has failed", () async {
+      // Given
+      final expectedResult = left(ObjectNotFound());
+      when(mockLandingPageRepo.getShareImageTemplateUrls())
+          .thenAnswer((_) async => left(ObjectNotFound()));
+      // When
+      final result = await mockLandingPageRepo.getShareImageTemplateUrls();
+      // Then
+      verify(mockLandingPageRepo.getShareImageTemplateUrls());
       expect(result, expectedResult);
       verifyNoMoreInteractions(mockLandingPageRepo);
     });

@@ -1,10 +1,10 @@
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page_template.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/animated_tile_grid.dart';
 import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_creator/landing_page_creator_ai_generator_tile.dart';
-import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_creator/landing_page_creator_fourth_step_grid_tile.dart';
+import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_creator/landing_page_creator_fifth_step_grid_tile.dart';
 import 'package:flutter/material.dart';
 
-class LandingPageCreatorFourthStepGrid extends StatelessWidget {
+class LandingPageCreatorFifthStepGrid extends StatelessWidget {
   final List<LandingPageTemplate> landingpageTemplates;
   final int? selectedIndex;
   final bool isAIGeneratorSelected;
@@ -12,7 +12,7 @@ class LandingPageCreatorFourthStepGrid extends StatelessWidget {
   final VoidCallback onAIGeneratorTap;
   final bool disabled;
 
-  const LandingPageCreatorFourthStepGrid({
+  const LandingPageCreatorFifthStepGrid({
     super.key,
     required this.landingpageTemplates,
     required this.selectedIndex,
@@ -46,7 +46,7 @@ class LandingPageCreatorFourthStepGrid extends StatelessWidget {
         // Template tiles (shifted by 1)
         final templateIndex = index - 1;
         final isSelected = selectedIndex == templateIndex;
-        return LandingPageCreatorFourthStepGridTile(
+        return LandingPageCreatorFifthStepGridTile(
           template: landingpageTemplates[templateIndex],
           isSelected: isSelected,
           disabled: disabled,

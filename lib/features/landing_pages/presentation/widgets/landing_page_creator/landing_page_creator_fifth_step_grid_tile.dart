@@ -5,13 +5,13 @@ import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/placeholder
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-class LandingPageCreatorFourthStepGridTile extends StatefulWidget {
+class LandingPageCreatorFifthStepGridTile extends StatefulWidget {
   final LandingPageTemplate template;
   final bool isSelected;
   final bool disabled;
   final VoidCallback onTap;
 
-  const LandingPageCreatorFourthStepGridTile(
+  const LandingPageCreatorFifthStepGridTile(
       {super.key,
       required this.template,
       required this.isSelected,
@@ -19,12 +19,12 @@ class LandingPageCreatorFourthStepGridTile extends StatefulWidget {
       this.disabled = false});
 
   @override
-  State<LandingPageCreatorFourthStepGridTile> createState() =>
+  State<LandingPageCreatorFifthStepGridTile> createState() =>
       _LandingPageCreatorThirdStepGridTileState();
 }
 
 class _LandingPageCreatorThirdStepGridTileState
-    extends State<LandingPageCreatorFourthStepGridTile> {
+    extends State<LandingPageCreatorFifthStepGridTile> {
   bool _isHovered = false;
 
   @override

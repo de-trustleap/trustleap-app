@@ -1,8 +1,7 @@
-import 'dart:typed_data';
-
 import 'package:finanzbegleiter/features/landing_pages/application/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/core/id.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
+import 'package:finanzbegleiter/features/landing_pages/domain/landing_page_image_data.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/core/widgets/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/card_container.dart';
@@ -19,19 +18,15 @@ class LandingPageCreatorSecondStep extends StatefulWidget {
   final UniqueID id;
   final LandingPage? landingPage;
   final bool isEditMode;
-  final Uint8List? image;
-  final bool imageHasChanged;
   final bool buttonsDisabled;
   final bool isLoading;
-  final Function(LandingPage, Uint8List?, bool, bool) onContinueTapped;
+  final Function(LandingPage, bool) onContinueTapped;
   final Function(LandingPage) onBack;
   const LandingPageCreatorSecondStep(
       {super.key,
       required this.id,
       required this.landingPage,
       required this.isEditMode,
-      required this.image,
-      required this.imageHasChanged,
       required this.buttonsDisabled,
       required this.isLoading,
       required this.onContinueTapped,
@@ -96,13 +91,11 @@ class _LandingPageCreatorSecondStepState
               initialInformation: initialInformationTextController.text.trim(),
               termsAndConditions: termsAndConditionsTextController.text.trim(),
               scriptTags: scriptTagsTextController.text.trim()),
-          widget.image,
-          widget.imageHasChanged,
           widget.isEditMode);
     } else {
       validationHasError = true;
       Modular.get<LandingPageCubit>()
-          .createLandingPage(null, Uint8List(0), false, "");
+          .createLandingPage(null, const LandingPageImageData.empty(), "");
     }
   }
 

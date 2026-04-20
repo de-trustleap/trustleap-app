@@ -1,19 +1,24 @@
-import 'dart:typed_data';
+import "dart:typed_data";
 
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:finanzbegleiter/features/profile/domain/company.dart';
-import 'package:finanzbegleiter/core/id.dart';
-import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
+import "package:bloc/bloc.dart";
+import "package:equatable/equatable.dart";
+import "package:finanzbegleiter/features/profile/domain/company.dart";
+import "package:finanzbegleiter/core/id.dart";
+import "package:finanzbegleiter/features/landing_pages/domain/landing_page.dart";
+import "package:finanzbegleiter/features/landing_pages/domain/landing_page_image_data.dart";
+import "package:finanzbegleiter/features/landing_pages/domain/landing_page_repository.dart";
 
-part 'landing_page_creator_state.dart';
+part "landing_page_creator_state.dart";
 
 class LandingPageCreatorCubit extends Cubit<LandingPageCreatorDataState> {
-  LandingPageCreatorCubit()
+  final LandingPageRepository landingPageRepo;
+
+  LandingPageCreatorCubit(this.landingPageRepo)
       : super(const LandingPageCreatorDataState(
           id: null,
           isEditMode: false,
           createDefaultPage: false,
+          imageData: LandingPageImageData.empty(),
         ));
 
   void initialize({
@@ -26,6 +31,7 @@ class LandingPageCreatorCubit extends Cubit<LandingPageCreatorDataState> {
       landingPage: landingPage,
       isEditMode: isEditMode,
       createDefaultPage: createDefaultPage,
+      imageData: const LandingPageImageData.empty(),
     ));
   }
 
@@ -37,11 +43,39 @@ class LandingPageCreatorCubit extends Cubit<LandingPageCreatorDataState> {
     emit(state.copyWith(landingPage: landingPage));
   }
 
-  void updateImage(Uint8List? image, bool imageHasChanged) {
+  void updateMainImage(Uint8List? image, bool imageHasChanged) {
     emit(state.copyWith(
-      image: image,
-      imageHasChanged: imageHasChanged,
+      imageData: state.imageData.copyWith(
+        mainImage: image,
+        mainImageHasChanged: imageHasChanged,
+      ),
     ));
+  }
+
+  void updateFaviconImage(Uint8List? image, bool hasChanged) {
+    emit(state.copyWith(
+      imageData: state.imageData.copyWith(
+        faviconImage: image,
+        faviconImageHasChanged: hasChanged,
+      ),
+    ));
+  }
+
+  void updateShareImage(Uint8List? image, bool hasChanged) {
+    emit(state.copyWith(
+      imageData: state.imageData.copyWith(
+        shareImage: image,
+        shareImageHasChanged: hasChanged,
+      ),
+    ));
+  }
+
+  Future<void> loadShareImageTemplates() async {
+    final result = await landingPageRepo.getShareImageTemplateUrls();
+    result.fold(
+      (_) => null,
+      (urls) => emit(state.copyWith(shareImageTemplateUrls: urls)),
+    );
   }
 
   void setImageValid(bool isValid) {
@@ -70,7 +104,7 @@ class LandingPageCreatorCubit extends Cubit<LandingPageCreatorDataState> {
   void clearError() {
     emit(state.copyWith(
       showError: false,
-      errorMessage: '',
+      errorMessage: "",
     ));
   }
 
@@ -79,6 +113,7 @@ class LandingPageCreatorCubit extends Cubit<LandingPageCreatorDataState> {
       id: null,
       isEditMode: false,
       createDefaultPage: false,
+      imageData: LandingPageImageData.empty(),
     ));
   }
 }

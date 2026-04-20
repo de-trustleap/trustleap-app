@@ -71,8 +71,8 @@ class CompanyModel extends Equatable {
             map['phoneNumber'] != null ? map['phoneNumber'] as String : null,
         websiteURL:
             map['websiteURL'] != null ? map['websiteURL'] as String : null,
-        companyImageDownloadURL: map['thumbnailDownloadURL'] != null
-            ? map['thumbnailDownloadURL'] as String
+        companyImageDownloadURL: map['companyImageDownloadURL'] != null
+            ? map['companyImageDownloadURL'] as String
             : null,
         thumbnailDownloadURL: map['thumbnailDownloadURL'] != null
             ? map['thumbnailDownloadURL'] as String
