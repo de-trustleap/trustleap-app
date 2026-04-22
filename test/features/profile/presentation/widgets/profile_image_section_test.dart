@@ -10,10 +10,27 @@ import 'package:finanzbegleiter/features/profile/presentation/widgets/profile_im
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../../mocks.mocks.dart';
+
+class ProfileImageSectionTestModule extends Module {
+  final ProfileImageBloc profileImageBloc;
+
+  ProfileImageSectionTestModule({required this.profileImageBloc});
+
+  @override
+  void binds(i) {
+    i.addSingleton<ProfileImageBloc>(() => profileImageBloc);
+  }
+
+  @override
+  void routes(r) {
+    r.child('/', child: (_) => const Scaffold());
+  }
+}
 
 void main() {
   late MockImageRepository mockImageRepository;
@@ -27,6 +44,7 @@ void main() {
 
   tearDown(() {
     ResponsiveHelper.disableTestMode();
+    Modular.destroy();
     profileImageBloc.close();
   });
 
@@ -49,20 +67,31 @@ void main() {
     required CustomUser user,
     Function? imageUploadSuccessful,
   }) {
-    return MaterialApp(
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: AppLocalizations.supportedLocales,
-      home: Scaffold(
-        body: BlocProvider<ProfileImageBloc>.value(
-          value: profileImageBloc,
-          child: ProfileImageSection(
-            user: user,
-            imageUploadSuccessful: imageUploadSuccessful ?? () {},
+    Modular.destroy();
+    ResponsiveHelper.enableTestMode();
+
+    final module = ProfileImageSectionTestModule(
+      profileImageBloc: profileImageBloc,
+    );
+
+    return ModularApp(
+      module: module,
+      child: MaterialApp(
+        locale: const Locale('en'),
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: Scaffold(
+          body: BlocProvider<ProfileImageBloc>.value(
+            value: profileImageBloc,
+            child: ProfileImageSection(
+              user: user,
+              imageUploadSuccessful: imageUploadSuccessful ?? () {},
+            ),
           ),
         ),
       ),

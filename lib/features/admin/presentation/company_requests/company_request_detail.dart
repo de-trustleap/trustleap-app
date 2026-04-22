@@ -23,6 +23,7 @@ class CompanyRequestDetail extends StatelessWidget {
     final localizations = AppLocalizations.of(context);
 
     return BlocConsumer<CompanyRequestCubit, CompanyRequestState>(
+      bloc: Modular.get<CompanyRequestCubit>(),
       listener: (context, state) {
         if (state is ProcessCompanyRequestSuccessState) {
           Modular.to
@@ -152,7 +153,7 @@ class CompanyRequestDetail extends StatelessWidget {
                               .admin_company_request_detail_decline_button_title,
                           width: maxWidth / 3,
                           onTap: () {
-                            BlocProvider.of<CompanyRequestCubit>(context)
+                            Modular.get<CompanyRequestCubit>()
                                 .processCompanyRequest(model.request.id.value,
                                     model.user.id.value, false);
                           }),
@@ -162,7 +163,7 @@ class CompanyRequestDetail extends StatelessWidget {
                               .admin_company_request_detail_accept_button_title,
                           width: maxWidth / 3,
                           onTap: () {
-                            BlocProvider.of<CompanyRequestCubit>(context)
+                            Modular.get<CompanyRequestCubit>()
                                 .processCompanyRequest(model.request.id.value,
                                     model.user.id.value, true);
                           }),

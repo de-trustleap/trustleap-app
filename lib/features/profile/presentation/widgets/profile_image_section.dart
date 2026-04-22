@@ -10,6 +10,7 @@ import 'package:finanzbegleiter/core/widgets/shared_elements/image_upload/image_
     if (dart.library.io) 'package:finanzbegleiter/core/widgets/shared_elements/image_upload/image_upload_dropzone_stub.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileImageSection extends StatefulWidget {
@@ -33,13 +34,13 @@ class _MyWidgetState extends State<ProfileImageSection> {
     final XFile? image =
         await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
     if (context != null && context.mounted) {
-      BlocProvider.of<ProfileImageBloc>(context).add(
+      Modular.get<ProfileImageBloc>().add(
           UploadImageTriggeredEvent(rawImage: image, id: widget.user.id.value));
     }
   }
 
   void onDroppedFile(List<ImageDroppedFile> files) {
-    BlocProvider.of<ProfileImageBloc>(context).add(
+    Modular.get<ProfileImageBloc>().add(
         UploadImageFromDropZoneTriggeredEvent(
             files: files, id: widget.user.id.value));
   }
@@ -85,6 +86,7 @@ class _MyWidgetState extends State<ProfileImageSection> {
     const Size imageSize = Size(120, 120);
 
     return BlocConsumer<ProfileImageBloc, ProfileImageState>(
+      bloc: Modular.get<ProfileImageBloc>(),
       listener: (context, state) {
         if (state is ProfileImageUploadSuccessState) {
           widget.imageUploadSuccessful();

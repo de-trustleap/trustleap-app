@@ -38,3 +38,15 @@ class UploadCompanyImageForAppTriggeredEvent extends CompanyImageEvent {
   const UploadCompanyImageForAppTriggeredEvent(
       {required this.image, required this.id});
 }
+
+class CompanyImageContinueWithCroppedEvent extends CompanyImageEvent {
+  final Uint8List croppedBytes;
+  final String id;
+
+  const CompanyImageContinueWithCroppedEvent(
+      {required this.croppedBytes, required this.id});
+}
+
+class CompanyImageCropCancelledEvent extends CompanyImageEvent {
+  const CompanyImageCropCancelledEvent();
+}

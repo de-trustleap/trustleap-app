@@ -16,6 +16,7 @@ class CompanyModel extends Equatable {
   final String? websiteURL;
   final String? companyImageDownloadURL;
   final String? thumbnailDownloadURL;
+  final String? companyShareOutpaintedImageUrl;
   final String? ownerID;
   final String? defaultLandingPageID;
   final List<String>? employeeIDs;
@@ -33,6 +34,7 @@ class CompanyModel extends Equatable {
       this.websiteURL,
       this.companyImageDownloadURL,
       this.thumbnailDownloadURL,
+      this.companyShareOutpaintedImageUrl,
       this.ownerID,
       this.defaultLandingPageID,
       this.employeeIDs,
@@ -51,6 +53,7 @@ class CompanyModel extends Equatable {
       'websiteURL': websiteURL,
       'companyImageDownloadURL': companyImageDownloadURL,
       'thumbnailDownloadURL': thumbnailDownloadURL,
+      'companyShareOutpaintedImageUrl': companyShareOutpaintedImageUrl,
       'ownerID': ownerID,
       'defaultLandingPageID': defaultLandingPageID,
       'employeeIDs': employeeIDs,
@@ -77,6 +80,10 @@ class CompanyModel extends Equatable {
         thumbnailDownloadURL: map['thumbnailDownloadURL'] != null
             ? map['thumbnailDownloadURL'] as String
             : null,
+        companyShareOutpaintedImageUrl:
+            map['companyShareOutpaintedImageUrl'] != null
+                ? map['companyShareOutpaintedImageUrl'] as String
+                : null,
         ownerID: map['ownerID'] != null ? map['ownerID'] as String : null,
         defaultLandingPageID: map['defaultLandingPageID'] != null
             ? map['defaultLandingPageID'] as String
@@ -101,6 +108,7 @@ class CompanyModel extends Equatable {
       String? websiteURL,
       String? companyImageDownloadURL,
       String? thumbnailDownloadURL,
+      String? companyShareOutpaintedImageUrl,
       String? ownerID,
       String? defaultLandingPageID,
       List<String>? employeeIDs,
@@ -118,6 +126,8 @@ class CompanyModel extends Equatable {
         companyImageDownloadURL:
             companyImageDownloadURL ?? this.companyImageDownloadURL,
         thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
+        companyShareOutpaintedImageUrl:
+            companyShareOutpaintedImageUrl ?? this.companyShareOutpaintedImageUrl,
         ownerID: ownerID ?? this.ownerID,
         defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
         employeeIDs: employeeIDs ?? this.employeeIDs,
@@ -141,6 +151,7 @@ class CompanyModel extends Equatable {
         websiteURL: websiteURL,
         companyImageDownloadURL: companyImageDownloadURL,
         thumbnailDownloadURL: thumbnailDownloadURL,
+        companyShareOutpaintedImageUrl: companyShareOutpaintedImageUrl,
         ownerID: ownerID,
         defaultLandingPageID: defaultLandingPageID,
         employeeIDs: employeeIDs,
@@ -160,6 +171,7 @@ class CompanyModel extends Equatable {
         websiteURL: company.websiteURL,
         companyImageDownloadURL: company.companyImageDownloadURL,
         thumbnailDownloadURL: company.thumbnailDownloadURL,
+        companyShareOutpaintedImageUrl: company.companyShareOutpaintedImageUrl,
         ownerID: company.ownerID,
         defaultLandingPageID: company.defaultLandingPageID,
         employeeIDs: company.employeeIDs,
@@ -181,6 +193,7 @@ class CompanyModel extends Equatable {
         websiteURL,
         companyImageDownloadURL,
         thumbnailDownloadURL,
+        companyShareOutpaintedImageUrl,
         ownerID,
         defaultLandingPageID,
         employeeIDs,

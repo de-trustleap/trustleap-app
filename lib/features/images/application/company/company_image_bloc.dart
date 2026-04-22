@@ -69,12 +69,7 @@ class CompanyImageBloc extends Bloc<CompanyImageEvent, CompanyImageState> {
         emit(CompanyImageExceedsFileSizeLimitFailureState());
         return;
       }
-      final failureOrSuccess = await imageRepo.uploadImageForWeb(
-          selectedImage, event.id, ImageUploader.company);
-      failureOrSuccess.fold(
-          (failure) => emit(CompanyImageUploadFailureState(failure: failure)),
-          (imageURL) =>
-              emit(CompanyImageUploadSuccessState(imageURL: imageURL)));
+      emit(CompanyImageReadyToCropState(imageBytes: selectedImage));
     });
 
     on<UploadCompanyImageForAppTriggeredEvent>((event, emit) async {
@@ -84,12 +79,22 @@ class CompanyImageBloc extends Bloc<CompanyImageEvent, CompanyImageState> {
         emit(CompanyImageExceedsFileSizeLimitFailureState());
         return;
       }
-      final failureOrSuccess = await imageRepo.uploadImageForApp(
-          selectedImage, event.id, ImageUploader.company);
+      final bytes = await selectedImage.readAsBytes();
+      emit(CompanyImageReadyToCropState(imageBytes: bytes));
+    });
+
+    on<CompanyImageContinueWithCroppedEvent>((event, emit) async {
+      emit(CompanyImageUploadLoadingState());
+      final failureOrSuccess = await imageRepo.uploadImageForWeb(
+          event.croppedBytes, event.id, ImageUploader.company);
       failureOrSuccess.fold(
           (failure) => emit(CompanyImageUploadFailureState(failure: failure)),
           (imageURL) =>
               emit(CompanyImageUploadSuccessState(imageURL: imageURL)));
+    });
+
+    on<CompanyImageCropCancelledEvent>((event, emit) {
+      emit(CompanyUploadCancelledState());
     });
   }
 

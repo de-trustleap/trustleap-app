@@ -435,7 +435,7 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       getShareImageTemplateUrls() async {
     try {
       final listResult = await firebaseStorage
-          .ref("landingPageShareImageTemplates")
+          .ref("landingPageShareImages")
           .listAll();
       final urls = await Future.wait(
           listResult.items.map((ref) => ref.getDownloadURL()));

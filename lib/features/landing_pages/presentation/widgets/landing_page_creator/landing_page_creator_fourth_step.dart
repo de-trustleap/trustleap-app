@@ -4,7 +4,7 @@ import "package:finanzbegleiter/features/landing_pages/application/landing_page_
 import "package:finanzbegleiter/features/profile/domain/company.dart";
 import "package:finanzbegleiter/features/landing_pages/domain/landing_page.dart";
 import "package:finanzbegleiter/features/landing_pages/domain/landing_page_image_data.dart";
-import "package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_creator/landing_page_creator_image_cropper.dart";
+import "package:finanzbegleiter/core/widgets/shared_elements/image_upload/image_crop_dialog.dart";
 import "package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_creator/landing_page_creator_image_picker_box.dart";
 import "package:finanzbegleiter/l10n/generated/app_localizations.dart";
 import "package:finanzbegleiter/core/widgets/page_wrapper/centered_constrained_wrapper.dart";
@@ -170,6 +170,7 @@ class _LandingPageCreatorFourthStepState
       builder: (context, creatorState) {
         final shareTemplateUrls = creatorState.shareImageTemplateUrls ?? [];
         final companyImageUrl = widget.company?.companyImageDownloadURL;
+        final shareOutpaintedUrl = widget.company?.companyShareOutpaintedImageUrl ?? companyImageUrl;
 
         return SingleChildScrollView(
           child: Column(
@@ -296,7 +297,7 @@ class _LandingPageCreatorFourthStepState
                             color: themeData.colorScheme.onSurfaceVariant,
                           ),
                         ),
-                        if (companyImageUrl != null ||
+                        if (shareOutpaintedUrl != null ||
                             shareTemplateUrls.isNotEmpty) ...[
                           const SizedBox(height: 16),
                           SelectableText(
@@ -309,15 +310,15 @@ class _LandingPageCreatorFourthStepState
                             scrollDirection: Axis.horizontal,
                             child: Row(
                               children: [
-                                if (companyImageUrl != null)
+                                if (shareOutpaintedUrl != null)
                                   _SelectableThumbnail(
-                                    imageUrl: companyImageUrl,
+                                    imageUrl: shareOutpaintedUrl,
                                     size: const Size(120, 120),
                                     isSelected:
                                         _selectedShareTemplateUrl ==
-                                            companyImageUrl,
+                                            shareOutpaintedUrl,
                                     onTap: () =>
-                                        _selectShareImageFromUrl(companyImageUrl),
+                                        _selectShareImageFromUrl(shareOutpaintedUrl),
                                   ),
                                 ...shareTemplateUrls.map((url) => Padding(
                                       padding: const EdgeInsets.only(left: 8),

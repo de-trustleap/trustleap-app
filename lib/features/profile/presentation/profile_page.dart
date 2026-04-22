@@ -1,9 +1,4 @@
-import 'package:finanzbegleiter/features/admin/application/company_request/company_request/company_request_cubit.dart';
-import 'package:finanzbegleiter/features/images/application/company/company_image_bloc.dart';
-import 'package:finanzbegleiter/features/images/application/profile/profile_image_bloc.dart';
 import 'package:finanzbegleiter/features/permissions/application/permission_cubit.dart';
-import 'package:finanzbegleiter/features/profile/application/company/company_cubit.dart';
-import 'package:finanzbegleiter/features/profile/application/company_observer/company_observer_cubit.dart';
 import 'package:finanzbegleiter/features/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/features/permissions/domain/permissions.dart';
 import 'package:finanzbegleiter/core/modular_watch_extension.dart';
@@ -65,22 +60,14 @@ class _ProfilePageState extends State<ProfilePage>
             as PermissionSuccessState)
         .permissions;
     final localization = AppLocalizations.of(context);
-    return MultiBlocProvider(
-        providers: [
-          BlocProvider(
-              create: (context) => Modular.get<CompanyObserverCubit>()),
-          BlocProvider(create: (context) => Modular.get<CompanyCubit>()),
-          BlocProvider(create: (context) => Modular.get<ProfileImageBloc>()),
-          BlocProvider(create: (context) => Modular.get<CompanyImageBloc>()),
-          BlocProvider(create: (context) => Modular.get<CompanyRequestCubit>())
-        ],
-        child: BlocBuilder<UserObserverCubit, UserObserverState>(
-          builder: (context, state) {
-            return CustomTabBar(
-              tabs: getCustomTabItems(state, permissions, localization),
-            );
-          },
-        ));
+    return BlocBuilder<UserObserverCubit, UserObserverState>(
+      bloc: Modular.get<UserObserverCubit>(),
+      builder: (context, state) {
+        return CustomTabBar(
+          tabs: getCustomTabItems(state, permissions, localization),
+        );
+      },
+    );
   }
 
   bool _canAccessCompanyProfile(

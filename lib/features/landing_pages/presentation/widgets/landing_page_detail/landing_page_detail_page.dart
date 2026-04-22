@@ -167,5 +167,4 @@ class _LandingPageDetailPageState extends State<LandingPageDetailPage> {
   }
 }
 
-// TODO: CONVERSIONRATE TESTEN
-// TODO: Graph werden  falsch dargestellt, wenn man eine Empehlung ausspricht und der Links bereits geklickt wurde. Dann wird die Empfehlung nicht mehr unter “Empfehlung ausgesprochen” gelistet, sondern nur noch unter “link geklickt” UMSETZEN
+// TODO: SHARE IMAGE TEMPLATES HINZUFÜGEN

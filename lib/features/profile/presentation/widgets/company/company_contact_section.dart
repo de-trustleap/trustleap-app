@@ -19,6 +19,7 @@ import 'package:finanzbegleiter/features/profile/presentation/widgets/company/co
 import 'package:finanzbegleiter/features/profile/presentation/widgets/company/company_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class CompanyContactSection extends StatefulWidget {
@@ -132,7 +133,7 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
   void submit(CompanyValidator validator) {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
-      BlocProvider.of<CompanyCubit>(context).updateCompany(
+      Modular.get<CompanyCubit>().updateCompany(
           widget.company.copyWith(
               name: nameTextController.text.trim(),
               industry: industryTextController.text.trim(),
@@ -144,14 +145,14 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
           avvChecked);
     } else {
       validationHasError = true;
-      BlocProvider.of<CompanyCubit>(context).updateCompany(null, false);
+      Modular.get<CompanyCubit>().updateCompany(null, false);
     }
   }
 
   void submitPDFRequest(CompanyValidator validator, bool isPreview) {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
-      BlocProvider.of<CompanyCubit>(context).getPDFDownloadURL(
+      Modular.get<CompanyCubit>().getPDFDownloadURL(
           widget.company.copyWith(
               name: nameTextController.text.trim(),
               industry: industryTextController.text.trim(),
@@ -163,7 +164,7 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
           isPreview);
     } else {
       validationHasError = true;
-      BlocProvider.of<CompanyCubit>(context).getPDFDownloadURL(null, true);
+      Modular.get<CompanyCubit>().getPDFDownloadURL(null, true);
     }
   }
 
@@ -174,13 +175,14 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
     final localization = AppLocalizations.of(context);
     final validator = CompanyValidator(localization: localization);
     final permissions =
-        (context.watch<PermissionCubit>().state as PermissionSuccessState)
+        (context.watchModular<PermissionCubit>().state as PermissionSuccessState)
             .permissions;
     const double textFieldSpacing = 20;
 
     return CardContainer(maxWidth: 800, child: LayoutBuilder(builder: (context, constraints) {
       final maxWidth = constraints.maxWidth;
       return BlocConsumer<CompanyCubit, CompanyState>(
+        bloc: Modular.get<CompanyCubit>(),
         listener: (context, state) {
           if (state is CompanyUpdateContactInformationFailureState) {
             errorMessage = DatabaseFailureMapper.mapFailureMessage(

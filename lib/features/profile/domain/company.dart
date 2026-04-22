@@ -14,6 +14,7 @@ class Company extends Equatable {
   final String? websiteURL;
   final String? companyImageDownloadURL;
   final String? thumbnailDownloadURL;
+  final String? companyShareOutpaintedImageUrl;
   final String? ownerID;
   final String? defaultLandingPageID;
   final List<String>? employeeIDs;
@@ -31,6 +32,7 @@ class Company extends Equatable {
       this.websiteURL,
       this.companyImageDownloadURL,
       this.thumbnailDownloadURL,
+      this.companyShareOutpaintedImageUrl,
       this.ownerID,
       this.defaultLandingPageID,
       this.employeeIDs,
@@ -48,6 +50,7 @@ class Company extends Equatable {
       String? websiteURL,
       String? companyImageDownloadURL,
       String? thumbnailDownloadURL,
+      String? companyShareOutpaintedImageUrl,
       String? ownerID,
       String? defaultLandingPageID,
       List<String>? employeeIDs,
@@ -65,6 +68,8 @@ class Company extends Equatable {
         companyImageDownloadURL:
             companyImageDownloadURL ?? this.companyImageDownloadURL,
         thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
+        companyShareOutpaintedImageUrl:
+            companyShareOutpaintedImageUrl ?? this.companyShareOutpaintedImageUrl,
         ownerID: ownerID ?? this.ownerID,
         defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
         employeeIDs: employeeIDs ?? this.employeeIDs,
@@ -84,6 +89,7 @@ class Company extends Equatable {
         websiteURL,
         companyImageDownloadURL,
         thumbnailDownloadURL,
+        companyShareOutpaintedImageUrl,
         employeeIDs,
         ownerID,
         defaultLandingPageID,
