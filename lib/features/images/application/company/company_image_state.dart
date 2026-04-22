@@ -33,3 +33,12 @@ final class CompanyImageIsNotValidFailureState extends CompanyImageState {}
 final class CompanyImageOnlyOneAllowedFailureState extends CompanyImageState {}
 
 final class CompanyImageUploadNotFoundFailureState extends CompanyImageState {}
+
+final class CompanyImageReadyToCropState extends CompanyImageState {
+  final Uint8List imageBytes;
+
+  const CompanyImageReadyToCropState({required this.imageBytes});
+
+  @override
+  List<Object> get props => [imageBytes];
+}

@@ -82,7 +82,7 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
   void submit(CompanyValidator validator) {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
-      BlocProvider.of<CompanyCubit>(context).registerCompany(
+      Modular.get<CompanyCubit>().registerCompany(
           Company(
               id: UniqueID(),
               name: nameTextController.text.trim(),
@@ -96,14 +96,14 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
           avvChecked);
     } else {
       validationHasError = true;
-      BlocProvider.of<CompanyCubit>(context).registerCompany(null, false);
+      Modular.get<CompanyCubit>().registerCompany(null, false);
     }
   }
 
   void submitPDFRequest(CompanyValidator validator) {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
-      BlocProvider.of<CompanyCubit>(context).getPDFDownloadURL(
+      Modular.get<CompanyCubit>().getPDFDownloadURL(
           Company(
               id: UniqueID(),
               name: nameTextController.text.trim(),
@@ -117,7 +117,7 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
           true);
     } else {
       validationHasError = true;
-      BlocProvider.of<CompanyCubit>(context).getPDFDownloadURL(null, true);
+      Modular.get<CompanyCubit>().getPDFDownloadURL(null, true);
     }
   }
 
@@ -130,6 +130,7 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
     const double textFieldSpacing = 20;
 
     return BlocConsumer<CompanyCubit, CompanyState>(
+      bloc: Modular.get<CompanyCubit>(),
       listener: (context, state) {
         if (state is CompanyRegisterFailureState) {
           errorMessage = DatabaseFailureMapper.mapFailureMessage(

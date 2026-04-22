@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/features/images/application/company/company_image_bloc.dart';
 import 'package:finanzbegleiter/core/failures/storage_failure_mapper.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/image_upload/image_crop_dialog.dart';
 import 'package:finanzbegleiter/features/profile/domain/company.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/form_error_view.dart';
@@ -10,6 +11,7 @@ import 'package:finanzbegleiter/core/widgets/shared_elements/image_upload/image_
     if (dart.library.io) 'package:finanzbegleiter/core/widgets/shared_elements/image_upload/image_upload_dropzone_stub.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CompanyImageSection extends StatefulWidget {
@@ -33,14 +35,14 @@ class _CompanyImageSectionState extends State<CompanyImageSection> {
     final XFile? image =
         await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
     if (context != null && context.mounted) {
-      BlocProvider.of<CompanyImageBloc>(context).add(
+      Modular.get<CompanyImageBloc>().add(
           UploadCompanyImageTriggeredEvent(
               rawImage: image, id: widget.company.id.value));
     }
   }
 
   void onDroppedFile(List<ImageDroppedFile> files) {
-    BlocProvider.of<CompanyImageBloc>(context).add(
+    Modular.get<CompanyImageBloc>().add(
         UploadCompanyImageFromDropZoneTriggeredEvent(
             files: files, id: widget.company.id.value));
   }
@@ -86,10 +88,28 @@ class _CompanyImageSectionState extends State<CompanyImageSection> {
     const Size imageSize = Size(120, 120);
 
     return BlocConsumer<CompanyImageBloc, CompanyImageState>(
+      bloc: Modular.get<CompanyImageBloc>(),
       listener: (context, state) {
         if (state is CompanyImageUploadSuccessState) {
           widget.imageUploadSuccessful();
           PaintingBinding.instance.imageCache.clear();
+        } else if (state is CompanyImageReadyToCropState) {
+          final bloc = Modular.get<CompanyImageBloc>();
+          showImageCropDialog(
+            context,
+            state.imageBytes,
+            aspectRatio: 1.0,
+            aspectRatioLabel: "1:1",
+          ).then((croppedBytes) {
+            if (croppedBytes != null) {
+              bloc.add(CompanyImageContinueWithCroppedEvent(
+                croppedBytes: croppedBytes,
+                id: widget.company.id.value,
+              ));
+            } else {
+              bloc.add(const CompanyImageCropCancelledEvent());
+            }
+          });
         }
       },
       builder: (context, state) {

@@ -13,6 +13,7 @@ import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/primary_but
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class ProfileRegisterCompanySection extends StatefulWidget {
@@ -31,7 +32,7 @@ class _ProfileRegisterCompanySectionState
   @override
   void initState() {
     if (_hasPendingCompanyRequest()) {
-      BlocProvider.of<CompanyRequestCubit>(context)
+      Modular.get<CompanyRequestCubit>()
           .getPendingCompanyRequest(widget.user.pendingCompanyRequestID!);
     }
     super.initState();
@@ -51,6 +52,7 @@ class _ProfileRegisterCompanySectionState
     const spacing = 20;
 
     return BlocBuilder<CompanyRequestCubit, CompanyRequestState>(
+      bloc: Modular.get<CompanyRequestCubit>(),
       builder: (context, state) {
         return CardContainer(
             maxWidth: widget.maxWidth,

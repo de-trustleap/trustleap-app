@@ -31,7 +31,7 @@ class _ProfileCompanyViewState extends State<ProfileCompanyView>
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<CompanyObserverCubit>(context)
+    Modular.get<CompanyObserverCubit>()
         .observeCompany(widget.companyID);
   }
 
@@ -45,6 +45,7 @@ class _ProfileCompanyViewState extends State<ProfileCompanyView>
     final companyObserverCubit = Modular.get<CompanyObserverCubit>();
 
     return BlocBuilder<CompanyObserverCubit, CompanyObserverState>(
+      bloc: Modular.get<CompanyObserverCubit>(),
       builder: (context, state) {
         if (state is CompanyObserverSuccess) {
           return Container(
