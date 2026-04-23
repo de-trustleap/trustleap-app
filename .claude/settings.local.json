@@ -38,7 +38,8 @@
       "mcp__plugin_firebase_firebase__firestore_query_collection",
       "mcp__plugin_firebase_firebase__functions_get_logs",
       "mcp__github__search_pull_requests",
-      "WebFetch(domain:storage.googleapis.com)"
+      "WebFetch(domain:storage.googleapis.com)",
+      "mcp__obsidian__read-note"
     ],
     "deny": []
   }

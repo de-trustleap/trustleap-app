@@ -37,12 +37,18 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
   bool avvChecked = false;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  late String currentUserID;
+  String currentUserID = "";
 
   bool showError = false;
   String errorMessage = "";
   bool validationHasError = false;
   bool buttonDisabled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Modular.get<CompanyCubit>().getCurrentUser();
+  }
 
   @override
   void dispose() {
@@ -158,6 +164,9 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
         }
       },
       builder: (context, state) {
+        if (state is CompanyGetCurrentUserSuccessState) {
+          currentUserID = state.user?.uid ?? "";
+        }
         return CardContainer(
             child: LayoutBuilder(builder: (context, constraints) {
           final maxWidth = constraints.maxWidth;

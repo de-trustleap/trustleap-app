@@ -54,6 +54,19 @@ dart run build_runner build --delete-conflicting-outputs
 | Staging | staging.trust-leap.de | trustleap-staging |
 | Prod | app.trust-leap.de | finanzwegbegleiter |
 
+## Obsidian Integration
+Vault via MCP verbunden (obsidian-local-rest-api). Alle Vault-Zugriffe via MCP — nie via Dateisystem.
+
+**Lesen — bei Implementierung oder Feature-Fragen:**
+1. CLAUDE.md aus Vault-Root lesen — Konventionen + Struktur
+2. Feature bekannt → direkt finanzbegleiter/features/details/[feature].md lesen
+3. Feature unklar → zuerst finanzbegleiter/features/feature-map.md lesen
+
+**Schreiben — nach Implementierung:**
+1. finanzbegleiter/features/_conventions.md lesen
+2. Feature-Doc updaten: neue Gotchas, Backend-Änderungen, Abhängigkeiten
+3. Neues Feature: Doc nach _conventions.md-Template anlegen
+
 ## Konventionen
 
 - **Entities vs Models:** Entities sind reine Domain-Objekte, Models haben Firestore-Serialisierung

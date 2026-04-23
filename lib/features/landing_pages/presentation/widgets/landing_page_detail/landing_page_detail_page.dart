@@ -166,5 +166,3 @@ class _LandingPageDetailPageState extends State<LandingPageDetailPage> {
     );
   }
 }
-
-// TODO: SHARE IMAGE TEMPLATES HINZUFÜGEN

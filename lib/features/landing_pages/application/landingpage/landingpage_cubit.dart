@@ -24,10 +24,7 @@ class LandingPageCubit extends Cubit<LandingPageState> {
       LandingPageImageData imageData, String templateID) async {
     if (landingpage == null) {
       emit(LandingPageShowValidationState());
-    } else if (imageData.mainImage == null ||
-        imageData.mainImage == [0]) {
-      emit(LandingPageNoImageFailureState());
-    } else if (imageData.mainImage!.lengthInBytes > fileSizeLimit) {
+    } else if (imageData.mainImage != null && imageData.mainImage!.lengthInBytes > fileSizeLimit) {
       emit(LandingPageImageExceedsFileSizeLimitFailureState());
     } else {
       emit(CreateLandingPageLoadingState());
@@ -44,10 +41,7 @@ class LandingPageCubit extends Cubit<LandingPageState> {
       PagebuilderAiGeneration aiGeneration) async {
     if (landingpage == null) {
       emit(LandingPageShowValidationState());
-    } else if (imageData.mainImage == null ||
-        imageData.mainImage == [0]) {
-      emit(LandingPageNoImageFailureState());
-    } else if (imageData.mainImage!.lengthInBytes > fileSizeLimit) {
+    } else if (imageData.mainImage != null && imageData.mainImage!.lengthInBytes > fileSizeLimit) {
       emit(LandingPageImageExceedsFileSizeLimitFailureState());
     } else {
       emit(CreateLandingPageWithAILoadingState());
@@ -78,11 +72,7 @@ class LandingPageCubit extends Cubit<LandingPageState> {
 
   void checkLandingPageImage(
       LandingPage? landingPage, LandingPageImageData imageData) {
-    if (landingPage != null && landingPage.thumbnailDownloadURL != null) {
-      emit(LandingPageImageValid());
-    } else if (imageData.mainImage == null || imageData.mainImage == [0]) {
-      emit(LandingPageNoImageFailureState());
-    } else if (imageData.mainImage!.lengthInBytes > fileSizeLimit) {
+    if (imageData.mainImage != null && imageData.mainImage!.lengthInBytes > fileSizeLimit) {
       emit(LandingPageImageExceedsFileSizeLimitFailureState());
     } else {
       emit(LandingPageImageValid());

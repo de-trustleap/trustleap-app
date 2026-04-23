@@ -69,13 +69,7 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
     return BlocListener<LandingPageCubit, LandingPageState>(
         bloc: landingPageCubit,
         listener: (context, state) {
-          if (state is LandingPageNoImageFailureState) {
-            setState(() {
-              showError = true;
-              errorMessage = localization.error_msg_pleace_upload_picture;
-            });
-          } else if (state
-              is LandingPageImageExceedsFileSizeLimitFailureState) {
+          if (state is LandingPageImageExceedsFileSizeLimitFailureState) {
             setState(() {
               showError = true;
               errorMessage = localization

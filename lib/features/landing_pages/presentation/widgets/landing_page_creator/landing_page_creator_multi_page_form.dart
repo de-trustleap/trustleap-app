@@ -283,8 +283,6 @@ class _LandingPageCreatorMultiPageFormState
                   const params = "?editedPage=true";
                   navigator.pushAndReplace(
                       RoutePaths.homePath + RoutePaths.landingPagePath, params);
-                } else if (state is LandingPageNoImageFailureState) {
-                  creatorCubit.setImageValid(false);
                 } else if (state
                     is LandingPageImageExceedsFileSizeLimitFailureState) {
                   creatorCubit.setImageValid(false);
