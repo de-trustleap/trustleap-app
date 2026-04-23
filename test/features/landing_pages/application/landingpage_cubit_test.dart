@@ -343,10 +343,10 @@ void main() {
     });
 
     test(
-        "should emit LandingPageNoImageFailureState when there is no imageData",
+        "should emit LandingPageImageValid when there is no imageData (image is optional)",
         () {
       // Given
-      final expectedResult = [LandingPageNoImageFailureState()];
+      final expectedResult = [isA<LandingPageImageValid>()];
       // Then
       expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
       landingPageCubit.checkLandingPageImage(

@@ -102,11 +102,6 @@ class LandingPageImageValid extends LandingPageState with EquatableMixin {
   List<Object> get props => [timestamp];
 }
 
-class LandingPageNoImageFailureState extends LandingPageState
-    with EquatableMixin {
-  @override
-  List<Object> get props => [];
-}
 
 class DuplicateLandingPageLoadingState extends LandingPageState
     with EquatableMixin {
