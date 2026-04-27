@@ -30,6 +30,7 @@ final class GetLandingPageAndUserSuccessState extends PagebuilderState
   final DatabaseFailure? saveFailure;
   final bool? saveSuccessful;
   final bool? isUpdated;
+  final List<PageBuilderWidgetType>? saveDuplicateWidgetTypes;
   final int _timestamp;
 
   GetLandingPageAndUserSuccessState(
@@ -37,12 +38,20 @@ final class GetLandingPageAndUserSuccessState extends PagebuilderState
       required this.saveLoading,
       required this.saveFailure,
       required this.saveSuccessful,
-      required this.isUpdated})
+      required this.isUpdated,
+      this.saveDuplicateWidgetTypes})
       : _timestamp = DateTime.now().millisecondsSinceEpoch;
 
   @override
-  List<Object?> get props =>
-      [content, saveLoading, saveFailure, saveSuccessful, isUpdated, _timestamp];
+  List<Object?> get props => [
+        content,
+        saveLoading,
+        saveFailure,
+        saveSuccessful,
+        isUpdated,
+        saveDuplicateWidgetTypes,
+        _timestamp
+      ];
 }
 
 final class PageBuilderUnexpectedFailureState extends PagebuilderState

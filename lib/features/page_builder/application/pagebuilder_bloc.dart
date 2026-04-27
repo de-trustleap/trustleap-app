@@ -11,7 +11,11 @@ import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilde
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/features/page_builder/helpers/pagebuilder_widget_tree_manipulator.dart';
+import 'package:finanzbegleiter/features/page_builder/helpers/pagebuilder_widget_tree_searcher.dart';
+import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/landing_page_repository.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_calendly_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_contact_form_properties.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/pagebuilder_repository.dart';
 import 'package:finanzbegleiter/features/profile/domain/user_repository.dart';
 import 'package:finanzbegleiter/features/page_builder/infrastructure/models/pagebuilder_page_model.dart';
@@ -134,6 +138,31 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
       SaveLandingPageContentEvent event, Emitter<PagebuilderState> emit) async {
     if (event.content?.content == null) {
       emit(PageBuilderUnexpectedFailureState());
+      return;
+    }
+
+    const uniqueOnlyTypes = [
+      PageBuilderWidgetType.footer,
+      PageBuilderWidgetType.contactForm,
+      PageBuilderWidgetType.calendly,
+    ];
+
+    final duplicates = uniqueOnlyTypes
+        .where((type) =>
+            PagebuilderWidgetTreeSearcher.countWidgetsByType(
+                event.content!.content!, type) >
+            1)
+        .toList();
+
+    if (duplicates.isNotEmpty) {
+      emit(GetLandingPageAndUserSuccessState(
+        content: event.content!,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: null,
+        saveDuplicateWidgetTypes: duplicates,
+      ));
       return;
     }
 

@@ -1398,6 +1398,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_pagebuilder_save_error_alert_button => 'OK';
 
   @override
+  String get landingpage_pagebuilder_save_duplicate_widget_error_title =>
+      'Widgets used multiple times';
+
+  @override
+  String landingpage_pagebuilder_save_duplicate_widget_error_message(
+      String widgetNames) {
+    return 'The following widgets are used multiple times: $widgetNames. These widgets can only be used once per page.';
+  }
+
+  @override
   String get landingpage_pagebuilder_save_success_snackbar =>
       'The changes were saved successfully.';
 

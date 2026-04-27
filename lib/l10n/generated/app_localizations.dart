@@ -2471,6 +2471,19 @@ abstract class AppLocalizations {
   /// **'OK'**
   String get landingpage_pagebuilder_save_error_alert_button;
 
+  /// Title of the error alert when widgets are used multiple times in the page builder
+  ///
+  /// In en, this message translates to:
+  /// **'Widgets used multiple times'**
+  String get landingpage_pagebuilder_save_duplicate_widget_error_title;
+
+  /// Message of the error alert when widgets are used multiple times
+  ///
+  /// In en, this message translates to:
+  /// **'The following widgets are used multiple times: {widgetNames}. These widgets can only be used once per page.'**
+  String landingpage_pagebuilder_save_duplicate_widget_error_message(
+      String widgetNames);
+
   /// Text for the snack bar that will be displayed in the page builder if the save was successful
   ///
   /// In en, this message translates to:

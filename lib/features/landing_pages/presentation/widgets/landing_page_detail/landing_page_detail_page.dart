@@ -1,23 +1,23 @@
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/core/skeleton/skeleton_data.dart';
-import 'package:finanzbegleiter/features/landing_pages/application/landing_page_detail/landing_page_detail_cubit.dart';
-import 'package:finanzbegleiter/features/landing_pages/application/landingpage_observer/landingpage_observer_cubit.dart';
-import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
-import 'package:finanzbegleiter/features/auth/domain/user.dart';
-import 'package:finanzbegleiter/features/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/id.dart';
 import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
-import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/skeleton_loading.dart';
-import 'package:finanzbegleiter/environment.dart';
-import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/core/skeleton/skeleton_data.dart';
 import 'package:finanzbegleiter/core/widgets/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/error_view.dart';
+import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/skeleton_loading.dart';
+import 'package:finanzbegleiter/environment.dart';
+import 'package:finanzbegleiter/features/auth/domain/user.dart';
+import 'package:finanzbegleiter/features/landing_pages/application/landing_page_detail/landing_page_detail_cubit.dart';
+import 'package:finanzbegleiter/features/landing_pages/application/landingpage_observer/landingpage_observer_cubit.dart';
+import 'package:finanzbegleiter/features/landing_pages/domain/landing_page.dart';
 import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_detail/landing_page_detail_config_card.dart';
 import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_detail/landing_page_detail_header.dart';
 import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_detail/landing_page_detail_promoters_section.dart';
 import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_detail/landing_page_detail_recommendation_chart.dart';
 import 'package:finanzbegleiter/features/landing_pages/presentation/widgets/landing_page_detail/landing_page_detail_statistics.dart';
+import 'package:finanzbegleiter/features/user_observer/user_observer_cubit.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -166,3 +166,8 @@ class _LandingPageDetailPageState extends State<LandingPageDetailPage> {
     );
   }
 }
+
+// TODO: OBSIDIAN ONBOARDING BEREICH ERSTELLEN MIT INSTRUCTIONS ZUR FLUTTER APP, BACKEND, OBSIDIAN SETUP, ETC
+// TODO: AVV UNTERSCHRIFT
+// TODO: OBSIDIAN DOCUMENT ZUM ZUSAMMENSPIEL DER PROJEKTE ERSTELLEN
+// TODO: FOOTER, CONTACTFORM UND CALENDLY SOLLEN NUR EINMAL ZU EINER LANDINGPAGE HINZUGEFÜGT WERDEN KÖNNEN. DAS BEI DRAG AND DROP BEACHTEN, BEI DUPLIZIEREN UND BEI ERSTELLEN NEUER SECTIONS

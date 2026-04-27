@@ -20,6 +20,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_section.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_text_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_calendly_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_contact_form_properties.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_paint.dart';
@@ -220,6 +222,156 @@ void main() {
             .having((state) => state.saveFailure, "saveFailure", isA<BackendFailure>())
       ]));
       pageBuilderBloc.add(SaveLandingPageContentEvent(testContent));
+    });
+
+    test(
+        "should emit saveDuplicateWidgetTypes and not call repo when duplicate unique widget found",
+        () async {
+      // Given
+      final duplicateWidget = PageBuilderWidget(
+          id: UniqueID.fromUniqueString("footer2"),
+          elementType: PageBuilderWidgetType.footer,
+          children: [],
+          widthPercentage: null,
+          background: null,
+          hoverBackground: null,
+          containerChild: null,
+          padding: null,
+          margin: null,
+          maxWidth: null,
+          alignment: null,
+          customCSS: null,
+          properties: null,
+          hoverProperties: null);
+      final pageWithDuplicates = testPage.copyWith(
+          sections: [
+            testPage.sections![0].copyWith(widgets: [
+              ...testPage.sections![0].widgets!,
+              PageBuilderWidget(
+                  id: UniqueID.fromUniqueString("footer1"),
+                  elementType: PageBuilderWidgetType.footer,
+                  children: [],
+                  widthPercentage: null,
+                  background: null,
+                  hoverBackground: null,
+                  containerChild: null,
+                  padding: null,
+                  margin: null,
+                  maxWidth: null,
+                  alignment: null,
+                  customCSS: null,
+                  properties: null,
+                  hoverProperties: null),
+              duplicateWidget,
+            ])
+          ]);
+      final contentWithDuplicates = PagebuilderContent(
+          landingPage: testLandingPage,
+          content: pageWithDuplicates,
+          user: testUser);
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.saveDuplicateWidgetTypes,
+                    "saveDuplicateWidgetTypes",
+                    contains(PageBuilderWidgetType.footer))
+                .having((state) => state.saveLoading, "saveLoading", false)
+          ]));
+      pageBuilderBloc.add(SaveLandingPageContentEvent(contentWithDuplicates));
+      await Future.delayed(Duration.zero);
+      verifyNever(mockPageBuilderRepo
+          .saveLandingPageContent(contentWithDuplicates.content!));
+    });
+
+    test(
+        "should include all duplicate types in saveDuplicateWidgetTypes",
+        () async {
+      // Given
+      final pageWithMultipleDuplicates = testPage.copyWith(sections: [
+        testPage.sections![0].copyWith(widgets: [
+          ...testPage.sections![0].widgets!,
+          PageBuilderWidget(
+              id: UniqueID.fromUniqueString("footer1"),
+              elementType: PageBuilderWidgetType.footer,
+              children: [],
+              widthPercentage: null,
+              background: null,
+              hoverBackground: null,
+              containerChild: null,
+              padding: null,
+              margin: null,
+              maxWidth: null,
+              alignment: null,
+              customCSS: null,
+              properties: null,
+              hoverProperties: null),
+          PageBuilderWidget(
+              id: UniqueID.fromUniqueString("footer2"),
+              elementType: PageBuilderWidgetType.footer,
+              children: [],
+              widthPercentage: null,
+              background: null,
+              hoverBackground: null,
+              containerChild: null,
+              padding: null,
+              margin: null,
+              maxWidth: null,
+              alignment: null,
+              customCSS: null,
+              properties: null,
+              hoverProperties: null),
+          PageBuilderWidget(
+              id: UniqueID.fromUniqueString("calendly1"),
+              elementType: PageBuilderWidgetType.calendly,
+              children: [],
+              widthPercentage: null,
+              background: null,
+              hoverBackground: null,
+              containerChild: null,
+              padding: null,
+              margin: null,
+              maxWidth: null,
+              alignment: null,
+              customCSS: null,
+              properties: null,
+              hoverProperties: null),
+          PageBuilderWidget(
+              id: UniqueID.fromUniqueString("calendly2"),
+              elementType: PageBuilderWidgetType.calendly,
+              children: [],
+              widthPercentage: null,
+              background: null,
+              hoverBackground: null,
+              containerChild: null,
+              padding: null,
+              margin: null,
+              maxWidth: null,
+              alignment: null,
+              customCSS: null,
+              properties: null,
+              hoverProperties: null),
+        ])
+      ]);
+      final contentWithMultipleDuplicates = PagebuilderContent(
+          landingPage: testLandingPage,
+          content: pageWithMultipleDuplicates,
+          user: testUser);
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>().having(
+                (state) => state.saveDuplicateWidgetTypes,
+                "saveDuplicateWidgetTypes",
+                containsAll([
+                  PageBuilderWidgetType.footer,
+                  PageBuilderWidgetType.calendly,
+                ]))
+          ]));
+      pageBuilderBloc
+          .add(SaveLandingPageContentEvent(contentWithMultipleDuplicates));
     });
   });
 
@@ -1324,6 +1476,143 @@ void main() {
         position: DropPosition.before,
       ));
     });
+
+    test(
+        "should pre-populate calendlyEventURL from landingPage when adding calendly widget with null URL",
+        () async {
+      // Given
+      const calendlyUrl = "https://calendly.com/user/30min";
+      final landingPageWithCalendly =
+          mockLandingPage.copyWith(calendlyEventURL: calendlyUrl);
+      final contentWithCalendly =
+          mockPagebuilderContent.copyWith(landingPage: landingPageWithCalendly);
+      final calendlyWidget = PageBuilderWidget(
+        id: UniqueID.fromUniqueString("cal1"),
+        elementType: PageBuilderWidgetType.calendly,
+        properties: const PagebuilderCalendlyProperties(
+          width: null,
+          height: null,
+          borderRadius: null,
+          calendlyEventURL: null,
+          eventTypeName: null,
+          textColor: null,
+          backgroundColor: null,
+          primaryColor: null,
+          hideEventTypeDetails: false,
+          shadow: null,
+          useIntrinsicHeight: false,
+        ),
+        hoverProperties: null,
+        children: null,
+        containerChild: null,
+        widthPercentage: null,
+        background: null,
+        hoverBackground: null,
+        padding: null,
+        margin: null,
+        maxWidth: null,
+        alignment: null,
+        customCSS: null,
+      );
+      // Then — addWidgetAtPositionInList wraps widgets in a row
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final allWidgets = state.content.content?.sections?.first.widgets
+                  ?.expand((w) => w.children ?? [w]).toList();
+              final added = allWidgets?.firstWhere(
+                  (w) => w.elementType == PageBuilderWidgetType.calendly,
+                  orElse: () => calendlyWidget);
+              if (added?.elementType != PageBuilderWidgetType.calendly) {
+                return false;
+              }
+              final props =
+                  added!.properties as PagebuilderCalendlyProperties;
+              return props.calendlyEventURL == calendlyUrl;
+            }),
+          ]));
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: contentWithCalendly,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+      pageBuilderBloc.add(AddWidgetAtPositionEvent(
+        newWidget: calendlyWidget,
+        targetWidgetId: "target",
+        position: DropPosition.after,
+      ));
+    });
+
+    test(
+        "should pre-populate email from landingPage when adding contact form widget with null email",
+        () async {
+      // Given
+      const email = "test@example.com";
+      final landingPageWithEmail =
+          mockLandingPage.copyWith(contactEmailAddress: email);
+      final contentWithEmail =
+          mockPagebuilderContent.copyWith(landingPage: landingPageWithEmail);
+      final contactFormWidget = PageBuilderWidget(
+        id: UniqueID.fromUniqueString("cf1"),
+        elementType: PageBuilderWidgetType.contactForm,
+        properties: const PageBuilderContactFormProperties(
+          email: null,
+          nameTextFieldProperties: null,
+          emailTextFieldProperties: null,
+          phoneTextFieldProperties: null,
+          messageTextFieldProperties: null,
+          buttonProperties: null,
+        ),
+        hoverProperties: null,
+        children: null,
+        containerChild: null,
+        widthPercentage: null,
+        background: null,
+        hoverBackground: null,
+        padding: null,
+        margin: null,
+        maxWidth: null,
+        alignment: null,
+        customCSS: null,
+      );
+      // Then — addWidgetAtPositionInList wraps widgets in a row
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final allWidgets = state.content.content?.sections?.first.widgets
+                  ?.expand((w) => w.children ?? [w]).toList();
+              final added = allWidgets?.firstWhere(
+                  (w) => w.elementType == PageBuilderWidgetType.contactForm,
+                  orElse: () => contactFormWidget);
+              if (added?.elementType != PageBuilderWidgetType.contactForm) {
+                return false;
+              }
+              final props =
+                  added!.properties as PageBuilderContactFormProperties;
+              return props.email == email;
+            }),
+          ]));
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: contentWithEmail,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+      pageBuilderBloc.add(AddWidgetAtPositionEvent(
+        newWidget: contactFormWidget,
+        targetWidgetId: "target",
+        position: DropPosition.after,
+      ));
+    });
   });
 
   group("PagebuilderBloc_AddSection", () {
@@ -1737,6 +2026,90 @@ void main() {
       pageBuilderBloc.add(ReplacePlaceholderEvent(
         placeholderId: "placeholder1",
         widgetType: PageBuilderWidgetType.text,
+      ));
+    });
+
+    test(
+        "should pre-populate calendlyEventURL from landingPage when replacing placeholder with calendly widget",
+        () async {
+      // Given
+      const calendlyUrl = "https://calendly.com/user/30min";
+      final landingPageWithCalendly =
+          mockLandingPage.copyWith(calendlyEventURL: calendlyUrl);
+      final contentWithCalendly = mockPagebuilderContent.copyWith(
+          landingPage: landingPageWithCalendly);
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              if (sections == null || sections.isEmpty) return false;
+              final column = sections.first.widgets?.first;
+              final row = column?.children?.first;
+              final replaced = row?.children?.first;
+              if (replaced?.elementType != PageBuilderWidgetType.calendly) {
+                return false;
+              }
+              final props =
+                  replaced!.properties as PagebuilderCalendlyProperties;
+              return props.calendlyEventURL == calendlyUrl;
+            }),
+          ]));
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: contentWithCalendly,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+      pageBuilderBloc.add(ReplacePlaceholderEvent(
+        placeholderId: "placeholder1",
+        widgetType: PageBuilderWidgetType.calendly,
+      ));
+    });
+
+    test(
+        "should pre-populate email from landingPage when replacing placeholder with contact form widget",
+        () async {
+      // Given
+      const email = "test@example.com";
+      final landingPageWithEmail =
+          mockLandingPage.copyWith(contactEmailAddress: email);
+      final contentWithEmail =
+          mockPagebuilderContent.copyWith(landingPage: landingPageWithEmail);
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              if (sections == null || sections.isEmpty) return false;
+              final column = sections.first.widgets?.first;
+              final row = column?.children?.first;
+              final replaced = row?.children?.first;
+              if (replaced?.elementType != PageBuilderWidgetType.contactForm) {
+                return false;
+              }
+              final props =
+                  replaced!.properties as PageBuilderContactFormProperties;
+              return props.email == email;
+            }),
+          ]));
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: contentWithEmail,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+      pageBuilderBloc.add(ReplacePlaceholderEvent(
+        placeholderId: "placeholder1",
+        widgetType: PageBuilderWidgetType.contactForm,
       ));
     });
   });

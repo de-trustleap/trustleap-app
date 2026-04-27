@@ -80,8 +80,12 @@ class PageBuilderWidget extends Equatable {
         customCSS: customCSS ?? this.customCSS);
   }
 
-  String getWidgetTitle(AppLocalizations localization) {
-    switch (elementType) {
+  String getWidgetTitle(AppLocalizations localization) =>
+      widgetTypeTitle(localization, elementType);
+
+  static String widgetTypeTitle(
+      AppLocalizations localization, PageBuilderWidgetType? type) {
+    switch (type) {
       case == PageBuilderWidgetType.container:
         return localization.landingpage_pagebuilder_config_menu_container_type;
       case == PageBuilderWidgetType.column:
