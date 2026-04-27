@@ -49,6 +49,9 @@ extension PagebuilderBlocWidget on PagebuilderBloc {
 
       if (sections == null || sections.isEmpty) return;
 
+      final newWidget = _withLandingPageDefaults(
+          event.newWidget, currentState.content.landingPage);
+
       final updatedSections = sections.map((section) {
         if (section.widgets == null || section.widgets!.isEmpty) {
           return section;
@@ -58,7 +61,7 @@ extension PagebuilderBlocWidget on PagebuilderBloc {
             PagebuilderWidgetTreeManipulator.addWidgetAtPositionInList(
           section.widgets!,
           event.targetWidgetId,
-          event.newWidget,
+          newWidget,
           event.position,
         );
         return section.copyWith(widgets: updatedWidgets);
@@ -98,8 +101,10 @@ extension PagebuilderBlocWidget on PagebuilderBloc {
             widget,
             event.placeholderId,
             (placeholder) {
-              final newWidget = PagebuilderWidgetFactory.createDefaultWidget(
-                  event.widgetType);
+              final newWidget = _withLandingPageDefaults(
+                PagebuilderWidgetFactory.createDefaultWidget(event.widgetType),
+                currentState.content.landingPage,
+              );
               return newWidget.copyWith(
                 widthPercentage: placeholder.widthPercentage,
               );
@@ -235,6 +240,29 @@ extension PagebuilderBlocWidget on PagebuilderBloc {
         saveSuccessful: null,
         isUpdated: true,
       ));
+    }
+  }
+
+  PageBuilderWidget _withLandingPageDefaults(
+      PageBuilderWidget widget, LandingPage? landingPage) {
+    switch (widget.elementType) {
+      case PageBuilderWidgetType.calendly:
+        final properties = widget.properties as PagebuilderCalendlyProperties;
+        if (properties.calendlyEventURL != null) return widget;
+        final url = landingPage?.calendlyEventURL;
+        if (url == null) return widget;
+        return widget.copyWith(
+            properties: properties.copyWith(calendlyEventURL: url));
+      case PageBuilderWidgetType.contactForm:
+        final properties =
+            widget.properties as PageBuilderContactFormProperties;
+        if (properties.email != null) return widget;
+        final email = landingPage?.contactEmailAddress;
+        if (email == null) return widget;
+        return widget.copyWith(
+            properties: properties.copyWith(email: email));
+      default:
+        return widget;
     }
   }
 
