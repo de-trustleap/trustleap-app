@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/features/menu/application/menu_cubit.dart';
 import 'package:finanzbegleiter/features/page_builder/application/pagebuilder_bloc.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/features/page_builder/application/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart';
 import 'package:finanzbegleiter/features/page_builder/application/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
@@ -77,6 +78,28 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
         });
   }
 
+  void _showDuplicateWidgetDialog(
+      AppLocalizations localizations,
+      CustomNavigatorBase navigator,
+      List<PageBuilderWidgetType> duplicates) {
+    final widgetNames = duplicates
+        .map((type) => PageBuilderWidget.widgetTypeTitle(localizations, type))
+        .join(', ');
+    showDialog(
+        context: context,
+        builder: (_) {
+          return CustomAlertDialog(
+              title: localizations
+                  .landingpage_pagebuilder_save_duplicate_widget_error_title,
+              message: localizations
+                  .landingpage_pagebuilder_save_duplicate_widget_error_message(
+                      widgetNames),
+              actionButtonTitle:
+                  localizations.landingpage_pagebuilder_save_error_alert_button,
+              actionButtonAction: () => navigator.pop());
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
@@ -104,7 +127,12 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
             listener: (context, state) {
               if (state is GetLandingPageAndUserSuccessState) {
                 pageBuilderContent = state.content;
-                if (!state.saveLoading && state.saveFailure != null) {
+                if (!state.saveLoading &&
+                    state.saveDuplicateWidgetTypes != null &&
+                    state.saveDuplicateWidgetTypes!.isNotEmpty) {
+                  _showDuplicateWidgetDialog(
+                      localization, navigator, state.saveDuplicateWidgetTypes!);
+                } else if (!state.saveLoading && state.saveFailure != null) {
                   _showSaveFailureDialog(localization, navigator);
                   htmlEvents.disableLeavePageListeners();
                   isUpdated = false;

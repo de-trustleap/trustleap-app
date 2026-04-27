@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_page.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_widget.dart';
 
 class PagebuilderWidgetTreeSearcher {
@@ -41,5 +42,28 @@ class PagebuilderWidgetTreeSearcher {
     return type == PageBuilderWidgetType.row ||
         type == PageBuilderWidgetType.column ||
         type == PageBuilderWidgetType.container;
+  }
+
+  static int countWidgetsByType(
+      PageBuilderPage page, PageBuilderWidgetType type) {
+    int count = 0;
+    for (final section in page.sections ?? []) {
+      for (final widget in section.widgets ?? []) {
+        count += _countInWidget(widget, type);
+      }
+    }
+    return count;
+  }
+
+  static int _countInWidget(
+      PageBuilderWidget widget, PageBuilderWidgetType type) {
+    int count = widget.elementType == type ? 1 : 0;
+    if (widget.containerChild != null) {
+      count += _countInWidget(widget.containerChild!, type);
+    }
+    for (final child in widget.children ?? []) {
+      count += _countInWidget(child, type);
+    }
+    return count;
   }
 }

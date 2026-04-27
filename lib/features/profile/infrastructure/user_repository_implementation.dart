@@ -36,8 +36,8 @@ class UserRepositoryImplementation implements UserRepository {
     if (!requestedUser.exists) {
       yield left(NotFoundFailure());
     }
-    final role = await CustomClaims(auth: firebaseAuth).getUserCustomClaims();
-    yield* userDoc.snapshots().map((snapshot) {
+    yield* userDoc.snapshots().asyncMap((snapshot) async {
+      final role = await CustomClaims(auth: firebaseAuth).getUserCustomClaims();
       var document = snapshot.data() as Map<String, dynamic>;
       var model = UserModel.fromFirestore(document, snapshot.id)
           .toDomain()

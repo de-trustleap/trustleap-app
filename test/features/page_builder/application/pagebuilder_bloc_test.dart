@@ -221,6 +221,156 @@ void main() {
       ]));
       pageBuilderBloc.add(SaveLandingPageContentEvent(testContent));
     });
+
+    test(
+        "should emit saveDuplicateWidgetTypes and not call repo when duplicate unique widget found",
+        () async {
+      // Given
+      final duplicateWidget = PageBuilderWidget(
+          id: UniqueID.fromUniqueString("footer2"),
+          elementType: PageBuilderWidgetType.footer,
+          children: [],
+          widthPercentage: null,
+          background: null,
+          hoverBackground: null,
+          containerChild: null,
+          padding: null,
+          margin: null,
+          maxWidth: null,
+          alignment: null,
+          customCSS: null,
+          properties: null,
+          hoverProperties: null);
+      final pageWithDuplicates = testPage.copyWith(
+          sections: [
+            testPage.sections![0].copyWith(widgets: [
+              ...testPage.sections![0].widgets!,
+              PageBuilderWidget(
+                  id: UniqueID.fromUniqueString("footer1"),
+                  elementType: PageBuilderWidgetType.footer,
+                  children: [],
+                  widthPercentage: null,
+                  background: null,
+                  hoverBackground: null,
+                  containerChild: null,
+                  padding: null,
+                  margin: null,
+                  maxWidth: null,
+                  alignment: null,
+                  customCSS: null,
+                  properties: null,
+                  hoverProperties: null),
+              duplicateWidget,
+            ])
+          ]);
+      final contentWithDuplicates = PagebuilderContent(
+          landingPage: testLandingPage,
+          content: pageWithDuplicates,
+          user: testUser);
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.saveDuplicateWidgetTypes,
+                    "saveDuplicateWidgetTypes",
+                    contains(PageBuilderWidgetType.footer))
+                .having((state) => state.saveLoading, "saveLoading", false)
+          ]));
+      pageBuilderBloc.add(SaveLandingPageContentEvent(contentWithDuplicates));
+      await Future.delayed(Duration.zero);
+      verifyNever(mockPageBuilderRepo
+          .saveLandingPageContent(contentWithDuplicates.content!));
+    });
+
+    test(
+        "should include all duplicate types in saveDuplicateWidgetTypes",
+        () async {
+      // Given
+      final pageWithMultipleDuplicates = testPage.copyWith(sections: [
+        testPage.sections![0].copyWith(widgets: [
+          ...testPage.sections![0].widgets!,
+          PageBuilderWidget(
+              id: UniqueID.fromUniqueString("footer1"),
+              elementType: PageBuilderWidgetType.footer,
+              children: [],
+              widthPercentage: null,
+              background: null,
+              hoverBackground: null,
+              containerChild: null,
+              padding: null,
+              margin: null,
+              maxWidth: null,
+              alignment: null,
+              customCSS: null,
+              properties: null,
+              hoverProperties: null),
+          PageBuilderWidget(
+              id: UniqueID.fromUniqueString("footer2"),
+              elementType: PageBuilderWidgetType.footer,
+              children: [],
+              widthPercentage: null,
+              background: null,
+              hoverBackground: null,
+              containerChild: null,
+              padding: null,
+              margin: null,
+              maxWidth: null,
+              alignment: null,
+              customCSS: null,
+              properties: null,
+              hoverProperties: null),
+          PageBuilderWidget(
+              id: UniqueID.fromUniqueString("calendly1"),
+              elementType: PageBuilderWidgetType.calendly,
+              children: [],
+              widthPercentage: null,
+              background: null,
+              hoverBackground: null,
+              containerChild: null,
+              padding: null,
+              margin: null,
+              maxWidth: null,
+              alignment: null,
+              customCSS: null,
+              properties: null,
+              hoverProperties: null),
+          PageBuilderWidget(
+              id: UniqueID.fromUniqueString("calendly2"),
+              elementType: PageBuilderWidgetType.calendly,
+              children: [],
+              widthPercentage: null,
+              background: null,
+              hoverBackground: null,
+              containerChild: null,
+              padding: null,
+              margin: null,
+              maxWidth: null,
+              alignment: null,
+              customCSS: null,
+              properties: null,
+              hoverProperties: null),
+        ])
+      ]);
+      final contentWithMultipleDuplicates = PagebuilderContent(
+          landingPage: testLandingPage,
+          content: pageWithMultipleDuplicates,
+          user: testUser);
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>().having(
+                (state) => state.saveDuplicateWidgetTypes,
+                "saveDuplicateWidgetTypes",
+                containsAll([
+                  PageBuilderWidgetType.footer,
+                  PageBuilderWidgetType.calendly,
+                ]))
+          ]));
+      pageBuilderBloc
+          .add(SaveLandingPageContentEvent(contentWithMultipleDuplicates));
+    });
   });
 
   group("PagebuilderCubit_updateWidgets", () {
