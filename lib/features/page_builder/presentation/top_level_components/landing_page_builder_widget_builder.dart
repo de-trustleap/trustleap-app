@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilde
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_calendly_properties.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_column_properties.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_contact_form_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_faq_properties.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_footer_properties.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_icon_properties.dart';
@@ -15,6 +16,7 @@ import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilde
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/page_elements/button_view.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/page_elements/contact_form_view.dart';
+import 'package:finanzbegleiter/features/page_builder/presentation/page_elements/pagebuilder_faq_view.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/page_elements/footer_view.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/page_elements/icon_view.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/page_elements/image_view.dart';
@@ -99,6 +101,10 @@ class LandingPageBuilderWidgetBuilder {
             index: index);
       case PageBuilderWidgetType.placeholder:
         return buildPlaceholderWidget(model, index: index);
+      case PageBuilderWidgetType.faq:
+        return buildFaqWidget(
+            model.properties as PageBuilderFaqProperties, model,
+            index: index);
       default:
         return const SizedBox.shrink();
     }
@@ -225,5 +231,12 @@ class LandingPageBuilderWidgetBuilder {
       widgetModel: model,
       index: index,
     );
+  }
+
+  Widget buildFaqWidget(
+      PageBuilderFaqProperties properties, PageBuilderWidget model,
+      {int? index}) {
+    return PagebuilderFaqView(
+        properties: properties, widgetModel: model, index: index);
   }
 }

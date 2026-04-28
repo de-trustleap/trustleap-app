@@ -8,6 +8,8 @@ import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilde
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_calendly_properties.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_contact_form_properties.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_container_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_faq_item.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_faq_properties.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_height_properties.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_image_properties.dart';
@@ -18,11 +20,12 @@ import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilde
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_video_player_properties.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/responsive/pagebuilder_responsive_or_constant.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class PagebuilderWidgetFactory {
   static PageBuilderWidget createDefaultWidget(
-      PageBuilderWidgetType widgetType) {
+      PageBuilderWidgetType widgetType, AppLocalizations localization) {
     switch (widgetType) {
       case PageBuilderWidgetType.text:
         return _createTextWidget();
@@ -35,7 +38,7 @@ class PagebuilderWidgetFactory {
       case PageBuilderWidgetType.videoPlayer:
         return _createVideoPlayerWidget();
       case PageBuilderWidgetType.contactForm:
-        return _createContactFormWidget();
+        return _createContactFormWidget(localization);
       case PageBuilderWidgetType.anchorButton:
         return _createAnchorButtonWidget();
       case PageBuilderWidgetType.calendly:
@@ -48,6 +51,8 @@ class PagebuilderWidgetFactory {
         return _createHeightWidget();
       case PageBuilderWidgetType.placeholder:
         return _createPlaceholderWidget();
+      case PageBuilderWidgetType.faq:
+        return _createFaqWidget(localization);
       default:
         return _createTextWidget();
     }
@@ -183,7 +188,8 @@ class PagebuilderWidgetFactory {
     );
   }
 
-  static PageBuilderWidget _createContactFormWidget() {
+  static PageBuilderWidget _createContactFormWidget(
+      AppLocalizations? localization) {
     return PageBuilderWidget(
       id: UniqueID(),
       elementType: PageBuilderWidgetType.contactForm,
@@ -198,7 +204,8 @@ class PagebuilderWidgetFactory {
                 Color(ColorUtility.getHexIntFromString("FFF9F9F9")),
             borderColor: Color(ColorUtility.getHexIntFromString("FFDBDBDB")),
             placeHolderTextProperties: PageBuilderTextProperties(
-                text: "Ihr Name",
+                text: localization
+                    ?.pagebuilder_contact_form_default_name_placeholder,
                 fontSize: const PagebuilderResponsiveOrConstant.constant(16),
                 fontFamily: "Roboto",
                 lineHeight: null,
@@ -226,7 +233,8 @@ class PagebuilderWidgetFactory {
                 Color(ColorUtility.getHexIntFromString("FFF9F9F9")),
             borderColor: Color(ColorUtility.getHexIntFromString("FFDBDBDB")),
             placeHolderTextProperties: PageBuilderTextProperties(
-                text: "Ihr E-Mail",
+                text: localization
+                    ?.pagebuilder_contact_form_default_email_placeholder,
                 fontSize: const PagebuilderResponsiveOrConstant.constant(16),
                 fontFamily: "Roboto",
                 lineHeight: null,
@@ -254,7 +262,8 @@ class PagebuilderWidgetFactory {
                 Color(ColorUtility.getHexIntFromString("FFF9F9F9")),
             borderColor: Color(ColorUtility.getHexIntFromString("FFDBDBDB")),
             placeHolderTextProperties: PageBuilderTextProperties(
-                text: "Ihre Telefonnummer",
+                text: localization
+                    ?.pagebuilder_contact_form_default_phone_placeholder,
                 fontSize: const PagebuilderResponsiveOrConstant.constant(16),
                 fontFamily: "Roboto",
                 lineHeight: null,
@@ -282,7 +291,8 @@ class PagebuilderWidgetFactory {
                 Color(ColorUtility.getHexIntFromString("FFF9F9F9")),
             borderColor: Color(ColorUtility.getHexIntFromString("FFDBDBDB")),
             placeHolderTextProperties: PageBuilderTextProperties(
-                text: "Ihre Nachricht",
+                text: localization
+                    ?.pagebuilder_contact_form_default_message_placeholder,
                 fontSize: const PagebuilderResponsiveOrConstant.constant(16),
                 fontFamily: "Roboto",
                 lineHeight: null,
@@ -312,7 +322,8 @@ class PagebuilderWidgetFactory {
             backgroundPaint: PagebuilderPaint(
                 color: Color(ColorUtility.getHexIntFromString("FF000000"))),
             textProperties: PageBuilderTextProperties(
-                text: "Nachricht senden",
+                text:
+                    localization?.pagebuilder_contact_form_default_button_text,
                 fontSize: const PagebuilderResponsiveOrConstant.constant(16),
                 fontFamily: "Roboto",
                 lineHeight: null,
@@ -452,6 +463,72 @@ class PagebuilderWidgetFactory {
       elementType: PageBuilderWidgetType.height,
       properties: const PageBuilderHeightProperties(
         height: PagebuilderResponsiveOrConstant.constant(40),
+      ),
+      hoverProperties: null,
+      children: null,
+      containerChild: null,
+      widthPercentage: null,
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+      customCSS: null,
+    );
+  }
+
+  static PageBuilderWidget _createFaqWidget(AppLocalizations? localization) {
+    return PageBuilderWidget(
+      id: UniqueID(),
+      elementType: PageBuilderWidgetType.faq,
+      properties: PageBuilderFaqProperties(
+        items: [
+          PagebuilderFAQItem(
+            question: localization?.pagebuilder_faq_default_question_1,
+            answer: localization?.pagebuilder_faq_default_answer_1,
+          ),
+          PagebuilderFAQItem(
+            question: localization?.pagebuilder_faq_default_question_2,
+            answer: localization?.pagebuilder_faq_default_answer_2,
+          ),
+          PagebuilderFAQItem(
+            question: localization?.pagebuilder_faq_default_question_3,
+            answer: localization?.pagebuilder_faq_default_answer_3,
+          ),
+        ],
+        questionTextProperties: PageBuilderTextProperties(
+          text: null,
+          fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
+          fontFamily: "Poppins",
+          lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
+          letterSpacing: null,
+          color: Color(ColorUtility.getHexIntFromString("FF000000")),
+          alignment:
+              const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
+          textShadow: null,
+        ),
+        answerTextProperties: PageBuilderTextProperties(
+          text: null,
+          fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
+          fontFamily: "Poppins",
+          lineHeight: const PagebuilderResponsiveOrConstant.constant(1.6),
+          letterSpacing: null,
+          color: Color(ColorUtility.getHexIntFromString("FF444444")),
+          alignment:
+              const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
+          textShadow: null,
+        ),
+        chevronColor: Color(ColorUtility.getHexIntFromString("FF000000")),
+        questionBackgroundPaint: PagebuilderPaint.color(
+          Color(ColorUtility.getHexIntFromString("FFFFFFFF")),
+        ),
+        answerBackgroundPaint: PagebuilderPaint.color(
+          Color(ColorUtility.getHexIntFromString("FFF9F9F9")),
+        ),
+        borderPaint: PagebuilderPaint.color(
+          Color(ColorUtility.getHexIntFromString("FFDBDBDB")),
+        ),
       ),
       hoverProperties: null,
       children: null,

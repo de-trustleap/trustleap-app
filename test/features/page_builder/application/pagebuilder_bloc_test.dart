@@ -22,6 +22,7 @@ import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilde
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_calendly_properties.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_contact_form_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_faq_properties.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_paint.dart';
@@ -1801,6 +1802,118 @@ void main() {
       customCSS: null,
     );
 
+    final preBuiltTextWidget = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("new_text"),
+      elementType: PageBuilderWidgetType.text,
+      properties: null,
+      hoverProperties: null,
+      children: null,
+      containerChild: null,
+      widthPercentage: null,
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+      customCSS: null,
+    );
+
+    final preBuiltImageWidget = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("new_image"),
+      elementType: PageBuilderWidgetType.image,
+      properties: null,
+      hoverProperties: null,
+      children: null,
+      containerChild: null,
+      widthPercentage: null,
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+      customCSS: null,
+    );
+
+    final preBuiltCalendlyWidget = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("new_calendly"),
+      elementType: PageBuilderWidgetType.calendly,
+      properties: const PagebuilderCalendlyProperties(
+        width: PagebuilderResponsiveOrConstant.constant(640.0),
+        height: PagebuilderResponsiveOrConstant.constant(700.0),
+        borderRadius: 0.0,
+        calendlyEventURL: null,
+        eventTypeName: null,
+        textColor: null,
+        backgroundColor: null,
+        primaryColor: null,
+        hideEventTypeDetails: false,
+        shadow: null,
+        useIntrinsicHeight: false,
+      ),
+      hoverProperties: null,
+      children: null,
+      containerChild: null,
+      widthPercentage: null,
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+      customCSS: null,
+    );
+
+    final preBuiltContactFormWidget = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("new_contact_form"),
+      elementType: PageBuilderWidgetType.contactForm,
+      properties: const PageBuilderContactFormProperties(
+        email: null,
+        nameTextFieldProperties: null,
+        emailTextFieldProperties: null,
+        phoneTextFieldProperties: null,
+        messageTextFieldProperties: null,
+        buttonProperties: null,
+      ),
+      hoverProperties: null,
+      children: null,
+      containerChild: null,
+      widthPercentage: null,
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+      customCSS: null,
+    );
+
+    final preBuiltFaqWidget = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("new_faq"),
+      elementType: PageBuilderWidgetType.faq,
+      properties: const PageBuilderFaqProperties(
+        items: null,
+        questionTextProperties: null,
+        answerTextProperties: null,
+        chevronColor: null,
+        questionBackgroundPaint: null,
+        answerBackgroundPaint: null,
+        borderPaint: null,
+      ),
+      hoverProperties: null,
+      children: null,
+      containerChild: null,
+      widthPercentage: null,
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+      customCSS: null,
+    );
+
     final mockSection = PageBuilderSection(
       id: UniqueID.fromUniqueString("section1"),
       name: "Test Section",
@@ -1876,6 +1989,7 @@ void main() {
       pageBuilderBloc.add(ReplacePlaceholderEvent(
         placeholderId: "placeholder1",
         widgetType: PageBuilderWidgetType.text,
+        preBuiltWidget: preBuiltTextWidget,
       ));
     });
 
@@ -1917,6 +2031,7 @@ void main() {
       pageBuilderBloc.add(ReplacePlaceholderEvent(
         placeholderId: "placeholder1",
         widgetType: PageBuilderWidgetType.image,
+        preBuiltWidget: preBuiltImageWidget,
       ));
     });
 
@@ -1943,6 +2058,7 @@ void main() {
       pageBuilderBloc.add(ReplacePlaceholderEvent(
         placeholderId: "placeholder1",
         widgetType: PageBuilderWidgetType.text,
+        preBuiltWidget: preBuiltTextWidget,
       ));
     });
 
@@ -1968,6 +2084,7 @@ void main() {
       pageBuilderBloc.add(ReplacePlaceholderEvent(
         placeholderId: "nonexistent",
         widgetType: PageBuilderWidgetType.text,
+        preBuiltWidget: preBuiltTextWidget,
       ));
     });
 
@@ -1998,6 +2115,7 @@ void main() {
       pageBuilderBloc.add(ReplacePlaceholderEvent(
         placeholderId: "placeholder1",
         widgetType: PageBuilderWidgetType.text,
+        preBuiltWidget: preBuiltTextWidget,
       ));
     });
 
@@ -2026,6 +2144,7 @@ void main() {
       pageBuilderBloc.add(ReplacePlaceholderEvent(
         placeholderId: "placeholder1",
         widgetType: PageBuilderWidgetType.text,
+        preBuiltWidget: preBuiltTextWidget,
       ));
     });
 
@@ -2068,6 +2187,7 @@ void main() {
       pageBuilderBloc.add(ReplacePlaceholderEvent(
         placeholderId: "placeholder1",
         widgetType: PageBuilderWidgetType.calendly,
+        preBuiltWidget: preBuiltCalendlyWidget,
       ));
     });
 
@@ -2110,6 +2230,49 @@ void main() {
       pageBuilderBloc.add(ReplacePlaceholderEvent(
         placeholderId: "placeholder1",
         widgetType: PageBuilderWidgetType.contactForm,
+        preBuiltWidget: preBuiltContactFormWidget,
+      ));
+    });
+
+    test("should emit GetLandingPageAndUserSuccessState with placeholder replaced by faq widget",
+        () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              if (sections == null || sections.isEmpty) return false;
+
+              final section = sections.first;
+              final column = section.widgets?.first;
+              if (column == null) return false;
+
+              final row = column.children?.first;
+              if (row == null || row.children == null || row.children!.isEmpty) return false;
+
+              final replacedWidget = row.children!.first;
+
+              return replacedWidget.elementType == PageBuilderWidgetType.faq &&
+                  replacedWidget.widthPercentage?.constantValue == 50.0 &&
+                  state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(ReplacePlaceholderEvent(
+        placeholderId: "placeholder1",
+        widgetType: PageBuilderWidgetType.faq,
+        preBuiltWidget: preBuiltFaqWidget,
       ));
     });
   });

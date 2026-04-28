@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilde
 import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_anchor_button_content.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_calendly_content.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_contactform_content.dart';
+import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_faq_content.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_icon_content.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_image_content.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_spacer_content.dart';
@@ -44,6 +45,8 @@ class LandingPageBuilderConfigMenuContentTab extends StatelessWidget {
           PagebuilderConfigMenuSpacerContent(
             model: model,
           )
+        ] else if (model.elementType == PageBuilderWidgetType.faq) ...[
+          PagebuilderConfigMenuFaqContent(model: model)
         ],
         const SizedBox(height: 40)
       ],

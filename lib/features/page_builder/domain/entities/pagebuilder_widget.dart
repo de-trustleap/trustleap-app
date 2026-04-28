@@ -115,6 +115,8 @@ class PageBuilderWidget extends Equatable {
         return localization.landingpage_pagebuilder_config_menu_calendly_type;
       case == PageBuilderWidgetType.height:
         return localization.landingpage_pagebuilder_config_menu_spacer_type;
+      case == PageBuilderWidgetType.faq:
+        return localization.landingpage_pagebuilder_config_menu_faq_type;
       default:
         return localization.landingpage_pagebuilder_config_menu_unknown_type;
     }

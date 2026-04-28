@@ -102,7 +102,7 @@ extension PagebuilderBlocWidget on PagebuilderBloc {
             event.placeholderId,
             (placeholder) {
               final newWidget = _withLandingPageDefaults(
-                PagebuilderWidgetFactory.createDefaultWidget(event.widgetType),
+                event.preBuiltWidget,
                 currentState.content.landingPage,
               );
               return newWidget.copyWith(

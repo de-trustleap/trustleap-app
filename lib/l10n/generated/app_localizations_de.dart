@@ -1489,6 +1489,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_pagebuilder_config_menu_calendly_type => 'Calendly';
 
   @override
+  String get landingpage_pagebuilder_config_menu_faq_type => 'FAQ';
+
+  @override
   String get landingpage_pagebuilder_config_menu_unknown_type => 'Unbekannt';
 
   @override
@@ -2746,6 +2749,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get pagebuilder_hierarchy_overlay_height => 'Höhe';
 
   @override
+  String get pagebuilder_hierarchy_overlay_faq => 'FAQ';
+
+  @override
   String get pagebuilder_mobile_not_supported_title =>
       'PageBuilder nur auf Desktop verfügbar';
 
@@ -3286,6 +3292,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get pagebuilder_widget_template_spacer => 'Höhe';
+
+  @override
+  String get pagebuilder_widget_template_faq => 'FAQ';
 
   @override
   String get pagebuilder_html_text_editor_select_color => 'Farbe auswählen';
@@ -3973,4 +3982,77 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settings_app_version => 'App Version';
+
+  @override
+  String get pagebuilder_contact_form_default_name_placeholder => 'Ihr Name';
+
+  @override
+  String get pagebuilder_contact_form_default_email_placeholder => 'Ihr E-Mail';
+
+  @override
+  String get pagebuilder_contact_form_default_phone_placeholder =>
+      'Ihre Telefonnummer';
+
+  @override
+  String get pagebuilder_contact_form_default_message_placeholder =>
+      'Ihre Nachricht';
+
+  @override
+  String get pagebuilder_contact_form_default_button_text => 'Nachricht senden';
+
+  @override
+  String get pagebuilder_faq_config_question_style_title => 'Frage-Style';
+
+  @override
+  String get pagebuilder_faq_config_answer_style_title => 'Antwort-Style';
+
+  @override
+  String get pagebuilder_faq_config_indicator_color_title => 'Indikator Farbe';
+
+  @override
+  String get pagebuilder_faq_config_question_background_title =>
+      'Frage Hintergrundfarbe';
+
+  @override
+  String get pagebuilder_faq_config_answer_background_title =>
+      'Antwort Hintergrundfarbe';
+
+  @override
+  String get pagebuilder_faq_config_border_color_title => 'Rahmenfarbe';
+
+  @override
+  String get pagebuilder_faq_config_items_title => 'FAQ Items';
+
+  @override
+  String get pagebuilder_faq_config_add_item => 'Frage hinzufügen';
+
+  @override
+  String get pagebuilder_faq_config_delete_item => 'Frage löschen';
+
+  @override
+  String get pagebuilder_faq_config_item_question_label => 'Frage';
+
+  @override
+  String get pagebuilder_faq_config_item_answer_label => 'Antwort';
+
+  @override
+  String get pagebuilder_faq_default_question_1 => 'Wie funktioniert das?';
+
+  @override
+  String get pagebuilder_faq_default_answer_1 =>
+      'Hier kommt die Antwort auf die erste Frage.';
+
+  @override
+  String get pagebuilder_faq_default_question_2 => 'Für wen ist das geeignet?';
+
+  @override
+  String get pagebuilder_faq_default_answer_2 =>
+      'Hier kommt die Antwort auf die zweite Frage.';
+
+  @override
+  String get pagebuilder_faq_default_question_3 => 'Was kostet das?';
+
+  @override
+  String get pagebuilder_faq_default_answer_3 =>
+      'Hier kommt die Antwort auf die dritte Frage.';
 }

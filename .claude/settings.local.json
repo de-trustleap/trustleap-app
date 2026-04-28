@@ -40,7 +40,18 @@
       "mcp__github__search_pull_requests",
       "WebFetch(domain:storage.googleapis.com)",
       "mcp__obsidian__read-note",
-      "mcp__plugin_firebase_firebase__auth_get_users"
+      "mcp__plugin_firebase_firebase__auth_get_users",
+      "mcp__obsidian__list-available-vaults",
+      "mcp__obsidian__search-vault",
+      "mcp__obsidian__create-note",
+      "mcp__obsidian__edit-note",
+      "mcp__obsidian__create-directory",
+      "mcp__obsidian__delete-note",
+      "mcp__obsidian__move-note",
+      "mcp__obsidian__add-tags",
+      "mcp__obsidian__remove-tags",
+      "mcp__obsidian__rename-tag",
+      "Bash(mkdir:*)"
     ],
     "deny": []
   }
