@@ -31,6 +31,8 @@ class PagebuilderWidgetTemplate {
         return localizations.pagebuilder_widget_template_calendly;
       case PageBuilderWidgetType.height:
         return localizations.pagebuilder_widget_template_spacer;
+      case PageBuilderWidgetType.faq:
+        return localizations.pagebuilder_widget_template_faq;
       default:
         return localizations.landingpage_pagebuilder_config_menu_unknown_type;
     }
@@ -74,6 +76,10 @@ class PagebuilderWidgetTemplates {
     PagebuilderWidgetTemplate(
       icon: Icons.height,
       widgetType: PageBuilderWidgetType.height,
+    ),
+    PagebuilderWidgetTemplate(
+      icon: Icons.help_outline,
+      widgetType: PageBuilderWidgetType.faq,
     ),
   ];
 }

@@ -21,7 +21,6 @@ import 'package:finanzbegleiter/features/profile/domain/user_repository.dart';
 import 'package:finanzbegleiter/features/page_builder/infrastructure/models/pagebuilder_page_model.dart';
 import 'package:finanzbegleiter/features/page_builder/infrastructure/models/pagebuilder_section_model.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/pagebuilder_reorder_helper.dart';
-import 'package:finanzbegleiter/features/page_builder/presentation/pagebuilder_widget_factory.dart';
 import 'package:rxdart/rxdart.dart';
 
 part 'pagebuilder_bloc_history.dart';

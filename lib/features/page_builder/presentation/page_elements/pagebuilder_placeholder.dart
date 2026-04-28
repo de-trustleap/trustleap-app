@@ -3,6 +3,8 @@ import 'package:finanzbegleiter/features/page_builder/domain/entities/drag_data/
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/page_elements/pagebuilder_add_widget_overlay.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/page_elements/pagebuilder_overlay.dart';
+import 'package:finanzbegleiter/features/page_builder/presentation/pagebuilder_widget_factory.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -30,19 +32,25 @@ class _PagebuilderPlaceholderState extends State<PagebuilderPlaceholder> {
       content: PagebuilderAddWidgetOverlay(
         onWidgetSelected: (widgetType) {
           Navigator.pop(context);
+          final newWidget = PagebuilderWidgetFactory.createDefaultWidget(
+              widgetType, AppLocalizations.of(context));
           Modular.get<PagebuilderBloc>().add(ReplacePlaceholderEvent(
             placeholderId: widget.widgetModel.id.value,
             widgetType: widgetType,
+            preBuiltWidget: newWidget,
           ));
         },
       ),
     );
   }
 
-  void _replacePlaceholder(WidgetLibraryDragData dragData) {
+  void _replacePlaceholder(WidgetLibraryDragData dragData, BuildContext context) {
+    final newWidget = PagebuilderWidgetFactory.createDefaultWidget(
+        dragData.widgetType, AppLocalizations.of(context));
     Modular.get<PagebuilderBloc>().add(ReplacePlaceholderEvent(
       placeholderId: widget.widgetModel.id.value,
       widgetType: dragData.widgetType,
+      preBuiltWidget: newWidget,
     ));
   }
 
@@ -53,7 +61,7 @@ class _PagebuilderPlaceholderState extends State<PagebuilderPlaceholder> {
     return DragTarget<WidgetLibraryDragData>(
       onWillAcceptWithDetails: (details) => true,
       onAcceptWithDetails: (details) {
-        _replacePlaceholder(details.data);
+        _replacePlaceholder(details.data, context);
         setState(() => _isDragOver = false);
       },
       onLeave: (_) {

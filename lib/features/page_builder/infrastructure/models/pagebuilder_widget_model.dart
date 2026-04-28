@@ -6,6 +6,7 @@ import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilde
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_calendly_properties.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_column_properties.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_contact_form_properties.dart';
+import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_faq_properties.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_footer_properties.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_global_styles.dart';
@@ -23,6 +24,7 @@ import 'package:finanzbegleiter/features/page_builder/infrastructure/models/page
 import 'package:finanzbegleiter/features/page_builder/infrastructure/models/pagebuilder_calendly_properties_model.dart';
 import 'package:finanzbegleiter/features/page_builder/infrastructure/models/pagebuilder_column_properties_model.dart';
 import 'package:finanzbegleiter/features/page_builder/infrastructure/models/pagebuilder_contact_form_properties_model.dart';
+import 'package:finanzbegleiter/features/page_builder/infrastructure/models/pagebuilder_faq_properties_model.dart';
 import 'package:finanzbegleiter/features/page_builder/infrastructure/models/pagebuilder_container_properties_model.dart';
 import 'package:finanzbegleiter/features/page_builder/infrastructure/models/pagebuilder_footer_properties_model.dart';
 import 'package:finanzbegleiter/features/page_builder/infrastructure/models/pagebuilder_height_properties_model.dart';
@@ -262,6 +264,8 @@ class PageBuilderWidgetModel extends Equatable {
             .toDomain(globalStyles);
       case PageBuilderWidgetType.height:
         return PageBuilderHeightPropertiesModel.fromMap(properties).toDomain();
+      case PageBuilderWidgetType.faq:
+        return PageBuilderFaqPropertiesModel.fromMap(properties).toDomain(globalStyles);
       default:
         return null;
     }
@@ -299,6 +303,8 @@ class PageBuilderWidgetModel extends Equatable {
       return PagebuilderCalendlyPropertiesModel.fromDomain(properties).toMap();
     } else if (properties is PageBuilderHeightProperties) {
       return PageBuilderHeightPropertiesModel.fromDomain(properties).toMap();
+    } else if (properties is PageBuilderFaqProperties) {
+      return PageBuilderFaqPropertiesModel.fromDomain(properties).toMap();
     } else {
       return null;
     }

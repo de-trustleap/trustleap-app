@@ -12,6 +12,7 @@ import 'package:finanzbegleiter/features/page_builder/presentation/pagebuilder_w
 import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/draggable_item_provider.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_drag_indicators.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_reorderable_row/reorderable_row_resize_overlay.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -366,7 +367,7 @@ class ReorderableRowContentState extends State<ReorderableRowContent> {
 
                 // Create new widget from factory
                 final newWidget = PagebuilderWidgetFactory.createDefaultWidget(
-                    widgetLibraryData.widgetType);
+                    widgetLibraryData.widgetType, AppLocalizations.of(context));
 
                 // Add widget at position
                 Modular.get<PagebuilderBloc>().add(AddWidgetAtPositionEvent(
@@ -531,9 +532,11 @@ class ReorderableRowContentState extends State<ReorderableRowContent> {
             children: rowChildren,
           );
 
-    final isGloballyDragging = Modular.get<PagebuilderDragCubit>().state.isDragging;
+    final isGloballyDragging =
+        Modular.get<PagebuilderDragCubit>().state.isDragging;
     final shouldShowResizeOverlay =
-        (!isGloballyDragging && _dragState.draggingIndex == null) || _isResizing;
+        (!isGloballyDragging && _dragState.draggingIndex == null) ||
+            _isResizing;
 
     return Stack(
       clipBehavior: Clip.none,

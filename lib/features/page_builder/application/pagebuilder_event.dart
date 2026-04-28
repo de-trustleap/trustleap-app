@@ -141,14 +141,16 @@ class AddSectionFromTemplateEvent extends PagebuilderEvent with EquatableMixin {
 class ReplacePlaceholderEvent extends PagebuilderEvent with EquatableMixin {
   final String placeholderId;
   final PageBuilderWidgetType widgetType;
+  final PageBuilderWidget preBuiltWidget;
 
   ReplacePlaceholderEvent({
     required this.placeholderId,
     required this.widgetType,
+    required this.preBuiltWidget,
   });
 
   @override
-  List<Object?> get props => [placeholderId, widgetType];
+  List<Object?> get props => [placeholderId, widgetType, preBuiltWidget];
 }
 
 class DeleteSectionEvent extends PagebuilderEvent with EquatableMixin {

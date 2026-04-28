@@ -7,6 +7,7 @@ import 'package:finanzbegleiter/features/page_builder/presentation/top_level_com
 import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_calendly_config.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_column_config.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_contactform_config.dart';
+import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_faq_config.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_container_config.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_custom_css.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_footer_config.dart';
@@ -57,6 +58,8 @@ class LandingPageBuilderConfigMenuDesignTab extends StatelessWidget {
           PagebuilderConfigMenuAnchorButtonConfig(model: model, globalStyles: globalStyles)
         ] else if (model.elementType == PageBuilderWidgetType.calendly) ...[
           PagebuilderConfigMenuCalendlyConfig(model: model, globalColors: globalStyles?.colors)
+        ] else if (model.elementType == PageBuilderWidgetType.faq) ...[
+          PagebuilderConfigMenuFaqConfig(model: model)
         ],
         const SizedBox(height: 8),
         PagebuilderConfigMenuLayout(model: model),

@@ -2586,6 +2586,12 @@ abstract class AppLocalizations {
   /// **'Calendly'**
   String get landingpage_pagebuilder_config_menu_calendly_type;
 
+  /// FAQ title in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'FAQ'**
+  String get landingpage_pagebuilder_config_menu_faq_type;
+
   /// Unknown title in the pagebuilder config menu
   ///
   /// In en, this message translates to:
@@ -4696,6 +4702,12 @@ abstract class AppLocalizations {
   /// **'Height'**
   String get pagebuilder_hierarchy_overlay_height;
 
+  /// FAQ element in the hierarchy overlay in the pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'FAQ'**
+  String get pagebuilder_hierarchy_overlay_faq;
+
   /// Title of the Mobile not Supported View in the Pagebuilder
   ///
   /// In en, this message translates to:
@@ -5583,6 +5595,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Height'**
   String get pagebuilder_widget_template_spacer;
+
+  /// Name of the FAQ widget template in the Pagebuilder widget menu
+  ///
+  /// In en, this message translates to:
+  /// **'FAQ'**
+  String get pagebuilder_widget_template_faq;
 
   /// Label for color selection in the HTML text editor
   ///
@@ -6831,6 +6849,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'App Version'**
   String get settings_app_version;
+
+  /// Contact form - default placeholder for name field
+  ///
+  /// In en, this message translates to:
+  /// **'Your Name'**
+  String get pagebuilder_contact_form_default_name_placeholder;
+
+  /// Contact form - default placeholder for email field
+  ///
+  /// In en, this message translates to:
+  /// **'Your Email'**
+  String get pagebuilder_contact_form_default_email_placeholder;
+
+  /// Contact form - default placeholder for phone field
+  ///
+  /// In en, this message translates to:
+  /// **'Your Phone Number'**
+  String get pagebuilder_contact_form_default_phone_placeholder;
+
+  /// Contact form - default placeholder for message field
+  ///
+  /// In en, this message translates to:
+  /// **'Your Message'**
+  String get pagebuilder_contact_form_default_message_placeholder;
+
+  /// Contact form - default button text
+  ///
+  /// In en, this message translates to:
+  /// **'Send Message'**
+  String get pagebuilder_contact_form_default_button_text;
+
+  /// FAQ config menu - title for question style section
+  ///
+  /// In en, this message translates to:
+  /// **'Question Style'**
+  String get pagebuilder_faq_config_question_style_title;
+
+  /// FAQ config menu - title for answer style section
+  ///
+  /// In en, this message translates to:
+  /// **'Answer Style'**
+  String get pagebuilder_faq_config_answer_style_title;
+
+  /// FAQ config menu - title for indicator color
+  ///
+  /// In en, this message translates to:
+  /// **'Indicator Color'**
+  String get pagebuilder_faq_config_indicator_color_title;
+
+  /// FAQ config menu - title for question background color
+  ///
+  /// In en, this message translates to:
+  /// **'Question Background Color'**
+  String get pagebuilder_faq_config_question_background_title;
+
+  /// FAQ config menu - title for answer background color
+  ///
+  /// In en, this message translates to:
+  /// **'Answer Background Color'**
+  String get pagebuilder_faq_config_answer_background_title;
+
+  /// FAQ config menu - title for border color
+  ///
+  /// In en, this message translates to:
+  /// **'Border Color'**
+  String get pagebuilder_faq_config_border_color_title;
+
+  /// FAQ config menu - title for items section
+  ///
+  /// In en, this message translates to:
+  /// **'FAQ Items'**
+  String get pagebuilder_faq_config_items_title;
+
+  /// FAQ config menu - button to add a question
+  ///
+  /// In en, this message translates to:
+  /// **'Add Question'**
+  String get pagebuilder_faq_config_add_item;
+
+  /// FAQ config menu - tooltip for delete question button
+  ///
+  /// In en, this message translates to:
+  /// **'Delete question'**
+  String get pagebuilder_faq_config_delete_item;
+
+  /// FAQ config menu - label for question text field
+  ///
+  /// In en, this message translates to:
+  /// **'Question'**
+  String get pagebuilder_faq_config_item_question_label;
+
+  /// FAQ config menu - label for answer text field
+  ///
+  /// In en, this message translates to:
+  /// **'Answer'**
+  String get pagebuilder_faq_config_item_answer_label;
+
+  /// FAQ - default question text 1
+  ///
+  /// In en, this message translates to:
+  /// **'How does it work?'**
+  String get pagebuilder_faq_default_question_1;
+
+  /// FAQ - default answer text 1
+  ///
+  /// In en, this message translates to:
+  /// **'Here comes the answer to the first question.'**
+  String get pagebuilder_faq_default_answer_1;
+
+  /// FAQ - default question text 2
+  ///
+  /// In en, this message translates to:
+  /// **'Who is this suitable for?'**
+  String get pagebuilder_faq_default_question_2;
+
+  /// FAQ - default answer text 2
+  ///
+  /// In en, this message translates to:
+  /// **'Here comes the answer to the second question.'**
+  String get pagebuilder_faq_default_answer_2;
+
+  /// FAQ - default question text 3
+  ///
+  /// In en, this message translates to:
+  /// **'What does it cost?'**
+  String get pagebuilder_faq_default_question_3;
+
+  /// FAQ - default answer text 3
+  ///
+  /// In en, this message translates to:
+  /// **'Here comes the answer to the third question.'**
+  String get pagebuilder_faq_default_answer_3;
 }
 
 class _AppLocalizationsDelegate

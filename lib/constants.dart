@@ -78,6 +78,7 @@ enum PageBuilderWidgetType {
   calendly,
   placeholder,
   height,
+  faq,
   none
 }
 

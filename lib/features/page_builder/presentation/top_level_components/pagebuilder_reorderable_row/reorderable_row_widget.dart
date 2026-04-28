@@ -8,6 +8,7 @@ import 'package:finanzbegleiter/features/page_builder/presentation/pagebuilder_w
 import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/landing_page_builder_widget_container.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_reorderable_element.dart';
 import 'package:finanzbegleiter/features/page_builder/presentation/top_level_components/pagebuilder_reorderable_row/reorderable_row_content.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -68,7 +69,8 @@ class ReorderableRowWidget extends StatelessWidget {
                     // Create new widget from factory
                     final newWidget =
                         PagebuilderWidgetFactory.createDefaultWidget(
-                            widgetLibraryData.widgetType);
+                            widgetLibraryData.widgetType,
+                            AppLocalizations.of(context));
 
                     // Add widget at position
                     Modular.get<PagebuilderBloc>().add(AddWidgetAtPositionEvent(

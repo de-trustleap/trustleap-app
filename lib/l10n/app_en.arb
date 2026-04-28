@@ -1718,6 +1718,10 @@
     "@landingpage_pagebuilder_config_menu_calendly_type": {
         "description": "Calendly title in the pagebuilder config menu"
     },
+    "landingpage_pagebuilder_config_menu_faq_type": "FAQ",
+    "@landingpage_pagebuilder_config_menu_faq_type": {
+        "description": "FAQ title in the pagebuilder config menu"
+    },
     "landingpage_pagebuilder_config_menu_unknown_type": "Unknown",
     "@landingpage_pagebuilder_config_menu_unknown_type": {
         "description": "Unknown title in the pagebuilder config menu"
@@ -3161,6 +3165,10 @@
     "@pagebuilder_hierarchy_overlay_height": {
         "description": "Height element in the hierarchy overlay in the pagebuilder"
     },
+    "pagebuilder_hierarchy_overlay_faq": "FAQ",
+    "@pagebuilder_hierarchy_overlay_faq": {
+        "description": "FAQ element in the hierarchy overlay in the pagebuilder"
+    },
     "pagebuilder_mobile_not_supported_title": "PageBuilder only available for desktop",
     "@pagebuilder_mobile_not_supported_title": {
         "description": "Title of the Mobile not Supported View in the Pagebuilder"
@@ -3790,6 +3798,10 @@
     "pagebuilder_widget_template_spacer": "Height",
     "@pagebuilder_widget_template_spacer": {
         "description": "Name of the Spacer widget template in the Pagebuilder widget menu"
+    },
+    "pagebuilder_widget_template_faq": "FAQ",
+    "@pagebuilder_widget_template_faq": {
+        "description": "Name of the FAQ widget template in the Pagebuilder widget menu"
     },
     "pagebuilder_html_text_editor_select_color": "Select Color",
     "@pagebuilder_html_text_editor_select_color": {
@@ -4642,5 +4654,93 @@
     "settings_app_version": "App Version",
     "@settings_app_version": {
         "description": "App version in settings"
+    },
+    "pagebuilder_contact_form_default_name_placeholder": "Your Name",
+    "@pagebuilder_contact_form_default_name_placeholder": {
+        "description": "Contact form - default placeholder for name field"
+    },
+    "pagebuilder_contact_form_default_email_placeholder": "Your Email",
+    "@pagebuilder_contact_form_default_email_placeholder": {
+        "description": "Contact form - default placeholder for email field"
+    },
+    "pagebuilder_contact_form_default_phone_placeholder": "Your Phone Number",
+    "@pagebuilder_contact_form_default_phone_placeholder": {
+        "description": "Contact form - default placeholder for phone field"
+    },
+    "pagebuilder_contact_form_default_message_placeholder": "Your Message",
+    "@pagebuilder_contact_form_default_message_placeholder": {
+        "description": "Contact form - default placeholder for message field"
+    },
+    "pagebuilder_contact_form_default_button_text": "Send Message",
+    "@pagebuilder_contact_form_default_button_text": {
+        "description": "Contact form - default button text"
+    },
+    "pagebuilder_faq_config_question_style_title": "Question Style",
+    "@pagebuilder_faq_config_question_style_title": {
+        "description": "FAQ config menu - title for question style section"
+    },
+    "pagebuilder_faq_config_answer_style_title": "Answer Style",
+    "@pagebuilder_faq_config_answer_style_title": {
+        "description": "FAQ config menu - title for answer style section"
+    },
+    "pagebuilder_faq_config_indicator_color_title": "Indicator Color",
+    "@pagebuilder_faq_config_indicator_color_title": {
+        "description": "FAQ config menu - title for indicator color"
+    },
+    "pagebuilder_faq_config_question_background_title": "Question Background Color",
+    "@pagebuilder_faq_config_question_background_title": {
+        "description": "FAQ config menu - title for question background color"
+    },
+    "pagebuilder_faq_config_answer_background_title": "Answer Background Color",
+    "@pagebuilder_faq_config_answer_background_title": {
+        "description": "FAQ config menu - title for answer background color"
+    },
+    "pagebuilder_faq_config_border_color_title": "Border Color",
+    "@pagebuilder_faq_config_border_color_title": {
+        "description": "FAQ config menu - title for border color"
+    },
+    "pagebuilder_faq_config_items_title": "FAQ Items",
+    "@pagebuilder_faq_config_items_title": {
+        "description": "FAQ config menu - title for items section"
+    },
+    "pagebuilder_faq_config_add_item": "Add Question",
+    "@pagebuilder_faq_config_add_item": {
+        "description": "FAQ config menu - button to add a question"
+    },
+    "pagebuilder_faq_config_delete_item": "Delete question",
+    "@pagebuilder_faq_config_delete_item": {
+        "description": "FAQ config menu - tooltip for delete question button"
+    },
+    "pagebuilder_faq_config_item_question_label": "Question",
+    "@pagebuilder_faq_config_item_question_label": {
+        "description": "FAQ config menu - label for question text field"
+    },
+    "pagebuilder_faq_config_item_answer_label": "Answer",
+    "@pagebuilder_faq_config_item_answer_label": {
+        "description": "FAQ config menu - label for answer text field"
+    },
+    "pagebuilder_faq_default_question_1": "How does it work?",
+    "@pagebuilder_faq_default_question_1": {
+        "description": "FAQ - default question text 1"
+    },
+    "pagebuilder_faq_default_answer_1": "Here comes the answer to the first question.",
+    "@pagebuilder_faq_default_answer_1": {
+        "description": "FAQ - default answer text 1"
+    },
+    "pagebuilder_faq_default_question_2": "Who is this suitable for?",
+    "@pagebuilder_faq_default_question_2": {
+        "description": "FAQ - default question text 2"
+    },
+    "pagebuilder_faq_default_answer_2": "Here comes the answer to the second question.",
+    "@pagebuilder_faq_default_answer_2": {
+        "description": "FAQ - default answer text 2"
+    },
+    "pagebuilder_faq_default_question_3": "What does it cost?",
+    "@pagebuilder_faq_default_question_3": {
+        "description": "FAQ - default question text 3"
+    },
+    "pagebuilder_faq_default_answer_3": "Here comes the answer to the third question.",
+    "@pagebuilder_faq_default_answer_3": {
+        "description": "FAQ - default answer text 3"
     }
 }

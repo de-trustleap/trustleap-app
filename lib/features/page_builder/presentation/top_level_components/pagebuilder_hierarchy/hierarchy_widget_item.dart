@@ -216,6 +216,8 @@ class HierarchyWidgetItem extends StatelessWidget {
         return Icons.calendar_month;
       case PageBuilderWidgetType.height:
         return Icons.height;
+      case PageBuilderWidgetType.faq:
+        return Icons.help_outline;
       default:
         return Icons.widgets;
     }
@@ -250,6 +252,8 @@ class HierarchyWidgetItem extends StatelessWidget {
         return localization.pagebuilder_hierarchy_overlay_calendly;
       case PageBuilderWidgetType.height:
         return localization.pagebuilder_hierarchy_overlay_height;
+      case PageBuilderWidgetType.faq:
+        return localization.pagebuilder_hierarchy_overlay_faq;
       default:
         return elementType?.name ?? "";
     }
