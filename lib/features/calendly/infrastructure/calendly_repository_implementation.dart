@@ -43,9 +43,8 @@ class CalendlyRepositoryImplementation implements CalendlyRepository {
       _codeVerifier = _generateCodeVerifier();
       _codeChallenge = _generateCodeChallenge(_codeVerifier!);
 
-      final redirectUri = Environment().isStaging()
-          ? "https://europe-west3-trustleap-staging.cloudfunctions.net/calendlyOAuthCallback"
-          : "https://europe-west3-finanzwegbegleiter.cloudfunctions.net/calendlyOAuthCallback";
+      final redirectUri =
+          "${environment.getCloudFunctionsBaseURL()}/calendlyOAuthCallback";
 
       final clientId = environment.isStaging()
           ? "ikt7o3GGKmjpXS6_kL4AxzQ0b8XucPYcE-Zby_rnAAU"

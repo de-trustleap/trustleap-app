@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/id.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_compensation.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_status_counts.dart';
 
@@ -19,6 +20,7 @@ class ArchivedRecommendationItem extends Equatable {
   final int? campaignDurationDays;
   final RecommendationStatusCounts? statusCounts;
   final Map<int, DateTime?>? statusTimestamps;
+  final RecommendationCompensation? compensation;
 
   const ArchivedRecommendationItem({
     required this.id,
@@ -34,6 +36,7 @@ class ArchivedRecommendationItem extends Equatable {
     required this.campaignName,
     required this.campaignDurationDays,
     required this.statusCounts,
+    required this.compensation,
     this.statusTimestamps,
   });
 
@@ -51,6 +54,7 @@ class ArchivedRecommendationItem extends Equatable {
     String? campaignName,
     int? campaignDurationDays,
     RecommendationStatusCounts? statusCounts,
+    RecommendationCompensation? compensation,
     Map<int, DateTime?>? statusTimestamps,
   }) {
     return ArchivedRecommendationItem(
@@ -67,6 +71,7 @@ class ArchivedRecommendationItem extends Equatable {
       campaignName: campaignName ?? this.campaignName,
       campaignDurationDays: campaignDurationDays ?? this.campaignDurationDays,
       statusCounts: statusCounts ?? this.statusCounts,
+      compensation: compensation ?? this.compensation,
       statusTimestamps: statusTimestamps ?? this.statusTimestamps,
     );
   }

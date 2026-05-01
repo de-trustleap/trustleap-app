@@ -1,6 +1,9 @@
 import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_compensation.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_manual_compensation_verify_widget.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_voucher_sent_widget.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -59,6 +62,11 @@ class PersonalizedRecommendationListTile extends StatelessWidget {
             reco.recommendation is PersonalizedRecommendationItem
                 ? reco.recommendation as PersonalizedRecommendationItem
                 : null;
+        final compensationStatus = personalizedReco?.compensation?.status;
+        final isManualIssued =
+            compensationStatus == RecommendationCompensationStatus.manualIssued;
+        final isVoucherSent =
+            compensationStatus == RecommendationCompensationStatus.voucherSent;
         return [
           RecommendationManagerStatusProgressIndicator(
             level: personalizedReco?.statusLevel ??
@@ -66,15 +74,20 @@ class PersonalizedRecommendationListTile extends StatelessWidget {
             statusTimestamps: personalizedReco?.statusTimestamps ?? {},
           ),
           const SizedBox(height: 16),
-          RecommendationManagerListTileIconRow(
-            key: ValueKey(
-                "${reco.id}-${personalizedReco?.statusLevel}"),
-            recommendation: reco,
-            onAppointmentPressed: onAppointmentPressed,
-            onFinishedPressed: onFinishedPressed,
-            onFailedPressed: onFailedPressed,
-            onDeletePressed: onDeletePressed,
-          ),
+          if (isManualIssued)
+            RecommendationManualCompensationVerifyWidget(recommendation: reco)
+          else if (isVoucherSent)
+            const RecommendationVoucherSentWidget()
+          else
+            RecommendationManagerListTileIconRow(
+              key: ValueKey("${reco.id}-${personalizedReco?.statusLevel}"),
+              recommendation: reco,
+              isPromoter: isPromoter,
+              onAppointmentPressed: onAppointmentPressed,
+              onFinishedPressed: onFinishedPressed,
+              onFailedPressed: onFailedPressed,
+              onDeletePressed: onDeletePressed,
+            ),
         ];
       },
       buildBottomRowTrailing: (reco) => [

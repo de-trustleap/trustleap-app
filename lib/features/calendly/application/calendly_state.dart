@@ -26,7 +26,7 @@ class CalendlyConnectedState extends CalendlyState with EquatableMixin {
 }
 
 class CalendlyConnectionFailureState extends CalendlyState with EquatableMixin {
-  final Failure failure;
+  final DatabaseFailure failure;
 
   CalendlyConnectionFailureState({
     required this.failure,
@@ -82,7 +82,7 @@ class CalendlyWebhookSetupSuccessState extends CalendlyState
 
 class CalendlyWebhookSetupFailureState extends CalendlyState
     with EquatableMixin {
-  final Failure failure;
+  final DatabaseFailure failure;
 
   CalendlyWebhookSetupFailureState({
     required this.failure,

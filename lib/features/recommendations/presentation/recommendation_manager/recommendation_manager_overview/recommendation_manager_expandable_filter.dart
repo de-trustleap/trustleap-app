@@ -221,14 +221,16 @@ class _RecommendationManagerExpandableFilterState
                             label: localization
                                 .recommendation_manager_status_level_4),
                       ],
-                      CustomDropdownItem(
-                          value: RecommendationStatusFilterState.successful,
-                          label: localization
-                              .recommendation_manager_status_level_5),
-                      CustomDropdownItem(
-                          value: RecommendationStatusFilterState.failed,
-                          label: localization
-                              .recommendation_manager_status_level_6),
+                      if (widget.isArchive) ...[
+                        CustomDropdownItem(
+                            value: RecommendationStatusFilterState.successful,
+                            label: localization
+                                .recommendation_manager_status_level_5),
+                        CustomDropdownItem(
+                            value: RecommendationStatusFilterState.failed,
+                            label: localization
+                                .recommendation_manager_status_level_6),
+                      ],
                     ],
                     onChanged: (sortBy) {
                       setState(() {

@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_compensation.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_helper.dart';
@@ -32,11 +33,26 @@ class PersonalizedRecommendationListTileTitle extends StatelessWidget {
 
     return responsiveValue.isMobile
         ? _buildMobileTitleWidget(helper, themeData, localization)
-        : _buildDesktopTitleWidget(helper, themeData);
+        : _buildDesktopTitleWidget(helper, themeData, localization);
   }
 
-  Widget _buildDesktopTitleWidget(
-      RecommendationManagerHelper helper, ThemeData themeData) {
+  String _getStatusLabel(
+    PersonalizedRecommendationItem? reco,
+    RecommendationManagerHelper helper,
+    AppLocalizations localization,
+  ) {
+    final compensationStatus = reco?.compensation?.status;
+    if (compensationStatus == RecommendationCompensationStatus.manualIssued) {
+      return localization.compensation_status_manual_issued;
+    }
+    if (compensationStatus == RecommendationCompensationStatus.voucherSent) {
+      return localization.compensation_status_voucher_sent;
+    }
+    return helper.getStringFromStatusLevel(reco?.statusLevel) ?? "";
+  }
+
+  Widget _buildDesktopTitleWidget(RecommendationManagerHelper helper,
+      ThemeData themeData, AppLocalizations localization) {
     final reco = recommendation.recommendation;
     final personalizedReco =
         reco is PersonalizedRecommendationItem ? reco : null;
@@ -54,9 +70,7 @@ class PersonalizedRecommendationListTileTitle extends StatelessWidget {
       Flexible(
           flex: 3,
           child: _buildCell(
-              helper.getStringFromStatusLevel(
-                      personalizedReco?.statusLevel) ??
-                  "",
+              _getStatusLabel(personalizedReco, helper, localization),
               themeData)),
       Flexible(
           flex: 2,
@@ -111,9 +125,7 @@ class PersonalizedRecommendationListTileTitle extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              helper.getStringFromStatusLevel(
-                      personalizedReco?.statusLevel) ??
-                  "",
+              _getStatusLabel(personalizedReco, helper, localization),
               style: themeData.textTheme.bodyMedium,
             ),
             const SizedBox(height: 4),

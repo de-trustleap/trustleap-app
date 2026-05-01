@@ -68,18 +68,16 @@ class DashboardRecommendationsChartDataProcessor {
     final Map<DateTime, int> groupedData = {};
 
     final filteredRecommendations = statusLevel != null
-        ? recommendations
-            .where((rec) {
-                final reco = rec.recommendation;
-                if (reco is PersonalizedRecommendationItem) {
-                  return _personalizedMatchesStatusLevel(reco, statusLevel! - 1);
-                }
-                if (reco is CampaignRecommendationItem) {
-                  return _campaignMatchesStatusLevel(reco, statusLevel! - 1);
-                }
-                return false;
-              })
-            .toList()
+        ? recommendations.where((rec) {
+            final reco = rec.recommendation;
+            if (reco is PersonalizedRecommendationItem) {
+              return _personalizedMatchesStatusLevel(reco, statusLevel! - 1);
+            }
+            if (reco is CampaignRecommendationItem) {
+              return _campaignMatchesStatusLevel(reco, statusLevel! - 1);
+            }
+            return false;
+          }).toList()
         : recommendations;
 
     for (final recommendation in filteredRecommendations) {
@@ -116,10 +114,12 @@ class DashboardRecommendationsChartDataProcessor {
     return level.index >= statusIndex;
   }
 
-  bool _campaignMatchesStatusLevel(CampaignRecommendationItem reco, int statusIndex) {
+  bool _campaignMatchesStatusLevel(
+      CampaignRecommendationItem reco, int statusIndex) {
     final counts = reco.statusCounts;
     if (counts == null) return false;
-    if (statusIndex < 0 || statusIndex >= StatusLevel.values.length) return false;
+    if (statusIndex < 0 || statusIndex >= StatusLevel.values.length)
+      return false;
     switch (StatusLevel.values[statusIndex]) {
       case StatusLevel.recommendationSend:
         return true;

@@ -9,6 +9,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class RecommendationManagerListTileIconRow extends StatefulWidget {
   final UserRecommendation recommendation;
+  final bool isPromoter;
   final Function(UserRecommendation) onAppointmentPressed;
   final Function(UserRecommendation) onFinishedPressed;
   final Function(UserRecommendation) onFailedPressed;
@@ -16,6 +17,7 @@ class RecommendationManagerListTileIconRow extends StatefulWidget {
   const RecommendationManagerListTileIconRow(
       {super.key,
       required this.recommendation,
+      required this.isPromoter,
       required this.onAppointmentPressed,
       required this.onFinishedPressed,
       required this.onFailedPressed,
@@ -80,26 +82,27 @@ class _RecommendationManagerListTileIconRowState
                       child: const Icon(Icons.calendar_month,
                           color: Colors.white)),
                 ))),
-        Expanded(
-            child: Padding(
-                padding: const EdgeInsets.all(4),
-                child: Tooltip(
-                  message: localization
-                      .recommendation_manager_tile_progress_finish_button_tooltip,
-                  child: ElevatedButton(
-                      onPressed: _getStatusLevel() ==
-                                  StatusLevel.appointment &&
-                              !buttonsDisabled
-                          ? () =>
-                              widget.onFinishedPressed(widget.recommendation)
-                          : null,
-                      style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12)),
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          backgroundColor: themeData.colorScheme.primary),
-                      child: const Icon(Icons.check, color: Colors.white)),
-                ))),
+        if (!widget.isPromoter)
+          Expanded(
+              child: Padding(
+                  padding: const EdgeInsets.all(4),
+                  child: Tooltip(
+                    message: localization
+                        .recommendation_manager_tile_progress_finish_button_tooltip,
+                    child: ElevatedButton(
+                        onPressed: _getStatusLevel() ==
+                                    StatusLevel.appointment &&
+                                !buttonsDisabled
+                            ? () =>
+                                widget.onFinishedPressed(widget.recommendation)
+                            : null,
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12)),
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            backgroundColor: themeData.colorScheme.primary),
+                        child: const Icon(Icons.check, color: Colors.white)),
+                  ))),
         Expanded(
             child: Padding(
                 padding: const EdgeInsets.all(4),

@@ -10,6 +10,7 @@ import 'package:finanzbegleiter/features/landing_pages/domain/last_viewed.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/campaign_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_compensation.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
@@ -17,9 +18,11 @@ import 'package:finanzbegleiter/features/recommendations/domain/draft_recommenda
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_repository.dart';
 import 'package:finanzbegleiter/features/recommendations/infrastructure/archived_recommendation_item_model.dart';
 import 'package:finanzbegleiter/features/recommendations/infrastructure/draft_recommendation_item_model.dart';
+import 'package:finanzbegleiter/features/recommendations/infrastructure/recommendation_compensation_model.dart';
 import 'package:finanzbegleiter/features/recommendations/infrastructure/recommendation_item_model.dart';
 import 'package:finanzbegleiter/features/profile/infrastructure/user_model.dart';
 import 'package:finanzbegleiter/features/recommendations/infrastructure/user_recommendation_model.dart';
+import 'package:finanzbegleiter/features/tremendous/domain/tremendous_order_request.dart';
 
 class RecommendationRepositoryImplementation
     implements RecommendationRepository {
@@ -148,7 +151,7 @@ class RecommendationRepositoryImplementation
         (key, value) => MapEntry(key.toString(), value?.toIso8601String()));
     try {
       await recoCollection.doc(newRecommendation.id).set(
-          {"statusLevel": 3, "statusTimestamps": timeStamps},
+          {"statusLevel": "appointment", "statusTimestamps": timeStamps},
           SetOptions(merge: true));
       return right(recommendation.copyWith(
           recommendation: newRecommendation.copyWith(
@@ -740,6 +743,7 @@ class RecommendationRepositoryImplementation
       statusTimestamps: statusTimestamps,
       userID: archived.userID,
       promoterImageDownloadURL: null,
+      compensation: archived.compensation,
       createdAt: archived.createdAt ?? DateTime.now(),
     );
   }
@@ -827,5 +831,84 @@ class RecommendationRepositoryImplementation
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, UserRecommendation>> setCompensation(
+      UserRecommendation recommendation,
+      RecommendationCompensationStatus status) async {
+    final recoCollection = firestore.collection("recommendations");
+    if (recommendation.recommendation is! PersonalizedRecommendationItem) {
+      return left(BackendFailure());
+    }
+    final personalized =
+        recommendation.recommendation! as PersonalizedRecommendationItem;
+
+    final now = DateTime.now();
+    final existingCompensation = personalized.compensation;
+    final updatedTimestamps = Map<RecommendationCompensationStatus, DateTime>.from(
+        existingCompensation?.timestamps ?? {});
+    updatedTimestamps[status] = now;
+
+    final updatedCompensation = RecommendationCompensation(
+      status: status,
+      tremendousOrderID: existingCompensation?.tremendousOrderID,
+      tremendousProductID: existingCompensation?.tremendousProductID,
+      amount: existingCompensation?.amount,
+      currency: existingCompensation?.currency,
+      error: null,
+      timestamps: updatedTimestamps,
+    );
+
+    final compensationMap =
+        RecommendationCompensationModel.fromDomain(updatedCompensation).toMap();
+
+    try {
+      await recoCollection
+          .doc(personalized.id)
+          .set({"compensation": compensationMap}, SetOptions(merge: true));
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+
+    final updatedReco = recommendation.copyWith(
+        recommendation: personalized.copyWith(compensation: updatedCompensation));
+
+    if (status != RecommendationCompensationStatus.skipped) {
+      return right(updatedReco);
+    }
+
+    return cloudFunctions.call(
+      "finishRecommendationX",
+      {
+        "recommendationID": recommendation.id.value,
+        "userID": recommendation.userID,
+        "success": true,
+      },
+      (_) => updatedReco,
+    );
+  }
+
+  @override
+  Future<Either<DatabaseFailure, UserRecommendation>> createTremendousOrder(
+      UserRecommendation recommendation,
+      TremendousOrderRequest orderRequest) async {
+    if (recommendation.recommendation is! PersonalizedRecommendationItem) {
+      return left(BackendFailure());
+    }
+    final personalized =
+        recommendation.recommendation! as PersonalizedRecommendationItem;
+
+    return cloudFunctions.call(
+      "tremendousCreateOrder",
+      {
+        "recommendationID": personalized.id,
+        "productID": orderRequest.productID,
+        "fundingSourceID": orderRequest.fundingSourceID,
+        "amount": orderRequest.amount,
+        "currency": orderRequest.currency,
+      },
+      (_) => recommendation,
+    );
   }
 }

@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/features/auth/application/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/features/auth/application/auth_observer/auth_observer_bloc.dart';
 import 'package:finanzbegleiter/features/auth/application/signIn/sign_in_cubit.dart';
 import 'package:finanzbegleiter/features/calendly/application/calendly_cubit.dart';
+import 'package:finanzbegleiter/features/tremendous/application/tremendous_cubit.dart';
 import 'package:finanzbegleiter/features/admin/application/company_request/company_request/company_request_cubit.dart';
 import 'package:finanzbegleiter/features/consent/application/consent_cubit.dart';
 import 'package:finanzbegleiter/features/admin/application/company_request/company_request_observer/company_request_observer_cubit.dart';
@@ -58,6 +59,7 @@ import 'package:finanzbegleiter/core/modules/home_module.dart';
 import 'package:finanzbegleiter/features/admin/domain/admin_registration_code_repository.dart';
 import 'package:finanzbegleiter/features/auth/domain/auth_repository.dart';
 import 'package:finanzbegleiter/features/calendly/domain/calendly_repository.dart';
+import 'package:finanzbegleiter/features/tremendous/domain/tremendous_repository.dart';
 import 'package:finanzbegleiter/features/profile/domain/company_repository.dart';
 import 'package:finanzbegleiter/features/consent/domain/consent_repository.dart';
 import 'package:finanzbegleiter/features/dashboard/domain/dashboard_repository.dart';
@@ -77,6 +79,7 @@ import 'package:finanzbegleiter/features/web_logging/domain/web_logging_reposito
 import 'package:finanzbegleiter/features/admin/infrastructure/admin_registration_code_repository_implementation.dart';
 import 'package:finanzbegleiter/features/auth/infrastructure/auth_repository_implementation.dart';
 import 'package:finanzbegleiter/features/calendly/infrastructure/calendly_repository_implementation.dart';
+import 'package:finanzbegleiter/features/tremendous/infrastructure/tremendous_repository_implementation.dart';
 import 'package:finanzbegleiter/features/profile/infrastructure/company_repository_implementation.dart';
 import 'package:finanzbegleiter/features/consent/infrastructure/consent_repository_implementation.dart';
 import 'package:finanzbegleiter/features/dashboard/infrastructure/dashboard_repository_implementation.dart';
@@ -148,6 +151,8 @@ class AppModule extends Module {
           TutorialRepositoryImplementation.new)
       ..addLazySingleton<CalendlyRepository>(
           CalendlyRepositoryImplementation.new)
+      ..addLazySingleton<TremendousRepository>(
+          TremendousRepositoryImplementation.new)
       ..addLazySingleton<ConsentRepository>(
           ConsentRepositoryImplementation.new)
       ..addLazySingleton(PagebuilderBloc.new)
@@ -182,6 +187,7 @@ class AppModule extends Module {
       ..addLazySingleton(DashboardTutorialCubit.new)
       ..addLazySingleton(UserObserverCubit.new)
       ..addLazySingleton(CalendlyCubit.new)
+      ..addLazySingleton(TremendousCubit.new)
       ..addLazySingleton(ConsentCubit.new)
       ..addLazySingleton(PagebuilderResponsiveBreakpointCubit.new)
       ..addLazySingleton(PagebuilderZoomCubit.new)

@@ -6,7 +6,9 @@ import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_compensation.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
+import 'package:finanzbegleiter/features/recommendations/presentation/widgets/compensation_dialog.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/core/widgets/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/custom_snackbar.dart';
@@ -102,6 +104,18 @@ class _RecommendationManagerPageState
         });
   }
 
+  void showCompensationDialog(UserRecommendation recommendation) {
+    showDialog(
+        context: context,
+        builder: (_) {
+          return Dialog(
+            child: CompensationDialog(
+              recommendation: recommendation,
+            ),
+          );
+        });
+  }
+
   void showFinishAlert(AppLocalizations localizations,
       CustomNavigatorBase navigator, UserRecommendation recommendation) {
     showDialog(
@@ -178,62 +192,97 @@ class _RecommendationManagerPageState
     final recoManagerCubit = Modular.get<RecommendationManagerCubit>();
     final userObserverCubit = Modular.get<UserObserverCubit>();
 
-    return BlocListener<UserObserverCubit, UserObserverState>(
-        bloc: userObserverCubit,
-        listener: (context, state) {
-          if (state is UserObserverSuccess &&
-              state.user.id != currentUser?.id) {
-            currentUser = state.user;
-            Modular.get<RecommendationManagerTileCubit>()
-                .initializeFavorites(state.user.favoriteRecommendationIDs);
-            Modular.get<RecommendationManagerTileCubit>()
-                .setCurrentUser(state.user);
-            _requestRecommendations(state.user);
-          }
-        },
-        child: BlocConsumer<RecommendationManagerCubit, RecommendationManagerState>(
-        bloc: recoManagerCubit,
-        listener: (context, state) {
-          if (state is RecommendationDeleteRecoSuccessState) {
-            CustomSnackBar.of(context).showCustomSnackBar(
-                localization.recommendation_manager_delete_snackbar);
-            _requestRecommendations(currentUser);
-          } else if (state is RecommendationDeleteRecoFailureState) {
-            CustomSnackBar.of(context).showCustomSnackBar(
-                DatabaseFailureMapper.mapFailureMessage(
-                    state.failure, localization),
-                SnackBarType.failure);
-            _requestRecommendations(currentUser);
-          } else if (state is RecommendationGetRecosSuccessState) {
-            if (state.showFavoriteSnackbar) {
-              CustomSnackBar.of(context).showCustomSnackBar(
-                  localization.recommendation_manager_favorite_snackbar);
-            } else if (state.showPrioritySnackbar) {
-              CustomSnackBar.of(context).showCustomSnackBar(
-                  localization.recommendation_manager_priority_snackbar);
-            } else if (state.showNotesSnackbar) {
-              CustomSnackBar.of(context).showCustomSnackBar(
-                  localization.recommendation_manager_notes_snackbar);
-            } else if (state.showSetAppointmentSnackBar) {
-              CustomSnackBar.of(context).showCustomSnackBar(
-                  localization.recommendation_manager_scheduled_snackbar);
-            } else if (state.showFinishedSnackBar) {
-              CustomSnackBar.of(context).showCustomSnackBar(
-                  localization.recommendation_manager_finished_snackbar);
-            }
-          }
-        },
-        builder: (context, state) {
-          if (state is RecommendationManagerLoadingState) {
-            return const LoadingIndicator();
-          } else {
-            return Container(
-                width: double.infinity,
-                decoration: BoxDecoration(color: themeData.colorScheme.surface),
-                child: _createContainerChildWidget(
-                    state, responsiveValue, localization, navigator));
-          }
-        }));
+    return MultiBlocListener(
+        listeners: [
+          BlocListener<UserObserverCubit, UserObserverState>(
+              bloc: userObserverCubit,
+              listener: (context, state) {
+                if (state is UserObserverSuccess &&
+                    state.user.id != currentUser?.id) {
+                  currentUser = state.user;
+                  Modular.get<RecommendationManagerTileCubit>()
+                      .initializeFavorites(state.user.favoriteRecommendationIDs);
+                  Modular.get<RecommendationManagerTileCubit>()
+                      .setCurrentUser(state.user);
+                  _requestRecommendations(state.user);
+                }
+              }),
+          BlocListener<RecommendationManagerTileCubit,
+              RecommendationManagerTileState>(
+              bloc: Modular.get<RecommendationManagerTileCubit>(),
+              listener: (context, state) {
+                if (state is RecommendationCompensationSuccessState) {
+                  if (state.status ==
+                      RecommendationCompensationStatus.manualConfirmed) {
+                    showFinishAlert(
+                        localization, navigator, state.recommendation);
+                  } else if (state.status ==
+                      RecommendationCompensationStatus.skipped) {
+                    CustomSnackBar.of(context).showCustomSnackBar(
+                        localization.compensation_success_skipped);
+                    _requestRecommendations(currentUser);
+                  } else if (state.status ==
+                      RecommendationCompensationStatus.voucherSent) {
+                    CustomSnackBar.of(context).showCustomSnackBar(
+                        localization.compensation_voucher_sent_snackbar);
+                    _requestRecommendations(currentUser);
+                  } else {
+                    CustomSnackBar.of(context).showCustomSnackBar(
+                        localization.compensation_success_manual_issued);
+                    _requestRecommendations(currentUser);
+                  }
+                } else if (state is RecommendationCompensationFailureState) {
+                  CustomSnackBar.of(context).showCustomSnackBar(
+                      localization.compensation_error, SnackBarType.failure);
+                }
+              }),
+          BlocListener<RecommendationManagerCubit, RecommendationManagerState>(
+              bloc: recoManagerCubit,
+              listener: (context, state) {
+                if (state is RecommendationDeleteRecoSuccessState) {
+                  CustomSnackBar.of(context).showCustomSnackBar(
+                      localization.recommendation_manager_delete_snackbar);
+                  _requestRecommendations(currentUser);
+                } else if (state is RecommendationDeleteRecoFailureState) {
+                  CustomSnackBar.of(context).showCustomSnackBar(
+                      DatabaseFailureMapper.mapFailureMessage(
+                          state.failure, localization),
+                      SnackBarType.failure);
+                  _requestRecommendations(currentUser);
+                } else if (state is RecommendationGetRecosSuccessState) {
+                  if (state.showFavoriteSnackbar) {
+                    CustomSnackBar.of(context).showCustomSnackBar(
+                        localization.recommendation_manager_favorite_snackbar);
+                  } else if (state.showPrioritySnackbar) {
+                    CustomSnackBar.of(context).showCustomSnackBar(
+                        localization.recommendation_manager_priority_snackbar);
+                  } else if (state.showNotesSnackbar) {
+                    CustomSnackBar.of(context).showCustomSnackBar(
+                        localization.recommendation_manager_notes_snackbar);
+                  } else if (state.showSetAppointmentSnackBar) {
+                    CustomSnackBar.of(context).showCustomSnackBar(
+                        localization.recommendation_manager_scheduled_snackbar);
+                  } else if (state.showFinishedSnackBar) {
+                    CustomSnackBar.of(context).showCustomSnackBar(
+                        localization.recommendation_manager_finished_snackbar);
+                  }
+                }
+              }),
+        ],
+        child: BlocBuilder<RecommendationManagerCubit, RecommendationManagerState>(
+            bloc: recoManagerCubit,
+            builder: (context, state) {
+              if (state is RecommendationManagerLoadingState) {
+                return const LoadingIndicator();
+              } else {
+                return Container(
+                    width: double.infinity,
+                    decoration:
+                        BoxDecoration(color: themeData.colorScheme.surface),
+                    child: _createContainerChildWidget(
+                        state, responsiveValue, localization, navigator));
+              }
+            }));
   }
 
   Widget _createContainerChildWidget(
@@ -269,7 +318,11 @@ class _RecommendationManagerPageState
                     .setAppointmentState(recommendation);
               },
               onFinishedPressed: (recommendation) {
-                showFinishAlert(localization, navigator, recommendation);
+                if (currentUser?.role == Role.company) {
+                  showCompensationDialog(recommendation);
+                } else {
+                  showFinishAlert(localization, navigator, recommendation);
+                }
               },
               onFailedPressed: (recommendation) {
                 showFailedAlert(localization, navigator, recommendation);

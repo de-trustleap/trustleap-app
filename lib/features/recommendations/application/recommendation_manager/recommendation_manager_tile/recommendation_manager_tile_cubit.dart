@@ -3,11 +3,13 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/last_viewed.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_compensation.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_repository.dart';
 import 'package:finanzbegleiter/features/profile/domain/user_repository.dart';
+import 'package:finanzbegleiter/features/tremendous/domain/tremendous_order_request.dart';
 
 part 'recommendation_manager_tile_state.dart';
 
@@ -143,6 +145,32 @@ class RecommendationManagerTileCubit
 
     emit(RecommendationManagerTileViewedState(
         recommendationID: recommendationID, lastViewed: lastViewed));
+  }
+
+  void setCompensation(
+      UserRecommendation recommendation,
+      RecommendationCompensationStatus status) async {
+    emit(RecommendationCompensationLoadingState(recommendation: recommendation));
+    final failureOrSuccess =
+        await recommendationRepo.setCompensation(recommendation, status);
+    failureOrSuccess.fold(
+        (failure) => emit(RecommendationCompensationFailureState(
+            failure: failure, recommendation: recommendation)),
+        (updated) => emit(RecommendationCompensationSuccessState(
+            recommendation: updated, status: status)));
+  }
+
+  void setCompensationVoucher(
+      UserRecommendation recommendation, TremendousOrderRequest orderRequest) async {
+    emit(RecommendationCompensationLoadingState(recommendation: recommendation));
+    final failureOrSuccess =
+        await recommendationRepo.createTremendousOrder(recommendation, orderRequest);
+    failureOrSuccess.fold(
+        (failure) => emit(RecommendationCompensationFailureState(
+            failure: failure, recommendation: recommendation)),
+        (updated) => emit(RecommendationCompensationSuccessState(
+            recommendation: updated,
+            status: RecommendationCompensationStatus.voucherSent)));
   }
 
   Future<String> getUserDisplayName(String userID) async {
