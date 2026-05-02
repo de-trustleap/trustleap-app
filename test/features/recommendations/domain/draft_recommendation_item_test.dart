@@ -58,6 +58,7 @@ void main() {
       statusLevel: StatusLevel.recommendationSend,
       statusTimestamps: null,
       promoterImageDownloadURL: null,
+      compensation: null,
     );
 
     test("fromRecommendationItem maps all fields correctly", () {
@@ -118,6 +119,7 @@ void main() {
         statusLevel: StatusLevel.recommendationSend,
         statusTimestamps: null,
         promoterImageDownloadURL: null,
+        compensation: null,
       );
       // When
       final result = DraftRecommendationItem.fromRecommendationItem(

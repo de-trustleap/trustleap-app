@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
 import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager/recommendation_manager_cubit.dart';
 import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
@@ -20,14 +21,12 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class RecommendationManagerDetailContent extends StatefulWidget {
   final UserRecommendation recommendation;
-  final Function(UserRecommendation, bool, bool, bool, bool) onUpdate;
   final List<Widget> Function(UserRecommendation, bool isLoading) buildContent;
   final List<Widget> Function(UserRecommendation)? buildBottomRowTrailing;
 
   const RecommendationManagerDetailContent({
     super.key,
     required this.recommendation,
-    required this.onUpdate,
     required this.buildContent,
     this.buildBottomRowTrailing,
   });
@@ -55,6 +54,16 @@ class _RecommendationManagerDetailContentState
   }
 
   @override
+  void didUpdateWidget(covariant RecommendationManagerDetailContent oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.recommendation != oldWidget.recommendation) {
+      setState(() {
+        _recommendation = widget.recommendation;
+      });
+    }
+  }
+
+  @override
   void dispose() {
     _viewTimer?.cancel();
     super.dispose();
@@ -76,8 +85,16 @@ class _RecommendationManagerDetailContentState
     return BlocListener<RecommendationManagerCubit, RecommendationManagerState>(
       bloc: Modular.get<RecommendationManagerCubit>(),
       listener: (context, state) {
-        if (state is RecommendationDeleteRecoSuccessState) {
-          Navigator.of(context).pop();
+        if (state is RecommendationGetRecosSuccessState) {
+          final updated = state.recoItems.firstWhereOrNull(
+              (r) => r.id == _recommendation.id);
+          if (updated == null) {
+            Navigator.of(context).pop();
+          } else if (updated != _recommendation) {
+            setState(() {
+              _recommendation = updated;
+            });
+          }
         }
       },
       child: BlocConsumer<RecommendationManagerTileCubit,
@@ -87,6 +104,8 @@ class _RecommendationManagerDetailContentState
           (current is RecommendationSetStatusSuccessState &&
               current.recommendation.id == _recommendation.id) ||
           (current is RecommendationSetFinishedSuccessState &&
+              current.recommendation.id == _recommendation.id) ||
+          (current is RecommendationDeleteSuccessState &&
               current.recommendation.id == _recommendation.id) ||
           (current is RecommendationManagerTileViewedState &&
               current.recommendationID == _recommendation.id.value),
@@ -98,14 +117,9 @@ class _RecommendationManagerDetailContentState
               _addNote = false;
             }
           });
-          widget.onUpdate(
-              state.recommendation,
-              false,
-              state.settedFavorite ?? false,
-              state.settedPriority ?? false,
-              state.settedNotes ?? false);
         } else if (state is RecommendationSetFinishedSuccessState) {
-          widget.onUpdate(state.recommendation, true, false, false, false);
+          Navigator.of(context).pop();
+        } else if (state is RecommendationDeleteSuccessState) {
           Navigator.of(context).pop();
         } else if (state is RecommendationManagerTileViewedState) {
           final hadUnseenChanges = _recommendation

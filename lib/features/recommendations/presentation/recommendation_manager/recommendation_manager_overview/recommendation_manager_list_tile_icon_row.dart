@@ -13,7 +13,7 @@ class RecommendationManagerListTileIconRow extends StatefulWidget {
   final Function(UserRecommendation) onAppointmentPressed;
   final Function(UserRecommendation) onFinishedPressed;
   final Function(UserRecommendation) onFailedPressed;
-  final Function(String, String, String) onDeletePressed;
+  final Function(UserRecommendation) onDeletePressed;
   const RecommendationManagerListTileIconRow(
       {super.key,
       required this.recommendation,
@@ -131,11 +131,7 @@ class _RecommendationManagerListTileIconRowState
                   child: ElevatedButton(
                       onPressed: buttonsDisabled
                           ? null
-                          : () => widget.onDeletePressed(
-                              widget.recommendation.recommendation?.id ?? "",
-                              widget.recommendation.recommendation?.userID ??
-                                  "",
-                              widget.recommendation.id.value),
+                          : () => widget.onDeletePressed(widget.recommendation),
                       style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12)),

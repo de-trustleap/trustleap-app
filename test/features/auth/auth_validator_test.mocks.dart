@@ -3717,6 +3717,18 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_pagebuilder_save_duplicate_widget_error_title =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_save_duplicate_widget_error_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_save_duplicate_widget_error_title),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_pagebuilder_save_success_snackbar =>
       (super.noSuchMethod(
         Invocation.getter(#landingpage_pagebuilder_save_success_snackbar),
@@ -3892,6 +3904,16 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#landingpage_pagebuilder_config_menu_calendly_type),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_config_menu_faq_type =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_config_menu_faq_type),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_config_menu_faq_type),
         ),
       ) as String);
 
@@ -7314,6 +7336,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get pagebuilder_hierarchy_overlay_faq => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_faq),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_faq),
+        ),
+      ) as String);
+
+  @override
   String get pagebuilder_mobile_not_supported_title => (super.noSuchMethod(
         Invocation.getter(#pagebuilder_mobile_not_supported_title),
         returnValue: _i3.dummyValue<String>(
@@ -8600,6 +8631,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#pagebuilder_widget_template_spacer),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_widget_template_faq => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_widget_template_faq),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_widget_template_faq),
         ),
       ) as String);
 
@@ -10487,6 +10527,608 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get pagebuilder_contact_form_default_name_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_contact_form_default_name_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_contact_form_default_name_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_contact_form_default_email_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_contact_form_default_email_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_contact_form_default_email_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_contact_form_default_phone_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_contact_form_default_phone_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_contact_form_default_phone_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_contact_form_default_message_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #pagebuilder_contact_form_default_message_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_contact_form_default_message_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_contact_form_default_button_text =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_contact_form_default_button_text),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_contact_form_default_button_text),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_question_style_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_question_style_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_question_style_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_answer_style_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_answer_style_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_answer_style_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_indicator_color_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_indicator_color_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_indicator_color_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_question_background_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_question_background_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_question_background_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_answer_background_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_answer_background_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_answer_background_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_border_color_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_border_color_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_border_color_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_items_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_items_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_items_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_add_item => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_add_item),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_add_item),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_delete_item => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_delete_item),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_delete_item),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_item_question_label => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_item_question_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_item_question_label),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_item_answer_label => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_item_answer_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_item_answer_label),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_default_question_1 => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_default_question_1),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_default_question_1),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_default_answer_1 => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_default_answer_1),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_default_answer_1),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_default_question_2 => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_default_question_2),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_default_question_2),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_default_answer_2 => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_default_answer_2),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_default_answer_2),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_default_question_3 => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_default_question_3),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_default_question_3),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_default_answer_3 => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_default_answer_3),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_default_answer_3),
+        ),
+      ) as String);
+
+  @override
+  String get profile_page_tremendous_integration_title => (super.noSuchMethod(
+        Invocation.getter(#profile_page_tremendous_integration_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_page_tremendous_integration_title),
+        ),
+      ) as String);
+
+  @override
+  String get profile_page_tremendous_integration_description =>
+      (super.noSuchMethod(
+        Invocation.getter(#profile_page_tremendous_integration_description),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_page_tremendous_integration_description),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_connect_button => (super.noSuchMethod(
+        Invocation.getter(#tremendous_connect_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_connect_button),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_connecting => (super.noSuchMethod(
+        Invocation.getter(#tremendous_connecting),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_connecting),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_disconnect_button => (super.noSuchMethod(
+        Invocation.getter(#tremendous_disconnect_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_disconnect_button),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_connected => (super.noSuchMethod(
+        Invocation.getter(#tremendous_connected),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_connected),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_success_connected => (super.noSuchMethod(
+        Invocation.getter(#tremendous_success_connected),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_success_connected),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_success_disconnected => (super.noSuchMethod(
+        Invocation.getter(#tremendous_success_disconnected),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_success_disconnected),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_error_connection => (super.noSuchMethod(
+        Invocation.getter(#tremendous_error_connection),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_error_connection),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_title => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_title),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_subtitle => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_subtitle),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_subtitle),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_voucher_option => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_voucher_option),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_voucher_option),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_voucher_placeholder => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_voucher_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_voucher_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_manual_option => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_manual_option),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_manual_option),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_skip_option => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_skip_option),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_skip_option),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_action_button => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_action_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_action_button),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_cancel_button => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_cancel_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_cancel_button),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_status_manual_issued => (super.noSuchMethod(
+        Invocation.getter(#compensation_status_manual_issued),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_status_manual_issued),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_manual_issued_description => (super.noSuchMethod(
+        Invocation.getter(#compensation_manual_issued_description),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_manual_issued_description),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_manual_confirm_button => (super.noSuchMethod(
+        Invocation.getter(#compensation_manual_confirm_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_manual_confirm_button),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_manual_change_link => (super.noSuchMethod(
+        Invocation.getter(#compensation_manual_change_link),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_manual_change_link),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_success_skipped => (super.noSuchMethod(
+        Invocation.getter(#compensation_success_skipped),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_success_skipped),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_success_manual_issued => (super.noSuchMethod(
+        Invocation.getter(#compensation_success_manual_issued),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_success_manual_issued),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_success_manual_confirmed => (super.noSuchMethod(
+        Invocation.getter(#compensation_success_manual_confirmed),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_success_manual_confirmed),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_error => (super.noSuchMethod(
+        Invocation.getter(#compensation_error),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_error),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_voucher_funding_source_label =>
+      (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_voucher_funding_source_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_voucher_funding_source_label),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_voucher_product_label => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_voucher_product_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_voucher_product_label),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_voucher_amount_label => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_voucher_amount_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_voucher_amount_label),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_voucher_connect_hint => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_voucher_connect_hint),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_voucher_connect_hint),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_voucher_catalog_error => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_voucher_catalog_error),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_voucher_catalog_error),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_voucher_product_required =>
+      (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_voucher_product_required),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_voucher_product_required),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_voucher_funding_source_required =>
+      (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_voucher_funding_source_required),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #compensation_dialog_voucher_funding_source_required),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_voucher_amount_invalid => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_voucher_amount_invalid),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_voucher_amount_invalid),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_voucher_sent_snackbar => (super.noSuchMethod(
+        Invocation.getter(#compensation_voucher_sent_snackbar),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_voucher_sent_snackbar),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_voucher_retry_button => (super.noSuchMethod(
+        Invocation.getter(#compensation_voucher_retry_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_voucher_retry_button),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_voucher_failed_description => (super.noSuchMethod(
+        Invocation.getter(#compensation_voucher_failed_description),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_voucher_failed_description),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_status_voucher_sent => (super.noSuchMethod(
+        Invocation.getter(#compensation_status_voucher_sent),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_status_voucher_sent),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_voucher_sent_description => (super.noSuchMethod(
+        Invocation.getter(#compensation_voucher_sent_description),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_voucher_sent_description),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_funding_source_balance => (super.noSuchMethod(
+        Invocation.getter(#tremendous_funding_source_balance),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_funding_source_balance),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_funding_source_invoice => (super.noSuchMethod(
+        Invocation.getter(#tremendous_funding_source_invoice),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_funding_source_invoice),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_funding_source_credit_card => (super.noSuchMethod(
+        Invocation.getter(#tremendous_funding_source_credit_card),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_funding_source_credit_card),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_funding_source_ach => (super.noSuchMethod(
+        Invocation.getter(#tremendous_funding_source_ach),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_funding_source_ach),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_funding_source_sepa => (super.noSuchMethod(
+        Invocation.getter(#tremendous_funding_source_sepa),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_funding_source_sepa),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
@@ -10637,6 +11279,23 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
           Invocation.method(
             #recommendation_count,
             [count],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String landingpage_pagebuilder_save_duplicate_widget_error_message(
+          String? widgetNames) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #landingpage_pagebuilder_save_duplicate_widget_error_message,
+          [widgetNames],
+        ),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.method(
+            #landingpage_pagebuilder_save_duplicate_widget_error_message,
+            [widgetNames],
           ),
         ),
       ) as String);
@@ -10932,6 +11591,38 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
           Invocation.method(
             #promoter_detail_chart_last_days,
             [days],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String compensation_dialog_voucher_amount_min(int? min) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #compensation_dialog_voucher_amount_min,
+          [min],
+        ),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.method(
+            #compensation_dialog_voucher_amount_min,
+            [min],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String compensation_dialog_voucher_amount_max(int? max) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #compensation_dialog_voucher_amount_max,
+          [max],
+        ),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.method(
+            #compensation_dialog_voucher_amount_max,
+            [max],
           ),
         ),
       ) as String);

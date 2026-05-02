@@ -11,9 +11,8 @@ import 'package:flutter/material.dart';
 class CampaignRecommendationList extends StatelessWidget {
   final List<UserRecommendation> recommendations;
   final String searchQuery;
-  final Function(String, String, String) onDeletePressed;
+  final Function(UserRecommendation) onDeletePressed;
   final Function(UserRecommendation) onFavoritePressed;
-  final Function(UserRecommendation, bool, bool, bool, bool) onUpdate;
 
   const CampaignRecommendationList({
     super.key,
@@ -21,7 +20,6 @@ class CampaignRecommendationList extends StatelessWidget {
     required this.searchQuery,
     required this.onDeletePressed,
     required this.onFavoritePressed,
-    required this.onUpdate,
   });
 
   @override
@@ -91,7 +89,6 @@ class CampaignRecommendationList extends StatelessWidget {
                 recommendation: recommendations[index],
                 onDeletePressed: onDeletePressed,
                 onFavoritePressed: onFavoritePressed,
-                onUpdate: onUpdate,
               );
             })
       ]

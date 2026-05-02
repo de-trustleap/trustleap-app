@@ -50,6 +50,7 @@ import 'package:finanzbegleiter/features/legals/domain/legals_repository.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/pagebuilder_repository.dart';
 import 'package:finanzbegleiter/features/permissions/domain/permission_repository.dart';
 import 'package:finanzbegleiter/features/promoter/domain/promoter_repository.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_observer_repository.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_repository.dart';
 import 'package:finanzbegleiter/features/dashboard/domain/tutorial_repository.dart';
 import 'package:finanzbegleiter/features/profile/domain/user_repository.dart';
@@ -72,6 +73,7 @@ class TestModule extends Module {
   final AdminRegistrationCodeRepository? mockAdminRegistrationCodeRepository;
   final LegalsRepository? mockLegalsRepository;
   final RecommendationRepository? mockRecommendationRepository;
+  final RecommendationObserverRepository? mockRecommendationObserverRepository;
   final WebLoggingRepository? mockWebLoggingRepository;
   final FeedbackRepository? mockFeedbackRepository;
   final DashboardRepository? mockDashboardRepository;
@@ -90,6 +92,7 @@ class TestModule extends Module {
     this.mockAdminRegistrationCodeRepository,
     this.mockLegalsRepository,
     this.mockRecommendationRepository,
+    this.mockRecommendationObserverRepository,
     this.mockWebLoggingRepository,
     this.mockFeedbackRepository,
     this.mockDashboardRepository,
@@ -137,6 +140,10 @@ class TestModule extends Module {
     if (mockRecommendationRepository != null) {
       i.addLazySingleton<RecommendationRepository>(
           () => mockRecommendationRepository!);
+    }
+    if (mockRecommendationObserverRepository != null) {
+      i.addLazySingleton<RecommendationObserverRepository>(
+          () => mockRecommendationObserverRepository!);
     }
     if (mockWebLoggingRepository != null) {
       i.addLazySingleton<WebLoggingRepository>(() => mockWebLoggingRepository!);

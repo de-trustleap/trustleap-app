@@ -57,6 +57,7 @@ void main() {
         statusTimestamps: null,
         userID: userId,
         promoterImageDownloadURL: null,
+        compensation: null,
       ),
     );
     final promoterRecommendations = [
@@ -197,6 +198,7 @@ void main() {
           statusTimestamps: null,
           userID: userId,
           promoterImageDownloadURL: null,
+          compensation: null,
         ),
       ),
     ];

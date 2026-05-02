@@ -9,6 +9,7 @@ import 'package:finanzbegleiter/features/landing_pages/domain/landing_page_repos
 import 'package:finanzbegleiter/features/legals/domain/legals_repository.dart';
 import 'package:finanzbegleiter/features/dashboard/domain/dashboard_repository.dart';
 import 'package:finanzbegleiter/features/promoter/domain/promoter_repository.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_observer_repository.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_repository.dart';
 import 'package:finanzbegleiter/features/profile/domain/user_repository.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/pagebuilder_repository.dart';
@@ -19,6 +20,7 @@ import 'package:finanzbegleiter/features/admin/domain/pagebuilder_section_templa
 import 'package:finanzbegleiter/features/feedback/domain/feedback_repository.dart';
 import 'package:finanzbegleiter/features/page_builder/domain/pagebuilder_section_template_repository.dart';
 import 'package:finanzbegleiter/features/dashboard/domain/tutorial_repository.dart';
+import 'package:finanzbegleiter/features/tremendous/domain/tremendous_repository.dart';
 import 'package:finanzbegleiter/features/page_builder/application/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/features/page_builder/application/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart';
 import 'package:finanzbegleiter/features/page_builder/application/pagebuilder_selection/pagebuilder_selection_cubit.dart';
@@ -41,9 +43,11 @@ import 'package:mockito/annotations.dart';
   AdminRegistrationCodeRepository,
   FeedbackRepository,
   RecommendationRepository,
+  RecommendationObserverRepository,
   LegalsRepository,
   DashboardRepository,
   TutorialRepository,
+  TremendousRepository,
   PagebuilderSectionTemplateRepository,
   PagebuilderSectionTemplateUploadRepository,
   ConsentRepository,

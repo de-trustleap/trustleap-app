@@ -124,12 +124,6 @@ class CompensationVoucherForm extends StatelessWidget {
 
   Widget _buildForm(
       BuildContext context, TremendousCatalogSuccessState state) {
-    for (final p in state.products) {
-      print("PRODUCT ${p.id} ${p.name} min:${p.min} max:${p.max}");
-    }
-    for (final s in state.fundingSources) {
-      print("FUNDING ${s.id} ${s.method} ${s.currencyCode}");
-    }
     final localization = AppLocalizations.of(context);
     final themeData = Theme.of(context);
 

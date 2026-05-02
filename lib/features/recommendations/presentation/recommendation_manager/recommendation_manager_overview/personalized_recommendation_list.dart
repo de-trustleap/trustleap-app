@@ -15,10 +15,9 @@ class PersonalizedRecommendationList extends StatelessWidget {
   final Function(UserRecommendation) onAppointmentPressed;
   final Function(UserRecommendation) onFinishedPressed;
   final Function(UserRecommendation) onFailedPressed;
-  final Function(String, String, String) onDeletePressed;
+  final Function(UserRecommendation) onDeletePressed;
   final Function(UserRecommendation) onFavoritePressed;
   final Function(UserRecommendation) onPriorityChanged;
-  final Function(UserRecommendation, bool, bool, bool, bool) onUpdate;
   const PersonalizedRecommendationList(
       {super.key,
       required this.recommendations,
@@ -29,8 +28,7 @@ class PersonalizedRecommendationList extends StatelessWidget {
       required this.onFailedPressed,
       required this.onDeletePressed,
       required this.onFavoritePressed,
-      required this.onPriorityChanged,
-      required this.onUpdate});
+      required this.onPriorityChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +110,6 @@ class PersonalizedRecommendationList extends StatelessWidget {
                 onDeletePressed: onDeletePressed,
                 onFavoritePressed: onFavoritePressed,
                 onPriorityChanged: onPriorityChanged,
-                onUpdate: onUpdate,
               );
             })
       ]

@@ -2,7 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_compensation.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
+import 'package:finanzbegleiter/features/tremendous/domain/tremendous_order_request.dart';
 import 'package:finanzbegleiter/core/id.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/last_viewed.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
@@ -51,7 +53,7 @@ void main() {
         userID: "1",
         statusLevel: StatusLevel.contactFormSent,
         statusTimestamps: {0: date, 1: date, 2: date},
-        promoterImageDownloadURL: null);
+        promoterImageDownloadURL: null, compensation: null);
     final userRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("1"),
         recoID: "1",
@@ -115,7 +117,7 @@ void main() {
         userID: "1",
         statusLevel: StatusLevel.appointment,
         statusTimestamps: {0: date, 1: date, 2: date},
-        promoterImageDownloadURL: null);
+        promoterImageDownloadURL: null, compensation: null);
     final userRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("1"),
         recoID: "1",
@@ -180,7 +182,7 @@ void main() {
         userID: "1",
         statusLevel: StatusLevel.contactFormSent,
         statusTimestamps: {0: date, 1: date, 2: date},
-        promoterImageDownloadURL: null);
+        promoterImageDownloadURL: null, compensation: null);
     final userRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("1"),
         recoID: "1",
@@ -242,7 +244,7 @@ void main() {
         userID: "1",
         statusLevel: StatusLevel.contactFormSent,
         statusTimestamps: {0: date, 1: date, 2: date},
-        promoterImageDownloadURL: null);
+        promoterImageDownloadURL: null, compensation: null);
     final userRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("1"),
         recoID: "1",
@@ -302,7 +304,7 @@ void main() {
         userID: "1",
         statusLevel: StatusLevel.contactFormSent,
         statusTimestamps: {0: date, 1: date, 2: date},
-        promoterImageDownloadURL: null);
+        promoterImageDownloadURL: null, compensation: null);
     final userRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("1"),
         recoID: "1",
@@ -383,6 +385,160 @@ void main() {
     });
   });
 
+  group("RecommendationManagerTileCubit_setCompensation", () {
+    final date = DateTime.now();
+    final recommendation = PersonalizedRecommendationItem(
+        id: "1",
+        name: "Test",
+        reason: "Test",
+        landingPageID: "1",
+        promotionTemplate: "",
+        promoterName: "Test",
+        serviceProviderName: "Test",
+        defaultLandingPageID: "2",
+        userID: "1",
+        statusLevel: StatusLevel.appointment,
+        statusTimestamps: {0: date, 1: date, 2: date, 3: date},
+        promoterImageDownloadURL: null,
+        compensation: null);
+    final userRecommendation = UserRecommendation(
+        id: UniqueID.fromUniqueString("1"),
+        recoID: "1",
+        userID: "1",
+        priority: RecommendationPriority.medium,
+        notes: "Test",
+        recommendation: recommendation);
+
+    test("should call repo setCompensation when function is called", () async {
+      // Given
+      when(mockRecoRepo.setCompensation(
+              userRecommendation, RecommendationCompensationStatus.manualIssued))
+          .thenAnswer((_) async => right(userRecommendation));
+      // When
+      recoManagerTileCubit.setCompensation(
+          userRecommendation, RecommendationCompensationStatus.manualIssued);
+      await untilCalled(mockRecoRepo.setCompensation(
+          userRecommendation, RecommendationCompensationStatus.manualIssued));
+      // Then
+      verify(mockRecoRepo.setCompensation(
+          userRecommendation, RecommendationCompensationStatus.manualIssued));
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+
+    test(
+        "should emit RecommendationCompensationLoadingState then RecommendationCompensationSuccessState on success",
+        () async {
+      // Given
+      when(mockRecoRepo.setCompensation(
+              userRecommendation, RecommendationCompensationStatus.manualIssued))
+          .thenAnswer((_) async => right(userRecommendation));
+      // Then
+      expectLater(recoManagerTileCubit.stream, emitsInOrder([
+        isA<RecommendationCompensationLoadingState>(),
+        isA<RecommendationCompensationSuccessState>()
+            .having((s) => s.status, 'status',
+                RecommendationCompensationStatus.manualIssued),
+      ]));
+      recoManagerTileCubit.setCompensation(
+          userRecommendation, RecommendationCompensationStatus.manualIssued);
+    });
+
+    test(
+        "should emit RecommendationCompensationLoadingState then RecommendationCompensationFailureState on failure",
+        () async {
+      // Given
+      when(mockRecoRepo.setCompensation(
+              userRecommendation, RecommendationCompensationStatus.skipped))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // Then
+      expectLater(recoManagerTileCubit.stream, emitsInOrder([
+        isA<RecommendationCompensationLoadingState>(),
+        isA<RecommendationCompensationFailureState>(),
+      ]));
+      recoManagerTileCubit.setCompensation(
+          userRecommendation, RecommendationCompensationStatus.skipped);
+    });
+  });
+
+  group("RecommendationManagerTileCubit_setCompensationVoucher", () {
+    final date = DateTime.now();
+    final recommendation = PersonalizedRecommendationItem(
+        id: "1",
+        name: "Test",
+        reason: "Test",
+        landingPageID: "1",
+        promotionTemplate: "",
+        promoterName: "Test",
+        serviceProviderName: "Test",
+        defaultLandingPageID: "2",
+        userID: "1",
+        statusLevel: StatusLevel.appointment,
+        statusTimestamps: {0: date, 1: date, 2: date, 3: date},
+        promoterImageDownloadURL: null,
+        compensation: null);
+    final userRecommendation = UserRecommendation(
+        id: UniqueID.fromUniqueString("1"),
+        recoID: "1",
+        userID: "1",
+        priority: RecommendationPriority.medium,
+        notes: "Test",
+        recommendation: recommendation);
+    const orderRequest = TremendousOrderRequest(
+      productID: "prod1",
+      fundingSourceID: "fs1",
+      amount: 50.0,
+      currency: "EUR",
+    );
+
+    test("should call repo createTremendousOrder when function is called",
+        () async {
+      // Given
+      when(mockRecoRepo.createTremendousOrder(userRecommendation, orderRequest))
+          .thenAnswer((_) async => right(userRecommendation));
+      // When
+      recoManagerTileCubit.setCompensationVoucher(
+          userRecommendation, orderRequest);
+      await untilCalled(
+          mockRecoRepo.createTremendousOrder(userRecommendation, orderRequest));
+      // Then
+      verify(mockRecoRepo.createTremendousOrder(
+          userRecommendation, orderRequest));
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+
+    test(
+        "should emit RecommendationCompensationLoadingState then RecommendationCompensationSuccessState with voucherSent on success",
+        () async {
+      // Given
+      when(mockRecoRepo.createTremendousOrder(userRecommendation, orderRequest))
+          .thenAnswer((_) async => right(userRecommendation));
+      // Then
+      expectLater(recoManagerTileCubit.stream, emitsInOrder([
+        isA<RecommendationCompensationLoadingState>(),
+        isA<RecommendationCompensationSuccessState>()
+            .having((s) => s.status, 'status',
+                RecommendationCompensationStatus.voucherSent),
+      ]));
+      recoManagerTileCubit.setCompensationVoucher(
+          userRecommendation, orderRequest);
+    });
+
+    test(
+        "should emit RecommendationCompensationLoadingState then RecommendationCompensationFailureState on failure",
+        () async {
+      // Given
+      when(mockRecoRepo.createTremendousOrder(userRecommendation, orderRequest))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // Then
+      expectLater(recoManagerTileCubit.stream, emitsInOrder([
+        isA<RecommendationCompensationLoadingState>(),
+        isA<RecommendationCompensationFailureState>(),
+      ]));
+      recoManagerTileCubit.setCompensationVoucher(
+          userRecommendation, orderRequest);
+    });
+  });
+
   group("RecommendationManagerTileCubit_getUserDisplayName", () {
     const testUserID = "user123";
     final testUser = CustomUser(
@@ -410,14 +566,99 @@ void main() {
       // Given
       when(mockUserRepo.getUserByID(userId: testUserID))
           .thenAnswer((_) async => left(BackendFailure()));
-      
+
       // When
       final result = await recoManagerTileCubit.getUserDisplayName(testUserID);
-      
+
       // Then
       expect(result, "");
       verify(mockUserRepo.getUserByID(userId: testUserID));
     });
   });
 
+  group("RecommendationManagerTileCubit_deleteRecommendation", () {
+    final recommendation = PersonalizedRecommendationItem(
+        id: "1",
+        name: "Test",
+        reason: "Test",
+        landingPageID: "1",
+        promotionTemplate: "",
+        promoterName: "Test",
+        serviceProviderName: "Test",
+        defaultLandingPageID: "2",
+        userID: "1",
+        statusLevel: StatusLevel.recommendationSend,
+        statusTimestamps: null,
+        promoterImageDownloadURL: null,
+        compensation: null);
+    final userRecommendation = UserRecommendation(
+        id: UniqueID.fromUniqueString("reco-1"),
+        recoID: "1",
+        userID: "1",
+        priority: RecommendationPriority.medium,
+        notes: null,
+        recommendation: recommendation);
+
+    test("should call repo deleteRecommendation with derived IDs", () async {
+      // Given
+      when(mockRecoRepo.deleteRecommendation("1", "1", "reco-1"))
+          .thenAnswer((_) async => right(unit));
+      // When
+      recoManagerTileCubit.deleteRecommendation(userRecommendation);
+      await untilCalled(
+          mockRecoRepo.deleteRecommendation("1", "1", "reco-1"));
+      // Then
+      verify(mockRecoRepo.deleteRecommendation("1", "1", "reco-1"));
+    });
+
+    test(
+        "should emit RecommendationSetStatusLoadingState then RecommendationDeleteSuccessState on success",
+        () async {
+      // Given
+      when(mockRecoRepo.deleteRecommendation("1", "1", "reco-1"))
+          .thenAnswer((_) async => right(unit));
+      // Then
+      expectLater(recoManagerTileCubit.stream, emitsInOrder([
+        isA<RecommendationSetStatusLoadingState>(),
+        isA<RecommendationDeleteSuccessState>()
+            .having((s) => s.recommendation, 'recommendation',
+                userRecommendation),
+      ]));
+      // When
+      recoManagerTileCubit.deleteRecommendation(userRecommendation);
+    });
+
+    test(
+        "should emit RecommendationSetStatusLoadingState then RecommendationDeleteFailureState on failure",
+        () async {
+      // Given
+      when(mockRecoRepo.deleteRecommendation("1", "1", "reco-1"))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // Then
+      expectLater(recoManagerTileCubit.stream, emitsInOrder([
+        isA<RecommendationSetStatusLoadingState>(),
+        isA<RecommendationDeleteFailureState>(),
+      ]));
+      // When
+      recoManagerTileCubit.deleteRecommendation(userRecommendation);
+    });
+
+    test(
+        "should emit RecommendationDeleteFailureState when recoID is null",
+        () async {
+      // Given
+      final userRecoNoRecoID = UserRecommendation(
+          id: UniqueID.fromUniqueString("reco-1"),
+          recoID: null,
+          userID: "1",
+          priority: RecommendationPriority.medium,
+          notes: null,
+          recommendation: null);
+      // Then
+      expectLater(recoManagerTileCubit.stream,
+          emits(isA<RecommendationDeleteFailureState>()));
+      // When
+      recoManagerTileCubit.deleteRecommendation(userRecoNoRecoID);
+    });
+  });
 }

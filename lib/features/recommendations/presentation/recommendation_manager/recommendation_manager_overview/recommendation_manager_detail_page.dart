@@ -71,7 +71,6 @@ class _RecommendationManagerDetailPageState
   Widget build(BuildContext context) {
     return RecommendationManagerDetailContent(
       recommendation: widget.args.recommendation,
-      onUpdate: widget.args.onUpdate,
       buildContent: widget.args.buildContent,
       buildBottomRowTrailing: widget.args.buildBottomRowTrailing,
     );

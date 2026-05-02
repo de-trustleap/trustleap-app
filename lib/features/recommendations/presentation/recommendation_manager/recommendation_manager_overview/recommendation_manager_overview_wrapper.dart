@@ -18,6 +18,7 @@ import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/error_view.
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_manager_overview.dart';
 import 'package:finanzbegleiter/route_paths.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -46,10 +47,8 @@ class _RecommendationManagerPageState
       if (userState is UserObserverSuccess) {
         currentUser = userState.user;
         Modular.get<RecommendationManagerTileCubit>()
-            .initializeFavorites(userState.user.favoriteRecommendationIDs);
-        Modular.get<RecommendationManagerTileCubit>()
             .setCurrentUser(userState.user);
-        _requestRecommendations(userState.user);
+        _observeRecommendations(userState.user);
       }
     });
   }
@@ -57,9 +56,7 @@ class _RecommendationManagerPageState
   void showDeleteAlert(
       AppLocalizations localizations,
       CustomNavigatorBase navigator,
-      String recoID,
-      String userID,
-      String userRecoID) {
+      UserRecommendation recommendation) {
     showDialog(
         context: context,
         builder: (_) {
@@ -72,7 +69,7 @@ class _RecommendationManagerPageState
               cancelButtonTitle: localizations
                   .recommendation_manager_delete_alert_cancel_button,
               actionButtonAction: () =>
-                  _submitDeleteRecommendation(recoID, userID, userRecoID),
+                  _submitDeleteRecommendation(recommendation),
               cancelButtonAction: () => navigator.pop(),
               icon: Icons.delete_outline,
               isDestructive: true);
@@ -82,9 +79,7 @@ class _RecommendationManagerPageState
   void showCampaignDeleteAlert(
       AppLocalizations localizations,
       CustomNavigatorBase navigator,
-      String recoID,
-      String userID,
-      String userRecoID) {
+      UserRecommendation recommendation) {
     showDialog(
         context: context,
         builder: (_) {
@@ -97,7 +92,7 @@ class _RecommendationManagerPageState
               cancelButtonTitle: localizations
                   .recommendation_manager_delete_alert_cancel_button,
               actionButtonAction: () =>
-                  _submitDeleteRecommendation(recoID, userID, userRecoID),
+                  _submitDeleteRecommendation(recommendation),
               cancelButtonAction: () => navigator.pop(),
               icon: Icons.delete_outline,
               isDestructive: true);
@@ -157,11 +152,10 @@ class _RecommendationManagerPageState
         });
   }
 
-  void _submitDeleteRecommendation(
-      String recoID, String userID, String userRecoID) {
+  void _submitDeleteRecommendation(UserRecommendation recommendation) {
     CustomNavigator.of(context).pop();
-    Modular.get<RecommendationManagerCubit>()
-        .deleteRecommendation(recoID, userID, userRecoID);
+    Modular.get<RecommendationManagerTileCubit>()
+        .deleteRecommendation(recommendation);
   }
 
   void _submitFinishRecommendation(
@@ -171,14 +165,10 @@ class _RecommendationManagerPageState
         .setFinished(recommendation, success);
   }
 
-  void _requestRecommendations(CustomUser? user) {
-    if (user?.role == Role.company) {
-      Modular.get<RecommendationManagerCubit>()
-          .getRecommendationsForCompany(user?.id.value);
-    } else {
-      Modular.get<RecommendationManagerCubit>()
-          .getRecommendations(user?.id.value);
-    }
+  void _observeRecommendations(CustomUser? user) {
+    if (user == null) return;
+    Modular.get<RecommendationManagerCubit>()
+        .observeRecommendationsForUser(user);
   }
 
   @override
@@ -197,14 +187,19 @@ class _RecommendationManagerPageState
           BlocListener<UserObserverCubit, UserObserverState>(
               bloc: userObserverCubit,
               listener: (context, state) {
-                if (state is UserObserverSuccess &&
-                    state.user.id != currentUser?.id) {
-                  currentUser = state.user;
+                if (state is UserObserverSuccess) {
+                  final user = state.user;
                   Modular.get<RecommendationManagerTileCubit>()
-                      .initializeFavorites(state.user.favoriteRecommendationIDs);
-                  Modular.get<RecommendationManagerTileCubit>()
-                      .setCurrentUser(state.user);
-                  _requestRecommendations(state.user);
+                      .setCurrentUser(user);
+                  final shouldReobserve = user.id != currentUser?.id ||
+                      !listEquals(user.recommendationIDs,
+                          currentUser?.recommendationIDs) ||
+                      !listEquals(user.registeredPromoterIDs,
+                          currentUser?.registeredPromoterIDs);
+                  currentUser = user;
+                  if (shouldReobserve) {
+                    _observeRecommendations(user);
+                  }
                 }
               }),
           BlocListener<RecommendationManagerTileCubit,
@@ -220,52 +215,43 @@ class _RecommendationManagerPageState
                       RecommendationCompensationStatus.skipped) {
                     CustomSnackBar.of(context).showCustomSnackBar(
                         localization.compensation_success_skipped);
-                    _requestRecommendations(currentUser);
                   } else if (state.status ==
                       RecommendationCompensationStatus.voucherSent) {
                     CustomSnackBar.of(context).showCustomSnackBar(
                         localization.compensation_voucher_sent_snackbar);
-                    _requestRecommendations(currentUser);
                   } else {
                     CustomSnackBar.of(context).showCustomSnackBar(
                         localization.compensation_success_manual_issued);
-                    _requestRecommendations(currentUser);
                   }
                 } else if (state is RecommendationCompensationFailureState) {
                   CustomSnackBar.of(context).showCustomSnackBar(
                       localization.compensation_error, SnackBarType.failure);
-                }
-              }),
-          BlocListener<RecommendationManagerCubit, RecommendationManagerState>(
-              bloc: recoManagerCubit,
-              listener: (context, state) {
-                if (state is RecommendationDeleteRecoSuccessState) {
+                } else if (state is RecommendationSetStatusSuccessState) {
+                  if (state.settedNotes == true) {
+                    CustomSnackBar.of(context).showCustomSnackBar(
+                        localization.recommendation_manager_notes_snackbar);
+                  } else if (state.settedPriority == true) {
+                    CustomSnackBar.of(context).showCustomSnackBar(
+                        localization.recommendation_manager_priority_snackbar);
+                  } else {
+                    CustomSnackBar.of(context).showCustomSnackBar(
+                        localization
+                            .recommendation_manager_scheduled_snackbar);
+                  }
+                } else if (state is RecommendationSetFinishedSuccessState) {
+                  CustomSnackBar.of(context).showCustomSnackBar(
+                      localization.recommendation_manager_finished_snackbar);
+                } else if (state is RecommendationManagerTileFavoriteUpdatedState) {
+                  CustomSnackBar.of(context).showCustomSnackBar(
+                      localization.recommendation_manager_favorite_snackbar);
+                } else if (state is RecommendationDeleteSuccessState) {
                   CustomSnackBar.of(context).showCustomSnackBar(
                       localization.recommendation_manager_delete_snackbar);
-                  _requestRecommendations(currentUser);
-                } else if (state is RecommendationDeleteRecoFailureState) {
+                } else if (state is RecommendationDeleteFailureState) {
                   CustomSnackBar.of(context).showCustomSnackBar(
                       DatabaseFailureMapper.mapFailureMessage(
                           state.failure, localization),
                       SnackBarType.failure);
-                  _requestRecommendations(currentUser);
-                } else if (state is RecommendationGetRecosSuccessState) {
-                  if (state.showFavoriteSnackbar) {
-                    CustomSnackBar.of(context).showCustomSnackBar(
-                        localization.recommendation_manager_favorite_snackbar);
-                  } else if (state.showPrioritySnackbar) {
-                    CustomSnackBar.of(context).showCustomSnackBar(
-                        localization.recommendation_manager_priority_snackbar);
-                  } else if (state.showNotesSnackbar) {
-                    CustomSnackBar.of(context).showCustomSnackBar(
-                        localization.recommendation_manager_notes_snackbar);
-                  } else if (state.showSetAppointmentSnackBar) {
-                    CustomSnackBar.of(context).showCustomSnackBar(
-                        localization.recommendation_manager_scheduled_snackbar);
-                  } else if (state.showFinishedSnackBar) {
-                    CustomSnackBar.of(context).showCustomSnackBar(
-                        localization.recommendation_manager_finished_snackbar);
-                  }
                 }
               }),
         ],
@@ -305,7 +291,7 @@ class _RecommendationManagerPageState
           title: localization.recommendation_manager_failure_text,
           message: DatabaseFailureMapper.mapFailureMessage(
               state.failure, localization),
-          callback: () => {_requestRecommendations(currentUser)});
+          callback: () => {_observeRecommendations(currentUser)});
     } else if (state is RecommendationGetRecosSuccessState) {
       return ListView(children: [
         SizedBox(height: responsiveValue.isMobile ? 16 : 80),
@@ -327,13 +313,12 @@ class _RecommendationManagerPageState
               onFailedPressed: (recommendation) {
                 showFailedAlert(localization, navigator, recommendation);
               },
-              onDeletePressed: (recoID, userID, userRecoID) {
-                showDeleteAlert(
-                    localization, navigator, recoID, userID, userRecoID);
+              onDeletePressed: (recommendation) {
+                showDeleteAlert(localization, navigator, recommendation);
               },
-              onCampaignDeletePressed: (recoID, userID, userRecoID) {
+              onCampaignDeletePressed: (recommendation) {
                 showCampaignDeleteAlert(
-                    localization, navigator, recoID, userID, userRecoID);
+                    localization, navigator, recommendation);
               },
               onFavoritePressed: (recommendation) {
                 Modular.get<RecommendationManagerTileCubit>()
@@ -342,15 +327,6 @@ class _RecommendationManagerPageState
               onPriorityChanged: (recommendation) {
                 Modular.get<RecommendationManagerTileCubit>()
                     .setPriority(recommendation);
-              },
-              onUpdate: (recommendation, shouldBeDeleted, settedFavorite,
-                  settedPriority, settedNotes) {
-                Modular.get<RecommendationManagerCubit>().updateReco(
-                    recommendation,
-                    shouldBeDeleted,
-                    settedFavorite,
-                    settedPriority,
-                    settedNotes);
               }),
         )
       ]);

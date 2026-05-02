@@ -8,6 +8,8 @@ enum RecommendationStatusFilterState {
   linkClicked,
   contactFormSent,
   appointment,
+  manualIssued,
+  voucherSent,
   successful,
   failed,
   all
@@ -220,6 +222,14 @@ class _RecommendationManagerExpandableFilterState
                             value: RecommendationStatusFilterState.appointment,
                             label: localization
                                 .recommendation_manager_status_level_4),
+                        CustomDropdownItem(
+                            value: RecommendationStatusFilterState.manualIssued,
+                            label: localization
+                                .compensation_status_manual_issued),
+                        CustomDropdownItem(
+                            value: RecommendationStatusFilterState.voucherSent,
+                            label: localization
+                                .compensation_status_voucher_sent),
                       ],
                       if (widget.isArchive) ...[
                         CustomDropdownItem(

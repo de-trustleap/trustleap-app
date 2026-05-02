@@ -21,10 +21,9 @@ class PersonalizedRecommendationListTile extends StatelessWidget {
   final Function(UserRecommendation) onAppointmentPressed;
   final Function(UserRecommendation) onFinishedPressed;
   final Function(UserRecommendation) onFailedPressed;
-  final Function(String, String, String) onDeletePressed;
+  final Function(UserRecommendation) onDeletePressed;
   final Function(UserRecommendation) onFavoritePressed;
   final Function(UserRecommendation) onPriorityChanged;
-  final Function(UserRecommendation, bool, bool, bool, bool) onUpdate;
 
   const PersonalizedRecommendationListTile({
     super.key,
@@ -36,7 +35,6 @@ class PersonalizedRecommendationListTile extends StatelessWidget {
     required this.onDeletePressed,
     required this.onFavoritePressed,
     required this.onPriorityChanged,
-    required this.onUpdate,
   });
 
   @override
@@ -49,7 +47,6 @@ class PersonalizedRecommendationListTile extends StatelessWidget {
     return RecommendationManagerBaseTile(
       recommendation: recommendation,
       onFavoritePressed: onFavoritePressed,
-      onUpdate: onUpdate,
       buildTitle: (reco) => PersonalizedRecommendationListTileTitle(
         recommendation: reco,
         isPromoter: isPromoter,

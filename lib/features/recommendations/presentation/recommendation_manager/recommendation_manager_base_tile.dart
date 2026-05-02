@@ -24,7 +24,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 class RecommendationManagerBaseTile extends StatefulWidget {
   final UserRecommendation recommendation;
   final Function(UserRecommendation) onFavoritePressed;
-  final Function(UserRecommendation, bool, bool, bool, bool) onUpdate;
   final Widget Function(UserRecommendation) buildTitle;
   final List<Widget> Function(UserRecommendation, bool isLoading) buildContent;
   final List<Widget> Function(UserRecommendation)? buildBottomRowTrailing;
@@ -33,7 +32,6 @@ class RecommendationManagerBaseTile extends StatefulWidget {
     super.key,
     required this.recommendation,
     required this.onFavoritePressed,
-    required this.onUpdate,
     required this.buildTitle,
     required this.buildContent,
     this.buildBottomRowTrailing,
@@ -55,6 +53,16 @@ class _RecommendationManagerBaseTileState
   void initState() {
     super.initState();
     _recommendation = widget.recommendation;
+  }
+
+  @override
+  void didUpdateWidget(covariant RecommendationManagerBaseTile oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.recommendation != oldWidget.recommendation) {
+      setState(() {
+        _recommendation = widget.recommendation;
+      });
+    }
   }
 
   @override
@@ -111,14 +119,6 @@ class _RecommendationManagerBaseTileState
               _addNote = false;
             }
           });
-          widget.onUpdate(
-              state.recommendation,
-              false,
-              state.settedFavorite ?? false,
-              state.settedPriority ?? false,
-              state.settedNotes ?? false);
-        } else if (state is RecommendationSetFinishedSuccessState) {
-          widget.onUpdate(state.recommendation, true, false, false, false);
         } else if (state is RecommendationManagerTileFavoriteUpdatedState) {
           setState(() {
             _recommendation = state.recommendation;
@@ -155,7 +155,6 @@ class _RecommendationManagerBaseTileState
               arguments: RecommendationDetailArgs(
                 recommendation: _recommendation,
                 onFavoritePressed: widget.onFavoritePressed,
-                onUpdate: widget.onUpdate,
                 buildContent: widget.buildContent,
                 buildBottomRowTrailing: widget.buildBottomRowTrailing,
               ),

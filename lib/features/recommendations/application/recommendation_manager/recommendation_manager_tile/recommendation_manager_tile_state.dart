@@ -126,3 +126,29 @@ class RecommendationManagerTileViewedState
   @override
   List<Object?> get props => [recommendationID, lastViewed];
 }
+
+class RecommendationDeleteSuccessState extends RecommendationManagerTileState
+    with EquatableMixin {
+  final UserRecommendation recommendation;
+  final DateTime timestamp;
+
+  RecommendationDeleteSuccessState({required this.recommendation})
+      : timestamp = DateTime.now();
+
+  @override
+  List<Object?> get props => [recommendation, timestamp];
+}
+
+class RecommendationDeleteFailureState extends RecommendationManagerTileState
+    with EquatableMixin {
+  final DatabaseFailure failure;
+  final UserRecommendation recommendation;
+  final DateTime timestamp;
+
+  RecommendationDeleteFailureState(
+      {required this.failure, required this.recommendation})
+      : timestamp = DateTime.now();
+
+  @override
+  List<Object?> get props => [failure, recommendation, timestamp];
+}

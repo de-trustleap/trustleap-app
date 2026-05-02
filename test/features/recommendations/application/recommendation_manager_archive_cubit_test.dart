@@ -41,7 +41,7 @@ void main() {
           recommendationType: RecommendationType.personalized,
           campaignName: null,
           campaignDurationDays: null,
-          statusCounts: null),
+          statusCounts: null, compensation: null),
     ];
 
     test("should call reco repo when function is called", () async {

@@ -72,6 +72,7 @@ import 'package:finanzbegleiter/features/page_builder/domain/pagebuilder_section
 import 'package:finanzbegleiter/features/admin/domain/pagebuilder_section_template_upload_repository.dart';
 import 'package:finanzbegleiter/features/permissions/domain/permission_repository.dart';
 import 'package:finanzbegleiter/features/promoter/domain/promoter_repository.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_observer_repository.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_repository.dart';
 import 'package:finanzbegleiter/features/dashboard/domain/tutorial_repository.dart';
 import 'package:finanzbegleiter/features/profile/domain/user_repository.dart';
@@ -92,6 +93,7 @@ import 'package:finanzbegleiter/features/page_builder/infrastructure/pagebuilder
 import 'package:finanzbegleiter/features/admin/infrastructure/pagebuilder_section_template_upload_repository_implementation.dart';
 import 'package:finanzbegleiter/features/permissions/infrastructure/permission_repository_implementation.dart';
 import 'package:finanzbegleiter/features/promoter/infrastructure/promoter_repository_implementation.dart';
+import 'package:finanzbegleiter/features/recommendations/infrastructure/recommendation_observer_repository_implementation.dart';
 import 'package:finanzbegleiter/features/recommendations/infrastructure/recommendation_repository_implementation.dart';
 import 'package:finanzbegleiter/features/dashboard/infrastructure/tutorial_repository_implementation.dart';
 import 'package:finanzbegleiter/features/profile/infrastructure/user_repository_implementation.dart';
@@ -141,6 +143,8 @@ class AppModule extends Module {
       ..addLazySingleton<LegalsRepository>(LegalsRepositoryImplementation.new)
       ..addLazySingleton<RecommendationRepository>(
           RecommendationRepositoryImplementation.new)
+      ..addLazySingleton<RecommendationObserverRepository>(
+          RecommendationObserverRepositoryImplementation.new)
       ..addLazySingleton<WebLoggingRepository>(
           WebLoggingRepositoryImplementation.new)
       ..addLazySingleton<FeedbackRepository>(
