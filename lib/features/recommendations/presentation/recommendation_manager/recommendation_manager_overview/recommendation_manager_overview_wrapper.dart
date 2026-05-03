@@ -305,7 +305,17 @@ class _RecommendationManagerPageState
               },
               onFinishedPressed: (recommendation) {
                 if (currentUser?.role == Role.company) {
-                  showCompensationDialog(recommendation);
+                  final personalizedReco = recommendation.recommendation
+                      is PersonalizedRecommendationItem
+                      ? recommendation.recommendation
+                          as PersonalizedRecommendationItem
+                      : null;
+                  if (personalizedReco?.compensation?.status ==
+                      RecommendationCompensationStatus.manualConfirmed) {
+                    showFinishAlert(localization, navigator, recommendation);
+                  } else {
+                    showCompensationDialog(recommendation);
+                  }
                 } else {
                   showFinishAlert(localization, navigator, recommendation);
                 }
