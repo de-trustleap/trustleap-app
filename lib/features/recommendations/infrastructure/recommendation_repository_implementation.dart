@@ -615,20 +615,9 @@ class RecommendationRepositoryImplementation
 
       // 3. Convert archived recommendations to UserRecommendations
       final List<UserRecommendation> convertedArchivedRecommendations =
-          archivedRecos.map((archived) {
-        final recommendationItem =
-            _convertArchivedToRecommendationItem(archived);
-        return UserRecommendation(
-          id: archived.id,
-          userID: archived.userID ?? userID,
-          recoID: archived.id.value,
-          recommendation: recommendationItem,
-          priority: RecommendationPriority.medium,
-          notes: null,
-          lastEdits: [],
-          viewedByUsers: [],
-        );
-      }).toList();
+          archivedRecos
+              .map((archived) => _archivedToUserRecommendation(archived, userID))
+              .toList();
 
       // 4. Best-effort merge of archived into promoter groups (for promoter dropdown)
       final Map<String, List<UserRecommendation>> archivedByPromoter = {};
@@ -748,6 +737,20 @@ class RecommendationRepositoryImplementation
     );
   }
 
+  UserRecommendation _archivedToUserRecommendation(
+      ArchivedRecommendationItem archived, String userID) {
+    return UserRecommendation(
+      id: archived.id,
+      userID: archived.userID ?? userID,
+      recoID: archived.id.value,
+      recommendation: _convertArchivedToRecommendationItem(archived),
+      priority: RecommendationPriority.medium,
+      notes: null,
+      lastEdits: [],
+      viewedByUsers: [],
+    );
+  }
+
   @override
   Future<Either<DatabaseFailure, Unit>> createDraftRecommendation(
       DraftRecommendationItem draft) async {
@@ -800,20 +803,9 @@ class RecommendationRepositoryImplementation
 
       // 3. Convert archived recommendations to UserRecommendations
       final List<UserRecommendation> convertedArchivedRecommendations =
-          archivedRecos.map((archived) {
-        final recommendationItem =
-            _convertArchivedToRecommendationItem(archived);
-        return UserRecommendation(
-          id: archived.id,
-          userID: archived.userID ?? userID,
-          recoID: archived.id.value,
-          recommendation: recommendationItem,
-          priority: RecommendationPriority.medium,
-          notes: null,
-          lastEdits: [],
-          viewedByUsers: [],
-        );
-      }).toList();
+          archivedRecos
+              .map((archived) => _archivedToUserRecommendation(archived, userID))
+              .toList();
 
       // 4. Merge active and archived recommendations
       final allRecommendations = [
@@ -863,18 +855,17 @@ class RecommendationRepositoryImplementation
     final compensationMap =
         RecommendationCompensationModel.fromDomain(updatedCompensation).toMap();
 
-    try {
-      await recoCollection
-          .doc(personalized.id)
-          .set({"compensation": compensationMap}, SetOptions(merge: true));
-    } on FirebaseException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
-
     final updatedReco = recommendation.copyWith(
         recommendation: personalized.copyWith(compensation: updatedCompensation));
 
     if (status != RecommendationCompensationStatus.skipped) {
+      try {
+        await recoCollection
+            .doc(personalized.id)
+            .set({"compensation": compensationMap}, SetOptions(merge: true));
+      } on FirebaseException catch (e) {
+        return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+      }
       return right(updatedReco);
     }
 
@@ -884,6 +875,7 @@ class RecommendationRepositoryImplementation
         "recommendationID": recommendation.id.value,
         "userID": recommendation.userID,
         "success": true,
+        "compensationStatus": status.name,
       },
       (_) => updatedReco,
     );

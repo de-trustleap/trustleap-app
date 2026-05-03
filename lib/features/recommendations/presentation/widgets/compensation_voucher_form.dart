@@ -195,8 +195,8 @@ class CompensationVoucherForm extends StatelessWidget {
 
   Widget _buildAmountHint(BuildContext context, TremendousProduct product) {
     final themeData = Theme.of(context);
-    final productMin = (product.min ?? 1).ceil();
-    final productMax = product.max != null ? product.max!.floor().clamp(1, 100) : 100;
+    final productMin = product.effectiveMin;
+    final productMax = product.effectiveMax;
     final hint = "$productMin–$productMax €";
     return SelectableText(
       hint,

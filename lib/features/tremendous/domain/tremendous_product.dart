@@ -17,6 +17,9 @@ class TremendousProduct extends Equatable {
     this.imageUrl,
   });
 
+  int get effectiveMin => (min ?? 1).ceil();
+  int get effectiveMax => (max ?? 100).floor().clamp(1, 100);
+
   factory TremendousProduct.fromMap(Map<String, dynamic> map) {
     final images = map['images'] as List<dynamic>?;
     return TremendousProduct(

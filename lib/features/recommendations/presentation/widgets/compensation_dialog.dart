@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/form_error_view.dart';
@@ -120,8 +118,8 @@ class _CompensationDialogState extends State<CompensationDialog> {
           localization.compensation_dialog_voucher_funding_source_required);
       return;
     }
-    final productMin = (product.min ?? 1).ceil();
-    final productMax = min((product.max ?? 100).floor(), 100);
+    final productMin = product.effectiveMin;
+    final productMax = product.effectiveMax;
 
     if (amount == null || amount < productMin) {
       setState(() => _errorMessage =
@@ -313,7 +311,7 @@ class _CompensationDialogState extends State<CompensationDialog> {
   }) {
     final themeData = Theme.of(context);
     return RadioListTile<CompensationOption>(
-      title: Text(label, style: themeData.textTheme.bodyMedium),
+      title: SelectableText(label, style: themeData.textTheme.bodyMedium),
       value: value,
       contentPadding: EdgeInsets.zero,
       dense: true,

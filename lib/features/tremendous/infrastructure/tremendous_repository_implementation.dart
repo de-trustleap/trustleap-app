@@ -1,13 +1,12 @@
-import 'dart:convert';
-import 'dart:math';
+import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:crypto/crypto.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/cloud_functions_service.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
+import 'package:finanzbegleiter/core/oauth_pkce_helper.dart';
 import 'package:finanzbegleiter/environment.dart';
 import 'package:finanzbegleiter/features/tremendous/domain/tremendous_funding_source.dart';
 import 'package:finanzbegleiter/features/tremendous/domain/tremendous_organization.dart';
@@ -32,8 +31,6 @@ class TremendousRepositoryImplementation implements TremendousRepository {
   final CloudFunctionsService cloudFunctions;
   final Environment environment = Environment();
 
-  String? _codeVerifier;
-
   TremendousRepositoryImplementation({
     required this.firestore,
     required this.firebaseAuth,
@@ -47,8 +44,18 @@ class TremendousRepositoryImplementation implements TremendousRepository {
       final user = firebaseAuth.currentUser;
       if (user == null) return left(BackendFailure());
 
-      _codeVerifier = _generateCodeVerifier();
-      final codeChallenge = _generateCodeChallenge(_codeVerifier!);
+      final codeVerifier = OAuthPkceHelper.generateCodeVerifier();
+      final codeChallenge = OAuthPkceHelper.generateCodeChallenge(codeVerifier);
+      final nonce = OAuthPkceHelper.generateNonce();
+
+      await firestore
+          .collection("tremendousOauthStates")
+          .doc(nonce)
+          .set({
+        "uid": user.uid,
+        "verifier": codeVerifier,
+        "createdAt": FieldValue.serverTimestamp(),
+      });
 
       final redirectUri =
           "${environment.getCloudFunctionsBaseURL()}/tremendousOAuthCallback";
@@ -61,7 +68,7 @@ class TremendousRepositoryImplementation implements TremendousRepository {
         "client_id": clientId,
         "response_type": "code",
         "redirect_uri": redirectUri,
-        "state": "${user.uid}|$_codeVerifier",
+        "state": nonce,
         "code_challenge": codeChallenge,
         "code_challenge_method": "S256",
       });
@@ -164,7 +171,7 @@ class TremendousRepositoryImplementation implements TremendousRepository {
         final isExpired = now > (expiresAt - 5 * 60 * 1000);
 
         if (isExpired) {
-          refreshToken();
+          unawaited(refreshToken());
           return right(false);
         }
 
@@ -198,20 +205,6 @@ class TremendousRepositoryImplementation implements TremendousRepository {
     if (now > (expiresAt - 5 * 60 * 1000)) return null;
 
     return accessToken;
-  }
-
-  String _generateCodeVerifier() {
-    const chars =
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~';
-    final random = Random.secure();
-    return List.generate(128, (_) => chars[random.nextInt(chars.length)])
-        .join();
-  }
-
-  String _generateCodeChallenge(String verifier) {
-    final bytes = utf8.encode(verifier);
-    final digest = sha256.convert(bytes);
-    return base64Url.encode(digest.bytes).replaceAll('=', '');
   }
 
   @override
