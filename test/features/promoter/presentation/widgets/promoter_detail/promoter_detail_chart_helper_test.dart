@@ -38,6 +38,7 @@ void main() {
           statusTimestamps: {0: createdAt},
           userID: "user-1",
           promoterImageDownloadURL: null,
+          compensation: null,
           createdAt: createdAt,
         ),
       );
@@ -296,6 +297,7 @@ void main() {
             statusTimestamps: null,
             userID: "user-1",
             promoterImageDownloadURL: null,
+            compensation: null,
           ),
         );
 

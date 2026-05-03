@@ -13,16 +13,14 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class CampaignRecommendationListTile extends StatelessWidget {
   final UserRecommendation recommendation;
-  final Function(String, String, String) onDeletePressed;
+  final Function(UserRecommendation) onDeletePressed;
   final Function(UserRecommendation) onFavoritePressed;
-  final Function(UserRecommendation, bool, bool, bool, bool) onUpdate;
 
   const CampaignRecommendationListTile({
     super.key,
     required this.recommendation,
     required this.onDeletePressed,
     required this.onFavoritePressed,
-    required this.onUpdate,
   });
 
   @override
@@ -33,7 +31,6 @@ class CampaignRecommendationListTile extends StatelessWidget {
     return RecommendationManagerBaseTile(
       recommendation: recommendation,
       onFavoritePressed: onFavoritePressed,
-      onUpdate: onUpdate,
       buildTitle: (reco) => CampaignRecommendationListTileTitle(
         recommendation: reco,
         onFavoritePressed: onFavoritePressed,
@@ -66,11 +63,7 @@ class CampaignRecommendationListTile extends StatelessWidget {
         ),
         IconButton(
           tooltip: localization.campaign_manager_delete_tooltip,
-          onPressed: () => onDeletePressed(
-            reco.recommendation?.id ?? "",
-            reco.recommendation?.userID ?? "",
-            reco.id.value,
-          ),
+          onPressed: () => onDeletePressed(reco),
           color: Theme.of(context).colorScheme.secondary,
           iconSize: 24,
           icon: const Icon(Icons.delete),

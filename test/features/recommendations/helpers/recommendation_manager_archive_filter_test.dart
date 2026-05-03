@@ -21,7 +21,7 @@ void main() {
           recommendationType: RecommendationType.personalized,
           campaignName: null,
           campaignDurationDays: null,
-          statusCounts: null),
+          statusCounts: null, compensation: null),
       ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("2"),
           reason: "Test 2",
@@ -35,7 +35,7 @@ void main() {
           recommendationType: RecommendationType.personalized,
           campaignName: null,
           campaignDurationDays: null,
-          statusCounts: null),
+          statusCounts: null, compensation: null),
       ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("3"),
           reason: "Test 3",
@@ -49,7 +49,7 @@ void main() {
           recommendationType: RecommendationType.personalized,
           campaignName: null,
           campaignDurationDays: null,
-          statusCounts: null),
+          statusCounts: null, compensation: null),
     ];
 
     test('filters by success status = successful', () {

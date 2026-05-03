@@ -93,6 +93,7 @@ void main() {
         statusTimestamps: null,
         defaultLandingPageID: "3",
         promoterImageDownloadURL: null,
+        compensation: null,
         lastUpdated: null);
 
     test("should call recommendation repo when function is called", () async {

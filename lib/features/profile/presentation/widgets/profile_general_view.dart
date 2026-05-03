@@ -7,7 +7,9 @@ import 'package:finanzbegleiter/core/widgets/page_wrapper/centered_constrained_w
 import 'package:finanzbegleiter/core/widgets/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/secondary_button.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/features/profile/presentation/widgets/calendly_section.dart';
+import 'package:finanzbegleiter/features/profile/presentation/widgets/tremendous_section.dart';
 import 'package:finanzbegleiter/features/profile/presentation/widgets/contact_section.dart';
 import 'package:finanzbegleiter/features/profile/presentation/widgets/email_section/email_section.dart';
 import 'package:finanzbegleiter/features/profile/presentation/widgets/profile_register_company_section.dart';
@@ -96,6 +98,10 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
                                       ],
                                       CalendlySection(maxWidth: secondColumnMaxWidth),
                                       SizedBox(height: isWideScreen ? 20 : (responsiveValue.isMobile ? 20 : 60)),
+                                      if (state.user.role == Role.company) ...[
+                                        TremendousSection(maxWidth: secondColumnMaxWidth),
+                                        SizedBox(height: isWideScreen ? 20 : (responsiveValue.isMobile ? 20 : 60)),
+                                      ],
                                       EmailSection(
                                         user: state.user,
                                         maxWidth: secondColumnMaxWidth,

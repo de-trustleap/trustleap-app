@@ -141,6 +141,7 @@ class RecommendationFormHelper {
         statusTimestamps: {0: DateTime.now()},
         userID: currentUser?.id.value ?? parentUser?.id.value,
         promoterImageDownloadURL: null,
+        compensation: null,
         promotionTemplate: reasons.firstWhere((e) {
           return e.reason == selectedReason.reason;
         }).promotionTemplate!);
