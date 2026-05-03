@@ -7,7 +7,7 @@ import 'dart:async' as _i12;
 import 'dart:io' as _i31;
 import 'dart:typed_data' as _i29;
 
-import 'package:bloc/bloc.dart' as _i70;
+import 'package:bloc/bloc.dart' as _i77;
 import 'package:cloud_firestore/cloud_firestore.dart' as _i11;
 import 'package:cloud_firestore_platform_interface/cloud_firestore_platform_interface.dart'
     as _i10;
@@ -25,11 +25,11 @@ import 'package:finanzbegleiter/features/admin/domain/admin_registration_code_re
 import 'package:finanzbegleiter/features/admin/domain/company_request.dart'
     as _i26;
 import 'package:finanzbegleiter/features/admin/domain/pagebuilder_section_template_edit.dart'
-    as _i63;
+    as _i70;
 import 'package:finanzbegleiter/features/admin/domain/pagebuilder_section_template_upload.dart'
-    as _i62;
+    as _i69;
 import 'package:finanzbegleiter/features/admin/domain/pagebuilder_section_template_upload_repository.dart'
-    as _i61;
+    as _i68;
 import 'package:finanzbegleiter/features/auth/domain/auth_repository.dart'
     as _i18;
 import 'package:finanzbegleiter/features/auth/domain/user.dart' as _i20;
@@ -38,15 +38,15 @@ import 'package:finanzbegleiter/features/calendly/domain/calendly_repository.dar
 import 'package:finanzbegleiter/features/consent/domain/consent_preference.dart'
     as _i3;
 import 'package:finanzbegleiter/features/consent/domain/consent_repository.dart'
-    as _i64;
+    as _i71;
 import 'package:finanzbegleiter/features/dashboard/domain/dashboard_ranked_landingpage.dart'
-    as _i56;
+    as _i59;
 import 'package:finanzbegleiter/features/dashboard/domain/dashboard_ranked_promoter.dart'
-    as _i55;
+    as _i58;
 import 'package:finanzbegleiter/features/dashboard/domain/dashboard_repository.dart'
-    as _i54;
-import 'package:finanzbegleiter/features/dashboard/domain/tutorial_repository.dart'
     as _i57;
+import 'package:finanzbegleiter/features/dashboard/domain/tutorial_repository.dart'
+    as _i60;
 import 'package:finanzbegleiter/features/feedback/domain/feedback_item.dart'
     as _i45;
 import 'package:finanzbegleiter/features/feedback/domain/feedback_repository.dart'
@@ -65,29 +65,29 @@ import 'package:finanzbegleiter/features/landing_pages/domain/last_viewed.dart'
     as _i49;
 import 'package:finanzbegleiter/features/legals/domain/archived_landing_page_legals.dart'
     as _i38;
-import 'package:finanzbegleiter/features/legals/domain/legals.dart' as _i53;
+import 'package:finanzbegleiter/features/legals/domain/legals.dart' as _i56;
 import 'package:finanzbegleiter/features/legals/domain/legals_repository.dart'
-    as _i52;
+    as _i55;
 import 'package:finanzbegleiter/features/page_builder/application/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart'
-    as _i67;
+    as _i74;
 import 'package:finanzbegleiter/features/page_builder/application/pagebuilder_selection/pagebuilder_selection_cubit.dart'
-    as _i71;
+    as _i78;
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_ai_generation.dart'
     as _i35;
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_page.dart'
-    as _i66;
+    as _i73;
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_section.dart'
-    as _i69;
+    as _i76;
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_section_template.dart'
-    as _i60;
+    as _i67;
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_section_template_meta.dart'
-    as _i59;
+    as _i66;
 import 'package:finanzbegleiter/features/page_builder/domain/entities/pagebuilder_widget.dart'
-    as _i68;
+    as _i75;
 import 'package:finanzbegleiter/features/page_builder/domain/pagebuilder_repository.dart'
-    as _i65;
+    as _i72;
 import 'package:finanzbegleiter/features/page_builder/domain/pagebuilder_section_template_repository.dart'
-    as _i58;
+    as _i65;
 import 'package:finanzbegleiter/features/permissions/domain/permission_repository.dart'
     as _i41;
 import 'package:finanzbegleiter/features/permissions/domain/permissions.dart'
@@ -103,19 +103,33 @@ import 'package:finanzbegleiter/features/promoter/domain/promoter_repository.dar
 import 'package:finanzbegleiter/features/promoter/domain/unregistered_promoter.dart'
     as _i40;
 import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart'
-    as _i72;
+    as _i79;
 import 'package:finanzbegleiter/features/recommendations/domain/archived_recommendation_item.dart'
     as _i48;
 import 'package:finanzbegleiter/features/recommendations/domain/draft_recommendation_item.dart'
     as _i51;
 import 'package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart'
     as _i50;
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_compensation.dart'
+    as _i52;
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart'
     as _i46;
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_observer_repository.dart'
+    as _i54;
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_repository.dart'
     as _i5;
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart'
     as _i47;
+import 'package:finanzbegleiter/features/tremendous/domain/tremendous_funding_source.dart'
+    as _i64;
+import 'package:finanzbegleiter/features/tremendous/domain/tremendous_order_request.dart'
+    as _i53;
+import 'package:finanzbegleiter/features/tremendous/domain/tremendous_organization.dart'
+    as _i62;
+import 'package:finanzbegleiter/features/tremendous/domain/tremendous_product.dart'
+    as _i63;
+import 'package:finanzbegleiter/features/tremendous/domain/tremendous_repository.dart'
+    as _i61;
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart' as _i16;
 import 'package:firebase_auth/firebase_auth.dart' as _i4;
 import 'package:firebase_core/firebase_core.dart' as _i9;
@@ -4167,6 +4181,18 @@ class MockAppLocalizations extends _i1.Mock implements _i16.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_pagebuilder_save_duplicate_widget_error_title =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_save_duplicate_widget_error_title),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_save_duplicate_widget_error_title),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_pagebuilder_save_success_snackbar =>
       (super.noSuchMethod(
         Invocation.getter(#landingpage_pagebuilder_save_success_snackbar),
@@ -4342,6 +4368,16 @@ class MockAppLocalizations extends _i1.Mock implements _i16.AppLocalizations {
         returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#landingpage_pagebuilder_config_menu_calendly_type),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_config_menu_faq_type =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_config_menu_faq_type),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_config_menu_faq_type),
         ),
       ) as String);
 
@@ -7764,6 +7800,15 @@ class MockAppLocalizations extends _i1.Mock implements _i16.AppLocalizations {
       ) as String);
 
   @override
+  String get pagebuilder_hierarchy_overlay_faq => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_faq),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_faq),
+        ),
+      ) as String);
+
+  @override
   String get pagebuilder_mobile_not_supported_title => (super.noSuchMethod(
         Invocation.getter(#pagebuilder_mobile_not_supported_title),
         returnValue: _i17.dummyValue<String>(
@@ -9050,6 +9095,15 @@ class MockAppLocalizations extends _i1.Mock implements _i16.AppLocalizations {
         returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#pagebuilder_widget_template_spacer),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_widget_template_faq => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_widget_template_faq),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_widget_template_faq),
         ),
       ) as String);
 
@@ -10937,6 +10991,608 @@ class MockAppLocalizations extends _i1.Mock implements _i16.AppLocalizations {
       ) as String);
 
   @override
+  String get pagebuilder_contact_form_default_name_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_contact_form_default_name_placeholder),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_contact_form_default_name_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_contact_form_default_email_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_contact_form_default_email_placeholder),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_contact_form_default_email_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_contact_form_default_phone_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_contact_form_default_phone_placeholder),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_contact_form_default_phone_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_contact_form_default_message_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #pagebuilder_contact_form_default_message_placeholder),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_contact_form_default_message_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_contact_form_default_button_text =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_contact_form_default_button_text),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_contact_form_default_button_text),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_question_style_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_question_style_title),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_question_style_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_answer_style_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_answer_style_title),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_answer_style_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_indicator_color_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_indicator_color_title),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_indicator_color_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_question_background_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_question_background_title),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_question_background_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_answer_background_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_answer_background_title),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_answer_background_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_border_color_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_border_color_title),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_border_color_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_items_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_items_title),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_items_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_add_item => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_add_item),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_add_item),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_delete_item => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_delete_item),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_delete_item),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_item_question_label => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_item_question_label),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_item_question_label),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_config_item_answer_label => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_config_item_answer_label),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_config_item_answer_label),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_default_question_1 => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_default_question_1),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_default_question_1),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_default_answer_1 => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_default_answer_1),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_default_answer_1),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_default_question_2 => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_default_question_2),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_default_question_2),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_default_answer_2 => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_default_answer_2),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_default_answer_2),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_default_question_3 => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_default_question_3),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_default_question_3),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_faq_default_answer_3 => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_faq_default_answer_3),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_faq_default_answer_3),
+        ),
+      ) as String);
+
+  @override
+  String get profile_page_tremendous_integration_title => (super.noSuchMethod(
+        Invocation.getter(#profile_page_tremendous_integration_title),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_page_tremendous_integration_title),
+        ),
+      ) as String);
+
+  @override
+  String get profile_page_tremendous_integration_description =>
+      (super.noSuchMethod(
+        Invocation.getter(#profile_page_tremendous_integration_description),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_page_tremendous_integration_description),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_connect_button => (super.noSuchMethod(
+        Invocation.getter(#tremendous_connect_button),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_connect_button),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_connecting => (super.noSuchMethod(
+        Invocation.getter(#tremendous_connecting),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_connecting),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_disconnect_button => (super.noSuchMethod(
+        Invocation.getter(#tremendous_disconnect_button),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_disconnect_button),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_connected => (super.noSuchMethod(
+        Invocation.getter(#tremendous_connected),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_connected),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_success_connected => (super.noSuchMethod(
+        Invocation.getter(#tremendous_success_connected),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_success_connected),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_success_disconnected => (super.noSuchMethod(
+        Invocation.getter(#tremendous_success_disconnected),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_success_disconnected),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_error_connection => (super.noSuchMethod(
+        Invocation.getter(#tremendous_error_connection),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_error_connection),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_title => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_title),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_title),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_subtitle => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_subtitle),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_subtitle),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_voucher_option => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_voucher_option),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_voucher_option),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_voucher_placeholder => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_voucher_placeholder),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_voucher_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_manual_option => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_manual_option),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_manual_option),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_skip_option => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_skip_option),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_skip_option),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_action_button => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_action_button),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_action_button),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_cancel_button => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_cancel_button),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_cancel_button),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_status_manual_issued => (super.noSuchMethod(
+        Invocation.getter(#compensation_status_manual_issued),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_status_manual_issued),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_manual_issued_description => (super.noSuchMethod(
+        Invocation.getter(#compensation_manual_issued_description),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_manual_issued_description),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_manual_confirm_button => (super.noSuchMethod(
+        Invocation.getter(#compensation_manual_confirm_button),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_manual_confirm_button),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_manual_change_link => (super.noSuchMethod(
+        Invocation.getter(#compensation_manual_change_link),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_manual_change_link),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_success_skipped => (super.noSuchMethod(
+        Invocation.getter(#compensation_success_skipped),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_success_skipped),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_success_manual_issued => (super.noSuchMethod(
+        Invocation.getter(#compensation_success_manual_issued),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_success_manual_issued),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_success_manual_confirmed => (super.noSuchMethod(
+        Invocation.getter(#compensation_success_manual_confirmed),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_success_manual_confirmed),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_error => (super.noSuchMethod(
+        Invocation.getter(#compensation_error),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_error),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_voucher_funding_source_label =>
+      (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_voucher_funding_source_label),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_voucher_funding_source_label),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_voucher_product_label => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_voucher_product_label),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_voucher_product_label),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_voucher_amount_label => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_voucher_amount_label),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_voucher_amount_label),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_voucher_connect_hint => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_voucher_connect_hint),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_voucher_connect_hint),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_voucher_catalog_error => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_voucher_catalog_error),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_voucher_catalog_error),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_voucher_product_required =>
+      (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_voucher_product_required),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_voucher_product_required),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_voucher_funding_source_required =>
+      (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_voucher_funding_source_required),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #compensation_dialog_voucher_funding_source_required),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_dialog_voucher_amount_invalid => (super.noSuchMethod(
+        Invocation.getter(#compensation_dialog_voucher_amount_invalid),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_dialog_voucher_amount_invalid),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_voucher_sent_snackbar => (super.noSuchMethod(
+        Invocation.getter(#compensation_voucher_sent_snackbar),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_voucher_sent_snackbar),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_voucher_retry_button => (super.noSuchMethod(
+        Invocation.getter(#compensation_voucher_retry_button),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_voucher_retry_button),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_voucher_failed_description => (super.noSuchMethod(
+        Invocation.getter(#compensation_voucher_failed_description),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_voucher_failed_description),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_status_voucher_sent => (super.noSuchMethod(
+        Invocation.getter(#compensation_status_voucher_sent),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_status_voucher_sent),
+        ),
+      ) as String);
+
+  @override
+  String get compensation_voucher_sent_description => (super.noSuchMethod(
+        Invocation.getter(#compensation_voucher_sent_description),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#compensation_voucher_sent_description),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_funding_source_balance => (super.noSuchMethod(
+        Invocation.getter(#tremendous_funding_source_balance),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_funding_source_balance),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_funding_source_invoice => (super.noSuchMethod(
+        Invocation.getter(#tremendous_funding_source_invoice),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_funding_source_invoice),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_funding_source_credit_card => (super.noSuchMethod(
+        Invocation.getter(#tremendous_funding_source_credit_card),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_funding_source_credit_card),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_funding_source_ach => (super.noSuchMethod(
+        Invocation.getter(#tremendous_funding_source_ach),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_funding_source_ach),
+        ),
+      ) as String);
+
+  @override
+  String get tremendous_funding_source_sepa => (super.noSuchMethod(
+        Invocation.getter(#tremendous_funding_source_sepa),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#tremendous_funding_source_sepa),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
@@ -11087,6 +11743,23 @@ class MockAppLocalizations extends _i1.Mock implements _i16.AppLocalizations {
           Invocation.method(
             #recommendation_count,
             [count],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String landingpage_pagebuilder_save_duplicate_widget_error_message(
+          String? widgetNames) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #landingpage_pagebuilder_save_duplicate_widget_error_message,
+          [widgetNames],
+        ),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.method(
+            #landingpage_pagebuilder_save_duplicate_widget_error_message,
+            [widgetNames],
           ),
         ),
       ) as String);
@@ -11382,6 +12055,38 @@ class MockAppLocalizations extends _i1.Mock implements _i16.AppLocalizations {
           Invocation.method(
             #promoter_detail_chart_last_days,
             [days],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String compensation_dialog_voucher_amount_min(int? min) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #compensation_dialog_voucher_amount_min,
+          [min],
+        ),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.method(
+            #compensation_dialog_voucher_amount_min,
+            [min],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String compensation_dialog_voucher_amount_max(int? max) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #compensation_dialog_voucher_amount_max,
+          [max],
+        ),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.method(
+            #compensation_dialog_voucher_amount_max,
+            [max],
           ),
         ),
       ) as String);
@@ -13218,12 +13923,114 @@ class MockRecommendationRepository extends _i1.Mock
               ),
             )),
           ) as _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>);
+
+  @override
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i47.UserRecommendation>>
+      setCompensation(
+    _i47.UserRecommendation? recommendation,
+    _i52.RecommendationCompensationStatus? status,
+  ) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #setCompensation,
+              [
+                recommendation,
+                status,
+              ],
+            ),
+            returnValue: _i12.Future<
+                    _i2.Either<_i22.DatabaseFailure,
+                        _i47.UserRecommendation>>.value(
+                _FakeEither_0<_i22.DatabaseFailure, _i47.UserRecommendation>(
+              this,
+              Invocation.method(
+                #setCompensation,
+                [
+                  recommendation,
+                  status,
+                ],
+              ),
+            )),
+          ) as _i12.Future<
+              _i2.Either<_i22.DatabaseFailure, _i47.UserRecommendation>>);
+
+  @override
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i47.UserRecommendation>>
+      createTremendousOrder(
+    _i47.UserRecommendation? recommendation,
+    _i53.TremendousOrderRequest? orderRequest,
+  ) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #createTremendousOrder,
+              [
+                recommendation,
+                orderRequest,
+              ],
+            ),
+            returnValue: _i12.Future<
+                    _i2.Either<_i22.DatabaseFailure,
+                        _i47.UserRecommendation>>.value(
+                _FakeEither_0<_i22.DatabaseFailure, _i47.UserRecommendation>(
+              this,
+              Invocation.method(
+                #createTremendousOrder,
+                [
+                  recommendation,
+                  orderRequest,
+                ],
+              ),
+            )),
+          ) as _i12.Future<
+              _i2.Either<_i22.DatabaseFailure, _i47.UserRecommendation>>);
+}
+
+/// A class which mocks [RecommendationObserverRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockRecommendationObserverRepository extends _i1.Mock
+    implements _i54.RecommendationObserverRepository {
+  MockRecommendationObserverRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i12.Stream<_i2.Either<_i22.DatabaseFailure, List<_i47.UserRecommendation>>>
+      observeRecommendations(List<String>? userRecoIDs) => (super.noSuchMethod(
+            Invocation.method(
+              #observeRecommendations,
+              [userRecoIDs],
+            ),
+            returnValue: _i12.Stream<
+                _i2.Either<_i22.DatabaseFailure,
+                    List<_i47.UserRecommendation>>>.empty(),
+          ) as _i12.Stream<
+              _i2.Either<_i22.DatabaseFailure, List<_i47.UserRecommendation>>>);
+
+  @override
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, List<String>>>
+      aggregateCompanyUserRecoIDs(_i20.CustomUser? companyUser) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #aggregateCompanyUserRecoIDs,
+              [companyUser],
+            ),
+            returnValue: _i12
+                .Future<_i2.Either<_i22.DatabaseFailure, List<String>>>.value(
+                _FakeEither_0<_i22.DatabaseFailure, List<String>>(
+              this,
+              Invocation.method(
+                #aggregateCompanyUserRecoIDs,
+                [companyUser],
+              ),
+            )),
+          ) as _i12.Future<_i2.Either<_i22.DatabaseFailure, List<String>>>);
 }
 
 /// A class which mocks [LegalsRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLegalsRepository extends _i1.Mock implements _i52.LegalsRepository {
+class MockLegalsRepository extends _i1.Mock implements _i55.LegalsRepository {
   MockLegalsRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -13248,26 +14055,26 @@ class MockLegalsRepository extends _i1.Mock implements _i52.LegalsRepository {
       ) as _i12.Future<_i2.Either<_i22.DatabaseFailure, String?>>);
 
   @override
-  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i53.Legals>> getAllLegals() =>
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i56.Legals>> getAllLegals() =>
       (super.noSuchMethod(
         Invocation.method(
           #getAllLegals,
           [],
         ),
         returnValue:
-            _i12.Future<_i2.Either<_i22.DatabaseFailure, _i53.Legals>>.value(
-                _FakeEither_0<_i22.DatabaseFailure, _i53.Legals>(
+            _i12.Future<_i2.Either<_i22.DatabaseFailure, _i56.Legals>>.value(
+                _FakeEither_0<_i22.DatabaseFailure, _i56.Legals>(
           this,
           Invocation.method(
             #getAllLegals,
             [],
           ),
         )),
-      ) as _i12.Future<_i2.Either<_i22.DatabaseFailure, _i53.Legals>>);
+      ) as _i12.Future<_i2.Either<_i22.DatabaseFailure, _i56.Legals>>);
 
   @override
   _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>> saveLegals(
-          _i53.Legals? legals) =>
+          _i56.Legals? legals) =>
       (super.noSuchMethod(
         Invocation.method(
           #saveLegals,
@@ -13289,14 +14096,14 @@ class MockLegalsRepository extends _i1.Mock implements _i52.LegalsRepository {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockDashboardRepository extends _i1.Mock
-    implements _i54.DashboardRepository {
+    implements _i57.DashboardRepository {
   MockDashboardRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
   _i12.Future<
-          _i2.Either<_i22.DatabaseFailure, List<_i55.DashboardRankedPromoter>>>
+          _i2.Either<_i22.DatabaseFailure, List<_i58.DashboardRankedPromoter>>>
       getTop3Promoters(
     List<String>? registeredPromoterIDs, {
     _i30.TimePeriod? timePeriod,
@@ -13309,8 +14116,8 @@ class MockDashboardRepository extends _i1.Mock
             ),
             returnValue: _i12.Future<
                 _i2.Either<_i22.DatabaseFailure,
-                    List<_i55.DashboardRankedPromoter>>>.value(_FakeEither_0<
-                _i22.DatabaseFailure, List<_i55.DashboardRankedPromoter>>(
+                    List<_i58.DashboardRankedPromoter>>>.value(_FakeEither_0<
+                _i22.DatabaseFailure, List<_i58.DashboardRankedPromoter>>(
               this,
               Invocation.method(
                 #getTop3Promoters,
@@ -13320,12 +14127,12 @@ class MockDashboardRepository extends _i1.Mock
             )),
           ) as _i12.Future<
               _i2.Either<_i22.DatabaseFailure,
-                  List<_i55.DashboardRankedPromoter>>>);
+                  List<_i58.DashboardRankedPromoter>>>);
 
   @override
   _i12.Future<
           _i2
-          .Either<_i22.DatabaseFailure, List<_i56.DashboardRankedLandingpage>>>
+          .Either<_i22.DatabaseFailure, List<_i59.DashboardRankedLandingpage>>>
       getTop3LandingPages(
     List<String>? landingPageIDs, {
     _i30.TimePeriod? timePeriod,
@@ -13338,8 +14145,8 @@ class MockDashboardRepository extends _i1.Mock
             ),
             returnValue: _i12.Future<
                 _i2.Either<_i22.DatabaseFailure,
-                    List<_i56.DashboardRankedLandingpage>>>.value(_FakeEither_0<
-                _i22.DatabaseFailure, List<_i56.DashboardRankedLandingpage>>(
+                    List<_i59.DashboardRankedLandingpage>>>.value(_FakeEither_0<
+                _i22.DatabaseFailure, List<_i59.DashboardRankedLandingpage>>(
               this,
               Invocation.method(
                 #getTop3LandingPages,
@@ -13349,14 +14156,14 @@ class MockDashboardRepository extends _i1.Mock
             )),
           ) as _i12.Future<
               _i2.Either<_i22.DatabaseFailure,
-                  List<_i56.DashboardRankedLandingpage>>>);
+                  List<_i59.DashboardRankedLandingpage>>>);
 }
 
 /// A class which mocks [TutorialRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTutorialRepository extends _i1.Mock
-    implements _i57.TutorialRepository {
+    implements _i60.TutorialRepository {
   MockTutorialRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -13397,11 +14204,165 @@ class MockTutorialRepository extends _i1.Mock
       ) as _i12.Future<void>);
 }
 
+/// A class which mocks [TremendousRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTremendousRepository extends _i1.Mock
+    implements _i61.TremendousRepository {
+  MockTremendousRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, String>> getAuthorizationUrl() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getAuthorizationUrl,
+          [],
+        ),
+        returnValue:
+            _i12.Future<_i2.Either<_i22.DatabaseFailure, String>>.value(
+                _FakeEither_0<_i22.DatabaseFailure, String>(
+          this,
+          Invocation.method(
+            #getAuthorizationUrl,
+            [],
+          ),
+        )),
+      ) as _i12.Future<_i2.Either<_i22.DatabaseFailure, String>>);
+
+  @override
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, bool>> isConnected() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #isConnected,
+          [],
+        ),
+        returnValue: _i12.Future<_i2.Either<_i22.DatabaseFailure, bool>>.value(
+            _FakeEither_0<_i22.DatabaseFailure, bool>(
+          this,
+          Invocation.method(
+            #isConnected,
+            [],
+          ),
+        )),
+      ) as _i12.Future<_i2.Either<_i22.DatabaseFailure, bool>>);
+
+  @override
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i62.TremendousOrganization?>>
+      getOrganization() => (super.noSuchMethod(
+            Invocation.method(
+              #getOrganization,
+              [],
+            ),
+            returnValue: _i12.Future<
+                _i2.Either<_i22.DatabaseFailure,
+                    _i62.TremendousOrganization?>>.value(_FakeEither_0<
+                _i22.DatabaseFailure, _i62.TremendousOrganization?>(
+              this,
+              Invocation.method(
+                #getOrganization,
+                [],
+              ),
+            )),
+          ) as _i12.Future<
+              _i2.Either<_i22.DatabaseFailure, _i62.TremendousOrganization?>>);
+
+  @override
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>> disconnect() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #disconnect,
+          [],
+        ),
+        returnValue:
+            _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i22.DatabaseFailure, _i2.Unit>(
+          this,
+          Invocation.method(
+            #disconnect,
+            [],
+          ),
+        )),
+      ) as _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>);
+
+  @override
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>> refreshToken() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #refreshToken,
+          [],
+        ),
+        returnValue:
+            _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i22.DatabaseFailure, _i2.Unit>(
+          this,
+          Invocation.method(
+            #refreshToken,
+            [],
+          ),
+        )),
+      ) as _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>);
+
+  @override
+  _i12.Stream<_i2.Either<_i22.DatabaseFailure, bool>>
+      observeConnectionStatus() => (super.noSuchMethod(
+            Invocation.method(
+              #observeConnectionStatus,
+              [],
+            ),
+            returnValue:
+                _i12.Stream<_i2.Either<_i22.DatabaseFailure, bool>>.empty(),
+          ) as _i12.Stream<_i2.Either<_i22.DatabaseFailure, bool>>);
+
+  @override
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, List<_i63.TremendousProduct>>>
+      getProductList() => (super.noSuchMethod(
+            Invocation.method(
+              #getProductList,
+              [],
+            ),
+            returnValue: _i12.Future<
+                _i2.Either<_i22.DatabaseFailure,
+                    List<_i63.TremendousProduct>>>.value(_FakeEither_0<
+                _i22.DatabaseFailure, List<_i63.TremendousProduct>>(
+              this,
+              Invocation.method(
+                #getProductList,
+                [],
+              ),
+            )),
+          ) as _i12.Future<
+              _i2.Either<_i22.DatabaseFailure, List<_i63.TremendousProduct>>>);
+
+  @override
+  _i12.Future<
+          _i2.Either<_i22.DatabaseFailure, List<_i64.TremendousFundingSource>>>
+      getFundingSourcesList() => (super.noSuchMethod(
+            Invocation.method(
+              #getFundingSourcesList,
+              [],
+            ),
+            returnValue: _i12.Future<
+                _i2.Either<_i22.DatabaseFailure,
+                    List<_i64.TremendousFundingSource>>>.value(_FakeEither_0<
+                _i22.DatabaseFailure, List<_i64.TremendousFundingSource>>(
+              this,
+              Invocation.method(
+                #getFundingSourcesList,
+                [],
+              ),
+            )),
+          ) as _i12.Future<
+              _i2.Either<_i22.DatabaseFailure,
+                  List<_i64.TremendousFundingSource>>>);
+}
+
 /// A class which mocks [PagebuilderSectionTemplateRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPagebuilderSectionTemplateRepository extends _i1.Mock
-    implements _i58.PagebuilderSectionTemplateRepository {
+    implements _i65.PagebuilderSectionTemplateRepository {
   MockPagebuilderSectionTemplateRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -13409,7 +14370,7 @@ class MockPagebuilderSectionTemplateRepository extends _i1.Mock
   @override
   _i12.Future<
       _i2.Either<_i22.DatabaseFailure,
-          List<_i59.PagebuilderSectionTemplateMeta>>> getAllTemplateMetas() =>
+          List<_i66.PagebuilderSectionTemplateMeta>>> getAllTemplateMetas() =>
       (super.noSuchMethod(
         Invocation.method(
           #getAllTemplateMetas,
@@ -13417,8 +14378,8 @@ class MockPagebuilderSectionTemplateRepository extends _i1.Mock
         ),
         returnValue: _i12.Future<
             _i2.Either<_i22.DatabaseFailure,
-                List<_i59.PagebuilderSectionTemplateMeta>>>.value(_FakeEither_0<
-            _i22.DatabaseFailure, List<_i59.PagebuilderSectionTemplateMeta>>(
+                List<_i66.PagebuilderSectionTemplateMeta>>>.value(_FakeEither_0<
+            _i22.DatabaseFailure, List<_i66.PagebuilderSectionTemplateMeta>>(
           this,
           Invocation.method(
             #getAllTemplateMetas,
@@ -13427,10 +14388,10 @@ class MockPagebuilderSectionTemplateRepository extends _i1.Mock
         )),
       ) as _i12.Future<
           _i2.Either<_i22.DatabaseFailure,
-              List<_i59.PagebuilderSectionTemplateMeta>>>);
+              List<_i66.PagebuilderSectionTemplateMeta>>>);
 
   @override
-  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i60.PagebuilderSectionTemplate>>
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i67.PagebuilderSectionTemplate>>
       getTemplateById(String? id) => (super.noSuchMethod(
             Invocation.method(
               #getTemplateById,
@@ -13438,8 +14399,8 @@ class MockPagebuilderSectionTemplateRepository extends _i1.Mock
             ),
             returnValue: _i12.Future<
                 _i2.Either<_i22.DatabaseFailure,
-                    _i60.PagebuilderSectionTemplate>>.value(_FakeEither_0<
-                _i22.DatabaseFailure, _i60.PagebuilderSectionTemplate>(
+                    _i67.PagebuilderSectionTemplate>>.value(_FakeEither_0<
+                _i22.DatabaseFailure, _i67.PagebuilderSectionTemplate>(
               this,
               Invocation.method(
                 #getTemplateById,
@@ -13448,21 +14409,21 @@ class MockPagebuilderSectionTemplateRepository extends _i1.Mock
             )),
           ) as _i12.Future<
               _i2
-              .Either<_i22.DatabaseFailure, _i60.PagebuilderSectionTemplate>>);
+              .Either<_i22.DatabaseFailure, _i67.PagebuilderSectionTemplate>>);
 }
 
 /// A class which mocks [PagebuilderSectionTemplateUploadRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPagebuilderSectionTemplateUploadRepository extends _i1.Mock
-    implements _i61.PagebuilderSectionTemplateUploadRepository {
+    implements _i68.PagebuilderSectionTemplateUploadRepository {
   MockPagebuilderSectionTemplateUploadRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
   _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>> uploadTemplate(
-          _i62.PagebuilderSectionTemplateUpload? template) =>
+          _i69.PagebuilderSectionTemplateUpload? template) =>
       (super.noSuchMethod(
         Invocation.method(
           #uploadTemplate,
@@ -13481,7 +14442,7 @@ class MockPagebuilderSectionTemplateUploadRepository extends _i1.Mock
 
   @override
   _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>> editTemplate(
-          _i63.PagebuilderSectionTemplateEdit? template) =>
+          _i70.PagebuilderSectionTemplateEdit? template) =>
       (super.noSuchMethod(
         Invocation.method(
           #editTemplate,
@@ -13502,7 +14463,7 @@ class MockPagebuilderSectionTemplateUploadRepository extends _i1.Mock
 /// A class which mocks [ConsentRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockConsentRepository extends _i1.Mock implements _i64.ConsentRepository {
+class MockConsentRepository extends _i1.Mock implements _i71.ConsentRepository {
   MockConsentRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -13953,13 +14914,13 @@ class MockUser extends _i1.Mock implements _i4.User {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPagebuilderRepository extends _i1.Mock
-    implements _i65.PagebuilderRepository {
+    implements _i72.PagebuilderRepository {
   MockPagebuilderRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i66.PageBuilderPage>>
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i73.PageBuilderPage>>
       getLandingPageContent(String? id) => (super.noSuchMethod(
             Invocation.method(
               #getLandingPageContent,
@@ -13967,8 +14928,8 @@ class MockPagebuilderRepository extends _i1.Mock
             ),
             returnValue: _i12.Future<
                     _i2
-                    .Either<_i22.DatabaseFailure, _i66.PageBuilderPage>>.value(
-                _FakeEither_0<_i22.DatabaseFailure, _i66.PageBuilderPage>(
+                    .Either<_i22.DatabaseFailure, _i73.PageBuilderPage>>.value(
+                _FakeEither_0<_i22.DatabaseFailure, _i73.PageBuilderPage>(
               this,
               Invocation.method(
                 #getLandingPageContent,
@@ -13976,11 +14937,11 @@ class MockPagebuilderRepository extends _i1.Mock
               ),
             )),
           ) as _i12
-              .Future<_i2.Either<_i22.DatabaseFailure, _i66.PageBuilderPage>>);
+              .Future<_i2.Either<_i22.DatabaseFailure, _i73.PageBuilderPage>>);
 
   @override
   _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>
-      saveLandingPageContent(_i66.PageBuilderPage? page) => (super.noSuchMethod(
+      saveLandingPageContent(_i73.PageBuilderPage? page) => (super.noSuchMethod(
             Invocation.method(
               #saveLandingPageContent,
               [page],
@@ -14001,26 +14962,26 @@ class MockPagebuilderRepository extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPagebuilderConfigMenuCubit extends _i1.Mock
-    implements _i67.PagebuilderConfigMenuCubit {
+    implements _i74.PagebuilderConfigMenuCubit {
   MockPagebuilderConfigMenuCubit() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i67.PagebuilderConfigMenuState get state => (super.noSuchMethod(
+  _i74.PagebuilderConfigMenuState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i17.dummyValue<_i67.PagebuilderConfigMenuState>(
+        returnValue: _i17.dummyValue<_i74.PagebuilderConfigMenuState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i67.PagebuilderConfigMenuState);
+      ) as _i74.PagebuilderConfigMenuState);
 
   @override
-  _i12.Stream<_i67.PagebuilderConfigMenuState> get stream =>
+  _i12.Stream<_i74.PagebuilderConfigMenuState> get stream =>
       (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i12.Stream<_i67.PagebuilderConfigMenuState>.empty(),
-      ) as _i12.Stream<_i67.PagebuilderConfigMenuState>);
+        returnValue: _i12.Stream<_i74.PagebuilderConfigMenuState>.empty(),
+      ) as _i12.Stream<_i74.PagebuilderConfigMenuState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -14029,7 +14990,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
       ) as bool);
 
   @override
-  void openConfigMenu(_i68.PageBuilderWidget? model) => super.noSuchMethod(
+  void openConfigMenu(_i75.PageBuilderWidget? model) => super.noSuchMethod(
         Invocation.method(
           #openConfigMenu,
           [model],
@@ -14038,7 +14999,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
       );
 
   @override
-  void openSectionConfigMenu(_i69.PageBuilderSection? model) =>
+  void openSectionConfigMenu(_i76.PageBuilderSection? model) =>
       super.noSuchMethod(
         Invocation.method(
           #openSectionConfigMenu,
@@ -14066,7 +15027,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
       );
 
   @override
-  void emit(_i67.PagebuilderConfigMenuState? state) => super.noSuchMethod(
+  void emit(_i74.PagebuilderConfigMenuState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -14075,7 +15036,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i70.Change<_i67.PagebuilderConfigMenuState>? change) =>
+  void onChange(_i77.Change<_i74.PagebuilderConfigMenuState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -14131,7 +15092,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPagebuilderSelectionCubit extends _i1.Mock
-    implements _i71.PagebuilderSelectionCubit {
+    implements _i78.PagebuilderSelectionCubit {
   MockPagebuilderSelectionCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -14167,7 +15128,7 @@ class MockPagebuilderSelectionCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i70.Change<String?>? change) => super.noSuchMethod(
+  void onChange(_i77.Change<String?>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -14222,7 +15183,7 @@ class MockPagebuilderSelectionCubit extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockRecommendationManagerTileCubit extends _i1.Mock
-    implements _i72.RecommendationManagerTileCubit {
+    implements _i79.RecommendationManagerTileCubit {
   MockRecommendationManagerTileCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -14252,20 +15213,20 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
       ) as List<String>);
 
   @override
-  _i72.RecommendationManagerTileState get state => (super.noSuchMethod(
+  _i79.RecommendationManagerTileState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i17.dummyValue<_i72.RecommendationManagerTileState>(
+        returnValue: _i17.dummyValue<_i79.RecommendationManagerTileState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i72.RecommendationManagerTileState);
+      ) as _i79.RecommendationManagerTileState);
 
   @override
-  _i12.Stream<_i72.RecommendationManagerTileState> get stream =>
+  _i12.Stream<_i79.RecommendationManagerTileState> get stream =>
       (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i12.Stream<_i72.RecommendationManagerTileState>.empty(),
-      ) as _i12.Stream<_i72.RecommendationManagerTileState>);
+        returnValue: _i12.Stream<_i79.RecommendationManagerTileState>.empty(),
+      ) as _i12.Stream<_i79.RecommendationManagerTileState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -14363,6 +15324,38 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
       );
 
   @override
+  void setCompensation(
+    _i47.UserRecommendation? recommendation,
+    _i52.RecommendationCompensationStatus? status,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #setCompensation,
+          [
+            recommendation,
+            status,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void setCompensationVoucher(
+    _i47.UserRecommendation? recommendation,
+    _i53.TremendousOrderRequest? orderRequest,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #setCompensationVoucher,
+          [
+            recommendation,
+            orderRequest,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   _i12.Future<String> getUserDisplayName(String? userID) => (super.noSuchMethod(
         Invocation.method(
           #getUserDisplayName,
@@ -14378,7 +15371,7 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
       ) as _i12.Future<String>);
 
   @override
-  void emit(_i72.RecommendationManagerTileState? state) => super.noSuchMethod(
+  void emit(_i79.RecommendationManagerTileState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -14387,7 +15380,7 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i70.Change<_i72.RecommendationManagerTileState>? change) =>
+  void onChange(_i77.Change<_i79.RecommendationManagerTileState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,

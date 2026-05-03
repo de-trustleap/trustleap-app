@@ -35,7 +35,7 @@ void main() {
         userID: "1",
         statusLevel: StatusLevel.recommendationSend,
         statusTimestamps: null,
-        promoterImageDownloadURL: null);
+        promoterImageDownloadURL: null, compensation: null);
 
     test("should return unit when saving of recommendation was successful",
         () async {
@@ -81,7 +81,7 @@ void main() {
         userID: "1",
         statusLevel: StatusLevel.recommendationSend,
         statusTimestamps: null,
-        promoterImageDownloadURL: null);
+        promoterImageDownloadURL: null, compensation: null);
     final recommendations = [
       UserRecommendation(
           id: UniqueID.fromUniqueString("1"),
@@ -165,7 +165,7 @@ void main() {
         userID: "1",
         statusLevel: StatusLevel.contactFormSent,
         statusTimestamps: {0: date, 1: date, 2: date},
-        promoterImageDownloadURL: null);
+        promoterImageDownloadURL: null, compensation: null);
     final userRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("1"),
         recoID: "1",
@@ -215,7 +215,7 @@ void main() {
         userID: "1",
         statusLevel: StatusLevel.contactFormSent,
         statusTimestamps: {0: date, 1: date, 2: date},
-        promoterImageDownloadURL: null);
+        promoterImageDownloadURL: null, compensation: null);
     final userRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("1"),
         recoID: "1",
@@ -271,7 +271,8 @@ void main() {
           recommendationType: RecommendationType.personalized,
           campaignName: null,
           campaignDurationDays: null,
-          statusCounts: null),
+          statusCounts: null,
+          compensation: null),
     ];
 
     test("should return items when call was successful", () async {
@@ -315,7 +316,7 @@ void main() {
         userID: "1",
         statusLevel: StatusLevel.contactFormSent,
         statusTimestamps: {0: date, 1: date, 2: date},
-        promoterImageDownloadURL: null);
+        promoterImageDownloadURL: null, compensation: null);
     final userRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("1"),
         recoID: "1",
@@ -364,7 +365,7 @@ void main() {
         userID: "1",
         statusLevel: StatusLevel.contactFormSent,
         statusTimestamps: {0: date, 1: date, 2: date},
-        promoterImageDownloadURL: null);
+        promoterImageDownloadURL: null, compensation: null);
     final userRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("1"),
         recoID: "1",
@@ -412,7 +413,7 @@ void main() {
         userID: "1",
         statusLevel: StatusLevel.contactFormSent,
         statusTimestamps: {0: date, 1: date, 2: date},
-        promoterImageDownloadURL: null);
+        promoterImageDownloadURL: null, compensation: null);
     final userRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("1"),
         recoID: "1",
@@ -462,7 +463,7 @@ void main() {
         userID: "1",
         statusLevel: StatusLevel.contactFormSent,
         statusTimestamps: {0: date, 1: date, 2: date},
-        promoterImageDownloadURL: null);
+        promoterImageDownloadURL: null, compensation: null);
     final userRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("1"),
         recoID: "1",
@@ -671,7 +672,7 @@ void main() {
         userID: "1",
         statusLevel: StatusLevel.contactFormSent,
         statusTimestamps: {0: date, 1: date, 2: date},
-        promoterImageDownloadURL: null);
+        promoterImageDownloadURL: null, compensation: null);
     
     final activeUserRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("1"),
@@ -694,7 +695,7 @@ void main() {
         userID: "1",
         statusLevel: StatusLevel.successful,
         statusTimestamps: {0: date, 5: date},
-        promoterImageDownloadURL: null);
+        promoterImageDownloadURL: null, compensation: null);
     
     final archivedUserRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("2"),

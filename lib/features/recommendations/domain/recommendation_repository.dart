@@ -4,8 +4,11 @@ import 'package:finanzbegleiter/features/recommendations/domain/archived_recomme
 import 'package:finanzbegleiter/features/landing_pages/domain/last_viewed.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/draft_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/promoter_recommendations.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_compensation.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
+import 'package:finanzbegleiter/features/tremendous/domain/tremendous_order_request.dart';
+
 
 abstract class RecommendationRepository {
   Future<Either<DatabaseFailure, Unit>> saveRecommendation(
@@ -36,4 +39,8 @@ abstract class RecommendationRepository {
   Future<Either<DatabaseFailure, Unit>> createDraftRecommendation(
       DraftRecommendationItem draft);
   Future<Either<DatabaseFailure, Unit>> deleteDraftRecommendation(String id);
+  Future<Either<DatabaseFailure, UserRecommendation>> setCompensation(
+      UserRecommendation recommendation, RecommendationCompensationStatus status);
+  Future<Either<DatabaseFailure, UserRecommendation>> createTremendousOrder(
+      UserRecommendation recommendation, TremendousOrderRequest orderRequest);
 }

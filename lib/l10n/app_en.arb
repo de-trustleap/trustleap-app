@@ -4742,5 +4742,191 @@
     "pagebuilder_faq_default_answer_3": "Here comes the answer to the third question.",
     "@pagebuilder_faq_default_answer_3": {
         "description": "FAQ - default answer text 3"
+    },
+    "profile_page_tremendous_integration_title": "Tremendous Integration",
+    "@profile_page_tremendous_integration_title": {
+        "description": "Title of the Tremendous integration in profile"
+    },
+    "profile_page_tremendous_integration_description": "Connect your Tremendous account to automatically send gift cards to promoters as compensation.",
+    "@profile_page_tremendous_integration_description": {
+        "description": "Description of the Tremendous integration in profile"
+    },
+    "tremendous_connect_button": "Connect Tremendous",
+    "@tremendous_connect_button": {
+        "description": "Button text to connect Tremendous"
+    },
+    "tremendous_connecting": "Connecting...",
+    "@tremendous_connecting": {
+        "description": "Button text while connecting to Tremendous"
+    },
+    "tremendous_disconnect_button": "Disconnect",
+    "@tremendous_disconnect_button": {
+        "description": "Button text to disconnect from Tremendous"
+    },
+    "tremendous_connected": "Tremendous account connected",
+    "@tremendous_connected": {
+        "description": "Text when Tremendous is connected"
+    },
+    "tremendous_success_connected": "Tremendous connected successfully!",
+    "@tremendous_success_connected": {
+        "description": "Snackbar on successful Tremendous connection"
+    },
+    "tremendous_success_disconnected": "Tremendous disconnected",
+    "@tremendous_success_disconnected": {
+        "description": "Snackbar on successful Tremendous disconnect"
+    },
+    "tremendous_error_connection": "Error connecting to Tremendous",
+    "@tremendous_error_connection": {
+        "description": "Snackbar on Tremendous connection error"
+    },
+    "compensation_dialog_title": "Recommendation completed",
+    "@compensation_dialog_title": {
+        "description": "Title of the compensation dialog"
+    },
+    "compensation_dialog_subtitle": "How would you like to compensate the promoter?",
+    "@compensation_dialog_subtitle": {
+        "description": "Subtitle of the compensation dialog"
+    },
+    "compensation_dialog_voucher_option": "Send voucher via Tremendous",
+    "@compensation_dialog_voucher_option": {
+        "description": "Option for voucher compensation"
+    },
+    "compensation_dialog_voucher_placeholder": "Tremendous integration coming soon",
+    "@compensation_dialog_voucher_placeholder": {
+        "description": "Placeholder text in voucher tab"
+    },
+    "compensation_dialog_manual_option": "Compensate manually",
+    "@compensation_dialog_manual_option": {
+        "description": "Option for manual compensation"
+    },
+    "compensation_dialog_skip_option": "No compensation",
+    "@compensation_dialog_skip_option": {
+        "description": "Option to skip compensation"
+    },
+    "compensation_dialog_action_button": "Confirm",
+    "@compensation_dialog_action_button": {
+        "description": "Confirm button in compensation dialog"
+    },
+    "compensation_dialog_cancel_button": "Cancel",
+    "@compensation_dialog_cancel_button": {
+        "description": "Cancel button in compensation dialog"
+    },
+    "compensation_status_manual_issued": "Compensation pending",
+    "@compensation_status_manual_issued": {
+        "description": "Status text when manual compensation is pending"
+    },
+    "compensation_manual_issued_description": "You have chosen to compensate the promoter manually. Once the compensation has been paid out, you can archive the recommendation.",
+    "@compensation_manual_issued_description": {
+        "description": "Description text in the manualIssued block"
+    },
+    "compensation_manual_confirm_button": "Compensation paid out",
+    "@compensation_manual_confirm_button": {
+        "description": "Button to confirm manual compensation has been paid and archive"
+    },
+    "compensation_manual_change_link": "Change compensation option",
+    "@compensation_manual_change_link": {
+        "description": "Link to reopen the compensation dialog"
+    },
+    "compensation_success_skipped": "Recommendation archived",
+    "@compensation_success_skipped": {
+        "description": "Snackbar when recommendation is archived without compensation"
+    },
+    "compensation_success_manual_issued": "Compensation marked as issued",
+    "@compensation_success_manual_issued": {
+        "description": "Snackbar when manual compensation is issued"
+    },
+    "compensation_success_manual_confirmed": "Compensation confirmed – recommendation archived",
+    "@compensation_success_manual_confirmed": {
+        "description": "Snackbar when manual compensation is confirmed and archived"
+    },
+    "compensation_error": "Error setting compensation status",
+    "@compensation_error": {
+        "description": "Snackbar on error setting compensation status"
+    },
+    "compensation_dialog_voucher_funding_source_label": "Funding source",
+    "@compensation_dialog_voucher_funding_source_label": {
+        "description": "Label for funding source dropdown in voucher dialog"
+    },
+    "compensation_dialog_voucher_product_label": "Product",
+    "@compensation_dialog_voucher_product_label": {
+        "description": "Label for product dropdown in voucher dialog"
+    },
+    "compensation_dialog_voucher_amount_label": "Amount",
+    "@compensation_dialog_voucher_amount_label": {
+        "description": "Label for amount input in voucher dialog"
+    },
+    "compensation_dialog_voucher_connect_hint": "Connect Tremendous to send vouchers directly to promoters.",
+    "@compensation_dialog_voucher_connect_hint": {
+        "description": "Hint when Tremendous is not connected"
+    },
+    "compensation_dialog_voucher_catalog_error": "Failed to load Tremendous products.",
+    "@compensation_dialog_voucher_catalog_error": {
+        "description": "Error message when product catalog could not be loaded"
+    },
+    "compensation_dialog_voucher_product_required": "Please select a product.",
+    "@compensation_dialog_voucher_product_required": {
+        "description": "Validation error when no product selected"
+    },
+    "compensation_dialog_voucher_funding_source_required": "Please select a funding source.",
+    "@compensation_dialog_voucher_funding_source_required": {
+        "description": "Validation error when no funding source selected"
+    },
+    "compensation_dialog_voucher_amount_invalid": "Please enter a valid amount.",
+    "@compensation_dialog_voucher_amount_invalid": {
+        "description": "Validation error when amount is invalid"
+    },
+    "compensation_dialog_voucher_amount_min": "The minimum amount for this product is €{min}.",
+    "@compensation_dialog_voucher_amount_min": {
+        "description": "Validation error when amount is below product minimum",
+        "placeholders": {
+            "min": { "type": "int" }
+        }
+    },
+    "compensation_dialog_voucher_amount_max": "The maximum amount is €{max}.",
+    "@compensation_dialog_voucher_amount_max": {
+        "description": "Validation error when amount exceeds maximum",
+        "placeholders": {
+            "max": { "type": "int" }
+        }
+    },
+    "compensation_voucher_sent_snackbar": "Voucher is being sent",
+    "@compensation_voucher_sent_snackbar": {
+        "description": "Snackbar when voucher order is successfully created"
+    },
+    "compensation_voucher_retry_button": "Try again",
+    "@compensation_voucher_retry_button": {
+        "description": "Button to retry loading catalog or voucher order"
+    },
+    "compensation_voucher_failed_description": "The voucher could not be sent. Please try again or choose a different compensation option.",
+    "@compensation_voucher_failed_description": {
+        "description": "Description when voucher order has failed"
+    },
+    "compensation_status_voucher_sent": "Voucher is being sent",
+    "@compensation_status_voucher_sent": {
+        "description": "Status text when voucher order has been created and is awaiting delivery"
+    },
+    "compensation_voucher_sent_description": "The voucher has been sent and is awaiting delivery. This may take a few minutes.",
+    "@compensation_voucher_sent_description": {
+        "description": "Description in tile when voucher order has been created and is awaiting delivery"
+    },
+    "tremendous_funding_source_balance": "Balance",
+    "@tremendous_funding_source_balance": {
+        "description": "Tremendous Funding Source method: balance"
+    },
+    "tremendous_funding_source_invoice": "Invoice",
+    "@tremendous_funding_source_invoice": {
+        "description": "Tremendous Funding Source method: invoice"
+    },
+    "tremendous_funding_source_credit_card": "Credit card",
+    "@tremendous_funding_source_credit_card": {
+        "description": "Tremendous Funding Source method: credit_card"
+    },
+    "tremendous_funding_source_ach": "ACH transfer",
+    "@tremendous_funding_source_ach": {
+        "description": "Tremendous Funding Source method: ach"
+    },
+    "tremendous_funding_source_sepa": "SEPA transfer",
+    "@tremendous_funding_source_sepa": {
+        "description": "Tremendous Funding Source method: sepa"
     }
 }

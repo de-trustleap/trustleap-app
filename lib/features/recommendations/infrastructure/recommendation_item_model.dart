@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/campaign_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/infrastructure/recommendation_compensation_model.dart';
 import 'package:finanzbegleiter/features/recommendations/infrastructure/recommendation_status_counts_model.dart';
 
 class RecommendationItemModel extends Equatable {
@@ -25,6 +26,7 @@ class RecommendationItemModel extends Equatable {
   final DateTime createdAt;
   final DateTime expiresAt;
   final DateTime? lastUpdated;
+  final Map<String, dynamic>? compensation;
 
   const RecommendationItemModel(
       {required this.id,
@@ -44,7 +46,8 @@ class RecommendationItemModel extends Equatable {
       required this.campaignDurationDays,
       required this.expiresAt,
       required this.createdAt,
-      required this.lastUpdated});
+      required this.lastUpdated,
+      required this.compensation});
 
   RecommendationItemModel copyWith(
       {String? id,
@@ -64,7 +67,8 @@ class RecommendationItemModel extends Equatable {
       int? campaignDurationDays,
       DateTime? expiresAt,
       DateTime? createdAt,
-      DateTime? lastUpdated}) {
+      DateTime? lastUpdated,
+      Map<String, dynamic>? compensation}) {
     return RecommendationItemModel(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -84,7 +88,8 @@ class RecommendationItemModel extends Equatable {
         campaignDurationDays: campaignDurationDays ?? this.campaignDurationDays,
         expiresAt: expiresAt ?? this.expiresAt,
         createdAt: createdAt ?? this.createdAt,
-        lastUpdated: lastUpdated ?? this.lastUpdated);
+        lastUpdated: lastUpdated ?? this.lastUpdated,
+        compensation: compensation ?? this.compensation);
   }
 
   Map<String, dynamic> toMap() {
@@ -112,6 +117,7 @@ class RecommendationItemModel extends Equatable {
       'expiresAt': expiresAt.toIso8601String(),
       'createdAt': createdAt.toIso8601String(),
       'lastUpdated': lastUpdated?.toIso8601String(),
+      'compensation': compensation,
     };
   }
 
@@ -157,6 +163,9 @@ class RecommendationItemModel extends Equatable {
         createdAt: (map['createdAt'] as Timestamp).toDate(),
         lastUpdated: map['lastUpdated'] != null
             ? (map['lastUpdated'] as Timestamp).toDate()
+            : null,
+        compensation: map['compensation'] != null
+            ? Map<String, dynamic>.from(map['compensation'] as Map)
             : null);
   }
 
@@ -201,6 +210,9 @@ class RecommendationItemModel extends Equatable {
         statusTimestamps: statusTimestamps,
         userID: userID,
         promoterImageDownloadURL: promoterImageDownloadURL,
+        compensation: compensation != null
+            ? RecommendationCompensationModel.fromMap(compensation!).toDomain()
+            : null,
         expiresAt: expiresAt,
         createdAt: createdAt,
         lastUpdated: lastUpdated);
@@ -231,7 +243,8 @@ class RecommendationItemModel extends Equatable {
           campaignDurationDays: recommendation.campaignDurationDays,
           expiresAt: recommendation.expiresAt,
           createdAt: recommendation.createdAt,
-          lastUpdated: recommendation.lastUpdated);
+          lastUpdated: recommendation.lastUpdated,
+          compensation: null);
     }
     final personalized = recommendation as PersonalizedRecommendationItem;
     return RecommendationItemModel(
@@ -252,7 +265,12 @@ class RecommendationItemModel extends Equatable {
         campaignDurationDays: null,
         expiresAt: personalized.expiresAt,
         createdAt: personalized.createdAt,
-        lastUpdated: personalized.lastUpdated);
+        lastUpdated: personalized.lastUpdated,
+        compensation: personalized.compensation != null
+            ? RecommendationCompensationModel.fromDomain(
+                    personalized.compensation!)
+                .toMap()
+            : null);
   }
 
   RecommendationType? _getRecommendationTypeFromString(String? type) {
@@ -288,5 +306,6 @@ class RecommendationItemModel extends Equatable {
         expiresAt,
         createdAt,
         lastUpdated,
+        compensation,
       ];
 }

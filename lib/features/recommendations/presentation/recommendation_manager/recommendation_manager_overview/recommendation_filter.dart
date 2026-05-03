@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_compensation.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_manager_expandable_filter.dart';
@@ -17,7 +18,7 @@ class RecommendationFilter {
         final personalizedReco = reco is PersonalizedRecommendationItem ? reco : null;
         final statusLevel = personalizedReco?.statusLevel ?? StatusLevel.recommendationSend;
         return _statusFilterMatches(
-            filterStates.statusFilterState, statusLevel);
+            filterStates.statusFilterState, statusLevel, personalizedReco);
       }
       return true;
     }).toList();
@@ -114,8 +115,9 @@ class RecommendationFilter {
         : b.compareTo(a);
   }
 
-  static bool _statusFilterMatches(
-      RecommendationStatusFilterState filter, StatusLevel statusLevel) {
+  static bool _statusFilterMatches(RecommendationStatusFilterState filter,
+      StatusLevel statusLevel, PersonalizedRecommendationItem? personalizedReco) {
+    final compensationStatus = personalizedReco?.compensation?.status;
     switch (filter) {
       case RecommendationStatusFilterState.recommendationSent:
         return statusLevel == StatusLevel.recommendationSend;
@@ -124,7 +126,13 @@ class RecommendationFilter {
       case RecommendationStatusFilterState.contactFormSent:
         return statusLevel == StatusLevel.contactFormSent;
       case RecommendationStatusFilterState.appointment:
-        return statusLevel == StatusLevel.appointment;
+        return statusLevel == StatusLevel.appointment &&
+            compensationStatus != RecommendationCompensationStatus.manualIssued &&
+            compensationStatus != RecommendationCompensationStatus.voucherSent;
+      case RecommendationStatusFilterState.manualIssued:
+        return compensationStatus == RecommendationCompensationStatus.manualIssued;
+      case RecommendationStatusFilterState.voucherSent:
+        return compensationStatus == RecommendationCompensationStatus.voucherSent;
       case RecommendationStatusFilterState.successful:
         return statusLevel == StatusLevel.successful;
       case RecommendationStatusFilterState.failed:

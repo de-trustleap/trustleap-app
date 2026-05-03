@@ -19,30 +19,11 @@ class RecommendationManagerLoadingState extends RecommendationManagerState
 class RecommendationGetRecosSuccessState extends RecommendationManagerState
     with EquatableMixin {
   final List<UserRecommendation> recoItems;
-  final bool showSetAppointmentSnackBar;
-  final bool showFinishedSnackBar;
-  final bool showFavoriteSnackbar;
-  final bool showPrioritySnackbar;
-  final bool showNotesSnackbar;
 
-  RecommendationGetRecosSuccessState({
-    required this.recoItems,
-    required this.showSetAppointmentSnackBar,
-    required this.showFinishedSnackBar,
-    required this.showFavoriteSnackbar,
-    required this.showPrioritySnackbar,
-    required this.showNotesSnackbar,
-  });
+  RecommendationGetRecosSuccessState({required this.recoItems});
 
   @override
-  List<Object?> get props => [
-        recoItems,
-        showSetAppointmentSnackBar,
-        showFinishedSnackBar,
-        showFavoriteSnackbar,
-        showPrioritySnackbar,
-        showNotesSnackbar
-      ];
+  List<Object?> get props => [recoItems];
 }
 
 class RecommendationGetRecosFailureState extends RecommendationManagerState
@@ -56,24 +37,6 @@ class RecommendationGetRecosFailureState extends RecommendationManagerState
 }
 
 class RecommendationGetRecosNoRecosState extends RecommendationManagerState
-    with EquatableMixin {
-  @override
-  List<Object?> get props => [];
-}
-
-
-
-class RecommendationDeleteRecoFailureState extends RecommendationManagerState
-    with EquatableMixin {
-  final DatabaseFailure failure;
-
-  RecommendationDeleteRecoFailureState({required this.failure});
-
-  @override
-  List<Object?> get props => [failure];
-}
-
-class RecommendationDeleteRecoSuccessState extends RecommendationManagerState
     with EquatableMixin {
   @override
   List<Object?> get props => [];

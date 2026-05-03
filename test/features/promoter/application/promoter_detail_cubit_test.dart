@@ -96,6 +96,7 @@ void main() {
         statusTimestamps: {0: DateTime.now()},
         userID: "user-1",
         promoterImageDownloadURL: null,
+        compensation: null,
       ),
     );
   }

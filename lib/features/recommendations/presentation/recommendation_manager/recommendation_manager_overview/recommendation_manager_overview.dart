@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/core/widgets/shared_elements/app_bottom_sheet.dart';
 import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
+import 'package:finanzbegleiter/features/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
@@ -11,6 +12,7 @@ import 'package:finanzbegleiter/features/recommendations/presentation/recommenda
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/recommendation_manager_filter_bottom_sheet.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/recommendation_manager_overview/personalized_recommendation_list.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/campaign_recommendation_overview/campaign_recommendation_list.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -22,11 +24,10 @@ class RecommendationManagerOverview extends StatefulWidget {
   final Function(UserRecommendation) onAppointmentPressed;
   final Function(UserRecommendation) onFinishedPressed;
   final Function(UserRecommendation) onFailedPressed;
-  final Function(String, String, String) onDeletePressed;
-  final Function(String, String, String) onCampaignDeletePressed;
+  final Function(UserRecommendation) onDeletePressed;
+  final Function(UserRecommendation) onCampaignDeletePressed;
   final Function(UserRecommendation) onFavoritePressed;
   final Function(UserRecommendation) onPriorityChanged;
-  final Function(UserRecommendation, bool, bool, bool, bool) onUpdate;
   const RecommendationManagerOverview(
       {super.key,
       required this.recommendations,
@@ -37,8 +38,7 @@ class RecommendationManagerOverview extends StatefulWidget {
       required this.onDeletePressed,
       required this.onCampaignDeletePressed,
       required this.onFavoritePressed,
-      required this.onPriorityChanged,
-      required this.onUpdate});
+      required this.onPriorityChanged});
 
   @override
   State<RecommendationManagerOverview> createState() =>
@@ -165,21 +165,40 @@ class _RecommendationManagerOverviewState
     _performSearch();
   }
 
+  void _reapplyFavoriteFilter() {
+    setState(() {
+      _filteredRecommendations = RecommendationFilter.applyFilters(
+        items: _searchFilteredRecommendations,
+        filterStates: _currentFilterStates,
+        favoriteRecommendationIDs: Modular.get<RecommendationManagerTileCubit>()
+            .currentFavoriteRecommendationIDs,
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocListener<RecommendationManagerTileCubit, RecommendationManagerTileState>(
-      bloc: Modular.get<RecommendationManagerTileCubit>(),
-      listener: (context, state) {
-        if (state is RecommendationManagerTileFavoriteUpdatedState) {
-          setState(() {
-            _filteredRecommendations = RecommendationFilter.applyFilters(
-              items: _searchFilteredRecommendations,
-              filterStates: _currentFilterStates,
-              favoriteRecommendationIDs: Modular.get<RecommendationManagerTileCubit>().currentFavoriteRecommendationIDs,
-            );
-          });
-        }
-      },
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<RecommendationManagerTileCubit,
+            RecommendationManagerTileState>(
+          bloc: Modular.get<RecommendationManagerTileCubit>(),
+          listener: (context, state) {
+            if (state is RecommendationManagerTileFavoriteUpdatedState) {
+              _reapplyFavoriteFilter();
+            }
+          },
+        ),
+        BlocListener<UserObserverCubit, UserObserverState>(
+          bloc: Modular.get<UserObserverCubit>(),
+          listenWhen: (prev, curr) =>
+              curr is UserObserverSuccess &&
+              prev is UserObserverSuccess &&
+              !listEquals(prev.user.favoriteRecommendationIDs,
+                  curr.user.favoriteRecommendationIDs),
+          listener: (context, _) => _reapplyFavoriteFilter(),
+        ),
+      ],
       child: CardContainer(
         maxWidth: 1200,
         child: Column(
@@ -213,7 +232,6 @@ class _RecommendationManagerOverviewState
                 searchQuery: _searchController.text,
                 onDeletePressed: widget.onCampaignDeletePressed,
                 onFavoritePressed: widget.onFavoritePressed,
-                onUpdate: widget.onUpdate,
               )
             else
               PersonalizedRecommendationList(
@@ -226,7 +244,6 @@ class _RecommendationManagerOverviewState
                 onDeletePressed: widget.onDeletePressed,
                 onFavoritePressed: widget.onFavoritePressed,
                 onPriorityChanged: widget.onPriorityChanged,
-                onUpdate: widget.onUpdate,
               ),
           ],
         ),

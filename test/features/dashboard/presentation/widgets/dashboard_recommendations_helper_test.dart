@@ -322,6 +322,7 @@ void main() {
             statusTimestamps: {},
             userID: "user1",
             promoterImageDownloadURL: "test",
+            compensation: null,
           ),
         );
 
@@ -344,6 +345,7 @@ void main() {
             statusTimestamps: {},
             userID: "user1",
             promoterImageDownloadURL: "test",
+            compensation: null,
           ),
         );
 
@@ -390,6 +392,7 @@ void main() {
             statusTimestamps: {},
             userID: "user1",
             promoterImageDownloadURL: "test",
+            compensation: null,
           ),
         );
 
@@ -436,6 +439,7 @@ void main() {
             statusTimestamps: {},
             userID: "user1",
             promoterImageDownloadURL: "test",
+            compensation: null,
           ),
         );
 
@@ -493,6 +497,7 @@ void main() {
             statusTimestamps: {},
             userID: "user1",
             promoterImageDownloadURL: "test",
+            compensation: null,
           ),
         );
 
@@ -515,6 +520,7 @@ void main() {
             statusTimestamps: {},
             userID: "user1",
             promoterImageDownloadURL: "test",
+            compensation: null,
           ),
         );
 
@@ -537,6 +543,7 @@ void main() {
             statusTimestamps: {},
             userID: "user1",
             promoterImageDownloadURL: "test",
+            compensation: null,
           ),
         );
 
@@ -593,6 +600,7 @@ void main() {
               statusTimestamps: {},
               userID: "user1",
               promoterImageDownloadURL: "test",
+              compensation: null,
               createdAt: yesterday,
             ),
           ),
@@ -616,6 +624,7 @@ void main() {
               statusTimestamps: {},
               userID: "user1",
               promoterImageDownloadURL: "test",
+              compensation: null,
               createdAt: yesterday,
             ),
           ),
@@ -690,6 +699,7 @@ void main() {
             statusTimestamps: {},
             userID: "user1",
             promoterImageDownloadURL: "test",
+            compensation: null,
             createdAt: yesterday,
           ),
         )];
@@ -763,6 +773,7 @@ void main() {
             statusTimestamps: {},
             userID: "user1",
             promoterImageDownloadURL: "test",
+            compensation: null,
             createdAt: yesterday,
           ),
         )];
@@ -786,6 +797,7 @@ void main() {
             statusTimestamps: {},
             userID: "user1",
             promoterImageDownloadURL: "test",
+            compensation: null,
             createdAt: yesterday,
           ),
         )];
@@ -840,6 +852,7 @@ void main() {
               statusTimestamps: {},
               userID: "user1",
               promoterImageDownloadURL: "test",
+              compensation: null,
               createdAt: yesterday,
             ),
           ),
@@ -863,6 +876,7 @@ void main() {
               statusTimestamps: {},
               userID: "user1",
               promoterImageDownloadURL: "test",
+              compensation: null,
               createdAt: lastWeek,
             ),
           ),
@@ -886,6 +900,7 @@ void main() {
               statusTimestamps: {},
               userID: "user1",
               promoterImageDownloadURL: "test",
+              compensation: null,
               createdAt: lastMonth,
             ),
           ),
@@ -909,6 +924,7 @@ void main() {
               statusTimestamps: {},
               userID: "user1",
               promoterImageDownloadURL: "test",
+              compensation: null,
               createdAt: veryOld,
             ),
           ),
@@ -981,6 +997,7 @@ void main() {
             statusTimestamps: {},
             userID: "user1",
             promoterImageDownloadURL: "test",
+            compensation: null,
             createdAt: yesterday,
           ),
         );
@@ -1004,6 +1021,7 @@ void main() {
             statusTimestamps: {},
             userID: "user1",
             promoterImageDownloadURL: "test",
+            compensation: null,
             createdAt: yesterday,
           ),
         );
@@ -1063,6 +1081,7 @@ void main() {
             ),
             userID: "user1",
             promoterImageDownloadURL: "test",
+            compensation: null,
             createdAt: createdAt,
           ),
         );
@@ -1284,6 +1303,7 @@ void main() {
                 statusTimestamps: null,
                 userID: "user1",
                 promoterImageDownloadURL: null,
+                compensation: null,
                 createdAt: now.subtract(const Duration(hours: 12)),
               ),
             ),
@@ -1306,6 +1326,7 @@ void main() {
                 statusTimestamps: null,
                 userID: "user1",
                 promoterImageDownloadURL: null,
+                compensation: null,
                 createdAt: now.subtract(const Duration(hours: 12)),
               ),
             ),
@@ -1540,6 +1561,7 @@ void main() {
                 statusTimestamps: {},
                 userID: "user1",
                 promoterImageDownloadURL: "test",
+                compensation: null,
                 createdAt: now.subtract(Duration(hours: 12)),
               ),
             ),
@@ -1562,6 +1584,7 @@ void main() {
                 statusTimestamps: {},
                 userID: "user1",
                 promoterImageDownloadURL: "test",
+                compensation: null,
                 createdAt: now.subtract(Duration(hours: 36)),
               ),
             ),

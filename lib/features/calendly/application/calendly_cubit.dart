@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
-import 'package:finanzbegleiter/core/failures/failure.dart';
 import 'package:finanzbegleiter/features/calendly/domain/calendly_repository.dart';
 
 part 'calendly_state.dart';
 
 class CalendlyCubit extends Cubit<CalendlyState> {
   final CalendlyRepository calendlyRepository;
-  StreamSubscription<dynamic>? _authStatusSubscription;
+  StreamSubscription<Either<DatabaseFailure, bool>>? _authStatusSubscription;
 
   CalendlyCubit(this.calendlyRepository) : super(CalendlyInitial());
 
