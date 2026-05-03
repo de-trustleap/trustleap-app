@@ -87,7 +87,7 @@ class _TremendousConnectionWidgetState
                 children: [
                   const Icon(Icons.check_circle, color: Colors.green, size: 24),
                   const SizedBox(width: 8),
-                  Text(
+                  SelectableText(
                     localization.tremendous_connected,
                     style: themeData.textTheme.bodyMedium!.copyWith(
                       color: Colors.green.shade700,

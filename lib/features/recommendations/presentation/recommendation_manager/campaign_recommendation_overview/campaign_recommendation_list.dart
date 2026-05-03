@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/core/custom_navigator.dart';
+import 'package:finanzbegleiter/core/helpers/animated_list_differ.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
@@ -8,7 +9,7 @@ import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/no_search_r
 import 'package:finanzbegleiter/features/recommendations/presentation/recommendation_manager/campaign_recommendation_overview/campaign_recommendation_list_tile.dart';
 import 'package:flutter/material.dart';
 
-class CampaignRecommendationList extends StatelessWidget {
+class CampaignRecommendationList extends StatefulWidget {
   final List<UserRecommendation> recommendations;
   final String searchQuery;
   final Function(UserRecommendation) onDeletePressed;
@@ -21,6 +22,48 @@ class CampaignRecommendationList extends StatelessWidget {
     required this.onDeletePressed,
     required this.onFavoritePressed,
   });
+
+  @override
+  State<CampaignRecommendationList> createState() =>
+      _CampaignRecommendationListState();
+}
+
+class _CampaignRecommendationListState
+    extends State<CampaignRecommendationList> {
+  late final AnimatedListDiffer<UserRecommendation> _differ;
+
+  @override
+  void initState() {
+    super.initState();
+    _differ = AnimatedListDiffer(
+      initialList: widget.recommendations,
+      isSame: (a, b) => a.id == b.id,
+    );
+  }
+
+  @override
+  void didUpdateWidget(CampaignRecommendationList oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _differ.update(
+      newList: widget.recommendations,
+      buildRemovedItem: _buildTile,
+    );
+  }
+
+  Widget _buildTile(UserRecommendation rec, Animation<double> animation) {
+    return SizeTransition(
+      sizeFactor: animation,
+      child: FadeTransition(
+        opacity: animation,
+        child: CampaignRecommendationListTile(
+          key: ValueKey(rec.id.value),
+          recommendation: rec,
+          onDeletePressed: widget.onDeletePressed,
+          onFavoritePressed: widget.onFavoritePressed,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,14 +101,14 @@ class CampaignRecommendationList extends StatelessWidget {
         ),
         const Divider(height: 1),
       ],
-      if (recommendations.isEmpty && searchQuery.isNotEmpty) ...[
+      if (widget.recommendations.isEmpty && widget.searchQuery.isNotEmpty) ...[
         const SizedBox(height: 40),
         NoSearchResultsView(
             title: localization.recommendation_manager_no_search_result_title,
             description: localization
                 .recommendation_manager_no_search_result_description),
         const SizedBox(height: 40)
-      ] else if (recommendations.isEmpty) ...[
+      ] else if (widget.recommendations.isEmpty) ...[
         const SizedBox(height: 40),
         EmptyPage(
             icon: Icons.campaign,
@@ -79,18 +122,14 @@ class CampaignRecommendationList extends StatelessWidget {
             }),
         const SizedBox(height: 40)
       ] else ...[
-        ListView.builder(
-            itemCount: recommendations.length,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              return CampaignRecommendationListTile(
-                key: ValueKey(recommendations[index].id.value),
-                recommendation: recommendations[index],
-                onDeletePressed: onDeletePressed,
-                onFavoritePressed: onFavoritePressed,
-              );
-            })
+        AnimatedList(
+          key: _differ.listKey,
+          initialItemCount: _differ.items.length,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index, animation) =>
+              _buildTile(_differ.items[index], animation),
+        )
       ]
     ]);
   }

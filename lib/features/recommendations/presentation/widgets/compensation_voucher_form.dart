@@ -141,7 +141,7 @@ class CompensationVoucherForm extends StatelessWidget {
             ))
         .toList();
 
-    final currency = selectedFundingSource?.currencyCode ?? "EUR";
+    final currency = _currencySymbol(selectedFundingSource?.currencyCode ?? "EUR");
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -186,18 +186,27 @@ class CompensationVoucherForm extends StatelessWidget {
         ),
         if (selectedProduct?.min != null || selectedProduct?.max != null) ...[
           const SizedBox(height: 4),
-          _buildAmountHint(context, selectedProduct!),
+          _buildAmountHint(context, selectedProduct!, currency),
         ],
         const SizedBox(height: 4),
       ],
     );
   }
 
-  Widget _buildAmountHint(BuildContext context, TremendousProduct product) {
+  String _currencySymbol(String code) {
+    const symbols = {
+      'EUR': '€',
+      'USD': '\$',
+      'GBP': '£',
+    };
+    return symbols[code] ?? code;
+  }
+
+  Widget _buildAmountHint(BuildContext context, TremendousProduct product, String currency) {
     final themeData = Theme.of(context);
     final productMin = product.effectiveMin;
     final productMax = product.effectiveMax;
-    final hint = "$productMin–$productMax €";
+    final hint = "$productMin–$productMax $currency";
     return SelectableText(
       hint,
       style: themeData.textTheme.bodySmall
