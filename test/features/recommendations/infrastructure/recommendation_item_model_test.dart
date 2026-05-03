@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_compensation.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finanzbegleiter/features/recommendations/infrastructure/recommendation_item_model.dart';
@@ -23,6 +24,7 @@ void main() {
           statusLevel: "recommendationSend",
           statusTimestamps: null,
           promoterImageDownloadURL: null,
+          compensation: null,
           recommendationType: null,
           statusCounts: null,
           campaignName: null,
@@ -42,6 +44,7 @@ void main() {
           statusTimestamps: null,
           reason: "",
           promoterImageDownloadURL: null,
+          compensation: null,
           recommendationType: null,
           statusCounts: null,
           campaignName: null,
@@ -72,6 +75,7 @@ void main() {
           statusLevel: "recommendationSend",
           statusTimestamps: null,
           promoterImageDownloadURL: null,
+          compensation: null,
           recommendationType: null,
           statusCounts: null,
           campaignName: null,
@@ -97,7 +101,8 @@ void main() {
         "campaignDurationDays": null,
         "expiresAt": date.toIso8601String(),
         "createdAt": date.toIso8601String(),
-        "lastUpdated": null
+        "lastUpdated": null,
+        "compensation": null
       };
       // When
       final result = recoModel.toMap();
@@ -136,6 +141,7 @@ void main() {
           statusLevel: "recommendationSend",
           statusTimestamps: null,
           promoterImageDownloadURL: null,
+          compensation: null,
           recommendationType: null,
           statusCounts: null,
           campaignName: null,
@@ -147,6 +153,83 @@ void main() {
       final result = RecommendationItemModel.fromMap(map);
       // Then
       expect(result, expectedResult);
+    });
+  });
+
+  group("RecommendationItemModel_FromMap_WithCompensation", () {
+    DateTime date = DateTime(2025, 4, 14, 13, 30);
+    test("parses compensation map when present", () {
+      // Given
+      final map = {
+        'id': "1",
+        "name": "Test",
+        "landingPageID": "2",
+        "promoterName": "Test",
+        "serviceProviderName": "",
+        "defaultLandingPageID": "",
+        "userID": "1",
+        "statusLevel": "appointment",
+        "statusTimestamps": null,
+        "expiresAt": Timestamp.fromDate(date),
+        "createdAt": Timestamp.fromDate(date),
+        "lastUpdated": null,
+        "compensation": {
+          "status": "manualIssued",
+          "timestamps": {"manualIssued": "2025-01-01T00:00:00.000"},
+          "amount": 50.0,
+          "currency": "EUR",
+        },
+      };
+      // When
+      final result = RecommendationItemModel.fromMap(map);
+      // Then
+      expect(result.compensation, isNotNull);
+      expect(result.compensation!["status"], "manualIssued");
+      expect(result.compensation!["amount"], 50.0);
+    });
+  });
+
+  group("RecommendationItemModel_ToDomain_WithCompensation", () {
+    DateTime date = DateTime(2025, 4, 14, 13, 30);
+    test("converts compensation map to domain RecommendationCompensation", () {
+      // Given
+      final ts = DateTime(2025, 1, 1);
+      final model = RecommendationItemModel(
+          id: "1",
+          name: "Test",
+          landingPageID: "2",
+          promoterName: "Test",
+          serviceProviderName: "",
+          defaultLandingPageID: "",
+          userID: "1",
+          reason: "",
+          statusLevel: "appointment",
+          statusTimestamps: null,
+          promoterImageDownloadURL: null,
+          compensation: {
+            "status": "manualIssued",
+            "timestamps": {"manualIssued": ts.toIso8601String()},
+            "amount": 50.0,
+            "currency": "EUR",
+          },
+          recommendationType: null,
+          statusCounts: null,
+          campaignName: null,
+          campaignDurationDays: null,
+          expiresAt: date,
+          createdAt: date,
+          lastUpdated: null);
+      // When
+      final result = model.toDomain() as PersonalizedRecommendationItem;
+      // Then
+      expect(result.compensation, isNotNull);
+      expect(result.compensation!.status,
+          RecommendationCompensationStatus.manualIssued);
+      expect(result.compensation!.amount, 50.0);
+      expect(result.compensation!.currency, "EUR");
+      expect(
+          result.compensation!.timestamps[RecommendationCompensationStatus.manualIssued],
+          ts);
     });
   });
 
@@ -181,6 +264,7 @@ void main() {
           statusLevel: "recommendationSend",
           statusTimestamps: null,
           promoterImageDownloadURL: null,
+          compensation: null,
           recommendationType: null,
           statusCounts: null,
           campaignName: null,
@@ -212,6 +296,7 @@ void main() {
           statusLevel: "recommendationSend",
           statusTimestamps: null,
           promoterImageDownloadURL: null,
+          compensation: null,
           recommendationType: null,
           statusCounts: null,
           campaignName: null,
@@ -232,6 +317,7 @@ void main() {
           statusLevel: StatusLevel.recommendationSend,
           statusTimestamps: null,
           promoterImageDownloadURL: null,
+          compensation: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);
@@ -261,6 +347,7 @@ void main() {
           statusLevel: StatusLevel.recommendationSend,
           statusTimestamps: null,
           promoterImageDownloadURL: null,
+          compensation: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);
@@ -276,6 +363,7 @@ void main() {
           statusLevel: "recommendationSend",
           statusTimestamps: null,
           promoterImageDownloadURL: null,
+          compensation: null,
           recommendationType: "personalized",
           statusCounts: null,
           campaignName: null,
@@ -306,6 +394,7 @@ void main() {
           statusLevel: "recommendationSend",
           statusTimestamps: null,
           promoterImageDownloadURL: null,
+          compensation: null,
           recommendationType: null,
           statusCounts: null,
           campaignName: null,
@@ -325,6 +414,7 @@ void main() {
           statusLevel: "recommendationSend",
           statusTimestamps: null,
           promoterImageDownloadURL: null,
+          compensation: null,
           recommendationType: null,
           statusCounts: null,
           campaignName: null,

@@ -4742,5 +4742,191 @@
     "pagebuilder_faq_default_answer_3": "Hier kommt die Antwort auf die dritte Frage.",
     "@pagebuilder_faq_default_answer_3": {
         "description": "FAQ - Standard Antworttext 3"
+    },
+    "profile_page_tremendous_integration_title": "Tremendous Integration",
+    "@profile_page_tremendous_integration_title": {
+        "description": "Titel der Tremendous-Integration im Profil"
+    },
+    "profile_page_tremendous_integration_description": "Verbinden Sie Ihren Tremendous-Account, um Promotern automatisch Gutscheine als Vergütung zu senden.",
+    "@profile_page_tremendous_integration_description": {
+        "description": "Beschreibung der Tremendous-Integration im Profil"
+    },
+    "tremendous_connect_button": "Tremendous verbinden",
+    "@tremendous_connect_button": {
+        "description": "Button-Text zum Verbinden mit Tremendous"
+    },
+    "tremendous_connecting": "Verbinde...",
+    "@tremendous_connecting": {
+        "description": "Button-Text während Tremendous-Verbindung"
+    },
+    "tremendous_disconnect_button": "Verbindung trennen",
+    "@tremendous_disconnect_button": {
+        "description": "Button-Text zum Trennen von Tremendous"
+    },
+    "tremendous_connected": "Tremendous Account verbunden",
+    "@tremendous_connected": {
+        "description": "Text wenn Tremendous verbunden ist"
+    },
+    "tremendous_success_connected": "Tremendous erfolgreich verbunden!",
+    "@tremendous_success_connected": {
+        "description": "Snackbar bei erfolgreicher Tremendous-Verbindung"
+    },
+    "tremendous_success_disconnected": "Tremendous erfolgreich getrennt",
+    "@tremendous_success_disconnected": {
+        "description": "Snackbar bei erfolgreichem Tremendous-Disconnect"
+    },
+    "tremendous_error_connection": "Fehler beim Verbinden mit Tremendous",
+    "@tremendous_error_connection": {
+        "description": "Snackbar bei Fehler während Tremendous-Verbindung"
+    },
+    "compensation_dialog_title": "Empfehlung abgeschlossen",
+    "@compensation_dialog_title": {
+        "description": "Titel des Vergütungsdialogs"
+    },
+    "compensation_dialog_subtitle": "Wie möchtest du den Promoter vergüten?",
+    "@compensation_dialog_subtitle": {
+        "description": "Untertitel des Vergütungsdialogs"
+    },
+    "compensation_dialog_voucher_option": "Gutschein über Tremendous senden",
+    "@compensation_dialog_voucher_option": {
+        "description": "Option für Gutschein-Vergütung"
+    },
+    "compensation_dialog_voucher_placeholder": "Tremendous-Anbindung wird in Kürze verfügbar",
+    "@compensation_dialog_voucher_placeholder": {
+        "description": "Platzhaltertext im Voucher-Tab"
+    },
+    "compensation_dialog_manual_option": "Manuell vergüten",
+    "@compensation_dialog_manual_option": {
+        "description": "Option für manuelle Vergütung"
+    },
+    "compensation_dialog_skip_option": "Nicht vergüten",
+    "@compensation_dialog_skip_option": {
+        "description": "Option um Vergütung zu überspringen"
+    },
+    "compensation_dialog_action_button": "Bestätigen",
+    "@compensation_dialog_action_button": {
+        "description": "Bestätigungs-Button im Vergütungsdialog"
+    },
+    "compensation_dialog_cancel_button": "Abbrechen",
+    "@compensation_dialog_cancel_button": {
+        "description": "Abbrechen-Button im Vergütungsdialog"
+    },
+    "compensation_status_manual_issued": "Vergütung ausstehend",
+    "@compensation_status_manual_issued": {
+        "description": "Status-Text wenn manuelle Vergütung ausstehend ist"
+    },
+    "compensation_manual_issued_description": "Du hast gewählt, den Promoter manuell zu vergüten. Sobald die Vergütung ausgezahlt wurde, kannst du die Empfehlung archivieren.",
+    "@compensation_manual_issued_description": {
+        "description": "Beschreibungstext im manualIssued-Block"
+    },
+    "compensation_manual_confirm_button": "Vergütung ausgezahlt",
+    "@compensation_manual_confirm_button": {
+        "description": "Button zum Bestätigen manueller Vergütung und Archivieren"
+    },
+    "compensation_manual_change_link": "Vergütungsoption ändern",
+    "@compensation_manual_change_link": {
+        "description": "Link zum erneuten Öffnen des Vergütungsdialogs"
+    },
+    "compensation_success_skipped": "Empfehlung archiviert",
+    "@compensation_success_skipped": {
+        "description": "Snackbar wenn Empfehlung ohne Vergütung archiviert wird"
+    },
+    "compensation_success_manual_issued": "Vergütung als ausgestellt markiert",
+    "@compensation_success_manual_issued": {
+        "description": "Snackbar wenn manuelle Vergütung ausgestellt wurde"
+    },
+    "compensation_success_manual_confirmed": "Vergütung bestätigt – Empfehlung archiviert",
+    "@compensation_success_manual_confirmed": {
+        "description": "Snackbar wenn manuelle Vergütung bestätigt und archiviert"
+    },
+    "compensation_error": "Fehler beim Setzen des Vergütungsstatus",
+    "@compensation_error": {
+        "description": "Snackbar bei Fehler beim Setzen des Vergütungsstatus"
+    },
+    "compensation_dialog_voucher_funding_source_label": "Zahlungsquelle",
+    "@compensation_dialog_voucher_funding_source_label": {
+        "description": "Label für Zahlungsquellen-Dropdown im Voucher-Dialog"
+    },
+    "compensation_dialog_voucher_product_label": "Produkt",
+    "@compensation_dialog_voucher_product_label": {
+        "description": "Label für Produkt-Dropdown im Voucher-Dialog"
+    },
+    "compensation_dialog_voucher_amount_label": "Betrag",
+    "@compensation_dialog_voucher_amount_label": {
+        "description": "Label für Betrags-Eingabe im Voucher-Dialog"
+    },
+    "compensation_dialog_voucher_connect_hint": "Verbinde Tremendous, um Gutscheine direkt an Promoter zu versenden.",
+    "@compensation_dialog_voucher_connect_hint": {
+        "description": "Hinweis wenn Tremendous nicht verbunden ist"
+    },
+    "compensation_dialog_voucher_catalog_error": "Fehler beim Laden der Tremendous-Produkte.",
+    "@compensation_dialog_voucher_catalog_error": {
+        "description": "Fehlermeldung wenn Produktkatalog nicht geladen werden konnte"
+    },
+    "compensation_dialog_voucher_product_required": "Bitte wähle ein Produkt aus.",
+    "@compensation_dialog_voucher_product_required": {
+        "description": "Validierungsfehler wenn kein Produkt ausgewählt"
+    },
+    "compensation_dialog_voucher_funding_source_required": "Bitte wähle eine Zahlungsquelle aus.",
+    "@compensation_dialog_voucher_funding_source_required": {
+        "description": "Validierungsfehler wenn keine Zahlungsquelle ausgewählt"
+    },
+    "compensation_dialog_voucher_amount_invalid": "Bitte gib einen gültigen Betrag ein.",
+    "@compensation_dialog_voucher_amount_invalid": {
+        "description": "Validierungsfehler wenn Betrag ungültig"
+    },
+    "compensation_dialog_voucher_amount_min": "Der Mindestbetrag für dieses Produkt beträgt {min} €.",
+    "@compensation_dialog_voucher_amount_min": {
+        "description": "Validierungsfehler wenn Betrag unter Produkt-Minimum liegt",
+        "placeholders": {
+            "min": { "type": "int" }
+        }
+    },
+    "compensation_dialog_voucher_amount_max": "Der maximale Betrag beträgt {max} €.",
+    "@compensation_dialog_voucher_amount_max": {
+        "description": "Validierungsfehler wenn Betrag über Maximum liegt",
+        "placeholders": {
+            "max": { "type": "int" }
+        }
+    },
+    "compensation_voucher_sent_snackbar": "Gutschein wird versendet",
+    "@compensation_voucher_sent_snackbar": {
+        "description": "Snackbar wenn Voucher-Order erfolgreich erstellt"
+    },
+    "compensation_voucher_retry_button": "Erneut versuchen",
+    "@compensation_voucher_retry_button": {
+        "description": "Button um Produktkatalog erneut zu laden oder Voucher-Order erneut zu versuchen"
+    },
+    "compensation_voucher_failed_description": "Der Gutschein konnte nicht versendet werden. Bitte versuche es erneut oder wähle eine andere Vergütungsoption.",
+    "@compensation_voucher_failed_description": {
+        "description": "Beschreibung wenn Voucher-Order fehlgeschlagen ist"
+    },
+    "compensation_status_voucher_sent": "Gutschein wird versendet",
+    "@compensation_status_voucher_sent": {
+        "description": "Status-Text wenn Voucher-Order erstellt wurde und auf Zustellung wartet"
+    },
+    "compensation_voucher_sent_description": "Der Gutschein wurde versendet und wartet auf Zustellung. Dies kann einige Minuten dauern.",
+    "@compensation_voucher_sent_description": {
+        "description": "Beschreibung im Tile wenn Voucher-Order erstellt wurde und auf Zustellung wartet"
+    },
+    "tremendous_funding_source_balance": "Guthaben",
+    "@tremendous_funding_source_balance": {
+        "description": "Tremendous Funding Source Methode: balance"
+    },
+    "tremendous_funding_source_invoice": "Rechnung",
+    "@tremendous_funding_source_invoice": {
+        "description": "Tremendous Funding Source Methode: invoice"
+    },
+    "tremendous_funding_source_credit_card": "Kreditkarte",
+    "@tremendous_funding_source_credit_card": {
+        "description": "Tremendous Funding Source Methode: credit_card"
+    },
+    "tremendous_funding_source_ach": "ACH-Überweisung",
+    "@tremendous_funding_source_ach": {
+        "description": "Tremendous Funding Source Methode: ach"
+    },
+    "tremendous_funding_source_sepa": "SEPA-Überweisung",
+    "@tremendous_funding_source_sepa": {
+        "description": "Tremendous Funding Source Methode: sepa"
     }
 }

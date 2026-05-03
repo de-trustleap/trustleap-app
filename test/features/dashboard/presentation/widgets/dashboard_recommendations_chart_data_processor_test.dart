@@ -35,6 +35,7 @@ void main() {
         statusLevel: StatusLevel.recommendationSend,
         statusTimestamps: {0: now.subtract(Duration(days: 1))},
         promoterImageDownloadURL: null,
+        compensation: null,
       );
 
       final recommendation2 = PersonalizedRecommendationItem(
@@ -50,6 +51,7 @@ void main() {
         statusLevel: StatusLevel.contactFormSent,
         statusTimestamps: {0: now.subtract(Duration(days: 2))},
         promoterImageDownloadURL: null,
+        compensation: null,
       );
 
       testRecommendations = [
@@ -283,6 +285,7 @@ void main() {
           statusLevel: StatusLevel.linkClicked,
           statusTimestamps: null,
           promoterImageDownloadURL: null,
+          compensation: null,
           createdAt: now.subtract(const Duration(days: 1)),
         );
         final recsWithFallback = [
@@ -368,6 +371,7 @@ void main() {
             StatusLevel.successful.index: now.subtract(const Duration(days: 2)),
           },
           promoterImageDownloadURL: null,
+          compensation: null,
         );
 
         mixedRecommendations = [

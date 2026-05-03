@@ -1,12 +1,11 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:crypto/crypto.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
+import 'package:finanzbegleiter/core/oauth_pkce_helper.dart';
 import 'package:finanzbegleiter/features/calendly/domain/calendly_repository.dart';
 import 'package:finanzbegleiter/environment.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,10 +21,6 @@ class CalendlyRepositoryImplementation implements CalendlyRepository {
   final FirebaseFunctions firebaseFunctions;
   final Environment environment = Environment();
 
-  // PKCE parameters
-  String? _codeVerifier;
-  String? _codeChallenge;
-
   CalendlyRepositoryImplementation(
       {required this.firestore,
       required this.firebaseAuth,
@@ -39,13 +34,21 @@ class CalendlyRepositoryImplementation implements CalendlyRepository {
         return left(BackendFailure());
       }
 
-      // Generate PKCE parameters
-      _codeVerifier = _generateCodeVerifier();
-      _codeChallenge = _generateCodeChallenge(_codeVerifier!);
+      final codeVerifier = OAuthPkceHelper.generateCodeVerifier();
+      final codeChallenge = OAuthPkceHelper.generateCodeChallenge(codeVerifier);
+      final nonce = OAuthPkceHelper.generateNonce();
 
-      final redirectUri = Environment().isStaging()
-          ? "https://europe-west3-trustleap-staging.cloudfunctions.net/calendlyOAuthCallback"
-          : "https://europe-west3-finanzwegbegleiter.cloudfunctions.net/calendlyOAuthCallback";
+      await firestore
+          .collection("calendlyOauthStates")
+          .doc(nonce)
+          .set({
+        "uid": user.uid,
+        "verifier": codeVerifier,
+        "createdAt": FieldValue.serverTimestamp(),
+      });
+
+      final redirectUri =
+          "${environment.getCloudFunctionsBaseURL()}/calendlyOAuthCallback";
 
       final clientId = environment.isStaging()
           ? "ikt7o3GGKmjpXS6_kL4AxzQ0b8XucPYcE-Zby_rnAAU"
@@ -56,8 +59,8 @@ class CalendlyRepositoryImplementation implements CalendlyRepository {
         "response_type": "code",
         "redirect_uri": redirectUri,
         "scope": "default",
-        "state": "${user.uid}|$_codeVerifier",
-        "code_challenge": _codeChallenge,
+        "state": nonce,
+        "code_challenge": codeChallenge,
         "code_challenge_method": "S256",
       });
 
@@ -283,18 +286,4 @@ class CalendlyRepositoryImplementation implements CalendlyRepository {
     });
   }
 
-  /// Generate a cryptographically secure random code verifier for PKCE
-  String _generateCodeVerifier() {
-    const chars =
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~';
-    final random = Random.secure();
-    return List.generate(128, (index) => chars[random.nextInt(chars.length)])
-        .join();
-  }
-
-  String _generateCodeChallenge(String verifier) {
-    final bytes = utf8.encode(verifier);
-    final digest = sha256.convert(bytes);
-    return base64Url.encode(digest.bytes).replaceAll('=', '');
-  }
 }

@@ -62,6 +62,40 @@ class RecommendationSetFinishedSuccessState
   List<Object?> get props => [];
 }
 
+class RecommendationCompensationLoadingState
+    extends RecommendationManagerTileState with EquatableMixin {
+  final UserRecommendation recommendation;
+
+  RecommendationCompensationLoadingState({required this.recommendation});
+
+  @override
+  List<Object?> get props => [recommendation];
+}
+
+class RecommendationCompensationFailureState
+    extends RecommendationManagerTileState with EquatableMixin {
+  final DatabaseFailure failure;
+  final UserRecommendation recommendation;
+
+  RecommendationCompensationFailureState(
+      {required this.failure, required this.recommendation});
+
+  @override
+  List<Object?> get props => [failure, recommendation];
+}
+
+class RecommendationCompensationSuccessState
+    extends RecommendationManagerTileState with EquatableMixin {
+  final UserRecommendation recommendation;
+  final RecommendationCompensationStatus status;
+
+  RecommendationCompensationSuccessState(
+      {required this.recommendation, required this.status});
+
+  @override
+  List<Object?> get props => [recommendation, status];
+}
+
 
 
 class RecommendationManagerTileFavoriteUpdatedState
@@ -91,4 +125,30 @@ class RecommendationManagerTileViewedState
 
   @override
   List<Object?> get props => [recommendationID, lastViewed];
+}
+
+class RecommendationDeleteSuccessState extends RecommendationManagerTileState
+    with EquatableMixin {
+  final UserRecommendation recommendation;
+  final DateTime timestamp;
+
+  RecommendationDeleteSuccessState({required this.recommendation})
+      : timestamp = DateTime.now();
+
+  @override
+  List<Object?> get props => [recommendation, timestamp];
+}
+
+class RecommendationDeleteFailureState extends RecommendationManagerTileState
+    with EquatableMixin {
+  final DatabaseFailure failure;
+  final UserRecommendation recommendation;
+  final DateTime timestamp;
+
+  RecommendationDeleteFailureState(
+      {required this.failure, required this.recommendation})
+      : timestamp = DateTime.now();
+
+  @override
+  List<Object?> get props => [failure, recommendation, timestamp];
 }

@@ -32,7 +32,7 @@ void main() {
         userID: "1",
         statusLevel: StatusLevel.contactFormSent,
         statusTimestamps: {0: date, 1: date, 2: date},
-        promoterImageDownloadURL: null);
+        promoterImageDownloadURL: null, compensation: null);
 
     final userRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("1"),
@@ -133,7 +133,7 @@ void main() {
         userID: "1",
         statusLevel: StatusLevel.contactFormSent,
         statusTimestamps: {0: date, 1: date, 2: date},
-        promoterImageDownloadURL: null);
+        promoterImageDownloadURL: null, compensation: null);
 
     final userRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("1"),

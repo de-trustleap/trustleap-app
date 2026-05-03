@@ -3990,4 +3990,160 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get pagebuilder_faq_default_answer_3 =>
       'Here comes the answer to the third question.';
+
+  @override
+  String get profile_page_tremendous_integration_title =>
+      'Tremendous Integration';
+
+  @override
+  String get profile_page_tremendous_integration_description =>
+      'Connect your Tremendous account to automatically send gift cards to promoters as compensation.';
+
+  @override
+  String get tremendous_connect_button => 'Connect Tremendous';
+
+  @override
+  String get tremendous_connecting => 'Connecting...';
+
+  @override
+  String get tremendous_disconnect_button => 'Disconnect';
+
+  @override
+  String get tremendous_connected => 'Tremendous account connected';
+
+  @override
+  String get tremendous_success_connected =>
+      'Tremendous connected successfully!';
+
+  @override
+  String get tremendous_success_disconnected => 'Tremendous disconnected';
+
+  @override
+  String get tremendous_error_connection => 'Error connecting to Tremendous';
+
+  @override
+  String get compensation_dialog_title => 'Recommendation completed';
+
+  @override
+  String get compensation_dialog_subtitle =>
+      'How would you like to compensate the promoter?';
+
+  @override
+  String get compensation_dialog_voucher_option =>
+      'Send voucher via Tremendous';
+
+  @override
+  String get compensation_dialog_voucher_placeholder =>
+      'Tremendous integration coming soon';
+
+  @override
+  String get compensation_dialog_manual_option => 'Compensate manually';
+
+  @override
+  String get compensation_dialog_skip_option => 'No compensation';
+
+  @override
+  String get compensation_dialog_action_button => 'Confirm';
+
+  @override
+  String get compensation_dialog_cancel_button => 'Cancel';
+
+  @override
+  String get compensation_status_manual_issued => 'Compensation pending';
+
+  @override
+  String get compensation_manual_issued_description =>
+      'You have chosen to compensate the promoter manually. Once the compensation has been paid out, you can archive the recommendation.';
+
+  @override
+  String get compensation_manual_confirm_button => 'Compensation paid out';
+
+  @override
+  String get compensation_manual_change_link => 'Change compensation option';
+
+  @override
+  String get compensation_success_skipped => 'Recommendation archived';
+
+  @override
+  String get compensation_success_manual_issued =>
+      'Compensation marked as issued';
+
+  @override
+  String get compensation_success_manual_confirmed =>
+      'Compensation confirmed – recommendation archived';
+
+  @override
+  String get compensation_error => 'Error setting compensation status';
+
+  @override
+  String get compensation_dialog_voucher_funding_source_label =>
+      'Funding source';
+
+  @override
+  String get compensation_dialog_voucher_product_label => 'Product';
+
+  @override
+  String get compensation_dialog_voucher_amount_label => 'Amount';
+
+  @override
+  String get compensation_dialog_voucher_connect_hint =>
+      'Connect Tremendous to send vouchers directly to promoters.';
+
+  @override
+  String get compensation_dialog_voucher_catalog_error =>
+      'Failed to load Tremendous products.';
+
+  @override
+  String get compensation_dialog_voucher_product_required =>
+      'Please select a product.';
+
+  @override
+  String get compensation_dialog_voucher_funding_source_required =>
+      'Please select a funding source.';
+
+  @override
+  String get compensation_dialog_voucher_amount_invalid =>
+      'Please enter a valid amount.';
+
+  @override
+  String compensation_dialog_voucher_amount_min(int min) {
+    return 'The minimum amount for this product is €$min.';
+  }
+
+  @override
+  String compensation_dialog_voucher_amount_max(int max) {
+    return 'The maximum amount is €$max.';
+  }
+
+  @override
+  String get compensation_voucher_sent_snackbar => 'Voucher is being sent';
+
+  @override
+  String get compensation_voucher_retry_button => 'Try again';
+
+  @override
+  String get compensation_voucher_failed_description =>
+      'The voucher could not be sent. Please try again or choose a different compensation option.';
+
+  @override
+  String get compensation_status_voucher_sent => 'Voucher is being sent';
+
+  @override
+  String get compensation_voucher_sent_description =>
+      'The voucher has been sent and is awaiting delivery. This may take a few minutes.';
+
+  @override
+  String get tremendous_funding_source_balance => 'Balance';
+
+  @override
+  String get tremendous_funding_source_invoice => 'Invoice';
+
+  @override
+  String get tremendous_funding_source_credit_card => 'Credit card';
+
+  @override
+  String get tremendous_funding_source_ach => 'ACH transfer';
+
+  @override
+  String get tremendous_funding_source_sepa => 'SEPA transfer';
 }

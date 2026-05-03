@@ -37,6 +37,7 @@ void main() {
         statusTimestamps: null,
         userID: "user-1",
         promoterImageDownloadURL: null,
+        compensation: null,
       ),
     );
   }

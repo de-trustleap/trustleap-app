@@ -1,10 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_compensation.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 
 class PersonalizedRecommendationItem extends RecommendationItem {
   final String? name;
   final StatusLevel? statusLevel;
   final Map<int, DateTime?>? statusTimestamps;
+  final RecommendationCompensation? compensation;
 
   @override
   String? get displayName => name;
@@ -22,6 +24,7 @@ class PersonalizedRecommendationItem extends RecommendationItem {
       required this.statusTimestamps,
       required super.userID,
       required super.promoterImageDownloadURL,
+      required this.compensation,
       super.lastUpdated,
       super.expiresAt,
       super.createdAt})
@@ -40,6 +43,7 @@ class PersonalizedRecommendationItem extends RecommendationItem {
       Map<int, DateTime?>? statusTimestamps,
       String? userID,
       String? promoterImageDownloadURL,
+      RecommendationCompensation? compensation,
       DateTime? lastUpdated}) {
     return PersonalizedRecommendationItem(
         id: id ?? this.id,
@@ -55,6 +59,7 @@ class PersonalizedRecommendationItem extends RecommendationItem {
         userID: userID ?? this.userID,
         promoterImageDownloadURL:
             promoterImageDownloadURL ?? this.promoterImageDownloadURL,
+        compensation: compensation ?? this.compensation,
         lastUpdated: lastUpdated ?? this.lastUpdated,
         expiresAt: expiresAt,
         createdAt: createdAt);
@@ -75,5 +80,6 @@ class PersonalizedRecommendationItem extends RecommendationItem {
         userID,
         promoterImageDownloadURL,
         recommendationType,
+        compensation,
       ];
 }

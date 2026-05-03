@@ -8,6 +8,8 @@ enum RecommendationStatusFilterState {
   linkClicked,
   contactFormSent,
   appointment,
+  manualIssued,
+  voucherSent,
   successful,
   failed,
   all
@@ -220,15 +222,25 @@ class _RecommendationManagerExpandableFilterState
                             value: RecommendationStatusFilterState.appointment,
                             label: localization
                                 .recommendation_manager_status_level_4),
+                        CustomDropdownItem(
+                            value: RecommendationStatusFilterState.manualIssued,
+                            label: localization
+                                .compensation_status_manual_issued),
+                        CustomDropdownItem(
+                            value: RecommendationStatusFilterState.voucherSent,
+                            label: localization
+                                .compensation_status_voucher_sent),
                       ],
-                      CustomDropdownItem(
-                          value: RecommendationStatusFilterState.successful,
-                          label: localization
-                              .recommendation_manager_status_level_5),
-                      CustomDropdownItem(
-                          value: RecommendationStatusFilterState.failed,
-                          label: localization
-                              .recommendation_manager_status_level_6),
+                      if (widget.isArchive) ...[
+                        CustomDropdownItem(
+                            value: RecommendationStatusFilterState.successful,
+                            label: localization
+                                .recommendation_manager_status_level_5),
+                        CustomDropdownItem(
+                            value: RecommendationStatusFilterState.failed,
+                            label: localization
+                                .recommendation_manager_status_level_6),
+                      ],
                     ],
                     onChanged: (sortBy) {
                       setState(() {

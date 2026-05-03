@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/archived_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_status_counts.dart';
+import 'package:finanzbegleiter/features/recommendations/infrastructure/recommendation_compensation_model.dart';
 import 'package:finanzbegleiter/features/recommendations/infrastructure/recommendation_status_counts_model.dart';
 import 'package:finanzbegleiter/core/id.dart';
 
@@ -22,6 +23,7 @@ class ArchivedRecommendationItemModel extends Equatable {
   final int? campaignDurationDays;
   final RecommendationStatusCounts? statusCounts;
   final Map<int, DateTime?>? statusTimestamps;
+  final Map<String, dynamic>? compensation;
 
   const ArchivedRecommendationItemModel({
     required this.id,
@@ -38,6 +40,7 @@ class ArchivedRecommendationItemModel extends Equatable {
     required this.campaignDurationDays,
     required this.statusCounts,
     required this.statusTimestamps,
+    required this.compensation,
   });
 
   ArchivedRecommendationItemModel copyWith({
@@ -55,6 +58,7 @@ class ArchivedRecommendationItemModel extends Equatable {
     int? campaignDurationDays,
     RecommendationStatusCounts? statusCounts,
     Map<int, DateTime?>? statusTimestamps,
+    Map<String, dynamic>? compensation,
   }) {
     return ArchivedRecommendationItemModel(
       id: id ?? this.id,
@@ -71,6 +75,7 @@ class ArchivedRecommendationItemModel extends Equatable {
       campaignDurationDays: campaignDurationDays ?? this.campaignDurationDays,
       statusCounts: statusCounts ?? this.statusCounts,
       statusTimestamps: statusTimestamps ?? this.statusTimestamps,
+      compensation: compensation ?? this.compensation,
     );
   }
 
@@ -91,6 +96,7 @@ class ArchivedRecommendationItemModel extends Equatable {
       'statusCounts': statusCounts != null
           ? RecommendationStatusCountsModel.fromDomain(statusCounts!).toMap()
           : null,
+      'compensation': compensation,
     };
   }
 
@@ -129,6 +135,9 @@ class ArchivedRecommendationItemModel extends Equatable {
         statusTimestamps: map['statusTimestamps'] != null
             ? (map['statusTimestamps'] as Map<String, dynamic>).map(
                 (key, value) => MapEntry(int.parse(key), DateTime.parse(value)))
+            : null,
+        compensation: map['compensation'] != null
+            ? Map<String, dynamic>.from(map['compensation'] as Map)
             : null);
   }
 
@@ -152,7 +161,10 @@ class ArchivedRecommendationItemModel extends Equatable {
         campaignName: campaignName,
         campaignDurationDays: campaignDurationDays,
         statusCounts: statusCounts,
-        statusTimestamps: statusTimestamps);
+        statusTimestamps: statusTimestamps,
+        compensation: compensation != null
+            ? RecommendationCompensationModel.fromMap(compensation!).toDomain()
+            : null);
   }
 
   factory ArchivedRecommendationItemModel.fromDomain(
@@ -171,7 +183,12 @@ class ArchivedRecommendationItemModel extends Equatable {
         campaignName: recommendation.campaignName,
         campaignDurationDays: recommendation.campaignDurationDays,
         statusCounts: recommendation.statusCounts,
-        statusTimestamps: recommendation.statusTimestamps);
+        statusTimestamps: recommendation.statusTimestamps,
+        compensation: recommendation.compensation != null
+            ? RecommendationCompensationModel.fromDomain(
+                    recommendation.compensation!)
+                .toMap()
+            : null);
   }
 
   RecommendationType _getRecommendationTypeFromString(String? type) {
@@ -199,5 +216,6 @@ class ArchivedRecommendationItemModel extends Equatable {
         campaignName,
         campaignDurationDays,
         statusCounts,
+        compensation,
       ];
 }

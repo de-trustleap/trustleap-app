@@ -21,7 +21,7 @@ void main() {
           recommendationType: RecommendationType.personalized,
           campaignName: null,
           campaignDurationDays: null,
-          statusCounts: null);
+          statusCounts: null, compensation: null);
       final expectedResult = ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("1"),
           reason: "Test new",
@@ -35,7 +35,7 @@ void main() {
           recommendationType: RecommendationType.personalized,
           campaignName: null,
           campaignDurationDays: null,
-          statusCounts: null);
+          statusCounts: null, compensation: null);
       // When
       final result = model.copyWith(reason: "Test new");
       // Then
@@ -60,7 +60,7 @@ void main() {
           recommendationType: RecommendationType.personalized,
           campaignName: null,
           campaignDurationDays: null,
-          statusCounts: null);
+          statusCounts: null, compensation: null);
       final model2 = ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("1"),
           reason: "Test",
@@ -74,7 +74,7 @@ void main() {
           recommendationType: RecommendationType.personalized,
           campaignName: null,
           campaignDurationDays: null,
-          statusCounts: null);
+          statusCounts: null, compensation: null);
       // Then
       expect(model, model2);
     });

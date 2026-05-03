@@ -6981,6 +6981,276 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Here comes the answer to the third question.'**
   String get pagebuilder_faq_default_answer_3;
+
+  /// Title of the Tremendous integration in profile
+  ///
+  /// In en, this message translates to:
+  /// **'Tremendous Integration'**
+  String get profile_page_tremendous_integration_title;
+
+  /// Description of the Tremendous integration in profile
+  ///
+  /// In en, this message translates to:
+  /// **'Connect your Tremendous account to automatically send gift cards to promoters as compensation.'**
+  String get profile_page_tremendous_integration_description;
+
+  /// Button text to connect Tremendous
+  ///
+  /// In en, this message translates to:
+  /// **'Connect Tremendous'**
+  String get tremendous_connect_button;
+
+  /// Button text while connecting to Tremendous
+  ///
+  /// In en, this message translates to:
+  /// **'Connecting...'**
+  String get tremendous_connecting;
+
+  /// Button text to disconnect from Tremendous
+  ///
+  /// In en, this message translates to:
+  /// **'Disconnect'**
+  String get tremendous_disconnect_button;
+
+  /// Text when Tremendous is connected
+  ///
+  /// In en, this message translates to:
+  /// **'Tremendous account connected'**
+  String get tremendous_connected;
+
+  /// Snackbar on successful Tremendous connection
+  ///
+  /// In en, this message translates to:
+  /// **'Tremendous connected successfully!'**
+  String get tremendous_success_connected;
+
+  /// Snackbar on successful Tremendous disconnect
+  ///
+  /// In en, this message translates to:
+  /// **'Tremendous disconnected'**
+  String get tremendous_success_disconnected;
+
+  /// Snackbar on Tremendous connection error
+  ///
+  /// In en, this message translates to:
+  /// **'Error connecting to Tremendous'**
+  String get tremendous_error_connection;
+
+  /// Title of the compensation dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendation completed'**
+  String get compensation_dialog_title;
+
+  /// Subtitle of the compensation dialog
+  ///
+  /// In en, this message translates to:
+  /// **'How would you like to compensate the promoter?'**
+  String get compensation_dialog_subtitle;
+
+  /// Option for voucher compensation
+  ///
+  /// In en, this message translates to:
+  /// **'Send voucher via Tremendous'**
+  String get compensation_dialog_voucher_option;
+
+  /// Placeholder text in voucher tab
+  ///
+  /// In en, this message translates to:
+  /// **'Tremendous integration coming soon'**
+  String get compensation_dialog_voucher_placeholder;
+
+  /// Option for manual compensation
+  ///
+  /// In en, this message translates to:
+  /// **'Compensate manually'**
+  String get compensation_dialog_manual_option;
+
+  /// Option to skip compensation
+  ///
+  /// In en, this message translates to:
+  /// **'No compensation'**
+  String get compensation_dialog_skip_option;
+
+  /// Confirm button in compensation dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get compensation_dialog_action_button;
+
+  /// Cancel button in compensation dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get compensation_dialog_cancel_button;
+
+  /// Status text when manual compensation is pending
+  ///
+  /// In en, this message translates to:
+  /// **'Compensation pending'**
+  String get compensation_status_manual_issued;
+
+  /// Description text in the manualIssued block
+  ///
+  /// In en, this message translates to:
+  /// **'You have chosen to compensate the promoter manually. Once the compensation has been paid out, you can archive the recommendation.'**
+  String get compensation_manual_issued_description;
+
+  /// Button to confirm manual compensation has been paid and archive
+  ///
+  /// In en, this message translates to:
+  /// **'Compensation paid out'**
+  String get compensation_manual_confirm_button;
+
+  /// Link to reopen the compensation dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Change compensation option'**
+  String get compensation_manual_change_link;
+
+  /// Snackbar when recommendation is archived without compensation
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendation archived'**
+  String get compensation_success_skipped;
+
+  /// Snackbar when manual compensation is issued
+  ///
+  /// In en, this message translates to:
+  /// **'Compensation marked as issued'**
+  String get compensation_success_manual_issued;
+
+  /// Snackbar when manual compensation is confirmed and archived
+  ///
+  /// In en, this message translates to:
+  /// **'Compensation confirmed – recommendation archived'**
+  String get compensation_success_manual_confirmed;
+
+  /// Snackbar on error setting compensation status
+  ///
+  /// In en, this message translates to:
+  /// **'Error setting compensation status'**
+  String get compensation_error;
+
+  /// Label for funding source dropdown in voucher dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Funding source'**
+  String get compensation_dialog_voucher_funding_source_label;
+
+  /// Label for product dropdown in voucher dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Product'**
+  String get compensation_dialog_voucher_product_label;
+
+  /// Label for amount input in voucher dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get compensation_dialog_voucher_amount_label;
+
+  /// Hint when Tremendous is not connected
+  ///
+  /// In en, this message translates to:
+  /// **'Connect Tremendous to send vouchers directly to promoters.'**
+  String get compensation_dialog_voucher_connect_hint;
+
+  /// Error message when product catalog could not be loaded
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load Tremendous products.'**
+  String get compensation_dialog_voucher_catalog_error;
+
+  /// Validation error when no product selected
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a product.'**
+  String get compensation_dialog_voucher_product_required;
+
+  /// Validation error when no funding source selected
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a funding source.'**
+  String get compensation_dialog_voucher_funding_source_required;
+
+  /// Validation error when amount is invalid
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid amount.'**
+  String get compensation_dialog_voucher_amount_invalid;
+
+  /// Validation error when amount is below product minimum
+  ///
+  /// In en, this message translates to:
+  /// **'The minimum amount for this product is €{min}.'**
+  String compensation_dialog_voucher_amount_min(int min);
+
+  /// Validation error when amount exceeds maximum
+  ///
+  /// In en, this message translates to:
+  /// **'The maximum amount is €{max}.'**
+  String compensation_dialog_voucher_amount_max(int max);
+
+  /// Snackbar when voucher order is successfully created
+  ///
+  /// In en, this message translates to:
+  /// **'Voucher is being sent'**
+  String get compensation_voucher_sent_snackbar;
+
+  /// Button to retry loading catalog or voucher order
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get compensation_voucher_retry_button;
+
+  /// Description when voucher order has failed
+  ///
+  /// In en, this message translates to:
+  /// **'The voucher could not be sent. Please try again or choose a different compensation option.'**
+  String get compensation_voucher_failed_description;
+
+  /// Status text when voucher order has been created and is awaiting delivery
+  ///
+  /// In en, this message translates to:
+  /// **'Voucher is being sent'**
+  String get compensation_status_voucher_sent;
+
+  /// Description in tile when voucher order has been created and is awaiting delivery
+  ///
+  /// In en, this message translates to:
+  /// **'The voucher has been sent and is awaiting delivery. This may take a few minutes.'**
+  String get compensation_voucher_sent_description;
+
+  /// Tremendous Funding Source method: balance
+  ///
+  /// In en, this message translates to:
+  /// **'Balance'**
+  String get tremendous_funding_source_balance;
+
+  /// Tremendous Funding Source method: invoice
+  ///
+  /// In en, this message translates to:
+  /// **'Invoice'**
+  String get tremendous_funding_source_invoice;
+
+  /// Tremendous Funding Source method: credit_card
+  ///
+  /// In en, this message translates to:
+  /// **'Credit card'**
+  String get tremendous_funding_source_credit_card;
+
+  /// Tremendous Funding Source method: ach
+  ///
+  /// In en, this message translates to:
+  /// **'ACH transfer'**
+  String get tremendous_funding_source_ach;
+
+  /// Tremendous Funding Source method: sepa
+  ///
+  /// In en, this message translates to:
+  /// **'SEPA transfer'**
+  String get tremendous_funding_source_sepa;
 }
 
 class _AppLocalizationsDelegate

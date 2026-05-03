@@ -3,11 +3,13 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/features/landing_pages/domain/last_viewed.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/recommendation_compensation.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_item.dart';
 import 'package:finanzbegleiter/features/auth/domain/user.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_repository.dart';
 import 'package:finanzbegleiter/features/profile/domain/user_repository.dart';
+import 'package:finanzbegleiter/features/tremendous/domain/tremendous_order_request.dart';
 
 part 'recommendation_manager_tile_state.dart';
 
@@ -16,25 +18,16 @@ class RecommendationManagerTileCubit
   final RecommendationRepository recommendationRepo;
   final UserRepository userRepo;
   CustomUser? _currentUser;
-  List<String> _globalFavoriteRecommendationIDs = [];
 
   RecommendationManagerTileCubit(this.recommendationRepo, this.userRepo)
       : super(RecommendationManagerTileInitial());
 
-
-  void initializeFavorites(List<String>? favoriteRecommendationIDs) {
-    _globalFavoriteRecommendationIDs =
-        List<String>.from(favoriteRecommendationIDs ?? []);
-  }
-
   void setCurrentUser(CustomUser user) {
     _currentUser = user;
-    _globalFavoriteRecommendationIDs =
-        List<String>.from(user.favoriteRecommendationIDs ?? []);
   }
 
   List<String> get currentFavoriteRecommendationIDs =>
-      _globalFavoriteRecommendationIDs;
+      _currentUser?.favoriteRecommendationIDs ?? const <String>[];
 
   CustomUser? get currentUser => _currentUser;
 
@@ -84,23 +77,9 @@ class RecommendationManagerTileCubit
         await recommendationRepo.setFavorite(recommendation, currentUserID);
     failureOrSuccess.fold(
         (failure) => emit(RecommendationSetStatusFailureState(
-            failure: failure,
-            recommendation: recommendation)), (recommendation) {
-      final recommendationId = recommendation.id.value;
-
-      if (_globalFavoriteRecommendationIDs.contains(recommendationId)) {
-        _globalFavoriteRecommendationIDs.remove(recommendationId);
-      } else {
-        _globalFavoriteRecommendationIDs.add(recommendationId);
-      }
-
-      final updatedUser = _currentUser!.copyWith(
-          favoriteRecommendationIDs: _globalFavoriteRecommendationIDs);
-      _currentUser = updatedUser;
-
-      emit(RecommendationManagerTileFavoriteUpdatedState(
-          user: updatedUser, recommendation: recommendation));
-    });
+            failure: failure, recommendation: recommendation)),
+        (recommendation) => emit(RecommendationManagerTileFavoriteUpdatedState(
+            user: _currentUser!, recommendation: recommendation)));
   }
 
   void setPriority(UserRecommendation recommendation) async {
@@ -143,6 +122,51 @@ class RecommendationManagerTileCubit
 
     emit(RecommendationManagerTileViewedState(
         recommendationID: recommendationID, lastViewed: lastViewed));
+  }
+
+  void deleteRecommendation(UserRecommendation recommendation) async {
+    final recoID = recommendation.recoID;
+    final userID = recommendation.userID;
+    if (recoID == null || userID == null) {
+      emit(RecommendationDeleteFailureState(
+          failure: NotFoundFailure(), recommendation: recommendation));
+      return;
+    }
+    emit(RecommendationSetStatusLoadingState(recommendation: recommendation));
+    final failureOrSuccess = await recommendationRepo.deleteRecommendation(
+        recoID, userID, recommendation.id.value);
+    failureOrSuccess.fold(
+      (failure) => emit(RecommendationDeleteFailureState(
+          failure: failure, recommendation: recommendation)),
+      (_) => emit(
+          RecommendationDeleteSuccessState(recommendation: recommendation)),
+    );
+  }
+
+  void setCompensation(
+      UserRecommendation recommendation,
+      RecommendationCompensationStatus status) async {
+    emit(RecommendationCompensationLoadingState(recommendation: recommendation));
+    final failureOrSuccess =
+        await recommendationRepo.setCompensation(recommendation, status);
+    failureOrSuccess.fold(
+        (failure) => emit(RecommendationCompensationFailureState(
+            failure: failure, recommendation: recommendation)),
+        (updated) => emit(RecommendationCompensationSuccessState(
+            recommendation: updated, status: status)));
+  }
+
+  void setCompensationVoucher(
+      UserRecommendation recommendation, TremendousOrderRequest orderRequest) async {
+    emit(RecommendationCompensationLoadingState(recommendation: recommendation));
+    final failureOrSuccess =
+        await recommendationRepo.createTremendousOrder(recommendation, orderRequest);
+    failureOrSuccess.fold(
+        (failure) => emit(RecommendationCompensationFailureState(
+            failure: failure, recommendation: recommendation)),
+        (updated) => emit(RecommendationCompensationSuccessState(
+            recommendation: updated,
+            status: RecommendationCompensationStatus.voucherSent)));
   }
 
   Future<String> getUserDisplayName(String userID) async {
