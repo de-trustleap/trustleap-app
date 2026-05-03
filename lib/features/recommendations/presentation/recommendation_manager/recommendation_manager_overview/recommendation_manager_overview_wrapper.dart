@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager/recommendation_manager_cubit.dart';
 import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
+import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
@@ -53,10 +54,8 @@ class _RecommendationManagerPageState
     });
   }
 
-  void showDeleteAlert(
-      AppLocalizations localizations,
-      CustomNavigatorBase navigator,
-      UserRecommendation recommendation) {
+  void showDeleteAlert(AppLocalizations localizations,
+      CustomNavigatorBase navigator, UserRecommendation recommendation) {
     showDialog(
         context: context,
         builder: (_) {
@@ -76,19 +75,16 @@ class _RecommendationManagerPageState
         });
   }
 
-  void showCampaignDeleteAlert(
-      AppLocalizations localizations,
-      CustomNavigatorBase navigator,
-      UserRecommendation recommendation) {
+  void showCampaignDeleteAlert(AppLocalizations localizations,
+      CustomNavigatorBase navigator, UserRecommendation recommendation) {
     showDialog(
         context: context,
         builder: (_) {
           return CustomAlertDialog(
               title: localizations.campaign_manager_delete_alert_title,
-              message:
-                  localizations.campaign_manager_delete_alert_description,
-              actionButtonTitle: localizations
-                  .campaign_manager_delete_alert_delete_button,
+              message: localizations.campaign_manager_delete_alert_description,
+              actionButtonTitle:
+                  localizations.campaign_manager_delete_alert_delete_button,
               cancelButtonTitle: localizations
                   .recommendation_manager_delete_alert_cancel_button,
               actionButtonAction: () =>
@@ -203,7 +199,7 @@ class _RecommendationManagerPageState
                 }
               }),
           BlocListener<RecommendationManagerTileCubit,
-              RecommendationManagerTileState>(
+                  RecommendationManagerTileState>(
               bloc: Modular.get<RecommendationManagerTileCubit>(),
               listener: (context, state) {
                 if (state is RecommendationCompensationSuccessState) {
@@ -235,13 +231,13 @@ class _RecommendationManagerPageState
                         localization.recommendation_manager_priority_snackbar);
                   } else {
                     CustomSnackBar.of(context).showCustomSnackBar(
-                        localization
-                            .recommendation_manager_scheduled_snackbar);
+                        localization.recommendation_manager_scheduled_snackbar);
                   }
                 } else if (state is RecommendationSetFinishedSuccessState) {
                   CustomSnackBar.of(context).showCustomSnackBar(
                       localization.recommendation_manager_finished_snackbar);
-                } else if (state is RecommendationManagerTileFavoriteUpdatedState) {
+                } else if (state
+                    is RecommendationManagerTileFavoriteUpdatedState) {
                   CustomSnackBar.of(context).showCustomSnackBar(
                       localization.recommendation_manager_favorite_snackbar);
                 } else if (state is RecommendationDeleteSuccessState) {
@@ -255,20 +251,21 @@ class _RecommendationManagerPageState
                 }
               }),
         ],
-        child: BlocBuilder<RecommendationManagerCubit, RecommendationManagerState>(
-            bloc: recoManagerCubit,
-            builder: (context, state) {
-              if (state is RecommendationManagerLoadingState) {
-                return const LoadingIndicator();
-              } else {
-                return Container(
-                    width: double.infinity,
-                    decoration:
-                        BoxDecoration(color: themeData.colorScheme.surface),
-                    child: _createContainerChildWidget(
-                        state, responsiveValue, localization, navigator));
-              }
-            }));
+        child:
+            BlocBuilder<RecommendationManagerCubit, RecommendationManagerState>(
+                bloc: recoManagerCubit,
+                builder: (context, state) {
+                  if (state is RecommendationManagerLoadingState) {
+                    return const LoadingIndicator();
+                  } else {
+                    return Container(
+                        width: double.infinity,
+                        decoration:
+                            BoxDecoration(color: themeData.colorScheme.surface),
+                        child: _createContainerChildWidget(
+                            state, responsiveValue, localization, navigator));
+                  }
+                }));
   }
 
   Widget _createContainerChildWidget(
@@ -306,7 +303,7 @@ class _RecommendationManagerPageState
               onFinishedPressed: (recommendation) {
                 if (currentUser?.role == Role.company) {
                   final personalizedReco = recommendation.recommendation
-                      is PersonalizedRecommendationItem
+                          is PersonalizedRecommendationItem
                       ? recommendation.recommendation
                           as PersonalizedRecommendationItem
                       : null;

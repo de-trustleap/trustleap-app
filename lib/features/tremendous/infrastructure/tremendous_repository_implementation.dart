@@ -44,6 +44,12 @@ class TremendousRepositoryImplementation implements TremendousRepository {
       final user = firebaseAuth.currentUser;
       if (user == null) return left(BackendFailure());
 
+      final clientId =
+          environment.isStaging() ? _clientIdStaging : _clientIdProd;
+      if (clientId == "TREMENDOUS_CLIENT_ID_PROD_PLACEHOLDER") {
+        return left(BackendFailure());
+      }
+
       final codeVerifier = OAuthPkceHelper.generateCodeVerifier();
       final codeChallenge = OAuthPkceHelper.generateCodeChallenge(codeVerifier);
       final nonce = OAuthPkceHelper.generateNonce();
@@ -59,12 +65,6 @@ class TremendousRepositoryImplementation implements TremendousRepository {
 
       final redirectUri =
           "${environment.getCloudFunctionsBaseURL()}/tremendousOAuthCallback";
-
-      final clientId =
-          environment.isStaging() ? _clientIdStaging : _clientIdProd;
-      if (clientId == "TREMENDOUS_CLIENT_ID_PROD_PLACEHOLDER") {
-        return left(BackendFailure());
-      }
       final authUrl = environment.isStaging() ? _authUrlSandbox : _authUrlProd;
 
       final uri = Uri.parse(authUrl).replace(queryParameters: {

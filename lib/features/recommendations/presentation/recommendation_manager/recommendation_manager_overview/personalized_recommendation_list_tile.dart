@@ -61,7 +61,8 @@ class PersonalizedRecommendationListTile extends StatelessWidget {
                 : null;
         final compensationStatus = personalizedReco?.compensation?.status;
         final isManualIssued =
-            compensationStatus == RecommendationCompensationStatus.manualIssued;
+            compensationStatus == RecommendationCompensationStatus.manualIssued ||
+            compensationStatus == RecommendationCompensationStatus.manualConfirmed;
         final isVoucherSent =
             compensationStatus == RecommendationCompensationStatus.voucherSent;
         return [
