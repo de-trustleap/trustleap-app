@@ -1,7 +1,9 @@
 import 'package:finanzbegleiter/core/remote_config/app_remote_config_cubit.dart';
+import 'package:finanzbegleiter/core/remote_config/app_remote_config_state.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/custom_dropdown.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -192,65 +194,74 @@ class _RecommendationManagerExpandableFilterState
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                CustomDropdown<RecommendationStatusFilterState>(
-                    textStyle: themeData.textTheme.bodySmall,
-                    width: responsiveValue.largerThan(MOBILE) ? 250 : 400,
-                    label: localization
-                        .recommendation_manager_filter_sort_by_status,
-                    value: filterStates.statusFilterState,
-                    type: CustomDropdownType.standard,
-                    useDialogPicker: responsiveValue.isMobile,
-                    items: [
-                      CustomDropdownItem(
-                          value: RecommendationStatusFilterState.all,
+                BlocBuilder<AppRemoteConfigCubit, AppRemoteConfigState>(
+                    bloc: Modular.get<AppRemoteConfigCubit>(),
+                    builder: (context, remoteConfig) {
+                      return CustomDropdown<RecommendationStatusFilterState>(
+                          textStyle: themeData.textTheme.bodySmall,
+                          width: responsiveValue.largerThan(MOBILE) ? 250 : 400,
                           label: localization
-                              .recommendation_manager_filter_status_all),
-                      if (!widget.isArchive) ...[
-                        CustomDropdownItem(
-                            value: RecommendationStatusFilterState
-                                .recommendationSent,
-                            label: localization
-                                .recommendation_manager_status_level_1),
-                        CustomDropdownItem(
-                            value: RecommendationStatusFilterState.linkClicked,
-                            label: localization
-                                .recommendation_manager_status_level_2),
-                        CustomDropdownItem(
-                            value: RecommendationStatusFilterState
-                                .contactFormSent,
-                            label: localization
-                                .recommendation_manager_status_level_3),
-                        CustomDropdownItem(
-                            value: RecommendationStatusFilterState.appointment,
-                            label: localization
-                                .recommendation_manager_status_level_4),
-                        CustomDropdownItem(
-                            value: RecommendationStatusFilterState.manualIssued,
-                            label: localization
-                                .compensation_status_manual_issued),
-                        if (Modular.get<AppRemoteConfigCubit>().state.tremendousEnabled)
-                          CustomDropdownItem(
-                              value: RecommendationStatusFilterState.voucherSent,
-                              label: localization
-                                  .compensation_status_voucher_sent),
-                      ],
-                      if (widget.isArchive) ...[
-                        CustomDropdownItem(
-                            value: RecommendationStatusFilterState.successful,
-                            label: localization
-                                .recommendation_manager_status_level_5),
-                        CustomDropdownItem(
-                            value: RecommendationStatusFilterState.failed,
-                            label: localization
-                                .recommendation_manager_status_level_6),
-                      ],
-                    ],
-                    onChanged: (sortBy) {
-                      setState(() {
-                        filterStates.statusFilterState =
-                            sortBy ?? RecommendationStatusFilterState.all;
-                        widget.onFilterChanged(filterStates);
-                      });
+                              .recommendation_manager_filter_sort_by_status,
+                          value: filterStates.statusFilterState,
+                          type: CustomDropdownType.standard,
+                          useDialogPicker: responsiveValue.isMobile,
+                          items: [
+                            CustomDropdownItem(
+                                value: RecommendationStatusFilterState.all,
+                                label: localization
+                                    .recommendation_manager_filter_status_all),
+                            if (!widget.isArchive) ...[
+                              CustomDropdownItem(
+                                  value: RecommendationStatusFilterState
+                                      .recommendationSent,
+                                  label: localization
+                                      .recommendation_manager_status_level_1),
+                              CustomDropdownItem(
+                                  value:
+                                      RecommendationStatusFilterState.linkClicked,
+                                  label: localization
+                                      .recommendation_manager_status_level_2),
+                              CustomDropdownItem(
+                                  value: RecommendationStatusFilterState
+                                      .contactFormSent,
+                                  label: localization
+                                      .recommendation_manager_status_level_3),
+                              CustomDropdownItem(
+                                  value:
+                                      RecommendationStatusFilterState.appointment,
+                                  label: localization
+                                      .recommendation_manager_status_level_4),
+                              CustomDropdownItem(
+                                  value: RecommendationStatusFilterState
+                                      .manualIssued,
+                                  label: localization
+                                      .compensation_status_manual_issued),
+                              if (remoteConfig.tremendousEnabled)
+                                CustomDropdownItem(
+                                    value:
+                                        RecommendationStatusFilterState.voucherSent,
+                                    label: localization
+                                        .compensation_status_voucher_sent),
+                            ],
+                            if (widget.isArchive) ...[
+                              CustomDropdownItem(
+                                  value:
+                                      RecommendationStatusFilterState.successful,
+                                  label: localization
+                                      .recommendation_manager_status_level_5),
+                              CustomDropdownItem(
+                                  value: RecommendationStatusFilterState.failed,
+                                  label: localization
+                                      .recommendation_manager_status_level_6),
+                            ],
+                          ],
+                          onChanged: (sortBy) {
+                            setState(() {
+                              filterStates.statusFilterState =
+                                  sortBy ?? RecommendationStatusFilterState.all;
+                              widget.onFilterChanged(filterStates);
+                            });
+                          });
                     }),
                 if (!widget.isArchive) ...[
                   const SizedBox(height: 16),

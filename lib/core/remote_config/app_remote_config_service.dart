@@ -14,7 +14,9 @@ class AppRemoteConfigService {
     } catch (_) {}
   }
 
+  Future<void> activate() => _rc.activate();
+
   bool get tremendousEnabled => _rc.getBool('tremendous_enabled');
 
-  Stream<RemoteConfigUpdate> get onConfigUpdated => _rc.onConfigUpdated;
+  Stream<void> get onConfigUpdated => _rc.onConfigUpdated.map((_) {});
 }
