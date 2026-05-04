@@ -7,6 +7,8 @@ import 'package:finanzbegleiter/features/recommendations/application/recommendat
 import 'package:finanzbegleiter/features/recommendations/domain/personalized_recommendation_item.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/recommendation_compensation.dart';
 import 'package:finanzbegleiter/features/recommendations/domain/user_recommendation.dart';
+import 'package:finanzbegleiter/core/remote_config/app_remote_config_cubit.dart';
+import 'package:finanzbegleiter/core/remote_config/app_remote_config_state.dart';
 import 'package:finanzbegleiter/features/tremendous/application/tremendous_cubit.dart';
 import 'package:finanzbegleiter/features/recommendations/presentation/widgets/compensation_voucher_form.dart';
 import 'package:finanzbegleiter/features/tremendous/domain/tremendous_funding_source.dart';
@@ -52,10 +54,11 @@ class _CompensationDialogState extends State<CompensationDialog> {
   void initState() {
     super.initState();
     _amountController = TextEditingController();
+    final tremendousEnabled = Modular.get<AppRemoteConfigCubit>().state.tremendousEnabled;
     final hasPriorFailure = widget.initialOption == CompensationOption.skip &&
         _getCompensation()?.status == RecommendationCompensationStatus.voucherFailed;
-    _selected = hasPriorFailure ? CompensationOption.voucher : widget.initialOption;
-    if (_selected == CompensationOption.voucher) {
+    _selected = hasPriorFailure && tremendousEnabled ? CompensationOption.voucher : widget.initialOption;
+    if (_selected == CompensationOption.voucher && tremendousEnabled) {
       WidgetsBinding.instance.addPostFrameCallback((_) => _loadCatalogIfNeeded());
     }
   }
@@ -217,50 +220,57 @@ class _CompensationDialogState extends State<CompensationDialog> {
                   color: themeData.colorScheme.onSurfaceVariant),
             ),
             const SizedBox(height: 16),
-            RadioGroup<CompensationOption>(
-              groupValue: _selected,
-              onChanged: _onOptionChanged,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildOption(
-                    context,
-                    label: localization.compensation_dialog_voucher_option,
-                    value: CompensationOption.voucher,
-                  ),
-                  if (_selected == CompensationOption.voucher)
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16, bottom: 8),
-                      child: CompensationVoucherForm(
-                        isLoading: _isLoading,
-                        selectedProduct: _selectedProduct,
-                        selectedFundingSource: _selectedFundingSource,
-                        amountController: _amountController,
-                        onProductChanged: (p) => setState(() {
-                          _selectedProduct = p;
-                          _errorMessage = null;
-                        }),
-                        onFundingSourceChanged: (s) => setState(() {
-                          _selectedFundingSource = s;
-                          _errorMessage = null;
-                        }),
-                        onConnectPressed: () =>
-                            Modular.get<TremendousCubit>().connect(),
+            BlocBuilder<AppRemoteConfigCubit, AppRemoteConfigState>(
+              bloc: Modular.get<AppRemoteConfigCubit>(),
+              builder: (context, configState) {
+                return RadioGroup<CompensationOption>(
+                  groupValue: _selected,
+                  onChanged: _onOptionChanged,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (configState.tremendousEnabled) ...[
+                        _buildOption(
+                          context,
+                          label: localization.compensation_dialog_voucher_option,
+                          value: CompensationOption.voucher,
+                        ),
+                        if (_selected == CompensationOption.voucher)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16, bottom: 8),
+                            child: CompensationVoucherForm(
+                              isLoading: _isLoading,
+                              selectedProduct: _selectedProduct,
+                              selectedFundingSource: _selectedFundingSource,
+                              amountController: _amountController,
+                              onProductChanged: (p) => setState(() {
+                                _selectedProduct = p;
+                                _errorMessage = null;
+                              }),
+                              onFundingSourceChanged: (s) => setState(() {
+                                _selectedFundingSource = s;
+                                _errorMessage = null;
+                              }),
+                              onConnectPressed: () =>
+                                  Modular.get<TremendousCubit>().connect(),
+                            ),
+                          ),
+                      ],
+                      _buildOption(
+                        context,
+                        label: localization.compensation_dialog_manual_option,
+                        value: CompensationOption.manual,
                       ),
-                    ),
-                  _buildOption(
-                    context,
-                    label: localization.compensation_dialog_manual_option,
-                    value: CompensationOption.manual,
+                      _buildOption(
+                        context,
+                        label: localization.compensation_dialog_skip_option,
+                        value: CompensationOption.skip,
+                      ),
+                    ],
                   ),
-                  _buildOption(
-                    context,
-                    label: localization.compensation_dialog_skip_option,
-                    value: CompensationOption.skip,
-                  ),
-                ],
-              ),
+                );
+              },
             ),
             if (_errorMessage != null) ...[
               const SizedBox(height: 12),

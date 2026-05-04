@@ -99,6 +99,8 @@ import 'package:finanzbegleiter/features/dashboard/infrastructure/tutorial_repos
 import 'package:finanzbegleiter/features/profile/infrastructure/user_repository_implementation.dart';
 import 'package:finanzbegleiter/features/web_logging/infrastructure/web_logging_repository_implementation.dart';
 import 'package:finanzbegleiter/core/cloud_functions_service.dart';
+import 'package:finanzbegleiter/core/remote_config/app_remote_config_cubit.dart';
+import 'package:finanzbegleiter/core/remote_config/app_remote_config_service.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -122,6 +124,8 @@ class AppModule extends Module {
       ..addLazySingleton(() => firebaseFunctions)
       ..addLazySingleton(() => appCheck)
       ..addLazySingleton(CloudFunctionsService.new)
+      ..addLazySingleton(AppRemoteConfigService.new)
+      ..addLazySingleton(AppRemoteConfigCubit.new)
       ..addLazySingleton<AuthRepository>(AuthRepositoryImplementation.new)
       ..addLazySingleton<UserRepository>(UserRepositoryImplementation.new)
       ..addLazySingleton<ImageRepository>(ImageRepositoryImplementation.new)

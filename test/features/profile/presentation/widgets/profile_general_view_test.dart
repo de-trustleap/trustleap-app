@@ -1,4 +1,8 @@
+import 'package:finanzbegleiter/core/remote_config/app_remote_config_cubit.dart';
+import 'package:finanzbegleiter/core/remote_config/app_remote_config_service.dart';
+import 'package:finanzbegleiter/core/remote_config/app_remote_config_state.dart';
 import 'package:finanzbegleiter/features/auth/application/auth/auth_cubit.dart';
+import 'package:finanzbegleiter/features/tremendous/application/tremendous_cubit.dart';
 import 'package:finanzbegleiter/features/calendly/application/calendly_cubit.dart';
 import 'package:finanzbegleiter/features/admin/application/company_request/company_request/company_request_cubit.dart';
 import 'package:finanzbegleiter/features/images/application/profile/profile_image_bloc.dart';
@@ -17,6 +21,7 @@ import 'package:finanzbegleiter/features/profile/presentation/widgets/email_sect
 import 'package:finanzbegleiter/features/profile/presentation/widgets/profile_general_view.dart';
 import 'package:finanzbegleiter/features/profile/presentation/widgets/profile_image_section.dart';
 import 'package:finanzbegleiter/features/profile/presentation/widgets/profile_register_company_section.dart';
+import 'package:finanzbegleiter/features/profile/presentation/widgets/tremendous_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -35,6 +40,8 @@ class ProfileGeneralViewTestModule extends Module {
   final MockImageRepository mockImageRepository;
   final MockCalendlyRepository mockCalendlyRepository;
   final MockCompanyRepository mockCompanyRepository;
+  final MockAppRemoteConfigService mockAppRemoteConfigService;
+  final MockTremendousRepository mockTremendousRepository;
 
   ProfileGeneralViewTestModule({
     required this.userObserverCubit,
@@ -44,6 +51,8 @@ class ProfileGeneralViewTestModule extends Module {
     required this.mockImageRepository,
     required this.mockCalendlyRepository,
     required this.mockCompanyRepository,
+    required this.mockAppRemoteConfigService,
+    required this.mockTremendousRepository,
   });
 
   @override
@@ -58,6 +67,9 @@ class ProfileGeneralViewTestModule extends Module {
         () => ProfileImageBloc(mockImageRepository));
     i.addSingleton<CalendlyCubit>(() => CalendlyCubit(mockCalendlyRepository));
     i.addSingleton<CompanyRequestCubit>(() => CompanyRequestCubit(mockCompanyRepository, mockUserRepository));
+    i.addSingleton<AppRemoteConfigService>(() => mockAppRemoteConfigService);
+    i.addSingleton<AppRemoteConfigCubit>(() => AppRemoteConfigCubit(mockAppRemoteConfigService));
+    i.addSingleton<TremendousCubit>(() => TremendousCubit(mockTremendousRepository));
   }
 
   @override
@@ -77,18 +89,27 @@ void main() {
   late MockImageRepository mockImageRepository;
   late MockCalendlyRepository mockCalendlyRepository;
   late MockCompanyRepository mockCompanyRepository;
+  late MockAppRemoteConfigService mockAppRemoteConfigService;
+  late MockTremendousRepository mockTremendousRepository;
 
   setUp(() {
     ResponsiveHelper.enableTestMode();
 
     provideDummy<UserObserverState>(UserObserverInitial());
     provideDummy<AuthState>(AuthStateUnAuthenticated());
+    provideDummy<AppRemoteConfigState>(const AppRemoteConfigState(tremendousEnabled: false));
 
     mockUserRepository = MockUserRepository();
     mockAuthRepository = MockAuthRepository();
     mockImageRepository = MockImageRepository();
     mockCalendlyRepository = MockCalendlyRepository();
     mockCompanyRepository = MockCompanyRepository();
+    mockAppRemoteConfigService = MockAppRemoteConfigService();
+    mockTremendousRepository = MockTremendousRepository();
+
+    when(mockAppRemoteConfigService.tremendousEnabled).thenReturn(false);
+    when(mockAppRemoteConfigService.onConfigUpdated).thenAnswer((_) => Stream.empty());
+    when(mockTremendousRepository.observeConnectionStatus()).thenAnswer((_) => Stream.empty());
 
     when(mockAuthRepository.getCurrentUser()).thenReturn(null);
     when(mockAuthRepository.getSignedInUser()).thenReturn(none());
@@ -115,6 +136,7 @@ void main() {
     String? firstName = 'John',
     String? lastName = 'Doe',
     String? email = 'john.doe@example.com',
+    Role role = Role.promoter,
   }) {
     return CustomUser(
       id: UniqueID.fromUniqueString('test-user-123'),
@@ -122,7 +144,7 @@ void main() {
       lastName: lastName,
       email: email,
       companyID: companyID,
-      role: Role.promoter,
+      role: role,
     );
   }
 
@@ -138,6 +160,8 @@ void main() {
       mockImageRepository: mockImageRepository,
       mockCalendlyRepository: mockCalendlyRepository,
       mockCompanyRepository: mockCompanyRepository,
+      mockAppRemoteConfigService: mockAppRemoteConfigService,
+      mockTremendousRepository: mockTremendousRepository,
     );
 
     return ModularApp(
@@ -269,6 +293,52 @@ void main() {
       expect(find.byType(ProfileRegisterCompanySection), findsNothing);
 
       // Clean up pending timers
+      await tester.pump(const Duration(milliseconds: 500));
+      await tester.pump();
+    });
+
+    testWidgets('should hide TremendousSection when feature disabled',
+        (tester) async {
+      // Given
+      when(mockAppRemoteConfigService.tremendousEnabled).thenReturn(false);
+      final testUser = createTestUser(
+        companyID: 'test-company-123',
+        role: Role.company,
+      );
+      userObserverCubit.emit(UserObserverSuccess(user: testUser));
+
+      await tester.binding.setSurfaceSize(const Size(1200, 800));
+
+      // When
+      await tester.pumpWidget(createWidgetUnderTest());
+      await tester.pump();
+
+      // Then
+      expect(find.byType(TremendousSection), findsNothing);
+
+      await tester.pump(const Duration(milliseconds: 500));
+      await tester.pump();
+    });
+
+    testWidgets('should show TremendousSection when feature enabled',
+        (tester) async {
+      // Given
+      when(mockAppRemoteConfigService.tremendousEnabled).thenReturn(true);
+      final testUser = createTestUser(
+        companyID: 'test-company-123',
+        role: Role.company,
+      );
+      userObserverCubit.emit(UserObserverSuccess(user: testUser));
+
+      await tester.binding.setSurfaceSize(const Size(1200, 800));
+
+      // When
+      await tester.pumpWidget(createWidgetUnderTest());
+      await tester.pump();
+
+      // Then
+      expect(find.byType(TremendousSection), findsOneWidget);
+
       await tester.pump(const Duration(milliseconds: 500));
       await tester.pump();
     });

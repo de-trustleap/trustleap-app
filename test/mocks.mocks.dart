@@ -20,6 +20,8 @@ import 'package:finanzbegleiter/core/failures/auth_failures.dart' as _i21;
 import 'package:finanzbegleiter/core/failures/database_failures.dart' as _i22;
 import 'package:finanzbegleiter/core/failures/failure.dart' as _i19;
 import 'package:finanzbegleiter/core/failures/storage_failures.dart' as _i28;
+import 'package:finanzbegleiter/core/remote_config/app_remote_config_service.dart'
+    as _i80;
 import 'package:finanzbegleiter/features/admin/domain/admin_registration_code_repository.dart'
     as _i43;
 import 'package:finanzbegleiter/features/admin/domain/company_request.dart'
@@ -133,6 +135,7 @@ import 'package:finanzbegleiter/features/tremendous/domain/tremendous_repository
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart' as _i16;
 import 'package:firebase_auth/firebase_auth.dart' as _i4;
 import 'package:firebase_core/firebase_core.dart' as _i9;
+import 'package:firebase_remote_config/firebase_remote_config.dart' as _i81;
 import 'package:firebase_storage/firebase_storage.dart' as _i13;
 import 'package:flutter/foundation.dart' as _i8;
 import 'package:flutter/widgets.dart' as _i7;
@@ -15235,16 +15238,6 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
       ) as bool);
 
   @override
-  void initializeFavorites(List<String>? favoriteRecommendationIDs) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #initializeFavorites,
-          [favoriteRecommendationIDs],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
   void setCurrentUser(_i20.CustomUser? user) => super.noSuchMethod(
         Invocation.method(
           #setCurrentUser,
@@ -15319,6 +15312,16 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
         Invocation.method(
           #markAsViewed,
           [recommendationID],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void deleteRecommendation(_i47.UserRecommendation? recommendation) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #deleteRecommendation,
+          [recommendation],
         ),
         returnValueForMissingStub: null,
       );
@@ -16765,4 +16768,37 @@ class MockFirebaseFunctions extends _i1.Mock implements _i15.FirebaseFunctions {
         ),
         returnValueForMissingStub: null,
       );
+}
+
+/// A class which mocks [AppRemoteConfigService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAppRemoteConfigService extends _i1.Mock
+    implements _i80.AppRemoteConfigService {
+  MockAppRemoteConfigService() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  bool get tremendousEnabled => (super.noSuchMethod(
+        Invocation.getter(#tremendousEnabled),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  _i12.Stream<_i81.RemoteConfigUpdate> get onConfigUpdated =>
+      (super.noSuchMethod(
+        Invocation.getter(#onConfigUpdated),
+        returnValue: _i12.Stream<_i81.RemoteConfigUpdate>.empty(),
+      ) as _i12.Stream<_i81.RemoteConfigUpdate>);
+
+  @override
+  _i12.Future<void> initialize() => (super.noSuchMethod(
+        Invocation.method(
+          #initialize,
+          [],
+        ),
+        returnValue: _i12.Future<void>.value(),
+        returnValueForMissingStub: _i12.Future<void>.value(),
+      ) as _i12.Future<void>);
 }
