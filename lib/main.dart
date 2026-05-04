@@ -34,6 +34,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:finanzbegleiter/core/app_check_initializer.dart';
 import 'package:finanzbegleiter/core/helpers/browser_location.dart';
+import 'package:finanzbegleiter/core/remote_config/app_remote_config_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -65,6 +66,9 @@ Future<void> _runApp(bool hasStatisticsConsent) async {
   await AppCheckInitializer.initialize(
     webToken: kIsWeb ? environment.getAppCheckToken() : null,
   );
+
+  final appRemoteConfigService = AppRemoteConfigService();
+  await appRemoteConfigService.initialize();
 
   setPathUrlStrategy();
 

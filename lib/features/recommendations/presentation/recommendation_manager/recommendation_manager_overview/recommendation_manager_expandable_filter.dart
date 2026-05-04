@@ -1,6 +1,8 @@
+import 'package:finanzbegleiter/core/remote_config/app_remote_config_cubit.dart';
 import 'package:finanzbegleiter/core/widgets/shared_elements/widgets/custom_dropdown.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 enum RecommendationStatusFilterState {
@@ -226,10 +228,11 @@ class _RecommendationManagerExpandableFilterState
                             value: RecommendationStatusFilterState.manualIssued,
                             label: localization
                                 .compensation_status_manual_issued),
-                        CustomDropdownItem(
-                            value: RecommendationStatusFilterState.voucherSent,
-                            label: localization
-                                .compensation_status_voucher_sent),
+                        if (Modular.get<AppRemoteConfigCubit>().state.tremendousEnabled)
+                          CustomDropdownItem(
+                              value: RecommendationStatusFilterState.voucherSent,
+                              label: localization
+                                  .compensation_status_voucher_sent),
                       ],
                       if (widget.isArchive) ...[
                         CustomDropdownItem(

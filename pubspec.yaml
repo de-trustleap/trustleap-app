@@ -27,6 +27,7 @@ dependencies:
   equatable: ^2.0.5
   flutter_modular: ^6.0.4+1
   firebase_storage: ">=12.3.4 <14.0.0"
+  firebase_remote_config: ">=5.0.0 <7.0.0"
   cached_network_image: ^3.3.1
   image_picker: ^1.0.7
   flutter_dropzone: ^4.0.3

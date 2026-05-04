@@ -1,6 +1,9 @@
 @TestOn('chrome')
 library;
 
+import 'package:finanzbegleiter/core/remote_config/app_remote_config_cubit.dart';
+import 'package:finanzbegleiter/core/remote_config/app_remote_config_service.dart';
+import 'package:finanzbegleiter/core/remote_config/app_remote_config_state.dart';
 import 'package:finanzbegleiter/features/auth/application/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/features/calendly/application/calendly_cubit.dart';
 import 'package:finanzbegleiter/features/admin/application/company_request/company_request/company_request_cubit.dart';
@@ -41,6 +44,7 @@ class ProfilePageTestModule extends Module {
   final MockImageRepository mockImageRepository;
   final MockCompanyRepository mockCompanyRepository;
   final MockCalendlyRepository mockCalendlyRepository;
+  final MockAppRemoteConfigService mockAppRemoteConfigService;
 
   ProfilePageTestModule({
     required this.userObserverCubit,
@@ -51,6 +55,7 @@ class ProfilePageTestModule extends Module {
     required this.mockImageRepository,
     required this.mockCompanyRepository,
     required this.mockCalendlyRepository,
+    required this.mockAppRemoteConfigService,
   });
 
   @override
@@ -68,6 +73,8 @@ class ProfilePageTestModule extends Module {
     i.addSingleton<CompanyObserverCubit>(() => CompanyObserverCubit(mockCompanyRepository));
     i.addSingleton<CompanyRequestCubit>(() => CompanyRequestCubit(mockCompanyRepository, mockUserRepository));
     i.addSingleton<CalendlyCubit>(() => CalendlyCubit(mockCalendlyRepository));
+    i.addSingleton<AppRemoteConfigService>(() => mockAppRemoteConfigService);
+    i.addSingleton<AppRemoteConfigCubit>(() => AppRemoteConfigCubit(mockAppRemoteConfigService));
   }
 
   @override
@@ -89,6 +96,7 @@ void main() {
   late MockCompanyRepository mockCompanyRepository;
   late MockPermissionRepository mockPermissionRepository;
   late MockCalendlyRepository mockCalendlyRepository;
+  late MockAppRemoteConfigService mockAppRemoteConfigService;
 
   setUp(() {
     ResponsiveHelper.enableTestMode();
@@ -96,6 +104,7 @@ void main() {
     provideDummy<UserObserverState>(UserObserverInitial());
     provideDummy<AuthState>(AuthStateUnAuthenticated());
     provideDummy<PermissionState>(PermissionInitial());
+    provideDummy<AppRemoteConfigState>(const AppRemoteConfigState(tremendousEnabled: true));
 
     mockUserRepository = MockUserRepository();
     mockAuthRepository = MockAuthRepository();
@@ -103,6 +112,10 @@ void main() {
     mockCompanyRepository = MockCompanyRepository();
     mockPermissionRepository = MockPermissionRepository();
     mockCalendlyRepository = MockCalendlyRepository();
+    mockAppRemoteConfigService = MockAppRemoteConfigService();
+
+    when(mockAppRemoteConfigService.tremendousEnabled).thenReturn(true);
+    when(mockAppRemoteConfigService.onConfigUpdated).thenAnswer((_) => Stream.empty());
 
     // Setup default mock returns
     when(mockAuthRepository.getCurrentUser()).thenReturn(null);
@@ -167,6 +180,7 @@ void main() {
       mockImageRepository: mockImageRepository,
       mockCompanyRepository: mockCompanyRepository,
       mockCalendlyRepository: mockCalendlyRepository,
+      mockAppRemoteConfigService: mockAppRemoteConfigService,
     );
 
     return ModularApp(

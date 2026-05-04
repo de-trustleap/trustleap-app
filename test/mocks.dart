@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finanzbegleiter/core/remote_config/app_remote_config_service.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:finanzbegleiter/features/recommendations/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/features/auth/domain/auth_repository.dart';
@@ -61,5 +62,6 @@ import 'package:mockito/annotations.dart';
   FirebaseFirestore,
   FirebaseStorage,
   FirebaseFunctions,
+  AppRemoteConfigService,
 ])
 void main() {}

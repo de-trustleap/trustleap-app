@@ -14,7 +14,10 @@ import 'package:finanzbegleiter/features/profile/presentation/widgets/contact_se
 import 'package:finanzbegleiter/features/profile/presentation/widgets/email_section/email_section.dart';
 import 'package:finanzbegleiter/features/profile/presentation/widgets/profile_register_company_section.dart';
 import 'package:flutter/material.dart';
+import 'package:finanzbegleiter/core/remote_config/app_remote_config_cubit.dart';
+import 'package:finanzbegleiter/core/remote_config/app_remote_config_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class ProfileGeneralView extends StatefulWidget {
@@ -98,10 +101,20 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
                                       ],
                                       CalendlySection(maxWidth: secondColumnMaxWidth),
                                       SizedBox(height: isWideScreen ? 20 : (responsiveValue.isMobile ? 20 : 60)),
-                                      if (state.user.role == Role.company) ...[
-                                        TremendousSection(maxWidth: secondColumnMaxWidth),
-                                        SizedBox(height: isWideScreen ? 20 : (responsiveValue.isMobile ? 20 : 60)),
-                                      ],
+                                      BlocBuilder<AppRemoteConfigCubit, AppRemoteConfigState>(
+                                        bloc: Modular.get<AppRemoteConfigCubit>(),
+                                        builder: (context, configState) {
+                                          if (!configState.tremendousEnabled || state.user.role != Role.company) {
+                                            return const SizedBox.shrink();
+                                          }
+                                          return Column(
+                                            children: [
+                                              TremendousSection(maxWidth: secondColumnMaxWidth),
+                                              SizedBox(height: isWideScreen ? 20 : (responsiveValue.isMobile ? 20 : 60)),
+                                            ],
+                                          );
+                                        },
+                                      ),
                                       EmailSection(
                                         user: state.user,
                                         maxWidth: secondColumnMaxWidth,
